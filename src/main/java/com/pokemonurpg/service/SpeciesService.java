@@ -10,7 +10,7 @@ public class SpeciesService {
 
     public List<Species> findByName(String name) {
         List<Species> result = new ArrayList<>();
-        result.add(new Species());
+        result.add(new Species(name));
         return result;
     }
 }
