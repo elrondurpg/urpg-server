@@ -1,13 +1,12 @@
 package com.pokemonurpg.object;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Species {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer dbid;
 
@@ -106,6 +105,98 @@ public class Species {
         this.contestCredits = contestCredits;
         this.displayName = displayName;
         this.formName = formName;
+    }
+
+    public void persistValuesFrom(Species species) {
+        this.dbid = species.getDbid();
+
+        if (this.getDexno() == null) {
+            this.dexno = species.getDexno();
+        }
+
+        if (this.getType1Dbid() == null) {
+            this.type1Dbid = species.getType1Dbid();
+        }
+
+        if (this.getType2Dbid() == null) {
+            this.type2Dbid = species.getType2Dbid();
+        }
+
+        if (this.getClassification() == null) {
+            this.classification = species.getClassification();
+        }
+
+        if (this.getHp() == null) {
+            this.hp = species.getHp();
+        }
+
+        if (this.getAttack() == null) {
+            this.attack = species.getAttack();
+        }
+
+        if (this.getDefense() == null) {
+            this.defense = species.getDefense();
+        }
+
+        if (this.getSpecialAttack() == null) {
+            this.specialAttack = species.getSpecialAttack();
+        }
+
+        if (this.getSpecialDefense() == null) {
+            this.specialDefense = species.getSpecialDefense();
+        }
+
+        if (this.getSpeed() == null) {
+            this.speed = species.getSpeed();
+        }
+
+        if (this.getHeight() == null) {
+            this.height = species.getHeight();
+        }
+
+        if (this.getWeight() == null) {
+            this.weight = species.getWeight();
+        }
+
+        if (this.getMaleAllowed() == null) {
+            this.maleAllowed = species.getMaleAllowed();
+        }
+
+        if (this.getFemaleAllowed() == null) {
+            this.femaleAllowed = species.getFemaleAllowed();
+        }
+
+        if (this.getPokemart() == null) {
+            this.pokemart = species.getPokemart();
+        }
+
+        if (this.getContestCredits() == null) {
+            this.contestCredits = species.getContestCredits();
+        }
+
+        if (this.getArtRank() == null) {
+            this.artRank = species.getArtRank();
+        }
+
+        if (this.getStoryRank() == null) {
+            this.storyRank = species.getStoryRank();
+        }
+
+        if (this.getParkLocation() == null) {
+            this.parkLocation = species.getParkLocation();
+        }
+
+        if (this.getParkRank() == null) {
+            this.parkRank = species.getParkRank();
+        }
+
+        if (this.getDisplayName() == null) {
+            this.displayName = species.getDisplayName();
+        }
+
+        if (this.getFormName() == null) {
+            this.formName = species.getFormName();
+        }
     }
 
     public Double getHeight() {

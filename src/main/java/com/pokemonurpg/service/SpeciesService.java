@@ -33,4 +33,8 @@ public class SpeciesService {
         speciesRepository.save(species);
     }
 
+    public void delete(Species species) {
+        speciesRepository.delete(species);
+    }
+
 }
