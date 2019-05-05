@@ -1,19 +1,19 @@
 package com.pokemonurpg.validator;
 
 import com.pokemonurpg.object.Species;
-import org.springframework.http.ResponseEntity;
+import com.pokemonurpg.service.TypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.MapBindingResult;
-import org.springframework.validation.Validator;
 
 import java.util.HashMap;
 
+@Component
 public class SpeciesValidator extends URPGValidator {
 
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return Species.class.equals(clazz);
-    }
+    @Autowired
+    private TypeService typeService;
 
     public Errors validate(Object obj) {
         HashMap<String, String> errorMap = new HashMap<>();
@@ -36,12 +36,14 @@ public class SpeciesValidator extends URPGValidator {
                 errors.rejectValue("dexno", "Dex No. '" + pokemon.getDexno() + "' is invalid.");
             }
 
-            if (pokemon.getType1Dbid() == null || !isIntegerBetween(pokemon.getType1Dbid(), 1, 18)) {
-                errors.rejectValue("type1Dbid", "Type 1 DBID '" + pokemon.getType1Dbid() + "' is invalid.");
+            if (pokemon.getType1() == null || !typeService.findByDbid(pokemon.getType1().getDbid()).isPresent() )
+            {
+                errors.rejectValue("type1", "Type 1 '" + pokemon.getType1() + "' is invalid.");
             }
 
-            if (pokemon.getType2Dbid() != null && !isIntegerBetween(pokemon.getType2Dbid(), 1, 18)) {
-                errors.rejectValue("type2Dbid", "Type 2 DBID '" + pokemon.getType2Dbid() + "' is invalid.");
+            if (pokemon.getType2() != null && !typeService.findByDbid(pokemon.getType2().getDbid()).isPresent() )
+            {
+                errors.rejectValue("type2", "Type 2 '" + pokemon.getType2() + "' is invalid.");
             }
 
             if (!emptyInputString(pokemon.getClassification()) && !isIntegerBetween(pokemon.getClassification().length(), 1, 20)) {

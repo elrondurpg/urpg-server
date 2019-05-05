@@ -16,11 +16,13 @@ public class Species {
     @Column
     private String name;
 
-    @Column(name="type1_dbid")
-    private Integer type1Dbid;
+    @OneToOne
+    @JoinColumn(name = "type1_dbid")
+    private Type type1;
 
-    @Column(name="type2_dbid")
-    private Integer type2Dbid;
+    @OneToOne
+    @JoinColumn(name = "type2_dbid")
+    private Type type2;
 
     @Column
     private String classification;
@@ -80,12 +82,12 @@ public class Species {
     private String formName;
 
     public Species() { }
-    public Species(Integer dbid, Integer dexno, String name, Integer type1Dbid, Integer type2Dbid, String classification, Integer hp, Integer attack, Integer defense, Integer specialAttack, Integer specialDefense, Integer speed, Double height, Double weight, Boolean maleAllowed, Boolean femaleAllowed, String pokemart, Integer storyRank, Integer artRank, Integer parkLocation, Integer parkRank, String contestCredits, String displayName, String formName) {
+    public Species(Integer dbid, Integer dexno, String name, Type type1, Type type2, String classification, Integer hp, Integer attack, Integer defense, Integer specialAttack, Integer specialDefense, Integer speed, Double height, Double weight, Boolean maleAllowed, Boolean femaleAllowed, String pokemart, Integer storyRank, Integer artRank, Integer parkLocation, Integer parkRank, String contestCredits, String displayName, String formName) {
         this.dbid = dbid;
         this.dexno = dexno;
         this.name = name;
-        this.type1Dbid = type1Dbid;
-        this.type2Dbid = type2Dbid;
+        this.type1 = type1;
+        this.type2 = type2;
         this.classification = classification;
         this.hp = hp;
         this.attack = attack;
@@ -114,12 +116,12 @@ public class Species {
             this.dexno = species.getDexno();
         }
 
-        if (this.getType1Dbid() == null) {
-            this.type1Dbid = species.getType1Dbid();
+        if (this.getType1() == null) {
+            this.type1 = species.getType1();
         }
 
-        if (this.getType2Dbid() == null) {
-            this.type2Dbid = species.getType2Dbid();
+        if (this.getType2() == null) {
+            this.type2 = species.getType1();
         }
 
         if (this.getClassification() == null) {
@@ -327,20 +329,20 @@ public class Species {
         this.dexno = dexno;
     }
 
-    public Integer getType1Dbid() {
-        return type1Dbid;
+    public Type getType1() {
+        return type1;
     }
 
-    public void setType1Dbid(Integer type1Dbid) {
-        this.type1Dbid = type1Dbid;
+    public void setType1(Type type1) {
+        this.type1 = type1;
     }
 
-    public Integer getType2Dbid() {
-        return type2Dbid;
+    public Type getType2() {
+        return type2;
     }
 
-    public void setType2Dbid(Integer type2Dbid) {
-        this.type2Dbid = type2Dbid;
+    public void setType2(Type type2) {
+        this.type2 = type2;
     }
 
     public String getClassification() {
