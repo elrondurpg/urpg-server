@@ -84,7 +84,7 @@ public class SpeciesControllerTest
     }
 
     @Test
-    public void createSpeciesWithNameEqualToExistingSpeciesTest() {
+    public void createSpeciesWithNameEqualToExistingSpeciesShouldFail() {
         String speciesName = "TestName";
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
 
@@ -99,7 +99,7 @@ public class SpeciesControllerTest
     }
 
     @Test
-    public void createSpeciesWithInvalidAttributesTest() throws JSONException {
+    public void createSpeciesWithInvalidAttributesShouldFail() {
         String speciesName = "TestName";
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
         pokemon.setDexno(1000000);
@@ -109,6 +109,43 @@ public class SpeciesControllerTest
         ResponseEntity<String> response = restTemplate.exchange("/pokemon/create", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         Assert.assertTrue(response.getBody().contains("Dex No. '" + pokemon.getDexno() + "' is invalid."));
+    }
+
+    @Test
+    public void updateSpeciesWithValidAttributesTest() {
+        String speciesName = "TestName";
+
+        Species existingPokemon = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(existingPokemon);
+        Mockito.when(service.findByName(speciesName)).thenReturn(speciesOptional);
+
+        Species updatedPokemon = SpeciesTestFactory.createSpecies(speciesName);
+        updatedPokemon.setDexno(999);
+
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(updatedPokemon);
+
+        ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertEquals("Pokemon " + speciesName + " was updated successfully!", response.getBody());
+        Mockito.verify(service, Mockito.times(1)).save(Mockito.any(Species.class));
+    }
+
+    @Test
+    public void updateSpeciesWithInvalidDexnoShouldFail() {
+        String speciesName = "TestName";
+
+        Species existingPokemon = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(existingPokemon);
+        Mockito.when(service.findByName(speciesName)).thenReturn(speciesOptional);
+
+        Species updatedPokemon = SpeciesTestFactory.createSpecies(speciesName);
+        updatedPokemon.setDexno(10101);
+
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(updatedPokemon);
+
+        ResponseEntity<String> response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        Assert.assertTrue(response.getBody().contains("Dex No. '" + updatedPokemon.getDexno() + "' is invalid."));
     }
 
     @Test
@@ -141,6 +178,24 @@ public class SpeciesControllerTest
 
         ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
 
+    @Test
+    public void deleteSpeciesTest() {
+        ResponseEntity response = restTemplate.exchange("/pokemon/DOES_NOT_EXIST", HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
+        Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void deleteNonexistentSpeciesShouldFail() {
+        String speciesName = "TestName";
+        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Mockito.when(service.findByName(speciesName)).thenReturn(speciesOptional);
+
+        ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertEquals("Pokemon " + speciesName + " was deleted successfully!", response.getBody());
+        Mockito.verify(service, Mockito.times(1)).delete(Mockito.any(Species.class));
     }
 }
