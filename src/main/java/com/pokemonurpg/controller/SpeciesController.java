@@ -16,7 +16,9 @@ import java.util.Optional;
 public class SpeciesController {
 
     private SpeciesService service;
-    private SpeciesValidator speciesValidator = new SpeciesValidator();
+
+    @Autowired
+    private SpeciesValidator speciesValidator;
 
     @Autowired
     public SpeciesController(SpeciesService service) {
