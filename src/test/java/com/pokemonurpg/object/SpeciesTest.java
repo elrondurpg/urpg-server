@@ -1,5 +1,6 @@
 package com.pokemonurpg.object;
 
+import factory.SpeciesTestFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,13 +10,9 @@ public class SpeciesTest {
 
     @Test
     public void createSpeciesTest() {
-        Species pokemon = new Species(1, 1, "Pikachu", 1, 1,
-                "TestClass", 300, 123, 321, 456, 321,
-                134, 13.0, 10.0, true, false, "10000",
-                1, 2, 3, 4, "40000", "Pikachu-Display",
-                "Pikachu-Form");
+        Species pokemon = SpeciesTestFactory.createSpecies("SpeciesTest");
         Assert.assertEquals((Integer) 1, pokemon.getDbid());
-        Assert.assertEquals("Pikachu", pokemon.getName());
+        Assert.assertEquals("SpeciesTest", pokemon.getName());
         Assert.assertEquals((Integer) 1, pokemon.getType1Dbid());
         Assert.assertEquals((Integer) 1, pokemon.getType2Dbid());
         Assert.assertEquals("TestClass", pokemon.getClassification());

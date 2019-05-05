@@ -12,9 +12,7 @@ public class RequestEntityTestFactory {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
         headers.add("Content-Type", "application/json");
 
-        Species pokemon = new Species();
-
-        return new HttpEntity<Species>(pokemon, headers);
+        return new HttpEntity<Species>(species, headers);
     }
 
 }
