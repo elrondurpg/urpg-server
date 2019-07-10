@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/type")
 @CrossOrigin
 public class TypeController {
-    private TypeService service;
+    /*private TypeService service;
     private TypeValidator typeValidator;
 
     @Autowired
@@ -77,5 +77,5 @@ public class TypeController {
             service.delete(typeOptional.get());
             return ResponseEntity.ok("Type " + name + " was deleted successfully!");
         }
-    }
+    }*/
 }

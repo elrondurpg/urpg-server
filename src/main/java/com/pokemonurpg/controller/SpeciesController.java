@@ -25,22 +25,10 @@ import java.util.Optional;
 public class SpeciesController {
 
     private SpeciesService speciesService;
-    private AlteredFormMethodService alteredFormMethodService;
-    private EvolutionService evolutionService;
-
-    private SpeciesValidator speciesValidator;
-
-    private SpeciesAttackValidator speciesAttackValidator;
-    private SpeciesAbilityValidator speciesAbilityValidator;
 
     @Autowired
-    public SpeciesController(SpeciesService speciesService, AlteredFormMethodService alteredFormMethodService, EvolutionService evolutionService, SpeciesValidator speciesValidator, SpeciesAttackValidator speciesAttackValidator, SpeciesAbilityValidator speciesAbilityValidator) {
+    public SpeciesController(SpeciesService speciesService) {
         this.speciesService = speciesService;
-        this.alteredFormMethodService = alteredFormMethodService;
-        this.evolutionService = evolutionService;
-        this.speciesValidator = speciesValidator;
-        this.speciesAttackValidator = speciesAttackValidator;
-        this.speciesAbilityValidator = speciesAbilityValidator;
     }
 
     @GetMapping(path="/all")

@@ -40,7 +40,7 @@ public class SpeciesDto extends ResponseDto
     private SpeciesPageTabDto nextSpecies;
     private SpeciesPageTabDto prevSpecies;
     private List<SpeciesAlteredFormDto> alteredForms;
-    private AlteredFormMethod alteredFormMethod;
+    private String alteredFormMethod;
 
     public SpeciesDto() {
 
@@ -315,11 +315,11 @@ public class SpeciesDto extends ResponseDto
         this.alteredForms = alteredForms;
     }
 
-    public AlteredFormMethod getAlteredFormMethod() {
+    public String getAlteredFormMethod() {
         return alteredFormMethod;
     }
 
-    public void setAlteredFormMethod(AlteredFormMethod alteredFormMethod) {
+    public void setAlteredFormMethod(String alteredFormMethod) {
         this.alteredFormMethod = alteredFormMethod;
     }
 }

@@ -1,7 +1,7 @@
 package com.pokemonurpg.object.partials;
 
 public class EvolutionFamilyMember {
-
+/*
     String name;
     String displayName;
     String method;
@@ -46,5 +46,5 @@ public class EvolutionFamilyMember {
 
     public void setStage(Integer stage) {
         this.stage = stage;
-    }
+    }*/
 }

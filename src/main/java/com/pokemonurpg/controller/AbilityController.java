@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/ability")
 @CrossOrigin
 public class AbilityController {
-    private AbilityService service;
+    /*private AbilityService service;
 
     private AbilityValidator abilityValidator;
 
@@ -101,5 +101,5 @@ public class AbilityController {
             service.delete(abilityOptional.get());
             return ResponseEntity.ok("Ability " + name + " was deleted successfully!");
         }
-    }
+    }*/
 }

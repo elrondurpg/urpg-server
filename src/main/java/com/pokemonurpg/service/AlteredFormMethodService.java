@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class AlteredFormMethodService {
-
+/*
     private AlteredFormMethodRepository alteredFormMethodRepository;
 
     @Autowired
@@ -34,5 +34,5 @@ public class AlteredFormMethodService {
     public void delete(AlteredFormMethod alteredFormMethod) {
         alteredFormMethodRepository.delete(alteredFormMethod);
     }
-
+*/
 }

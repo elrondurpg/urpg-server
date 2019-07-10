@@ -21,10 +21,10 @@ public class Species {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer dbid;
+    private int dbid;
 
     @Column
-    private Integer dexno;
+    private int dexno;
 
     @Column
     private String name;
@@ -41,34 +41,34 @@ public class Species {
     private String classification;
 
     @Column
-    private Integer hp;
+    private int hp;
 
     @Column
-    private Integer attack;
+    private int attack;
 
     @Column
-    private Integer defense;
+    private int defense;
 
     @Column(name = "special_attack")
-    private Integer specialAttack;
+    private int specialAttack;
 
     @Column(name = "special_defense")
-    private Integer specialDefense;
+    private int specialDefense;
 
     @Column
-    private Integer speed;
+    private int speed;
 
     @Column
-    private Double height;
+    private double height;
 
     @Column
-    private Double weight;
+    private double weight;
 
     @Column(name = "male_allowed")
-    private Boolean maleAllowed;
+    private boolean maleAllowed;
 
     @Column(name = "female_allowed")
-    private Boolean femaleAllowed;
+    private boolean femaleAllowed;
 
     @Column
     private Integer pokemart;
@@ -90,7 +90,7 @@ public class Species {
     private ParkRank parkRank;
 
     @Column(name = "contest_credits")
-    private int contestCredits;
+    private Integer contestCredits;
 
     @Column(name = "display_name")
     private String displayName;
@@ -327,43 +327,43 @@ public class Species {
         else throw new IllegalStateException("Database contains " + prevos.size() + " Species that evolve into species with DBID = " + dbid);
     }*/
 
-    public Double getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(Double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public Boolean getMaleAllowed() {
+    public boolean getMaleAllowed() {
         return maleAllowed;
     }
 
-    public void setMaleAllowed(Boolean maleAllowed) {
+    public void setMaleAllowed(boolean maleAllowed) {
         this.maleAllowed = maleAllowed;
     }
 
-    public Boolean getFemaleAllowed() {
+    public boolean getFemaleAllowed() {
         return femaleAllowed;
     }
 
-    public void setFemaleAllowed(Boolean femaleAllowed) {
+    public void setFemaleAllowed(boolean femaleAllowed) {
         this.femaleAllowed = femaleAllowed;
     }
 
-    public int getPokemart() {
+    public Integer getPokemart() {
         return pokemart;
     }
 
-    public void setPokemart(int pokemart) {
+    public void setPokemart(Integer pokemart) {
         this.pokemart = pokemart;
     }
 
@@ -399,11 +399,11 @@ public class Species {
         this.parkRank = parkRank;
     }
 
-    public int getContestCredits() {
+    public Integer getContestCredits() {
         return contestCredits;
     }
 
-    public void setContestCredits(int contestCredits) {
+    public void setContestCredits(Integer contestCredits) {
         this.contestCredits = contestCredits;
     }
 
@@ -423,11 +423,11 @@ public class Species {
         this.formName = formName;
     }
 
-    public Integer getDbid() {
+    public int getDbid() {
         return dbid;
     }
 
-    public void setDbid(Integer dbid) {
+    public void setDbid(int dbid) {
         this.dbid = dbid;
     }
 
@@ -439,19 +439,19 @@ public class Species {
         this.name = name;
     }
 
-    public Integer getHp() {
+    public int getHp() {
         return hp;
     }
 
-    public void setHp(Integer hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
-    public Integer getDexno() {
+    public int getDexno() {
         return dexno;
     }
 
-    public void setDexno(Integer dexno) {
+    public void setDexno(int dexno) {
         this.dexno = dexno;
     }
 
@@ -479,43 +479,43 @@ public class Species {
         this.classification = classification;
     }
 
-    public Integer getAttack() {
+    public int getAttack() {
         return attack;
     }
 
-    public void setAttack(Integer attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
-    public Integer getDefense() {
+    public int getDefense() {
         return defense;
     }
 
-    public void setDefense(Integer defense) {
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
-    public Integer getSpecialAttack() {
+    public int getSpecialAttack() {
         return specialAttack;
     }
 
-    public void setSpecialAttack(Integer specialAttack) {
+    public void setSpecialAttack(int specialAttack) {
         this.specialAttack = specialAttack;
     }
 
-    public Integer getSpecialDefense() {
+    public int getSpecialDefense() {
         return specialDefense;
     }
 
-    public void setSpecialDefense(Integer specialDefense) {
+    public void setSpecialDefense(int specialDefense) {
         this.specialDefense = specialDefense;
     }
 
-    public Integer getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(Integer speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 

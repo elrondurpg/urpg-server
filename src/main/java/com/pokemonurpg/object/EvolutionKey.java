@@ -8,6 +8,7 @@ import java.util.Objects;
 @Embeddable
 public class EvolutionKey implements Serializable
 {
+    /*
     @Column(name = "evolution_dbid")
     Integer evolutionDbid;
 
@@ -51,4 +52,6 @@ public class EvolutionKey implements Serializable
     public int hashCode() {
         return Objects.hash(evolutionDbid, preEvolutionDbid);
     }
+
+     */
 }

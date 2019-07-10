@@ -3,6 +3,7 @@ package com.pokemonurpg.object.partials;
 import com.pokemonurpg.object.Species;
 
 public class SpeciesPageTab {
+    /*
     private Integer dexno;
     private String name;
 
@@ -30,5 +31,5 @@ public class SpeciesPageTab {
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class EvolutionService {
+    /*
     private EvolutionRepository evolutionRepository;
 
     @Autowired
@@ -20,4 +21,6 @@ public class EvolutionService {
     public List<Evolution> findAll(Example<Evolution> evolution) {
         return evolutionRepository.findAll(evolution);
     }
+
+     */
 }

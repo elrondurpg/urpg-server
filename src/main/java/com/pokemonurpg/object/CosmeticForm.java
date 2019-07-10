@@ -6,8 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+//@Entity
 public class CosmeticForm implements Serializable {
+    /*
     @EmbeddedId
     CosmeticFormKey id;
 
@@ -76,6 +77,6 @@ public class CosmeticForm implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getSpecies().getDbid(), getName(), getDisplayName(), getMethod());
-    }
+    }*/
 
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/attack")
 @CrossOrigin
 public class AttackController {
-    private AttackService service;
+    /*private AttackService service;
 
     private AttackValidator attackValidator;
 
@@ -101,5 +101,5 @@ public class AttackController {
             service.delete(attackOptional.get());
             return ResponseEntity.ok("Attack " + name + " was deleted successfully!");
         }
-    }
+    }*/
 }

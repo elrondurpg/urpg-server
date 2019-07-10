@@ -5,9 +5,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Entity
+//@Entity
 public class Evolution {
-
+/*
     @EmbeddedId
     EvolutionKey id;
 
@@ -51,4 +51,5 @@ public class Evolution {
     public int hashCode() {
         return Objects.hash(id, method);
     }
+    */
 }

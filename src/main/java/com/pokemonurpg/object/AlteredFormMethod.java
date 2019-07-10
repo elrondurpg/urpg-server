@@ -5,10 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "altered_form")
+//@Entity
+//@Table(name = "altered_form")
 public class AlteredFormMethod {
-
+/*
     @Id
     @Column(name = "base_dex")
     Integer dexno;
@@ -36,5 +36,5 @@ public class AlteredFormMethod {
 
     public void setMethod(String method) {
         this.method = method;
-    }
+    }*/
 }
