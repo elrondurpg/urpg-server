@@ -1,7 +1,7 @@
 package com.pokemonurpg.validator;
 
 import com.pokemonurpg.object.Species;
-import com.pokemonurpg.service.TypeService;
+import com.pokemonurpg.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -11,9 +11,22 @@ import java.util.HashMap;
 
 @Component
 public class SpeciesValidator extends URPGValidator {
+    /* TODO reinstate
+
+    private TypeService typeService;
+    private StoryRankService storyRankService;
+    private ArtRankService artRankService;
+    private ParkRankService parkRankService;
+    private ParkLocationService parkLocationService;
 
     @Autowired
-    private TypeService typeService;
+    public SpeciesValidator (TypeService typeService, StoryRankService storyRankService, ArtRankService artRankService, ParkLocationService parkLocationService, ParkRankService parkRankService) {
+        this.typeService = typeService;
+        this.storyRankService = storyRankService;
+        this.artRankService = artRankService;
+        this.parkLocationService = parkLocationService;
+        this.parkRankService = parkRankService;
+    }
 
     public Errors validate(Object obj) {
         HashMap<String, String> errorMap = new HashMap<>();
@@ -25,7 +38,6 @@ public class SpeciesValidator extends URPGValidator {
     @Override
     public void validate(Object obj, Errors errors) {
         Species pokemon = (Species) obj;
-
         if (pokemon != null) {
 
             if (emptyInputString(pokemon.getName()) || !isIntegerBetween(pokemon.getName().length(), 3, 21)) {
@@ -90,20 +102,24 @@ public class SpeciesValidator extends URPGValidator {
                 errors.rejectValue("contestCredits", "Contest credit value '" + pokemon.getContestCredits() + "' is invalid.");
             }
 
-            if (pokemon.getArtRank() != null && !isIntegerBetween(pokemon.getArtRank(), 1, 8)) {
-                errors.rejectValue("artRank", "Art Rank DBID '" + pokemon.getArtRank() + "' is invalid.");
+            if (pokemon.getStoryRank() == null || !storyRankService.findByDbid(pokemon.getStoryRank().getDbid()).isPresent() )
+            {
+                errors.rejectValue("storyRank", "Story rank '" + pokemon.getStoryRank() + "' is invalid.");
             }
 
-            if (pokemon.getStoryRank() != null && !isIntegerBetween(pokemon.getStoryRank(), 1, 8)) {
-                errors.rejectValue("storyRank", "Story Rank DBID '" + pokemon.getStoryRank() + "' is invalid.");
+            if (pokemon.getArtRank() == null || !artRankService.findByDbid(pokemon.getArtRank().getDbid()).isPresent() )
+            {
+                errors.rejectValue("artRank", "Art rank '" + pokemon.getArtRank() + "' is invalid.");
             }
 
-            if (pokemon.getParkRank() != null && !isIntegerBetween(pokemon.getParkRank(), 1, 7)) {
-                errors.rejectValue("parkRank", "Park Rank DBID '" + pokemon.getParkRank() + "' is invalid.");
+            if (pokemon.getParkRank() == null || !parkRankService.findByDbid(pokemon.getParkRank().getDbid()).isPresent() )
+            {
+                errors.rejectValue("parkRank", "Park rank '" + pokemon.getParkRank() + "' is invalid.");
             }
 
-            if (pokemon.getParkLocation() != null && !isIntegerBetween(pokemon.getParkLocation(), 1, 9)) {
-                errors.rejectValue("parkLocation", "Park Location DBID '" + pokemon.getParkLocation() + "' is invalid.");
+            if (pokemon.getParkLocation() == null || !parkLocationService.findByDbid(pokemon.getParkLocation().getDbid()).isPresent() )
+            {
+                errors.rejectValue("parkLocation", "Park location '" + pokemon.getParkLocation() + "' is invalid.");
             }
 
             if (emptyInputString(pokemon.getDisplayName())) {
@@ -113,11 +129,13 @@ public class SpeciesValidator extends URPGValidator {
             if (!emptyInputString(pokemon.getFormName()) && !isIntegerBetween(pokemon.getFormName().length(), 2, 20)) {
                 errors.rejectValue("formName", "Form Name '" + pokemon.getFormName() + "' is invalid.");
             }
+
+            // TODO validate attacks
         }
         else {
             errors.reject("No/Invalid Pokemon object specified.");
         }
 
-    }
+    }*/
 
 }

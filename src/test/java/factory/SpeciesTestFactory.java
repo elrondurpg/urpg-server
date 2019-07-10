@@ -1,14 +1,20 @@
 package factory;
 
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.*;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SpeciesTestFactory {
+    /*
 
     public static Species createSpecies() {
-        return new Species(1, 1, "Pikachu", 1, 1,
+        Type type = new Type("Electric");
+        type.setDbid(1);
+        return new Species(1, 1, "Pikachu", type, null,
                 "TestClass", 300, 123, 321, 456, 321,
                 134, 13.0, 10.0, true, false, "10000",
-                1, 2, 3, 4, "40000", "Pikachu-Display",
+                new StoryRank(), new ArtRank(), new ParkLocation(), new ParkRank(), "40000", "Pikachu-Display",
                 "Pikachu-Form");
     }
 
@@ -18,4 +24,11 @@ public class SpeciesTestFactory {
         return species;
     }
 
+    public static Species createSpecies(String name, Integer dbid) {
+        Species species = createSpecies();
+        species.setName(name);
+        species.setDbid(dbid);
+        return species;
+    }
+*/
 }

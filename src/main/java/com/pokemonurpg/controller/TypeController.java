@@ -13,13 +13,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/type")
+@CrossOrigin
 public class TypeController {
     private TypeService service;
-    private TypeValidator typeValidator = new TypeValidator();
+    private TypeValidator typeValidator;
 
     @Autowired
-    public TypeController(TypeService service) {
+    public TypeController(TypeService service, TypeValidator typeValidator) {
         this.service = service;
+        this.typeValidator = typeValidator;
     }
 
     @GetMapping(path="/all")

@@ -2,11 +2,13 @@ package com.pokemonurpg.validator;
 
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.Type;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.MapBindingResult;
 
 import java.util.HashMap;
 
+@Component
 public class TypeValidator extends URPGValidator  {
 
     public Errors validate(Object obj) {

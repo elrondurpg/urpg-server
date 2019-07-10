@@ -1,7 +1,15 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.dto.species.SpeciesDto;
+import com.pokemonurpg.object.AlteredFormMethod;
 import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.SpeciesAbility;
+import com.pokemonurpg.object.SpeciesAttack;
+import com.pokemonurpg.service.AlteredFormMethodService;
+import com.pokemonurpg.service.EvolutionService;
 import com.pokemonurpg.service.SpeciesService;
+import com.pokemonurpg.validator.SpeciesAbilityValidator;
+import com.pokemonurpg.validator.SpeciesAttackValidator;
 import com.pokemonurpg.validator.SpeciesValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,42 +21,62 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/pokemon")
+@CrossOrigin
 public class SpeciesController {
 
-    private SpeciesService service;
+    private SpeciesService speciesService;
+    private AlteredFormMethodService alteredFormMethodService;
+    private EvolutionService evolutionService;
 
-    @Autowired
     private SpeciesValidator speciesValidator;
 
+    private SpeciesAttackValidator speciesAttackValidator;
+    private SpeciesAbilityValidator speciesAbilityValidator;
+
     @Autowired
-    public SpeciesController(SpeciesService service) {
-        this.service = service;
+    public SpeciesController(SpeciesService speciesService, AlteredFormMethodService alteredFormMethodService, EvolutionService evolutionService, SpeciesValidator speciesValidator, SpeciesAttackValidator speciesAttackValidator, SpeciesAbilityValidator speciesAbilityValidator) {
+        this.speciesService = speciesService;
+        this.alteredFormMethodService = alteredFormMethodService;
+        this.evolutionService = evolutionService;
+        this.speciesValidator = speciesValidator;
+        this.speciesAttackValidator = speciesAttackValidator;
+        this.speciesAbilityValidator = speciesAbilityValidator;
     }
 
     @GetMapping(path="/all")
     public @ResponseBody ResponseEntity getAllSpecies() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(speciesService.findAll());
     }
 
     @GetMapping(path="/{name}")
     public @ResponseBody
+    SpeciesDto getSpeciesByName(@PathVariable("name") String name) {
+        return speciesService.findByName(name);
+    }
+
+    /*@GetMapping(path="/{name}")
+    public @ResponseBody
     ResponseEntity getSpeciesByName(@PathVariable("name") String name) {
         Optional<Species> speciesOptional = service.findByName(name);
         if (speciesOptional.isPresent()) {
-            return ResponseEntity.ok(speciesOptional.get());
+            Species species = speciesOptional.get();
+            species.addTransientFields(service, alteredFormMethodService,evolutionService);
+            return ResponseEntity.ok(species);
         }
         else {
-            List<Species> results = service.findByNameStartingWith(name);
-            if (results != null && !results.isEmpty()) {
-                return ResponseEntity.ok(results.get(0));
+            speciesOptional = service.findByNameStartingWith(name);
+            if (speciesOptional.isPresent()) {
+                Species species = speciesOptional.get();
+                species.addTransientFields(service, alteredFormMethodService, evolutionService);
+                return ResponseEntity.ok(species);
             }
             else {
                 return ResponseEntity.notFound().build();
             }
         }
-    }
+    }*/
 
-    @PostMapping(path="/create")
+    /*@PostMapping(path="/create")
     public ResponseEntity createSpecies(@RequestBody Species species) {
         Errors errors = speciesValidator.validate(species);
         if(errors.hasErrors()) {
@@ -56,12 +84,28 @@ public class SpeciesController {
         }
         else {
             String name = species.getName();
-            Optional<Species> speciesOptional = service.findByName(name);
+            Optional<Species> speciesOptional = speciesService.findByName(name);
             if (speciesOptional.isPresent()) {
                 return ResponseEntity.badRequest().body("A Pokemon named " + name + " already exists!");
             }
 
-            service.save(species);
+            List<SpeciesAttack> attacks = species.getAttacks();
+            for (SpeciesAttack attack : attacks) {
+                errors = speciesAttackValidator.validate(attack);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+            }
+
+            List<SpeciesAbility> abilities = species.getAbilities();
+            for (SpeciesAbility ability : abilities) {
+                errors = speciesAbilityValidator.validate(ability);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+            }
+
+            speciesService.save(species);
             return ResponseEntity.ok("Pokemon " + name + " was created successfully!");
         }
     }
@@ -69,21 +113,21 @@ public class SpeciesController {
     @PutMapping(path="/{name}")
     public ResponseEntity updateSpecies(@RequestBody Species species, @PathVariable String name) {
 
-        Optional<Species> speciesOptional = service.findByName(name);
+        Optional<Species> speciesOptional = speciesService.findByName(name);
 
         if (!speciesOptional.isPresent())
             return ResponseEntity.notFound().build();
         else if (!name.equals(species.getName()))
             return ResponseEntity.badRequest().build();
         else {
-            species.persistValuesFrom(speciesOptional.get());
+            species.cloneValuesFrom(speciesOptional.get());
 
             Errors errors = speciesValidator.validate(species);
             if(errors.hasErrors()) {
                 return ResponseEntity.badRequest().body(errors.getAllErrors());
             }
             else {
-                service.save(species);
+                speciesService.save(species);
                 return ResponseEntity.ok("Pokemon " + name + " was updated successfully!");
             }
         }
@@ -91,15 +135,15 @@ public class SpeciesController {
 
     @DeleteMapping(path="/{name}")
     public ResponseEntity deleteSpecies(@PathVariable String name) {
-        Optional<Species> speciesOptional = service.findByName(name);
+        Optional<Species> speciesOptional = speciesService.findByName(name);
 
         if (!speciesOptional.isPresent())
             return ResponseEntity.notFound().build();
         else
         {
-            service.delete(speciesOptional.get());
+            speciesService.delete(speciesOptional.get());
             return ResponseEntity.ok("Pokemon " + name + " was deleted successfully!");
         }
-    }
+    }*/
 
 }
