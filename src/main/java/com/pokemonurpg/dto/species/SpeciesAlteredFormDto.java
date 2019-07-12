@@ -1,4 +1,6 @@
 package com.pokemonurpg.dto.species;
 
-public class SpeciesAlteredFormDto {
+import com.pokemonurpg.dto.DataDto;
+
+public class SpeciesAlteredFormDto extends DataDto {
 }

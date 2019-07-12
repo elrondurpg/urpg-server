@@ -1,22 +1,12 @@
 package com.pokemonurpg.object;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
-//@Entity
-public class CosmeticForm implements Serializable {
-    /*
+@Entity
+public class CosmeticForm {
     @EmbeddedId
     CosmeticFormKey id;
-
-    @JsonBackReference
-    @ManyToOne
-    @MapsId("species_dbid")
-    @JoinColumn(name = "base_dbid")
-    private Species species;
 
     @Column(name = "display_name")
     private String displayName;
@@ -26,18 +16,12 @@ public class CosmeticForm implements Serializable {
 
     public CosmeticForm() {}
 
-    public CosmeticForm(int speciesDbid, String name, String displayName, String method) {
-        this.id = new CosmeticFormKey(speciesDbid, name);
-        this.displayName = displayName;
-        this.method = method;
+    public CosmeticFormKey getId() {
+        return id;
     }
 
-    public Species getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(Species species) {
-        this.species = species;
+    public void setId(CosmeticFormKey id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -68,15 +52,14 @@ public class CosmeticForm implements Serializable {
         if (this == o) return true;
         if (!(o instanceof CosmeticForm)) return false;
         CosmeticForm that = (CosmeticForm) o;
-        return Objects.equals(species.getDbid(), that.getSpecies().getDbid()) &&
-                Objects.equals(getName(), that.getName()) &&
+        return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getDisplayName(), that.getDisplayName()) &&
                 Objects.equals(getMethod(), that.getMethod());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSpecies().getDbid(), getName(), getDisplayName(), getMethod());
-    }*/
+        return Objects.hash(getId(), getName(), getDisplayName(), getMethod());
+    }
 
 }

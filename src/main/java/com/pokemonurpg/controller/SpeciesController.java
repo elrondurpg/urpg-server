@@ -1,5 +1,6 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.dto.ResponseDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
 import com.pokemonurpg.object.AlteredFormMethod;
 import com.pokemonurpg.object.Species;
@@ -31,15 +32,23 @@ public class SpeciesController {
         this.speciesService = speciesService;
     }
 
-    @GetMapping(path="/all")
+    /*@GetMapping(path="/all")
     public @ResponseBody ResponseEntity getAllSpecies() {
         return ResponseEntity.ok(speciesService.findAll());
-    }
+    }*/
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    SpeciesDto getSpeciesByName(@PathVariable("name") String name) {
-        return speciesService.findByName(name);
+    ResponseEntity<SpeciesDto> getSpeciesByName(@PathVariable("name") String name) {
+        try {
+            SpeciesDto dto = speciesService.findByName(name);
+            if (dto != null) {
+                return ResponseEntity.ok(dto);
+            }
+            else return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /*@GetMapping(path="/{name}")

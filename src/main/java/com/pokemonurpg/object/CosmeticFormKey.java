@@ -7,9 +7,9 @@ import java.util.Objects;
 
 @Embeddable
 public class CosmeticFormKey implements Serializable {
-/*
+
     @Column(name = "base_dbid")
-    private Integer speciesDbid;
+    private int speciesDbid;
 
     @Column(name = "form_name")
     private String name;
@@ -21,11 +21,11 @@ public class CosmeticFormKey implements Serializable {
         this.name = name;
     }
 
-    public Integer getSpeciesDbid() {
+    public int getSpeciesDbid() {
         return speciesDbid;
     }
 
-    public void setSpeciesDbid(Integer speciesDbid) {
+    public void setSpeciesDbid(int speciesDbid) {
         this.speciesDbid = speciesDbid;
     }
 
@@ -50,5 +50,4 @@ public class CosmeticFormKey implements Serializable {
     public int hashCode() {
         return Objects.hash(getSpeciesDbid(), getName());
     }
-*/
 }

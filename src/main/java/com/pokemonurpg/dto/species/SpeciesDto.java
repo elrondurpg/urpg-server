@@ -1,14 +1,11 @@
 package com.pokemonurpg.dto.species;
 
-import com.pokemonurpg.dto.CosmeticFormDto;
-import com.pokemonurpg.dto.ResponseDto;
-import com.pokemonurpg.dto.SpeciesAbilityDto;
-import com.pokemonurpg.dto.SpeciesAttackDto;
+import com.pokemonurpg.dto.*;
 import com.pokemonurpg.object.*;
 
 import java.util.List;
 
-public class SpeciesDto extends ResponseDto
+public class SpeciesDto extends DataDto
 {
     private int dbid;
     private int dexno;
@@ -26,12 +23,12 @@ public class SpeciesDto extends ResponseDto
     private double weight;
     private boolean maleAllowed;
     private boolean femaleAllowed;
-    private int pokemart;
+    private Integer pokemart;
     private StoryRank storyRank;
     private ArtRank artRank;
     private ParkRank parkRank;
     private ParkLocation parkLocation;
-    private int contestCredits;
+    private Integer contestCredits;
     private String displayName;
     private String formName;
     private List<SpeciesAttackDto> speciesAttacks;
@@ -203,11 +200,11 @@ public class SpeciesDto extends ResponseDto
         this.femaleAllowed = femaleAllowed;
     }
 
-    public int getPokemart() {
+    public Integer getPokemart() {
         return pokemart;
     }
 
-    public void setPokemart(int pokemart) {
+    public void setPokemart(Integer pokemart) {
         this.pokemart = pokemart;
     }
 
@@ -243,11 +240,11 @@ public class SpeciesDto extends ResponseDto
         this.parkLocation = parkLocation;
     }
 
-    public int getContestCredits() {
+    public Integer getContestCredits() {
         return contestCredits;
     }
 
-    public void setContestCredits(int contestCredits) {
+    public void setContestCredits(Integer contestCredits) {
         this.contestCredits = contestCredits;
     }
 

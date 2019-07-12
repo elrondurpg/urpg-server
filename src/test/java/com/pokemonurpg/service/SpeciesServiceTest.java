@@ -1,11 +1,19 @@
 package com.pokemonurpg.service;
 
+import com.pokemonurpg.AppConfig;
+import com.pokemonurpg.dto.CosmeticFormDto;
+import com.pokemonurpg.dto.ResponseDto;
+import com.pokemonurpg.dto.species.SpeciesDto;
+import com.pokemonurpg.dto.species.SpeciesPageTabDto;
+import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.Attack;
+import com.pokemonurpg.object.CosmeticForm;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.SpeciesAttack;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
@@ -13,254 +21,165 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class SpeciesServiceTest {
-    /* TODO reinstate
-
-    private static final String POKEMON_NAME="Pikachu";
-    private static final Integer POKEMON_DBID = 808;
-
-    private static final String ATTACK_NAME="Fire Blast";
-    private static final Integer ATTACK_DBID = 777;
-    private static final String ATTACK_METHOD="LEVEL-UP";
-
-    private static final String ATTACK_NAME_ALT="Flamethrower";
-    private static final Integer ATTACK_DBID_ALT=999;
-    private static final String ATTACK_METHOD_ALT="HM";
 
     private SpeciesService speciesService;
-
     private SpeciesRepository speciesRepository = mock(SpeciesRepository.class);
-
     private SpeciesAttackService speciesAttackService = mock(SpeciesAttackService.class);
-
     private AttackService attackService = mock(AttackService.class);
-
     private SpeciesAbilityService speciesAbilityService = mock(SpeciesAbilityService.class);
     private AbilityService abilityService = mock(AbilityService.class);
+    private CosmeticFormService cosmeticFormService = mock(CosmeticFormService.class);
+
+    private Species pikachu = TestObjectFactory.createPikachu();
+    private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
+
+    private Species nextDex = TestObjectFactory.createNextDex();
+    private Species prevDex = TestObjectFactory.createPrevDex();
 
     @Before
     public void initService() {
-        speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackService, speciesAbilityService, abilityService);
-    }
-
-    public Species createExistingSpeciesObject() {
-        Species existingSpecies = mock(Species.class);
-        when(existingSpecies.getDbid()).thenReturn(POKEMON_DBID);
-        when(existingSpecies.getName()).thenReturn(POKEMON_NAME);
-        when(speciesRepository.findByName(POKEMON_NAME)).thenReturn(Optional.of(existingSpecies));
-        when(existingSpecies.getAttacks()).thenReturn(new ArrayList<>());
-
-        return existingSpecies;
-    }
-
-    public Attack createExistingAttackObject() {
-        Attack existingAttack = mock(Attack.class);
-        when(existingAttack.getDbid()).thenReturn(ATTACK_DBID);
-        when(attackService.findByName(ATTACK_NAME)).thenReturn(Optional.of(existingAttack));
-
-        return existingAttack;
-    }
-
-    public Species createRequestedSpeciesObject(SpeciesAttack... speciesAttacks) {
-        Species requestedSpecies = mock(Species.class);
-        when(requestedSpecies.getAttacks()).thenReturn(new ArrayList<>(Arrays.asList(speciesAttacks)));
-        when(requestedSpecies.getName()).thenReturn(POKEMON_NAME);
-        return requestedSpecies;
-    }
-
-    public SpeciesAttack createGenericSpeciesAttackObject() {
-        SpeciesAttack speciesAttack = new SpeciesAttack();
-        Attack attack = new Attack();
-        attack.setName(ATTACK_NAME);
-        speciesAttack.setAttack(attack);
-        speciesAttack.setMethod(ATTACK_METHOD);
-
-        return speciesAttack;
+        speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackService,
+                speciesAbilityService, abilityService, cosmeticFormService);
     }
 
     @Test
-    public void saveExistingSpeciesSavesNewAttacks() {
-        Species existingSpecies = createExistingSpeciesObject();
-        Attack existingAttack = createExistingAttackObject();
+    public void serviceReturnsPikachuWithExactName() {
+        String name = TestObjectFactory.TEST_SPECIES_NAME;
+        when(speciesRepository.findByName(name)).thenReturn(Optional.of(pikachu));
 
-        SpeciesAttack requestedAttack = createGenericSpeciesAttackObject();
-        Species requestedSpecies = createRequestedSpeciesObject(requestedAttack);
-
-        speciesService.save(requestedSpecies);
-        verify(speciesRepository, times(1)).save(requestedSpecies);
-        verify(speciesAttackService, times(1)).save(any(SpeciesAttack.class));
-        assertEquals(existingSpecies.getDbid(), requestedAttack.internalGetId().getSpeciesDbid());
-        assertEquals(existingAttack.getDbid(), requestedAttack.internalGetId().getAttackDbid());
+        SpeciesDto dto = speciesService.findByName(name);
+        assertEquals(name, dto.getName());
     }
 
     @Test
-    public void saveExistingSpeciesDoesntSaveAttacksThatDontExist() {
-        Species existingSpecies = createExistingSpeciesObject();
+    public void serviceReturnsPikachuWithPartialName() {
+        String name = TestObjectFactory.TEST_SPECIES_NAME;
+        String namePartial = name.substring(0, 4);
+        ArrayList<Species> list = new ArrayList<>();
+        list.add(pikachu);
+        when(speciesRepository.findByNameStartingWith(namePartial)).thenReturn(list);
 
-        SpeciesAttack requestedAttack = createGenericSpeciesAttackObject();
-        Species requestedSpecies = createRequestedSpeciesObject(requestedAttack);
-
-        speciesService.save(requestedSpecies);
-        verify(speciesRepository, times(1)).save(requestedSpecies);
-        verify(speciesAttackService, times(0)).save(any(SpeciesAttack.class));
-        assertEquals(null, requestedAttack.internalGetId());
+        SpeciesDto dto = speciesService.findByName(namePartial);
+        assertEquals(name, dto.getName());
     }
 
     @Test
-    public void getCurrentAttacksSuccessPath() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        SpeciesAttack speciesAttack = createGenericSpeciesAttackObject();
-        speciesAttacks.add(speciesAttack);
-
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(existingSpecies);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.containsKey(ATTACK_NAME));
+    public void serviceReturnsNullWithEmptyName() {
+        SpeciesDto dto = speciesService.findByName("");
+        assertNull(dto);
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenSpeciesIsNull() {
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(null);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+    public void serviceReturnsNullWithNonexistentName() {
+        SpeciesDto dto = speciesService.findByName("Mewthree");
+        assertNull(dto);
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenSpeciesAttacksIsNull() {
-        Species existingSpecies = createExistingSpeciesObject();
-        when(existingSpecies.getAttacks()).thenReturn(null);
+    public void buildSpeciesDtoAttachesCosmeticForm() {
+        List<CosmeticFormDto> list = new ArrayList<>();
+        list.add(new CosmeticFormDto(spikyEaredPikachu));
 
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(existingSpecies);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+        when(cosmeticFormService.findBySpeciesDbid(pikachu.getDbid())).thenReturn(list);
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
+        assertNotNull(speciesDto.getCosmeticForms());
+        assertEquals(1, speciesDto.getCosmeticForms().size());
+        assertEquals(spikyEaredPikachu.getDisplayName(), speciesDto.getCosmeticForms().get(0).getDisplayName());
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenSpeciesAttacksIsEmpty() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(existingSpecies);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+    public void getNextDexReturnsOneWhenOriginIsX() {
+        int dexno = 1;
+        int nextDex = speciesService.getNextDex(dexno);
+        assertEquals(2, nextDex);
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenSpeciesIsNew() {
-        Species species = new Species();
-        String name = "TestName";
-        species.setName(name);
-
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(species);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+    public void getNextDexReturnsTwoWhenOriginIsOne() {
+        int dexno = AppConfig.NUM_SPECIES;
+        int nextDex = speciesService.getNextDex(dexno);
+        assertEquals(1, nextDex);
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenSpeciesAttackHasNoAttack() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        SpeciesAttack speciesAttack = new SpeciesAttack();
-        speciesAttacks.add(speciesAttack);
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(existingSpecies);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+    public void getNextDexReturnsXWhenOriginIsXMinusOne() {
+        int dexno = AppConfig.NUM_SPECIES - 1;
+        int nextDex = speciesService.getNextDex(dexno);
+        assertEquals(AppConfig.NUM_SPECIES, nextDex);
     }
 
     @Test
-    public void getCurrentAttacksReturnsEmptyMapWhenAttackHasNoName() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        SpeciesAttack speciesAttack = new SpeciesAttack();
-        speciesAttack.setAttack(new Attack());
-        speciesAttacks.add(speciesAttack);
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> currentAttacks = speciesService.getCurrentAttacks(existingSpecies);
-        assertNotNull(currentAttacks);
-        assertTrue(currentAttacks.isEmpty());
+    public void getPrevDexReturnsXWhenOriginIsOne() {
+        int dexno = 1;
+        int prevDex = speciesService.getPrevDex(dexno);
+        assertEquals(AppConfig.NUM_SPECIES, prevDex);
     }
 
     @Test
-    public void getNewAttacksSuccessPath() {
-        Species species = mock(Species.class);
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<>();
-        SpeciesAttack speciesAttack = createGenericSpeciesAttackObject();
-        speciesAttacks.add(speciesAttack);
-
-        when(species.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(species);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.containsKey(ATTACK_NAME));
+    public void getPrevDexReturnsOneWhenOriginIsTwo() {
+        int dexno = 2;
+        int prevDex = speciesService.getPrevDex(dexno);
+        assertEquals(1, prevDex);
     }
 
     @Test
-    public void getNewAttacksReturnsEmptyMapWhenSpeciesIsNull() {
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(null);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.isEmpty());
+    public void getPrevDexReturnsXMinusOneWhenOriginIsX() {
+        int dexno = AppConfig.NUM_SPECIES;
+        int prevDex = speciesService.getPrevDex(dexno);
+        assertEquals(AppConfig.NUM_SPECIES - 1, prevDex);
     }
 
     @Test
-    public void getNewAttacksReturnsEmptyMapWhenSpeciesAttacksIsNull() {
-        Species existingSpecies = createExistingSpeciesObject();
-        when(existingSpecies.getAttacks()).thenReturn(null);
-
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(existingSpecies);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.isEmpty());
+    public void buildSpeciesPageTabDtoAssignsCorrectFields() {
+        SpeciesDto species = speciesService.buildSpeciesDto(pikachu);
+        SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(species);
+        assertNotNull(dto);
+        assertEquals(dto.getDexno(), pikachu.getDexno());
+        assertEquals(dto.getName(), pikachu.getDisplayName());
     }
 
     @Test
-    public void getNewAttacksReturnsEmptyMapWhenSpeciesAttacksIsEmpty() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(existingSpecies);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.isEmpty());
+    public void buildSpeciesPageTabDtoReturnsEmptyDtoWhenSpeciesIsNull() {
+        SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(null);
+        assertNotNull(dto);
+        assertEquals(0, dto.getDexno());
+        assertNull(dto.getName());
     }
 
     @Test
-    public void getNewAttacksReturnsEmptyMapWhenSpeciesAttackHasNoAttack() {
-        Species existingSpecies = createExistingSpeciesObject();
+    public void findByDexnoReturnsPikachu() {
+        when(speciesRepository.findByDexno(pikachu.getDexno())).thenReturn(Arrays.asList(pikachu));
 
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        SpeciesAttack speciesAttack = new SpeciesAttack();
-        speciesAttacks.add(speciesAttack);
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
+        List<SpeciesDto> responseList = speciesService.findByDexno(pikachu.getDexno());
+        assertFalse(responseList.isEmpty());
+        assertEquals(1, responseList.size());
 
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(existingSpecies);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.isEmpty());
+        SpeciesDto dto = responseList.get(0);
+        assertEquals(pikachu.getName(), dto.getName());
     }
 
     @Test
-    public void getNewAttacksReturnsEmptyMapWhenAttackHasNoName() {
-        Species existingSpecies = createExistingSpeciesObject();
-
-        List<SpeciesAttack> speciesAttacks = new ArrayList<> ();
-        SpeciesAttack speciesAttack = new SpeciesAttack();
-        speciesAttack.setAttack(new Attack());
-        speciesAttacks.add(speciesAttack);
-        when(existingSpecies.getAttacks()).thenReturn(speciesAttacks);
-
-        Map<String, SpeciesAttack> newAttacks = speciesService.getNewAttacks(existingSpecies);
-        assertNotNull(newAttacks);
-        assertTrue(newAttacks.isEmpty());
+    public void findByNonexistentDexnoReturnsEmptyList() {
+        List<SpeciesDto> responseList = speciesService.findByDexno(-1);
+        assertNotNull(responseList);
+        assertTrue(responseList.isEmpty());
     }
-    */
+
+    @Test
+    public void buildSpeciesDtoAttachesNextAndPrevDex() {
+        when(speciesRepository.findByDexno(pikachu.getDexno() - 1)).thenReturn(Arrays.asList(prevDex));
+        when(speciesRepository.findByDexno(pikachu.getDexno() + 1)).thenReturn(Arrays.asList(nextDex));
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
+        assertNotNull(speciesDto.getNextSpecies());
+        assertNotNull(speciesDto.getPrevSpecies());
+
+        SpeciesPageTabDto nextSpecies = speciesDto.getNextSpecies();
+        assertEquals(nextSpecies.getDexno(), pikachu.getDexno() + 1);
+
+        SpeciesPageTabDto prevSpecies = speciesDto.getPrevSpecies();
+        assertEquals(prevSpecies.getDexno(), pikachu.getDexno() - 1);
+    }
 
 }
