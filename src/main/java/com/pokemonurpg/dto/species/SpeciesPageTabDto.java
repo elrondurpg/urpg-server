@@ -6,7 +6,7 @@ public class SpeciesPageTabDto {
     private int dexno;
     private String name;
 
-    public SpeciesPageTabDto(SpeciesDto species) {
+    public SpeciesPageTabDto(Species species) {
         if (species != null) {
             dexno = species.getDexno();
             name = species.getDisplayName();

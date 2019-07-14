@@ -36,7 +36,8 @@ public class SpeciesDto extends DataDto
     private List<CosmeticFormDto> cosmeticForms;
     private SpeciesPageTabDto nextSpecies;
     private SpeciesPageTabDto prevSpecies;
-    private List<SpeciesAlteredFormDto> alteredForms;
+    private List<AlteredFormDto> alteredForms;
+    private List<String> uniqueMoves;
     private String alteredFormMethod;
 
     public SpeciesDto() {
@@ -304,12 +305,20 @@ public class SpeciesDto extends DataDto
         this.prevSpecies = prevSpecies;
     }
 
-    public List<SpeciesAlteredFormDto> getAlteredForms() {
+    public List<AlteredFormDto> getAlteredForms() {
         return alteredForms;
     }
 
-    public void setAlteredForms(List<SpeciesAlteredFormDto> alteredForms) {
+    public void setAlteredForms(List<AlteredFormDto> alteredForms) {
         this.alteredForms = alteredForms;
+    }
+
+    public List<String> getUniqueMoves() {
+        return uniqueMoves;
+    }
+
+    public void setUniqueMoves(List<String> uniqueMoves) {
+        this.uniqueMoves = uniqueMoves;
     }
 
     public String getAlteredFormMethod() {

@@ -11,14 +11,14 @@ public class SpeciesAttackDto extends DataDto {
     private String description;
     private Integer power;
     private Integer accuracy;
-    private int pp;
+    private Integer pp;
     private String category;
     private String target;
-    private boolean contact;
-    private boolean magicCoat;
-    private boolean sheerForce;
-    private boolean snatch;
-    private boolean substitute;
+    private Boolean contact;
+    private Boolean magicCoat;
+    private Boolean sheerForce;
+    private Boolean snatch;
+    private Boolean substitute;
     private String method;
     private Integer generation;
 
@@ -96,11 +96,11 @@ public class SpeciesAttackDto extends DataDto {
         this.accuracy = accuracy;
     }
 
-    public int getPp() {
+    public Integer getPp() {
         return pp;
     }
 
-    public void setPp(int pp) {
+    public void setPp(Integer pp) {
         this.pp = pp;
     }
 
@@ -120,43 +120,43 @@ public class SpeciesAttackDto extends DataDto {
         this.target = target;
     }
 
-    public boolean isContact() {
+    public Boolean isContact() {
         return contact;
     }
 
-    public void setContact(boolean contact) {
+    public void setContact(Boolean contact) {
         this.contact = contact;
     }
 
-    public boolean isMagicCoat() {
+    public Boolean isMagicCoat() {
         return magicCoat;
     }
 
-    public void setMagicCoat(boolean magicCoat) {
+    public void setMagicCoat(Boolean magicCoat) {
         this.magicCoat = magicCoat;
     }
 
-    public boolean isSheerForce() {
+    public Boolean isSheerForce() {
         return sheerForce;
     }
 
-    public void setSheerForce(boolean sheerForce) {
+    public void setSheerForce(Boolean sheerForce) {
         this.sheerForce = sheerForce;
     }
 
-    public boolean isSnatch() {
+    public Boolean isSnatch() {
         return snatch;
     }
 
-    public void setSnatch(boolean snatch) {
+    public void setSnatch(Boolean snatch) {
         this.snatch = snatch;
     }
 
-    public boolean isSubstitute() {
+    public Boolean isSubstitute() {
         return substitute;
     }
 
-    public void setSubstitute(boolean substitute) {
+    public void setSubstitute(Boolean substitute) {
         this.substitute = substitute;
     }
 

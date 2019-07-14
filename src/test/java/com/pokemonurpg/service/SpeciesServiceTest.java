@@ -3,6 +3,8 @@ package com.pokemonurpg.service;
 import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.dto.CosmeticFormDto;
 import com.pokemonurpg.dto.ResponseDto;
+import com.pokemonurpg.dto.SpeciesAttackDto;
+import com.pokemonurpg.dto.species.AlteredFormDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
 import com.pokemonurpg.dto.species.SpeciesPageTabDto;
 import com.pokemonurpg.factory.TestObjectFactory;
@@ -32,9 +34,15 @@ public class SpeciesServiceTest {
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
+    private Species pikachuBelle = TestObjectFactory.createPikachuBelle();
 
     private Species nextDex = TestObjectFactory.createNextDex();
     private Species prevDex = TestObjectFactory.createPrevDex();
+
+    private Attack thundershock = TestObjectFactory.createThundershock();
+    private Attack thunder = TestObjectFactory.createThunder();
+    private Attack voltTackle = TestObjectFactory.createVoltTackle();
+    private Attack icicleCrash = TestObjectFactory.createIcicleCrash();
 
     @Before
     public void initService() {
@@ -132,8 +140,7 @@ public class SpeciesServiceTest {
 
     @Test
     public void buildSpeciesPageTabDtoAssignsCorrectFields() {
-        SpeciesDto species = speciesService.buildSpeciesDto(pikachu);
-        SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(species);
+        SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(pikachu);
         assertNotNull(dto);
         assertEquals(dto.getDexno(), pikachu.getDexno());
         assertEquals(dto.getName(), pikachu.getDisplayName());
@@ -151,35 +158,193 @@ public class SpeciesServiceTest {
     public void findByDexnoReturnsPikachu() {
         when(speciesRepository.findByDexno(pikachu.getDexno())).thenReturn(Arrays.asList(pikachu));
 
-        List<SpeciesDto> responseList = speciesService.findByDexno(pikachu.getDexno());
-        assertFalse(responseList.isEmpty());
-        assertEquals(1, responseList.size());
-
-        SpeciesDto dto = responseList.get(0);
+        SpeciesDto dto = speciesService.findByDexno(pikachu.getDexno());
         assertEquals(pikachu.getName(), dto.getName());
     }
 
     @Test
     public void findByNonexistentDexnoReturnsEmptyList() {
-        List<SpeciesDto> responseList = speciesService.findByDexno(-1);
-        assertNotNull(responseList);
-        assertTrue(responseList.isEmpty());
+        SpeciesDto species = speciesService.findByDexno(-1);
+        assertNull(species);
     }
 
     @Test
     public void buildSpeciesDtoAttachesNextAndPrevDex() {
-        when(speciesRepository.findByDexno(pikachu.getDexno() - 1)).thenReturn(Arrays.asList(prevDex));
-        when(speciesRepository.findByDexno(pikachu.getDexno() + 1)).thenReturn(Arrays.asList(nextDex));
+        when(speciesRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO - 1)).thenReturn(Arrays.asList(prevDex));
+        when(speciesRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO + 1)).thenReturn(Arrays.asList(nextDex));
 
         SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
         assertNotNull(speciesDto.getNextSpecies());
         assertNotNull(speciesDto.getPrevSpecies());
 
         SpeciesPageTabDto nextSpecies = speciesDto.getNextSpecies();
-        assertEquals(nextSpecies.getDexno(), pikachu.getDexno() + 1);
+        assertEquals(nextSpecies.getDexno(), TestObjectFactory.TEST_SPECIES_DEXNO + 1);
 
         SpeciesPageTabDto prevSpecies = speciesDto.getPrevSpecies();
-        assertEquals(prevSpecies.getDexno(), pikachu.getDexno() - 1);
+        assertEquals(prevSpecies.getDexno(), TestObjectFactory.TEST_SPECIES_DEXNO - 1);
+    }
+
+    @Test
+    public void findAllByPokedexReturnsPikachuAndPikachuBelle() {
+        when(speciesRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO)).thenReturn(Arrays.asList(pikachu, pikachuBelle));
+
+        List<Integer> list = speciesService.findAllSpeciesDbidsByDexno(TestObjectFactory.TEST_SPECIES_DEXNO);
+        assertNotNull(list);
+        assertEquals(2, list.size());
+
+        assertEquals((Integer) TestObjectFactory.TEST_SPECIES_DBID, list.get(0));
+        assertEquals((Integer) TestObjectFactory.TEST_ALTERNATE_FORM_DBID, list.get(1));
+    }
+
+    @Test
+    public void findAllByNonexistentPokedexReturnsEmptyList() {
+        List<Integer> list = speciesService.findAllSpeciesDbidsByDexno(-1);
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void buildAlteredFormDtoReturnsPikachuBelle() {
+        AlteredFormDto dto = speciesService.buildAlteredFormDto(pikachuBelle);
+        assertEquals(pikachuBelle.getDbid(), dto.getDbid());
+        assertEquals(pikachuBelle.getName(), dto.getName());
+        assertEquals(pikachuBelle.getFormName(), dto.getFormName());
+        assertEquals(pikachuBelle.getDisplayName(), dto.getDisplayName());
+        assertEquals(pikachuBelle.getType1(), dto.getType1());
+        assertEquals(pikachuBelle.getType2(), dto.getType2());
+        assertEquals(pikachuBelle.getHp(), dto.getHp());
+        assertEquals(pikachuBelle.getAttack(), dto.getAttack());
+        assertEquals(pikachuBelle.getDefense(), dto.getDefense());
+        assertEquals(pikachuBelle.getSpecialAttack(), dto.getSpecialAttack());
+        assertEquals(pikachuBelle.getSpecialDefense(), dto.getSpecialDefense());
+        assertEquals(pikachuBelle.getSpeed(), dto.getSpeed());
+    }
+
+    @Test
+    public void buildAlteredFormFromNull() {
+        AlteredFormDto dto = speciesService.buildAlteredFormDto(null);
+        assertNull(dto.getName());
+    }
+
+    @Test
+    public void buildAlteredFormListReturnsPikachuAndPikachuBelle() {
+        List<AlteredFormDto> list = speciesService.buildAlteredFormList(Arrays.asList(pikachu, pikachuBelle));
+        assertNotNull(list);
+        assertEquals(2, list.size());
+
+        AlteredFormDto dto1 = list.get(0);
+        assertEquals(TestObjectFactory.TEST_SPECIES_DBID, dto1.getDbid());
+
+        AlteredFormDto dto2 = list.get(1);
+        assertEquals(TestObjectFactory.TEST_ALTERNATE_FORM_DBID, dto2.getDbid());
+    }
+
+    @Test
+    public void buildAlteredFormListFromSingleForm() {
+        List<AlteredFormDto> list = speciesService.buildAlteredFormList(Arrays.asList(pikachu));
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void buildAlteredFormListFromNonexistentPokedex() {
+        List<AlteredFormDto> list = speciesService.buildAlteredFormList(Collections.emptyList());
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void buildSpeciesDtoAttachesAlteredForm() {
+        when(speciesRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO)).thenReturn(Arrays.asList(pikachu, pikachuBelle));
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
+        assertNotNull(speciesDto.getAlteredForms());
+
+        List<AlteredFormDto> list = speciesDto.getAlteredForms();
+        assertNotNull(list);
+        assertEquals(2, list.size());
+
+        AlteredFormDto dto1 = list.get(0);
+        assertEquals(TestObjectFactory.TEST_SPECIES_DBID, dto1.getDbid());
+
+        AlteredFormDto dto2 = list.get(1);
+        assertEquals(TestObjectFactory.TEST_ALTERNATE_FORM_DBID, dto2.getDbid());
+    }
+
+    @Test
+    public void buildUniqueMoveListReturnsEmptyListWhenPassedNullList() {
+        List<String> uniqueMoves = speciesService.buildUniqueMoveList(null);
+        assertNotNull(uniqueMoves);
+        assertTrue(uniqueMoves.isEmpty());
+    }
+
+    @Test
+    public void buildUniqueMoveListReturnsEmptyListWhenPassedEmptyList() {
+        List<String> uniqueMoves = speciesService.buildUniqueMoveList(null);
+        assertNotNull(uniqueMoves);
+        assertTrue(uniqueMoves.isEmpty());
+    }
+
+    @Test
+    public void buildUniqueMoveListReturnsEmptyListWhenPassedListOfOne() {
+        List<String> uniqueMoves = speciesService.buildUniqueMoveList(null);
+        assertNotNull(uniqueMoves);
+        assertTrue(uniqueMoves.isEmpty());
+    }
+
+    public void initAlternateFormMoveLists() {
+        SpeciesAttack thundershockRecord = TestObjectFactory.buildSpeciesAttack(thundershock, pikachu);
+        SpeciesAttackDto thundershockDto = new SpeciesAttackDto(thundershockRecord);
+
+        SpeciesAttack thundershockRecord2 = TestObjectFactory.buildSpeciesAttack(thundershock, pikachuBelle);
+        SpeciesAttackDto thundershockDto2 = new SpeciesAttackDto(thundershockRecord2);
+
+        SpeciesAttack thunderRecord = TestObjectFactory.buildSpeciesAttack(thunder, pikachu);
+        thunderRecord.setMethod("LEVEL-UP");
+        SpeciesAttackDto thunderDto = new SpeciesAttackDto(thunderRecord);
+
+        SpeciesAttack thunderRecord2 = TestObjectFactory.buildSpeciesAttack(thunder, pikachuBelle);
+        thunderRecord2.setMethod("SPECIAL");
+        SpeciesAttackDto thunderDto2 = new SpeciesAttackDto(thunderRecord2);
+
+        SpeciesAttack voltTackleRecord = TestObjectFactory.buildSpeciesAttack(voltTackle, pikachu);
+        SpeciesAttackDto voltTackleDto = new SpeciesAttackDto(voltTackleRecord);
+
+        SpeciesAttack icicleCrashRecord = TestObjectFactory.buildSpeciesAttack(icicleCrash, pikachuBelle);
+        SpeciesAttackDto icicleCrashDto = new SpeciesAttackDto(icicleCrashRecord);
+
+        when(speciesAttackService.findBySpeciesDbid(TestObjectFactory.TEST_SPECIES_DBID)).thenReturn(Arrays.asList(thundershockDto, thunderDto, voltTackleDto));
+        when(speciesAttackService.findBySpeciesDbid(TestObjectFactory.TEST_ALTERNATE_FORM_DBID)).thenReturn(Arrays.asList(thundershockDto2, thunderDto2, icicleCrashDto));
+    }
+
+    @Test
+    public void buildUniqueMoveListReturnsUniqueMoves() {
+        initAlternateFormMoveLists();
+
+        AlteredFormDto pikachuDto = new AlteredFormDto(pikachu);
+        AlteredFormDto pikachuBelleDto = new AlteredFormDto(pikachuBelle);
+
+        List<String> uniqueMoves = speciesService.buildUniqueMoveList(Arrays.asList(pikachuDto, pikachuBelleDto));
+        assertNotNull(uniqueMoves);
+        assertTrue(uniqueMoves.contains(TestObjectFactory.TEST_ATTACK_2_NAME));
+        assertTrue(uniqueMoves.contains(TestObjectFactory.TEST_ATTACK_3_NAME));
+        assertTrue(uniqueMoves.contains(TestObjectFactory.TEST_ATTACK_4_NAME));
+
+        HashMap<String, String> pikachuUniqueAttacks = pikachuDto.getUniqueAttacks();
+        assertNotNull(pikachuUniqueAttacks);
+        assertFalse(pikachuUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_1_NAME));
+        assertTrue(pikachuUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_2_NAME));
+        assertEquals("LEVEL-UP", pikachuUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_2_NAME));
+        assertTrue(pikachuUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_3_NAME));
+        assertNull(pikachuUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_4_NAME));
+
+        HashMap<String, String> pikachuBelleUniqueAttacks = pikachuBelleDto.getUniqueAttacks();
+        assertNotNull(pikachuBelleUniqueAttacks);
+        assertFalse(pikachuBelleUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_1_NAME));
+        assertTrue(pikachuBelleUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_2_NAME));
+        assertEquals("SPECIAL", pikachuBelleUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_2_NAME));
+        assertNull(pikachuBelleUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_3_NAME));
+        assertTrue(pikachuBelleUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_4_NAME));
     }
 
 }

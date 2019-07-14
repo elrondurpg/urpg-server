@@ -1,13 +1,13 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.dto.ResponseDto;
+import com.pokemonurpg.dto.SpeciesAttackDto;
+import com.pokemonurpg.dto.species.AlteredFormDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
 import com.pokemonurpg.dto.species.SpeciesPageTabDto;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,19 +41,24 @@ public class SpeciesService {
         return speciesRepository.findAll();
     }
 
-    public List<Species> findAllByDexno(Integer dexno) {
-        return speciesRepository.findByDexno(dexno);
+    public List<Integer> findAllSpeciesDbidsByDexno(Integer dexno) {
+        List<Species> speciesList = speciesRepository.findByDexno(dexno);
+        List<Integer> dbidList = new ArrayList<>();
+        if (speciesList != null && !speciesList.isEmpty()) {
+            for (Species species : speciesList) {
+                dbidList.add(species.getDbid());
+            }
+            return dbidList;
+        }
+        return Collections.emptyList();
     }
 
-    public List<SpeciesDto> findByDexno(Integer dexno) {
+    public SpeciesDto findByDexno(Integer dexno) {
         List<Species> results = speciesRepository.findByDexno(dexno);
-        List<SpeciesDto> responseList = new ArrayList<>();
         if (results != null && !results.isEmpty()) {
-            for (Species species : results) {
-                responseList.add(buildSpeciesDto(species));
-            }
+            return buildSpeciesDto(results.get(0));
         }
-        return responseList;
+        else return null;
     }
 
     public SpeciesDto findByName(String name) {
@@ -78,16 +83,23 @@ public class SpeciesService {
             speciesDto.setSpeciesAbilities(speciesAbilityService.findBySpeciesDbid(dbid));
             speciesDto.setCosmeticForms(cosmeticFormService.findBySpeciesDbid(dbid));
 
-            List<SpeciesDto> speciesAtPrevDex = findByDexno(getPrevDex(species.getDexno()));
+            int dexno = species.getDexno();
+            List<Species> speciesAtPrevDex = speciesRepository.findByDexno(getPrevDex(dexno));
             if (speciesAtPrevDex != null && !speciesAtPrevDex.isEmpty()) {
                 speciesDto.setPrevSpecies(buildSpeciesPageTabDto(speciesAtPrevDex.get(0)));
             }
 
-            List<SpeciesDto> speciesAtNextDex = findByDexno(getNextDex(species.getDexno()));
+            List<Species> speciesAtNextDex = speciesRepository.findByDexno(getNextDex(dexno));
             if (speciesAtNextDex != null && !speciesAtNextDex.isEmpty()) {
                 speciesDto.setNextSpecies(buildSpeciesPageTabDto(speciesAtNextDex.get(0)));
             }
-            /*speciesDto.setAlteredForms(buildAlteredFormDtoList(species));
+
+            List<Species> speciesAtThisDex = speciesRepository.findByDexno(species.getDexno());
+            List<AlteredFormDto> alteredFormDtos = buildAlteredFormList(speciesAtThisDex);
+            speciesDto.setAlteredForms(alteredFormDtos);
+
+            speciesDto.setUniqueMoves(buildUniqueMoveList(alteredFormDtos));
+            /*
             speciesDto.setAlteredFormMethod(alteredFormMethodService.findByBaseDex(species.getDexno());*/
 
             return speciesDto;
@@ -96,17 +108,86 @@ public class SpeciesService {
     }
 
     public int getNextDex(int dexno) {
-        int dexBase0 = dexno - 1;
-        return (dexBase0 + 1) % AppConfig.NUM_SPECIES + 1;
+        return dexno % AppConfig.NUM_SPECIES + 1;
     }
 
     public int getPrevDex(int dexno) {
-        int dexBase0 = dexno - 1;
-        return (dexBase0 + AppConfig.NUM_SPECIES - 1) % AppConfig.NUM_SPECIES + 1;
+        return (dexno + AppConfig.NUM_SPECIES - 2) % AppConfig.NUM_SPECIES + 1;
     }
 
-    public SpeciesPageTabDto buildSpeciesPageTabDto(SpeciesDto species) {
+    public SpeciesPageTabDto buildSpeciesPageTabDto(Species species) {
         return new SpeciesPageTabDto(species);
+    }
+
+    public AlteredFormDto buildAlteredFormDto(Species species) {
+        return new AlteredFormDto(species);
+    }
+
+    public List<AlteredFormDto> buildAlteredFormList(List<Species> speciesList) {
+        List<AlteredFormDto> dtos = new ArrayList<>();
+
+        if (speciesList.size() > 1) {
+            for (Species species : speciesList) {
+                dtos.add(buildAlteredFormDto(species));
+            }
+        }
+
+        return dtos;
+    }
+
+    public List<String> buildUniqueMoveList(List<AlteredFormDto> alteredFormDtoList) {
+        List<String> uniqueMoves = new ArrayList<>();
+        HashMap<String, String> nonUniqueMovesAndMethods = new HashMap<>();
+
+        List<HashMap<String, String>> allFormAttackMethods = new ArrayList<>();
+
+        if (alteredFormDtoList != null && alteredFormDtoList.size() > 1) {
+            int index = 0;
+            for (AlteredFormDto form : alteredFormDtoList) {
+                HashMap<String, String> formAttackMethods = new HashMap<>();
+                allFormAttackMethods.add(formAttackMethods);
+
+                int dbid = form.getDbid();
+                List<SpeciesAttackDto> attacks = speciesAttackService.findBySpeciesDbid(dbid);
+                for (SpeciesAttackDto attack : attacks) {
+                    String attackName = attack.getName();
+                    String attackMethod = attack.getMethod();
+                    formAttackMethods.put(attackName, attackMethod);
+                    if (!uniqueMoves.contains(attackName) && !nonUniqueMovesAndMethods.containsKey(attackName) && index == 0) {
+                        nonUniqueMovesAndMethods.put(attackName, attackMethod);
+                    }
+                    else if (!uniqueMoves.contains(attackName) && !nonUniqueMovesAndMethods.containsKey(attackName) && index != 0) {
+                        uniqueMoves.add(attackName);
+                    }
+                    else if (nonUniqueMovesAndMethods.containsKey(attackName) && !Objects.equals(attackMethod, nonUniqueMovesAndMethods.get(attackName))) {
+                        uniqueMoves.add(attackName);
+                        nonUniqueMovesAndMethods.remove(attackName);
+                    }
+                    else if (nonUniqueMovesAndMethods.containsKey(attackName) && index == alteredFormDtoList.size() - 1) {
+                        nonUniqueMovesAndMethods.remove(attackName);
+                    }
+                }
+                index++;
+            }
+
+            for (String attackName : nonUniqueMovesAndMethods.keySet()) {
+                uniqueMoves.add(attackName);
+            }
+
+            Collections.sort(uniqueMoves);
+
+            index = 0;
+            for (AlteredFormDto form : alteredFormDtoList) {
+                HashMap<String, String> formUniqueAttacks = new HashMap<>();
+                for (String attack : uniqueMoves) {
+                    String method = allFormAttackMethods.get(index).get(attack);
+                    formUniqueAttacks.put(attack, method);
+                }
+                form.setUniqueAttacks(formUniqueAttacks);
+                index++;
+            }
+        }
+        return uniqueMoves;
     }
 
     /*public Optional<Species> findByDbid(Integer dbid) {
