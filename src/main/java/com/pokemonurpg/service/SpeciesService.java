@@ -1,6 +1,7 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
+import com.pokemonurpg.dto.CosmeticFormDto;
 import com.pokemonurpg.dto.SpeciesAttackDto;
 import com.pokemonurpg.dto.species.AlteredFormDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
@@ -23,17 +24,19 @@ public class SpeciesService {
     private SpeciesAbilityService speciesAbilityService;
     private AbilityService abilityService;
 
+    private AlteredFormMethodService alteredFormMethodService;
     private CosmeticFormService cosmeticFormService;
 
     @Autowired
     public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, AttackService attackService,
                           SpeciesAbilityService speciesAbilityService, AbilityService abilityService,
-                          CosmeticFormService cosmeticFormService) {
+                          AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService) {
         this.speciesRepository = speciesRepository;
         this.speciesAttackService = speciesAttackService;
         this.attackService = attackService;
         this.speciesAbilityService = speciesAbilityService;
         this.abilityService = abilityService;
+        this.alteredFormMethodService = alteredFormMethodService;
         this.cosmeticFormService = cosmeticFormService;
     }
 
@@ -81,7 +84,6 @@ public class SpeciesService {
             int dbid = species.getDbid();
             speciesDto.setSpeciesAttacks(speciesAttackService.findBySpeciesDbid(dbid));
             speciesDto.setSpeciesAbilities(speciesAbilityService.findBySpeciesDbid(dbid));
-            speciesDto.setCosmeticForms(cosmeticFormService.findBySpeciesDbid(dbid));
 
             int dexno = species.getDexno();
             List<Species> speciesAtPrevDex = speciesRepository.findByDexno(getPrevDex(dexno));
@@ -99,9 +101,9 @@ public class SpeciesService {
             speciesDto.setAlteredForms(alteredFormDtos);
 
             speciesDto.setUniqueMoves(buildUniqueMoveList(alteredFormDtos));
-            /*
-            speciesDto.setAlteredFormMethod(alteredFormMethodService.findByBaseDex(species.getDexno());*/
+            speciesDto.setAlteredFormMethod(alteredFormMethodService.findByDexno(species.getDexno()));
 
+            speciesDto.setCosmeticForms(buildCosmeticForms(species, alteredFormDtos));
             return speciesDto;
         }
         else return new SpeciesDto();
@@ -188,6 +190,29 @@ public class SpeciesService {
             }
         }
         return uniqueMoves;
+    }
+
+    public List<CosmeticFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms) {
+        List<CosmeticFormDto> cosmeticFormDtos = new ArrayList<>();
+        if (species != null) {
+            for (CosmeticFormDto cosmeticFormDto : cosmeticFormService.findBySpeciesDbid(species.getDbid())) {
+                if (!cosmeticFormDtos.contains(cosmeticFormDto)) {
+                    cosmeticFormDtos.add(cosmeticFormDto);
+                }
+            }
+
+            if (alteredForms != null) {
+                for (AlteredFormDto form : alteredForms) {
+                    for (CosmeticFormDto cosmeticFormDto : cosmeticFormService.findBySpeciesDbid(form.getDbid())) {
+                        if (!cosmeticFormDtos.contains(cosmeticFormDto)) {
+                            cosmeticFormDtos.add(cosmeticFormDto);
+                        }
+                    }
+                }
+            }
+            return cosmeticFormDtos;
+        }
+        else return Collections.emptyList();
     }
 
     /*public Optional<Species> findByDbid(Integer dbid) {

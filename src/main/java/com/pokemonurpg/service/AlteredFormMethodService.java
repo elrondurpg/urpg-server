@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class AlteredFormMethodService {
-/*
+
     private AlteredFormMethodRepository alteredFormMethodRepository;
 
     @Autowired
@@ -18,16 +18,18 @@ public class AlteredFormMethodService {
         this.alteredFormMethodRepository = alteredFormMethodRepository;
     }
 
-    public List<AlteredFormMethod> findAll() {
+    /*public List<AlteredFormMethod> findAll() {
         return alteredFormMethodRepository.findAll();
+    }*/
+
+    public String findByDexno(Integer dexno) {
+        Optional<AlteredFormMethod> method = alteredFormMethodRepository.findByDexno(dexno);
+        if (method.isPresent())
+            return method.get().getMethod();
+        else return null;
     }
 
-    public Optional<AlteredFormMethod> findByDexno(Integer dexno) {
-        Optional<AlteredFormMethod> species = alteredFormMethodRepository.findByDexno(dexno);
-        return species;
-    }
-
-    public void save(AlteredFormMethod alteredFormMethod) {
+/*    public void save(AlteredFormMethod alteredFormMethod) {
         alteredFormMethodRepository.save(alteredFormMethod);
     }
 

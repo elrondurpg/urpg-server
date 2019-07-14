@@ -8,7 +8,7 @@ import javax.persistence.Table;
 //@Entity
 //@Table(name = "altered_form")
 public class AlteredFormMethod {
-/*
+
     @Id
     @Column(name = "base_dex")
     Integer dexno;
@@ -16,11 +16,6 @@ public class AlteredFormMethod {
     String method;
 
     public AlteredFormMethod() {}
-
-    public AlteredFormMethod(Integer dexno, String method) {
-        this.dexno = dexno;
-        this.method = method;
-    }
 
     public Integer getDexno() {
         return dexno;
@@ -36,5 +31,5 @@ public class AlteredFormMethod {
 
     public void setMethod(String method) {
         this.method = method;
-    }*/
+    }
 }

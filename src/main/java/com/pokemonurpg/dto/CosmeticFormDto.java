@@ -3,6 +3,8 @@ package com.pokemonurpg.dto;
 import com.pokemonurpg.object.CosmeticForm;
 import com.pokemonurpg.object.CosmeticFormKey;
 
+import java.util.Objects;
+
 public class CosmeticFormDto extends DataDto {
     private int speciesDbid;
     private String name;
@@ -51,5 +53,21 @@ public class CosmeticFormDto extends DataDto {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CosmeticFormDto that = (CosmeticFormDto) o;
+        return speciesDbid == that.speciesDbid &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(displayName, that.displayName) &&
+                Objects.equals(method, that.method);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(speciesDbid, name, displayName, method);
     }
 }

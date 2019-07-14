@@ -12,6 +12,7 @@ public class TestObjectFactory {
     public static final String TEST_ALTERNATE_FORM_NAME = "Pikachu-Belle";
     public static final String TEST_ALTERNATE_FORM_DISPLAY_NAME = "Pikachu Belle";
     public static final int TEST_ALTERNATE_FORM_DBID = 777;
+    public static final String TEST_ALTERNATE_FORM_METHOD = "Form changes when using Pikachu's special items.";
 
     public static final String TEST_COSMETIC_FORM_NAME = "Pikachu-Spiky";
     public static final String TEST_COSMETIC_FORM_DISPLAY_NAME = "Spiky Eared Pikachu";

@@ -8,10 +8,7 @@ import com.pokemonurpg.dto.species.AlteredFormDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
 import com.pokemonurpg.dto.species.SpeciesPageTabDto;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.object.CosmeticForm;
-import com.pokemonurpg.object.Species;
-import com.pokemonurpg.object.SpeciesAttack;
+import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +28,7 @@ public class SpeciesServiceTest {
     private SpeciesAbilityService speciesAbilityService = mock(SpeciesAbilityService.class);
     private AbilityService abilityService = mock(AbilityService.class);
     private CosmeticFormService cosmeticFormService = mock(CosmeticFormService.class);
+    private AlteredFormMethodService alteredFormMethodService = mock(AlteredFormMethodService.class);
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
@@ -47,7 +45,7 @@ public class SpeciesServiceTest {
     @Before
     public void initService() {
         speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackService,
-                speciesAbilityService, abilityService, cosmeticFormService);
+                speciesAbilityService, abilityService, alteredFormMethodService, cosmeticFormService);
     }
 
     @Test
@@ -345,6 +343,60 @@ public class SpeciesServiceTest {
         assertEquals("SPECIAL", pikachuBelleUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_2_NAME));
         assertNull(pikachuBelleUniqueAttacks.get(TestObjectFactory.TEST_ATTACK_3_NAME));
         assertTrue(pikachuBelleUniqueAttacks.containsKey(TestObjectFactory.TEST_ATTACK_4_NAME));
+    }
+
+    @Test
+    public void buildCosmeticFormsReturnsEmptyListWhenSpeciesIsNull() {
+        List<CosmeticFormDto> list = speciesService.buildCosmeticForms(null, null);
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void buildCosmeticFormsReturnsCorrectlyWhenAlteredFormsIsNull() {
+        List<CosmeticFormDto> list = new ArrayList<>();
+        list.add(new CosmeticFormDto(spikyEaredPikachu));
+
+        when(cosmeticFormService.findBySpeciesDbid(pikachu.getDbid())).thenReturn(list);
+
+        List<CosmeticFormDto> results = speciesService.buildCosmeticForms(pikachu, null);
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        assertEquals(spikyEaredPikachu.getDisplayName(), results.get(0).getDisplayName());
+    }
+
+    @Test
+    public void buildCosmeticFormsReturnsCorrectlyWhenAlteredFormsIsEmpty() {
+        List<CosmeticFormDto> list = new ArrayList<>();
+        list.add(new CosmeticFormDto(spikyEaredPikachu));
+
+        when(cosmeticFormService.findBySpeciesDbid(pikachu.getDbid())).thenReturn(list);
+
+        List<CosmeticFormDto> results = speciesService.buildCosmeticForms(pikachu, Collections.emptyList());
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        assertEquals(spikyEaredPikachu.getDisplayName(), results.get(0).getDisplayName());
+    }
+
+    @Test
+    public void buildCosmeticFormsReturnsCosmeticVariationsOfAlteredForms() {
+        List<CosmeticFormDto> list = new ArrayList<>();
+        list.add(new CosmeticFormDto(spikyEaredPikachu));
+
+        when(cosmeticFormService.findBySpeciesDbid(pikachuBelle.getDbid())).thenReturn(list);
+
+        List<CosmeticFormDto> results = speciesService.buildCosmeticForms(pikachu, Arrays.asList(new AlteredFormDto(pikachu), new AlteredFormDto(pikachuBelle)));
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        assertEquals(spikyEaredPikachu.getDisplayName(), results.get(0).getDisplayName());
+    }
+
+    @Test
+    public void buildSpeciesDtoAttachesAlteredFormMethod() {
+        when(alteredFormMethodService.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO)).thenReturn(TestObjectFactory.TEST_ALTERNATE_FORM_METHOD);
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
+        assertEquals(TestObjectFactory.TEST_ALTERNATE_FORM_METHOD, speciesDto.getAlteredFormMethod());
     }
 
 }
