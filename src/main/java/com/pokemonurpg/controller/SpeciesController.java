@@ -1,24 +1,10 @@
 package com.pokemonurpg.controller;
 
-import com.pokemonurpg.dto.ResponseDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
-import com.pokemonurpg.object.AlteredFormMethod;
-import com.pokemonurpg.object.Species;
-import com.pokemonurpg.object.SpeciesAbility;
-import com.pokemonurpg.object.SpeciesAttack;
-import com.pokemonurpg.service.AlteredFormMethodService;
-import com.pokemonurpg.service.EvolutionService;
 import com.pokemonurpg.service.SpeciesService;
-import com.pokemonurpg.validator.SpeciesAbilityValidator;
-import com.pokemonurpg.validator.SpeciesAttackValidator;
-import com.pokemonurpg.validator.SpeciesValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/pokemon")

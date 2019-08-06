@@ -28,9 +28,6 @@ public class MegaEvolutionDto {
     private List<SpeciesAbilityDto> speciesAbilities;
     private String megaStone;
 
-    public MegaEvolutionDto() {
-    }
-
     public MegaEvolutionDto(Species species, String megaStone) {
         if (species != null) {
             setDbid(species.getDbid());

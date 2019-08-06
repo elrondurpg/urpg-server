@@ -4,7 +4,7 @@ import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.SpeciesAbility;
 
-public class SpeciesAbilityDto extends DataDto {
+public class SpeciesAbilityDto {
     private int dbid;
     private String name;
     private String description;

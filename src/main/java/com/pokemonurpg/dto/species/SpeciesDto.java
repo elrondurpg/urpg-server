@@ -3,11 +3,9 @@ package com.pokemonurpg.dto.species;
 import com.pokemonurpg.dto.*;
 import com.pokemonurpg.object.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SpeciesDto extends DataDto
-{
+public class SpeciesDto {
     private int dbid;
     private int dexno;
     private String name;
@@ -42,6 +40,7 @@ public class SpeciesDto extends DataDto
     private String alteredFormMethod;
     private List<List<EvolutionFamilyMemberDto>> evolutionFamily;
     private List<MegaEvolutionDto> megaEvolutions;
+    private List<TypeMatchupDto> typeMatchups;
 
     public SpeciesDto() {
 
@@ -346,5 +345,13 @@ public class SpeciesDto extends DataDto
 
     public void setMegaEvolutions(List<MegaEvolutionDto> megaEvolutions) {
         this.megaEvolutions = megaEvolutions;
+    }
+
+    public List<TypeMatchupDto> getTypeMatchups() {
+        return typeMatchups;
+    }
+
+    public void setTypeMatchups(List<TypeMatchupDto> typeMatchups) {
+        this.typeMatchups = typeMatchups;
     }
 }

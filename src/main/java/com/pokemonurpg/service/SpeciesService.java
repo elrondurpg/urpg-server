@@ -21,10 +21,8 @@ public class SpeciesService {
     private SpeciesRepository speciesRepository;
 
     private SpeciesAttackService speciesAttackService;
-    private AttackService attackService;
 
     private SpeciesAbilityService speciesAbilityService;
-    private AbilityService abilityService;
 
     private AlteredFormMethodService alteredFormMethodService;
     private CosmeticFormService cosmeticFormService;
@@ -32,20 +30,22 @@ public class SpeciesService {
     private EvolutionService evolutionService;
     private MegaEvolutionService megaEvolutionService;
 
+    private TypeMatchupService typeMatchupService;
+
     @Autowired
-    public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, AttackService attackService,
-                          SpeciesAbilityService speciesAbilityService, AbilityService abilityService,
+    public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService,
+                          SpeciesAbilityService speciesAbilityService,
                           AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
-                          @Lazy EvolutionService evolutionService, @Lazy MegaEvolutionService megaEvolutionService) {
+                          @Lazy EvolutionService evolutionService, @Lazy MegaEvolutionService megaEvolutionService,
+                          TypeMatchupService typeMatchupService) {
         this.speciesRepository = speciesRepository;
         this.speciesAttackService = speciesAttackService;
-        this.attackService = attackService;
         this.speciesAbilityService = speciesAbilityService;
-        this.abilityService = abilityService;
         this.alteredFormMethodService = alteredFormMethodService;
         this.cosmeticFormService = cosmeticFormService;
         this.evolutionService = evolutionService;
         this.megaEvolutionService = megaEvolutionService;
+        this.typeMatchupService = typeMatchupService;
     }
 
     public List<Species> findAll() {
@@ -120,6 +120,8 @@ public class SpeciesService {
             speciesDto.setEvolutionFamily(buildEvolutionFamily(species));
 
             speciesDto.setMegaEvolutions(megaEvolutionService.findByOriginalDbid(species.getDbid()));
+
+            speciesDto.setTypeMatchups(typeMatchupService.findTypeMatchupsBySpecies(species));
             return speciesDto;
         }
         else return new SpeciesDto();

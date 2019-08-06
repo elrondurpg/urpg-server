@@ -4,7 +4,7 @@ import com.pokemonurpg.object.Attack;
 import com.pokemonurpg.object.SpeciesAttack;
 import com.pokemonurpg.object.Type;
 
-public class SpeciesAttackDto extends DataDto {
+public class SpeciesAttackDto {
     private int dbid;
     private String name;
     private Type type;

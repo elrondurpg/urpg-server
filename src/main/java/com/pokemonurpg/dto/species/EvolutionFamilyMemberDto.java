@@ -1,9 +1,6 @@
 package com.pokemonurpg.dto.species;
 
-import com.pokemonurpg.object.Evolution;
 import com.pokemonurpg.object.Species;
-
-import java.util.ArrayList;
 
 public class EvolutionFamilyMemberDto {
     private int dbid;

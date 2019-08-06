@@ -5,7 +5,7 @@ import com.pokemonurpg.object.CosmeticFormKey;
 
 import java.util.Objects;
 
-public class CosmeticFormDto extends DataDto {
+public class CosmeticFormDto {
     private int speciesDbid;
     private String name;
     private String displayName;
