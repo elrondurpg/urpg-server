@@ -1,6 +1,13 @@
 package com.pokemonurpg.factory;
 
+import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
 import com.pokemonurpg.object.*;
+import com.pokemonurpg.repository.EvolutionRepository;
+import com.pokemonurpg.service.EvolutionService;
+
+import java.util.Arrays;
+
+import static org.mockito.Mockito.when;
 
 public class TestObjectFactory {
 
@@ -8,6 +15,12 @@ public class TestObjectFactory {
     public static final String TEST_SPECIES_DISPLAY_NAME = "Pikachu Test Display Name";
     public static final int TEST_SPECIES_DEXNO = 25;
     public static final int TEST_SPECIES_DBID = 999;
+
+    public static final String TEST_PRE_EVOLUTION_NAME = "Pichu";
+    public static final int TEST_PRE_EVOLUTION_DBID = 998;
+
+    public static final String TEST_EVOLUTION_NAME = "Raichu";
+    public static final int TEST_EVOLUTION_DBID = 1000;
 
     public static final String TEST_ALTERNATE_FORM_NAME = "Pikachu-Belle";
     public static final String TEST_ALTERNATE_FORM_DISPLAY_NAME = "Pikachu Belle";
@@ -17,6 +30,8 @@ public class TestObjectFactory {
     public static final String TEST_COSMETIC_FORM_NAME = "Pikachu-Spiky";
     public static final String TEST_COSMETIC_FORM_DISPLAY_NAME = "Spiky Eared Pikachu";
     public static final String TEST_COSMETIC_FORM_METHOD = "Use Spiky Earring";
+
+    public static final String TEST_EVOLUTION_METHOD = "Use Soothe Bell";
 
     public static final int TEST_ATTACK_1_DBID = 123;
     public static final String TEST_ATTACK_1_NAME = "Thundershock";
@@ -29,6 +44,10 @@ public class TestObjectFactory {
 
     public static final int TEST_ATTACK_4_DBID = 456;
     public static final String TEST_ATTACK_4_NAME = "Icicle Crash";
+
+    public static final int TEST_MEGA_EVOLUTION_ORIGINAL_DBID = 567;
+    public static final int TEST_MEGA_EVOLUTION_DBID = 765;
+    public static final String TEST_MEGA_STONE = "Charizardite X";
 
     public static Species createNextDex() {
         Species nextDex = new Species();
@@ -49,6 +68,20 @@ public class TestObjectFactory {
         pikachu.setDisplayName(TEST_SPECIES_DISPLAY_NAME);
         pikachu.setDexno(TEST_SPECIES_DEXNO);
         return pikachu;
+    }
+
+    public static Species createPichu() {
+        Species pichu = new Species();
+        pichu.setName(TEST_PRE_EVOLUTION_NAME);
+        pichu.setDbid(TEST_PRE_EVOLUTION_DBID);
+        return pichu;
+    }
+
+    public static Species createRaichu() {
+        Species raichu = new Species();
+        raichu.setName(TEST_EVOLUTION_NAME);
+        raichu.setDbid(TEST_EVOLUTION_DBID);
+        return raichu;
     }
 
     public static Species createPikachuBelle() {
@@ -111,5 +144,85 @@ public class TestObjectFactory {
         speciesAttack.setAttack(attack);
 
         return speciesAttack;
+    }
+
+    public static void buildEvolutionRelation(EvolutionService service, Species prevo, Species evo) {
+        if (prevo != null) {
+            EvolutionKey evolutionKey = new EvolutionKey();
+            evolutionKey.setEvolutionDbid(evo.getDbid());
+            evolutionKey.setPreEvolutionDbid(prevo.getDbid());
+
+            Evolution evolution = new Evolution();
+            evolution.setId(evolutionKey);
+            evolution.setMethod(TestObjectFactory.TEST_EVOLUTION_METHOD);
+
+            when(service.getPreEvolutionDbid(evo.getDbid())).thenReturn(prevo.getDbid());
+            when(service.findEvolutionsByPreEvolutionDbid(prevo.getDbid())).thenReturn(Arrays.asList(new EvolutionFamilyMemberDto(evo, null)));
+
+        }
+        else {
+            when(service.getPreEvolutionDbid(evo.getDbid())).thenReturn(-1);
+        }
+    }
+
+    public static void buildEvolutionRelation(EvolutionRepository repository, Species prevo, Species evo) {
+        if (prevo != null) {
+            EvolutionKey evolutionKey = new EvolutionKey();
+            evolutionKey.setEvolutionDbid(evo.getDbid());
+            evolutionKey.setPreEvolutionDbid(prevo.getDbid());
+
+            Evolution evolution = new Evolution();
+            evolution.setId(evolutionKey);
+            evolution.setMethod(TestObjectFactory.TEST_EVOLUTION_METHOD);
+
+            when(repository.findByIdEvolutionDbid(evo.getDbid())).thenReturn(evolution);
+            when(repository.findByIdPreEvolutionDbid(prevo.getDbid())).thenReturn(Arrays.asList(evolution));
+        }
+        /*else {
+            when(repository.findByIdEvolutionDbid(evo.getDbid())).thenReturn(evolution);
+            when(repository.findByIdPreEvolutionDbid(prevo.getDbid())).thenReturn(Arrays.asList(evolution));
+        }*/
+    }
+
+    public static MegaEvolution createMegaCharizardXRecord() {
+        MegaEvolution megaCharizardXRecord = new MegaEvolution();
+
+        MegaEvolutionKey key = new MegaEvolutionKey();
+        key.setOriginalDbid(TEST_MEGA_EVOLUTION_ORIGINAL_DBID);
+        key.setMegaEvolutionDbid(TEST_MEGA_EVOLUTION_DBID);
+
+        megaCharizardXRecord.setId(key);
+        megaCharizardXRecord.setMegaStone(TEST_MEGA_STONE);
+
+        return megaCharizardXRecord;
+    }
+
+    public static Species createMegaCharizardX() {
+        Species megaCharizardX = new Species();
+        megaCharizardX.setDbid(TEST_MEGA_EVOLUTION_DBID);
+        megaCharizardX.setDexno(6);
+        megaCharizardX.setName("Charizard-Mega-X");
+        megaCharizardX.setType1(new Type("Fire"));
+        megaCharizardX.setType2(new Type("Dragon"));
+        megaCharizardX.setClassification("Cool Dragon");
+        megaCharizardX.setHp(300);
+        megaCharizardX.setAttack(350);
+        megaCharizardX.setDefense(250);
+        megaCharizardX.setSpecialAttack(300);
+        megaCharizardX.setSpecialDefense(250);
+        megaCharizardX.setSpeed(300);
+        megaCharizardX.setHeight(2);
+        megaCharizardX.setWeight(100);
+        megaCharizardX.setMaleAllowed(true);
+        megaCharizardX.setFemaleAllowed(false);
+        megaCharizardX.setDisplayName("Mega Charizard X");
+        megaCharizardX.setFormName("Mega X Form");
+        return megaCharizardX;
+    }
+
+    public static Species createCharizard() {
+        Species charizard = new Species();
+        charizard.setDbid(TEST_MEGA_EVOLUTION_ORIGINAL_DBID);
+        return charizard;
     }
 }

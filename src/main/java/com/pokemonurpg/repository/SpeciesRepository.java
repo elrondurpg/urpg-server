@@ -11,8 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface SpeciesRepository extends JpaRepository<Species, Integer> {
-    Optional<Species> findByName(String name);
-    Optional<Species> findByDbid(Integer dbid);
+    Species findByName(String name);
+    Species findByDbid(Integer dbid);
     List<Species> findByNameStartingWith(String name);
     List<Species> findByDexno(Integer dexno);
 }

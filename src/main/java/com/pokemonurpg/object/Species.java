@@ -1,19 +1,6 @@
 package com.pokemonurpg.object;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.object.partials.EvolutionFamilyMember;
-import com.pokemonurpg.object.partials.SpeciesPageTab;
-import com.pokemonurpg.service.AlteredFormMethodService;
-import com.pokemonurpg.service.EvolutionService;
-import com.pokemonurpg.service.SpeciesService;
-import org.springframework.data.domain.Example;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 public class Species {

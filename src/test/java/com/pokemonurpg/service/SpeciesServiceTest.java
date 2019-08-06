@@ -2,17 +2,13 @@ package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.dto.CosmeticFormDto;
-import com.pokemonurpg.dto.ResponseDto;
 import com.pokemonurpg.dto.SpeciesAttackDto;
-import com.pokemonurpg.dto.species.AlteredFormDto;
-import com.pokemonurpg.dto.species.SpeciesDto;
-import com.pokemonurpg.dto.species.SpeciesPageTabDto;
+import com.pokemonurpg.dto.species.*;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
@@ -29,10 +25,17 @@ public class SpeciesServiceTest {
     private AbilityService abilityService = mock(AbilityService.class);
     private CosmeticFormService cosmeticFormService = mock(CosmeticFormService.class);
     private AlteredFormMethodService alteredFormMethodService = mock(AlteredFormMethodService.class);
+    private EvolutionService evolutionService = mock(EvolutionService.class);
+    private MegaEvolutionService megaEvolutionService = mock(MegaEvolutionService.class);
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
     private Species pikachuBelle = TestObjectFactory.createPikachuBelle();
+    private Species pichu = TestObjectFactory.createPichu();
+    private Species raichu = TestObjectFactory.createRaichu();
+
+    private Species charizard = TestObjectFactory.createCharizard();
+    private Species megaCharizardX = TestObjectFactory.createMegaCharizardX();
 
     private Species nextDex = TestObjectFactory.createNextDex();
     private Species prevDex = TestObjectFactory.createPrevDex();
@@ -45,13 +48,14 @@ public class SpeciesServiceTest {
     @Before
     public void initService() {
         speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackService,
-                speciesAbilityService, abilityService, alteredFormMethodService, cosmeticFormService);
+                speciesAbilityService, abilityService, alteredFormMethodService, cosmeticFormService,
+                evolutionService, megaEvolutionService);
     }
 
     @Test
     public void serviceReturnsPikachuWithExactName() {
         String name = TestObjectFactory.TEST_SPECIES_NAME;
-        when(speciesRepository.findByName(name)).thenReturn(Optional.of(pikachu));
+        when(speciesRepository.findByName(name)).thenReturn(pikachu);
 
         SpeciesDto dto = speciesService.findByName(name);
         assertEquals(name, dto.getName());
@@ -397,6 +401,112 @@ public class SpeciesServiceTest {
 
         SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
         assertEquals(TestObjectFactory.TEST_ALTERNATE_FORM_METHOD, speciesDto.getAlteredFormMethod());
+    }
+
+    @Test
+    public void buildEvolutionFamily() {
+        TestObjectFactory.buildEvolutionRelation(evolutionService, null, pichu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pichu, pikachu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pikachu, raichu);
+
+        when(speciesRepository.findByDbid(pichu.getDbid())).thenReturn(pichu);
+        when(speciesRepository.findByDbid(pikachu.getDbid())).thenReturn(pikachu);
+        when(speciesRepository.findByDbid(raichu.getDbid())).thenReturn(raichu);
+
+        List<List<EvolutionFamilyMemberDto>> evolutionFamily = speciesService.buildEvolutionFamily(raichu);
+        assertEquals(3, evolutionFamily.size());
+        assertEquals(1, evolutionFamily.get(0).size());
+        assertEquals(pichu.getName(), evolutionFamily.get(0).get(0).getName());
+        assertEquals(1, evolutionFamily.get(1).size());
+        assertEquals(pikachu.getName(), evolutionFamily.get(1).get(0).getName());
+        assertEquals(1, evolutionFamily.get(2).size());
+        assertEquals(raichu.getName(), evolutionFamily.get(2).get(0).getName());
+    }
+
+    @Test
+    public void getBasicFormReturnsThisIfBasicAlready() {
+        when(evolutionService.getPreEvolutionDbid(pichu.getDbid())).thenReturn(-1);
+        EvolutionFamilyMemberDto basic = speciesService.findBasicForm(pichu);
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getName());
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_DBID, basic.getDbid());
+        assertNull(basic.getMethod());
+    }
+
+    @Test
+    public void getBasicFormReturnsBasicFormOfThirdStage() {
+        TestObjectFactory.buildEvolutionRelation(evolutionService, null, pichu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pichu, pikachu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pikachu, raichu);
+
+        when(speciesRepository.findByDbid(pichu.getDbid())).thenReturn(pichu);
+
+        EvolutionFamilyMemberDto basic = speciesService.findBasicForm(raichu);
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getName());
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_DBID, basic.getDbid());
+        assertNull(basic.getMethod());
+    }
+
+    @Test
+    public void getBasicFormReturnsNullWhenSpeciesIsNull() {
+        EvolutionFamilyMemberDto basic = speciesService.findBasicForm(null);
+        assertNull(basic.getName());
+        assertNull(basic.getMethod());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getBasicFormThrowsIllegalStateExceptionWhenBasicFormDoesntExist() {
+        TestObjectFactory.buildEvolutionRelation(evolutionService, null, pichu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pichu, pikachu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pikachu, raichu);
+
+        EvolutionFamilyMemberDto basic = speciesService.findBasicForm(raichu);
+    }
+
+    @Test
+    public void findByDbid() {
+        when(speciesRepository.findByDbid(pikachu.getDbid())).thenReturn(pikachu);
+
+        Species result = speciesService.findByDbid(pikachu.getDbid());
+        assertNotNull(result);
+        assertEquals(result.getDbid(), pikachu.getDbid());
+        assertEquals(result.getName(), pikachu.getName());
+    }
+
+    @Test
+    public void findByNonexistentDbid() {
+        Species result = speciesService.findByDbid(-1);
+        assertNull(result);
+    }
+
+    @Test
+    public void buildSpeciesDtoAttachesEvolutionFamily() {
+        TestObjectFactory.buildEvolutionRelation(evolutionService, null, pichu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pichu, pikachu);
+        TestObjectFactory.buildEvolutionRelation(evolutionService, pikachu, raichu);
+
+        when(speciesRepository.findByDbid(pichu.getDbid())).thenReturn(pichu);
+        when(speciesRepository.findByDbid(pikachu.getDbid())).thenReturn(pikachu);
+        when(speciesRepository.findByDbid(raichu.getDbid())).thenReturn(raichu);
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(pikachu);
+        List<List<EvolutionFamilyMemberDto>> evolutionFamily = speciesDto.getEvolutionFamily();
+        assertEquals(3, evolutionFamily.size());
+        assertEquals(1, evolutionFamily.get(0).size());
+        assertEquals(pichu.getName(), evolutionFamily.get(0).get(0).getName());
+        assertEquals(1, evolutionFamily.get(1).size());
+        assertEquals(pikachu.getName(), evolutionFamily.get(1).get(0).getName());
+        assertEquals(1, evolutionFamily.get(2).size());
+        assertEquals(raichu.getName(), evolutionFamily.get(2).get(0).getName());
+    }
+
+    @Test
+    public void buildSpeciesDtoAttachesMegaEvolutions() {
+        when(megaEvolutionService.findByOriginalDbid(TestObjectFactory.TEST_MEGA_EVOLUTION_ORIGINAL_DBID)).thenReturn(Arrays.asList(new MegaEvolutionDto(megaCharizardX, TestObjectFactory.TEST_MEGA_STONE)));
+
+        SpeciesDto speciesDto = speciesService.buildSpeciesDto(charizard);
+        List<MegaEvolutionDto> megaEvolutionDtos = speciesDto.getMegaEvolutions();
+        assertEquals(1, megaEvolutionDtos.size());
+        assertEquals(TestObjectFactory.TEST_MEGA_EVOLUTION_DBID, megaEvolutionDtos.get(0).getDbid());
     }
 
 }

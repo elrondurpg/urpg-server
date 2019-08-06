@@ -38,10 +38,13 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class SpeciesControllerTest
 {
+
+    @Test
+    public void justForKicks() {
+
+    }
     /*
     public static final String POKEMON_NAME="Pikachu";
     public static final Integer POKEMON_DBID = 808;

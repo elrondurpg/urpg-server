@@ -4,11 +4,13 @@ import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.dto.CosmeticFormDto;
 import com.pokemonurpg.dto.SpeciesAttackDto;
 import com.pokemonurpg.dto.species.AlteredFormDto;
+import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
 import com.pokemonurpg.dto.species.SpeciesDto;
 import com.pokemonurpg.dto.species.SpeciesPageTabDto;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,10 +29,14 @@ public class SpeciesService {
     private AlteredFormMethodService alteredFormMethodService;
     private CosmeticFormService cosmeticFormService;
 
+    private EvolutionService evolutionService;
+    private MegaEvolutionService megaEvolutionService;
+
     @Autowired
     public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, AttackService attackService,
                           SpeciesAbilityService speciesAbilityService, AbilityService abilityService,
-                          AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService) {
+                          AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
+                          @Lazy EvolutionService evolutionService, @Lazy MegaEvolutionService megaEvolutionService) {
         this.speciesRepository = speciesRepository;
         this.speciesAttackService = speciesAttackService;
         this.attackService = attackService;
@@ -38,6 +44,8 @@ public class SpeciesService {
         this.abilityService = abilityService;
         this.alteredFormMethodService = alteredFormMethodService;
         this.cosmeticFormService = cosmeticFormService;
+        this.evolutionService = evolutionService;
+        this.megaEvolutionService = megaEvolutionService;
     }
 
     public List<Species> findAll() {
@@ -56,6 +64,10 @@ public class SpeciesService {
         return Collections.emptyList();
     }
 
+    Species findByDbid(int dbid) {
+        return speciesRepository.findByDbid(dbid);
+    }
+
     public SpeciesDto findByDexno(Integer dexno) {
         List<Species> results = speciesRepository.findByDexno(dexno);
         if (results != null && !results.isEmpty()) {
@@ -65,9 +77,9 @@ public class SpeciesService {
     }
 
     public SpeciesDto findByName(String name) {
-        Optional<Species> speciesOptional = speciesRepository.findByName(name);
-        if (speciesOptional.isPresent()) {
-            return buildSpeciesDto(speciesOptional.get());
+        Species species = speciesRepository.findByName(name);
+        if (species != null) {
+            return buildSpeciesDto(species);
         }
         else {
             List<Species> results = speciesRepository.findByNameStartingWith(name);
@@ -104,6 +116,10 @@ public class SpeciesService {
             speciesDto.setAlteredFormMethod(alteredFormMethodService.findByDexno(species.getDexno()));
 
             speciesDto.setCosmeticForms(buildCosmeticForms(species, alteredFormDtos));
+
+            speciesDto.setEvolutionFamily(buildEvolutionFamily(species));
+
+            speciesDto.setMegaEvolutions(megaEvolutionService.findByOriginalDbid(species.getDbid()));
             return speciesDto;
         }
         else return new SpeciesDto();
@@ -213,6 +229,52 @@ public class SpeciesService {
             return cosmeticFormDtos;
         }
         else return Collections.emptyList();
+    }
+
+    public List<List<EvolutionFamilyMemberDto>> buildEvolutionFamily(Species species) {
+        List<List<EvolutionFamilyMemberDto>> evolutionFamily = new ArrayList<>();
+
+        List<EvolutionFamilyMemberDto> basicStage = Arrays.asList(findBasicForm(species));
+        evolutionFamily.add(basicStage);
+
+        List<EvolutionFamilyMemberDto> firstStage = new ArrayList<>();
+        for (EvolutionFamilyMemberDto member : basicStage) {
+            firstStage.addAll(evolutionService.findEvolutionsByPreEvolutionDbid(member.getDbid()));
+        }
+        evolutionFamily.add(firstStage);
+
+        List<EvolutionFamilyMemberDto> secondStage = new ArrayList<>();
+        for (EvolutionFamilyMemberDto member : firstStage) {
+            secondStage.addAll(evolutionService.findEvolutionsByPreEvolutionDbid(member.getDbid()));
+        }
+        evolutionFamily.add(secondStage);
+
+        return evolutionFamily;
+    }
+
+    public EvolutionFamilyMemberDto findBasicForm(Species species) throws IllegalStateException {
+        if (species != null) {
+            int dbidOfSpeciesToCheck = species.getDbid();
+            int prevoDbid;
+
+            do {
+                prevoDbid = evolutionService.getPreEvolutionDbid(dbidOfSpeciesToCheck);
+                if (prevoDbid != -1 && prevoDbid != 0) {
+                    dbidOfSpeciesToCheck = prevoDbid;
+                }
+            } while (prevoDbid != -1 && prevoDbid != 0);
+
+            if (dbidOfSpeciesToCheck != species.getDbid()) {
+                Species prevo = speciesRepository.findByDbid(dbidOfSpeciesToCheck);
+                if (prevo != null) {
+                    return new EvolutionFamilyMemberDto(prevo, null);
+                } else
+                    throw new IllegalStateException("Basic form with DBID " + dbidOfSpeciesToCheck + " does not exist!");
+            } else {
+                return new EvolutionFamilyMemberDto(species, null);
+            }
+        }
+        else return new EvolutionFamilyMemberDto();
     }
 
     /*public Optional<Species> findByDbid(Integer dbid) {
