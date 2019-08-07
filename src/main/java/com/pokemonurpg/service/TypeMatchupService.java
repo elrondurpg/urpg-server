@@ -24,10 +24,14 @@ public class TypeMatchupService {
     }
 
     List<TypeMatchupDto> findTypeMatchupsBySpecies(Species species) {
+        return findTypeMatchupsBySpeciesTypes(species.getType1(), species.getType2());
+    }
+
+    public List<TypeMatchupDto> findTypeMatchupsBySpeciesTypes(Type type1, Type type2) {
         List<TypeMatchupDto> matchups = new ArrayList<>();
 
         List<Type> types = typeService.findAll();
-        int type1Dbid = species.getType1().getDbid();
+        int type1Dbid = type1.getDbid();
         for (Type type : types) {
             if (type.getDbid() != -1) {
                 TypeMatchup matchup = typeMatchupRepository.findByIdAttackTypeDbidAndIdDefendTypeDbid(type.getDbid(), type1Dbid);
@@ -35,8 +39,8 @@ public class TypeMatchupService {
             }
         }
 
-        if (species.getType2() != null && species.getType2().getDbid() != -1) {
-            int type2Dbid = species.getType2().getDbid();
+        if (type2 != null && type2.getDbid() != -1) {
+            int type2Dbid = type2.getDbid();
             int index = 0;
             for (Type type : types) {
                 if (type.getDbid() != -1) {

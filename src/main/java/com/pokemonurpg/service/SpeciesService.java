@@ -3,10 +3,7 @@ package com.pokemonurpg.service;
 import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.dto.CosmeticFormDto;
 import com.pokemonurpg.dto.SpeciesAttackDto;
-import com.pokemonurpg.dto.species.AlteredFormDto;
-import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
-import com.pokemonurpg.dto.species.SpeciesDto;
-import com.pokemonurpg.dto.species.SpeciesPageTabDto;
+import com.pokemonurpg.dto.species.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +119,10 @@ public class SpeciesService {
             speciesDto.setMegaEvolutions(megaEvolutionService.findByOriginalDbid(species.getDbid()));
 
             speciesDto.setTypeMatchups(typeMatchupService.findTypeMatchupsBySpecies(species));
+            for (MegaEvolutionDto megaDto : speciesDto.getMegaEvolutions()) {
+                megaDto.setTypeMatchups(typeMatchupService.findTypeMatchupsBySpeciesTypes(megaDto.getType1(), megaDto.getType2()));
+            }
+
             return speciesDto;
         }
         else return new SpeciesDto();

@@ -1,6 +1,7 @@
 package com.pokemonurpg.dto.species;
 
 import com.pokemonurpg.dto.SpeciesAbilityDto;
+import com.pokemonurpg.dto.TypeMatchupDto;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.Type;
 
@@ -27,6 +28,7 @@ public class MegaEvolutionDto {
     private String formName;
     private List<SpeciesAbilityDto> speciesAbilities;
     private String megaStone;
+    private List<TypeMatchupDto> typeMatchups;
 
     public MegaEvolutionDto(Species species, String megaStone) {
         if (species != null) {
@@ -210,5 +212,13 @@ public class MegaEvolutionDto {
 
     public void setMegaStone(String megaStone) {
         this.megaStone = megaStone;
+    }
+
+    public List<TypeMatchupDto> getTypeMatchups() {
+        return typeMatchups;
+    }
+
+    public void setTypeMatchups(List<TypeMatchupDto> typeMatchups) {
+        this.typeMatchups = typeMatchups;
     }
 }
