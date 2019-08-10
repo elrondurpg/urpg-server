@@ -22,11 +22,11 @@ public class ArtRankService {
         return artRankRepository.findAll();
     }
 
-    public Optional<ArtRank> findByDbid(int dbid) {
+    public ArtRank findByDbid(int dbid) {
         return artRankRepository.findByDbid(dbid);
     }
 
-    public Optional<ArtRank> findByName(String name) {
+    public ArtRank findByName(String name) {
         return artRankRepository.findByName(name);
     }
 

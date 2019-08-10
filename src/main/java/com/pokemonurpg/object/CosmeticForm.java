@@ -16,6 +16,12 @@ public class CosmeticForm {
 
     public CosmeticForm() {}
 
+    public CosmeticForm(int speciesDbid, String formName, String displayName, String method) {
+        setId(new CosmeticFormKey(speciesDbid, formName));
+        this.displayName = displayName;
+        this.method = method;
+    }
+
     public CosmeticFormKey getId() {
         return id;
     }

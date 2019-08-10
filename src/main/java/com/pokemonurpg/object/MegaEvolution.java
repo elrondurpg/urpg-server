@@ -19,6 +19,11 @@ public class MegaEvolution {
     public MegaEvolution() {
     }
 
+    public MegaEvolution(int megaEvolutionDbid, int originalDbid, String megaStone) {
+        setId(new MegaEvolutionKey(megaEvolutionDbid, originalDbid));
+        setMegaStone(megaStone);
+    }
+
     public MegaEvolutionKey getId() {
         return id;
     }

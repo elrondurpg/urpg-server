@@ -19,6 +19,10 @@ public class StoryRank {
     public StoryRank() {
     }
 
+    public StoryRank(String name) {
+        this.name = name;
+    }
+
     public StoryRank(Integer dbid, String name, String requirement) {
         this.dbid = dbid;
         this.name = name;

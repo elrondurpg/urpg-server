@@ -1,6 +1,5 @@
-package com.pokemonurpg.dto.species;
+package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.dto.*;
 import com.pokemonurpg.object.*;
 
 import java.util.List;

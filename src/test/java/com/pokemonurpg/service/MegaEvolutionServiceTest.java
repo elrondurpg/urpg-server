@@ -1,6 +1,6 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.species.MegaEvolutionDto;
+import com.pokemonurpg.dto.species.response.MegaEvolutionDto;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.MegaEvolution;
 import com.pokemonurpg.object.Species;
@@ -39,4 +39,11 @@ public class MegaEvolutionServiceTest {
         assertEquals(megaCharizardX.getName(), dtos.get(0).getName());
     }
 
+    @Test
+    public void findByMegaDbid() {
+        when(megaEvolutionRepository.findByIdMegaEvolutionDbid(TestObjectFactory.TEST_MEGA_EVOLUTION_DBID)).thenReturn(megaCharizardXRecord);
+
+        boolean isMega = megaEvolutionService.isMegaEvolution(TestObjectFactory.TEST_MEGA_EVOLUTION_DBID);
+        assertTrue(isMega);
+    }
 }

@@ -1,16 +1,14 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.CosmeticFormDto;
+import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 import com.pokemonurpg.object.CosmeticForm;
 import com.pokemonurpg.repository.CosmeticFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CosmeticFormService
@@ -34,5 +32,14 @@ public class CosmeticFormService
             return responseList;
         }
         else return Collections.emptyList();
+    }
+
+    public void createAll(int speciesDbid, List<CosmeticFormDto> input) {
+        if (input != null) {
+            for (CosmeticFormDto dto : input) {
+                CosmeticForm form = new CosmeticForm(speciesDbid, dto.getName(), dto.getDisplayName(), dto.getMethod());
+                cosmeticFormRepository.save(form);
+            }
+        }
     }
 }

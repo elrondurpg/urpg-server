@@ -22,11 +22,11 @@ public class StoryRankService {
         return storyRankRepository.findAll();
     }
 
-    public Optional<StoryRank> findByDbid(int dbid) {
+    public StoryRank findByDbid(int dbid) {
         return storyRankRepository.findByDbid(dbid);
     }
 
-    public Optional<StoryRank> findByName(String name) {
+    public StoryRank findByName(String name) {
         return storyRankRepository.findByName(name);
     }
 

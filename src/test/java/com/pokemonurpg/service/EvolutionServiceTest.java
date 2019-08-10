@@ -1,17 +1,13 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
-import com.pokemonurpg.dto.species.SpeciesDto;
+import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.Evolution;
-import com.pokemonurpg.object.EvolutionKey;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.repository.EvolutionRepository;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

@@ -19,6 +19,10 @@ public class ParkRank {
     public ParkRank() {
     }
 
+    public ParkRank(String name) {
+        this.name = name;
+    }
+
     public ParkRank(Integer dbid, String name, String requirement) {
         this.dbid = dbid;
         this.name = name;

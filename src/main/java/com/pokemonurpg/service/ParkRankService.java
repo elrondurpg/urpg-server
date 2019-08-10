@@ -22,11 +22,11 @@ public class ParkRankService {
         return parkRankRepository.findAll();
     }
 
-    public Optional<ParkRank> findByDbid(int dbid) {
+    public ParkRank findByDbid(int dbid) {
         return parkRankRepository.findByDbid(dbid);
     }
 
-    public Optional<ParkRank> findByName(String name) {
+    public ParkRank findByName(String name) {
         return parkRankRepository.findByName(name);
     }
 

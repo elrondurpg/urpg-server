@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttackRepository extends JpaRepository<Attack, Integer> {
-    Optional<Attack> findByName(String name);
-    Optional<Attack> findByDbid(Integer dbid);
+    Attack findByName(String name);
+    Attack findByDbid(Integer dbid);
     List<Attack> findByNameStartingWith(String name);
 }

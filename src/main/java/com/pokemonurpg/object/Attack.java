@@ -52,6 +52,10 @@ public class Attack {
 
     public Attack() { }
 
+    public Attack(String name) {
+        this.name = name;
+    }
+
     public Attack(Integer dbid, String name, Type type, String description, int power, int accuracy, int pp, String category, String target, boolean contact, boolean snatch, boolean substitute, boolean sheerForce, boolean magicCoat) {
         this.dbid = dbid;
         this.name = name;

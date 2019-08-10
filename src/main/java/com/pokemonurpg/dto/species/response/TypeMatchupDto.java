@@ -1,4 +1,4 @@
-package com.pokemonurpg.dto;
+package com.pokemonurpg.dto.species.response;
 
 public class TypeMatchupDto {
     String type;

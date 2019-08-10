@@ -17,6 +17,11 @@ public class Evolution {
     public Evolution() {
     }
 
+    public Evolution(int evoDbid, int prevoDbid, String method) {
+        setId(new EvolutionKey(evoDbid, prevoDbid));
+        this.method = method;
+    }
+
     public EvolutionKey getId() {
         return id;
     }

@@ -16,6 +16,10 @@ public class ParkLocation {
     public ParkLocation() {
     }
 
+    public ParkLocation(String name) {
+        this.name = name;
+    }
+
     public ParkLocation(Integer dbid, String name) {
         this.dbid = dbid;
         this.name = name;

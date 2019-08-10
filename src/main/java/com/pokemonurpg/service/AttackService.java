@@ -22,12 +22,12 @@ public class AttackService {
         return attackRepository.findAll();
     }
 
-    public Optional<Attack> findByDbid(Integer dbid) {
-        Optional<Attack> species = attackRepository.findByDbid(dbid);
-        return species;
+    public Attack findByDbid(Integer dbid) {
+        Attack attack = attackRepository.findByDbid(dbid);
+        return attack;
     }
 
-    public Optional<Attack> findByName(String name) {
+    public Attack findByName(String name) {
         return attackRepository.findByName(name);
     }
 

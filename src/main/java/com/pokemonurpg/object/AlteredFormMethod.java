@@ -17,6 +17,11 @@ public class AlteredFormMethod {
 
     public AlteredFormMethod() {}
 
+    public AlteredFormMethod(Integer dexno, String method) {
+        this.dexno = dexno;
+        this.method = method;
+    }
+
     public Integer getDexno() {
         return dexno;
     }

@@ -1,9 +1,11 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
+import com.pokemonurpg.dto.species.input.EvolutionInputDto;
+import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.object.Evolution;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.repository.EvolutionRepository;
+import com.pokemonurpg.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,12 @@ import java.util.List;
 public class EvolutionService {
 
     private EvolutionRepository evolutionRepository;
-
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Autowired
-    public EvolutionService(EvolutionRepository evolutionRepository, SpeciesService speciesService) {
+    public EvolutionService(EvolutionRepository evolutionRepository, SpeciesRepository speciesRepository) {
         this.evolutionRepository = evolutionRepository;
-        this.speciesService = speciesService;
+        this.speciesRepository = speciesRepository;
     }
 
     public int getPreEvolutionDbid(int evolutionDbid) {
@@ -38,11 +39,19 @@ public class EvolutionService {
         List<Evolution> evolutions = evolutionRepository.findByIdPreEvolutionDbid(preEvolutionDbid);
         if (evolutions != null) {
             for (Evolution evolution : evolutions) {
-                Species evo = speciesService.findByDbid(evolution.getId().getEvolutionDbid());
+                Species evo = speciesRepository.findByDbid(evolution.getId().getEvolutionDbid());
                 dtos.add(new EvolutionFamilyMemberDto(evo, evolution.getMethod()));
             }
         }
 
         return dtos;
+    }
+
+    public void create(int evoDbid, EvolutionInputDto evolutionInputDto) {
+        if (evolutionInputDto != null) {
+            Species prevo = speciesRepository.findByName(evolutionInputDto.getName());
+            Evolution evolution = new Evolution(evoDbid, prevo.getDbid(), evolutionInputDto.getMethod());
+            evolutionRepository.save(evolution);
+        }
     }
 }

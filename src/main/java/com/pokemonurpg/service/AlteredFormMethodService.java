@@ -29,6 +29,11 @@ public class AlteredFormMethodService {
         else return null;
     }
 
+    public void create(int dexno, String method) {
+        AlteredFormMethod alteredFormMethod = new AlteredFormMethod(dexno, method);
+        alteredFormMethodRepository.save(alteredFormMethod);
+    }
+
 /*    public void save(AlteredFormMethod alteredFormMethod) {
         alteredFormMethodRepository.save(alteredFormMethod);
     }

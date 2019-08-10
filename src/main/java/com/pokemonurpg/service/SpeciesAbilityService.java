@@ -1,10 +1,10 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.SpeciesAbilityDto;
-import com.pokemonurpg.dto.SpeciesAttackDto;
+import com.pokemonurpg.dto.species.input.SpeciesAbilityInputDto;
+import com.pokemonurpg.dto.species.response.SpeciesAbilityDto;
+import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.SpeciesAbility;
 import com.pokemonurpg.object.SpeciesAbilityKey;
-import com.pokemonurpg.object.SpeciesAttack;
 import com.pokemonurpg.repository.SpeciesAbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,12 @@ import java.util.Optional;
 public class SpeciesAbilityService {
 
     private SpeciesAbilityRepository speciesAbilityRepository;
+    private AbilityService abilityService;
 
     @Autowired
-    public SpeciesAbilityService(SpeciesAbilityRepository speciesAbilityRepository) {
+    public SpeciesAbilityService(SpeciesAbilityRepository speciesAbilityRepository, AbilityService abilityService) {
         this.speciesAbilityRepository = speciesAbilityRepository;
+        this.abilityService = abilityService;
     }
 
     public List<SpeciesAbility> findAll() {
@@ -39,6 +41,14 @@ public class SpeciesAbilityService {
 
     public Optional<SpeciesAbility> findBySpeciesAbilityKey(SpeciesAbilityKey key) {
         return speciesAbilityRepository.findById(key);
+    }
+
+    public void createAll(int speciesDbid, List<SpeciesAbilityInputDto> input) {
+        for (SpeciesAbilityInputDto record : input) {
+            Ability ability = abilityService.findByName(record.getName());
+            SpeciesAbility speciesAbility = new SpeciesAbility(speciesDbid, ability.getDbid(), record.isHidden());
+            speciesAbilityRepository.save(speciesAbility);
+        }
     }
 
     public void save(SpeciesAbility sa) {

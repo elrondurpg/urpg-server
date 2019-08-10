@@ -1,5 +1,7 @@
 package com.pokemonurpg.object;
 
+import com.pokemonurpg.dto.species.input.SpeciesInputDto;
+
 import javax.persistence.*;
 
 @Entity
@@ -114,205 +116,29 @@ public class Species {
     private AlteredFormMethod alteredFormMethod;*/
 
     public Species() { }
-    /*public Species(Integer dbid, Integer dexno, String name, Type type1, Type type2, String classification, Integer hp, Integer attack, Integer defense, Integer specialAttack, Integer specialDefense, Integer speed, Double height, Double weight, Boolean maleAllowed, Boolean femaleAllowed, int pokemart, StoryRank storyRank, ArtRank artRank, ParkLocation parkLocation, ParkRank parkRank, int contestCredits, String displayName, String formName) {
-        this.dbid = dbid;
-        this.dexno = dexno;
+
+    public Species(String name) {
         this.name = name;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.classification = classification;
-        this.hp = hp;
-        this.attack = attack;
-        this.defense = defense;
-        this.specialAttack = specialAttack;
-        this.specialDefense = specialDefense;
-        this.speed = speed;
-        this.height = height;
-        this.weight = weight;
-        this.maleAllowed = maleAllowed;
-        this.femaleAllowed = femaleAllowed;
-        this.pokemart = pokemart;
-        this.storyRank = storyRank;
-        this.artRank = artRank;
-        this.parkLocation = parkLocation;
-        this.parkRank = parkRank;
-        this.contestCredits = contestCredits;
-        this.displayName = displayName;
-        this.formName = formName;
     }
 
-    // TODO remove all references to this function
-    public void cloneValuesFrom(Species species) {
-        this.dbid = species.getDbid();
-
-        if (this.getDexno() == null) {
-            this.dexno = species.getDexno();
-        }
-
-        if (this.getType1() == null) {
-            this.type1 = species.getType1();
-        }
-
-        if (this.getType2() == null) {
-            this.type2 = species.getType2();
-        }
-
-        if (this.getClassification() == null) {
-            this.classification = species.getClassification();
-        }
-
-        if (this.getHp() == null) {
-            this.hp = species.getHp();
-        }
-
-        if (this.getAttack() == null) {
-            this.attack = species.getAttack();
-        }
-
-        if (this.getDefense() == null) {
-            this.defense = species.getDefense();
-        }
-
-        if (this.getSpecialAttack() == null) {
-            this.specialAttack = species.getSpecialAttack();
-        }
-
-        if (this.getSpecialDefense() == null) {
-            this.specialDefense = species.getSpecialDefense();
-        }
-
-        if (this.getSpeed() == null) {
-            this.speed = species.getSpeed();
-        }
-
-        if (this.getHeight() == null) {
-            this.height = species.getHeight();
-        }
-
-        if (this.getWeight() == null) {
-            this.weight = species.getWeight();
-        }
-
-        if (this.getMaleAllowed() == null) {
-            this.maleAllowed = species.getMaleAllowed();
-        }
-
-        if (this.getFemaleAllowed() == null) {
-            this.femaleAllowed = species.getFemaleAllowed();
-        }
-
-
-        if (this.getDisplayName() == null) {
-            this.displayName = species.getDisplayName();
-        }
-
-        if (this.getFormName() == null) {
-            this.formName = species.getFormName();
-        }
+    public Species(SpeciesInputDto input) {
+        setDexno(input.getDexno());
+        setName(input.getName());
+        setClassification(input.getClassification());
+        setHp(input.getHp());
+        setAttack(input.getAttack());
+        setDefense(input.getDefense());
+        setSpecialAttack(input.getSpecialAttack());
+        setSpecialDefense(input.getSpecialDefense());
+        setSpeed(input.getSpeed());
+        setHeight(input.getHeight());
+        setWeight(input.getWeight());
+        setMaleAllowed(input.isMaleAllowed());
+        setFemaleAllowed(input.isFemaleAllowed());
+        setPokemart(input.getPokemart());
+        setDisplayName(input.getDisplayName());
+        setFormName(input.getFormName());
     }
-
-    public Species cloneWithoutTransientFields() {
-        Species clone = new Species();
-        clone.cloneValuesFrom(this);
-        clone.setName(this.getName());
-        clone.setAbilities(this.getAbilities());
-        clone.setAttacks(this.getAttacks());
-        return clone;
-    }*/
-
-    /*public void addTransientFields(SpeciesService speciesService, AlteredFormMethodService alteredFormMethodService, EvolutionService evolutionService) {
-        next = createNextTab(speciesService);
-        prev = createPrevTab(speciesService);
-        alteredForms = createAlteredForms(speciesService);
-        alteredFormMethod = createAlteredFormMethod(alteredFormMethodService);
-        evolutionFamily = createEvolutionFamily(speciesService, evolutionService);
-    }
-
-    public SpeciesPageTab createNextTab(SpeciesService service) {
-        int mod = AppConfig.NUM_SPECIES;
-        int dexBase0 = dexno - 1;
-
-        int nextDex = (dexBase0 + 1) % mod + 1;
-        Optional<Species> nextSpecies = service.findByDexno(nextDex);
-        if (nextSpecies.isPresent())
-            return new SpeciesPageTab(nextSpecies.get());
-
-        return null;
-    }
-
-    public SpeciesPageTab createPrevTab(SpeciesService service) {
-        int mod = AppConfig.NUM_SPECIES;
-        int dexBase0 = dexno - 1;
-
-        int prevDex = (dexBase0 + mod - 1) % mod + 1;
-        Optional<Species> prevSpecies = service.findByDexno(prevDex);
-        if (prevSpecies.isPresent())
-            return new SpeciesPageTab(prevSpecies.get());
-
-        return null;
-    }
-
-    public List<Species> createAlteredForms(SpeciesService service) {
-        ArrayList<Species> alteredForms = new ArrayList<>();
-        List<Species> alteredFormsTemp = service.findAllByDexno(dexno);
-
-        if (alteredFormsTemp.size() > 1) {
-            for (Species form : alteredFormsTemp) {
-                if (!Objects.equals(form.getDbid(), dbid)) {
-                    alteredForms.add(form);
-                }
-                else {
-                    alteredForms.add(this.cloneWithoutTransientFields());
-                }
-            }
-        }
-        return alteredForms;
-    }
-
-    public AlteredFormMethod createAlteredFormMethod(AlteredFormMethodService service) {
-        Optional<AlteredFormMethod> alteredFormMethodOptional = service.findByDexno(dexno);
-        if (alteredFormMethodOptional.isPresent())
-            return alteredFormMethodOptional.get();
-        return null;
-    }
-
-    public ArrayList<ArrayList<EvolutionFamilyMember>> createEvolutionFamily(SpeciesService speciesService, EvolutionService evolutionService) {
-        ArrayList<ArrayList<EvolutionFamilyMember>> evolutionFamily = new ArrayList<>();
-
-        // Get any Pokemon that evolve into this, then get any Pokemon that evolve into THAT
-        Species basic = this;
-        Species prevo = this;
-        int tempDbid = dbid;
-        do {
-            prevo = getPrevo(tempDbid, speciesService, evolutionService);
-            if (prevo != null) {
-                basic = prevo;
-            }
-        } while (prevo != null);
-
-
-        return evolutionFamily;
-    }
-
-    public Species getPrevo(Integer dbid, SpeciesService speciesService, EvolutionService evolutionService) {
-        EvolutionKey prevoKey = new EvolutionKey();
-        prevoKey.setEvolutionDbid(dbid);
-        Evolution prevoRecord = new Evolution();
-        prevoRecord.setId(prevoKey);
-        List<Evolution> prevos = evolutionService.findAll(Example.of(prevoRecord));
-        if (prevos.size() == 1) {
-            Integer prevoDbid = prevos.get(0).getId().getPreEvolutionDbid();
-            Optional<Species> prevo = speciesService.findByDbid(prevoDbid);
-            if (prevo.isPresent()) {
-                return prevo.get();
-            }
-            else throw new IllegalStateException("Species with DBID = " + dbid + " has prevo with DBID = " + prevoDbid + " that doesn't correspond to an existing Pokemon.");
-        }
-        else if (prevos.size() == 0) {
-            return null;
-        }
-        else throw new IllegalStateException("Database contains " + prevos.size() + " Species that evolve into species with DBID = " + dbid);
-    }*/
 
     public double getHeight() {
         return height;
@@ -562,11 +388,11 @@ public class Species {
         this.alteredForms = alteredForms;
     }
 
-    public ArrayList<ArrayList<EvolutionFamilyMember>> getEvolutionFamily() {
+    public ArrayList<ArrayList<EvolutionFamilyMember>> getEvolvesFrom() {
         return evolutionFamily;
     }
 
-    public void setEvolutionFamily(ArrayList<ArrayList<EvolutionFamilyMember>> evolutionFamily) {
+    public void setEvolvesFrom(ArrayList<ArrayList<EvolutionFamilyMember>> evolutionFamily) {
         this.evolutionFamily = evolutionFamily;
     }*/
 }

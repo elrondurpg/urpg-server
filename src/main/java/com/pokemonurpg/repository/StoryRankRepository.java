@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StoryRankRepository extends JpaRepository<StoryRank, Integer> {
-    Optional<StoryRank> findByDbid(int dbid);
-    Optional<StoryRank> findByName(String name);
+    StoryRank findByDbid(int dbid);
+    StoryRank findByName(String name);
     List<StoryRank> findByNameStartingWith(String name);
 }

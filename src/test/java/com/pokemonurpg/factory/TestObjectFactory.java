@@ -1,6 +1,6 @@
 package com.pokemonurpg.factory;
 
-import com.pokemonurpg.dto.species.EvolutionFamilyMemberDto;
+import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.EvolutionRepository;
 import com.pokemonurpg.service.EvolutionService;

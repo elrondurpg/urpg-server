@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MegaEvolutionRepository extends JpaRepository<MegaEvolution, MegaEvolutionKey> {
     List<MegaEvolution> findByIdOriginalDbid(int originalDbid);
+    MegaEvolution findByIdMegaEvolutionDbid(int megaEvolutionDbid);
 }

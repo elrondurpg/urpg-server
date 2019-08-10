@@ -36,7 +36,7 @@ public class AttackValidator extends URPGValidator {
                 errors.rejectValue("name", "Name '" + attack.getName() + "' is invalid.");
             }
 
-            if (attack.getType() == null || !typeService.findByDbid(attack.getType().getDbid()).isPresent()) {
+            if (attack.getType() == null || typeService.findByDbid(attack.getType().getDbid()) != null) {
                 errors.rejectValue("type", "Type '" + attack.getType() + "' is invalid.");
             }
 

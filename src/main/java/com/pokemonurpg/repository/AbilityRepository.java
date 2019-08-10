@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AbilityRepository extends JpaRepository<Ability, Integer> {
-    Optional<Ability> findByName(String name);
-    Optional<Ability> findByDbid(Integer dbid);
+    Ability findByName(String name);
+    Ability findByDbid(Integer dbid);
     List<Ability> findByNameStartingWith(String name);
 }

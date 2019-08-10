@@ -22,12 +22,12 @@ public class AbilityService {
         return abilityRepository.findAll();
     }
 
-    public Optional<Ability> findByDbid(Integer dbid) {
-        Optional<Ability> species = abilityRepository.findByDbid(dbid);
-        return species;
+    public Ability findByDbid(Integer dbid) {
+        Ability ability = abilityRepository.findByDbid(dbid);
+        return ability;
     }
 
-    public Optional<Ability> findByName(String name) {
+    public Ability findByName(String name) {
         return abilityRepository.findByName(name);
     }
 

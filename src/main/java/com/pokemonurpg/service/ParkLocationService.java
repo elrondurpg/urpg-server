@@ -22,11 +22,11 @@ public class ParkLocationService {
         return parkLocationRepository.findAll();
     }
 
-    public Optional<ParkLocation> findByDbid(int dbid) {
+    public ParkLocation findByDbid(int dbid) {
         return parkLocationRepository.findByDbid(dbid);
     }
 
-    public Optional<ParkLocation> findByName(String name) {
+    public ParkLocation findByName(String name) {
         return parkLocationRepository.findByName(name);
     }
 

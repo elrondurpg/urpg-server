@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ParkLocationRepository extends JpaRepository<ParkLocation, Integer> {
-    Optional<ParkLocation> findByDbid(int dbid);
-    Optional<ParkLocation> findByName(String name);
+    ParkLocation findByDbid(int dbid);
+    ParkLocation findByName(String name);
     List<ParkLocation> findByNameStartingWith(String name);
 }

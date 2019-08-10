@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ParkRankRepository extends JpaRepository<ParkRank, Integer> {
-    Optional<ParkRank> findByDbid(int dbid);
-    Optional<ParkRank> findByName(String name);
+    ParkRank findByDbid(int dbid);
+    ParkRank findByName(String name);
     List<ParkRank> findByNameStartingWith(String name);
 }

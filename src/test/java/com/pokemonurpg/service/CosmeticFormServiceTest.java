@@ -1,16 +1,14 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.CosmeticFormDto;
+import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.CosmeticForm;
 import com.pokemonurpg.repository.CosmeticFormRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -40,7 +38,6 @@ public class CosmeticFormServiceTest {
         assertEquals(1, responseList.size());
 
         CosmeticFormDto cosmeticForm = responseList.get(0);
-        assertEquals(spikyEaredPikachu.getId().getSpeciesDbid(), cosmeticForm.getSpeciesDbid());
         assertEquals(spikyEaredPikachu.getDisplayName(), cosmeticForm.getDisplayName());
         assertEquals(spikyEaredPikachu.getMethod(), cosmeticForm.getMethod());
         assertEquals(spikyEaredPikachu.getName(), cosmeticForm.getName());

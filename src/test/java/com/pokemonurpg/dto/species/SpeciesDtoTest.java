@@ -1,5 +1,6 @@
 package com.pokemonurpg.dto.species;
 
+import com.pokemonurpg.dto.species.response.SpeciesDto;
 import com.pokemonurpg.object.Species;
 import org.junit.Test;
 

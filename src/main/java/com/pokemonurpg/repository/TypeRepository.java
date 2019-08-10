@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TypeRepository extends JpaRepository<Type, Integer> {
-    Optional<Type> findByDbid(int dbid);
-    Optional<Type> findByName(String name);
+    Type findByDbid(int dbid);
+    Type findByName(String name);
     List<Type> findByNameStartingWith(String name);
 }

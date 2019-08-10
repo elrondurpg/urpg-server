@@ -1,14 +1,17 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.dto.CosmeticFormDto;
-import com.pokemonurpg.dto.SpeciesAttackDto;
-import com.pokemonurpg.dto.species.*;
+import com.pokemonurpg.dto.species.input.SpeciesInputDto;
+import com.pokemonurpg.dto.species.response.CosmeticFormDto;
+import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
+import com.pokemonurpg.dto.species.response.*;
 import com.pokemonurpg.object.*;
-import com.pokemonurpg.repository.SpeciesRepository;
+import com.pokemonurpg.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.MapBindingResult;
 
 import java.util.*;
 
@@ -29,12 +32,19 @@ public class SpeciesService {
 
     private TypeMatchupService typeMatchupService;
 
+    private TypeRepository typeRepository;
+    private StoryRankRepository storyRankRepository;
+    private ArtRankRepository artRankRepository;
+    private ParkRankRepository parkRankRepository;
+    private ParkLocationRepository parkLocationRepository;
+
     @Autowired
-    public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService,
-                          SpeciesAbilityService speciesAbilityService,
-                          AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
-                          @Lazy EvolutionService evolutionService, @Lazy MegaEvolutionService megaEvolutionService,
-                          TypeMatchupService typeMatchupService) {
+        public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, SpeciesAbilityService speciesAbilityService,
+                              AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
+                              EvolutionService evolutionService, MegaEvolutionService megaEvolutionService,
+                              TypeMatchupService typeMatchupService, TypeRepository typeRepository,
+                              StoryRankRepository storyRankRepository, ArtRankRepository artRankRepository,
+                              ParkRankRepository parkRankRepository, ParkLocationRepository parkLocationRepository) {
         this.speciesRepository = speciesRepository;
         this.speciesAttackService = speciesAttackService;
         this.speciesAbilityService = speciesAbilityService;
@@ -43,6 +53,11 @@ public class SpeciesService {
         this.evolutionService = evolutionService;
         this.megaEvolutionService = megaEvolutionService;
         this.typeMatchupService = typeMatchupService;
+        this.typeRepository = typeRepository;
+        this.storyRankRepository = storyRankRepository;
+        this.artRankRepository = artRankRepository;
+        this.parkRankRepository = parkRankRepository;
+        this.parkLocationRepository = parkLocationRepository;
     }
 
     public List<Species> findAll() {
@@ -149,7 +164,8 @@ public class SpeciesService {
 
         if (speciesList.size() > 1) {
             for (Species species : speciesList) {
-                dtos.add(buildAlteredFormDto(species));
+                if (!megaEvolutionService.isMegaEvolution(species.getDbid()))
+                    dtos.add(buildAlteredFormDto(species));
             }
         }
 
@@ -278,6 +294,32 @@ public class SpeciesService {
             }
         }
         else return new EvolutionFamilyMemberDto();
+    }
+
+    public Errors create(SpeciesInputDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+
+        // speciesValidator.validate(input);
+        Species newSpecies = new Species(input);
+        newSpecies.setType1(typeRepository.findByName(input.getType1()));
+        newSpecies.setType2(typeRepository.findByName(input.getType2()));
+        newSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+        newSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+        newSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+        newSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
+        speciesRepository.save(newSpecies);
+
+        Species savedSpecies = speciesRepository.findByName(input.getName());
+        int dbid = savedSpecies.getDbid();
+
+        speciesAttackService.createAll(dbid, input.getSpeciesAttacks());
+        speciesAbilityService.createAll(dbid, input.getSpeciesAbilities());
+        cosmeticFormService.createAll(dbid, input.getCosmeticForms());
+        alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
+        evolutionService.create(dbid, input.getEvolvesFrom());
+        megaEvolutionService.create(dbid, input.getMegaEvolvesFrom());
+
+        return errors;
     }
 
     /*public Optional<Species> findByDbid(Integer dbid) {

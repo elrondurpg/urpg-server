@@ -22,11 +22,11 @@ public class TypeService {
         return typeRepository.findAll();
     }
 
-    public Optional<Type> findByDbid(int dbid) {
+    public Type findByDbid(int dbid) {
         return typeRepository.findByDbid(dbid);
     }
 
-    public Optional<Type> findByName(String name) {
+    public Type findByName(String name) {
         return typeRepository.findByName(name);
     }
 

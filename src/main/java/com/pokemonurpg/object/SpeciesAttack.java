@@ -1,6 +1,7 @@
 package com.pokemonurpg.object;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pokemonurpg.dto.species.input.SpeciesAttackInputDto;
 
 import javax.persistence.*;
 import java.util.Objects;

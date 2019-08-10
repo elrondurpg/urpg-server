@@ -1,9 +1,11 @@
 package com.pokemonurpg.controller;
 
-import com.pokemonurpg.dto.species.SpeciesDto;
+import com.pokemonurpg.dto.species.input.SpeciesInputDto;
+import com.pokemonurpg.dto.species.response.SpeciesDto;
 import com.pokemonurpg.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,27 +39,15 @@ public class SpeciesController {
         }
     }
 
-    /*@GetMapping(path="/{name}")
+    @PutMapping
     public @ResponseBody
-    ResponseEntity getSpeciesByName(@PathVariable("name") String name) {
-        Optional<Species> speciesOptional = service.findByName(name);
-        if (speciesOptional.isPresent()) {
-            Species species = speciesOptional.get();
-            species.addTransientFields(service, alteredFormMethodService,evolutionService);
-            return ResponseEntity.ok(species);
+    ResponseEntity createSpecies(@RequestBody SpeciesInputDto species) {
+        Errors errors = speciesService.create(species);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors.getAllErrors());
         }
-        else {
-            speciesOptional = service.findByNameStartingWith(name);
-            if (speciesOptional.isPresent()) {
-                Species species = speciesOptional.get();
-                species.addTransientFields(service, alteredFormMethodService, evolutionService);
-                return ResponseEntity.ok(species);
-            }
-            else {
-                return ResponseEntity.notFound().build();
-            }
-        }
-    }*/
+        else return ResponseEntity.ok("Pokemon " + species.getName() + " was created successfully!");
+    }
 
     /*@PostMapping(path="/create")
     public ResponseEntity createSpecies(@RequestBody Species species) {

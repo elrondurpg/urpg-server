@@ -1,5 +1,6 @@
 package com.pokemonurpg.dto.species;
 
+import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.Species;
 import org.junit.Test;

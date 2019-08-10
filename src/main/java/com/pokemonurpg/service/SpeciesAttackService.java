@@ -1,26 +1,27 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.SpeciesAttackDto;
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.dto.species.input.SpeciesAttackInputDto;
+import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
+import com.pokemonurpg.object.Attack;
 import com.pokemonurpg.object.SpeciesAttack;
-import com.pokemonurpg.object.SpeciesAttackKey;
 import com.pokemonurpg.repository.SpeciesAttackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SpeciesAttackService {
 
     private SpeciesAttackRepository speciesAttackRepository;
 
+    private AttackService attackService;
+
     @Autowired
-    public SpeciesAttackService(SpeciesAttackRepository speciesAttackRepository) {
+    public SpeciesAttackService(SpeciesAttackRepository speciesAttackRepository, AttackService attackService) {
         this.speciesAttackRepository = speciesAttackRepository;
+        this.attackService = attackService;
     }
 
     public List<SpeciesAttack> findAll() {
@@ -35,6 +36,14 @@ public class SpeciesAttackService {
             speciesAttackDtos.add(speciesAttackDto);
         }
         return speciesAttackDtos;
+    }
+
+    public void createAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
+        for (SpeciesAttackInputDto record : input) {
+            Attack attack = attackService.findByName(record.getName());
+            SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), record.getMethod(), record.getGeneration());
+            speciesAttackRepository.save(speciesAttack);
+        }
     }
 
     /*public Optional<SpeciesAttack> findBySpeciesAttackKey(SpeciesAttackKey key) {

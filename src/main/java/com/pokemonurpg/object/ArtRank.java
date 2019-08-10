@@ -19,6 +19,10 @@ public class ArtRank {
     public ArtRank() {
     }
 
+    public ArtRank(String name) {
+        this.name = name;
+    }
+
     public ArtRank(Integer dbid, String name, String requirement) {
         this.dbid = dbid;
         this.name = name;

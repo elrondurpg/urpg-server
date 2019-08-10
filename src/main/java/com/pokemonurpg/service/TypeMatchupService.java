@@ -1,6 +1,6 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.TypeMatchupDto;
+import com.pokemonurpg.dto.species.response.TypeMatchupDto;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.Type;
 import com.pokemonurpg.object.TypeMatchup;

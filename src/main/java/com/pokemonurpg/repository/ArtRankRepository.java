@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArtRankRepository extends JpaRepository<ArtRank, Integer> {
-    Optional<ArtRank> findByDbid(int dbid);
-    Optional<ArtRank> findByName(String name);
+    ArtRank findByDbid(int dbid);
+    ArtRank findByName(String name);
     List<ArtRank> findByNameStartingWith(String name);
 }

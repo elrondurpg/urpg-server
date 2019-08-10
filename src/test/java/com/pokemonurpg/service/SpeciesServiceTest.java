@@ -1,9 +1,9 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.dto.CosmeticFormDto;
-import com.pokemonurpg.dto.SpeciesAttackDto;
-import com.pokemonurpg.dto.species.*;
+import com.pokemonurpg.dto.species.response.CosmeticFormDto;
+import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
+import com.pokemonurpg.dto.species.response.*;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.SpeciesRepository;
@@ -27,6 +27,7 @@ public class SpeciesServiceTest {
     private AlteredFormMethodService alteredFormMethodService = mock(AlteredFormMethodService.class);
     private EvolutionService evolutionService = mock(EvolutionService.class);
     private MegaEvolutionService megaEvolutionService = mock(MegaEvolutionService.class);
+    private TypeMatchupService typeMatchupService = mock(TypeMatchupService.class);
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
@@ -47,9 +48,9 @@ public class SpeciesServiceTest {
 
     @Before
     public void initService() {
-        speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackService,
-                speciesAbilityService, abilityService, alteredFormMethodService, cosmeticFormService,
-                evolutionService, megaEvolutionService);
+        speciesService = new SpeciesService(speciesRepository, speciesAttackService,
+                speciesAbilityService, alteredFormMethodService, cosmeticFormService,
+                evolutionService, megaEvolutionService, typeMatchupService);
     }
 
     @Test

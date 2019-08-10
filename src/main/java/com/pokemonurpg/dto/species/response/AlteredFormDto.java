@@ -1,4 +1,4 @@
-package com.pokemonurpg.dto.species;
+package com.pokemonurpg.dto.species.response;
 
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.Type;
