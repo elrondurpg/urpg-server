@@ -1,7 +1,7 @@
 package com.pokemonurpg.dto;
 
 public class InputDto {
-    private boolean delete;
+    private boolean delete = false;
 
     public InputDto() {
     }

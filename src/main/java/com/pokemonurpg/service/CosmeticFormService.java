@@ -1,7 +1,10 @@
 package com.pokemonurpg.service;
 
+import com.pokemonurpg.dto.species.input.SpeciesAbilityInputDto;
 import com.pokemonurpg.dto.species.response.CosmeticFormDto;
+import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.CosmeticForm;
+import com.pokemonurpg.object.SpeciesAbility;
 import com.pokemonurpg.repository.CosmeticFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +37,38 @@ public class CosmeticFormService
         else return Collections.emptyList();
     }
 
+    public void create(int speciesDbid, CosmeticFormDto input) {
+        CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getDisplayName(), input.getMethod());
+        cosmeticFormRepository.save(form);
+    }
+
     public void createAll(int speciesDbid, List<CosmeticFormDto> input) {
         if (input != null) {
             for (CosmeticFormDto dto : input) {
-                CosmeticForm form = new CosmeticForm(speciesDbid, dto.getName(), dto.getDisplayName(), dto.getMethod());
-                cosmeticFormRepository.save(form);
+                create(speciesDbid, dto);
+            }
+        }
+    }
+
+    public void update(CosmeticForm existingRecord, CosmeticFormDto input) {
+        if (input.getDisplayName() != null) {
+            existingRecord.setDisplayName(input.getDisplayName());
+        }
+        if (input.getMethod() != null) {
+            existingRecord.setMethod(input.getMethod());
+        }
+        cosmeticFormRepository.save(existingRecord);
+    }
+
+    public void updateAll(int speciesDbid, List<CosmeticFormDto> input) {
+        if (input != null) {
+            for (CosmeticFormDto record : input) {
+                CosmeticForm existingRecord = cosmeticFormRepository.findByIdSpeciesDbidAndIdName(speciesDbid, record.getName());
+                if (existingRecord != null) {
+                    update(existingRecord, record);
+                } else {
+                    create(speciesDbid, record);
+                }
             }
         }
     }

@@ -299,7 +299,7 @@ public class SpeciesService {
     public Errors create(SpeciesInputDto input) {
         MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
 
-        // speciesValidator.validate(input);
+        // speciesValidator.validateSpeciesCreate(input);
         Species newSpecies = new Species(input);
         newSpecies.setType1(typeRepository.findByName(input.getType1()));
         newSpecies.setType2(typeRepository.findByName(input.getType2()));
@@ -318,6 +318,94 @@ public class SpeciesService {
         alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
         evolutionService.create(dbid, input.getEvolvesFrom());
         megaEvolutionService.create(dbid, input.getMegaEvolvesFrom());
+
+        return errors;
+    }
+
+    public Errors update(SpeciesInputDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+
+        // speciesValidator.validateSpeciesUpdate(input);
+        Species existingSpecies = speciesRepository.findByName(input.getName());
+        if (input.getDexno() != null) {
+            existingSpecies.setDexno(input.getDexno());
+        }
+        if (input.getName() != null) {
+            existingSpecies.setName(input.getName());
+        }
+        if (input.getClassification() != null) {
+            existingSpecies.setClassification(input.getClassification());
+        }
+        if (input.getHp() != null) {
+            existingSpecies.setHp(input.getHp());
+        }
+        if (input.getHp() != null) {
+            existingSpecies.setHp(input.getHp());
+        }
+        if (input.getAttack() != null) {
+            existingSpecies.setAttack(input.getAttack());
+        }
+        if (input.getDefense() != null) {
+            existingSpecies.setDefense(input.getDefense());
+        }
+        if (input.getSpecialAttack() != null) {
+            existingSpecies.setSpecialAttack(input.getSpecialAttack());
+        }
+        if (input.getSpecialDefense() != null) {
+            existingSpecies.setSpecialDefense(input.getSpecialDefense());
+        }
+        if (input.getSpeed() != null) {
+            existingSpecies.setSpeed(input.getSpeed());
+        }
+        if (input.getHeight() != null) {
+            existingSpecies.setHeight(input.getHeight());
+        }
+        if (input.getWeight() != null) {
+            existingSpecies.setWeight(input.getWeight());
+        }
+        if (input.isMaleAllowed() != null) {
+            existingSpecies.setMaleAllowed(input.isMaleAllowed());
+        }
+        if (input.isFemaleAllowed() != null) {
+            existingSpecies.setFemaleAllowed(input.isFemaleAllowed());
+        }
+        if (input.getPokemart() != null) {
+            existingSpecies.setPokemart(input.getPokemart());
+        }
+        if (input.getDisplayName() != null) {
+            existingSpecies.setDisplayName(input.getDisplayName());
+        }
+        if (input.getFormName() != null) {
+            existingSpecies.setFormName(input.getFormName());
+        }
+        if (input.getType1() != null) {
+            existingSpecies.setType1(typeRepository.findByName(input.getType1()));
+        }
+        if (input.getType2() != null) {
+            existingSpecies.setType2(typeRepository.findByName(input.getType2()));
+        }
+        if (input.getStoryRank() != null) {
+            existingSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+        }
+        if (input.getArtRank() != null) {
+            existingSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+        }
+        if (input.getParkRank() != null) {
+            existingSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+        }
+        if (input.getParkLocation() != null) {
+            existingSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
+        }
+        speciesRepository.save(existingSpecies);
+
+        int dbid = existingSpecies.getDbid();
+
+        speciesAttackService.updateAll(dbid, input.getSpeciesAttacks());
+        speciesAbilityService.updateAll(dbid, input.getSpeciesAbilities());
+        cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
+        alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
+        evolutionService.update(dbid, input.getEvolvesFrom());
+        megaEvolutionService.update(dbid, input.getMegaEvolvesFrom());
 
         return errors;
     }

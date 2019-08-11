@@ -39,11 +39,11 @@ public class SpeciesInputDto extends InputDto {
     public SpeciesInputDto() {
     }
 
-    public int getDexno() {
+    public Integer getDexno() {
         return dexno;
     }
 
-    public void setDexno(int dexno) {
+    public void setDexno(Integer dexno) {
         this.dexno = dexno;
     }
 
@@ -79,83 +79,83 @@ public class SpeciesInputDto extends InputDto {
         this.classification = classification;
     }
 
-    public int getHp() {
+    public Integer getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(Integer hp) {
         this.hp = hp;
     }
 
-    public int getAttack() {
+    public Integer getAttack() {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public void setAttack(Integer attack) {
         this.attack = attack;
     }
 
-    public int getDefense() {
+    public Integer getDefense() {
         return defense;
     }
 
-    public void setDefense(int defense) {
+    public void setDefense(Integer defense) {
         this.defense = defense;
     }
 
-    public int getSpecialAttack() {
+    public Integer getSpecialAttack() {
         return specialAttack;
     }
 
-    public void setSpecialAttack(int specialAttack) {
+    public void setSpecialAttack(Integer specialAttack) {
         this.specialAttack = specialAttack;
     }
 
-    public int getSpecialDefense() {
+    public Integer getSpecialDefense() {
         return specialDefense;
     }
 
-    public void setSpecialDefense(int specialDefense) {
+    public void setSpecialDefense(Integer specialDefense) {
         this.specialDefense = specialDefense;
     }
 
-    public int getSpeed() {
+    public Integer getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(Integer speed) {
         this.speed = speed;
     }
 
-    public double getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public boolean isMaleAllowed() {
+    public Boolean isMaleAllowed() {
         return maleAllowed;
     }
 
-    public void setMaleAllowed(boolean maleAllowed) {
+    public void setMaleAllowed(Boolean maleAllowed) {
         this.maleAllowed = maleAllowed;
     }
 
-    public boolean isFemaleAllowed() {
+    public Boolean isFemaleAllowed() {
         return femaleAllowed;
     }
 
-    public void setFemaleAllowed(boolean femaleAllowed) {
+    public void setFemaleAllowed(Boolean femaleAllowed) {
         this.femaleAllowed = femaleAllowed;
     }
 

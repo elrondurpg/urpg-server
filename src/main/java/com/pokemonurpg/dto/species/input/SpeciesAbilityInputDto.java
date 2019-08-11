@@ -5,7 +5,7 @@ import com.pokemonurpg.dto.InputDto;
 public class SpeciesAbilityInputDto extends InputDto
 {
     public String name;
-    public boolean hidden;
+    public Boolean hidden;
 
     public SpeciesAbilityInputDto() {
     }
@@ -18,11 +18,11 @@ public class SpeciesAbilityInputDto extends InputDto
         this.name = name;
     }
 
-    public boolean isHidden() {
+    public Boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
+    public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 }

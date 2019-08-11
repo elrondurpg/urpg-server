@@ -14,6 +14,9 @@ public class Evolution {
     @Column(name = "evolution_method")
     String method;
 
+    @Column(name = "num_battles")
+    int numBattles;
+
     public Evolution() {
     }
 
@@ -38,17 +41,26 @@ public class Evolution {
         this.method = method;
     }
 
+    public int getNumBattles() {
+        return numBattles;
+    }
+
+    public void setNumBattles(int numBattles) {
+        this.numBattles = numBattles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Evolution evolution = (Evolution) o;
         return id.equals(evolution.id) &&
-                method.equals(evolution.method);
+                method.equals(evolution.method) &&
+                numBattles == evolution.numBattles;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, method);
+        return Objects.hash(id, method, numBattles);
     }
 }

@@ -43,19 +43,42 @@ public class SpeciesAbilityService {
         return speciesAbilityRepository.findById(key);
     }
 
+    public void create(int speciesDbid, SpeciesAbilityInputDto input) {
+        Ability ability = abilityService.findByName(input.getName());
+        SpeciesAbility speciesAbility = new SpeciesAbility(speciesDbid, ability.getDbid(), input.isHidden());
+        speciesAbilityRepository.save(speciesAbility);
+    }
+
     public void createAll(int speciesDbid, List<SpeciesAbilityInputDto> input) {
         for (SpeciesAbilityInputDto record : input) {
-            Ability ability = abilityService.findByName(record.getName());
-            SpeciesAbility speciesAbility = new SpeciesAbility(speciesDbid, ability.getDbid(), record.isHidden());
-            speciesAbilityRepository.save(speciesAbility);
+            create(speciesDbid, record);
         }
     }
 
-    public void save(SpeciesAbility sa) {
-        speciesAbilityRepository.save(sa);
+    public void update(SpeciesAbility existingRecord, SpeciesAbilityInputDto input) {
+        if (input.isDelete()) {
+            speciesAbilityRepository.delete(existingRecord);
+        }
+        else {
+            if (input.isHidden() != null) {
+                existingRecord.setHidden(input.isHidden());
+            }
+            speciesAbilityRepository.save(existingRecord);
+        }
     }
 
-    public void delete(SpeciesAbility sa) {
-        speciesAbilityRepository.delete(sa.secretGetSpecies().getDbid(), sa.getAbility().getDbid());
+    public void updateAll(int speciesDbid, List<SpeciesAbilityInputDto> input) {
+        if (input != null) {
+            for (SpeciesAbilityInputDto record : input) {
+                Ability ability = abilityService.findByName(record.getName());
+
+                SpeciesAbility existingRecord = speciesAbilityRepository.findByIdSpeciesDbidAndIdAbilityDbid(speciesDbid, ability.getDbid());
+                if (existingRecord != null) {
+                    update(existingRecord, record);
+                } else if (!record.isDelete()){
+                    create(speciesDbid, record);
+                }
+            }
+        }
     }
 }

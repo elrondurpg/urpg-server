@@ -6,7 +6,7 @@ public class EvolutionInputDto extends InputDto
 {
     private String name;
     private String method;
-    private int numBattles;
+    private Integer numBattles;
 
     public EvolutionInputDto() {
     }
@@ -27,11 +27,11 @@ public class EvolutionInputDto extends InputDto
         this.method = method;
     }
 
-    public int getNumBattles() {
+    public Integer getNumBattles() {
         return numBattles;
     }
 
-    public void setNumBattles(int numBattles) {
+    public void setNumBattles(Integer numBattles) {
         this.numBattles = numBattles;
     }
 }

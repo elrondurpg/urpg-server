@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CosmeticFormRepository extends JpaRepository<CosmeticForm, CosmeticFormKey> {
     List<CosmeticForm> findByIdSpeciesDbid(int speciesDbid);
+    CosmeticForm findByIdSpeciesDbidAndIdName(int speciesDbid, String formName);
 }

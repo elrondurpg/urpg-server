@@ -39,7 +39,7 @@ public class SpeciesController {
         }
     }
 
-    @PutMapping
+    @PostMapping
     public @ResponseBody
     ResponseEntity createSpecies(@RequestBody SpeciesInputDto species) {
         Errors errors = speciesService.create(species);
@@ -47,6 +47,16 @@ public class SpeciesController {
             return ResponseEntity.badRequest().body(errors.getAllErrors());
         }
         else return ResponseEntity.ok("Pokemon " + species.getName() + " was created successfully!");
+    }
+
+    @PutMapping
+    public @ResponseBody
+    ResponseEntity updateSpecies(@RequestBody SpeciesInputDto species) {
+        Errors errors = speciesService.update(species);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors.getAllErrors());
+        }
+        else return ResponseEntity.ok("Pokemon " + species.getName() + " was updated successfully!");
     }
 
     /*@PostMapping(path="/create")

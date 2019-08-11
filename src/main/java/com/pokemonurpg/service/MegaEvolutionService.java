@@ -51,4 +51,14 @@ public class MegaEvolutionService {
         }
     }
 
+    public void update(int megaEvolutionDbid, MegaEvolutionInputDto input) {
+        if (input != null) {
+            MegaEvolution existingRecord = megaEvolutionRepository.findByIdMegaEvolutionDbid(megaEvolutionDbid);
+            if (input.getMegaStone() != null) {
+                existingRecord.setMegaStone(input.getMegaStone());
+                megaEvolutionRepository.save(existingRecord);
+            }
+        }
+    }
+
 }

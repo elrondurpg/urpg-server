@@ -23,9 +23,9 @@ public class AlteredFormMethodService {
     }*/
 
     public String findByDexno(Integer dexno) {
-        Optional<AlteredFormMethod> method = alteredFormMethodRepository.findByDexno(dexno);
-        if (method.isPresent())
-            return method.get().getMethod();
+        AlteredFormMethod method = alteredFormMethodRepository.findByDexno(dexno);
+        if (method != null)
+            return method.getMethod();
         else return null;
     }
 
@@ -34,12 +34,11 @@ public class AlteredFormMethodService {
         alteredFormMethodRepository.save(alteredFormMethod);
     }
 
-/*    public void save(AlteredFormMethod alteredFormMethod) {
-        alteredFormMethodRepository.save(alteredFormMethod);
+    public void update(int dexno, String method) {
+        AlteredFormMethod existingRecord = alteredFormMethodRepository.findByDexno(dexno);
+        if (method != null) {
+            existingRecord.setMethod(method);
+            alteredFormMethodRepository.save(existingRecord);
+        }
     }
-
-    public void delete(AlteredFormMethod alteredFormMethod) {
-        alteredFormMethodRepository.delete(alteredFormMethod);
-    }
-*/
 }

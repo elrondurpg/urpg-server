@@ -15,8 +15,5 @@ public interface SpeciesAttackRepository  extends JpaRepository<SpeciesAttack, S
 
     List<SpeciesAttack> findByIdSpeciesDbid(int dbid);
 
-    @Transactional
-    @Modifying
-    @Query(value = "delete from species_attack where species_dbid=?1 && attack_dbid=?2", nativeQuery = true)
-    void delete(int species_dbid, int attack_dbid);
+    SpeciesAttack findByIdSpeciesDbidAndIdAttackDbid(int speciesDbid, int attackDbid);
 }

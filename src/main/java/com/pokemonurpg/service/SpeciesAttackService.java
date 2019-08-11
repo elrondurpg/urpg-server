@@ -38,11 +38,45 @@ public class SpeciesAttackService {
         return speciesAttackDtos;
     }
 
+    public void create(int speciesDbid, SpeciesAttackInputDto input) {
+        Attack attack = attackService.findByName(input.getName());
+        SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), input.getMethod(), input.getGeneration());
+        speciesAttackRepository.save(speciesAttack);
+    }
+
     public void createAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
         for (SpeciesAttackInputDto record : input) {
-            Attack attack = attackService.findByName(record.getName());
-            SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), record.getMethod(), record.getGeneration());
-            speciesAttackRepository.save(speciesAttack);
+            create(speciesDbid, record);
+        }
+    }
+
+    public void update(SpeciesAttack existingRecord, SpeciesAttackInputDto input) {
+        if (input.isDelete()) {
+            speciesAttackRepository.delete(existingRecord);
+        }
+        else {
+            if (input.getMethod() != null) {
+                existingRecord.setMethod(input.getMethod());
+            }
+            if (input.getGeneration() != null) {
+                existingRecord.setGeneration(input.getGeneration());
+            }
+            speciesAttackRepository.save(existingRecord);
+        }
+    }
+
+    public void updateAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
+        if (input != null) {
+            for (SpeciesAttackInputDto record : input) {
+                Attack attack = attackService.findByName(record.getName());
+
+                SpeciesAttack existingRecord = speciesAttackRepository.findByIdSpeciesDbidAndIdAttackDbid(speciesDbid, attack.getDbid());
+                if (existingRecord != null) {
+                    update(existingRecord, record);
+                } else if (!record.isDelete()) {
+                    create(speciesDbid, record);
+                }
+            }
         }
     }
 

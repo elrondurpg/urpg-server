@@ -54,4 +54,17 @@ public class EvolutionService {
             evolutionRepository.save(evolution);
         }
     }
+
+    public void update(int evoDbid, EvolutionInputDto evolutionInputDto) {
+        if (evolutionInputDto != null) {
+            Evolution existingRecord = evolutionRepository.findByIdEvolutionDbid(evoDbid);
+            if (evolutionInputDto.getMethod() != null) {
+                existingRecord.setMethod(evolutionInputDto.getMethod());
+            }
+            if (evolutionInputDto.getNumBattles() != null) {
+                existingRecord.setNumBattles(evolutionInputDto.getNumBattles());
+            }
+            evolutionRepository.save(existingRecord);
+        }
+    }
 }
