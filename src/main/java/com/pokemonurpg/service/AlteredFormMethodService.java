@@ -35,10 +35,15 @@ public class AlteredFormMethodService {
     }
 
     public void update(int dexno, String method) {
-        AlteredFormMethod existingRecord = alteredFormMethodRepository.findByDexno(dexno);
         if (method != null) {
-            existingRecord.setMethod(method);
-            alteredFormMethodRepository.save(existingRecord);
+            AlteredFormMethod existingRecord = alteredFormMethodRepository.findByDexno(dexno);
+            if (existingRecord != null) {
+                existingRecord.setMethod(method);
+                alteredFormMethodRepository.save(existingRecord);
+            }
+            else {
+                create(dexno, method);
+            }
         }
     }
 }

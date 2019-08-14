@@ -1,7 +1,7 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.dto.species.input.SpeciesInputDto;
+import com.pokemonurpg.dto.species.input.*;
 import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
 import com.pokemonurpg.dto.species.response.*;
@@ -21,13 +21,16 @@ public class SpeciesService {
     private SpeciesRepository speciesRepository;
 
     private SpeciesAttackService speciesAttackService;
+    private AttackRepository attackRepository;
 
     private SpeciesAbilityService speciesAbilityService;
+    private AbilityRepository abilityRepository;
 
     private AlteredFormMethodService alteredFormMethodService;
     private CosmeticFormService cosmeticFormService;
 
     private EvolutionService evolutionService;
+
     private MegaEvolutionService megaEvolutionService;
 
     private TypeMatchupService typeMatchupService;
@@ -39,15 +42,18 @@ public class SpeciesService {
     private ParkLocationRepository parkLocationRepository;
 
     @Autowired
-        public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, SpeciesAbilityService speciesAbilityService,
-                              AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
-                              EvolutionService evolutionService, MegaEvolutionService megaEvolutionService,
-                              TypeMatchupService typeMatchupService, TypeRepository typeRepository,
-                              StoryRankRepository storyRankRepository, ArtRankRepository artRankRepository,
-                              ParkRankRepository parkRankRepository, ParkLocationRepository parkLocationRepository) {
+    public SpeciesService(SpeciesRepository speciesRepository, SpeciesAttackService speciesAttackService, AttackRepository attackRepository,
+                          SpeciesAbilityService speciesAbilityService, AbilityRepository abilityRepository,
+                          AlteredFormMethodService alteredFormMethodService, CosmeticFormService cosmeticFormService,
+                          EvolutionService evolutionService, MegaEvolutionService megaEvolutionService,
+                          TypeMatchupService typeMatchupService, TypeRepository typeRepository,
+                          StoryRankRepository storyRankRepository, ArtRankRepository artRankRepository,
+                          ParkRankRepository parkRankRepository, ParkLocationRepository parkLocationRepository) {
         this.speciesRepository = speciesRepository;
         this.speciesAttackService = speciesAttackService;
+        this.attackRepository = attackRepository;
         this.speciesAbilityService = speciesAbilityService;
+        this.abilityRepository = abilityRepository;
         this.alteredFormMethodService = alteredFormMethodService;
         this.cosmeticFormService = cosmeticFormService;
         this.evolutionService = evolutionService;
@@ -297,265 +303,449 @@ public class SpeciesService {
     }
 
     public Errors create(SpeciesInputDto input) {
-        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+        Errors errors = validateSpeciesCreate(input);
 
-        // speciesValidator.validateSpeciesCreate(input);
-        Species newSpecies = new Species(input);
-        newSpecies.setType1(typeRepository.findByName(input.getType1()));
-        newSpecies.setType2(typeRepository.findByName(input.getType2()));
-        newSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
-        newSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
-        newSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
-        newSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
-        speciesRepository.save(newSpecies);
+        if (!errors.hasErrors()) {
+            Species newSpecies = new Species(input);
+            newSpecies.setType1(typeRepository.findByName(input.getType1()));
+            newSpecies.setType2(typeRepository.findByName(input.getType2()));
+            newSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+            newSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+            newSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+            newSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
+            speciesRepository.save(newSpecies);
 
-        Species savedSpecies = speciesRepository.findByName(input.getName());
-        int dbid = savedSpecies.getDbid();
+            Species savedSpecies = speciesRepository.findByName(input.getName());
+            int dbid = savedSpecies.getDbid();
 
-        speciesAttackService.createAll(dbid, input.getSpeciesAttacks());
-        speciesAbilityService.createAll(dbid, input.getSpeciesAbilities());
-        cosmeticFormService.createAll(dbid, input.getCosmeticForms());
-        alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
-        evolutionService.create(dbid, input.getEvolvesFrom());
-        megaEvolutionService.create(dbid, input.getMegaEvolvesFrom());
+            speciesAttackService.createAll(dbid, input.getSpeciesAttacks());
+            speciesAbilityService.createAll(dbid, input.getSpeciesAbilities());
+            cosmeticFormService.createAll(dbid, input.getCosmeticForms());
+            alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
+            evolutionService.create(dbid, input.getEvolvesFrom());
+            megaEvolutionService.create(dbid, input.getMegaEvolvesFrom());
+        }
 
         return errors;
     }
 
     public Errors update(SpeciesInputDto input) {
+        Errors errors = validateSpeciesUpdate(input);
+
+        if (!errors.hasErrors()) {
+            Species existingSpecies = speciesRepository.findByName(input.getName());
+            if (input.getDexno() != null) {
+                existingSpecies.setDexno(input.getDexno());
+            }
+            if (input.getName() != null) {
+                existingSpecies.setName(input.getName());
+            }
+            if (input.getClassification() != null) {
+                existingSpecies.setClassification(input.getClassification());
+            }
+            if (input.getHp() != null) {
+                existingSpecies.setHp(input.getHp());
+            }
+            if (input.getHp() != null) {
+                existingSpecies.setHp(input.getHp());
+            }
+            if (input.getAttack() != null) {
+                existingSpecies.setAttack(input.getAttack());
+            }
+            if (input.getDefense() != null) {
+                existingSpecies.setDefense(input.getDefense());
+            }
+            if (input.getSpecialAttack() != null) {
+                existingSpecies.setSpecialAttack(input.getSpecialAttack());
+            }
+            if (input.getSpecialDefense() != null) {
+                existingSpecies.setSpecialDefense(input.getSpecialDefense());
+            }
+            if (input.getSpeed() != null) {
+                existingSpecies.setSpeed(input.getSpeed());
+            }
+            if (input.getHeight() != null) {
+                existingSpecies.setHeight(input.getHeight());
+            }
+            if (input.getWeight() != null) {
+                existingSpecies.setWeight(input.getWeight());
+            }
+            if (input.isMaleAllowed() != null) {
+                existingSpecies.setMaleAllowed(input.isMaleAllowed());
+            }
+            if (input.isFemaleAllowed() != null) {
+                existingSpecies.setFemaleAllowed(input.isFemaleAllowed());
+            }
+            if (input.getPokemart() != null) {
+                existingSpecies.setPokemart(input.getPokemart());
+            }
+            if (input.getDisplayName() != null) {
+                existingSpecies.setDisplayName(input.getDisplayName());
+            }
+            if (input.getFormName() != null) {
+                existingSpecies.setFormName(input.getFormName());
+            }
+            if (input.getType1() != null) {
+                existingSpecies.setType1(typeRepository.findByName(input.getType1()));
+            }
+            if (input.getType2() != null) {
+                existingSpecies.setType2(typeRepository.findByName(input.getType2()));
+            }
+            if (input.getStoryRank() != null) {
+                existingSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+            }
+            if (input.getArtRank() != null) {
+                existingSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+            }
+            if (input.getParkRank() != null) {
+                existingSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+            }
+            if (input.getParkLocation() != null) {
+                existingSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
+            }
+            speciesRepository.save(existingSpecies);
+
+            int dbid = existingSpecies.getDbid();
+
+            speciesAttackService.updateAll(dbid, input.getSpeciesAttacks());
+            speciesAbilityService.updateAll(dbid, input.getSpeciesAbilities());
+            cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
+            alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
+            evolutionService.update(dbid, input.getEvolvesFrom());
+            megaEvolutionService.update(dbid, input.getMegaEvolvesFrom());
+        }
+
+        return errors;
+    }
+
+    public Errors validateSpeciesCreate(SpeciesInputDto input) {
         MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
 
-        // speciesValidator.validateSpeciesUpdate(input);
-        Species existingSpecies = speciesRepository.findByName(input.getName());
-        if (input.getDexno() != null) {
-            existingSpecies.setDexno(input.getDexno());
-        }
-        if (input.getName() != null) {
-            existingSpecies.setName(input.getName());
-        }
-        if (input.getClassification() != null) {
-            existingSpecies.setClassification(input.getClassification());
-        }
-        if (input.getHp() != null) {
-            existingSpecies.setHp(input.getHp());
-        }
-        if (input.getHp() != null) {
-            existingSpecies.setHp(input.getHp());
-        }
-        if (input.getAttack() != null) {
-            existingSpecies.setAttack(input.getAttack());
-        }
-        if (input.getDefense() != null) {
-            existingSpecies.setDefense(input.getDefense());
-        }
-        if (input.getSpecialAttack() != null) {
-            existingSpecies.setSpecialAttack(input.getSpecialAttack());
-        }
-        if (input.getSpecialDefense() != null) {
-            existingSpecies.setSpecialDefense(input.getSpecialDefense());
-        }
-        if (input.getSpeed() != null) {
-            existingSpecies.setSpeed(input.getSpeed());
-        }
-        if (input.getHeight() != null) {
-            existingSpecies.setHeight(input.getHeight());
-        }
-        if (input.getWeight() != null) {
-            existingSpecies.setWeight(input.getWeight());
-        }
-        if (input.isMaleAllowed() != null) {
-            existingSpecies.setMaleAllowed(input.isMaleAllowed());
-        }
-        if (input.isFemaleAllowed() != null) {
-            existingSpecies.setFemaleAllowed(input.isFemaleAllowed());
-        }
-        if (input.getPokemart() != null) {
-            existingSpecies.setPokemart(input.getPokemart());
-        }
-        if (input.getDisplayName() != null) {
-            existingSpecies.setDisplayName(input.getDisplayName());
-        }
-        if (input.getFormName() != null) {
-            existingSpecies.setFormName(input.getFormName());
-        }
-        if (input.getType1() != null) {
-            existingSpecies.setType1(typeRepository.findByName(input.getType1()));
-        }
-        if (input.getType2() != null) {
-            existingSpecies.setType2(typeRepository.findByName(input.getType2()));
-        }
-        if (input.getStoryRank() != null) {
-            existingSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
-        }
-        if (input.getArtRank() != null) {
-            existingSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
-        }
-        if (input.getParkRank() != null) {
-            existingSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
-        }
-        if (input.getParkLocation() != null) {
-            existingSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
-        }
-        speciesRepository.save(existingSpecies);
+        Species existingRecord = speciesRepository.findByName(input.getName());
+        if (existingRecord == null) {
 
-        int dbid = existingSpecies.getDbid();
+            if (input.getDexno() == null || input.getDexno() <= 0) {
+                errors.reject("Dex No. " + input.getDexno() + " is invalid.");
+            }
 
-        speciesAttackService.updateAll(dbid, input.getSpeciesAttacks());
-        speciesAbilityService.updateAll(dbid, input.getSpeciesAbilities());
-        cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
-        alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
-        evolutionService.update(dbid, input.getEvolvesFrom());
-        megaEvolutionService.update(dbid, input.getMegaEvolvesFrom());
+            if (input.getName() == null || input.getName().length() < 3 || input.getName().length() > 21) {
+                errors.reject("Name " + input.getName() + " is invalid.");
+            }
+
+            if (input.getDisplayName() != null && (input.getDisplayName().length() < 3 || input.getDisplayName().length() > 20)) {
+                errors.reject("Display name " + input.getDisplayName() + " is invalid.");
+            }
+
+            if (input.getFormName() != null && (input.getFormName().length() < 3 || input.getFormName().length() > 20)) {
+                errors.reject("Form name " + input.getFormName() + " is invalid.");
+            }
+
+            if (input.getType1() == null) {
+                errors.reject("Type 1 cannot be null!");
+            }
+            else if (typeRepository.findByName(input.getType1()) == null) {
+                errors.reject("Type 1: " + input.getType1() + " is invalid.");
+            }
+
+            if (input.getType2() != null && typeRepository.findByName(input.getType2()) == null) {
+                errors.reject("Type 2: " + input.getType2() + " is invalid.");
+            }
+
+            if (input.getClassification() != null && input.getClassification().length() > 20){
+                errors.reject("Classification " + input.getClassification() + " is invalid.");
+            }
+
+            if (input.getHp() == null || input.getHp() < 0 || input.getHp() > 1000) {
+                errors.reject("HP " + input.getHp() + " is invalid.");
+            }
+
+            if (input.getAttack() == null || input.getAttack() < 0 || input.getAttack() > 1000) {
+                errors.reject("Attack " + input.getAttack() + " is invalid.");
+            }
+
+            if (input.getDefense() == null || input.getDefense() < 0 || input.getDefense() > 1000) {
+                errors.reject("Defense " + input.getDefense() + " is invalid.");
+            }
+
+            if (input.getSpecialAttack() == null || input.getSpecialAttack() < 0 || input.getSpecialAttack() > 1000) {
+                errors.reject("Special Attack " + input.getSpecialAttack() + " is invalid.");
+            }
+
+            if (input.getSpecialDefense() == null || input.getSpecialDefense() < 0 || input.getSpecialDefense() > 1000) {
+                errors.reject("Special Defense " + input.getSpecialDefense() + " is invalid.");
+            }
+
+            if (input.getSpeed() == null || input.getSpeed() < 0 || input.getSpeed() > 1000) {
+                errors.reject("Speed " + input.getSpeed() + " is invalid.");
+            }
+
+            if (input.getHeight() == null || input.getHeight() < 0 || input.getHeight() > 1000000) {
+                errors.reject("Height " + input.getHeight() + " is invalid.");
+            }
+
+            if (input.getWeight() == null || input.getWeight() < 0 || input.getWeight() > 1000000) {
+                errors.reject("Weight " + input.getWeight() + " is invalid.");
+            }
+
+            if (input.isMaleAllowed() == null) {
+                errors.reject("maleAllowed cannot be null!");
+            }
+
+            if (input.isFemaleAllowed() == null) {
+                errors.reject("femaleAllowed cannot be null!");
+            }
+
+            if (input.getPokemart() != null && (input.getPokemart() < 0 || input.getPokemart() > 100000)) {
+                errors.reject("Pokemart value " + input.getPokemart() + " is invalid.");
+            }
+
+            if (input.getContestCredits() != null && (input.getContestCredits() < 0 || input.getContestCredits() > 100000)) {
+                errors.reject("Contest credit value " + input.getContestCredits() + " is invalid.");
+            }
+
+            if (input.getStoryRank() != null && storyRankRepository.findByName(input.getStoryRank()) == null) {
+                errors.reject("Story Rank " + input.getStoryRank() + " is invalid.");
+            }
+
+            if (input.getArtRank() != null && artRankRepository.findByName(input.getArtRank()) == null) {
+                errors.reject("Art Rank " + input.getArtRank() + " is invalid.");
+            }
+
+            if (input.getParkRank() != null && parkRankRepository.findByName(input.getParkRank()) == null) {
+                errors.reject("Park Rank " + input.getParkRank() + " is invalid.");
+            }
+
+            if (input.getParkLocation() != null && parkLocationRepository.findByName(input.getParkLocation()) == null) {
+                errors.reject("Park Location " + input.getParkLocation() + " is invalid.");
+            }
+
+            if (input.getSpeciesAttacks() != null) {
+                for (SpeciesAttackInputDto speciesAttackInputDto : input.getSpeciesAttacks()) {
+                    if (speciesAttackInputDto.getName() == null || attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
+                        errors.reject("Attack name " + speciesAttackInputDto.getName() + " is invalid.");
+                    }
+                    if (speciesAttackInputDto.getMethod() == null) {
+                        errors.reject("Attack learn method " + speciesAttackInputDto.getMethod() + " for " + speciesAttackInputDto.getName() + " is invalid.");
+                    }
+                }
+            }
+
+            if (input.getSpeciesAbilities() != null) {
+                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getSpeciesAbilities()) {
+                    if (speciesAbilityInputDto.getName() == null || abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
+                        errors.reject("Ability name " + speciesAbilityInputDto.getName() + " is invalid.");
+                    }
+                    if (speciesAbilityInputDto.isHidden() == null) {
+                        errors.reject("Hidden property of " + speciesAbilityInputDto.getName() + " cannot be null!");
+                    }
+                }
+            }
+
+            if (input.getCosmeticForms() != null) {
+                for (CosmeticFormDto cosmeticFormDto : input.getCosmeticForms()) {
+                    if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
+                        errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
+                    }
+                    if (cosmeticFormDto.getDisplayName() == null || cosmeticFormDto.getDisplayName().length() > 20) {
+                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getDisplayName() + " is invalid.");
+                    }
+                    if (cosmeticFormDto.getMethod() == null || cosmeticFormDto.getMethod().length() > 110) {
+                        errors.reject("Cosmetic form method " + cosmeticFormDto.getMethod() + " is invalid.");
+                    }
+                }
+            }
+
+            if (input.getAlteredFormMethod() != null && input.getAlteredFormMethod().length() > 100) {
+                errors.reject("Altered form method " + input.getAlteredFormMethod() + " is invalid.");
+            }
+
+            if (input.getEvolvesFrom() != null) {
+                EvolutionInputDto evolutionInputDto = input.getEvolvesFrom();
+                if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
+                    errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
+                }
+                if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                    errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
+                }
+                if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                    errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
+                }
+            }
+
+            if (input.getMegaEvolvesFrom() != null) {
+                MegaEvolutionInputDto megaEvolutionInputDto = input.getMegaEvolvesFrom();
+                if (speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
+                    errors.reject("Pre-mega form " + megaEvolutionInputDto.getName() + " is not a real Pokemon.");
+                }
+                if (megaEvolutionInputDto.getMegaStone() == null || megaEvolutionInputDto.getMegaStone().length() > 50) {
+                    errors.reject("Mega Stone " + megaEvolutionInputDto.getMegaStone() + " is invalid.");
+                }
+            }
+        }
+        else {
+            errors.reject("Pokemon " + input.getName() + " already exists.");
+        }
 
         return errors;
     }
 
-    /*public Optional<Species> findByDbid(Integer dbid) {
-        Optional<Species> species = speciesRepository.findByDbid(dbid);
-        return species;
-    }
+    public Errors validateSpeciesUpdate(SpeciesInputDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
 
-    public SpeciesDto findByNameStartingWith(String name) {
-        List<Species> results = speciesRepository.findByNameStartingWith(name);
-        if (results != null && !results.isEmpty()) {
-            Species species = results.get(0);
-            return new SpeciesDto(species);
+        Species existingRecord = speciesRepository.findByName(input.getName());
+        if (existingRecord != null) {
+
+            if (input.getDexno() != null && input.getDexno() <= 0) {
+                errors.reject("Dex No. " + input.getDexno() + " is invalid.");
+            }
+
+            if (input.getName() != null && (input.getName().length() < 3 || input.getName().length() > 21)) {
+                errors.reject("Name " + input.getName() + " is invalid.");
+            }
+
+            if (input.getDisplayName() != null && (input.getDisplayName().length() < 3 || input.getDisplayName().length() > 20)) {
+                errors.reject("Display name " + input.getDisplayName() + " is invalid.");
+            }
+
+            if (input.getFormName() != null && (input.getFormName().length() < 3 || input.getFormName().length() > 20)) {
+                errors.reject("Form name " + input.getFormName() + " is invalid.");
+            }
+
+            if (input.getType1() != null && typeRepository.findByName(input.getType1()) == null) {
+                errors.reject("Type 1: " + input.getType1() + " is invalid.");
+            }
+
+            if (input.getType2() != null && typeRepository.findByName(input.getType2()) == null) {
+                errors.reject("Type 2: " + input.getType2() + " is invalid.");
+            }
+
+            if (input.getClassification() != null && input.getClassification().length() > 20){
+                errors.reject("Classification " + input.getClassification() + " is invalid.");
+            }
+
+            if (input.getHp() != null && (input.getHp() < 0 || input.getHp() > 1000)) {
+                errors.reject("HP " + input.getHp() + " is invalid.");
+            }
+
+            if (input.getAttack() != null && (input.getAttack() < 0 || input.getAttack() > 1000)) {
+                errors.reject("Attack " + input.getAttack() + " is invalid.");
+            }
+
+            if (input.getDefense() != null && (input.getDefense() < 0 || input.getDefense() > 1000)) {
+                errors.reject("Defense " + input.getDefense() + " is invalid.");
+            }
+
+            if (input.getSpecialAttack() != null && (input.getSpecialAttack() < 0 || input.getSpecialAttack() > 1000)) {
+                errors.reject("Special Attack " + input.getSpecialAttack() + " is invalid.");
+            }
+
+            if (input.getSpecialDefense() != null && (input.getSpecialDefense() < 0 || input.getSpecialDefense() > 1000)) {
+                errors.reject("Special Defense " + input.getSpecialDefense() + " is invalid.");
+            }
+
+            if (input.getSpeed() != null && (input.getSpeed() < 0 || input.getSpeed() > 1000)) {
+                errors.reject("Speed " + input.getSpeed() + " is invalid.");
+            }
+
+            if (input.getHeight() != null && (input.getHeight() < 0 || input.getHeight() > 1000000)) {
+                errors.reject("Height " + input.getHeight() + " is invalid.");
+            }
+
+            if (input.getWeight() != null && (input.getWeight() < 0 || input.getWeight() > 1000000)) {
+                errors.reject("Weight " + input.getWeight() + " is invalid.");
+            }
+
+            if (input.getPokemart() != null && (input.getPokemart() < 0 || input.getPokemart() > 100000)) {
+                errors.reject("Pokemart value " + input.getPokemart() + " is invalid.");
+            }
+
+            if (input.getContestCredits() != null && (input.getContestCredits() < 0 || input.getContestCredits() > 100000)) {
+                errors.reject("Contest credit value " + input.getContestCredits() + " is invalid.");
+            }
+
+            if (input.getStoryRank() != null && storyRankRepository.findByName(input.getStoryRank()) == null) {
+                errors.reject("Story Rank " + input.getStoryRank() + " is invalid.");
+            }
+
+            if (input.getArtRank() != null && artRankRepository.findByName(input.getArtRank()) == null) {
+                errors.reject("Art Rank " + input.getArtRank() + " is invalid.");
+            }
+
+            if (input.getParkRank() != null && parkRankRepository.findByName(input.getParkRank()) == null) {
+                errors.reject("Park Rank " + input.getParkRank() + " is invalid.");
+            }
+
+            if (input.getParkLocation() != null && parkLocationRepository.findByName(input.getParkLocation()) == null) {
+                errors.reject("Park Location " + input.getParkLocation() + " is invalid.");
+            }
+
+            if (input.getSpeciesAttacks() != null) {
+                for (SpeciesAttackInputDto speciesAttackInputDto : input.getSpeciesAttacks()) {
+                    if (speciesAttackInputDto.getName() == null || attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
+                        errors.reject("Attack name " + speciesAttackInputDto.getName() + " is invalid.");
+                    }
+                    if (speciesAttackInputDto.getMethod() == null) {
+                        errors.reject("Attack learn method " + speciesAttackInputDto.getMethod() + " for " + speciesAttackInputDto.getName() + " is invalid.");
+                    }
+                }
+            }
+
+            if (input.getSpeciesAbilities() != null) {
+                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getSpeciesAbilities()) {
+                    if (speciesAbilityInputDto.getName() == null || abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
+                        errors.reject("Ability name " + speciesAbilityInputDto.getName() + " is invalid.");
+                    }
+                    if (speciesAbilityInputDto.isHidden() == null) {
+                        errors.reject("Hidden property of " + speciesAbilityInputDto.getName() + " cannot be null!");
+                    }
+                }
+            }
+
+            if (input.getCosmeticForms() != null) {
+                for (CosmeticFormDto cosmeticFormDto : input.getCosmeticForms()) {
+                    if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
+                        errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
+                    }
+                    if (cosmeticFormDto.getDisplayName() == null || cosmeticFormDto.getDisplayName().length() > 20) {
+                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getDisplayName() + " is invalid.");
+                    }
+                    if (cosmeticFormDto.getMethod() == null || cosmeticFormDto.getMethod().length() > 110) {
+                        errors.reject("Cosmetic form method " + cosmeticFormDto.getMethod() + " is invalid.");
+                    }
+                }
+            }
+
+            if (input.getAlteredFormMethod() != null && input.getAlteredFormMethod().length() > 100) {
+                errors.reject("Altered form method " + input.getAlteredFormMethod() + " is invalid.");
+            }
+
+            if (input.getEvolvesFrom() != null) {
+                EvolutionInputDto evolutionInputDto = input.getEvolvesFrom();
+                if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
+                    errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
+                }
+                if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                    errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
+                }
+                if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                    errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
+                }
+            }
+
+            if (input.getMegaEvolvesFrom() != null) {
+                MegaEvolutionInputDto megaEvolutionInputDto = input.getMegaEvolvesFrom();
+                if (speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
+                    errors.reject("Pre-mega form " + megaEvolutionInputDto.getName() + " is not a real Pokemon.");
+                }
+                if (megaEvolutionInputDto.getMegaStone() == null || megaEvolutionInputDto.getMegaStone().length() > 50) {
+                    errors.reject("Mega Stone " + megaEvolutionInputDto.getMegaStone() + " is invalid.");
+                }
+            }
         }
-        else return null;
-    }
+        else {
+            errors.reject("Pokemon " + input.getName() + " doesn't exist.");
+        }
 
-    public Errors save(Species species) {
-        HashMap<String, String> errorMap = new HashMap<>();
-        MapBindingResult errors = new MapBindingResult(errorMap, "");
-        save(species, errors);
         return errors;
     }
-
-    public Errors save(Species species, Errors errors) {
-        speciesRepository.save(species);
-
-        speciesAttackService.saveSpeciesAttacksFromSpecies(species, speciesRepository.findByName(species.getName()).orElse(new Species()));
-
-        Map<String, SpeciesAbility> currentAbilities = getCurrentAbilities(species);
-        Map<String, SpeciesAbility> newAbilities = getNewAbilities(species);
-
-        if (newAbilities != null && !newAbilities.isEmpty()) {
-            for (SpeciesAbility sa : currentAbilities.values()) {
-                if (!newAbilities.containsKey((sa.getAbility().getName()))) {
-                    speciesAbilityService.delete(sa);
-                }
-            }
-
-            for (SpeciesAbility sa : newAbilities.values()) {
-                Optional<Species> speciesEntity = findByName(species.getName());
-                Optional<Ability> ability = abilityService.findByName(sa.getAbility().getName());
-                if (speciesEntity.isPresent() && ability.isPresent()) {
-                    sa.setAbility(null);
-                    sa.setId(new SpeciesAbilityKey(speciesEntity.get().getDbid(), ability.get().getDbid()));
-                    speciesAbilityService.save(sa);
-                }
-            }
-        }
-
-        Map<String, SpeciesAttack> currentAttacks = getCurrentAttacks(species);
-        Map<String, SpeciesAttack> newAttacks = getNewAttacks(species);
-
-        if (newAttacks != null && !newAttacks.isEmpty()) {
-            for (SpeciesAttack sa : currentAttacks.values()) {
-                if (!newAttacks.containsKey(sa.getAttack().getName())) {
-                    speciesAttackService.delete(sa);
-                }
-            }
-
-            // TODO implement error handling, pass Errors back through return
-            for (SpeciesAttack sa : newAttacks.values()) {
-                Optional<Species> speciesEntity = findByName(species.getName());
-                Optional<Attack> attack = attackService.findByName(sa.getAttack().getName());
-                if (speciesEntity.isPresent() && attack.isPresent()) {
-                    sa.setAttack(null);
-                    sa.setId(new SpeciesAttackKey(speciesEntity.get().getDbid(), attack.get().getDbid()));
-                    speciesAttackService.save(sa);
-                }
-            }
-        }
-
-        return errors;
-    }
-
-    public Map<String, SpeciesAbility> getCurrentAbilities(Species species) {
-        Map<String, SpeciesAbility> map = new HashMap<>();
-        if (species != null) {
-            Optional<Species> prototype = findByName(species.getName());
-
-            if (prototype.isPresent()) {
-                List<SpeciesAbility> list = prototype.get().getAbilities();
-                if (list != null) {
-                    for (SpeciesAbility sa : list) {
-                        if (sa.getAbility() != null && sa.getAbility().getName() != null) {
-                            map.put(sa.getAbility().getName(), sa);
-                        }
-                    }
-                }
-            }
-        }
-        return map;
-    }
-
-    public Map<String, SpeciesAttack> getCurrentAttacks(Species species) {
-        Map<String, SpeciesAttack> map = new HashMap<>();
-        if (species != null) {
-            Optional<Species> prototype = findByName(species.getName());
-
-            if (prototype.isPresent()) {
-                List<SpeciesAttack> list = prototype.get().getAttacks();
-                if (list != null) {
-                    for (SpeciesAttack sa : list) {
-                        if (sa.getAttack() != null && sa.getAttack().getName() != null) {
-                            map.put(sa.getAttack().getName(), sa);
-                        }
-                    }
-                }
-            }
-        }
-        return map;
-    }
-
-    public Map<String, SpeciesAbility> getNewAbilities(Species species) {
-        Map<String, SpeciesAbility> map = new HashMap<>();
-        if (species != null) {
-            List <SpeciesAbility> list = species.getAbilities();
-            if (list != null) {
-                for (SpeciesAbility sa : list) {
-                    if (sa.getAbility() != null && sa.getAbility().getName() != null) {
-                        map.put(sa.getAbility().getName(), sa);
-                    }
-                }
-            }
-        }
-        return map;
-    }
-
-    public Map<String, SpeciesAttack> getNewAttacks(Species species) {
-        Map<String, SpeciesAttack> map = new HashMap<>();
-        if (species != null) {
-            List<SpeciesAttack> list = species.getAttacks();
-            if (list != null) {
-                for (SpeciesAttack sa : list) {
-                    if (sa.getAttack() != null && sa.getAttack().getName() != null) {
-                        map.put(sa.getAttack().getName(), sa);
-                    }
-                }
-            }
-        }
-        return map;
-    }
-
-    public void delete(Species species) {
-        Map<String, SpeciesAttack> currentAttacks = getCurrentAttacks(species);
-        for (SpeciesAttack sa : currentAttacks.values()) {
-            speciesAttackService.delete(sa);
-        }
-        speciesRepository.delete(species);
-    }*/
-
 }
