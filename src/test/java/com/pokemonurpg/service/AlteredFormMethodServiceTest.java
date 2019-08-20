@@ -26,7 +26,7 @@ public class AlteredFormMethodServiceTest {
         AlteredFormMethod methodObj = new AlteredFormMethod();
         methodObj.setDexno(TestObjectFactory.TEST_SPECIES_DEXNO);
         methodObj.setMethod(TestObjectFactory.TEST_ALTERNATE_FORM_METHOD);
-        when(alteredFormMethodRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO)).thenReturn(Optional.of(methodObj));
+        when(alteredFormMethodRepository.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO)).thenReturn(methodObj);
 
         String method = alteredFormMethodService.findByDexno(TestObjectFactory.TEST_SPECIES_DEXNO);
         assertEquals(TestObjectFactory.TEST_ALTERNATE_FORM_METHOD, method);

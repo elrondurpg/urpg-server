@@ -6,7 +6,7 @@ import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
 import com.pokemonurpg.dto.species.response.*;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.*;
-import com.pokemonurpg.repository.SpeciesRepository;
+import com.pokemonurpg.repository.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +28,13 @@ public class SpeciesServiceTest {
     private EvolutionService evolutionService = mock(EvolutionService.class);
     private MegaEvolutionService megaEvolutionService = mock(MegaEvolutionService.class);
     private TypeMatchupService typeMatchupService = mock(TypeMatchupService.class);
+    private AttackRepository attackRepository;
+    private AbilityRepository abilityRepository;
+    private TypeRepository typeRepository;
+    private StoryRankRepository storyRankRepository;
+    private ArtRankRepository artRankRepository;
+    private ParkRankRepository parkRankRepository;
+    private ParkLocationRepository parkLocationRepository;
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private CosmeticForm spikyEaredPikachu = TestObjectFactory.createSpikyEaredPikachu();
@@ -48,9 +55,9 @@ public class SpeciesServiceTest {
 
     @Before
     public void initService() {
-        speciesService = new SpeciesService(speciesRepository, speciesAttackService,
-                speciesAbilityService, alteredFormMethodService, cosmeticFormService,
-                evolutionService, megaEvolutionService, typeMatchupService);
+        speciesService = new SpeciesService(speciesRepository, speciesAttackService, attackRepository, speciesAbilityService, abilityRepository,
+                alteredFormMethodService, cosmeticFormService, evolutionService, megaEvolutionService, typeMatchupService, typeRepository,
+                storyRankRepository, artRankRepository, parkRankRepository, parkLocationRepository);
     }
 
     @Test

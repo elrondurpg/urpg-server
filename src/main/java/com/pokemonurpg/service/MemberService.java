@@ -1,15 +1,13 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.Authenticated;
-import com.pokemonurpg.dto.InputDto;
-import com.pokemonurpg.object.Member;
-import com.pokemonurpg.repository.MemberRepository;
-import com.pokemonurpg.repository.MemberRoleRepository;
-import com.pokemonurpg.repository.RoleRepository;
+import com.pokemonurpg.object.*;
+import com.pokemonurpg.repository.*;
+import com.pokemonurpg.security.Authenticated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
+import java.util.List;
 
 @Service
 public class MemberService
@@ -17,19 +15,43 @@ public class MemberService
     private MemberRepository memberRepository;
     private RoleRepository roleRepository;
     private MemberRoleRepository memberRoleRepository;
+    private PermissionRepository permissionRepository;
+    private RolePermissionRepository rolePermissionRepository;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleRepository memberRoleRepository) {
+    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleRepository memberRoleRepository,
+                         PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository) {
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
         this.memberRoleRepository = memberRoleRepository;
+        this.permissionRepository = permissionRepository;
+        this.rolePermissionRepository = rolePermissionRepository;
     }
 
-    public boolean authenticate(Authenticated authDetails) {
+    public Member authenticate(Authenticated authDetails) {
         if (hasRequiredFields(authDetails)) {
             Member member = memberRepository.findByUsername(authDetails.getUsername());
             if (hasCorrectPassword(authDetails, member)) {
-                return true;
+                return member;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean authorize(Member member, String permission) {
+        List<MemberRole> roles = memberRoleRepository.findByIdMemberDbid(member.getDbid());
+
+        for (MemberRole record : roles) {
+            Role role = roleRepository.findByDbid(record.getId().getRoleDbid());
+            if (role != null) {
+                List<RolePermission> rolePermissions = rolePermissionRepository.findByIdRoleDbid(role.getDbid());
+                for (RolePermission rolePermission : rolePermissions) {
+                    Permission perm = permissionRepository.findByDbid(rolePermission.getId().getPermissionDbid());
+                    if (perm != null && permission.equals(perm.getName())) {
+                        return true;
+                    }
+                }
             }
         }
 

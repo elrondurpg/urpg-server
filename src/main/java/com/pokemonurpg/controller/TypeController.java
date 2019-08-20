@@ -48,7 +48,7 @@ public class TypeController {
         }
     }
 
-    @PostMapping(path="/create")
+    @PostMapping(path="/createSpecies")
     public ResponseEntity createType(@RequestBody Type type) {
         Errors errors = typeValidator.validate(type);
         if(errors.hasErrors()) {

@@ -5,6 +5,7 @@ import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.MegaEvolution;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.repository.MegaEvolutionRepository;
+import com.pokemonurpg.repository.SpeciesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,20 +20,20 @@ public class MegaEvolutionServiceTest {
 
     private MegaEvolutionService megaEvolutionService;
     private MegaEvolutionRepository megaEvolutionRepository = mock(MegaEvolutionRepository.class);
-    private SpeciesService speciesService = mock(SpeciesService.class);
+    private SpeciesRepository speciesRepository = mock(SpeciesRepository.class);
 
     private MegaEvolution megaCharizardXRecord = TestObjectFactory.createMegaCharizardXRecord();
     private Species megaCharizardX = TestObjectFactory.createMegaCharizardX();
 
     @Before
     public void init() {
-        megaEvolutionService = new MegaEvolutionService(megaEvolutionRepository, speciesService);
+        megaEvolutionService = new MegaEvolutionService(megaEvolutionRepository, speciesRepository);
     }
 
     @Test
     public void findByOriginalDbid() {
         when(megaEvolutionRepository.findByIdOriginalDbid(TestObjectFactory.TEST_MEGA_EVOLUTION_ORIGINAL_DBID)).thenReturn(Arrays.asList(megaCharizardXRecord));
-        when(speciesService.findByDbid(megaCharizardXRecord.getId().getMegaEvolutionDbid())).thenReturn(megaCharizardX);
+        when(speciesRepository.findByDbid(megaCharizardXRecord.getId().getMegaEvolutionDbid())).thenReturn(megaCharizardX);
 
         List<MegaEvolutionDto> dtos = megaEvolutionService.findByOriginalDbid(TestObjectFactory.TEST_MEGA_EVOLUTION_ORIGINAL_DBID);
         assertEquals(1, dtos.size());

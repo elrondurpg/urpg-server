@@ -4,6 +4,7 @@ import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.factory.TestObjectFactory;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.repository.EvolutionRepository;
+import com.pokemonurpg.repository.SpeciesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class EvolutionServiceTest {
 
     private EvolutionService evolutionService;
     private EvolutionRepository evolutionRepository = mock(EvolutionRepository.class);
-    private SpeciesService speciesService = mock(SpeciesService.class);
+    private SpeciesRepository speciesRepository = mock(SpeciesRepository.class);
 
     private Species pikachu = TestObjectFactory.createPikachu();
     private Species pichu = TestObjectFactory.createPichu();
@@ -25,7 +26,7 @@ public class EvolutionServiceTest {
 
     @Before
     public void init() {
-        evolutionService = new EvolutionService(evolutionRepository, speciesService);
+        evolutionService = new EvolutionService(evolutionRepository, speciesRepository);
     }
 
     @Test
@@ -46,7 +47,7 @@ public class EvolutionServiceTest {
     public void findEvolutionsForPichu() {
         TestObjectFactory.buildEvolutionRelation(evolutionRepository, pichu, pikachu);
 
-        when(speciesService.findByDbid(pikachu.getDbid())).thenReturn(pikachu);
+        when(speciesRepository.findByDbid(pikachu.getDbid())).thenReturn(pikachu);
 
         List<EvolutionFamilyMemberDto> evolutions = evolutionService.findEvolutionsByPreEvolutionDbid(pichu.getDbid());
         assertEquals(1, evolutions.size());

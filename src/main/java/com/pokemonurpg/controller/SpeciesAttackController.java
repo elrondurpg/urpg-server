@@ -30,28 +30,28 @@ public class SpeciesAttackController {
     @PutMapping(path="/text/{species}/{attack}")
     public @ResponseBody
     void createSpecies(@PathVariable String species, @PathVariable String attack) {
-        speciesAttackService.create(species, attack);
+        speciesAttackService.createSpecies(species, attack);
     }
 
     // TODO WORKS
     @PutMapping(path="/dbid/{species}/{attack}")
     public @ResponseBody
     void createSpecies(@PathVariable int species, @PathVariable int attack) {
-        speciesAttackService.create(species, attack);
+        speciesAttackService.createSpecies(species, attack);
     }
 
     // Not-null property references a transient value
     @PutMapping(path="/mixtextfirst/{species}/{attack}")
     public @ResponseBody
     void createSpecies(@PathVariable String species, @PathVariable int attack) {
-        speciesAttackService.create(species, attack);
+        speciesAttackService.createSpecies(species, attack);
     }
 
     // Not-null property references a transient value
     @PutMapping(path="/mixdbidfirst/{species}/{attack}")
     public @ResponseBody
     void createSpecies(@PathVariable int species, @PathVariable String attack) {
-        speciesAttackService.create(species, attack);
+        speciesAttackService.createSpecies(species, attack);
     }*/
 
 }

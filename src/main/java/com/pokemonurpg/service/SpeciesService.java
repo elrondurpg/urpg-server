@@ -302,7 +302,7 @@ public class SpeciesService {
         else return new EvolutionFamilyMemberDto();
     }
 
-    public Errors create(SpeciesInputDto input) {
+    public Errors createSpecies(SpeciesInputDto input) {
         Errors errors = validateSpeciesCreate(input);
 
         if (!errors.hasErrors()) {
@@ -329,7 +329,7 @@ public class SpeciesService {
         return errors;
     }
 
-    public Errors update(SpeciesInputDto input) {
+    public Errors updateSpecies(SpeciesInputDto input) {
         Errors errors = validateSpeciesUpdate(input);
 
         if (!errors.hasErrors()) {

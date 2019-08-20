@@ -49,7 +49,7 @@ public class AbilityController {
         }
     }
 
-    @PostMapping(path="/create")
+    @PostMapping(path="/createSpecies")
     public ResponseEntity createAbility(@RequestBody Ability ability) {
         Errors errors = abilityValidator.validate(ability);
         if(errors.hasErrors()) {

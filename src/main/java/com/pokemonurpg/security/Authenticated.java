@@ -1,9 +1,8 @@
-package com.pokemonurpg;
+package com.pokemonurpg.security;
 
 public class Authenticated<T> {
     private T payload;
 
-    private String id;
     private String username;
     private String loginString;
     private String browser;
@@ -17,14 +16,6 @@ public class Authenticated<T> {
 
     public void setPayload(T payload) {
         this.payload = payload;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUsername() {

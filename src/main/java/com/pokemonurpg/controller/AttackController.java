@@ -49,7 +49,7 @@ public class AttackController {
         }
     }
 
-    @PostMapping(path="/create")
+    @PostMapping(path="/createSpecies")
     public ResponseEntity createAttack(@RequestBody Attack attack) {
         Errors errors = attackValidator.validate(attack);
         if(errors.hasErrors()) {

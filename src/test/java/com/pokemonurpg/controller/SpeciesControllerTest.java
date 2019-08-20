@@ -110,7 +110,7 @@ public class SpeciesControllerTest
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/create", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(speciesService, Mockito.times(1)).save(Mockito.any(Species.class));
     }
@@ -125,7 +125,7 @@ public class SpeciesControllerTest
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/create", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("A Pokemon named " + speciesName + " already exists!", response.getBody());
     }
@@ -138,7 +138,7 @@ public class SpeciesControllerTest
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
 
-        ResponseEntity<String> response = restTemplate.exchange("/pokemon/create", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity<String> response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         Assert.assertTrue(response.getBody().contains("Dex No. '" + pokemon.getDexno() + "' is invalid."));
     }
