@@ -8,8 +8,8 @@ public class SpeciesDto {
     private int dbid;
     private int dexno;
     private String name;
-    private Type type1;
-    private Type type2;
+    private String type1;
+    private String type2;
     private String classification;
     private int hp;
     private int attack;
@@ -50,8 +50,8 @@ public class SpeciesDto {
             dbid = species.getDbid();
             dexno = species.getDexno();
             name = species.getName();
-            type1 = species.getType1();
-            type2 = species.getType2();
+            type1 = species.getType1().getName();
+            type2 = species.getType2().getName();
             classification = species.getClassification();
             hp = species.getHp();
             attack = species.getAttack();
@@ -98,19 +98,19 @@ public class SpeciesDto {
         this.name = name;
     }
 
-    public Type getType1() {
+    public String getType1() {
         return type1;
     }
 
-    public void setType1(Type type1) {
+    public void setType1(String type1) {
         this.type1 = type1;
     }
 
-    public Type getType2() {
+    public String getType2() {
         return type2;
     }
 
-    public void setType2(Type type2) {
+    public void setType2(String type2) {
         this.type2 = type2;
     }
 

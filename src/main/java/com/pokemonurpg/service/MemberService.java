@@ -60,8 +60,6 @@ public class MemberService
 
     public boolean hasRequiredFields(Authenticated authDetails) {
         try {
-            if (authDetails.getId() == null || authDetails.getId().equals("") || authDetails.getId().isEmpty())
-                return false;
             if (authDetails.getUsername() == null || authDetails.getUsername().equals("") || authDetails.getUsername().isEmpty())
                 return false;
             if (authDetails.getLoginString() == null || authDetails.getLoginString().equals("") || authDetails.getLoginString().isEmpty())

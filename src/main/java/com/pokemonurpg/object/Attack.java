@@ -1,5 +1,7 @@
 package com.pokemonurpg.object;
 
+import com.pokemonurpg.dto.attack.AttackInputDto;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,11 +31,13 @@ public class Attack {
     @Column
     private Integer pp;
 
-    @Column
-    private String category;
+    @OneToOne
+    @JoinColumn(name = "category")
+    private AttackCategory category;
 
-    @Column
-    private String target;
+    @OneToOne
+    @JoinColumn(name = "target")
+    private AttackTargetType target;
 
     @Column
     private Boolean contact;
@@ -56,38 +60,19 @@ public class Attack {
         this.name = name;
     }
 
-    public Attack(Integer dbid, String name, Type type, String description, int power, int accuracy, int pp, String category, String target, boolean contact, boolean snatch, boolean substitute, boolean sheerForce, boolean magicCoat) {
-        this.dbid = dbid;
-        this.name = name;
-        this.type = type;
-        this.description = description;
-        this.power = power;
-        this.accuracy = accuracy;
-        this.pp = pp;
-        this.category = category;
-        this.target = target;
-        this.contact = contact;
-        this.snatch = snatch;
-        this.substitute = substitute;
-        this.sheerForce = sheerForce;
-        this.magicCoat = magicCoat;
-    }
-
-    public void cloneValuesFrom(Attack attack) {
-        if (dbid == null) this.dbid = attack.getDbid();
-        if (name == null) this.name = attack.getName();
-        if (type == null) this.type = attack.getType();
-        if (description == null) this.description = attack.getDescription();
-        if (power == null) this.power = attack.getPower();
-        if (accuracy == null) this.accuracy = attack.getAccuracy();
-        if (pp == null) this.pp = attack.getPp();
-        if (category == null) this.category = attack.getCategory();
-        if (target == null) this.target = attack.getTarget();
-        if (contact == null) this.contact = attack.isContact();
-        if (snatch == null) this.snatch = attack.isSnatch();
-        if (substitute == null) this.substitute = attack.isSubstitute();
-        if (sheerForce == null) this.sheerForce = attack.isSheerForce();
-        if (magicCoat == null) this.magicCoat = attack.isMagicCoat();
+    public Attack(AttackInputDto input) {
+        if (input != null) {
+            setName(input.getName());
+            setDescription(input.getDescription());
+            setPower(input.getPower());
+            setAccuracy(input.getAccuracy());
+            setPp(input.getPp());
+            setContact(input.getContact());
+            setSnatch(input.getSnatch());
+            setSubstitute(input.getSubstitute());
+            setSheerForce(input.getSheerForce());
+            setMagicCoat(input.getMagicCoat());
+        }
     }
 
     public Integer getDbid() {
@@ -146,19 +131,19 @@ public class Attack {
         this.pp = pp;
     }
 
-    public String getCategory() {
+    public AttackCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(AttackCategory category) {
         this.category = category;
     }
 
-    public String getTarget() {
+    public AttackTargetType getTarget() {
         return target;
     }
 
-    public void setTarget(String target) {
+    public void setTarget(AttackTargetType target) {
         this.target = target;
     }
 

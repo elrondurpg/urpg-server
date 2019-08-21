@@ -1,19 +1,20 @@
 package com.pokemonurpg.dto.species.response;
 
 import com.pokemonurpg.object.Attack;
+import com.pokemonurpg.object.AttackTargetType;
 import com.pokemonurpg.object.SpeciesAttack;
 import com.pokemonurpg.object.Type;
 
 public class SpeciesAttackDto {
     private int dbid;
     private String name;
-    private Type type;
+    private String type;
     private String description;
     private Integer power;
     private Integer accuracy;
     private Integer pp;
     private String category;
-    private String target;
+    private AttackTargetType target;
     private Boolean contact;
     private Boolean magicCoat;
     private Boolean sheerForce;
@@ -30,12 +31,16 @@ public class SpeciesAttackDto {
             if (attack != null) {
                 dbid = attack.getDbid();
                 name = attack.getName();
-                type = attack.getType();
+                if (attack.getType() != null) {
+                    type = attack.getType().getName();
+                }
                 description = attack.getDescription();
                 power = attack.getPower();
                 accuracy = attack.getAccuracy();
                 pp = attack.getPp();
-                category = attack.getCategory();
+                if (attack.getCategory() != null) {
+                    category = attack.getCategory().getName();
+                }
                 target = attack.getTarget();
                 contact = attack.isContact();
                 magicCoat = attack.isMagicCoat();
@@ -64,11 +69,11 @@ public class SpeciesAttackDto {
         this.name = name;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -112,11 +117,11 @@ public class SpeciesAttackDto {
         this.category = category;
     }
 
-    public String getTarget() {
+    public AttackTargetType getTarget() {
         return target;
     }
 
-    public void setTarget(String target) {
+    public void setTarget(AttackTargetType target) {
         this.target = target;
     }
 

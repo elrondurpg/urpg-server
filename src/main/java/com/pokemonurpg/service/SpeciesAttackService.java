@@ -4,6 +4,7 @@ import com.pokemonurpg.dto.species.input.SpeciesAttackInputDto;
 import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
 import com.pokemonurpg.object.Attack;
 import com.pokemonurpg.object.SpeciesAttack;
+import com.pokemonurpg.repository.AttackRepository;
 import com.pokemonurpg.repository.SpeciesAttackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,12 @@ public class SpeciesAttackService {
 
     private SpeciesAttackRepository speciesAttackRepository;
 
-    private AttackService attackService;
+    private AttackRepository attackRepository;
 
     @Autowired
-    public SpeciesAttackService(SpeciesAttackRepository speciesAttackRepository, AttackService attackService) {
+    public SpeciesAttackService(SpeciesAttackRepository speciesAttackRepository, AttackRepository attackRepository) {
         this.speciesAttackRepository = speciesAttackRepository;
-        this.attackService = attackService;
+        this.attackRepository = attackRepository;
     }
 
     public List<SpeciesAttack> findAll() {
@@ -39,7 +40,7 @@ public class SpeciesAttackService {
     }
 
     public void create(int speciesDbid, SpeciesAttackInputDto input) {
-        Attack attack = attackService.findByName(input.getName());
+        Attack attack = attackRepository.findByName(input.getName());
         SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), input.getMethod(), input.getGeneration());
         speciesAttackRepository.save(speciesAttack);
     }
@@ -68,7 +69,7 @@ public class SpeciesAttackService {
     public void updateAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
         if (input != null) {
             for (SpeciesAttackInputDto record : input) {
-                Attack attack = attackService.findByName(record.getName());
+                Attack attack = attackRepository.findByName(record.getName());
 
                 SpeciesAttack existingRecord = speciesAttackRepository.findByIdSpeciesDbidAndIdAttackDbid(speciesDbid, attack.getDbid());
                 if (existingRecord != null) {

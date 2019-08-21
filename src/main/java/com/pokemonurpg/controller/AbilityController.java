@@ -1,13 +1,17 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.object.Ability;
+import com.pokemonurpg.object.Member;
+import com.pokemonurpg.security.Authenticated;
 import com.pokemonurpg.service.AbilityService;
+import com.pokemonurpg.service.MemberService;
 import com.pokemonurpg.validator.AbilityValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.channels.MembershipKey;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,91 +19,62 @@ import java.util.Optional;
 @RequestMapping("/ability")
 @CrossOrigin
 public class AbilityController {
-    /*private AbilityService service;
-
-    private AbilityValidator abilityValidator;
+    private AbilityService abilityService;
+    private MemberService memberService;
 
     @Autowired
-    public AbilityController(AbilityService service, AbilityValidator abilityValidator) {
-        this.service = service;
-        this.abilityValidator = abilityValidator;
-    }
-
-    @GetMapping(path="/all")
-    public @ResponseBody
-    ResponseEntity getAllAbility() {
-        return ResponseEntity.ok(service.findAll());
+    public AbilityController(AbilityService abilityService, MemberService memberService) {
+        this.abilityService = abilityService;
+        this.memberService = memberService;
     }
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    ResponseEntity getAbilityByName(@PathVariable("name") String name) {
-        Optional<Ability> abilityOptional = service.findByName(name);
-        if (abilityOptional.isPresent()) {
-            return ResponseEntity.ok(abilityOptional.get());
-        }
-        else {
-            List<Ability> results = service.findByNameStartingWith(name);
-            if (results != null && !results.isEmpty()) {
-                return ResponseEntity.ok(results.get(0));
+    ResponseEntity<Ability> getAbilityByName(@PathVariable("name") String name) {
+        try {
+            Ability dto = abilityService.findByName(name);
+            if (dto != null) {
+                return ResponseEntity.ok(dto);
             }
-            else {
-                return ResponseEntity.notFound().build();
-            }
-        }
-    }
-
-    @PostMapping(path="/createSpecies")
-    public ResponseEntity createAbility(@RequestBody Ability ability) {
-        Errors errors = abilityValidator.validate(ability);
-        if(errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors.getAllErrors());
-        }
-        else {
-            String name = ability.getName();
-            Optional<Ability> abilityOptional = service.findByName(name);
-            if (abilityOptional.isPresent()) {
-                return ResponseEntity.badRequest().body("An Ability named " + name + " already exists!");
-            }
-
-            service.save(ability);
-            return ResponseEntity.ok("Ability " + name + " was created successfully!");
-        }
-    }
-
-    @PutMapping(path="/{name}")
-    public ResponseEntity updateAbility(@RequestBody Ability ability, @PathVariable String name) {
-
-        Optional<Ability> abilityOptional = service.findByName(name);
-
-        if (!abilityOptional.isPresent())
-            return ResponseEntity.notFound().build();
-        else if (!name.equals(ability.getName()))
+            else return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().build();
-        else {
-            ability.cloneValuesFrom(abilityOptional.get());
-
-            Errors errors = abilityValidator.validate(ability);
-            if(errors.hasErrors()) {
-                return ResponseEntity.badRequest().body(errors.getAllErrors());
-            }
-            else {
-                service.save(ability);
-                return ResponseEntity.ok("Ability " + name + " was updated successfully!");
-            }
         }
     }
 
-    @DeleteMapping(path="/{name}")
-    public ResponseEntity deleteAbility(@PathVariable String name) {
-        Optional<Ability> abilityOptional = service.findByName(name);
-
-        if (!abilityOptional.isPresent())
-            return ResponseEntity.notFound().build();
-        else
-        {
-            service.delete(abilityOptional.get());
-            return ResponseEntity.ok("Ability " + name + " was deleted successfully!");
+    @PostMapping
+    public @ResponseBody
+    ResponseEntity createAbility(@RequestBody Authenticated<Ability> input) {
+        Member member = memberService.authenticate(input);
+        if (member != null) {
+            if (memberService.authorize(member, "Write Ability")) {
+                Ability ability = input.getPayload();
+                Errors errors = abilityService.createAbility(ability);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+                else return ResponseEntity.ok("Ability " + ability.getName() + " was created successfully!");
+            }
+            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-    }*/
+        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+    }
+
+    @PutMapping
+    public @ResponseBody
+    ResponseEntity updateAbility(@RequestBody Authenticated<Ability> input) {
+        Member member = memberService.authenticate(input);
+        if (member != null) {
+            if (memberService.authorize(member, "Write Species")) {
+                Ability ability = input.getPayload();
+                Errors errors = abilityService.updateAbility(ability);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+                else return ResponseEntity.ok("Ability " + ability.getName() + " was updated successfully!");
+            }
+            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+        }
+        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+    }
 }

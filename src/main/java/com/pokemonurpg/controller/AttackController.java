@@ -1,105 +1,77 @@
 package com.pokemonurpg.controller;
 
-import com.pokemonurpg.object.Attack;
+import com.pokemonurpg.dto.attack.AttackDto;
+import com.pokemonurpg.dto.attack.AttackInputDto;
+import com.pokemonurpg.object.Member;
+import com.pokemonurpg.security.Authenticated;
 import com.pokemonurpg.service.AttackService;
-import com.pokemonurpg.validator.AttackValidator;
+import com.pokemonurpg.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/attack")
 @CrossOrigin
 public class AttackController {
-    /*private AttackService service;
 
-    private AttackValidator attackValidator;
+    private AttackService attackService;
+    private MemberService memberService;
 
     @Autowired
-    public AttackController(AttackService service, AttackValidator attackValidator) {
-        this.service = service;
-        this.attackValidator = attackValidator;
-    }
-
-    @GetMapping(path="/all")
-    public @ResponseBody
-    ResponseEntity getAllAttack() {
-        return ResponseEntity.ok(service.findAll());
+    public AttackController(AttackService attackService, MemberService memberService) {
+        this.attackService = attackService;
+        this.memberService = memberService;
     }
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    ResponseEntity getAttackByName(@PathVariable("name") String name) {
-        Optional<Attack> attackOptional = service.findByName(name);
-        if (attackOptional.isPresent()) {
-            return ResponseEntity.ok(attackOptional.get());
-        }
-        else {
-            List<Attack> results = service.findByNameStartingWith(name);
-            if (results != null && !results.isEmpty()) {
-                return ResponseEntity.ok(results.get(0));
+    ResponseEntity<AttackDto> getAttackByName(@PathVariable("name") String name) {
+        try {
+            AttackDto dto = attackService.findByName(name);
+            if (dto != null) {
+                return ResponseEntity.ok(dto);
             }
-            else {
-                return ResponseEntity.notFound().build();
-            }
-        }
-    }
-
-    @PostMapping(path="/createSpecies")
-    public ResponseEntity createAttack(@RequestBody Attack attack) {
-        Errors errors = attackValidator.validate(attack);
-        if(errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors.getAllErrors());
-        }
-        else {
-            String name = attack.getName();
-            Optional<Attack> attackOptional = service.findByName(name);
-            if (attackOptional.isPresent()) {
-                return ResponseEntity.badRequest().body("An Attack named " + name + " already exists!");
-            }
-
-            service.save(attack);
-            return ResponseEntity.ok("Attack " + name + " was created successfully!");
-        }
-    }
-
-    @PutMapping(path="/{name}")
-    public ResponseEntity updateAttack(@RequestBody Attack attack, @PathVariable String name) {
-
-        Optional<Attack> attackOptional = service.findByName(name);
-
-        if (!attackOptional.isPresent())
-            return ResponseEntity.notFound().build();
-        else if (!name.equals(attack.getName()))
+            else return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().build();
-        else {
-            attack.cloneValuesFrom(attackOptional.get());
-
-            Errors errors = attackValidator.validate(attack);
-            if(errors.hasErrors()) {
-                return ResponseEntity.badRequest().body(errors.getAllErrors());
-            }
-            else {
-                service.save(attack);
-                return ResponseEntity.ok("Attack " + name + " was updated successfully!");
-            }
         }
     }
 
-    @DeleteMapping(path="/{name}")
-    public ResponseEntity deleteAttack(@PathVariable String name) {
-        Optional<Attack> attackOptional = service.findByName(name);
-
-        if (!attackOptional.isPresent())
-            return ResponseEntity.notFound().build();
-        else
-        {
-            service.delete(attackOptional.get());
-            return ResponseEntity.ok("Attack " + name + " was deleted successfully!");
+    @PostMapping
+    public @ResponseBody
+    ResponseEntity createAttack(@RequestBody Authenticated<AttackInputDto> input) {
+        Member member = memberService.authenticate(input);
+        if (member != null) {
+            if (memberService.authorize(member, "Write Attack")) {
+                AttackInputDto attack = input.getPayload();
+                Errors errors = attackService.createAttack(attack);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+                else return ResponseEntity.ok("Attack " + attack.getName() + " was created successfully!");
+            }
+            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-    }*/
+        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+    }
+
+    @PutMapping
+    public @ResponseBody
+    ResponseEntity updateAttack(@RequestBody Authenticated<AttackInputDto> input) {
+        Member member = memberService.authenticate(input);
+        if (member != null) {
+            if (memberService.authorize(member, "Write Species")) {
+                AttackInputDto attack = input.getPayload();
+                Errors errors = attackService.updateAttack(attack);
+                if (errors.hasErrors()) {
+                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                }
+                else return ResponseEntity.ok("Attack " + attack.getName() + " was updated successfully!");
+            }
+            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+        }
+        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+    }
 }
