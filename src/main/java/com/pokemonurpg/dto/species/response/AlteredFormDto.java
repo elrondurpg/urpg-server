@@ -1,7 +1,6 @@
 package com.pokemonurpg.dto.species.response;
 
 import com.pokemonurpg.object.Species;
-import com.pokemonurpg.object.Type;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,24 +9,31 @@ public class AlteredFormDto {
     private int dbid;
     private String name;
     private String formName;
+    private String baseName;
     private String displayName;
-    private Type type1;
-    private Type type2;
+    private String type1;
+    private String type2;
     private int hp;
     private int attack;
     private int defense;
     private int specialAttack;
     private int specialDefense;
     private int speed;
-    private List<String> uniqueAbilities;
+    private List<SpeciesAbilityDto> abilities;
     private HashMap<String, String> uniqueAttacks;
+    private String method;
 
     public AlteredFormDto(Species species) {
         if (species != null) {
             dbid = species.getDbid();
             name = species.getName();
-            type1 = species.getType1();
-            type2 = species.getType2();
+            baseName = species.getName();
+            if (species.getType1() != null) {
+                setType1(species.getType1().getName());
+            }
+            if (species.getType2() != null) {
+                setType2(species.getType2().getName());
+            }
             hp = species.getHp();
             attack = species.getAttack();
             defense = species.getDefense();
@@ -36,6 +42,52 @@ public class AlteredFormDto {
             speed = species.getSpeed();
             displayName = species.getDisplayName();
             formName = species.getFormName();
+        }
+    }
+
+    public AlteredFormDto(Species species, CosmeticFormDto cosmeticFormDto) {
+        if (cosmeticFormDto != null) {
+            setFormName(cosmeticFormDto.getFormName());
+            setName(cosmeticFormDto.getName());
+            setMethod(cosmeticFormDto.getMethod());
+        }
+        if (species != null) {
+            setDbid(species.getDbid());
+            if (species.getType1() != null) {
+                setType1(species.getType1().getName());
+            }
+            if (species.getType2() != null) {
+                setType2(species.getType2().getName());
+            }
+            setHp(species.getHp());
+            setAttack(species.getAttack());
+            setDefense(species.getDefense());
+            setSpecialAttack(species.getSpecialAttack());
+            setSpecialDefense(species.getSpecialDefense());
+            setSpeed(species.getSpeed());
+            setDisplayName(species.getDisplayName());
+            setBaseName(species.getName());
+        }
+    }
+
+    public AlteredFormDto(AlteredFormDto species, CosmeticFormDto cosmeticFormDto) {
+        if (cosmeticFormDto != null) {
+            setFormName(cosmeticFormDto.getFormName());
+            setName(cosmeticFormDto.getName());
+            setMethod(cosmeticFormDto.getMethod());
+        }
+        if (species != null) {
+            setDbid(species.getDbid());
+            setType1(species.getType1());
+            setType2(species.getType2());
+            setHp(species.getHp());
+            setAttack(species.getAttack());
+            setDefense(species.getDefense());
+            setSpecialAttack(species.getSpecialAttack());
+            setSpecialDefense(species.getSpecialDefense());
+            setSpeed(species.getSpeed());
+            setDisplayName(species.getDisplayName());
+            setBaseName(species.getName());
         }
     }
 
@@ -71,19 +123,27 @@ public class AlteredFormDto {
         this.displayName = displayName;
     }
 
-    public Type getType1() {
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public void setBaseName(String baseName) {
+        this.baseName = baseName;
+    }
+
+    public String getType1() {
         return type1;
     }
 
-    public void setType1(Type type1) {
+    public void setType1(String type1) {
         this.type1 = type1;
     }
 
-    public Type getType2() {
+    public String getType2() {
         return type2;
     }
 
-    public void setType2(Type type2) {
+    public void setType2(String type2) {
         this.type2 = type2;
     }
 
@@ -135,12 +195,12 @@ public class AlteredFormDto {
         this.speed = speed;
     }
 
-    public List<String> getUniqueAbilities() {
-        return uniqueAbilities;
+    public List<SpeciesAbilityDto> getAbilities() {
+        return abilities;
     }
 
-    public void setUniqueAbilities(List<String> uniqueAbilities) {
-        this.uniqueAbilities = uniqueAbilities;
+    public void setAbilities(List<SpeciesAbilityDto> abilities) {
+        this.abilities = abilities;
     }
 
     public HashMap<String, String> getUniqueAttacks() {
@@ -149,5 +209,13 @@ public class AlteredFormDto {
 
     public void setUniqueAttacks(HashMap<String, String> uniqueAttacks) {
         this.uniqueAttacks = uniqueAttacks;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

@@ -1,10 +1,10 @@
-package com.pokemonurpg.security;
+package com.pokemonurpg.dto.security;
 
 public class Authenticated<T> {
     private T payload;
 
     private String username;
-    private String loginString;
+    private String authToken;
     private String browser;
 
     public Authenticated() {
@@ -26,12 +26,12 @@ public class Authenticated<T> {
         this.username = username;
     }
 
-    public String getLoginString() {
-        return loginString;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void setLoginString(String loginString) {
-        this.loginString = loginString;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     public String getBrowser() {

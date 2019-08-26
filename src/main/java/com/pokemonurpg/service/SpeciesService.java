@@ -8,7 +8,6 @@ import com.pokemonurpg.dto.species.response.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.MapBindingResult;
@@ -112,8 +111,11 @@ public class SpeciesService {
         if (species != null) {
             SpeciesDto speciesDto = new SpeciesDto(species);
             int dbid = species.getDbid();
-            speciesDto.setSpeciesAttacks(speciesAttackService.findBySpeciesDbid(dbid));
-            speciesDto.setSpeciesAbilities(speciesAbilityService.findBySpeciesDbid(dbid));
+            speciesDto.setAttacks(speciesAttackService.findBySpeciesDbid(dbid));
+
+            List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dbid);
+            Collections.sort(abilities);
+            speciesDto.setAbilities(abilities);
 
             int dexno = species.getDexno();
             List<Species> speciesAtPrevDex = speciesRepository.findByDexno(getPrevDex(dexno));
@@ -127,13 +129,11 @@ public class SpeciesService {
             }
 
             List<Species> speciesAtThisDex = speciesRepository.findByDexno(species.getDexno());
-            List<AlteredFormDto> alteredFormDtos = buildAlteredFormList(speciesAtThisDex);
+            String alteredFormMethod = alteredFormMethodService.findByDexno(species.getDexno());
+            List<AlteredFormDto> alteredFormDtos = buildAlteredFormList(speciesAtThisDex, alteredFormMethod);
+            alteredFormDtos.addAll(buildCosmeticForms(species, alteredFormDtos));
             speciesDto.setAlteredForms(alteredFormDtos);
-
             speciesDto.setUniqueMoves(buildUniqueMoveList(alteredFormDtos));
-            speciesDto.setAlteredFormMethod(alteredFormMethodService.findByDexno(species.getDexno()));
-
-            speciesDto.setCosmeticForms(buildCosmeticForms(species, alteredFormDtos));
 
             speciesDto.setEvolutionFamily(buildEvolutionFamily(species));
 
@@ -165,14 +165,24 @@ public class SpeciesService {
         return new AlteredFormDto(species);
     }
 
-    public List<AlteredFormDto> buildAlteredFormList(List<Species> speciesList) {
+    public List<AlteredFormDto> buildAlteredFormList(List<Species> speciesList, String method) {
         List<AlteredFormDto> dtos = new ArrayList<>();
 
         if (speciesList.size() > 1) {
             for (Species species : speciesList) {
-                if (!megaEvolutionService.isMegaEvolution(species.getDbid()))
-                    dtos.add(buildAlteredFormDto(species));
+                if (!megaEvolutionService.isMegaEvolution(species.getDbid())) {
+                    AlteredFormDto dto = buildAlteredFormDto(species);
+                    dto.setMethod(method);
+                    List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
+                    Collections.sort(abilities);
+                    dto.setAbilities(abilities);
+                    dtos.add(dto);
+                }
             }
+        }
+
+        if (dtos.size() == 1) {
+            return Collections.emptyList();
         }
 
         return dtos;
@@ -233,24 +243,43 @@ public class SpeciesService {
         return uniqueMoves;
     }
 
-    public List<CosmeticFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms) {
-        List<CosmeticFormDto> cosmeticFormDtos = new ArrayList<>();
+    public List<AlteredFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms) {
+        List<AlteredFormDto> cosmeticFormDtos = new ArrayList<>();
         if (species != null) {
+            boolean noAlteredForms = alteredForms.isEmpty();
+            if (noAlteredForms) {
+                AlteredFormDto dto = new AlteredFormDto(species);
+                List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
+                Collections.sort(abilities);
+                dto.setAbilities(abilities);
+                cosmeticFormDtos.add(dto);
+            }
+
             for (CosmeticFormDto cosmeticFormDto : cosmeticFormService.findBySpeciesDbid(species.getDbid())) {
-                if (!cosmeticFormDtos.contains(cosmeticFormDto)) {
-                    cosmeticFormDtos.add(cosmeticFormDto);
-                }
+                AlteredFormDto dto = new AlteredFormDto(species, cosmeticFormDto);
+                List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
+                Collections.sort(abilities);
+                dto.setAbilities(abilities);
+                cosmeticFormDtos.add(dto);
             }
 
             if (alteredForms != null) {
                 for (AlteredFormDto form : alteredForms) {
-                    for (CosmeticFormDto cosmeticFormDto : cosmeticFormService.findBySpeciesDbid(form.getDbid())) {
-                        if (!cosmeticFormDtos.contains(cosmeticFormDto)) {
-                            cosmeticFormDtos.add(cosmeticFormDto);
+                    if (form.getDbid() != species.getDbid()) {
+                        for (CosmeticFormDto cosmeticFormDto : cosmeticFormService.findBySpeciesDbid(form.getDbid())) {
+                            AlteredFormDto dto = new AlteredFormDto(form, cosmeticFormDto);
+                            List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
+                            Collections.sort(abilities);
+                            dto.setAbilities(abilities);
+                            cosmeticFormDtos.add(dto);
                         }
                     }
                 }
             }
+
+            if (cosmeticFormDtos.size() == 1 && noAlteredForms)
+                return Collections.emptyList();
+
             return cosmeticFormDtos;
         }
         else return Collections.emptyList();
@@ -546,8 +575,8 @@ public class SpeciesService {
                     if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
                         errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
                     }
-                    if (cosmeticFormDto.getDisplayName() == null || cosmeticFormDto.getDisplayName().length() > 20) {
-                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getDisplayName() + " is invalid.");
+                    if (cosmeticFormDto.getFormName() == null || cosmeticFormDto.getFormName().length() > 20) {
+                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getFormName() + " is invalid.");
                     }
                     if (cosmeticFormDto.getMethod() == null || cosmeticFormDto.getMethod().length() > 110) {
                         errors.reject("Cosmetic form method " + cosmeticFormDto.getMethod() + " is invalid.");
@@ -706,8 +735,8 @@ public class SpeciesService {
                     if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
                         errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
                     }
-                    if (cosmeticFormDto.getDisplayName() == null || cosmeticFormDto.getDisplayName().length() > 20) {
-                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getDisplayName() + " is invalid.");
+                    if (cosmeticFormDto.getFormName() == null || cosmeticFormDto.getFormName().length() > 20) {
+                        errors.reject("Cosmetic form display name " + cosmeticFormDto.getFormName() + " is invalid.");
                     }
                     if (cosmeticFormDto.getMethod() == null || cosmeticFormDto.getMethod().length() > 110) {
                         errors.reject("Cosmetic form method " + cosmeticFormDto.getMethod() + " is invalid.");

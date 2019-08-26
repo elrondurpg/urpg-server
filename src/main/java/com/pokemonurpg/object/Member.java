@@ -18,6 +18,9 @@ public class Member {
     @Column
     private String password;
 
+    @Column(name = "beta_key")
+    private String betaKey;
+
     public Member() {
     }
 
@@ -51,5 +54,13 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getBetaKey() {
+        return betaKey;
+    }
+
+    public void setBetaKey(String betaKey) {
+        this.betaKey = betaKey;
     }
 }

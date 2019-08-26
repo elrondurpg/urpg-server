@@ -3,7 +3,7 @@ package com.pokemonurpg.controller;
 import com.pokemonurpg.dto.species.input.SpeciesInputDto;
 import com.pokemonurpg.dto.species.response.SpeciesDto;
 import com.pokemonurpg.object.Member;
-import com.pokemonurpg.security.Authenticated;
+import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.service.MemberService;
 import com.pokemonurpg.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class CosmeticFormDto {
     private String name;
-    private String displayName;
+    private String formName;
     private String method;
 
     public CosmeticFormDto(CosmeticForm cosmeticForm) {
@@ -16,7 +16,7 @@ public class CosmeticFormDto {
             if (key != null) {
                 name = key.getName();
             }
-            displayName = cosmeticForm.getDisplayName();
+            formName = cosmeticForm.getFormName();
             method = cosmeticForm.getMethod();
         }
     }
@@ -29,12 +29,12 @@ public class CosmeticFormDto {
         this.name = name;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getFormName() {
+        return formName;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setFormName(String formName) {
+        this.formName = formName;
     }
 
     public String getMethod() {
@@ -51,12 +51,12 @@ public class CosmeticFormDto {
         if (o == null || getClass() != o.getClass()) return false;
         CosmeticFormDto that = (CosmeticFormDto) o;
         return Objects.equals(name, that.name) &&
-                Objects.equals(displayName, that.displayName) &&
+                Objects.equals(formName, that.formName) &&
                 Objects.equals(method, that.method);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, displayName, method);
+        return Objects.hash(name, formName, method);
     }
 }

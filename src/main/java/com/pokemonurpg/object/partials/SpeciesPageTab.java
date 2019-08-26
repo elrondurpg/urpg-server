@@ -14,7 +14,7 @@ public class SpeciesPageTab {
 
     public SpeciesPageTab(Species species) {
         this.dexno = species.getDexno();
-        this.name = species.getDisplayName();
+        this.name = species.getFormName();
     }
 
     public Integer getDexno() {

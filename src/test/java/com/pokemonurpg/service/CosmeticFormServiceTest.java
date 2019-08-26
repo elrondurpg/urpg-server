@@ -38,7 +38,7 @@ public class CosmeticFormServiceTest {
         assertEquals(1, responseList.size());
 
         CosmeticFormDto cosmeticForm = responseList.get(0);
-        assertEquals(spikyEaredPikachu.getDisplayName(), cosmeticForm.getDisplayName());
+        assertEquals(spikyEaredPikachu.getFormName(), cosmeticForm.getFormName());
         assertEquals(spikyEaredPikachu.getMethod(), cosmeticForm.getMethod());
         assertEquals(spikyEaredPikachu.getName(), cosmeticForm.getName());
     }

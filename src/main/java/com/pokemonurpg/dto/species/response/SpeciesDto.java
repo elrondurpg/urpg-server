@@ -29,14 +29,12 @@ public class SpeciesDto {
     private Integer contestCredits;
     private String displayName;
     private String formName;
-    private List<SpeciesAttackDto> speciesAttacks;
-    private List<SpeciesAbilityDto> speciesAbilities;
-    private List<CosmeticFormDto> cosmeticForms;
+    private List<SpeciesAttackDto> attacks;
+    private List<SpeciesAbilityDto> abilities;
     private SpeciesPageTabDto nextSpecies;
     private SpeciesPageTabDto prevSpecies;
     private List<AlteredFormDto> alteredForms;
     private List<String> uniqueMoves;
-    private String alteredFormMethod;
     private List<List<EvolutionFamilyMemberDto>> evolutionFamily;
     private List<MegaEvolutionDto> megaEvolutions;
     private List<TypeMatchupDto> typeMatchups;
@@ -266,28 +264,20 @@ public class SpeciesDto {
         this.formName = formName;
     }
 
-    public List<SpeciesAttackDto> getSpeciesAttacks() {
-        return speciesAttacks;
+    public List<SpeciesAttackDto> getAttacks() {
+        return attacks;
     }
 
-    public void setSpeciesAttacks(List<SpeciesAttackDto> speciesAttacks) {
-        this.speciesAttacks = speciesAttacks;
+    public void setAttacks(List<SpeciesAttackDto> attacks) {
+        this.attacks = attacks;
     }
 
-    public List<SpeciesAbilityDto> getSpeciesAbilities() {
-        return speciesAbilities;
+    public List<SpeciesAbilityDto> getAbilities() {
+        return abilities;
     }
 
-    public void setSpeciesAbilities(List<SpeciesAbilityDto> speciesAbilities) {
-        this.speciesAbilities = speciesAbilities;
-    }
-
-    public List<CosmeticFormDto> getCosmeticForms() {
-        return cosmeticForms;
-    }
-
-    public void setCosmeticForms(List<CosmeticFormDto> cosmeticForms) {
-        this.cosmeticForms = cosmeticForms;
+    public void setAbilities(List<SpeciesAbilityDto> abilities) {
+        this.abilities = abilities;
     }
 
     public SpeciesPageTabDto getNextSpecies() {
@@ -320,14 +310,6 @@ public class SpeciesDto {
 
     public void setUniqueMoves(List<String> uniqueMoves) {
         this.uniqueMoves = uniqueMoves;
-    }
-
-    public String getAlteredFormMethod() {
-        return alteredFormMethod;
-    }
-
-    public void setAlteredFormMethod(String alteredFormMethod) {
-        this.alteredFormMethod = alteredFormMethod;
     }
 
     public List<List<EvolutionFamilyMemberDto>> getEvolutionFamily() {

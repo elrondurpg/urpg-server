@@ -24,7 +24,7 @@ public class MegaEvolutionDto {
     private boolean femaleAllowed;
     private String displayName;
     private String formName;
-    private List<SpeciesAbilityDto> speciesAbilities;
+    private SpeciesAbilityDto ability;
     private String megaStone;
     private List<TypeMatchupDto> typeMatchups;
 
@@ -196,12 +196,12 @@ public class MegaEvolutionDto {
         this.formName = formName;
     }
 
-    public List<SpeciesAbilityDto> getSpeciesAbilities() {
-        return speciesAbilities;
+    public SpeciesAbilityDto getAbility() {
+        return ability;
     }
 
-    public void setSpeciesAbilities(List<SpeciesAbilityDto> speciesAbilities) {
-        this.speciesAbilities = speciesAbilities;
+    public void setAbility(SpeciesAbilityDto ability) {
+        this.ability = ability;
     }
 
     public String getMegaStone() {

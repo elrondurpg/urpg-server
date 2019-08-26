@@ -100,7 +100,7 @@ public class TestObjectFactory {
 
         CosmeticForm spikyEaredPikachu = new CosmeticForm();
         spikyEaredPikachu.setId(key);
-        spikyEaredPikachu.setDisplayName(TEST_COSMETIC_FORM_DISPLAY_NAME);
+        spikyEaredPikachu.setFormName(TEST_COSMETIC_FORM_DISPLAY_NAME);
         spikyEaredPikachu.setMethod(TEST_COSMETIC_FORM_METHOD);
 
         return spikyEaredPikachu;

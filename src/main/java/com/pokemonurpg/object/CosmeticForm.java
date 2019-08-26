@@ -8,17 +8,17 @@ public class CosmeticForm {
     @EmbeddedId
     CosmeticFormKey id;
 
-    @Column(name = "display_name")
-    private String displayName;
+    @Column(name = "form_name")
+    private String formName;
 
     @Column
     private String method;
 
     public CosmeticForm() {}
 
-    public CosmeticForm(int speciesDbid, String formName, String displayName, String method) {
-        setId(new CosmeticFormKey(speciesDbid, formName));
-        this.displayName = displayName;
+    public CosmeticForm(int speciesDbid, String name, String formName, String method) {
+        setId(new CosmeticFormKey(speciesDbid, name));
+        this.formName = formName;
         this.method = method;
     }
 
@@ -38,12 +38,12 @@ public class CosmeticForm {
         this.id.setName(name);
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getFormName() {
+        return formName;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setFormName(String formName) {
+        this.formName = formName;
     }
 
     public String getMethod() {
@@ -59,13 +59,13 @@ public class CosmeticForm {
         if (!(o instanceof CosmeticForm)) return false;
         CosmeticForm that = (CosmeticForm) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getDisplayName(), that.getDisplayName()) &&
+                Objects.equals(getFormName(), that.getFormName()) &&
                 Objects.equals(getMethod(), that.getMethod());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDisplayName(), getMethod());
+        return Objects.hash(getId(), getName(), getFormName(), getMethod());
     }
 
 }

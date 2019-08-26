@@ -1,10 +1,7 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.species.input.SpeciesAbilityInputDto;
 import com.pokemonurpg.dto.species.response.CosmeticFormDto;
-import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.CosmeticForm;
-import com.pokemonurpg.object.SpeciesAbility;
 import com.pokemonurpg.repository.CosmeticFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +35,7 @@ public class CosmeticFormService
     }
 
     public void create(int speciesDbid, CosmeticFormDto input) {
-        CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getDisplayName(), input.getMethod());
+        CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getFormName(), input.getMethod());
         cosmeticFormRepository.save(form);
     }
 
@@ -51,8 +48,8 @@ public class CosmeticFormService
     }
 
     public void update(CosmeticForm existingRecord, CosmeticFormDto input) {
-        if (input.getDisplayName() != null) {
-            existingRecord.setDisplayName(input.getDisplayName());
+        if (input.getFormName() != null) {
+            existingRecord.setFormName(input.getFormName());
         }
         if (input.getMethod() != null) {
             existingRecord.setMethod(input.getMethod());

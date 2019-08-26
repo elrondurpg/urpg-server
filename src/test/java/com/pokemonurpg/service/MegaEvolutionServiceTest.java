@@ -21,13 +21,14 @@ public class MegaEvolutionServiceTest {
     private MegaEvolutionService megaEvolutionService;
     private MegaEvolutionRepository megaEvolutionRepository = mock(MegaEvolutionRepository.class);
     private SpeciesRepository speciesRepository = mock(SpeciesRepository.class);
+    private SpeciesAbilityService speciesAbilityService;
 
     private MegaEvolution megaCharizardXRecord = TestObjectFactory.createMegaCharizardXRecord();
     private Species megaCharizardX = TestObjectFactory.createMegaCharizardX();
 
     @Before
     public void init() {
-        megaEvolutionService = new MegaEvolutionService(megaEvolutionRepository, speciesRepository);
+        megaEvolutionService = new MegaEvolutionService(megaEvolutionRepository, speciesRepository, speciesAbilityService);
     }
 
     @Test

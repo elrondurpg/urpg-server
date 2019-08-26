@@ -3,7 +3,7 @@ package com.pokemonurpg.controller;
 import com.pokemonurpg.dto.attack.AttackDto;
 import com.pokemonurpg.dto.attack.AttackInputDto;
 import com.pokemonurpg.object.Member;
-import com.pokemonurpg.security.Authenticated;
+import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.service.AttackService;
 import com.pokemonurpg.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;

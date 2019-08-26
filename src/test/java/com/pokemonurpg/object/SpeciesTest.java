@@ -32,7 +32,7 @@ public class SpeciesTest {
         Assert.assertEquals((Integer) 3, pokemon.getParkLocation());
         Assert.assertEquals((Integer) 4, pokemon.getParkRank());
         Assert.assertEquals("40000", pokemon.getContestCredits());
-        Assert.assertEquals("Pikachu-Display", pokemon.getDisplayName());
+        Assert.assertEquals("Pikachu-Display", pokemon.getFormName());
         Assert.assertEquals("Pikachu-Form", pokemon.getFormName());
     }
 */

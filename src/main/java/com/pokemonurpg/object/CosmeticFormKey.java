@@ -11,7 +11,7 @@ public class CosmeticFormKey implements Serializable {
     @Column(name = "base_dbid")
     private int speciesDbid;
 
-    @Column(name = "form_name")
+    @Column
     private String name;
 
     public CosmeticFormKey() {    }

@@ -122,8 +122,8 @@ public class SpeciesValidator extends URPGValidator {
                 errors.rejectValue("parkLocation", "Park location '" + pokemon.getParkLocation() + "' is invalid.");
             }
 
-            if (emptyInputString(pokemon.getDisplayName())) {
-                errors.rejectValue("displayName", "Display Name '" + pokemon.getDisplayName() + "' is invalid.");
+            if (emptyInputString(pokemon.getFormName())) {
+                errors.rejectValue("displayName", "Display Name '" + pokemon.getFormName() + "' is invalid.");
             }
 
             if (!emptyInputString(pokemon.getFormName()) && !isIntegerBetween(pokemon.getFormName().length(), 2, 20)) {

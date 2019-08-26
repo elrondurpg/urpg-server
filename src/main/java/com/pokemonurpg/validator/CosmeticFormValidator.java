@@ -48,8 +48,8 @@ public class CosmeticFormValidator extends URPGValidator {
                 errors.rejectValue("name", "Name '" + cosmeticForm.getName() + "' is invalid.");
             }
 
-            if (!isStringLengthBetween(cosmeticForm.getDisplayName(), 3, 20)) {
-                errors.rejectValue("displayName", "Display name '" + cosmeticForm.getDisplayName() + "' is invalid.");
+            if (!isStringLengthBetween(cosmeticForm.getFormName(), 3, 20)) {
+                errors.rejectValue("displayName", "Display name '" + cosmeticForm.getFormName() + "' is invalid.");
             }
 
         } else {

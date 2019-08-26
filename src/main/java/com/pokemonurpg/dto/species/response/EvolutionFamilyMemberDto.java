@@ -7,6 +7,7 @@ public class EvolutionFamilyMemberDto {
     private String name;
     private String displayName;
     private String method;
+    private int dexno;
 
     public EvolutionFamilyMemberDto() { }
 
@@ -16,11 +17,20 @@ public class EvolutionFamilyMemberDto {
             setName(species.getName());
             setDisplayName(species.getDisplayName());
             setMethod(method);
+            setDexno(species.getDexno());
         }
     }
 
     public int getDbid() {
         return dbid;
+    }
+
+    public int getDexno() {
+        return dexno;
+    }
+
+    public void setDexno(int dexno) {
+        this.dexno = dexno;
     }
 
     public void setDbid(int dbid) {

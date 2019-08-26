@@ -4,7 +4,7 @@ import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.Species;
 import com.pokemonurpg.object.SpeciesAbility;
 
-public class SpeciesAbilityDto {
+public class SpeciesAbilityDto implements Comparable<SpeciesAbilityDto> {
     private int dbid;
     private String name;
     private String description;
@@ -54,5 +54,10 @@ public class SpeciesAbilityDto {
 
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
+    }
+
+    @Override
+    public int compareTo(SpeciesAbilityDto o) {
+        return ("" + hidden + name).compareTo("" + o.isHidden() + o.getName());
     }
 }
