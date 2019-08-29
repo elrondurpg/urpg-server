@@ -347,8 +347,8 @@ public class SpeciesService {
             Species savedSpecies = speciesRepository.findByName(input.getName());
             int dbid = savedSpecies.getDbid();
 
-            speciesAttackService.createAll(dbid, input.getSpeciesAttacks());
-            speciesAbilityService.createAll(dbid, input.getSpeciesAbilities());
+            speciesAttackService.createAll(dbid, input.getAttacks());
+            speciesAbilityService.createAll(dbid, input.getAbilities());
             cosmeticFormService.createAll(dbid, input.getCosmeticForms());
             alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
             evolutionService.create(dbid, input.getEvolvesFrom());
@@ -436,8 +436,8 @@ public class SpeciesService {
 
             int dbid = existingSpecies.getDbid();
 
-            speciesAttackService.updateAll(dbid, input.getSpeciesAttacks());
-            speciesAbilityService.updateAll(dbid, input.getSpeciesAbilities());
+            speciesAttackService.updateAll(dbid, input.getAttacks());
+            speciesAbilityService.updateAll(dbid, input.getAbilities());
             cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
             alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
             evolutionService.update(dbid, input.getEvolvesFrom());
@@ -480,7 +480,7 @@ public class SpeciesService {
                 errors.reject("Type 2: " + input.getType2() + " is invalid.");
             }
 
-            if (input.getClassification() != null && input.getClassification().length() > 20){
+            if (input.getClassification() != null && (input.getClassification().length() < 3 || input.getClassification().length() > 20)){
                 errors.reject("Classification " + input.getClassification() + " is invalid.");
             }
 
@@ -548,8 +548,8 @@ public class SpeciesService {
                 errors.reject("Park Location " + input.getParkLocation() + " is invalid.");
             }
 
-            if (input.getSpeciesAttacks() != null) {
-                for (SpeciesAttackInputDto speciesAttackInputDto : input.getSpeciesAttacks()) {
+            if (input.getAttacks() != null) {
+                for (SpeciesAttackInputDto speciesAttackInputDto : input.getAttacks()) {
                     if (speciesAttackInputDto.getName() == null || attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
                         errors.reject("Attack name " + speciesAttackInputDto.getName() + " is invalid.");
                     }
@@ -559,8 +559,8 @@ public class SpeciesService {
                 }
             }
 
-            if (input.getSpeciesAbilities() != null) {
-                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getSpeciesAbilities()) {
+            if (input.getAbilities() != null) {
+                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getAbilities()) {
                     if (speciesAbilityInputDto.getName() == null || abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
                         errors.reject("Ability name " + speciesAbilityInputDto.getName() + " is invalid.");
                     }
@@ -708,8 +708,8 @@ public class SpeciesService {
                 errors.reject("Park Location " + input.getParkLocation() + " is invalid.");
             }
 
-            if (input.getSpeciesAttacks() != null) {
-                for (SpeciesAttackInputDto speciesAttackInputDto : input.getSpeciesAttacks()) {
+            if (input.getAttacks() != null) {
+                for (SpeciesAttackInputDto speciesAttackInputDto : input.getAttacks()) {
                     if (speciesAttackInputDto.getName() == null || attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
                         errors.reject("Attack name " + speciesAttackInputDto.getName() + " is invalid.");
                     }
@@ -719,8 +719,8 @@ public class SpeciesService {
                 }
             }
 
-            if (input.getSpeciesAbilities() != null) {
-                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getSpeciesAbilities()) {
+            if (input.getAbilities() != null) {
+                for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getAbilities()) {
                     if (speciesAbilityInputDto.getName() == null || abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
                         errors.reject("Ability name " + speciesAbilityInputDto.getName() + " is invalid.");
                     }

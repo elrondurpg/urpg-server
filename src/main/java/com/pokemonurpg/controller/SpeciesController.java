@@ -1,5 +1,6 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.species.input.SpeciesInputDto;
 import com.pokemonurpg.dto.species.response.SpeciesDto;
 import com.pokemonurpg.object.Member;
@@ -32,52 +33,52 @@ public class SpeciesController {
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    ResponseEntity<SpeciesDto> getSpeciesByName(@PathVariable("name") String name) {
+    RestResponse getSpeciesByName(@PathVariable("name") String name) {
         try {
             SpeciesDto dto = speciesService.findByName(name);
             if (dto != null) {
-                return ResponseEntity.ok(dto);
+                return new RestResponse(200, dto);
             }
-            else return ResponseEntity.notFound().build();
+            else return new RestResponse(404, null);
         } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().build();
+            return new RestResponse(400, null);
         }
     }
 
     @PostMapping
     public @ResponseBody
-    ResponseEntity createSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
+    RestResponse createSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
             if (memberService.authorize(member, "Write Species")) {
                 SpeciesInputDto species = input.getPayload();
                 Errors errors = speciesService.createSpecies(species);
                 if (errors.hasErrors()) {
-                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                    return new RestResponse(400, errors.getAllErrors());
                 }
-                else return ResponseEntity.ok("Pokemon " + species.getName() + " was created successfully!");
+                else return new RestResponse(200,"Pokemon " + species.getName() + " was created successfully!");
             }
-            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
     }
 
     @PutMapping
     public @ResponseBody
-    ResponseEntity updateSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
+    RestResponse updateSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
             if (memberService.authorize(member, "Write Species")) {
                 SpeciesInputDto species = input.getPayload();
                 Errors errors = speciesService.updateSpecies(species);
                 if (errors.hasErrors()) {
-                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                    return new RestResponse(400, errors.getAllErrors());
                 }
-                else return ResponseEntity.ok("Pokemon " + species.getName() + " was updated successfully!");
+                else return new RestResponse(200,"Pokemon " + species.getName() + " was updated successfully!");
             }
-            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
     }
 
     /*

@@ -29,8 +29,8 @@ public class SpeciesInputDto extends InputDto {
     private Integer contestCredits;
     private String displayName;
     private String formName;
-    private List<SpeciesAttackInputDto> speciesAttacks;
-    private List<SpeciesAbilityInputDto> speciesAbilities;
+    private List<SpeciesAttackInputDto> attacks;
+    private List<SpeciesAbilityInputDto> abilities;
     private List<CosmeticFormDto> cosmeticForms;
     private String alteredFormMethod;
     private EvolutionInputDto evolvesFrom;
@@ -223,20 +223,20 @@ public class SpeciesInputDto extends InputDto {
         this.formName = formName;
     }
 
-    public List<SpeciesAttackInputDto> getSpeciesAttacks() {
-        return speciesAttacks;
+    public List<SpeciesAttackInputDto> getAttacks() {
+        return attacks;
     }
 
-    public void setSpeciesAttacks(List<SpeciesAttackInputDto> speciesAttacks) {
-        this.speciesAttacks = speciesAttacks;
+    public void setAttacks(List<SpeciesAttackInputDto> attacks) {
+        this.attacks = attacks;
     }
 
-    public List<SpeciesAbilityInputDto> getSpeciesAbilities() {
-        return speciesAbilities;
+    public List<SpeciesAbilityInputDto> getAbilities() {
+        return abilities;
     }
 
-    public void setSpeciesAbilities(List<SpeciesAbilityInputDto> speciesAbilities) {
-        this.speciesAbilities = speciesAbilities;
+    public void setAbilities(List<SpeciesAbilityInputDto> abilities) {
+        this.abilities = abilities;
     }
 
     public List<CosmeticFormDto> getCosmeticForms() {

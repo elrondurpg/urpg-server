@@ -1,12 +1,17 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.dto.security.LoginDto;
+import com.pokemonurpg.dto.security.RegisterBetaDto;
 import com.pokemonurpg.object.Member;
 import com.pokemonurpg.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("/user")
@@ -22,13 +27,13 @@ public class UserController {
 
     @PostMapping("/login")
     public @ResponseBody
-    ResponseEntity login(@RequestBody LoginDto login) {
+    RestResponse login(@RequestBody LoginDto login) {
         String authToken = memberService.login(login);
         if (authToken == null) {
-            return ResponseEntity.status(401).body("No user was found which matched the provided credentials.");
+            return new RestResponse(401, "No user was found which matched the provided credentials.");
         }
         else {
-            return ResponseEntity.ok(authToken);
+            return new RestResponse(200, authToken);
         }
     }
 
@@ -49,6 +54,18 @@ public class UserController {
             else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
         else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+    }
+
+    @PutMapping("/registerBeta")
+    public @ResponseBody
+    ResponseEntity registerBeta(@RequestBody RegisterBetaDto input) {
+        boolean success = memberService.registerBeta(input);
+        if (success) {
+            return ResponseEntity.ok().build();
+        }
+        else {
+            return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be registered.");
+        }
     }
 
 }

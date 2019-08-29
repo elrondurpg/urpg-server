@@ -2,6 +2,7 @@ package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.dto.security.LoginDto;
+import com.pokemonurpg.dto.security.RegisterBetaDto;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.*;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MemberService
@@ -20,6 +24,13 @@ public class MemberService
     private MemberRoleRepository memberRoleRepository;
     private PermissionRepository permissionRepository;
     private RolePermissionRepository rolePermissionRepository;
+
+    private Matcher matcher;
+
+    private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z]).{8,40})";
+    private Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+
+    Random rand = new Random();
 
     @Autowired
     public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleRepository memberRoleRepository,
@@ -32,7 +43,7 @@ public class MemberService
     }
 
     public String login(LoginDto login) {
-        if (hasRequiredFields(login)) {
+        if (exists(login.getBrowser()) && exists(login.getPassword()) && exists(login.getUsername())) {
             Member member = memberRepository.findByUsername(login.getUsername());
             if (hasCorrectPassword(login, member)) {
                 return createAuthToken(login);
@@ -41,8 +52,28 @@ public class MemberService
         return null;
     }
 
+    public boolean registerBeta(RegisterBetaDto registerBetaDto) {
+        try {
+            if (validateRegistrationBeta(registerBetaDto)) {
+                Member member = memberRepository.findByUsername(registerBetaDto.getUsername());
+                if (hasCorrectBetaKey(registerBetaDto, member)) {
+                    int salt = rand.nextInt(1000000000);
+                    member.setSalt(salt);
+                    member.setPassword(hash(registerBetaDto.getPassword() + salt));
+                    member.setBetaKey(null);
+                    memberRepository.save(member);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
     public Member authenticate(Authenticated authDetails) {
-        if (hasRequiredFields(authDetails)) {
+        if (exists(authDetails.getAuthToken()) && exists(authDetails.getBrowser()) && exists(authDetails.getUsername())) {
             Member member = memberRepository.findByUsername(authDetails.getUsername());
             if (hasCorrectAuthToken(authDetails, member)) {
                 return member;
@@ -89,42 +120,12 @@ public class MemberService
         }
     }
 
-    public boolean hasRequiredFields(LoginDto login) {
-        try {
-            if (login.getUsername() == null || login.getUsername().equals("") || login.getUsername().isEmpty())
-                return false;
-            if (login.getPassword() == null || login.getPassword().equals("") || login.getPassword().isEmpty())
-                return false;
-            if (login.getBrowser() == null || login.getBrowser().equals("") || login.getBrowser().isEmpty())
-                return false;
-
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean hasRequiredFields(Authenticated authDetails) {
-        try {
-            if (authDetails.getUsername() == null || authDetails.getUsername().equals("") || authDetails.getUsername().isEmpty())
-                return false;
-            if (authDetails.getAuthToken() == null || authDetails.getAuthToken().equals("") || authDetails.getAuthToken().isEmpty())
-                return false;
-            if (authDetails.getBrowser() == null || authDetails.getBrowser().equals("") || authDetails.getBrowser().isEmpty())
-                return false;
-
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     public boolean hasCorrectPassword(LoginDto login, Member member) {
         try {
             String password = login.getPassword();
-            int dbid = member.getDbid();
+            int salt = member.getSalt();
 
-            String loginCheck = hash("" + password + dbid);
+            String loginCheck = hash(password + salt);
             if (loginCheck != null && !loginCheck.equals("") && !loginCheck.isEmpty()) {
                 String memberPassword = member.getPassword();
                 if (memberPassword != null && !memberPassword.equals("") && !memberPassword.isEmpty()) {
@@ -164,6 +165,43 @@ public class MemberService
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean validateRegistrationBeta(RegisterBetaDto registerBetaDto) {
+        try {
+            if (exists(registerBetaDto.getUsername()) && exists(registerBetaDto.getBetaKey()) && exists(registerBetaDto.getPassword())) {
+                String password = registerBetaDto.getPassword();
+                matcher = pattern.matcher(password);
+                return matcher.matches();
+            }
+
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean hasCorrectBetaKey(RegisterBetaDto registerBetaDto, Member member) {
+        try {
+            String betaKey = member.getBetaKey();
+
+            String keyCheck = hash(registerBetaDto.getBetaKey());
+            if (exists(betaKey) && exists(keyCheck)) {
+                if (betaKey.equals(keyCheck)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean exists(String s) {
+        if (s == null || s.equals("") || s.isEmpty()) {
+            return false;
+        }
+        else return true;
     }
 
     public String hash(String cleartext) throws NoSuchAlgorithmException {

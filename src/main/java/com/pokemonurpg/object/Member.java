@@ -21,6 +21,9 @@ public class Member {
     @Column(name = "beta_key")
     private String betaKey;
 
+    @Column
+    private Integer salt;
+
     public Member() {
     }
 
@@ -62,5 +65,13 @@ public class Member {
 
     public void setBetaKey(String betaKey) {
         this.betaKey = betaKey;
+    }
+
+    public Integer getSalt() {
+        return salt;
+    }
+
+    public void setSalt(Integer salt) {
+        this.salt = salt;
     }
 }
