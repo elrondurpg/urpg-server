@@ -56,7 +56,7 @@ public class SpeciesAbilityService {
     }
 
     public void update(SpeciesAbility existingRecord, SpeciesAbilityInputDto input) {
-        if (input.isDelete()) {
+        if (input.isDeleted()) {
             speciesAbilityRepository.delete(existingRecord);
         }
         else {
@@ -75,7 +75,7 @@ public class SpeciesAbilityService {
                 SpeciesAbility existingRecord = speciesAbilityRepository.findByIdSpeciesDbidAndIdAbilityDbid(speciesDbid, ability.getDbid());
                 if (existingRecord != null) {
                     update(existingRecord, record);
-                } else if (!record.isDelete()){
+                } else if (!record.isDeleted()){
                     create(speciesDbid, record);
                 }
             }

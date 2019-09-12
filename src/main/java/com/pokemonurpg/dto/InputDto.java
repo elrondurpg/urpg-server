@@ -1,16 +1,16 @@
 package com.pokemonurpg.dto;
 
 public class InputDto {
-    private boolean delete = false;
+    private boolean deleted = false;
 
     public InputDto() {
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

@@ -52,7 +52,7 @@ public class SpeciesAttackService {
     }
 
     public void update(SpeciesAttack existingRecord, SpeciesAttackInputDto input) {
-        if (input.isDelete()) {
+        if (input.isDeleted()) {
             speciesAttackRepository.delete(existingRecord);
         }
         else {
@@ -74,7 +74,7 @@ public class SpeciesAttackService {
                 SpeciesAttack existingRecord = speciesAttackRepository.findByIdSpeciesDbidAndIdAttackDbid(speciesDbid, attack.getDbid());
                 if (existingRecord != null) {
                     update(existingRecord, record);
-                } else if (!record.isDelete()) {
+                } else if (!record.isDeleted()) {
                     create(speciesDbid, record);
                 }
             }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.MapBindingResult;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class AttackService {
         this.attackCategoryRepository = attackCategoryRepository;
         this.attackTargetTypeRepository = attackTargetTypeRepository;
         this.typeRepository = typeRepository;
+    }
+
+    public List<Object> findAll() {
+        return attackRepository.findAllNames();
     }
 
     public AttackDto findByName(String name) {

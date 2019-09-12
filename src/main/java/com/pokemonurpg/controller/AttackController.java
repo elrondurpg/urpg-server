@@ -1,5 +1,6 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.attack.AttackDto;
 import com.pokemonurpg.dto.attack.AttackInputDto;
 import com.pokemonurpg.object.Member;
@@ -23,6 +24,12 @@ public class AttackController {
     public AttackController(AttackService attackService, MemberService memberService) {
         this.attackService = attackService;
         this.memberService = memberService;
+    }
+
+    @GetMapping
+    public @ResponseBody
+    RestResponse getAllAttacks() {
+        return new RestResponse(200, attackService.findAll());
     }
 
     @GetMapping(path="/{name}")
