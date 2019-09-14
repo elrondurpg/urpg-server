@@ -26,10 +26,11 @@ public class SpeciesController {
         this.speciesService = speciesService;
     }
 
-    /*@GetMapping(path="/all")
-    public @ResponseBody ResponseEntity getAllSpecies() {
-        return ResponseEntity.ok(speciesService.findAll());
-    }*/
+    @GetMapping
+    public @ResponseBody
+    RestResponse getAllSpecies() {
+        return new RestResponse(200, speciesService.findAll());
+    }
 
     @GetMapping(path="/{name}")
     public @ResponseBody

@@ -18,8 +18,8 @@ public class StoryRankService {
         this.storyRankRepository = storyRankRepository;
     }
 
-    public List<StoryRank> findAll() {
-        return storyRankRepository.findAll();
+    public List<Object> findAll() {
+        return storyRankRepository.findAllNames();
     }
 
     public StoryRank findByDbid(int dbid) {

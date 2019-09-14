@@ -65,8 +65,8 @@ public class SpeciesService {
         this.parkLocationRepository = parkLocationRepository;
     }
 
-    public List<Species> findAll() {
-        return speciesRepository.findAll();
+    public List<Object> findAll() {
+        return speciesRepository.findAllNames();
     }
 
     public List<Integer> findAllSpeciesDbidsByDexno(Integer dexno) {
@@ -136,8 +136,10 @@ public class SpeciesService {
             speciesDto.setUniqueMoves(buildUniqueMoveList(alteredFormDtos));
 
             speciesDto.setEvolutionFamily(buildEvolutionFamily(species));
+            speciesDto.setEvolvesFrom(evolutionService.findByEvolutionDbid(species.getDbid()));
 
             speciesDto.setMegaEvolutions(megaEvolutionService.findByOriginalDbid(species.getDbid()));
+            speciesDto.setMegaEvolvesFrom(megaEvolutionService.findByMegaDbid(species.getDbid()));
 
             speciesDto.setTypeMatchups(typeMatchupService.findTypeMatchupsBySpecies(species));
             for (MegaEvolutionDto megaDto : speciesDto.getMegaEvolutions()) {

@@ -30,7 +30,7 @@ public class TypeMatchupService {
     public List<TypeMatchupDto> findTypeMatchupsBySpeciesTypes(Type type1, Type type2) {
         List<TypeMatchupDto> matchups = new ArrayList<>();
 
-        List<Type> types = typeService.findAll();
+        List<Type> types = typeService.findAllFull();
         int type1Dbid = type1.getDbid();
         for (Type type : types) {
             if (type.getDbid() != -1) {

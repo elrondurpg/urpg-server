@@ -38,6 +38,8 @@ public class SpeciesDto {
     private List<List<EvolutionFamilyMemberDto>> evolutionFamily;
     private List<MegaEvolutionDto> megaEvolutions;
     private List<TypeMatchupDto> typeMatchups;
+    private EvolutionFamilyMemberBriefDto evolvesFrom;
+    private MegaEvolutionBriefDto megaEvolvesFrom;
 
     public SpeciesDto() {
 
@@ -334,5 +336,21 @@ public class SpeciesDto {
 
     public void setTypeMatchups(List<TypeMatchupDto> typeMatchups) {
         this.typeMatchups = typeMatchups;
+    }
+
+    public EvolutionFamilyMemberBriefDto getEvolvesFrom() {
+        return evolvesFrom;
+    }
+
+    public void setEvolvesFrom(EvolutionFamilyMemberBriefDto evolvesFrom) {
+        this.evolvesFrom = evolvesFrom;
+    }
+
+    public MegaEvolutionBriefDto getMegaEvolvesFrom() {
+        return megaEvolvesFrom;
+    }
+
+    public void setMegaEvolvesFrom(MegaEvolutionBriefDto megaEvolvesFrom) {
+        this.megaEvolvesFrom = megaEvolvesFrom;
     }
 }

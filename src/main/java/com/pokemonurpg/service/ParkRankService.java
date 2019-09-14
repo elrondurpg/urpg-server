@@ -18,8 +18,8 @@ public class ParkRankService {
         this.parkRankRepository = parkRankRepository;
     }
 
-    public List<ParkRank> findAll() {
-        return parkRankRepository.findAll();
+    public List<Object> findAll() {
+        return parkRankRepository.findAllNames();
     }
 
     public ParkRank findByDbid(int dbid) {

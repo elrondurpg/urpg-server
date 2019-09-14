@@ -18,8 +18,8 @@ public class ArtRankService {
         this.artRankRepository = artRankRepository;
     }
 
-    public List<ArtRank> findAll() {
-        return artRankRepository.findAll();
+    public List<Object> findAll() {
+        return artRankRepository.findAllNames();
     }
 
     public ArtRank findByDbid(int dbid) {

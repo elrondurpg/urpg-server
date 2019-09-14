@@ -1,6 +1,7 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.species.input.EvolutionInputDto;
+import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberBriefDto;
 import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.object.Evolution;
 import com.pokemonurpg.object.Species;
@@ -31,6 +32,20 @@ public class EvolutionService {
             return prevoDbid;
         }
         else return -1;
+    }
+
+    public EvolutionFamilyMemberBriefDto findByEvolutionDbid(int evolutionDbid) {
+        Evolution evolution = evolutionRepository.findByIdEvolutionDbid(evolutionDbid);
+        if (evolution != null) {
+            EvolutionFamilyMemberBriefDto dto = new EvolutionFamilyMemberBriefDto();
+
+            Species evo = speciesRepository.findByDbid(evolution.getId().getPreEvolutionDbid());
+            dto.setName(evo.getName());
+            dto.setMethod(evolution.getMethod());
+
+            return dto;
+        }
+        else return null;
     }
 
     public List<EvolutionFamilyMemberDto> findEvolutionsByPreEvolutionDbid(int preEvolutionDbid) {

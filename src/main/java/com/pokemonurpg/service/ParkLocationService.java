@@ -18,8 +18,8 @@ public class ParkLocationService {
         this.parkLocationRepository = parkLocationRepository;
     }
 
-    public List<ParkLocation> findAll() {
-        return parkLocationRepository.findAll();
+    public List<Object> findAll() {
+        return parkLocationRepository.findAllNames();
     }
 
     public ParkLocation findByDbid(int dbid) {

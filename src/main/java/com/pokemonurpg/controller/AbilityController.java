@@ -1,5 +1,6 @@
 package com.pokemonurpg.controller;
 
+import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.object.Ability;
 import com.pokemonurpg.object.Member;
 import com.pokemonurpg.dto.security.Authenticated;
@@ -21,6 +22,12 @@ public class AbilityController {
     public AbilityController(AbilityService abilityService, MemberService memberService) {
         this.abilityService = abilityService;
         this.memberService = memberService;
+    }
+
+    @GetMapping
+    public @ResponseBody
+    RestResponse getAllAbilities() {
+        return new RestResponse(200, abilityService.findAll());
     }
 
     @GetMapping(path="/{name}")

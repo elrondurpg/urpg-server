@@ -21,8 +21,8 @@ public class AbilityService {
         this.abilityRepository = abilityRepository;
     }
 
-    public List<Ability> findAll() {
-        return abilityRepository.findAll();
+    public List<Object> findAll() {
+        return abilityRepository.findAllNames();
     }
 
     public Ability findByDbid(Integer dbid) {

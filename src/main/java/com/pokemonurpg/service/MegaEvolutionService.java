@@ -1,6 +1,7 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.species.input.MegaEvolutionInputDto;
+import com.pokemonurpg.dto.species.response.MegaEvolutionBriefDto;
 import com.pokemonurpg.dto.species.response.MegaEvolutionDto;
 import com.pokemonurpg.dto.species.response.SpeciesAbilityDto;
 import com.pokemonurpg.object.Ability;
@@ -33,6 +34,20 @@ public class MegaEvolutionService {
     public boolean isMegaEvolution(int dbid) {
         MegaEvolution mega = megaEvolutionRepository.findByIdMegaEvolutionDbid(dbid);
         return mega != null;
+    }
+
+    public MegaEvolutionBriefDto findByMegaDbid(int dbid) {
+        MegaEvolution mega = megaEvolutionRepository.findByIdMegaEvolutionDbid(dbid);
+        if (mega != null) {
+            MegaEvolutionBriefDto dto = new MegaEvolutionBriefDto();
+
+            Species species = speciesRepository.findByDbid(mega.getId().getOriginalDbid());
+            dto.setName(species.getName());
+            dto.setMegaStone(mega.getMegaStone());
+
+            return dto;
+        }
+        else return null;
     }
 
     public List<MegaEvolutionDto> findByOriginalDbid(int dbid) {

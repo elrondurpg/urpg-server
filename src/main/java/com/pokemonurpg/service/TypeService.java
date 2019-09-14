@@ -18,7 +18,11 @@ public class TypeService {
         this.typeRepository = typeRepository;
     }
 
-    public List<Type> findAll() {
+    public List<Object> findAll() {
+        return typeRepository.findAllNames();
+    }
+
+    public List<Type> findAllFull() {
         return typeRepository.findAll();
     }
 
