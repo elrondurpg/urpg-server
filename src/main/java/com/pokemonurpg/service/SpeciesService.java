@@ -262,6 +262,7 @@ public class SpeciesService {
                 List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
                 Collections.sort(abilities);
                 dto.setAbilities(abilities);
+                dto.setCosmetic(true);
                 cosmeticFormDtos.add(dto);
             }
 
@@ -273,6 +274,7 @@ public class SpeciesService {
                             List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());
                             Collections.sort(abilities);
                             dto.setAbilities(abilities);
+                            dto.setCosmetic(true);
                             cosmeticFormDtos.add(dto);
                         }
                     }
@@ -573,7 +575,7 @@ public class SpeciesService {
             }
 
             if (input.getCosmeticForms() != null) {
-                for (CosmeticFormDto cosmeticFormDto : input.getCosmeticForms()) {
+                for (CosmeticFormInputDto cosmeticFormDto : input.getCosmeticForms()) {
                     if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
                         errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
                     }
@@ -733,7 +735,7 @@ public class SpeciesService {
             }
 
             if (input.getCosmeticForms() != null) {
-                for (CosmeticFormDto cosmeticFormDto : input.getCosmeticForms()) {
+                for (CosmeticFormInputDto cosmeticFormDto : input.getCosmeticForms()) {
                     if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
                         errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
                     }

@@ -1,7 +1,6 @@
 package com.pokemonurpg.dto.species.input;
 
 import com.pokemonurpg.dto.InputDto;
-import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class SpeciesInputDto extends InputDto {
     private String formName;
     private List<SpeciesAttackInputDto> attacks;
     private List<SpeciesAbilityInputDto> abilities;
-    private List<CosmeticFormDto> cosmeticForms;
+    private List<CosmeticFormInputDto> cosmeticForms;
     private String alteredFormMethod;
     private EvolutionInputDto evolvesFrom;
     private MegaEvolutionInputDto megaEvolvesFrom;
@@ -239,11 +238,11 @@ public class SpeciesInputDto extends InputDto {
         this.abilities = abilities;
     }
 
-    public List<CosmeticFormDto> getCosmeticForms() {
+    public List<CosmeticFormInputDto> getCosmeticForms() {
         return cosmeticForms;
     }
 
-    public void setCosmeticForms(List<CosmeticFormDto> cosmeticForms) {
+    public void setCosmeticForms(List<CosmeticFormInputDto> cosmeticForms) {
         this.cosmeticForms = cosmeticForms;
     }
 

@@ -22,6 +22,7 @@ public class AlteredFormDto {
     private List<SpeciesAbilityDto> abilities;
     private HashMap<String, String> uniqueAttacks;
     private String method;
+    private boolean cosmetic = false;
 
     public AlteredFormDto(Species species) {
         if (species != null) {
@@ -217,5 +218,13 @@ public class AlteredFormDto {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public boolean isCosmetic() {
+        return cosmetic;
+    }
+
+    public void setCosmetic(boolean cosmetic) {
+        this.cosmetic = cosmetic;
     }
 }

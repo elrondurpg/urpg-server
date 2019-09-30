@@ -46,7 +46,7 @@ public class MemberService
         if (exists(login.getBrowser()) && exists(login.getPassword()) && exists(login.getUsername())) {
             Member member = memberRepository.findByUsername(login.getUsername());
             if (hasCorrectPassword(login, member)) {
-                return createAuthToken(login);
+                return createAuthToken(login, member);
             }
         }
         return null;
@@ -142,9 +142,9 @@ public class MemberService
         }
     }
 
-    public String createAuthToken(LoginDto login) {
+    public String createAuthToken(LoginDto login, Member member) {
         try {
-            return hash("" + login.getPassword() + login.getBrowser());
+            return hash("" + member.getPassword() + login.getBrowser());
         } catch (Exception e) {
             return null;
         }

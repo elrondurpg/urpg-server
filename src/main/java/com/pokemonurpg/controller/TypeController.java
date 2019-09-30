@@ -1,12 +1,8 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.object.Type;
 import com.pokemonurpg.service.TypeService;
-import com.pokemonurpg.validator.TypeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.service;
 
+import com.pokemonurpg.dto.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 import com.pokemonurpg.object.CosmeticForm;
 import com.pokemonurpg.repository.CosmeticFormRepository;
@@ -34,32 +35,37 @@ public class CosmeticFormService
         else return Collections.emptyList();
     }
 
-    public void create(int speciesDbid, CosmeticFormDto input) {
+    public void create(int speciesDbid, CosmeticFormInputDto input) {
         CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getFormName(), input.getMethod());
         cosmeticFormRepository.save(form);
     }
 
-    public void createAll(int speciesDbid, List<CosmeticFormDto> input) {
+    public void createAll(int speciesDbid, List<CosmeticFormInputDto> input) {
         if (input != null) {
-            for (CosmeticFormDto dto : input) {
+            for (CosmeticFormInputDto dto : input) {
                 create(speciesDbid, dto);
             }
         }
     }
 
-    public void update(CosmeticForm existingRecord, CosmeticFormDto input) {
-        if (input.getFormName() != null) {
-            existingRecord.setFormName(input.getFormName());
+    public void update(CosmeticForm existingRecord, CosmeticFormInputDto input) {
+        if (input.isDeleted()) {
+            cosmeticFormRepository.delete(existingRecord);
         }
-        if (input.getMethod() != null) {
-            existingRecord.setMethod(input.getMethod());
+        else {
+            if (input.getFormName() != null) {
+                existingRecord.setFormName(input.getFormName());
+            }
+            if (input.getMethod() != null) {
+                existingRecord.setMethod(input.getMethod());
+            }
+            cosmeticFormRepository.save(existingRecord);
         }
-        cosmeticFormRepository.save(existingRecord);
     }
 
-    public void updateAll(int speciesDbid, List<CosmeticFormDto> input) {
+    public void updateAll(int speciesDbid, List<CosmeticFormInputDto> input) {
         if (input != null) {
-            for (CosmeticFormDto record : input) {
+            for (CosmeticFormInputDto record : input) {
                 CosmeticForm existingRecord = cosmeticFormRepository.findByIdSpeciesDbidAndIdName(speciesDbid, record.getName());
                 if (existingRecord != null) {
                     update(existingRecord, record);
