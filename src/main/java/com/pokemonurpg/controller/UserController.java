@@ -39,32 +39,32 @@ public class UserController {
 
     @PostMapping("/invite")
     public @ResponseBody
-    ResponseEntity invite(@RequestBody Authenticated<String> input) {
+    RestResponse invite(@RequestBody Authenticated<String> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
             if (memberService.authorize(member, "Invite User")) {
                 String betaKey = memberService.inviteUser(input.getPayload());
                 if (betaKey != null) {
-                    return ResponseEntity.ok(betaKey);
+                    return new RestResponse(200, betaKey);
                 }
                 else {
-                    return ResponseEntity.status(500).body("An unexpected error occurred.");
+                    return new RestResponse(500, "An unexpected error occurred.");
                 }
             }
-            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+            else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+        else return new RestResponse(401, "User " + input.getUsername() + " could not be authenticated.");
     }
 
     @PutMapping("/registerBeta")
     public @ResponseBody
-    ResponseEntity registerBeta(@RequestBody RegisterBetaDto input) {
+    RestResponse registerBeta(@RequestBody RegisterBetaDto input) {
         boolean success = memberService.registerBeta(input);
         if (success) {
-            return ResponseEntity.ok().build();
+            return new RestResponse(200, null);
         }
         else {
-            return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be registered.");
+            return new RestResponse(401, "User " + input.getUsername() + " could not be registered.");
         }
     }
 

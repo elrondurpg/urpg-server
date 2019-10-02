@@ -129,7 +129,7 @@ public class MemberService
             if (loginCheck != null && !loginCheck.equals("") && !loginCheck.isEmpty()) {
                 String memberPassword = member.getPassword();
                 if (memberPassword != null && !memberPassword.equals("") && !memberPassword.isEmpty()) {
-                    if (loginCheck.equals(member.getPassword())) {
+                    if (loginCheck.equals(memberPassword)) {
                         return true;
                     }
                 }
