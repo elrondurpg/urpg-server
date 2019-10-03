@@ -62,28 +62,28 @@ public class EvolutionService {
         return dtos;
     }
 
-    public void create(int evoDbid, EvolutionInputDto evolutionInputDto) {
-        if (evolutionInputDto != null) {
-            Species prevo = speciesRepository.findByName(evolutionInputDto.getName());
-            Evolution evolution = new Evolution(evoDbid, prevo.getDbid(), evolutionInputDto.getMethod());
+    public void create(int evoDbid, EvolutionInputDto input) {
+        if (input != null && input.getName() != null) {
+            Species prevo = speciesRepository.findByName(input.getName());
+            Evolution evolution = new Evolution(evoDbid, prevo.getDbid(), input.getMethod());
             evolutionRepository.save(evolution);
         }
     }
 
-    public void update(int evoDbid, EvolutionInputDto evolutionInputDto) {
-        if (evolutionInputDto != null) {
+    public void update(int evoDbid, EvolutionInputDto input) {
+        if (input != null && input.getName() != null) {
             Evolution existingRecord = evolutionRepository.findByIdEvolutionDbid(evoDbid);
             if (existingRecord != null) {
-                if (evolutionInputDto.getMethod() != null) {
-                    existingRecord.setMethod(evolutionInputDto.getMethod());
+                if (input.getMethod() != null) {
+                    existingRecord.setMethod(input.getMethod());
                 }
-                if (evolutionInputDto.getNumBattles() != null) {
-                    existingRecord.setNumBattles(evolutionInputDto.getNumBattles());
+                if (input.getNumBattles() != null) {
+                    existingRecord.setNumBattles(input.getNumBattles());
                 }
                 evolutionRepository.save(existingRecord);
             }
             else {
-                create(evoDbid, evolutionInputDto);
+                create(evoDbid, input);
             }
         }
     }

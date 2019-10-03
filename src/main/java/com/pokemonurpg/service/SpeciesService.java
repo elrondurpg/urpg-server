@@ -712,12 +712,20 @@ public class SpeciesService {
                 errors.reject("Park Location " + input.getParkLocation() + " is invalid.");
             }
 
+            ArrayList<String> attackMethods = new ArrayList<>();
+            attackMethods.add("LEVEL-UP");
+            attackMethods.add("BREEDING");
+            attackMethods.add("TM");
+            attackMethods.add("HM");
+            attackMethods.add("MOVE TUTOR");
+            attackMethods.add("SPECIAL");
+
             if (input.getAttacks() != null) {
                 for (SpeciesAttackInputDto speciesAttackInputDto : input.getAttacks()) {
-                    if (speciesAttackInputDto.getName() == null || attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
+                    if (speciesAttackInputDto.getName() != null && attackRepository.findByName(speciesAttackInputDto.getName()) == null) {
                         errors.reject("Attack name " + speciesAttackInputDto.getName() + " is invalid.");
                     }
-                    if (speciesAttackInputDto.getMethod() == null) {
+                    if (speciesAttackInputDto.getMethod() != null && !attackMethods.contains(speciesAttackInputDto.getMethod())) {
                         errors.reject("Attack learn method " + speciesAttackInputDto.getMethod() + " for " + speciesAttackInputDto.getName() + " is invalid.");
                     }
                 }
@@ -725,7 +733,7 @@ public class SpeciesService {
 
             if (input.getAbilities() != null) {
                 for (SpeciesAbilityInputDto speciesAbilityInputDto : input.getAbilities()) {
-                    if (speciesAbilityInputDto.getName() == null || abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
+                    if (speciesAbilityInputDto.getName() != null && abilityRepository.findByName((speciesAbilityInputDto.getName())) == null) {
                         errors.reject("Ability name " + speciesAbilityInputDto.getName() + " is invalid.");
                     }
                     if (speciesAbilityInputDto.isHidden() == null) {
@@ -736,13 +744,13 @@ public class SpeciesService {
 
             if (input.getCosmeticForms() != null) {
                 for (CosmeticFormInputDto cosmeticFormDto : input.getCosmeticForms()) {
-                    if (cosmeticFormDto.getName() == null || cosmeticFormDto.getName().length() > 20) {
+                    if (cosmeticFormDto.getName() != null && cosmeticFormDto.getName().length() > 20) {
                         errors.reject("Cosmetic form name " + cosmeticFormDto.getName() + " is invalid.");
                     }
-                    if (cosmeticFormDto.getFormName() == null || cosmeticFormDto.getFormName().length() > 20) {
+                    if (cosmeticFormDto.getFormName() != null && cosmeticFormDto.getFormName().length() > 20) {
                         errors.reject("Cosmetic form display name " + cosmeticFormDto.getFormName() + " is invalid.");
                     }
-                    if (cosmeticFormDto.getMethod() == null || cosmeticFormDto.getMethod().length() > 110) {
+                    if (cosmeticFormDto.getMethod() != null && cosmeticFormDto.getMethod().length() > 110) {
                         errors.reject("Cosmetic form method " + cosmeticFormDto.getMethod() + " is invalid.");
                     }
                 }
@@ -754,23 +762,23 @@ public class SpeciesService {
 
             if (input.getEvolvesFrom() != null) {
                 EvolutionInputDto evolutionInputDto = input.getEvolvesFrom();
-                if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
+                if (evolutionInputDto.getName() != null && speciesRepository.findByName(evolutionInputDto.getName()) == null) {
                     errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
                 }
-                if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                if (evolutionInputDto.getMethod() != null && evolutionInputDto.getMethod().length() > 50) {
                     errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
                 }
-                if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                if (evolutionInputDto.getNumBattles() != null && evolutionInputDto.getNumBattles() > 10) {
                     errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
                 }
             }
 
             if (input.getMegaEvolvesFrom() != null) {
                 MegaEvolutionInputDto megaEvolutionInputDto = input.getMegaEvolvesFrom();
-                if (speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
+                if (megaEvolutionInputDto.getName() != null && speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
                     errors.reject("Pre-mega form " + megaEvolutionInputDto.getName() + " is not a real Pokemon.");
                 }
-                if (megaEvolutionInputDto.getMegaStone() == null || megaEvolutionInputDto.getMegaStone().length() > 50) {
+                if (megaEvolutionInputDto.getMegaStone() != null && megaEvolutionInputDto.getMegaStone().length() > 50) {
                     errors.reject("Mega Stone " + megaEvolutionInputDto.getMegaStone() + " is invalid.");
                 }
             }

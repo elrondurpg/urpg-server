@@ -70,7 +70,7 @@ public class MegaEvolutionService {
     }
 
     public void create(int megaEvolutionDbid, MegaEvolutionInputDto input) {
-        if (input != null) {
+        if (input != null && input.getName() != null) {
             Species species = speciesRepository.findByName(input.getName());
             MegaEvolution mega = new MegaEvolution(megaEvolutionDbid, species.getDbid(), input.getMegaStone());
             megaEvolutionRepository.save(mega);
@@ -78,7 +78,7 @@ public class MegaEvolutionService {
     }
 
     public void update(int megaEvolutionDbid, MegaEvolutionInputDto input) {
-        if (input != null) {
+        if (input != null && input.getName() != null) {
             MegaEvolution existingRecord = megaEvolutionRepository.findByIdMegaEvolutionDbid(megaEvolutionDbid);
             if (existingRecord != null) {
                 if (input.getMegaStone() != null) {
