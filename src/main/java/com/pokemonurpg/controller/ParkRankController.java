@@ -19,7 +19,7 @@ public class ParkRankController {
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllSpecies() {
+    RestResponse getAllParkRanks() {
         return new RestResponse(200, parkRankService.findAll());
     }
 }

@@ -594,24 +594,28 @@ public class SpeciesService {
 
             if (input.getEvolvesFrom() != null) {
                 EvolutionInputDto evolutionInputDto = input.getEvolvesFrom();
-                if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
-                    errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
-                }
-                if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
-                    errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
-                }
-                if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
-                    errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
+                if (evolutionInputDto.getName() != null) {
+                    if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
+                        errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
+                    }
+                    if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                        errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
+                    }
+                    if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                        errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
+                    }
                 }
             }
 
             if (input.getMegaEvolvesFrom() != null) {
                 MegaEvolutionInputDto megaEvolutionInputDto = input.getMegaEvolvesFrom();
-                if (speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
-                    errors.reject("Pre-mega form " + megaEvolutionInputDto.getName() + " is not a real Pokemon.");
-                }
-                if (megaEvolutionInputDto.getMegaStone() == null || megaEvolutionInputDto.getMegaStone().length() > 50) {
-                    errors.reject("Mega Stone " + megaEvolutionInputDto.getMegaStone() + " is invalid.");
+                if (megaEvolutionInputDto.getName() != null) {
+                    if (speciesRepository.findByName(megaEvolutionInputDto.getName()) == null) {
+                        errors.reject("Pre-mega form " + megaEvolutionInputDto.getName() + " is not a real Pokemon.");
+                    }
+                    if (megaEvolutionInputDto.getMegaStone() == null || megaEvolutionInputDto.getMegaStone().length() > 50) {
+                        errors.reject("Mega Stone " + megaEvolutionInputDto.getMegaStone() + " is invalid.");
+                    }
                 }
             }
         }

@@ -2,7 +2,14 @@ package com.pokemonurpg.repository;
 
 import com.pokemonurpg.object.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-    Member findByUsername(String username);
+    @Query("select x.username from Member x")
+    List<Object> findAllNames();
+    Member findByDbid(int dbid);
+    Member findByUsername(String name);
+    List<Member> findByUsernameStartingWith(String username);
 }

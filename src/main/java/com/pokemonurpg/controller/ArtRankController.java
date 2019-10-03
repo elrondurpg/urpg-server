@@ -20,7 +20,7 @@ public class ArtRankController {
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllSpecies() {
+    RestResponse getAllArtRanks() {
         return new RestResponse(200, artRankService.findAll());
     }
 }

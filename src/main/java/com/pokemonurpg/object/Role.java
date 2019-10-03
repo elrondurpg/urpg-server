@@ -1,5 +1,7 @@
 package com.pokemonurpg.object;
 
+import com.pokemonurpg.dto.security.RoleInputDto;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,12 @@ public class Role {
     private String name;
 
     public Role() {
+    }
+
+    public Role(RoleInputDto input) {
+        if (input != null) {
+            setName(input.getName());
+        }
     }
 
     public int getDbid() {

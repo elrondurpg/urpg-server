@@ -1,16 +1,17 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.dto.security.Authenticated;
-import com.pokemonurpg.dto.security.LoginDto;
-import com.pokemonurpg.dto.security.RegisterBetaDto;
+import com.pokemonurpg.dto.security.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.MapBindingResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -21,6 +22,7 @@ public class MemberService
 {
     private MemberRepository memberRepository;
     private RoleRepository roleRepository;
+    private MemberRoleService memberRoleService;
     private MemberRoleRepository memberRoleRepository;
     private PermissionRepository permissionRepository;
     private RolePermissionRepository rolePermissionRepository;
@@ -32,14 +34,20 @@ public class MemberService
 
     Random rand = new Random();
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleRepository memberRoleRepository,
-                         PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository) {
+    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleService memberRoleService, MemberRoleRepository memberRoleRepository, PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository) {
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
+        this.memberRoleService = memberRoleService;
         this.memberRoleRepository = memberRoleRepository;
         this.permissionRepository = permissionRepository;
         this.rolePermissionRepository = rolePermissionRepository;
+    }
+
+    @Autowired
+
+
+    public List<Object> findAll() {
+        return memberRepository.findAllNames();
     }
 
     public String login(LoginDto login) {
@@ -215,5 +223,45 @@ public class MemberService
         }
 
         return sb.toString();
+    }
+
+    public Errors updateMember(MemberInputDto input) {
+        Errors errors = validateMemberUpdate(input);
+        if (!errors.hasErrors()) {
+            Member existingMember = memberRepository.findByUsername(input.getName());
+            if (input.getName() != null) {
+                existingMember.setUsername(input.getName());
+            }
+
+            memberRepository.save(existingMember);
+            int dbid = existingMember.getDbid();
+
+            memberRoleService.updateAll(dbid, input.getRoles());
+        }
+        return errors;
+    }
+
+    public Errors validateMemberUpdate(MemberInputDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+
+        Member existingRecord = memberRepository.findByUsername(input.getName());
+        if (existingRecord != null) {
+            if (input.getName() != null && (input.getName().length() < 3 || input.getName().length() > 17)) {
+                errors.reject("Member name " + input.getName() + " is invalid.");
+            }
+
+            if (input.getRoles() != null) {
+                for (MemberRoleInputDto memberRoleInputDto : input.getRoles()) {
+                    if (memberRoleInputDto.getName() != null && roleRepository.findByName(memberRoleInputDto.getName()) == null) {
+                        errors.reject("Role name " + memberRoleInputDto.getName() + " is invalid.");
+                    }
+                }
+            }
+        }
+        else {
+            errors.reject("Member " + input.getName() + " doesn't exist.");
+        }
+
+        return errors;
     }
 }

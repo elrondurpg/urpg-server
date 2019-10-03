@@ -16,6 +16,10 @@ public class Permission {
     public Permission() {
     }
 
+    public Permission(String name) {
+        this.name = name;
+    }
+
     public int getDbid() {
         return dbid;
     }

@@ -19,7 +19,7 @@ public class StoryRankController {
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllSpecies() {
+    RestResponse getAllStoryRanks() {
         return new RestResponse(200, storyRankService.findAll());
     }
 }

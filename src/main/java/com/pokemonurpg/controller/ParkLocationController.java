@@ -19,7 +19,7 @@ public class ParkLocationController {
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllSpecies() {
+    RestResponse getAllParkLocations() {
         return new RestResponse(200, parkLocationService.findAll());
     }
 }

@@ -22,7 +22,7 @@ public class TypeController {
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllSpecies() {
+    RestResponse getAllTypes() {
         return new RestResponse(200, typeService.findAll());
     }
 }

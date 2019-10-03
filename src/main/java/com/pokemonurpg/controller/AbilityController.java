@@ -32,51 +32,51 @@ public class AbilityController {
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    ResponseEntity<Ability> getAbilityByName(@PathVariable("name") String name) {
+    RestResponse getAbilityByName(@PathVariable("name") String name) {
         try {
             Ability dto = abilityService.findByName(name);
             if (dto != null) {
-                return ResponseEntity.ok(dto);
+                return new RestResponse(200, dto);
             }
-            else return ResponseEntity.notFound().build();
+            else return new RestResponse(404, "Ability not found.");
         } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().build();
+            return new RestResponse(400, "Bad request.");
         }
     }
 
     @PostMapping
     public @ResponseBody
-    ResponseEntity createAbility(@RequestBody Authenticated<Ability> input) {
+    RestResponse createAbility(@RequestBody Authenticated<Ability> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
             if (memberService.authorize(member, "Write Ability")) {
                 Ability ability = input.getPayload();
                 Errors errors = abilityService.createAbility(ability);
                 if (errors.hasErrors()) {
-                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                    return new RestResponse(400, errors.getAllErrors());
                 }
-                else return ResponseEntity.ok("Ability " + ability.getName() + " was created successfully!");
+                else return new RestResponse(200,"Ability " + ability.getName() + " was created successfully!");
             }
-            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
     }
 
     @PutMapping
     public @ResponseBody
-    ResponseEntity updateAbility(@RequestBody Authenticated<Ability> input) {
+    RestResponse updateAbility(@RequestBody Authenticated<Ability> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
-            if (memberService.authorize(member, "Write Species")) {
+            if (memberService.authorize(member, "Write Ability")) {
                 Ability ability = input.getPayload();
                 Errors errors = abilityService.updateAbility(ability);
                 if (errors.hasErrors()) {
-                    return ResponseEntity.badRequest().body(errors.getAllErrors());
+                    return new RestResponse(400, errors.getAllErrors());
                 }
-                else return ResponseEntity.ok("Ability " + ability.getName() + " was updated successfully!");
+                else return new RestResponse(200,"Ability " + ability.getName() + " was updated successfully!");
             }
-            else return ResponseEntity.status(401).body("User " + input.getUsername() + " does not have permission to perform the requested action.");
+            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
-        else return ResponseEntity.status(401).body("User " + input.getUsername() + " could not be authenticated.");
+        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
     }
 }

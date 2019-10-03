@@ -88,8 +88,8 @@ public class SpeciesControllerTest
         String speciesName = "TestName";
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(pokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
-        when(speciesService.findByNameStartingWith(speciesName.substring(0, 3))).thenReturn(Optional.of(pokemon));
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsernameStartingWith(speciesName.substring(0, 3))).thenReturn(Optional.of(pokemon));
 
         ResponseEntity<Species> responseWithFullName = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
         assertEquals(HttpStatus.OK, responseWithFullName.getStatusCode());
@@ -121,7 +121,7 @@ public class SpeciesControllerTest
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
 
         Optional<Species> speciesOptional = Optional.of(pokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
 
@@ -149,7 +149,7 @@ public class SpeciesControllerTest
 
         Species existingPokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(existingPokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         Species updatedPokemon = SpeciesTestFactory.createSpecies(speciesName);
         updatedPokemon.setDexno(999);
@@ -168,7 +168,7 @@ public class SpeciesControllerTest
 
         Species existingPokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(existingPokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         Species updatedPokemon = SpeciesTestFactory.createSpecies(speciesName);
         updatedPokemon.setDexno(10101);
@@ -187,7 +187,7 @@ public class SpeciesControllerTest
 
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(pokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
 
@@ -202,7 +202,7 @@ public class SpeciesControllerTest
 
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(pokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         Species updatedPokemon = SpeciesTestFactory.createSpecies(invalidName);
 
@@ -223,7 +223,7 @@ public class SpeciesControllerTest
         String speciesName = "TestName";
         Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
         Optional<Species> speciesOptional = Optional.of(pokemon);
-        when(speciesService.findByName(speciesName)).thenReturn(speciesOptional);
+        when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -235,11 +235,11 @@ public class SpeciesControllerTest
     public void updateSpeciesWithNewAttackSuccess() {
         Species existingSpecies = mock(Species.class);
         when(existingSpecies.getDbid()).thenReturn(POKEMON_DBID);
-        when(speciesService.findByName(POKEMON_NAME)).thenReturn(Optional.of(existingSpecies));
+        when(speciesService.findByUsername(POKEMON_NAME)).thenReturn(Optional.of(existingSpecies));
 
         Attack existingAttack = mock(Attack.class);
         when(existingAttack.getDbid()).thenReturn(ATTACK_DBID);
-        when(attackService.findByName(ATTACK_NAME)).thenReturn(Optional.of(existingAttack));
+        when(attackService.findByUsername(ATTACK_NAME)).thenReturn(Optional.of(existingAttack));
 
         Species requestedSpecies = SpeciesTestFactory.createSpecies(POKEMON_NAME, POKEMON_DBID);
         when(typeService.findByDbid(Matchers.any(Integer.class))).thenReturn(Optional.of(new Type("Electric")));

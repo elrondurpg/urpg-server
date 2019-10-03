@@ -85,7 +85,7 @@ public class SpeciesController {
     /*
     @DeleteMapping(path="/{name}")
     public ResponseEntity deleteSpecies(@PathVariable String name) {
-        Optional<Species> speciesOptional = speciesService.findByName(name);
+        Optional<Species> speciesOptional = speciesService.findByUsername(name);
 
         if (!speciesOptional.isPresent())
             return ResponseEntity.notFound().build();

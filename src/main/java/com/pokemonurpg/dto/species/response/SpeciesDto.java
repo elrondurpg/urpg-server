@@ -51,7 +51,9 @@ public class SpeciesDto {
             dexno = species.getDexno();
             name = species.getName();
             type1 = species.getType1().getName();
-            type2 = species.getType2().getName();
+            if (species.getType2() != null) {
+                type2 = species.getType2().getName();
+            }
             classification = species.getClassification();
             hp = species.getHp();
             attack = species.getAttack();

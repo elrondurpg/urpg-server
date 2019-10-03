@@ -1,42 +1,40 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.dto.attack.AttackDto;
-import com.pokemonurpg.dto.attack.AttackInputDto;
-import com.pokemonurpg.object.Member;
+import com.pokemonurpg.dto.security.RoleDto;
 import com.pokemonurpg.dto.security.Authenticated;
-import com.pokemonurpg.service.AttackService;
+import com.pokemonurpg.dto.security.RoleInputDto;
+import com.pokemonurpg.object.Member;
 import com.pokemonurpg.service.MemberService;
+import com.pokemonurpg.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/attack")
+@RequestMapping("/role")
 @CrossOrigin
-public class AttackController {
-
-    private AttackService attackService;
+public class RoleController {
+    private RoleService roleService;
     private MemberService memberService;
 
     @Autowired
-    public AttackController(AttackService attackService, MemberService memberService) {
-        this.attackService = attackService;
+    public RoleController(RoleService roleService, MemberService memberService) {
+        this.roleService = roleService;
         this.memberService = memberService;
     }
 
     @GetMapping
     public @ResponseBody
-    RestResponse getAllAttacks() {
-        return new RestResponse(200, attackService.findAll());
+    RestResponse getAllRoles() {
+        return new RestResponse(200, roleService.findAll());
     }
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    RestResponse getAttackByName(@PathVariable("name") String name) {
+    RestResponse getRoleByName(@PathVariable("name") String name) {
         try {
-            AttackDto dto = attackService.findByName(name);
+            RoleDto dto = roleService.findByName(name);
             if (dto != null) {
                 return new RestResponse(200, dto);
             }
@@ -48,16 +46,16 @@ public class AttackController {
 
     @PostMapping
     public @ResponseBody
-    RestResponse createAttack(@RequestBody Authenticated<AttackInputDto> input) {
+    RestResponse createRole(@RequestBody Authenticated<RoleInputDto> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
-            if (memberService.authorize(member, "Write Attack")) {
-                AttackInputDto attack = input.getPayload();
-                Errors errors = attackService.createAttack(attack);
+            if (memberService.authorize(member, "Write Role")) {
+                RoleInputDto role = input.getPayload();
+                Errors errors = roleService.createRole(role);
                 if (errors.hasErrors()) {
                     return new RestResponse(400, errors.getAllErrors());
                 }
-                else return new RestResponse(200, "Attack " + attack.getName() + " was created successfully!");
+                else return new RestResponse(200, "Role " + role.getName() + " was created successfully!");
             }
             else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
         }
@@ -66,16 +64,16 @@ public class AttackController {
 
     @PutMapping
     public @ResponseBody
-    RestResponse updateAttack(@RequestBody Authenticated<AttackInputDto> input) {
+    RestResponse updateRole(@RequestBody Authenticated<RoleInputDto> input) {
         Member member = memberService.authenticate(input);
         if (member != null) {
-            if (memberService.authorize(member, "Write Attack")) {
-                AttackInputDto attack = input.getPayload();
-                Errors errors = attackService.updateAttack(attack);
+            if (memberService.authorize(member, "Write Role")) {
+                RoleInputDto role = input.getPayload();
+                Errors errors = roleService.updateRole(role);
                 if (errors.hasErrors()) {
                     return new RestResponse(400, errors.getAllErrors());
                 }
-                else return new RestResponse(200, "Attack " + attack.getName() + " was updated successfully!");
+                else return new RestResponse(200, "Role " + role.getName() + " was updated successfully!");
             }
             else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
         }

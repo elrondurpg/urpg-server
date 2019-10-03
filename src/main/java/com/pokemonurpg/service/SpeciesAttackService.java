@@ -41,8 +41,10 @@ public class SpeciesAttackService {
 
     public void create(int speciesDbid, SpeciesAttackInputDto input) {
         Attack attack = attackRepository.findByName(input.getName());
-        SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), input.getMethod(), input.getGeneration());
-        speciesAttackRepository.save(speciesAttack);
+        if (attack != null) {
+            SpeciesAttack speciesAttack = new SpeciesAttack(speciesDbid, attack.getDbid(), input.getMethod(), input.getGeneration());
+            speciesAttackRepository.save(speciesAttack);
+        }
     }
 
     public void createAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
