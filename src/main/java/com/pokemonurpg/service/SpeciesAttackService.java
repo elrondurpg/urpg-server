@@ -49,7 +49,9 @@ public class SpeciesAttackService {
 
     public void createAll(int speciesDbid, List<SpeciesAttackInputDto> input) {
         for (SpeciesAttackInputDto record : input) {
-            create(speciesDbid, record);
+            if (!record.isDeleted()) {
+                create(speciesDbid, record);
+            }
         }
     }
 

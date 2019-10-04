@@ -38,7 +38,7 @@ public class RoleController {
             if (dto != null) {
                 return new RestResponse(200, dto);
             }
-            else return new RestResponse(404, "Attack not found.");
+            else return new RestResponse(404, "Role not found.");
         } catch (IllegalStateException e) {
             return new RestResponse(400, "Bad request.");
         }

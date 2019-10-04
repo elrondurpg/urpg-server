@@ -11,6 +11,7 @@ import org.springframework.validation.MapBindingResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +35,7 @@ public class MemberService
 
     Random rand = new Random();
 
+    @Autowired
     public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleService memberRoleService, MemberRoleRepository memberRoleRepository, PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository) {
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
@@ -43,11 +45,41 @@ public class MemberService
         this.rolePermissionRepository = rolePermissionRepository;
     }
 
-    @Autowired
-
-
     public List<Object> findAll() {
         return memberRepository.findAllNames();
+    }
+
+    public MemberDto findByName(String name) {
+        Member member = memberRepository.findByUsername(name);
+        MemberDto dto = null;
+        if (member != null) {
+            dto = new MemberDto(member);
+        }
+        else {
+            List<Member> results = memberRepository.findByUsernameStartingWith(name);
+            if (!results.isEmpty()) {
+                member = results.get(0);
+                dto = new MemberDto(member);
+            }
+            else return null;
+        }
+
+        dto.setRoles(buildDtoRoles(member.getDbid()));
+
+        return dto;
+    }
+
+    public List<String> buildDtoRoles(int memberDbid) {
+        List<MemberRole> memberRoles = memberRoleRepository.findByIdMemberDbid(memberDbid);
+        List<String> dtoRoles = new ArrayList<>();
+        for (MemberRole memberRole : memberRoles) {
+            int dbid = memberRole.getId().getRoleDbid();
+            Role role = roleRepository.findByDbid(dbid);
+            if (role != null) {
+                dtoRoles.add(role.getName());
+            }
+        }
+        return dtoRoles;
     }
 
     public String login(LoginDto login) {
@@ -111,21 +143,31 @@ public class MemberService
     }
 
     public String inviteUser(String username) {
-        try {
-            Member member = new Member();
-            member.setUsername(username);
-            member.setEmail("");
-            member.setPassword("");
+        if (validateInviteUser(username)) {
+            try {
+                Member member = new Member();
+                member.setUsername(username);
+                member.setEmail("");
+                member.setPassword("");
 
-            String betaKey = RandomStringUtils.randomAlphanumeric(10);
-            member.setBetaKey(hash(betaKey));
-            memberRepository.save(member);
+                String betaKey = RandomStringUtils.randomAlphanumeric(10);
+                member.setBetaKey(hash(betaKey));
+                memberRepository.save(member);
 
-            return betaKey;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+                return betaKey;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
+        else return null;
+    }
+
+    public boolean validateInviteUser(String username) {
+        if (username == null || username.isEmpty() || username.equals("")) {
+            return false;
+        }
+        else return true;
     }
 
     public boolean hasCorrectPassword(LoginDto login, Member member) {

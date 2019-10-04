@@ -51,7 +51,8 @@ public class RoleService {
         else {
             List<Role> results = roleRepository.findByNameStartingWith(name);
             if (!results.isEmpty()) {
-                dto = new RoleDto(results.get(0));
+                role = results.get(0);
+                dto = new RoleDto(role);
             }
             else return null;
         }

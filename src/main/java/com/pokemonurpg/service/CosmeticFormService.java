@@ -43,7 +43,9 @@ public class CosmeticFormService
     public void createAll(int speciesDbid, List<CosmeticFormInputDto> input) {
         if (input != null) {
             for (CosmeticFormInputDto dto : input) {
-                create(speciesDbid, dto);
+                if (!dto.isDeleted()) {
+                    create(speciesDbid, dto);
+                }
             }
         }
     }

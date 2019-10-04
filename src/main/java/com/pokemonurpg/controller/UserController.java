@@ -1,10 +1,7 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.dto.security.Authenticated;
-import com.pokemonurpg.dto.security.LoginDto;
-import com.pokemonurpg.dto.security.MemberInputDto;
-import com.pokemonurpg.dto.security.RegisterBetaDto;
+import com.pokemonurpg.dto.security.*;
 import com.pokemonurpg.object.Member;
 import com.pokemonurpg.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,26 @@ public class UserController {
     @Autowired
     public UserController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    @GetMapping
+    public @ResponseBody
+    RestResponse getAllMembers() {
+        return new RestResponse(200, memberService.findAll());
+    }
+
+    @GetMapping(path="/{name}")
+    public @ResponseBody
+    RestResponse getRoleByName(@PathVariable("name") String name) {
+        try {
+            MemberDto dto = memberService.findByName(name);
+            if (dto != null) {
+                return new RestResponse(200, dto);
+            }
+            else return new RestResponse(404, "Member not found.");
+        } catch (IllegalStateException e) {
+            return new RestResponse(400, "Bad request.");
+        }
     }
 
     @PostMapping("/login")

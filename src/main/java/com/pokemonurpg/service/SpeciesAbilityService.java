@@ -51,7 +51,9 @@ public class SpeciesAbilityService {
 
     public void createAll(int speciesDbid, List<SpeciesAbilityInputDto> input) {
         for (SpeciesAbilityInputDto record : input) {
-            create(speciesDbid, record);
+            if (!record.isDeleted()) {
+                create(speciesDbid, record);
+            }
         }
     }
 

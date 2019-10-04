@@ -35,7 +35,9 @@ public class RolePermissionService {
 
     public void createAll(int roleDbid, List<RolePermissionInputDto> input) {
         for (RolePermissionInputDto record : input) {
-            create(roleDbid, record);
+            if (!record.isDeleted()) {
+                create(roleDbid, record);
+            }
         }
     }
 
