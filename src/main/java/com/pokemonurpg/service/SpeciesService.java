@@ -473,14 +473,14 @@ public class SpeciesService {
                 errors.reject("Form name " + input.getFormName() + " is invalid.");
             }
 
-            if (input.getType1() == null) {
+            if (input.getType1() == null || input.getType1().equalsIgnoreCase("NONE")) {
                 errors.reject("Type 1 cannot be null!");
             }
             else if (typeRepository.findByName(input.getType1()) == null) {
                 errors.reject("Type 1: " + input.getType1() + " is invalid.");
             }
 
-            if (input.getType2() != null && typeRepository.findByName(input.getType2()) == null) {
+            if (input.getType2() != null && (typeRepository.findByName(input.getType2()) == null || input.getType2().equalsIgnoreCase(input.getType1()))) {
                 errors.reject("Type 2: " + input.getType2() + " is invalid.");
             }
 
@@ -648,11 +648,11 @@ public class SpeciesService {
                 errors.reject("Form name " + input.getFormName() + " is invalid.");
             }
 
-            if (input.getType1() != null && typeRepository.findByName(input.getType1()) == null) {
+            if (input.getType1() != null && (typeRepository.findByName(input.getType1()) == null || input.getType1().equalsIgnoreCase("NONE"))) {
                 errors.reject("Type 1: " + input.getType1() + " is invalid.");
             }
 
-            if (input.getType2() != null && typeRepository.findByName(input.getType2()) == null) {
+            if (input.getType2() != null && (typeRepository.findByName(input.getType2()) == null || input.getType2().equalsIgnoreCase(input.getType1()))) {
                 errors.reject("Type 2: " + input.getType2() + " is invalid.");
             }
 

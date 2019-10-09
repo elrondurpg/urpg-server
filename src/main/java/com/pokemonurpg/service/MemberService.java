@@ -49,6 +49,10 @@ public class MemberService
         return memberRepository.findAllNames();
     }
 
+    public Member findByExactName(String name) {
+        return memberRepository.findByUsername(name);
+    }
+
     public MemberDto findByName(String name) {
         Member member = memberRepository.findByUsername(name);
         MemberDto dto = null;

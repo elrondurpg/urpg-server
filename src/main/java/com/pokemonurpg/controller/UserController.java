@@ -58,6 +58,11 @@ public class UserController {
         Member member = memberService.authenticate(input);
         if (member != null) {
             if (memberService.authorize(member, "Invite User")) {
+                Member existingMember = memberService.findByExactName(input.getPayload());
+                if (existingMember != null) {
+                    return new RestResponse(400, "A user with that name already exists!");
+                }
+
                 String betaKey = memberService.inviteUser(input.getPayload());
                 if (betaKey != null) {
                     return new RestResponse(200, betaKey);
