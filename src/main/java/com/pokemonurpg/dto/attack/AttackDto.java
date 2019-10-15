@@ -1,7 +1,6 @@
 package com.pokemonurpg.dto.attack;
 
-import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.object.AttackTargetType;
+import com.pokemonurpg.object.*;
 
 public class AttackDto {
     private int dbid;
@@ -18,6 +17,12 @@ public class AttackDto {
     private boolean substitute;
     private boolean sheerForce;
     private boolean magicCoat;
+    private String rseContestAttribute;
+    private RSEContestMoveType rseContestMoveType;
+    private String dppContestAttribute;
+    private DPPContestMoveType dppContestMoveType;
+    private String orasContestAttribute;
+    private ORASContestMoveType orasContestMoveType;
 
     public AttackDto(Attack attack) {
         if (attack != null) {
@@ -39,6 +44,24 @@ public class AttackDto {
             setSubstitute(attack.isSubstitute());
             setSheerForce(attack.isSheerForce());
             setMagicCoat(attack.isMagicCoat());
+            if (attack.getRseContestAttribute() != null) {
+                setRseContestAttribute(attack.getRseContestAttribute().getName());
+            }
+            if (attack.getRseContestMoveType() != null) {
+                setRseContestMoveType(attack.getRseContestMoveType());
+            }
+            if (attack.getDppContestAttribute() != null) {
+                setDppContestAttribute(attack.getDppContestAttribute().getName());
+            }
+            if (attack.getDppContestMoveType() != null) {
+                setDppContestMoveType(attack.getDppContestMoveType());
+            }
+            if (attack.getOrasContestAttribute() != null) {
+                setOrasContestAttribute(attack.getOrasContestAttribute().getName());
+            }
+            if (attack.getOrasContestMoveType() != null) {
+                setOrasContestMoveType(attack.getOrasContestMoveType());
+            }
         }
     }
 
@@ -152,5 +175,53 @@ public class AttackDto {
 
     public void setMagicCoat(boolean magicCoat) {
         this.magicCoat = magicCoat;
+    }
+
+    public String getRseContestAttribute() {
+        return rseContestAttribute;
+    }
+
+    public void setRseContestAttribute(String rseContestAttribute) {
+        this.rseContestAttribute = rseContestAttribute;
+    }
+
+    public RSEContestMoveType getRseContestMoveType() {
+        return rseContestMoveType;
+    }
+
+    public void setRseContestMoveType(RSEContestMoveType rseContestMoveType) {
+        this.rseContestMoveType = rseContestMoveType;
+    }
+
+    public String getDppContestAttribute() {
+        return dppContestAttribute;
+    }
+
+    public void setDppContestAttribute(String dppContestAttribute) {
+        this.dppContestAttribute = dppContestAttribute;
+    }
+
+    public DPPContestMoveType getDppContestMoveType() {
+        return dppContestMoveType;
+    }
+
+    public void setDppContestMoveType(DPPContestMoveType dppContestMoveType) {
+        this.dppContestMoveType = dppContestMoveType;
+    }
+
+    public String getOrasContestAttribute() {
+        return orasContestAttribute;
+    }
+
+    public void setOrasContestAttribute(String orasContestAttribute) {
+        this.orasContestAttribute = orasContestAttribute;
+    }
+
+    public ORASContestMoveType getOrasContestMoveType() {
+        return orasContestMoveType;
+    }
+
+    public void setOrasContestMoveType(ORASContestMoveType orasContestMoveType) {
+        this.orasContestMoveType = orasContestMoveType;
     }
 }

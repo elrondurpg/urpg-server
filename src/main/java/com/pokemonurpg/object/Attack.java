@@ -54,6 +54,30 @@ public class Attack {
     @Column(name = "magic_coat")
     private Boolean magicCoat;
 
+    @OneToOne
+    @JoinColumn(name = "rse_contest_move_type")
+    private RSEContestMoveType rseContestMoveType;
+
+    @OneToOne
+    @JoinColumn(name = "rse_contest_attribute")
+    private ContestAttribute rseContestAttribute;
+
+    @OneToOne
+    @JoinColumn(name = "oras_contest_move_type")
+    private ORASContestMoveType orasContestMoveType;
+
+    @OneToOne
+    @JoinColumn(name = "oras_contest_attribute")
+    private ContestAttribute orasContestAttribute;
+
+    @OneToOne
+    @JoinColumn(name = "dpp_contest_move_type")
+    private DPPContestMoveType dppContestMoveType;
+
+    @OneToOne
+    @JoinColumn(name = "dpp_contest_attribute")
+    private ContestAttribute dppContestAttribute;
+
     public Attack() { }
 
     public Attack(String name) {
@@ -185,5 +209,53 @@ public class Attack {
 
     public void setMagicCoat(Boolean magicCoat) {
         this.magicCoat = magicCoat;
+    }
+
+    public RSEContestMoveType getRseContestMoveType() {
+        return rseContestMoveType;
+    }
+
+    public void setRseContestMoveType(RSEContestMoveType rseContestMoveType) {
+        this.rseContestMoveType = rseContestMoveType;
+    }
+
+    public ContestAttribute getRseContestAttribute() {
+        return rseContestAttribute;
+    }
+
+    public void setRseContestAttribute(ContestAttribute rseContestAttribute) {
+        this.rseContestAttribute = rseContestAttribute;
+    }
+
+    public ORASContestMoveType getOrasContestMoveType() {
+        return orasContestMoveType;
+    }
+
+    public void setOrasContestMoveType(ORASContestMoveType orasContestMoveType) {
+        this.orasContestMoveType = orasContestMoveType;
+    }
+
+    public ContestAttribute getOrasContestAttribute() {
+        return orasContestAttribute;
+    }
+
+    public void setOrasContestAttribute(ContestAttribute orasContestAttribute) {
+        this.orasContestAttribute = orasContestAttribute;
+    }
+
+    public DPPContestMoveType getDppContestMoveType() {
+        return dppContestMoveType;
+    }
+
+    public void setDppContestMoveType(DPPContestMoveType dppContestMoveType) {
+        this.dppContestMoveType = dppContestMoveType;
+    }
+
+    public ContestAttribute getDppContestAttribute() {
+        return dppContestAttribute;
+    }
+
+    public void setDppContestAttribute(ContestAttribute dppContestAttribute) {
+        this.dppContestAttribute = dppContestAttribute;
     }
 }

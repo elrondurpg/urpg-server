@@ -3,16 +3,12 @@ package com.pokemonurpg.service;
 import com.pokemonurpg.dto.attack.AttackDto;
 import com.pokemonurpg.dto.attack.AttackInputDto;
 import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.repository.AttackCategoryRepository;
-import com.pokemonurpg.repository.AttackRepository;
-import com.pokemonurpg.repository.AttackTargetTypeRepository;
-import com.pokemonurpg.repository.TypeRepository;
+import com.pokemonurpg.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.MapBindingResult;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,13 +19,21 @@ public class AttackService {
     private AttackCategoryRepository attackCategoryRepository;
     private AttackTargetTypeRepository attackTargetTypeRepository;
     private TypeRepository typeRepository;
+    private ContestAttributeRepository contestAttributeRepository;
+    private RSEContestMoveTypeRepository rseContestMoveTypeRepository;
+    private ORASContestMoveTypeRepository orasContestMoveTypeRepository;
+    private DPPContestMoveTypeRepository dppContestMoveTypeRepository;
 
     @Autowired
-    public AttackService(AttackRepository attackRepository, AttackCategoryRepository attackCategoryRepository, AttackTargetTypeRepository attackTargetTypeRepository, TypeRepository typeRepository) {
+    public AttackService(AttackRepository attackRepository, AttackCategoryRepository attackCategoryRepository, AttackTargetTypeRepository attackTargetTypeRepository, TypeRepository typeRepository, ContestAttributeRepository contestAttributeRepository, RSEContestMoveTypeRepository rseContestMoveTypeRepository, ORASContestMoveTypeRepository orasContestMoveTypeRepository, DPPContestMoveTypeRepository dppContestMoveTypeRepository) {
         this.attackRepository = attackRepository;
         this.attackCategoryRepository = attackCategoryRepository;
         this.attackTargetTypeRepository = attackTargetTypeRepository;
         this.typeRepository = typeRepository;
+        this.contestAttributeRepository = contestAttributeRepository;
+        this.rseContestMoveTypeRepository = rseContestMoveTypeRepository;
+        this.orasContestMoveTypeRepository = orasContestMoveTypeRepository;
+        this.dppContestMoveTypeRepository = dppContestMoveTypeRepository;
     }
 
     public List<Object> findAll() {
@@ -57,6 +61,24 @@ public class AttackService {
             attack.setType(typeRepository.findByName(input.getType()));
             attack.setCategory(attackCategoryRepository.findByName(input.getCategory()));
             attack.setTarget(attackTargetTypeRepository.findByName(input.getTarget()));
+            if (input.getRseContestAttribute() != null) {
+                attack.setRseContestAttribute(contestAttributeRepository.findByName(input.getRseContestAttribute()));
+            }
+            if (input.getRseContestMoveType() != null) {
+                attack.setRseContestMoveType(rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()));
+            }
+            if (input.getDppContestAttribute() != null) {
+                attack.setDppContestAttribute(contestAttributeRepository.findByName(input.getDppContestAttribute()));
+            }
+            if (input.getDppContestMoveType() != null) {
+                attack.setDppContestMoveType(dppContestMoveTypeRepository.findByName(input.getDppContestMoveType()));
+            }
+            if (input.getOrasContestAttribute() != null) {
+                attack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
+            }
+            if (input.getOrasContestMoveType() != null) {
+                attack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
+            }
             attackRepository.save(attack);
         }
         return errors;
@@ -104,6 +126,24 @@ public class AttackService {
             }
             if (input.getMagicCoat() != null) {
                 existingAttack.setMagicCoat(input.getMagicCoat());
+            }
+            if (input.getRseContestAttribute() != null) {
+                existingAttack.setRseContestAttribute(contestAttributeRepository.findByName(input.getRseContestAttribute()));
+            }
+            if (input.getRseContestMoveType() != null) {
+                existingAttack.setRseContestMoveType(rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()));
+            }
+            if (input.getDppContestAttribute() != null) {
+                existingAttack.setDppContestAttribute(contestAttributeRepository.findByName(input.getDppContestAttribute()));
+            }
+            if (input.getDppContestMoveType() != null) {
+                existingAttack.setDppContestMoveType(dppContestMoveTypeRepository.findByName(input.getDppContestMoveType()));
+            }
+            if (input.getOrasContestAttribute() != null) {
+                existingAttack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
+            }
+            if (input.getOrasContestMoveType() != null) {
+                existingAttack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
             }
             attackRepository.save(existingAttack);
         }
@@ -172,6 +212,30 @@ public class AttackService {
             if (input.getMagicCoat() == null) {
                 errors.reject("'Reflect by Magic Coat' cannot be null.");
             }
+
+            if (input.getRseContestMoveType() != null && rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()) == null) {
+                errors.reject("RSE Contest Move Type " + input.getRseContestMoveType() + " is invalid.");
+            }
+
+            if (input.getRseContestAttribute() != null && contestAttributeRepository.findByName(input.getRseContestAttribute()) == null) {
+                errors.reject("RSE Contest Attribute " + input.getRseContestAttribute() + " is invalid.");
+            }
+
+            if (input.getDppContestMoveType() != null && dppContestMoveTypeRepository.findByName(input.getDppContestMoveType()) == null) {
+                errors.reject("DPP Contest Move Type " + input.getDppContestMoveType() + " is invalid.");
+            }
+
+            if (input.getDppContestAttribute() != null && contestAttributeRepository.findByName(input.getDppContestAttribute()) == null) {
+                errors.reject("DPP Contest Attribute " + input.getDppContestAttribute() + " is invalid.");
+            }
+
+            if (input.getOrasContestMoveType() != null && orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()) == null) {
+                errors.reject("ORAS Contest Move Type " + input.getOrasContestMoveType() + " is invalid.");
+            }
+
+            if (input.getOrasContestAttribute() != null && contestAttributeRepository.findByName(input.getOrasContestAttribute()) == null) {
+                errors.reject("ORAS Contest Attribute " + input.getOrasContestAttribute() + " is invalid.");
+            }
         }
         else {
             errors.reject("Attack " + input.getName() + " already exists.");
@@ -215,6 +279,30 @@ public class AttackService {
 
             if (input.getTarget() != null && attackTargetTypeRepository.findByName(input.getTarget()) == null) {
                 errors.reject("Attack target type " + input.getTarget() + " is invalid.");
+            }
+
+            if (input.getRseContestMoveType() != null && rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()) == null) {
+                errors.reject("RSE Contest Move Type " + input.getRseContestMoveType() + " is invalid.");
+            }
+
+            if (input.getRseContestAttribute() != null && contestAttributeRepository.findByName(input.getRseContestAttribute()) == null) {
+                errors.reject("RSE Contest Attribute " + input.getRseContestAttribute() + " is invalid.");
+            }
+
+            if (input.getDppContestMoveType() != null && dppContestMoveTypeRepository.findByName(input.getDppContestMoveType()) == null) {
+                errors.reject("DPP Contest Move Type " + input.getDppContestMoveType() + " is invalid.");
+            }
+
+            if (input.getDppContestAttribute() != null && contestAttributeRepository.findByName(input.getDppContestAttribute()) == null) {
+                errors.reject("DPP Contest Attribute " + input.getDppContestAttribute() + " is invalid.");
+            }
+
+            if (input.getOrasContestMoveType() != null && orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()) == null) {
+                errors.reject("ORAS Contest Move Type " + input.getOrasContestMoveType() + " is invalid.");
+            }
+
+            if (input.getOrasContestAttribute() != null && contestAttributeRepository.findByName(input.getOrasContestAttribute()) == null) {
+                errors.reject("ORAS Contest Attribute " + input.getOrasContestAttribute() + " is invalid.");
             }
         }
         else {

@@ -1,9 +1,6 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.object.AttackTargetType;
-import com.pokemonurpg.object.SpeciesAttack;
-import com.pokemonurpg.object.Type;
+import com.pokemonurpg.object.*;
 
 public class SpeciesAttackDto {
     private int dbid;
@@ -22,6 +19,12 @@ public class SpeciesAttackDto {
     private Boolean substitute;
     private String method;
     private Integer generation;
+    private String rseContestAttribute;
+    private RSEContestMoveType rseContestMoveType;
+    private String dppContestAttribute;
+    private DPPContestMoveType dppContestMoveType;
+    private String orasContestAttribute;
+    private ORASContestMoveType orasContestMoveType;
 
     public SpeciesAttackDto() {    }
 
@@ -47,6 +50,24 @@ public class SpeciesAttackDto {
                 sheerForce = attack.isSheerForce();
                 snatch = attack.isSnatch();
                 substitute = attack.isSubstitute();
+                if (attack.getRseContestAttribute() != null) {
+                    setRseContestAttribute(attack.getRseContestAttribute().getName());
+                }
+                if (attack.getRseContestMoveType() != null) {
+                    setRseContestMoveType(attack.getRseContestMoveType());
+                }
+                if (attack.getDppContestAttribute() != null) {
+                    setDppContestAttribute(attack.getDppContestAttribute().getName());
+                }
+                if (attack.getDppContestMoveType() != null) {
+                    setDppContestMoveType(attack.getDppContestMoveType());
+                }
+                if (attack.getOrasContestAttribute() != null) {
+                    setOrasContestAttribute(attack.getOrasContestAttribute().getName());
+                }
+                if (attack.getOrasContestMoveType() != null) {
+                    setOrasContestMoveType(attack.getOrasContestMoveType());
+                }
             }
             method = sa.getMethod();
             generation = sa.getGeneration();
@@ -179,5 +200,53 @@ public class SpeciesAttackDto {
 
     public void setGeneration(Integer generation) {
         this.generation = generation;
+    }
+
+    public String getRseContestAttribute() {
+        return rseContestAttribute;
+    }
+
+    public void setRseContestAttribute(String rseContestAttribute) {
+        this.rseContestAttribute = rseContestAttribute;
+    }
+
+    public RSEContestMoveType getRseContestMoveType() {
+        return rseContestMoveType;
+    }
+
+    public void setRseContestMoveType(RSEContestMoveType rseContestMoveType) {
+        this.rseContestMoveType = rseContestMoveType;
+    }
+
+    public String getDppContestAttribute() {
+        return dppContestAttribute;
+    }
+
+    public void setDppContestAttribute(String dppContestAttribute) {
+        this.dppContestAttribute = dppContestAttribute;
+    }
+
+    public DPPContestMoveType getDppContestMoveType() {
+        return dppContestMoveType;
+    }
+
+    public void setDppContestMoveType(DPPContestMoveType dppContestMoveType) {
+        this.dppContestMoveType = dppContestMoveType;
+    }
+
+    public String getOrasContestAttribute() {
+        return orasContestAttribute;
+    }
+
+    public void setOrasContestAttribute(String orasContestAttribute) {
+        this.orasContestAttribute = orasContestAttribute;
+    }
+
+    public ORASContestMoveType getOrasContestMoveType() {
+        return orasContestMoveType;
+    }
+
+    public void setOrasContestMoveType(ORASContestMoveType orasContestMoveType) {
+        this.orasContestMoveType = orasContestMoveType;
     }
 }

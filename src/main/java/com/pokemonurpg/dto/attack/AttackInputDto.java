@@ -15,6 +15,12 @@ public class AttackInputDto {
     private Boolean substitute;
     private Boolean sheerForce;
     private Boolean magicCoat;
+    private String rseContestAttribute;
+    private String rseContestMoveType;
+    private String dppContestAttribute;
+    private String dppContestMoveType;
+    private String orasContestAttribute;
+    private String orasContestMoveType;
 
     public String getName() {
         return name;
@@ -118,5 +124,53 @@ public class AttackInputDto {
 
     public void setMagicCoat(Boolean magicCoat) {
         this.magicCoat = magicCoat;
+    }
+
+    public String getRseContestAttribute() {
+        return rseContestAttribute;
+    }
+
+    public void setRseContestAttribute(String rseContestAttribute) {
+        this.rseContestAttribute = rseContestAttribute;
+    }
+
+    public String getRseContestMoveType() {
+        return rseContestMoveType;
+    }
+
+    public void setRseContestMoveType(String rseContestMoveType) {
+        this.rseContestMoveType = rseContestMoveType;
+    }
+
+    public String getDppContestAttribute() {
+        return dppContestAttribute;
+    }
+
+    public void setDppContestAttribute(String dppContestAttribute) {
+        this.dppContestAttribute = dppContestAttribute;
+    }
+
+    public String getDppContestMoveType() {
+        return dppContestMoveType;
+    }
+
+    public void setDppContestMoveType(String dppContestMoveType) {
+        this.dppContestMoveType = dppContestMoveType;
+    }
+
+    public String getOrasContestAttribute() {
+        return orasContestAttribute;
+    }
+
+    public void setOrasContestAttribute(String orasContestAttribute) {
+        this.orasContestAttribute = orasContestAttribute;
+    }
+
+    public String getOrasContestMoveType() {
+        return orasContestMoveType;
+    }
+
+    public void setOrasContestMoveType(String orasContestMoveType) {
+        this.orasContestMoveType = orasContestMoveType;
     }
 }
