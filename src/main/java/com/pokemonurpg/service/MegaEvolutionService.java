@@ -59,7 +59,7 @@ public class MegaEvolutionService {
                 Species species = speciesRepository.findByDbid(mega.getId().getMegaEvolutionDbid());
                 MegaEvolutionDto dto = new MegaEvolutionDto(species, mega.getMegaStone());
                 List<SpeciesAbilityDto> abilityList = speciesAbilityService.findBySpeciesDbid(species.getDbid());
-                if (abilityList != null) {
+                if (abilityList != null && !abilityList.isEmpty()) {
                     dto.setAbility(abilityList.get(0));
                 }
                 dtos.add(dto);

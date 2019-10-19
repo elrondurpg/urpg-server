@@ -50,7 +50,9 @@ public class SpeciesDto {
             dbid = species.getDbid();
             dexno = species.getDexno();
             name = species.getName();
-            type1 = species.getType1().getName();
+            if (species.getType1() != null) {
+                type1 = species.getType1().getName();
+            }
             if (species.getType2() != null) {
                 type2 = species.getType2().getName();
             }

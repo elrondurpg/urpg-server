@@ -83,11 +83,13 @@
             <version>3.9</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.2.2</version>
+        </dependency>
 
-    <properties>
-        <java.version>1.8.0_222</java.version>
-    </properties>
+    </dependencies>
 
     <build>
         <plugins>

@@ -1,6 +1,7 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
+import com.pokemonurpg.dto.security.SessionDto;
 import com.pokemonurpg.dto.species.input.SpeciesInputDto;
 import com.pokemonurpg.dto.species.response.SpeciesDto;
 import com.pokemonurpg.object.Member;
@@ -49,37 +50,25 @@ public class SpeciesController {
     @PostMapping
     public @ResponseBody
     RestResponse createSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Write Species")) {
-                SpeciesInputDto species = input.getPayload();
-                Errors errors = speciesService.createSpecies(species);
-                if (errors.hasErrors()) {
-                    return new RestResponse(400, errors.getAllErrors());
-                }
-                else return new RestResponse(200,"Pokemon " + species.getName() + " was created successfully!");
-            }
-            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Write Species")) {
+            SpeciesInputDto species = input.getPayload();
+            Errors errors = speciesService.createSpecies(species);
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
+            } else return new RestResponse(200, "Pokemon " + species.getName() + " was created successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 
     @PutMapping
     public @ResponseBody
     RestResponse updateSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Write Species")) {
-                SpeciesInputDto species = input.getPayload();
-                Errors errors = speciesService.updateSpecies(species);
-                if (errors.hasErrors()) {
-                    return new RestResponse(400, errors.getAllErrors());
-                }
-                else return new RestResponse(200,"Pokemon " + species.getName() + " was updated successfully!");
-            }
-            else return new RestResponse(401,"User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Write Species")) {
+            SpeciesInputDto species = input.getPayload();
+            Errors errors = speciesService.updateSpecies(species);
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
+            } else return new RestResponse(200, "Pokemon " + species.getName() + " was updated successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 
     /*

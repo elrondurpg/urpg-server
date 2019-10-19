@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
@@ -40,70 +42,50 @@ public class UserController {
         }
     }
 
+    @PostMapping("/session")
+    public @ResponseBody
+    RestResponse session(@RequestBody SessionDto input) {
+        SessionDto currentSession = memberService.refreshCurrentUserSession(input);
+        if (currentSession != null) {
+            return new RestResponse(200, currentSession);
+        }
+        else return new RestResponse(404, "No current session found.");
+    }
+
     @PostMapping("/login")
     public @ResponseBody
-    RestResponse login(@RequestBody LoginDto login) {
-        String authToken = memberService.login(login);
-        if (authToken == null) {
-            return new RestResponse(401, "No user was found which matched the provided credentials.");
+    RestResponse login(@RequestBody String code) {
+        code = code.replaceAll("\"", "");
+        SessionDto session = memberService.login(code);
+        if (session != null) {
+            return new RestResponse(200, session);
         }
-        else {
-            return new RestResponse(200, authToken);
-        }
+        else return new RestResponse(401, "Couldn't log you in. Please contact your system administrator.");
     }
 
     @PostMapping("/invite")
     public @ResponseBody
-    RestResponse invite(@RequestBody Authenticated<String> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Invite User")) {
-                Member existingMember = memberService.findByExactName(input.getPayload());
-                if (existingMember != null) {
-                    return new RestResponse(400, "A user with that name already exists!");
-                }
-
-                String betaKey = memberService.inviteUser(input.getPayload());
-                if (betaKey != null) {
-                    return new RestResponse(200, betaKey);
-                }
-                else {
-                    return new RestResponse(500, "An unexpected error occurred.");
-                }
+    RestResponse invite(@RequestBody Authenticated<InviteUserDto> input) {
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Invite User")) {
+            Errors errors = memberService.inviteUser(input.getPayload());
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
             }
-            else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401, "User " + input.getUsername() + " could not be authenticated.");
-    }
-
-    @PutMapping("/registerBeta")
-    public @ResponseBody
-    RestResponse registerBeta(@RequestBody RegisterBetaDto input) {
-        boolean success = memberService.registerBeta(input);
-        if (success) {
-            return new RestResponse(200, null);
-        }
-        else {
-            return new RestResponse(401, "User " + input.getUsername() + " could not be registered.");
-        }
+            else return new RestResponse(200,"User " + input.getPayload().getUsername() + " was created successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 
     @PutMapping
     public @ResponseBody
     RestResponse updateMember(@RequestBody Authenticated<MemberInputDto> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Write Member")) {
-                MemberInputDto memberToUpdate = input.getPayload();
-                Errors errors = memberService.updateMember(memberToUpdate);
-                if (errors.hasErrors()) {
-                    return new RestResponse(400, errors.getAllErrors());
-                }
-                else return new RestResponse(200, "User " + memberToUpdate.getName() + " was updated successfully!");
-            }
-            else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Write Member")) {
+            MemberInputDto memberToUpdate = input.getPayload();
+            Errors errors = memberService.updateMember(memberToUpdate);
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
+            } else
+                return new RestResponse(200, "User " + memberToUpdate.getName() + " was updated successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 
     /*@PutMapping("/password")

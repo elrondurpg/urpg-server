@@ -248,7 +248,7 @@ public class SpeciesService {
     public List<AlteredFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms) {
         List<AlteredFormDto> cosmeticFormDtos = new ArrayList<>();
         if (species != null) {
-            boolean noAlteredForms = alteredForms.isEmpty();
+            boolean noAlteredForms = alteredForms == null || alteredForms.isEmpty();
             if (noAlteredForms) {
                 AlteredFormDto dto = new AlteredFormDto(species);
                 List<SpeciesAbilityDto> abilities = speciesAbilityService.findBySpeciesDbid(dto.getDbid());

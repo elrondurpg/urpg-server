@@ -360,8 +360,8 @@ public class SpeciesServiceTest {
 
         List<AlteredFormDto> results = speciesService.buildCosmeticForms(pikachu, null);
         assertNotNull(results);
-        assertEquals(1, results.size());
-        assertEquals(spikyEaredPikachu.getFormName(), results.get(0).getFormName());
+        assertEquals(2, results.size());
+        assertEquals(spikyEaredPikachu.getFormName(), results.get(1).getFormName());
     }
 
     @Test
@@ -373,8 +373,8 @@ public class SpeciesServiceTest {
 
         List<AlteredFormDto> results = speciesService.buildCosmeticForms(pikachu, Collections.emptyList());
         assertNotNull(results);
-        assertEquals(1, results.size());
-        assertEquals(spikyEaredPikachu.getFormName(), results.get(0).getFormName());
+        assertEquals(2, results.size());
+        assertEquals(spikyEaredPikachu.getFormName(), results.get(1).getFormName());
     }
 
     @Test

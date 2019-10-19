@@ -1,9 +1,9 @@
 package com.pokemonurpg.service;
 
+import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.security.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.*;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -27,6 +27,7 @@ public class MemberService
     private MemberRoleRepository memberRoleRepository;
     private PermissionRepository permissionRepository;
     private RolePermissionRepository rolePermissionRepository;
+    private OAuthService oAuthService;
 
     private Matcher matcher;
 
@@ -36,13 +37,14 @@ public class MemberService
     Random rand = new Random();
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleService memberRoleService, MemberRoleRepository memberRoleRepository, PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository) {
+    public MemberService(MemberRepository memberRepository, RoleRepository roleRepository, MemberRoleService memberRoleService, MemberRoleRepository memberRoleRepository, PermissionRepository permissionRepository, RolePermissionRepository rolePermissionRepository, OAuthService oAuthService) {
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
         this.memberRoleService = memberRoleService;
         this.memberRoleRepository = memberRoleRepository;
         this.permissionRepository = permissionRepository;
         this.rolePermissionRepository = rolePermissionRepository;
+        this.oAuthService = oAuthService;
     }
 
     public List<Object> findAll() {
@@ -52,6 +54,8 @@ public class MemberService
     public Member findByExactName(String name) {
         return memberRepository.findByUsername(name);
     }
+
+    public Member findByDiscordId(String id) { return memberRepository.findByDiscordId(id); }
 
     public MemberDto findByName(String name) {
         Member member = memberRepository.findByUsername(name);
@@ -86,189 +90,59 @@ public class MemberService
         return dtoRoles;
     }
 
-    public String login(LoginDto login) {
-        if (exists(login.getBrowser()) && exists(login.getPassword()) && exists(login.getUsername())) {
-            Member member = memberRepository.findByUsername(login.getUsername());
-            if (hasCorrectPassword(login, member)) {
-                return createAuthToken(login, member);
-            }
-        }
-        return null;
-    }
-
-    public boolean registerBeta(RegisterBetaDto registerBetaDto) {
-        try {
-            if (validateRegistrationBeta(registerBetaDto)) {
-                Member member = memberRepository.findByUsername(registerBetaDto.getUsername());
-                if (hasCorrectBetaKey(registerBetaDto, member)) {
-                    int salt = rand.nextInt(1000000000);
-                    member.setSalt(salt);
-                    member.setPassword(hash(registerBetaDto.getPassword() + salt));
-                    member.setBetaKey(null);
-                    memberRepository.save(member);
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return false;
-    }
-
-    public Member authenticate(Authenticated authDetails) {
-        if (exists(authDetails.getAuthToken()) && exists(authDetails.getBrowser()) && exists(authDetails.getUsername())) {
-            Member member = memberRepository.findByUsername(authDetails.getUsername());
-            if (hasCorrectAuthToken(authDetails, member)) {
-                return member;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean authorize(Member member, String permission) {
+    public boolean authorize(Member member, String... permissions) {
         List<MemberRole> roles = memberRoleRepository.findByIdMemberDbid(member.getDbid());
 
-        for (MemberRole record : roles) {
-            Role role = roleRepository.findByDbid(record.getId().getRoleDbid());
-            if (role != null) {
-                List<RolePermission> rolePermissions = rolePermissionRepository.findByIdRoleDbid(role.getDbid());
-                for (RolePermission rolePermission : rolePermissions) {
-                    Permission perm = permissionRepository.findByDbid(rolePermission.getId().getPermissionDbid());
-                    if (perm != null && permission.equals(perm.getName())) {
-                        return true;
+        for (String permission : permissions) {
+            boolean found = false;
+            for (MemberRole record : roles) {
+                Role role = roleRepository.findByDbid(record.getId().getRoleDbid());
+                if (role != null) {
+                    List<RolePermission> rolePermissions = rolePermissionRepository.findByIdRoleDbid(role.getDbid());
+                    for (RolePermission rolePermission : rolePermissions) {
+                        Permission perm = permissionRepository.findByDbid(rolePermission.getId().getPermissionDbid());
+                        if (perm != null && permission.equals(perm.getName())) {
+                            found = true;
+                        }
                     }
                 }
             }
+            if (!found) return false;
         }
 
+        return true;
+    }
+
+    public boolean authenticateAndAuthorize(SessionDto session, String... permissions) {
+        SessionDto currentSession = getCurrentUserSession(session);
+        if (currentSession != null) {
+            Member member = findByDiscordId(currentSession.getId());
+            if (member != null) {
+                if (!isBanned(member) && authorize(member, permissions)) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
-    public String inviteUser(String username) {
-        if (validateInviteUser(username)) {
+    public Errors inviteUser(InviteUserDto input) {
+        Errors errors = validateInviteUser(input);
+        if (!errors.hasErrors()) {
             try {
                 Member member = new Member();
-                member.setUsername(username);
-                member.setEmail("");
-                member.setPassword("");
+                member.setUsername(input.getUsername());
+                member.setDiscordId(input.getId());
 
-                String betaKey = RandomStringUtils.randomAlphanumeric(10);
-                member.setBetaKey(hash(betaKey));
+                int salt = rand.nextInt(1000000000);
+                member.setSalt(salt);
+
                 memberRepository.save(member);
-
-                return betaKey;
             } catch (Exception e) {
                 e.printStackTrace();
-                return null;
             }
         }
-        else return null;
-    }
-
-    public boolean validateInviteUser(String username) {
-        if (username == null || username.isEmpty() || username.equals("")) {
-            return false;
-        }
-        else return true;
-    }
-
-    public boolean hasCorrectPassword(LoginDto login, Member member) {
-        try {
-            String password = login.getPassword();
-            int salt = member.getSalt();
-
-            String loginCheck = hash(password + salt);
-            if (loginCheck != null && !loginCheck.equals("") && !loginCheck.isEmpty()) {
-                String memberPassword = member.getPassword();
-                if (memberPassword != null && !memberPassword.equals("") && !memberPassword.isEmpty()) {
-                    if (loginCheck.equals(memberPassword)) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public String createAuthToken(LoginDto login, Member member) {
-        try {
-            return hash("" + member.getPassword() + login.getBrowser());
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public boolean hasCorrectAuthToken(Authenticated authDetails, Member member) {
-        try {
-            String password = member.getPassword();
-
-            String loginCheck = hash("" + password + authDetails.getBrowser());
-            if (loginCheck != null && !loginCheck.equals("") && !loginCheck.isEmpty()) {
-                if (loginCheck.equals(authDetails.getAuthToken())) {
-                    return true;
-                }
-            }
-
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean validateRegistrationBeta(RegisterBetaDto registerBetaDto) {
-        try {
-            if (exists(registerBetaDto.getUsername()) && exists(registerBetaDto.getBetaKey()) && exists(registerBetaDto.getPassword())) {
-                String password = registerBetaDto.getPassword();
-                matcher = pattern.matcher(password);
-                return matcher.matches();
-            }
-
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean hasCorrectBetaKey(RegisterBetaDto registerBetaDto, Member member) {
-        try {
-            String betaKey = member.getBetaKey();
-
-            String keyCheck = hash(registerBetaDto.getBetaKey());
-            if (exists(betaKey) && exists(keyCheck)) {
-                if (betaKey.equals(keyCheck)) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean exists(String s) {
-        if (s == null || s.equals("") || s.isEmpty()) {
-            return false;
-        }
-        else return true;
-    }
-
-    public String hash(String cleartext) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(cleartext.getBytes());
-
-        byte byteData[] = md.digest();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < byteData.length; i++) {
-            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-        }
-
-        return sb.toString();
+        return errors;
     }
 
     public Errors updateMember(MemberInputDto input) {
@@ -310,4 +184,197 @@ public class MemberService
 
         return errors;
     }
+
+    public SessionDto login(String code) {
+        try {
+            if (code != null && !code.isEmpty() && !code.equals("")) {
+                OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(code);
+                if (validateAccessTokenResponse(accessTokenResponse)) {
+                    String id = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
+                    if (id != null) {
+                        Member member = memberRepository.findByDiscordId(id);
+                        if (member != null) {
+                            return startSecureSession(member, accessTokenResponse);
+                        }
+                        else return null;
+                    }
+                    else return null;
+                }
+                else return null;
+            }
+            else return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public SessionDto refreshCurrentUserSession(SessionDto input) {
+        try {
+            SessionDto currentSession = getCurrentUserSession(input);
+            if (currentSession != null) {
+                OAuthAccessTokenResponse refreshedAccessTokenResponse = oAuthService.refreshAccessToken(input.getRefreshToken());
+                if (validateAccessTokenResponse(refreshedAccessTokenResponse)) {
+                    Member memberToAuthenticate = memberRepository.findByDiscordId(input.getId());
+                    return startSecureSession(memberToAuthenticate, refreshedAccessTokenResponse);
+                }
+                return null;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public SessionDto getCurrentUserSession(SessionDto input) {
+        try {
+            if (validateSessionDto(input)) {
+                Member memberToAuthenticate = memberRepository.findByDiscordId(input.getId());
+                if (hasCorrectAccessToken(memberToAuthenticate, input.getAccessToken())) {
+                    String id = oAuthService.getDiscordId(input.getAccessToken());
+                    if (input.getId().equals(id)) {
+                        long expireTime = memberToAuthenticate.getSessionExpire();
+                        if ((System.currentTimeMillis() / 1000) < expireTime - 60) {
+                            return input;
+                        }
+                        return null;
+                    }
+                    return null;
+                }
+                return null;
+            }
+            else return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public SessionDto startSecureSession(Member member, OAuthAccessTokenResponse accessTokenResponse) throws NoSuchAlgorithmException {
+        String accessToken = accessTokenResponse.getAccessToken();
+        String refreshToken = accessTokenResponse.getRefreshToken();
+        long expiresIn = Long.parseLong(accessTokenResponse.getExpiresIn());
+
+        int salt = member.getSalt();
+        member.setAccessToken(hash(accessToken + salt));
+        member.setRefreshToken(hash(refreshToken + salt));
+        member.setSessionExpire(expiresIn + (System.currentTimeMillis() / 1000));
+
+        memberRepository.save(member);
+
+        return new SessionDto(member.getUsername(), member.getDiscordId(), accessToken, refreshToken);
+    }
+
+    public boolean isBanned(Member member) {
+        List<MemberRole> roles = memberRoleRepository.findByIdMemberDbid(member.getDbid());
+        for (MemberRole record : roles) {
+            Role role = roleRepository.findByDbid(record.getId().getRoleDbid());
+            if (role.getName().equals("Banned")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasCorrectAccessToken(Member member, String accessTokenToVerify) {
+        try {
+            String accessToken = member.getAccessToken();
+            int salt = member.getSalt();
+            String loginCheck = hash(accessTokenToVerify + salt);
+            if (loginCheck != null && !loginCheck.equals("") && !loginCheck.isEmpty()) {
+                if (loginCheck.equals(accessToken)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean validateAccessTokenResponse(OAuthAccessTokenResponse input) {
+        if (input != null) {
+            if (input.getAccessToken() == null || input.getAccessToken().isEmpty() || input.getAccessToken().equals("")) {
+                return false;
+            }
+            if (input.getRefreshToken() == null || input.getRefreshToken().isEmpty() || input.getRefreshToken().equals("")) {
+                return false;
+            }
+            if (input.getExpiresIn() == null || input.getExpiresIn().isEmpty() || input.getExpiresIn().equals("")) {
+                return false;
+            }
+            return true;
+        }
+        else return false;
+    }
+
+    public Errors validateInviteUser(InviteUserDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+
+        if (input != null) {
+            String username = input.getUsername();
+            if (username == null || username.isEmpty() || username.equals("")) {
+                errors.rejectValue("username", "Provided username was empty.");
+            }
+            else if (username.length() < 3 || username.length() > 30) {
+                errors.rejectValue("username", "Username must be between 3 and 30 characters long.");
+            }
+            else {
+                Member existingMember = memberRepository.findByUsername(username);
+                if (existingMember != null) {
+                    errors.rejectValue("username", "Provided username was not unique!");
+                }
+            }
+
+            String id = input.getId();
+            if (id == null || id.isEmpty() || id.equals("")) {
+                errors.rejectValue("id", "Provided ID was empty.");
+            }
+            else if (id.length() > 20) {
+                errors.rejectValue("id", "Provided ID had length greater than 20. Please contact the system administrator.");
+            }
+            else {
+                Member existingMember = memberRepository.findByDiscordId(id);
+                if (existingMember != null) {
+                    errors.rejectValue("id", "Can't invite a user that is already registered!");
+                }
+            }
+        }
+        else {
+            errors.reject("No invite details were provided.");
+        }
+
+        return errors;
+    }
+
+    public boolean validateSessionDto(SessionDto input) {
+        if (input != null) {
+            if (input.getAccessToken() == null || input.getAccessToken().isEmpty() || input.getAccessToken().equals("")) {
+                return false;
+            }
+            if (input.getRefreshToken() == null || input.getRefreshToken().isEmpty() || input.getRefreshToken().equals("")) {
+                return false;
+            }
+            if (input.getId() == null || input.getId().isEmpty() || input.getId().equals("")) {
+                return false;
+            }
+            return true;
+        }
+        else return false;
+    }
+
+    public String hash(String cleartext) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(cleartext.getBytes());
+
+        byte byteData[] = md.digest();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
+    }
+
 }

@@ -47,36 +47,26 @@ public class RoleController {
     @PostMapping
     public @ResponseBody
     RestResponse createRole(@RequestBody Authenticated<RoleInputDto> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Write Role")) {
-                RoleInputDto role = input.getPayload();
-                Errors errors = roleService.createRole(role);
-                if (errors.hasErrors()) {
-                    return new RestResponse(400, errors.getAllErrors());
-                }
-                else return new RestResponse(200, "Role " + role.getName() + " was created successfully!");
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Write Role")) {
+            RoleInputDto role = input.getPayload();
+            Errors errors = roleService.createRole(role);
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
             }
-            else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
+            else return new RestResponse(200, "Role " + role.getName() + " was created successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 
     @PutMapping
     public @ResponseBody
     RestResponse updateRole(@RequestBody Authenticated<RoleInputDto> input) {
-        Member member = memberService.authenticate(input);
-        if (member != null) {
-            if (memberService.authorize(member, "Write Role")) {
-                RoleInputDto role = input.getPayload();
-                Errors errors = roleService.updateRole(role);
-                if (errors.hasErrors()) {
-                    return new RestResponse(400, errors.getAllErrors());
-                }
-                else return new RestResponse(200, "Role " + role.getName() + " was updated successfully!");
+        if (memberService.authenticateAndAuthorize(input.getSession(), "Write Role")) {
+            RoleInputDto role = input.getPayload();
+            Errors errors = roleService.updateRole(role);
+            if (errors.hasErrors()) {
+                return new RestResponse(400, errors.getAllErrors());
             }
-            else return new RestResponse(401, "User " + input.getUsername() + " does not have permission to perform the requested action.");
-        }
-        else return new RestResponse(401,"User " + input.getUsername() + " could not be authenticated.");
+            else return new RestResponse(200, "Role " + role.getName() + " was updated successfully!");
+        } else return new RestResponse(401, "The current user is not logged in or does not have permissions to perform the requested action.");
     }
 }

@@ -21,7 +21,7 @@ public class MegaEvolutionServiceTest {
     private MegaEvolutionService megaEvolutionService;
     private MegaEvolutionRepository megaEvolutionRepository = mock(MegaEvolutionRepository.class);
     private SpeciesRepository speciesRepository = mock(SpeciesRepository.class);
-    private SpeciesAbilityService speciesAbilityService;
+    private SpeciesAbilityService speciesAbilityService = mock(SpeciesAbilityService.class);
 
     private MegaEvolution megaCharizardXRecord = TestObjectFactory.createMegaCharizardXRecord();
     private Species megaCharizardX = TestObjectFactory.createMegaCharizardX();

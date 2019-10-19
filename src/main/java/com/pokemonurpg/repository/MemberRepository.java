@@ -11,5 +11,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     List<Object> findAllNames();
     Member findByDbid(int dbid);
     Member findByUsername(String name);
+    Member findByDiscordId(String discordId);
     List<Member> findByUsernameStartingWith(String username);
 }
