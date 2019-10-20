@@ -12,6 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface SpeciesRepository extends JpaRepository<Species, Integer> {
+    @Query("select max(dexno) from Species s")
+    Integer findMaxDexno();
     @Query("select s.name from Species s")
     List<Object> findAllNames();
     Species findByName(String name);

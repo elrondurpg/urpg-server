@@ -152,11 +152,13 @@ public class SpeciesService {
     }
 
     public int getNextDex(int dexno) {
-        return dexno % AppConfig.NUM_SPECIES + 1;
+        int maxDex = speciesRepository.findMaxDexno();
+        return dexno % maxDex + 1;
     }
 
     public int getPrevDex(int dexno) {
-        return (dexno + AppConfig.NUM_SPECIES - 2) % AppConfig.NUM_SPECIES + 1;
+        int maxDex = speciesRepository.findMaxDexno();
+        return (dexno + maxDex - 2) % maxDex + 1;
     }
 
     public SpeciesPageTabDto buildSpeciesPageTabDto(Species species) {

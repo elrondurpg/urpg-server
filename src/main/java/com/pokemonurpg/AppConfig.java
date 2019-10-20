@@ -8,8 +8,6 @@ import javax.sql.DataSource;
 @Configuration
 public class AppConfig {
 
-    public final static int NUM_SPECIES = 807;
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

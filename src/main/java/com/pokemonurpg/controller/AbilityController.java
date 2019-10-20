@@ -1,13 +1,16 @@
 package com.pokemonurpg.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemonurpg.RestResponse;
+import com.pokemonurpg.URPGServerApplication;
 import com.pokemonurpg.object.Ability;
-import com.pokemonurpg.object.Member;
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.service.AbilityService;
 import com.pokemonurpg.service.MemberService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class AbilityController {
     private AbilityService abilityService;
     private MemberService memberService;
+    private Logger logger = LogManager.getLogger(AbilityController.class);
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     public AbilityController(AbilityService abilityService, MemberService memberService) {
@@ -49,6 +54,12 @@ public class AbilityController {
     RestResponse createAbility(@RequestBody Authenticated<Ability> input) {
         if (memberService.authenticateAndAuthorize(input.getSession(), "Write Ability")) {
             Ability ability = input.getPayload();
+            try {
+                logger.info("{} requested CREATE ABILITY with input={}", input.getSession().getId(), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(input.getPayload()));
+            } catch (JsonProcessingException e) {
+                logger.catching(e);
+                return new RestResponse(500, "Internal server error. Please contact your system administrator.");
+            }
             Errors errors = abilityService.createAbility(ability);
             if (errors.hasErrors()) {
                 return new RestResponse(400, errors.getAllErrors());
@@ -62,6 +73,12 @@ public class AbilityController {
     RestResponse updateAbility(@RequestBody Authenticated<Ability> input) {
         if (memberService.authenticateAndAuthorize(input.getSession(), "Write Ability")) {
             Ability ability = input.getPayload();
+            try {
+                logger.info("{} requested UPDATE ABILITY with input={}", input.getSession().getId(), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(input.getPayload()));
+            } catch (JsonProcessingException e) {
+                logger.catching(e);
+                return new RestResponse(500, "Internal server error. Please contact your system administrator.");
+            }
             Errors errors = abilityService.updateAbility(ability);
             if (errors.hasErrors()) {
                 return new RestResponse(400, errors.getAllErrors());

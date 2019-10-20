@@ -1,5 +1,7 @@
 package com.pokemonurpg.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.security.SessionDto;
 import com.pokemonurpg.dto.species.input.SpeciesInputDto;
@@ -8,6 +10,8 @@ import com.pokemonurpg.object.Member;
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.service.MemberService;
 import com.pokemonurpg.service.SpeciesService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -20,6 +24,8 @@ public class SpeciesController {
 
     private MemberService memberService;
     private SpeciesService speciesService;
+    private Logger logger = LogManager.getLogger(SpeciesController.class);
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     public SpeciesController(MemberService memberService, SpeciesService speciesService) {
@@ -52,6 +58,12 @@ public class SpeciesController {
     RestResponse createSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
         if (memberService.authenticateAndAuthorize(input.getSession(), "Write Species")) {
             SpeciesInputDto species = input.getPayload();
+            try {
+                logger.info("{} requested CREATE SPECIES with input={}", input.getSession().getId(), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(input.getPayload()));
+            } catch (JsonProcessingException e) {
+                logger.catching(e);
+                return new RestResponse(500, "Internal server error. Please contact your system administrator.");
+            }
             Errors errors = speciesService.createSpecies(species);
             if (errors.hasErrors()) {
                 return new RestResponse(400, errors.getAllErrors());
@@ -64,6 +76,12 @@ public class SpeciesController {
     RestResponse updateSpecies(@RequestBody Authenticated<SpeciesInputDto> input) {
         if (memberService.authenticateAndAuthorize(input.getSession(), "Write Species")) {
             SpeciesInputDto species = input.getPayload();
+            try {
+                logger.info("{} requested UPDATE SPECIES with input={}", input.getSession().getId(), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(input.getPayload()));
+            } catch (JsonProcessingException e) {
+                logger.catching(e);
+                return new RestResponse(500, "Internal server error. Please contact your system administrator.");
+            }
             Errors errors = speciesService.updateSpecies(species);
             if (errors.hasErrors()) {
                 return new RestResponse(400, errors.getAllErrors());

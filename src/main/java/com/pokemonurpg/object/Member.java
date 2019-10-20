@@ -16,12 +16,6 @@ public class Member {
     private String username;
 
     @Column
-    private String password;
-
-    @Column(name = "beta_key")
-    private String betaKey;
-
-    @Column
     private Integer salt;
 
     @Column(name = "access_token")
@@ -58,22 +52,6 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getBetaKey() {
-        return betaKey;
-    }
-
-    public void setBetaKey(String betaKey) {
-        this.betaKey = betaKey;
     }
 
     public Integer getSalt() {
