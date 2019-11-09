@@ -21,6 +21,8 @@ public class DiscordUser {
     private String error;
     @JsonProperty("error_description")
     private String errorDescription;
+    @JsonProperty("premium_type")
+    private String premiumType;
 
     public DiscordUser() {
     }
@@ -95,5 +97,13 @@ public class DiscordUser {
 
     public void setErrorDescription(String errorDescription) {
         this.errorDescription = errorDescription;
+    }
+
+    public String getPremiumType() {
+        return premiumType;
+    }
+
+    public void setPremiumType(String premiumType) {
+        this.premiumType = premiumType;
     }
 }

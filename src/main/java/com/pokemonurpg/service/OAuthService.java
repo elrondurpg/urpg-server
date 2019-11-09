@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemonurpg.object.DiscordUser;
 import com.pokemonurpg.object.OAuthAccessTokenResponse;
 import okhttp3.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,8 @@ public class OAuthService {
     public static final String REDIRECT_URI = System.getenv("REDIRECT_URI");
 
     private final OkHttpClient httpClient = new OkHttpClient();
+    private Logger logger = LogManager.getLogger(OAuthService.class);
+    private ObjectMapper mapper = new ObjectMapper();
 
     public OAuthAccessTokenResponse exchangeCodeForAccessToken(String code) {
         RequestBody formBody = new FormBody.Builder()
@@ -32,13 +36,16 @@ public class OAuthService {
 
         OAuthAccessTokenResponse accessTokenResponse = null;
         try (Response response = httpClient.newCall(request).execute()) {
+            String responseBody = response.body().string();
             if (response.isSuccessful()) {
                 ObjectMapper objectMapper = new ObjectMapper();
-                String responseBody = response.body().string();
                 accessTokenResponse = objectMapper.readValue(responseBody, OAuthAccessTokenResponse.class);
             }
+            else {
+                throw new IllegalStateException("Failed exchange returned access token response.");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
 
@@ -52,9 +59,9 @@ public class OAuthService {
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()){
+            String responseBody = response.body().string();
             if (response.isSuccessful()) {
                 ObjectMapper objectMapper = new ObjectMapper();
-                String responseBody = response.body().string();
                 DiscordUser user = objectMapper.readValue(responseBody, DiscordUser.class);
                 if (user.getError() != null || user.getErrorDescription() != null) {
                     throw new IllegalStateException(user.getErrorDescription());
@@ -63,8 +70,11 @@ public class OAuthService {
                     return user.getId();
                 }
             }
+            else {
+                throw new IllegalStateException("Failed ID lookup returned user object response: " + responseBody);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
 
@@ -95,7 +105,7 @@ public class OAuthService {
                 accessTokenResponse = objectMapper.readValue(responseBody, OAuthAccessTokenResponse.class);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
 

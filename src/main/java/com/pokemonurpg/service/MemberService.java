@@ -1,9 +1,12 @@
 package com.pokemonurpg.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.security.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -33,6 +36,8 @@ public class MemberService
 
     private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z]).{8,40})";
     private Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+    private Logger logger = LogManager.getLogger(MemberService.class);
+    private ObjectMapper mapper = new ObjectMapper();
 
     Random rand = new Random();
 
@@ -139,7 +144,7 @@ public class MemberService
 
                 memberRepository.save(member);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.catching(e);
             }
         }
         return errors;
@@ -196,15 +201,15 @@ public class MemberService
                         if (member != null) {
                             return startSecureSession(member, accessTokenResponse);
                         }
-                        else return null;
+                        else throw new IllegalStateException("No user was found with Discord ID: " + id);
                     }
-                    else return null;
+                    else throw new IllegalStateException("No ID was returned from the Discord request.");
                 }
-                else return null;
+                else throw new IllegalStateException("No access token was returned from the Discord exchange.");
             }
             else return null;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
     }
@@ -222,7 +227,7 @@ public class MemberService
             }
             return null;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
     }
@@ -246,7 +251,7 @@ public class MemberService
             }
             else return null;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.catching(e);
             return null;
         }
     }
