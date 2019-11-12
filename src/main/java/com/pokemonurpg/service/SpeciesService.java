@@ -344,9 +344,25 @@ public class SpeciesService {
             Species newSpecies = new Species(input);
             newSpecies.setType1(typeRepository.findByName(input.getType1()));
             newSpecies.setType2(typeRepository.findByName(input.getType2()));
+
+            if (input.getStoryRank() == null || input.getStoryRank().equals("")) {
+                input.setStoryRank("-");
+            }
             newSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+
+            if (input.getArtRank() == null || input.getArtRank().equals("")) {
+                input.setArtRank("-");
+            }
             newSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+
+            if (input.getParkRank() == null || input.getParkRank().equals("")) {
+                input.setParkRank("-");
+            }
             newSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+
+            if (input.getParkLocation() == null || input.getParkLocation().equals("")) {
+                input.setParkLocation("-");
+            }
             newSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
             speciesRepository.save(newSpecies);
 
@@ -600,10 +616,10 @@ public class SpeciesService {
                     if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
                         errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
                     }
-                    if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                    if (evolutionInputDto.getMethod() != null && evolutionInputDto.getMethod().length() > 50) {
                         errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
                     }
-                    if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                    if (evolutionInputDto.getNumBattles() != null && evolutionInputDto.getNumBattles() > 10) {
                         errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
                     }
                 }
