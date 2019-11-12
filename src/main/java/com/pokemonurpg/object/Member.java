@@ -27,6 +27,18 @@ public class Member {
     @Column(name = "session_expire")
     private Long sessionExpire;
 
+    @Column
+    private Integer money;
+
+    @Column
+    private Integer wins;
+
+    @Column
+    private Integer losses;
+
+    @Column
+    private Integer draws;
+
     public Member() {
     }
 
@@ -84,5 +96,37 @@ public class Member {
 
     public void setSessionExpire(Long sessionExpire) {
         this.sessionExpire = sessionExpire;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    public Integer getWins() {
+        return wins;
+    }
+
+    public void setWins(Integer wins) {
+        this.wins = wins;
+    }
+
+    public Integer getLosses() {
+        return losses;
+    }
+
+    public void setLosses(Integer losses) {
+        this.losses = losses;
+    }
+
+    public Integer getDraws() {
+        return draws;
+    }
+
+    public void setDraws(Integer draws) {
+        this.draws = draws;
     }
 }

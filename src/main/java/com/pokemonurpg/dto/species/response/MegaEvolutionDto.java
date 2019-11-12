@@ -9,8 +9,8 @@ public class MegaEvolutionDto {
     private int dbid;
     private int dexno;
     private String name;
-    private Type type1;
-    private Type type2;
+    private String type1;
+    private String type2;
     private String classification;
     private int hp;
     private int attack;
@@ -33,8 +33,12 @@ public class MegaEvolutionDto {
             setDbid(species.getDbid());
             setDexno(species.getDexno());
             setName(species.getName());
-            setType1(species.getType1());
-            setType2(species.getType2());
+            if (species.getType1() != null) {
+                setType1(species.getType1().getName());
+            }
+            if (species.getType2() != null) {
+                setType2(species.getType2().getName());
+            }
             setClassification(species.getClassification());
             setHp(species.getHp());
             setAttack(species.getAttack());
@@ -76,19 +80,19 @@ public class MegaEvolutionDto {
         this.name = name;
     }
 
-    public Type getType1() {
+    public String getType1() {
         return type1;
     }
 
-    public void setType1(Type type1) {
+    public void setType1(String type1) {
         this.type1 = type1;
     }
 
-    public Type getType2() {
+    public String getType2() {
         return type2;
     }
 
-    public void setType2(Type type2) {
+    public void setType2(String type2) {
         this.type2 = type2;
     }
 
