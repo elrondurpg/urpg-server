@@ -71,7 +71,7 @@ public class EvolutionService {
     }
 
     public void update(int evoDbid, EvolutionInputDto input) {
-        if (input != null && input.getName() != null) {
+        if (input != null) {
             Evolution existingRecord = evolutionRepository.findByIdEvolutionDbid(evoDbid);
             if (existingRecord != null) {
                 if (input.getMethod() != null) {

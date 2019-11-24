@@ -461,7 +461,7 @@ public class SpeciesService {
             speciesAttackService.updateAll(dbid, input.getAttacks());
             speciesAbilityService.updateAll(dbid, input.getAbilities());
             cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
-            alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
+            alteredFormMethodService.update(existingSpecies.getDexno(), input.getAlteredFormMethod());
             evolutionService.update(dbid, input.getEvolvesFrom());
             megaEvolutionService.update(dbid, input.getMegaEvolvesFrom());
         }

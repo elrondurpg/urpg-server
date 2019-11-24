@@ -24,8 +24,8 @@ public class MegaEvolutionDtoTest {
         assertEquals(dto.getDbid(), megaCharizardX.getDbid());
         assertEquals(dto.getDexno(), megaCharizardX.getDexno());
         assertEquals(dto.getName(), megaCharizardX.getName());
-        assertEquals(dto.getType1(), megaCharizardX.getType1());
-        assertEquals(dto.getType2(), megaCharizardX.getType2());
+        assertEquals(dto.getType1(), megaCharizardX.getType1().getName());
+        assertEquals(dto.getType2(), megaCharizardX.getType2().getName());
         assertEquals(dto.getClassification(), megaCharizardX.getClassification());
         assertEquals(dto.getHp(), megaCharizardX.getHp());
         assertEquals(dto.getAttack(), megaCharizardX.getAttack());
