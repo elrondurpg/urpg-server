@@ -12,7 +12,7 @@
         <RollingFile
                 name="FileAppender"
                 fileName="${filePath}/${artifactId}.log"
-                filePattern="${filePath}/${artifactId}.%i.log.gz"
+                filePattern="${filePath}/${artifactId}.log.%i.gz"
                 ignoreExceptions="false">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
