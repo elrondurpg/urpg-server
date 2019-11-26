@@ -27,6 +27,12 @@ public class TypeMatchupService {
         return findTypeMatchupsBySpeciesTypes(species.getType1(), species.getType2());
     }
 
+    public List<TypeMatchupDto> findTypeMatchupsBySpeciesTypes(String type1Name, String type2Name) {
+        Type type1 = typeService.findByName(type1Name);
+        Type type2 = typeService.findByName(type2Name);
+        return findTypeMatchupsBySpeciesTypes(type1, type2);
+    }
+
     public List<TypeMatchupDto> findTypeMatchupsBySpeciesTypes(Type type1, Type type2) {
         List<TypeMatchupDto> matchups = new ArrayList<>();
 

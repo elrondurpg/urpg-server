@@ -135,7 +135,14 @@ public class Species {
         setWeight(input.getWeight());
         setMaleAllowed(input.isMaleAllowed());
         setFemaleAllowed(input.isFemaleAllowed());
-        setPokemart(input.getPokemart());
+        if (input.getPokemart() != null) {
+            setPokemart(input.getPokemart());
+        }
+        else setPokemart(-1);
+        if (input.getContestCredits() != null) {
+            setContestCredits(input.getContestCredits());
+        }
+        else setContestCredits(-1);
         setDisplayName(input.getDisplayName());
         setFormName(input.getFormName());
     }

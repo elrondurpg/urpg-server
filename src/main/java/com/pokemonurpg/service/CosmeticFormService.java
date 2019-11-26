@@ -35,22 +35,22 @@ public class CosmeticFormService
         else return Collections.emptyList();
     }
 
-    public void create(int speciesDbid, CosmeticFormInputDto input) {
-        CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getFormName(), input.getMethod());
+    public void create(int speciesDbid, CosmeticFormInputDto input, String formChangeMethod) {
+        CosmeticForm form = new CosmeticForm(speciesDbid, input.getName(), input.getFormName(), formChangeMethod);
         cosmeticFormRepository.save(form);
     }
 
-    public void createAll(int speciesDbid, List<CosmeticFormInputDto> input) {
+    public void createAll(int speciesDbid, List<CosmeticFormInputDto> input, String formChangeMethod) {
         if (input != null) {
             for (CosmeticFormInputDto dto : input) {
                 if (!dto.isDeleted()) {
-                    create(speciesDbid, dto);
+                    create(speciesDbid, dto, formChangeMethod);
                 }
             }
         }
     }
 
-    public void update(CosmeticForm existingRecord, CosmeticFormInputDto input) {
+    public void update(CosmeticForm existingRecord, CosmeticFormInputDto input, String formChangeMethod) {
         if (input.isDeleted()) {
             cosmeticFormRepository.delete(existingRecord);
         }
@@ -59,21 +59,28 @@ public class CosmeticFormService
                 existingRecord.setFormName(input.getFormName());
             }
             if (input.getMethod() != null) {
-                existingRecord.setMethod(input.getMethod());
+                existingRecord.setMethod(formChangeMethod);
             }
             cosmeticFormRepository.save(existingRecord);
         }
     }
 
-    public void updateAll(int speciesDbid, List<CosmeticFormInputDto> input) {
+    public void updateAll(int speciesDbid, List<CosmeticFormInputDto> input, String formChangeMethod) {
         if (input != null) {
             for (CosmeticFormInputDto record : input) {
                 CosmeticForm existingRecord = cosmeticFormRepository.findByIdSpeciesDbidAndIdName(speciesDbid, record.getName());
                 if (existingRecord != null) {
-                    update(existingRecord, record);
+                    update(existingRecord, record, formChangeMethod);
                 } else {
-                    create(speciesDbid, record);
+                    create(speciesDbid, record, formChangeMethod);
                 }
+            }
+        }
+        if (formChangeMethod != null) {
+            List<CosmeticForm> existingForms = cosmeticFormRepository.findByIdSpeciesDbid(speciesDbid);
+            for (CosmeticForm existingForm : existingForms) {
+                existingForm.setMethod(formChangeMethod);
+                cosmeticFormRepository.save(existingForm);
             }
         }
     }

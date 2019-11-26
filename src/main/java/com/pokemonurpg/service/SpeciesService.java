@@ -131,7 +131,7 @@ public class SpeciesService {
             List<Species> speciesAtThisDex = speciesRepository.findByDexno(species.getDexno());
             String alteredFormMethod = alteredFormMethodService.findByDexno(species.getDexno());
             List<AlteredFormDto> alteredFormDtos = buildAlteredFormList(speciesAtThisDex, alteredFormMethod);
-            alteredFormDtos.addAll(buildCosmeticForms(species, alteredFormDtos));
+            alteredFormDtos.addAll(buildCosmeticForms(species, alteredFormDtos, alteredFormMethod));
             speciesDto.setAlteredForms(alteredFormDtos);
             speciesDto.setUniqueMoves(buildUniqueMoveList(alteredFormDtos));
 
@@ -247,7 +247,7 @@ public class SpeciesService {
         return uniqueMoves;
     }
 
-    public List<AlteredFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms) {
+    public List<AlteredFormDto> buildCosmeticForms(Species species, List<AlteredFormDto> alteredForms, String method) {
         List<AlteredFormDto> cosmeticFormDtos = new ArrayList<>();
         if (species != null) {
             boolean noAlteredForms = alteredForms == null || alteredForms.isEmpty();
@@ -285,6 +285,16 @@ public class SpeciesService {
 
             if (cosmeticFormDtos.size() == 1 && noAlteredForms)
                 return Collections.emptyList();
+
+            if (cosmeticFormDtos.size() > 1) {
+                if (cosmeticFormDtos.get(0).getMethod() == null) {
+                    for (AlteredFormDto dto : cosmeticFormDtos) {
+                        if (dto.getMethod() != null) {
+                            cosmeticFormDtos.get(0).setMethod(dto.getMethod());
+                        }
+                    }
+                }
+            }
 
             return cosmeticFormDtos;
         }
@@ -344,9 +354,25 @@ public class SpeciesService {
             Species newSpecies = new Species(input);
             newSpecies.setType1(typeRepository.findByName(input.getType1()));
             newSpecies.setType2(typeRepository.findByName(input.getType2()));
+
+            if (input.getStoryRank() == null || input.getStoryRank().equals("")) {
+                input.setStoryRank("-");
+            }
             newSpecies.setStoryRank(storyRankRepository.findByName(input.getStoryRank()));
+
+            if (input.getArtRank() == null || input.getArtRank().equals("")) {
+                input.setArtRank("-");
+            }
             newSpecies.setArtRank(artRankRepository.findByName(input.getArtRank()));
+
+            if (input.getParkRank() == null || input.getParkRank().equals("")) {
+                input.setParkRank("-");
+            }
             newSpecies.setParkRank(parkRankRepository.findByName(input.getParkRank()));
+
+            if (input.getParkLocation() == null || input.getParkLocation().equals("")) {
+                input.setParkLocation("-");
+            }
             newSpecies.setParkLocation(parkLocationRepository.findByName(input.getParkLocation()));
             speciesRepository.save(newSpecies);
 
@@ -355,8 +381,8 @@ public class SpeciesService {
 
             speciesAttackService.createAll(dbid, input.getAttacks());
             speciesAbilityService.createAll(dbid, input.getAbilities());
-            cosmeticFormService.createAll(dbid, input.getCosmeticForms());
             alteredFormMethodService.create(dbid, input.getAlteredFormMethod());
+            cosmeticFormService.createAll(dbid, input.getCosmeticForms(), input.getAlteredFormMethod());
             evolutionService.create(dbid, input.getEvolvesFrom());
             megaEvolutionService.create(dbid, input.getMegaEvolvesFrom());
         }
@@ -414,6 +440,9 @@ public class SpeciesService {
             if (input.getPokemart() != null) {
                 existingSpecies.setPokemart(input.getPokemart());
             }
+            if (input.getContestCredits() != null) {
+                existingSpecies.setContestCredits(input.getContestCredits());
+            }
             if (input.getDisplayName() != null) {
                 existingSpecies.setDisplayName(input.getDisplayName());
             }
@@ -444,8 +473,8 @@ public class SpeciesService {
 
             speciesAttackService.updateAll(dbid, input.getAttacks());
             speciesAbilityService.updateAll(dbid, input.getAbilities());
-            cosmeticFormService.updateAll(dbid, input.getCosmeticForms());
-            alteredFormMethodService.update(dbid, input.getAlteredFormMethod());
+            alteredFormMethodService.update(existingSpecies.getDexno(), input.getAlteredFormMethod());
+            cosmeticFormService.updateAll(dbid, input.getCosmeticForms(), input.getAlteredFormMethod());
             evolutionService.update(dbid, input.getEvolvesFrom());
             megaEvolutionService.update(dbid, input.getMegaEvolvesFrom());
         }
@@ -600,10 +629,10 @@ public class SpeciesService {
                     if (speciesRepository.findByName(evolutionInputDto.getName()) == null) {
                         errors.reject("Pre-evolved form " + evolutionInputDto.getName() + " is not a real Pokemon.");
                     }
-                    if (evolutionInputDto.getMethod() == null || evolutionInputDto.getMethod().length() > 50) {
+                    if (evolutionInputDto.getMethod() != null && evolutionInputDto.getMethod().length() > 50) {
                         errors.reject("Evolution method " + evolutionInputDto.getMethod() + " is invalid.");
                     }
-                    if (evolutionInputDto.getNumBattles() == null || evolutionInputDto.getNumBattles() > 10) {
+                    if (evolutionInputDto.getNumBattles() != null && evolutionInputDto.getNumBattles() > 10) {
                         errors.reject("Evolution EXP requirement " + evolutionInputDto.getNumBattles() + " is invalid.");
                     }
                 }
