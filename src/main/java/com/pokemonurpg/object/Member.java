@@ -1,6 +1,8 @@
 package com.pokemonurpg.object;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -38,6 +40,30 @@ public class Member {
 
     @Column
     private Integer draws;
+
+    @Column(name = "join_date")
+    private Date joinDate;
+
+    @OneToMany(mappedBy="trainer")
+    private List<OwnedPokemon> pokemon;
+
+    @OneToMany(mappedBy="trainer")
+    private List<OwnedItem> items;
+
+    @OneToMany(mappedBy="member")
+    private List<MemberRole> roles;
+
+    @OneToMany(mappedBy="member")
+    private List<EarnedBadge> badges;
+
+    @OneToMany(mappedBy="member")
+    private List<ChampionRecord> championRecords;
+
+    @OneToMany(mappedBy="trainer")
+    private List<LegendaryProgress> legendaryProgress;
+
+    @OneToMany(mappedBy="trainer")
+    private List<EarnedLegendary> earnedLegendaries;
 
     public Member() {
     }
@@ -128,5 +154,69 @@ public class Member {
 
     public void setDraws(Integer draws) {
         this.draws = draws;
+    }
+
+    public List<OwnedPokemon> getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(List<OwnedPokemon> pokemon) {
+        this.pokemon = pokemon;
+    }
+
+    public List<OwnedItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OwnedItem> items) {
+        this.items = items;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public List<MemberRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<MemberRole> roles) {
+        this.roles = roles;
+    }
+
+    public List<EarnedBadge> getBadges() {
+        return badges;
+    }
+
+    public void setBadges(List<EarnedBadge> badges) {
+        this.badges = badges;
+    }
+
+    public List<ChampionRecord> getChampionRecords() {
+        return championRecords;
+    }
+
+    public void setChampionRecords(List<ChampionRecord> championRecords) {
+        this.championRecords = championRecords;
+    }
+
+    public List<LegendaryProgress> getLegendaryProgress() {
+        return legendaryProgress;
+    }
+
+    public void setLegendaryProgress(List<LegendaryProgress> legendaryProgress) {
+        this.legendaryProgress = legendaryProgress;
+    }
+
+    public List<EarnedLegendary> getEarnedLegendaries() {
+        return earnedLegendaries;
+    }
+
+    public void setEarnedLegendaries(List<EarnedLegendary> earnedLegendaries) {
+        this.earnedLegendaries = earnedLegendaries;
     }
 }

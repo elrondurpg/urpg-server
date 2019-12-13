@@ -3,6 +3,7 @@ package com.pokemonurpg.object;
 import com.pokemonurpg.dto.species.input.SpeciesInputDto;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Species {
@@ -86,6 +87,15 @@ public class Species {
 
     @Column(name = "form_name")
     private String formName;
+
+    @OneToMany(mappedBy="species")
+    private List<SpeciesAttack> speciesAttacks;
+
+    @OneToMany(mappedBy="species")
+    private List<SpeciesAbility> speciesAbilities;
+
+    @Column(name="legendary_tier")
+    private int legendaryTier;
 
     /*
     @JsonManagedReference
@@ -337,6 +347,30 @@ public class Species {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public List<SpeciesAttack> getSpeciesAttacks() {
+        return speciesAttacks;
+    }
+
+    public void setSpeciesAttacks(List<SpeciesAttack> speciesAttacks) {
+        this.speciesAttacks = speciesAttacks;
+    }
+
+    public List<SpeciesAbility> getSpeciesAbilities() {
+        return speciesAbilities;
+    }
+
+    public void setSpeciesAbilities(List<SpeciesAbility> speciesAbilities) {
+        this.speciesAbilities = speciesAbilities;
+    }
+
+    public int getLegendaryTier() {
+        return legendaryTier;
+    }
+
+    public void setLegendaryTier(int legendaryTier) {
+        this.legendaryTier = legendaryTier;
     }
 
     /*public AlteredFormMethod getAlteredFormMethod() {
