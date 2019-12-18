@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping(path="/{name}")
     public @ResponseBody
-    RestResponse getRoleByName(@PathVariable("name") String name) {
+    RestResponse getMember(@PathVariable("name") String name) {
         try {
             MemberDto dto = memberService.findByName(name);
             if (dto != null) {

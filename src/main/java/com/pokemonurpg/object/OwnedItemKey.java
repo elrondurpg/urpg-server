@@ -16,6 +16,11 @@ public class OwnedItemKey implements Serializable {
     public OwnedItemKey() {
     }
 
+    public OwnedItemKey(int trainerDbid, int itemDbid) {
+        this.trainerDbid = trainerDbid;
+        this.itemDbid = itemDbid;
+    }
+
     public Integer getTrainerDbid() {
         return trainerDbid;
     }

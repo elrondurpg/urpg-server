@@ -1,4 +1,4 @@
-package com.pokemonurpg.dto.stats;
+package com.pokemonurpg.dto.stats.response;
 
 import com.pokemonurpg.object.*;
 
@@ -17,7 +17,8 @@ public class StatsDto {
     private List<OwnedPokemonBriefDto> pokemon;
     private List<OwnedItemDto> items;
     private List<String> roles = new ArrayList<>();
-    private AchievementsDto achievements = new AchievementsDto();;
+    private AchievementsDto achievements = new AchievementsDto();
+    private List<LogRecordDto> logs = new ArrayList<>();
 
     private static final DateFormat MM_DD_YYYY = new SimpleDateFormat("MM-dd-yyyy");
 
@@ -194,5 +195,13 @@ public class StatsDto {
 
     public void setAchievements(AchievementsDto achievements) {
         this.achievements = achievements;
+    }
+
+    public List<LogRecordDto> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<LogRecordDto> logs) {
+        this.logs = logs;
     }
 }

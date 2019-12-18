@@ -56,10 +56,6 @@ public class MemberService
         return memberRepository.findAllNames();
     }
 
-    public Member findByExactName(String name) {
-        return memberRepository.findByUsername(name);
-    }
-
     public Member findByDiscordId(String id) { return memberRepository.findByDiscordId(id); }
 
     public MemberDto findByName(String name) {
@@ -232,13 +228,21 @@ public class MemberService
         }
     }
 
+    public boolean isCurrentUser(SessionDto input, String name) {
+        SessionDto session = getCurrentUserSession(input);
+        if (name != null && session != null) {
+            return name.equals(session.getUsername());
+        }
+        return false;
+    }
+
     public SessionDto getCurrentUserSession(SessionDto input) {
         try {
             if (validateSessionDto(input)) {
                 Member memberToAuthenticate = memberRepository.findByDiscordId(input.getId());
                 if (hasCorrectAccessToken(memberToAuthenticate, input.getAccessToken())) {
                     String id = oAuthService.getDiscordId(input.getAccessToken());
-                    if (input.getId().equals(id)) {
+                    if (input.getId().equals(id) && input.getUsername().equals(memberToAuthenticate.getUsername())) {
                         long expireTime = memberToAuthenticate.getSessionExpire();
                         if ((System.currentTimeMillis() / 1000) < expireTime - 60) {
                             return input;
@@ -355,6 +359,9 @@ public class MemberService
 
     public boolean validateSessionDto(SessionDto input) {
         if (input != null) {
+            if (input.getUsername() == null || input.getUsername().isEmpty() || input.getUsername().equals("")) {
+                return false;
+            }
             if (input.getAccessToken() == null || input.getAccessToken().isEmpty() || input.getAccessToken().equals("")) {
                 return false;
             }

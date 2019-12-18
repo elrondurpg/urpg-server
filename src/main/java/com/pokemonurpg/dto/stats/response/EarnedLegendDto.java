@@ -1,4 +1,4 @@
-package com.pokemonurpg.dto.stats;
+package com.pokemonurpg.dto.stats.response;
 
 import com.pokemonurpg.object.EarnedLegendary;
 import com.pokemonurpg.object.OwnedPokemon;

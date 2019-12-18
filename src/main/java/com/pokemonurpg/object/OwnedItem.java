@@ -23,6 +23,12 @@ public class OwnedItem {
     public OwnedItem() {
     }
 
+    public OwnedItem(int trainerDbid, int itemDbid, int quantity) {
+        OwnedItemKey id = new OwnedItemKey(trainerDbid, itemDbid);
+        this.id = id;
+        this.quantity = quantity;
+    }
+
     public OwnedItemKey getId() {
         return id;
     }
