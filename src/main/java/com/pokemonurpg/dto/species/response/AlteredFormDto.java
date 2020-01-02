@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.pokemon.Species;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.pokemonurpg.dto.species.input;
 
 import com.pokemonurpg.dto.InputDto;
-import com.pokemonurpg.object.CosmeticForm;
-import com.pokemonurpg.object.CosmeticFormKey;
+import com.pokemonurpg.object.pokemon.CosmeticForm;
+import com.pokemonurpg.object.pokemon.CosmeticFormKey;
 
 import java.util.Objects;
 

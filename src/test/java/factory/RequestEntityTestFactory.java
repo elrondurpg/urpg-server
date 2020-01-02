@@ -1,8 +1,7 @@
 package factory;
 
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.pokemon.Species;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.RequestEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 

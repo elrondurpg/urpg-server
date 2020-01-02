@@ -1,7 +1,7 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.CosmeticForm;
-import com.pokemonurpg.object.CosmeticFormKey;
+import com.pokemonurpg.object.pokemon.CosmeticForm;
+import com.pokemonurpg.object.pokemon.CosmeticFormKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

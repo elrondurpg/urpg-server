@@ -1,6 +1,6 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.Item;
+import com.pokemonurpg.object.trainer.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

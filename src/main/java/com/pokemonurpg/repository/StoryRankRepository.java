@@ -1,11 +1,10 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.StoryRank;
+import com.pokemonurpg.object.pokemon.StoryRank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StoryRankRepository extends JpaRepository<StoryRank, Integer> {
     @Query("select x.name from StoryRank x")

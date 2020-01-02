@@ -1,7 +1,7 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.service.ParkRankService;
+import com.pokemonurpg.service.pokemon.ParkRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

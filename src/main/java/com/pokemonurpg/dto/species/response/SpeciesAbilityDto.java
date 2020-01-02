@@ -1,8 +1,7 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.Ability;
-import com.pokemonurpg.object.Species;
-import com.pokemonurpg.object.SpeciesAbility;
+import com.pokemonurpg.object.pokemon.Ability;
+import com.pokemonurpg.object.pokemon.SpeciesAbility;
 
 public class SpeciesAbilityDto implements Comparable<SpeciesAbilityDto> {
     private int dbid;

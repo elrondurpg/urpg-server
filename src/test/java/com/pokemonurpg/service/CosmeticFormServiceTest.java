@@ -2,8 +2,9 @@ package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.species.response.CosmeticFormDto;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.CosmeticForm;
+import com.pokemonurpg.object.pokemon.CosmeticForm;
 import com.pokemonurpg.repository.CosmeticFormRepository;
+import com.pokemonurpg.service.pokemon.CosmeticFormService;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -2,10 +2,12 @@ package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.species.response.MegaEvolutionDto;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.MegaEvolution;
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.pokemon.MegaEvolution;
+import com.pokemonurpg.object.pokemon.Species;
 import com.pokemonurpg.repository.MegaEvolutionRepository;
 import com.pokemonurpg.repository.SpeciesRepository;
+import com.pokemonurpg.service.pokemon.MegaEvolutionService;
+import com.pokemonurpg.service.pokemon.SpeciesAbilityService;
 import org.junit.Before;
 import org.junit.Test;
 

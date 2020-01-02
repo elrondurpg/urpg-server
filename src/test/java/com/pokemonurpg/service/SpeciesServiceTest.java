@@ -1,18 +1,13 @@
 package com.pokemonurpg.service;
 
-import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.dto.species.response.CosmeticFormDto;
-import com.pokemonurpg.dto.species.response.SpeciesAttackDto;
-import com.pokemonurpg.dto.species.response.*;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.*;
+import com.pokemonurpg.object.pokemon.Attack;
+import com.pokemonurpg.object.pokemon.CosmeticForm;
+import com.pokemonurpg.object.pokemon.Species;
 import com.pokemonurpg.repository.*;
+import com.pokemonurpg.service.pokemon.*;
 import org.junit.Before;
-import org.junit.Test;
 
-import java.util.*;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class SpeciesServiceTest {
@@ -66,7 +61,7 @@ public class SpeciesServiceTest {
         when(speciesRepository.findByName(name)).thenReturn(pikachu);
 
         SpeciesDto dto = speciesService.findByName(name);
-        assertEquals(name, dto.getName());
+        assertEquals(name, dto.getLabel());
     }
 
     @Test
@@ -78,7 +73,7 @@ public class SpeciesServiceTest {
         when(speciesRepository.findByNameStartingWith(namePartial)).thenReturn(list);
 
         SpeciesDto dto = speciesService.findByName(namePartial);
-        assertEquals(name, dto.getName());
+        assertEquals(name, dto.getLabel());
     }
 
     @Test
@@ -140,7 +135,7 @@ public class SpeciesServiceTest {
         SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(pikachu);
         assertNotNull(dto);
         assertEquals(dto.getDexno(), pikachu.getDexno());
-        assertEquals(dto.getName(), pikachu.getDisplayName());
+        assertEquals(dto.getLabel(), pikachu.getDisplayName());
     }
 
     @Test
@@ -148,7 +143,7 @@ public class SpeciesServiceTest {
         SpeciesPageTabDto dto = speciesService.buildSpeciesPageTabDto(null);
         assertNotNull(dto);
         assertEquals(0, dto.getDexno());
-        assertNull(dto.getName());
+        assertNull(dto.getLabel());
     }
 
     @Test
@@ -156,7 +151,7 @@ public class SpeciesServiceTest {
         when(speciesRepository.findByDexno(pikachu.getDexno())).thenReturn(Arrays.asList(pikachu));
 
         SpeciesDto dto = speciesService.findByDexno(pikachu.getDexno());
-        assertEquals(pikachu.getName(), dto.getName());
+        assertEquals(pikachu.getLabel(), dto.getLabel());
     }
 
     @Test
@@ -204,7 +199,7 @@ public class SpeciesServiceTest {
     public void buildAlteredFormDtoReturnsPikachuBelle() {
         AlteredFormDto dto = speciesService.buildAlteredFormDto(pikachuBelle);
         assertEquals(pikachuBelle.getDbid(), dto.getDbid());
-        assertEquals(pikachuBelle.getName(), dto.getName());
+        assertEquals(pikachuBelle.getLabel(), dto.getLabel());
         assertEquals(pikachuBelle.getFormName(), dto.getFormName());
         assertEquals(pikachuBelle.getDisplayName(), dto.getDisplayName());
         assertEquals(pikachuBelle.getType1(), dto.getType1());
@@ -220,7 +215,7 @@ public class SpeciesServiceTest {
     @Test
     public void buildAlteredFormFromNull() {
         AlteredFormDto dto = speciesService.buildAlteredFormDto(null);
-        assertNull(dto.getName());
+        assertNull(dto.getLabel());
     }
 
     @Test
@@ -403,18 +398,18 @@ public class SpeciesServiceTest {
         List<List<EvolutionFamilyMemberDto>> evolutionFamily = speciesService.buildEvolutionFamily(raichu);
         assertEquals(3, evolutionFamily.size());
         assertEquals(1, evolutionFamily.get(0).size());
-        assertEquals(pichu.getName(), evolutionFamily.get(0).get(0).getName());
+        assertEquals(pichu.getLabel(), evolutionFamily.get(0).get(0).getLabel());
         assertEquals(1, evolutionFamily.get(1).size());
-        assertEquals(pikachu.getName(), evolutionFamily.get(1).get(0).getName());
+        assertEquals(pikachu.getLabel(), evolutionFamily.get(1).get(0).getLabel());
         assertEquals(1, evolutionFamily.get(2).size());
-        assertEquals(raichu.getName(), evolutionFamily.get(2).get(0).getName());
+        assertEquals(raichu.getLabel(), evolutionFamily.get(2).get(0).getLabel());
     }
 
     @Test
     public void getBasicFormReturnsThisIfBasicAlready() {
         when(evolutionService.getPreEvolutionDbid(pichu.getDbid())).thenReturn(-1);
         EvolutionFamilyMemberDto basic = speciesService.findBasicForm(pichu);
-        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getName());
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getLabel());
         assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_DBID, basic.getDbid());
         assertNull(basic.getMethod());
     }
@@ -428,7 +423,7 @@ public class SpeciesServiceTest {
         when(speciesRepository.findByDbid(pichu.getDbid())).thenReturn(pichu);
 
         EvolutionFamilyMemberDto basic = speciesService.findBasicForm(raichu);
-        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getName());
+        assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_NAME, basic.getLabel());
         assertEquals(TestObjectFactory.TEST_PRE_EVOLUTION_DBID, basic.getDbid());
         assertNull(basic.getMethod());
     }
@@ -436,7 +431,7 @@ public class SpeciesServiceTest {
     @Test
     public void getBasicFormReturnsNullWhenSpeciesIsNull() {
         EvolutionFamilyMemberDto basic = speciesService.findBasicForm(null);
-        assertNull(basic.getName());
+        assertNull(basic.getLabel());
         assertNull(basic.getMethod());
     }
 
@@ -456,7 +451,7 @@ public class SpeciesServiceTest {
         Species result = speciesService.findByDbid(pikachu.getDbid());
         assertNotNull(result);
         assertEquals(result.getDbid(), pikachu.getDbid());
-        assertEquals(result.getName(), pikachu.getName());
+        assertEquals(result.getLabel(), pikachu.getLabel());
     }
 
     @Test
@@ -479,11 +474,11 @@ public class SpeciesServiceTest {
         List<List<EvolutionFamilyMemberDto>> evolutionFamily = speciesDto.getEvolutionFamily();
         assertEquals(3, evolutionFamily.size());
         assertEquals(1, evolutionFamily.get(0).size());
-        assertEquals(pichu.getName(), evolutionFamily.get(0).get(0).getName());
+        assertEquals(pichu.getLabel(), evolutionFamily.get(0).get(0).getLabel());
         assertEquals(1, evolutionFamily.get(1).size());
-        assertEquals(pikachu.getName(), evolutionFamily.get(1).get(0).getName());
+        assertEquals(pikachu.getLabel(), evolutionFamily.get(1).get(0).getLabel());
         assertEquals(1, evolutionFamily.get(2).size());
-        assertEquals(raichu.getName(), evolutionFamily.get(2).get(0).getName());
+        assertEquals(raichu.getLabel(), evolutionFamily.get(2).get(0).getLabel());
     }
 
     @Test

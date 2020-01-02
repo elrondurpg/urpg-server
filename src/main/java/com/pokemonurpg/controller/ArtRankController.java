@@ -1,8 +1,7 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.service.ArtRankService;
-import com.pokemonurpg.service.StoryRankService;
+import com.pokemonurpg.service.pokemon.ArtRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

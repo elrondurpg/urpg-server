@@ -1,7 +1,6 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.object.AttackCategory;
+import com.pokemonurpg.object.pokemon.AttackCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

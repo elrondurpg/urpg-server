@@ -1,7 +1,7 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.ChampionRecord;
-import com.pokemonurpg.object.Member;
+import com.pokemonurpg.object.trainer.ChampionRecord;
+import com.pokemonurpg.object.trainer.Member;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

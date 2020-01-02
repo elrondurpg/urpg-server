@@ -12,7 +12,7 @@ public class SpeciesTest {
     public void createSpeciesTest() {
         Species pokemon = SpeciesTestFactory.createSpecies("SpeciesTest");
         Assert.assertEquals((Integer) 1, pokemon.getDbid());
-        Assert.assertEquals("SpeciesTest", pokemon.getName());
+        Assert.assertEquals("SpeciesTest", pokemon.getLabel());
         Assert.assertEquals((Integer) 1, pokemon.getType1().getDbid());
         Assert.assertNull(pokemon.getType2());
         Assert.assertEquals("TestClass", pokemon.getClassification());

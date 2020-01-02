@@ -1,7 +1,7 @@
 package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
-import com.pokemonurpg.service.RSEContestMoveTypeService;
+import com.pokemonurpg.service.pokemon.RSEContestMoveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

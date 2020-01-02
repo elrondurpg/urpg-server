@@ -1,0 +1,92 @@
+package com.pokemonurpg.service.pokemon;
+
+import com.pokemonurpg.dto.species.input.MegaEvolutionInputDto;
+import com.pokemonurpg.dto.species.response.MegaEvolutionBriefDto;
+import com.pokemonurpg.dto.species.response.MegaEvolutionDto;
+import com.pokemonurpg.dto.species.response.SpeciesAbilityDto;
+import com.pokemonurpg.object.pokemon.MegaEvolution;
+import com.pokemonurpg.object.pokemon.Species;
+import com.pokemonurpg.repository.MegaEvolutionRepository;
+import com.pokemonurpg.repository.SpeciesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class MegaEvolutionService {
+
+    private MegaEvolutionRepository megaEvolutionRepository;
+    private SpeciesRepository speciesRepository;
+    private SpeciesAbilityService speciesAbilityService;
+
+    @Autowired
+    public MegaEvolutionService(MegaEvolutionRepository megaEvolutionRepository, SpeciesRepository speciesRepository, SpeciesAbilityService speciesAbilityService) {
+        this.megaEvolutionRepository = megaEvolutionRepository;
+        this.speciesRepository = speciesRepository;
+        this.speciesAbilityService = speciesAbilityService;
+    }
+
+    public boolean isMegaEvolution(int dbid) {
+        MegaEvolution mega = megaEvolutionRepository.findByIdMegaEvolutionDbid(dbid);
+        return mega != null;
+    }
+
+    public MegaEvolutionBriefDto findByMegaDbid(int dbid) {
+        MegaEvolution mega = megaEvolutionRepository.findByIdMegaEvolutionDbid(dbid);
+        if (mega != null) {
+            MegaEvolutionBriefDto dto = new MegaEvolutionBriefDto();
+
+            Species species = speciesRepository.findByDbid(mega.getId().getOriginalDbid());
+            dto.setName(species.getName());
+            dto.setMegaStone(mega.getMegaStone());
+
+            return dto;
+        }
+        else return null;
+    }
+
+    public List<MegaEvolutionDto> findByOriginalDbid(int dbid) {
+        List<MegaEvolutionDto> dtos = new ArrayList<>();
+
+        List<MegaEvolution> megas = megaEvolutionRepository.findByIdOriginalDbid(dbid);
+        if (megas != null) {
+            for (MegaEvolution mega : megas) {
+                Species species = speciesRepository.findByDbid(mega.getId().getMegaEvolutionDbid());
+                MegaEvolutionDto dto = new MegaEvolutionDto(species, mega.getMegaStone());
+                List<SpeciesAbilityDto> abilityList = speciesAbilityService.findBySpeciesDbid(species.getDbid());
+                if (abilityList != null && !abilityList.isEmpty()) {
+                    dto.setAbility(abilityList.get(0));
+                }
+                dtos.add(dto);
+            }
+        }
+
+        return dtos;
+    }
+
+    public void create(int megaEvolutionDbid, MegaEvolutionInputDto input) {
+        if (input != null && input.getName() != null) {
+            Species species = speciesRepository.findByName(input.getName());
+            MegaEvolution mega = new MegaEvolution(megaEvolutionDbid, species.getDbid(), input.getMegaStone());
+            megaEvolutionRepository.save(mega);
+        }
+    }
+
+    public void update(int megaEvolutionDbid, MegaEvolutionInputDto input) {
+        if (input != null && input.getName() != null) {
+            MegaEvolution existingRecord = megaEvolutionRepository.findByIdMegaEvolutionDbid(megaEvolutionDbid);
+            if (existingRecord != null) {
+                if (input.getMegaStone() != null) {
+                    existingRecord.setMegaStone(input.getMegaStone());
+                    megaEvolutionRepository.save(existingRecord);
+                }
+            }
+            else {
+                create(megaEvolutionDbid, input);
+            }
+        }
+    }
+
+}

@@ -1,7 +1,7 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.CosmeticForm;
-import com.pokemonurpg.object.CosmeticFormKey;
+import com.pokemonurpg.object.pokemon.CosmeticForm;
+import com.pokemonurpg.object.pokemon.CosmeticFormKey;
 
 import java.util.Objects;
 

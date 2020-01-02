@@ -1,9 +1,9 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.EarnedLegendary;
-import com.pokemonurpg.object.OwnedPokemon;
-import com.pokemonurpg.object.Section;
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.trainer.EarnedLegendary;
+import com.pokemonurpg.object.trainer.OwnedPokemon;
+import com.pokemonurpg.object.trainer.Section;
+import com.pokemonurpg.object.pokemon.Species;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

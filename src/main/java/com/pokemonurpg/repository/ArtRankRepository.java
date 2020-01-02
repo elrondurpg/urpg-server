@@ -1,11 +1,10 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.ArtRank;
+import com.pokemonurpg.object.pokemon.ArtRank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ArtRankRepository extends JpaRepository<ArtRank, Integer> {
     @Query("select x.name from ArtRank x")

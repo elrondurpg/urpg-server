@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.OwnedExtraMove;
+import com.pokemonurpg.object.trainer.OwnedExtraMove;
 
 public class OwnedMoveDto {
     private String name;

@@ -5,15 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.attack.AttackDto;
 import com.pokemonurpg.dto.attack.AttackInputDto;
-import com.pokemonurpg.object.AttackCategory;
-import com.pokemonurpg.object.Member;
 import com.pokemonurpg.dto.security.Authenticated;
-import com.pokemonurpg.service.AttackService;
-import com.pokemonurpg.service.MemberService;
+import com.pokemonurpg.service.pokemon.AttackService;
+import com.pokemonurpg.service.trainer.MemberService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 

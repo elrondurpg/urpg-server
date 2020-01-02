@@ -1,12 +1,11 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.AlteredFormMethod;
+import com.pokemonurpg.object.pokemon.AlteredFormMethod;
 import com.pokemonurpg.repository.AlteredFormMethodRepository;
+import com.pokemonurpg.service.pokemon.AlteredFormMethodService;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

@@ -1,6 +1,10 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.*;
+import com.pokemonurpg.object.pokemon.Species;
+import com.pokemonurpg.object.trainer.EarnedRibbon;
+import com.pokemonurpg.object.trainer.OwnedExtraMove;
+import com.pokemonurpg.object.trainer.OwnedHiddenAbility;
+import com.pokemonurpg.object.trainer.OwnedPokemon;
 
 import java.util.ArrayList;
 import java.util.Collection;

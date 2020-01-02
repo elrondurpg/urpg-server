@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.LogRecord;
+import com.pokemonurpg.object.trainer.LogRecord;
 
 public class LogRecordDto {
     private long timestamp;

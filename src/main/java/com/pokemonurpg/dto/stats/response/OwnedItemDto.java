@@ -1,7 +1,7 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.Item;
-import com.pokemonurpg.object.OwnedItem;
+import com.pokemonurpg.object.trainer.Item;
+import com.pokemonurpg.object.trainer.OwnedItem;
 
 public class OwnedItemDto {
     private String name;

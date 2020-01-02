@@ -1,7 +1,7 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.OwnedPokemon;
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.trainer.OwnedPokemon;
+import com.pokemonurpg.object.pokemon.Species;
 
 public class OwnedPokemonBriefDto {
     private int dbid;

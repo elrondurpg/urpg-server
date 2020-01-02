@@ -1,6 +1,6 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.Role;
+import com.pokemonurpg.object.trainer.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

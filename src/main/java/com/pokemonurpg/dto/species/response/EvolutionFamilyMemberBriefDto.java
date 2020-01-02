@@ -1,7 +1,5 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.Species;
-
 public class EvolutionFamilyMemberBriefDto {
     private String name;
     private String method;

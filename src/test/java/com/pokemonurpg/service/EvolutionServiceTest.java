@@ -2,9 +2,10 @@ package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.species.response.EvolutionFamilyMemberDto;
 import com.pokemonurpg.factory.TestObjectFactory;
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.pokemon.Species;
 import com.pokemonurpg.repository.EvolutionRepository;
 import com.pokemonurpg.repository.SpeciesRepository;
+import com.pokemonurpg.service.pokemon.EvolutionService;
 import org.junit.Before;
 import org.junit.Test;
 

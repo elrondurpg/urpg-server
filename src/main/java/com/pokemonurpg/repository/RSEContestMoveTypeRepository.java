@@ -1,6 +1,6 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.RSEContestMoveType;
+import com.pokemonurpg.object.pokemon.RSEContestMoveType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

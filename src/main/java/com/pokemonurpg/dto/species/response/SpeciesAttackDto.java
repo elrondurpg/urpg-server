@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.*;
+import com.pokemonurpg.object.pokemon.*;
 
 public class SpeciesAttackDto {
     private int dbid;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.security;
 
-import com.pokemonurpg.object.Role;
+import com.pokemonurpg.object.trainer.Role;
 
 import java.util.List;
 

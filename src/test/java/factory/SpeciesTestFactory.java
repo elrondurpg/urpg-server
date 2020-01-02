@@ -20,13 +20,13 @@ public class SpeciesTestFactory {
 
     public static Species createSpecies(String name) {
         Species species = createSpecies();
-        species.setName(name);
+        species.setLabel(name);
         return species;
     }
 
     public static Species createSpecies(String name, Integer dbid) {
         Species species = createSpecies();
-        species.setName(name);
+        species.setLabel(name);
         species.setDbid(dbid);
         return species;
     }

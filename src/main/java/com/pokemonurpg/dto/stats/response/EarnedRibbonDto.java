@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.EarnedRibbon;
+import com.pokemonurpg.object.trainer.EarnedRibbon;
 
 import java.util.ArrayList;
 import java.util.List;

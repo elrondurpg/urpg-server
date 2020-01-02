@@ -1,6 +1,6 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.ContestAttribute;
+import com.pokemonurpg.object.pokemon.ContestAttribute;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

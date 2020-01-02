@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.species.response;
 
-import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.pokemon.Species;
 
 public class SpeciesPageTabDto {
     private int dexno;

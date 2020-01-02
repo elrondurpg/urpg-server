@@ -1,7 +1,7 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.Evolution;
-import com.pokemonurpg.object.EvolutionKey;
+import com.pokemonurpg.object.pokemon.Evolution;
+import com.pokemonurpg.object.pokemon.EvolutionKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

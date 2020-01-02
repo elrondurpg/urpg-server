@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.attack;
 
-import com.pokemonurpg.object.*;
+import com.pokemonurpg.object.pokemon.*;
 
 public class AttackDto {
     private int dbid;

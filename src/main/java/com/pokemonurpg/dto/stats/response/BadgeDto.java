@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.*;
+import com.pokemonurpg.object.trainer.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,13 +1,12 @@
 package com.pokemonurpg.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.dto.stats.input.StatsInputDto;
 import com.pokemonurpg.dto.stats.response.OwnedPokemonDto;
 import com.pokemonurpg.dto.stats.response.StatsDto;
-import com.pokemonurpg.service.MemberService;
-import com.pokemonurpg.service.StatsService;
+import com.pokemonurpg.service.trainer.MemberService;
+import com.pokemonurpg.service.trainer.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;

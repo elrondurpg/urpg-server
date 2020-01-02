@@ -1,7 +1,7 @@
 package com.pokemonurpg.repository;
 
-import com.pokemonurpg.object.LogRecord;
-import com.pokemonurpg.object.Member;
+import com.pokemonurpg.object.trainer.LogRecord;
+import com.pokemonurpg.object.trainer.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

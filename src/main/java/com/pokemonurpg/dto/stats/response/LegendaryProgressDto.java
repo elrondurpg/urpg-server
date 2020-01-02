@@ -1,6 +1,6 @@
 package com.pokemonurpg.dto.stats.response;
 
-import com.pokemonurpg.object.LegendaryProgress;
+import com.pokemonurpg.object.trainer.LegendaryProgress;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
