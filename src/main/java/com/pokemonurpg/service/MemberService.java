@@ -236,6 +236,8 @@ public class MemberService
         return false;
     }
 
+
+
     public SessionDto getCurrentUserSession(SessionDto input) {
         try {
             if (validateSessionDto(input)) {

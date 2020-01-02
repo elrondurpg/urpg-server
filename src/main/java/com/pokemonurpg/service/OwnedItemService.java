@@ -32,7 +32,7 @@ public class OwnedItemService {
         }
     }
 
-    public void update(OwnedItem existingRecord, OwnedItemDto input) {
+    public void update(String updater, OwnedItem existingRecord, OwnedItemDto input) {
         if (existingRecord != null && existingRecord.getTrainer() != null) {
             Member member = existingRecord.getTrainer();
             int current = existingRecord.getQuantity();
@@ -46,21 +46,21 @@ public class OwnedItemService {
 
             int difference = input.getQuantity() - current;
             if (difference > 0) {
-                logService.log(member, member.getUsername() + " gained " + difference + "x " + input.getName());
+                logService.log(member, updater + " added " + difference + "x " + input.getName());
             } else if (difference < 0) {
-                logService.log(member, member.getUsername() + " lost " + (difference * -1) + "x " + input.getName());
+                logService.log(member, updater + " removed " + (difference * -1) + "x " + input.getName());
             }
         }
     }
 
-    public void updateAll(Member member, List<OwnedItemDto> input) {
+    public void updateAll(String updater, Member member, List<OwnedItemDto> input) {
         if (input != null) {
             for (OwnedItemDto record : input) {
                 Item item = itemRepository.findByName(record.getName());
 
                 OwnedItem existingRecord = ownedItemRepository.findByIdTrainerDbidAndIdItemDbid(member.getDbid(), item.getDbid());
                 if (existingRecord != null) {
-                    update(existingRecord, record);
+                    update(updater, existingRecord, record);
                 } else if (record.getQuantity() > 0) {
                     create(member, record);
                 }

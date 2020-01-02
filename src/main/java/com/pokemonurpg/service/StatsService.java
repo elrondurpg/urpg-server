@@ -1,6 +1,7 @@
 package com.pokemonurpg.service;
 
 import com.pokemonurpg.dto.stats.input.StatsInputDto;
+import com.pokemonurpg.dto.stats.input.StatsPokemonInputDto;
 import com.pokemonurpg.dto.stats.response.*;
 import com.pokemonurpg.object.*;
 import com.pokemonurpg.repository.ItemRepository;
@@ -47,6 +48,11 @@ public class StatsService {
             }
             else return null;
         }
+    }
+
+    public Member getPokemonOwner(int dbid) {
+        OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);
+        return pokemon.getTrainer();
     }
 
     public StatsDto buildStatsDto(Member trainer) {
@@ -132,7 +138,7 @@ public class StatsService {
         return new Date(System.currentTimeMillis() - (days * DAY_IN_MS));
     }
 
-    public Errors updateStats(StatsInputDto input, String name) {
+    public Errors updateStats(String updater, StatsInputDto input, String name) {
         Errors errors = validateStatsUpdate(input, name);
 
         if (!errors.hasErrors()) {
@@ -142,17 +148,17 @@ public class StatsService {
 
             if (input.getName() != null && !input.getName().equals(existingRecord.getUsername())) {
                 existingRecord.setUsername(input.getName());
-                logs.add(new LogRecord(existingRecord, "This user's name was changed to " + input.getName()));
+                logs.add(new LogRecord(existingRecord, updater + " changed this user's name to " + input.getName()));
             }
 
             if (input.getMoney() != null) {
                 int currentMoney = existingRecord.getMoney();
                 int difference = input.getMoney() - currentMoney;
                 if (difference > 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " added $" + difference));
+                    logs.add(new LogRecord(existingRecord, updater + " added $" + difference));
                 }
                 else if (difference < 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " subtracted $" + (difference * -1)));
+                    logs.add(new LogRecord(existingRecord, updater + " subtracted $" + (difference * -1)));
                 }
                 existingRecord.setMoney(input.getMoney());
             }
@@ -161,10 +167,10 @@ public class StatsService {
                 int current = existingRecord.getWins();
                 int difference = input.getWins() - current;
                 if (difference > 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " won " + difference + " games"));
+                    logs.add(new LogRecord(existingRecord, updater + " added " + difference + " won games."));
                 }
                 else if (difference < 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " removed " + (difference * -1) + " wins"));
+                    logs.add(new LogRecord(existingRecord, updater + " removed " + (difference * -1) + " wins"));
                 }
                 existingRecord.setWins(input.getWins());
             }
@@ -173,10 +179,10 @@ public class StatsService {
                 int current = existingRecord.getLosses();
                 int difference = input.getLosses() - current;
                 if (difference > 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " lost " + difference + " games"));
+                    logs.add(new LogRecord(existingRecord, updater + " added " + difference + " lost games."));
                 }
                 else if (difference < 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " removed " + (difference * -1) + " losses"));
+                    logs.add(new LogRecord(existingRecord, updater + " removed " + (difference * -1) + " losses"));
                 }
                 existingRecord.setLosses(input.getLosses());
             }
@@ -185,19 +191,17 @@ public class StatsService {
                 int current = existingRecord.getDraws();
                 int difference = input.getDraws() - current;
                 if (difference > 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " drew " + difference + " games"));
+                    logs.add(new LogRecord(existingRecord, updater + " added " + difference + " drawn games."));
                 }
                 else if (difference < 0) {
-                    logs.add(new LogRecord(existingRecord, existingRecord.getUsername() + " removed " + (difference * -1) + " draws"));
+                    logs.add(new LogRecord(existingRecord, updater + " removed " + (difference * -1) + " draws"));
                 }
                 existingRecord.setDraws(input.getDraws());
             }
 
             if (input.getItems() != null) {
-                ownedItemService.updateAll(existingRecord, input.getItems());
+                ownedItemService.updateAll(updater, existingRecord, input.getItems());
             }
-
-            ownedItemService.updateAll(existingRecord, input.getItems());
 
             for (LogRecord log : logs) {
                 logService.log(log);
@@ -253,6 +257,80 @@ public class StatsService {
         }
         else {
             errors.reject("Trainer " + name + " doesn't exist.");
+        }
+
+        return errors;
+    }
+
+    public Errors updatePokemon(String updater, StatsPokemonInputDto input) {
+        Errors errors = validateUpdatePokemon(input);
+
+        if (!errors.hasErrors()) {
+            int dbid = input.getDbid();
+            OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);
+            Member owner = getPokemonOwner(dbid);
+            String logMessage = updater + " updated ";
+
+            String nickname = pokemon.getNickname();
+            if (nickname != null) {
+                logMessage += nickname + " the ";
+            }
+            logMessage += pokemon.getSpecies().getName() + " as follows: ";
+            List<String> logs = new ArrayList<>();
+
+            Integer exp = input.getExp();
+            if (exp != null) {
+                int difference = exp - pokemon.getExp();
+                if (difference > 0) {
+                    logs.add(" added " + difference + " EXP");
+                }
+                else if (difference < 0) {
+                    logs.add(" removed " + difference + " EXP");
+                }
+                pokemon.setExp(exp);
+            }
+
+            for (int i = 0; i < logs.size(); i++) {
+                logMessage += logs.get(i);
+                if (i < logs.size() - 1) {
+                    logMessage += ", ";
+                }
+            }
+            logMessage += ".";
+
+            logService.log(owner, logMessage);
+
+            ownedPokemonRepository.save(pokemon);
+        }
+
+        return errors;
+    }
+
+    public Errors validateUpdatePokemon(StatsPokemonInputDto input) {
+        MapBindingResult errors = new MapBindingResult(new HashMap<>(), "");
+
+        if (input != null) {
+            Integer dbid = input.getDbid();
+            if (dbid != null) {
+                OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(input.getDbid());
+                if (pokemon != null) {
+
+                    Integer exp = input.getExp();
+                    if (exp != null && exp < 0) {
+                        errors.reject("EXP must be greater than zero! (Found " + exp + ")");
+                    }
+
+                }
+                else {
+                    errors.reject("Could not find an owned Pokemon with DBID = " + dbid);
+                }
+            }
+            else {
+                errors.reject("Owned Pokemon DBID cannot be null!");
+            }
+        }
+        else {
+            errors.reject("Input cannot be null!");
         }
 
         return errors;
