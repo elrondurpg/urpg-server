@@ -29,6 +29,7 @@ public class StatsService {
     private static final Pattern POKEMON_URPG_FORUM_THREAD_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?$");
     private static final Pattern POKEMON_URPG_FORUM_POST_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+$");
     private static final Pattern BMG_ARCHIVE_THREAD_PATTERN = Pattern.compile("^(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html$");
+    private static final Pattern PXR_ARCHIVE_THREAD_PATTERN = Pattern.compile("^(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?$");
 
     @Autowired
     public StatsService(MemberRepository memberRepository, OwnedPokemonRepository ownedPokemonRepository, LogService logService,
@@ -277,7 +278,7 @@ public class StatsService {
             String logMessage = updater + " updated ";
 
             String nickname = pokemon.getNickname();
-            if (nickname != null) {
+            if (nickname != null && !nickname.equals("")) {
                 logMessage += nickname + " the ";
             }
             logMessage += pokemon.getSpecies().getName() + " as follows: ";
@@ -352,7 +353,8 @@ public class StatsService {
                         Matcher urpgPostMatcher = POKEMON_URPG_FORUM_POST_PATTERN.matcher(hiddenPowerLink);
                         Matcher urpgThreadMatcher = POKEMON_URPG_FORUM_THREAD_PATTERN.matcher(hiddenPowerLink);
                         Matcher bmgArchiveMatcher = BMG_ARCHIVE_THREAD_PATTERN.matcher(hiddenPowerLink);
-                        if (!urpgPostMatcher.find() && !urpgThreadMatcher.find() && !bmgArchiveMatcher.find()) {
+                        Matcher pxrArchiveMatcher = PXR_ARCHIVE_THREAD_PATTERN.matcher(hiddenPowerLink);
+                        if (!urpgPostMatcher.find() && !urpgThreadMatcher.find() && !bmgArchiveMatcher.find() && !pxrArchiveMatcher.find()) {
                             errors.reject("Hidden Power link is not properly formatted or links to an invalid website. If you believe you are receiving this message in error, please contact a system administrator.");
                         }
                     }
