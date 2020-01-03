@@ -4,10 +4,7 @@ import com.pokemonurpg.dto.stats.input.StatsInputDto;
 import com.pokemonurpg.dto.stats.input.StatsPokemonInputDto;
 import com.pokemonurpg.dto.stats.response.*;
 import com.pokemonurpg.object.*;
-import com.pokemonurpg.repository.ItemRepository;
-import com.pokemonurpg.repository.MemberRepository;
-import com.pokemonurpg.repository.OwnedItemRepository;
-import com.pokemonurpg.repository.OwnedPokemonRepository;
+import com.pokemonurpg.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -17,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class StatsService {
@@ -25,15 +24,21 @@ public class StatsService {
     private LogService logService;
     private ItemRepository itemRepository;
     private OwnedItemService ownedItemService;
+    private TypeRepository typeRepository;
+
+    private static final Pattern POKEMON_URPG_FORUM_THREAD_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?$");
+    private static final Pattern POKEMON_URPG_FORUM_POST_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+$");
+    private static final Pattern BMG_ARCHIVE_THREAD_PATTERN = Pattern.compile("^(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html$");
 
     @Autowired
     public StatsService(MemberRepository memberRepository, OwnedPokemonRepository ownedPokemonRepository, LogService logService,
-                        ItemRepository itemRepository, OwnedItemService ownedItemService) {
+                        ItemRepository itemRepository, OwnedItemService ownedItemService, TypeRepository typeRepository) {
         this.memberRepository = memberRepository;
         this.ownedPokemonRepository = ownedPokemonRepository;
         this.logService = logService;
         this.itemRepository = itemRepository;
         this.ownedItemService = ownedItemService;
+        this.typeRepository = typeRepository;
     }
 
     public StatsDto findByName(String name) {
@@ -290,6 +295,19 @@ public class StatsService {
                 pokemon.setExp(exp);
             }
 
+            String hiddenPowerType = input.getHiddenPowerType();
+            if (hiddenPowerType != null) {
+                Type type = typeRepository.findByName(hiddenPowerType);
+                logs.add(" changed Hidden Power type to " + type.getName());
+                pokemon.setHiddenPowerType(type);
+            }
+
+            String hiddenPowerLink = input.getHiddenPowerLink();
+            if (hiddenPowerLink != null) {
+                logs.add(" updated Hidden Power link");
+                pokemon.setHiddenPowerLink(hiddenPowerLink);
+            }
+
             for (int i = 0; i < logs.size(); i++) {
                 logMessage += logs.get(i);
                 if (i < logs.size() - 1) {
@@ -318,6 +336,25 @@ public class StatsService {
                     Integer exp = input.getExp();
                     if (exp != null && exp < 0) {
                         errors.reject("EXP must be greater than zero! (Found " + exp + ")");
+                    }
+
+                    String hiddenPowerType = input.getHiddenPowerType();
+                    if (hiddenPowerType != null && ("NORMAL".equalsIgnoreCase(hiddenPowerType) || "FAIRY".equalsIgnoreCase(hiddenPowerType) || typeRepository.findByName(hiddenPowerType) == null)) {
+                        errors.reject("Hidden Power type " + hiddenPowerType + " is invalid.");
+                    }
+
+                    String hiddenPowerLink = input.getHiddenPowerLink();
+                    if (hiddenPowerLink != null) {
+                        if (hiddenPowerLink.length() > 2083) {
+                            errors.reject("Hidden Power link is too long (max 2083 chars)");
+                        }
+
+                        Matcher urpgPostMatcher = POKEMON_URPG_FORUM_POST_PATTERN.matcher(hiddenPowerLink);
+                        Matcher urpgThreadMatcher = POKEMON_URPG_FORUM_THREAD_PATTERN.matcher(hiddenPowerLink);
+                        Matcher bmgArchiveMatcher = BMG_ARCHIVE_THREAD_PATTERN.matcher(hiddenPowerLink);
+                        if (!urpgPostMatcher.find() && !urpgThreadMatcher.find() && !bmgArchiveMatcher.find()) {
+                            errors.reject("Hidden Power link is not properly formatted or links to an invalid website. If you believe you are receiving this message in error, please contact a system administrator.");
+                        }
                     }
 
                 }
