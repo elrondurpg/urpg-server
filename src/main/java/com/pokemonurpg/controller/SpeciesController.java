@@ -10,12 +10,15 @@ import com.pokemonurpg.object.Member;
 import com.pokemonurpg.dto.security.Authenticated;
 import com.pokemonurpg.service.MemberService;
 import com.pokemonurpg.service.SpeciesService;
+import net.bytebuddy.pool.TypePool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pokemon")
@@ -46,6 +49,20 @@ public class SpeciesController {
             SpeciesDto dto = speciesService.findByName(name);
             if (dto != null) {
                 return new RestResponse(200, dto);
+            }
+            else return new RestResponse(404, null);
+        } catch (IllegalStateException e) {
+            return new RestResponse(400, null);
+        }
+    }
+
+    @GetMapping(path="/rank/{rank}")
+    public @ResponseBody
+    RestResponse getSpeciesByRank(@PathVariable("rank") String rank) {
+        try {
+            List<String> speciesNames = speciesService.findByRank(rank);
+            if (speciesNames != null) {
+                return new RestResponse(200, speciesNames);
             }
             else return new RestResponse(404, null);
         } catch (IllegalStateException e) {

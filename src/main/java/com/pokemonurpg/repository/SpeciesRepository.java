@@ -1,6 +1,8 @@
 package com.pokemonurpg.repository;
 
+import com.pokemonurpg.object.ParkRank;
 import com.pokemonurpg.object.Species;
+import com.pokemonurpg.object.StoryRank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +22,6 @@ public interface SpeciesRepository extends JpaRepository<Species, Integer> {
     Species findByDbid(Integer dbid);
     List<Species> findByNameStartingWith(String name);
     List<Species> findByDexno(Integer dexno);
+    List<Species> findByStoryRank(StoryRank rank);
+    List<Species> findByParkRank(ParkRank rank);
 }

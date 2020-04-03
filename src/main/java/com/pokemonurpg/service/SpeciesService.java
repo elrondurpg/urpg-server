@@ -107,6 +107,30 @@ public class SpeciesService {
         }
     }
 
+    public List<String> findByRank(String rankName) {
+        List<String> speciesNames = new ArrayList<>();
+        List<Species> speciesList = null;
+
+        StoryRank rank = storyRankRepository.findByName(rankName);
+        if (rank != null) {
+            speciesList = speciesRepository.findByStoryRank(rank);
+        }
+        else {
+            ParkRank parkRank = parkRankRepository.findByName(rankName);
+            if (parkRank != null) {
+                speciesList = speciesRepository.findByParkRank(parkRank);
+            }
+        }
+
+        if (speciesList != null) {
+            for (Species species : speciesList) {
+                speciesNames.add(species.getName());
+            }
+        }
+
+        return speciesNames;
+    }
+
     public SpeciesDto buildSpeciesDto(Species species) {
         if (species != null) {
             SpeciesDto speciesDto = new SpeciesDto(species);
