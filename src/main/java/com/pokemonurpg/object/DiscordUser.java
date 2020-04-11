@@ -13,6 +13,8 @@ public class DiscordUser {
     private Boolean mfaEnabled;
     @JsonProperty("flags")
     private String flags;
+    @JsonProperty("public_flags")
+    private String publicFlags;
     @JsonProperty("avatar")
     private String avatar;
     @JsonProperty("discriminator")
@@ -65,6 +67,14 @@ public class DiscordUser {
 
     public void setFlags(String flags) {
         this.flags = flags;
+    }
+
+    public String getPublicFlags() {
+        return publicFlags;
+    }
+
+    public void setPublicFlags(String publicFlags) {
+        this.publicFlags = publicFlags;
     }
 
     public String getAvatar() {

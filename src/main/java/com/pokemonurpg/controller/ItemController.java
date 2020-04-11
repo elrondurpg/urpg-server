@@ -2,6 +2,7 @@ package com.pokemonurpg.controller;
 
 import com.pokemonurpg.RestResponse;
 import com.pokemonurpg.dto.ItemDto;
+import com.pokemonurpg.object.Item;
 import com.pokemonurpg.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,9 @@ public class ItemController {
     public @ResponseBody
     RestResponse getItemByName(@PathVariable("name") String name) {
         try {
-            ItemDto dto = itemService.findByName(name);
-            if (dto != null) {
-                return new RestResponse(200, dto);
+            Item item = itemService.findByName(name);
+            if (item != null) {
+                return new RestResponse(200, item);
             }
             else return new RestResponse(404, null);
         } catch (IllegalStateException e) {

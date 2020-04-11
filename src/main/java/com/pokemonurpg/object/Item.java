@@ -18,6 +18,9 @@ public class Item {
     @Column
     private String type;
 
+    @Column
+    private String description;
+
     public Item() {
     }
 
@@ -51,5 +54,13 @@ public class Item {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
