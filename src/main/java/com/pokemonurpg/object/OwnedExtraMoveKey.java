@@ -16,6 +16,11 @@ public class OwnedExtraMoveKey implements Serializable {
     public OwnedExtraMoveKey() {
     }
 
+    public OwnedExtraMoveKey(int pokemonDbid, int attackDbid) {
+        this.pokemonDbid = pokemonDbid;
+        this.attackDbid = attackDbid;
+    }
+
     public Integer getPokemonDbid() {
         return pokemonDbid;
     }

@@ -1,10 +1,13 @@
 package com.pokemonurpg.dto.stats.input;
 
+import java.util.List;
+
 public class StatsPokemonInputDto {
     private Integer dbid;
     private Integer exp;
     private String hiddenPowerType;
     private String hiddenPowerLink;
+    private List<String> movesToAdd;
 
     public StatsPokemonInputDto() {
     }
@@ -39,5 +42,13 @@ public class StatsPokemonInputDto {
 
     public void setHiddenPowerLink(String hiddenPowerLink) {
         this.hiddenPowerLink = hiddenPowerLink;
+    }
+
+    public List<String> getMovesToAdd() {
+        return movesToAdd;
+    }
+
+    public void setMovesToAdd(List<String> movesToAdd) {
+        this.movesToAdd = movesToAdd;
     }
 }

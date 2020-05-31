@@ -78,6 +78,14 @@ public class Attack {
     @JoinColumn(name = "dpp_contest_attribute")
     private ContestAttribute dppContestAttribute;
 
+    @OneToOne
+    @JoinColumn(name = "adv_contest_move_type")
+    private AdvContestMoveType advContestMoveType;
+
+    @OneToOne
+    @JoinColumn(name = "adv_contest_attribute")
+    private ContestAttribute advContestAttribute;
+
     public Attack() { }
 
     public Attack(String name) {
@@ -257,5 +265,21 @@ public class Attack {
 
     public void setDppContestAttribute(ContestAttribute dppContestAttribute) {
         this.dppContestAttribute = dppContestAttribute;
+    }
+
+    public AdvContestMoveType getAdvContestMoveType() {
+        return advContestMoveType;
+    }
+
+    public void setAdvContestMoveType(AdvContestMoveType advContestMoveType) {
+        this.advContestMoveType = advContestMoveType;
+    }
+
+    public ContestAttribute getAdvContestAttribute() {
+        return advContestAttribute;
+    }
+
+    public void setAdvContestAttribute(ContestAttribute advContestAttribute) {
+        this.advContestAttribute = advContestAttribute;
     }
 }

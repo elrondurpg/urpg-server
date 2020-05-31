@@ -21,6 +21,8 @@ public class AttackInputDto {
     private String dppContestMoveType;
     private String orasContestAttribute;
     private String orasContestMoveType;
+    private String advContestAttribute;
+    private String advContestMoveType;
 
     public String getName() {
         return name;
@@ -172,5 +174,21 @@ public class AttackInputDto {
 
     public void setOrasContestMoveType(String orasContestMoveType) {
         this.orasContestMoveType = orasContestMoveType;
+    }
+
+    public String getAdvContestAttribute() {
+        return advContestAttribute;
+    }
+
+    public void setAdvContestAttribute(String advContestAttribute) {
+        this.advContestAttribute = advContestAttribute;
+    }
+
+    public String getAdvContestMoveType() {
+        return advContestMoveType;
+    }
+
+    public void setAdvContestMoveType(String advContestMoveType) {
+        this.advContestMoveType = advContestMoveType;
     }
 }

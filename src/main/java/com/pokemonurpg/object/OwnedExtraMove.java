@@ -20,6 +20,10 @@ public class OwnedExtraMove {
     public OwnedExtraMove() {
     }
 
+    public OwnedExtraMove(int pokemonDbid, int attackDbid) {
+        this.id = new OwnedExtraMoveKey(pokemonDbid, attackDbid);
+    }
+
     public OwnedExtraMoveKey getId() {
         return id;
     }

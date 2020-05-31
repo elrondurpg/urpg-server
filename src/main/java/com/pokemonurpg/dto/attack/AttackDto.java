@@ -23,6 +23,8 @@ public class AttackDto {
     private DPPContestMoveType dppContestMoveType;
     private String orasContestAttribute;
     private ORASContestMoveType orasContestMoveType;
+    private String advContestAttribute;
+    private AdvContestMoveType advContestMoveType;
 
     public AttackDto(Attack attack) {
         if (attack != null) {
@@ -61,6 +63,12 @@ public class AttackDto {
             }
             if (attack.getOrasContestMoveType() != null) {
                 setOrasContestMoveType(attack.getOrasContestMoveType());
+            }
+            if (attack.getAdvContestAttribute() != null) {
+                setAdvContestAttribute(attack.getAdvContestAttribute().getName());
+            }
+            if (attack.getAdvContestMoveType() != null) {
+                setAdvContestMoveType(attack.getAdvContestMoveType());
             }
         }
     }
@@ -223,5 +231,21 @@ public class AttackDto {
 
     public void setOrasContestMoveType(ORASContestMoveType orasContestMoveType) {
         this.orasContestMoveType = orasContestMoveType;
+    }
+
+    public String getAdvContestAttribute() {
+        return advContestAttribute;
+    }
+
+    public void setAdvContestAttribute(String advContestAttribute) {
+        this.advContestAttribute = advContestAttribute;
+    }
+
+    public AdvContestMoveType getAdvContestMoveType() {
+        return advContestMoveType;
+    }
+
+    public void setAdvContestMoveType(AdvContestMoveType advContestMoveType) {
+        this.advContestMoveType = advContestMoveType;
     }
 }

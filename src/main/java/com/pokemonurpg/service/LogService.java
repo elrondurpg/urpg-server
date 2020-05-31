@@ -22,8 +22,24 @@ public class LogService {
     }
 
     public void log(Member member, String message) {
-        LogRecord log = new LogRecord(member, message);
-        logRecordRepository.save(log);
+        if (message.length() > 256) {
+            int x = 0;
+            int y = 253;
+            while (y < message.length()) {
+                String chunk = message.substring(x, y) + "...";
+                LogRecord log = new LogRecord(member, chunk);
+                logRecordRepository.save(log);
+                x += 253;
+                y += 253;
+            }
+            String chunk = message.substring(x);
+            LogRecord log = new LogRecord(member, chunk);
+            logRecordRepository.save(log);
+        }
+        else {
+            LogRecord log = new LogRecord(member, message);
+            logRecordRepository.save(log);
+        }
     }
 
     public void log(LogRecord log) {

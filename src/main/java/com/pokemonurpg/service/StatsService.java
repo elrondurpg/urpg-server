@@ -25,6 +25,9 @@ public class StatsService {
     private ItemRepository itemRepository;
     private OwnedItemService ownedItemService;
     private TypeRepository typeRepository;
+    private SpeciesAttackRepository speciesAttackRepository;
+    private AttackRepository attackRepository;
+    private OwnedExtraMoveService ownedExtraMoveService;
 
     private static final Pattern POKEMON_URPG_FORUM_THREAD_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?$");
     private static final Pattern POKEMON_URPG_FORUM_POST_PATTERN = Pattern.compile("^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+$");
@@ -32,14 +35,16 @@ public class StatsService {
     private static final Pattern PXR_ARCHIVE_THREAD_PATTERN = Pattern.compile("^(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?$");
 
     @Autowired
-    public StatsService(MemberRepository memberRepository, OwnedPokemonRepository ownedPokemonRepository, LogService logService,
-                        ItemRepository itemRepository, OwnedItemService ownedItemService, TypeRepository typeRepository) {
+    public StatsService(MemberRepository memberRepository, OwnedPokemonRepository ownedPokemonRepository, LogService logService, ItemRepository itemRepository, OwnedItemService ownedItemService, TypeRepository typeRepository, SpeciesAttackRepository speciesAttackRepository, AttackRepository attackRepository, OwnedExtraMoveService ownedExtraMoveService) {
         this.memberRepository = memberRepository;
         this.ownedPokemonRepository = ownedPokemonRepository;
         this.logService = logService;
         this.itemRepository = itemRepository;
         this.ownedItemService = ownedItemService;
         this.typeRepository = typeRepository;
+        this.speciesAttackRepository = speciesAttackRepository;
+        this.attackRepository = attackRepository;
+        this.ownedExtraMoveService = ownedExtraMoveService;
     }
 
     public StatsDto findByName(String name) {
@@ -297,16 +302,23 @@ public class StatsService {
             }
 
             String hiddenPowerType = input.getHiddenPowerType();
-            if (hiddenPowerType != null) {
+            if (hiddenPowerType != null && (pokemon.getHiddenPowerType() == null || !pokemon.getHiddenPowerType().getName().equals(hiddenPowerType))) {
                 Type type = typeRepository.findByName(hiddenPowerType);
                 logs.add(" changed Hidden Power type to " + type.getName());
                 pokemon.setHiddenPowerType(type);
             }
 
             String hiddenPowerLink = input.getHiddenPowerLink();
-            if (hiddenPowerLink != null) {
+            if (hiddenPowerLink != null && !hiddenPowerLink.equals(pokemon.getHiddenPowerLink())) {
                 logs.add(" updated Hidden Power link");
                 pokemon.setHiddenPowerLink(hiddenPowerLink);
+            }
+
+            List<String> movesToAdd = input.getMovesToAdd();
+            if (movesToAdd != null) {
+                for (String attackName : movesToAdd) {
+                    ownedExtraMoveService.add(pokemon, attackName);
+                }
             }
 
             for (int i = 0; i < logs.size(); i++) {
@@ -315,9 +327,11 @@ public class StatsService {
                     logMessage += ", ";
                 }
             }
-            logMessage += ".";
 
-            logService.log(owner, logMessage);
+            if (!logs.isEmpty()) {
+                logMessage += ".";
+                logService.log(owner, logMessage);
+            }
 
             ownedPokemonRepository.save(pokemon);
         }
@@ -359,6 +373,25 @@ public class StatsService {
                         }
                     }
 
+                    List<String> movesToAdd = input.getMovesToAdd();
+                    if (movesToAdd != null) {
+                        for (String attackName : movesToAdd) {
+                            Attack attack = attackRepository.findByName(attackName);
+                            if (attack != null) {
+                                int attackDbid = attack.getDbid();
+                                Species species = pokemon.getSpecies();
+                                if (species != null) {
+                                    int speciesDbid = species.getDbid();
+                                    SpeciesAttack sa = speciesAttackRepository.findByIdSpeciesDbidAndIdAttackDbid(speciesDbid, attackDbid);
+                                    if (sa == null) {
+                                        errors.reject(species.getName() + " can't learn " + attack.getName());
+                                    }
+                                }
+                                else errors.reject("Owned Pokemon with DBID " + dbid + " had species = null");
+                            }
+                            else errors.reject("Could not find attack named " + attackName);
+                        }
+                    }
                 }
                 else {
                     errors.reject("Could not find an owned Pokemon with DBID = " + dbid);
