@@ -13,8 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class URPGServerApplication {
 
-    public static final Integer CURRENT_GEN = 7;
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

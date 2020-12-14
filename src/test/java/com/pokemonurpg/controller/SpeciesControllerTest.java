@@ -1,42 +1,8 @@
 package com.pokemonurpg.controller;
 
-import com.pokemonurpg.URPGServerApplication;
-import com.pokemonurpg.object.Attack;
-import com.pokemonurpg.object.Species;
-import com.pokemonurpg.object.SpeciesAttack;
-import com.pokemonurpg.object.Type;
-import com.pokemonurpg.repository.SpeciesRepository;
-import com.pokemonurpg.service.AttackService;
-import com.pokemonurpg.service.SpeciesAttackService;
-import com.pokemonurpg.service.SpeciesService;
-import com.pokemonurpg.service.TypeService;
-import factory.RequestEntityTestFactory;
-import factory.SpeciesTestFactory;
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 public class SpeciesControllerTest
 {
@@ -73,10 +39,10 @@ public class SpeciesControllerTest
 
     @Test
     public void getAllSpeciesTest() {
-        Species pokemon = SpeciesTestFactory.createSpecies();
-        when(speciesService.findAll()).thenReturn(Arrays.asList(pokemon, pokemon, pokemon));
+        Species species = SpeciesTestFactory.createSpecies();
+        when(speciesService.findAllNames()).thenReturn(Arrays.asList(species, species, species));
 
-        ResponseEntity<List<Species>> response = restTemplate.exchange("/pokemon/all", HttpMethod.GET, null,
+        ResponseEntity<List<Species>> response = restTemplate.exchange("/species/all", HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<Species>>() {});
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -86,31 +52,31 @@ public class SpeciesControllerTest
     @Test
     public void getSpeciesByNameTest() {
         String speciesName = "TestName";
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
-        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(species);
         when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
-        when(speciesService.findByUsernameStartingWith(speciesName.substring(0, 3))).thenReturn(Optional.of(pokemon));
+        when(speciesService.findByUsernameStartingWith(speciesName.substring(0, 3))).thenReturn(Optional.of(species));
 
-        ResponseEntity<Species> responseWithFullName = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
+        ResponseEntity<Species> responseWithFullName = restTemplate.exchange("/species/" + speciesName, HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
         assertEquals(HttpStatus.OK, responseWithFullName.getStatusCode());
-        assertEquals(speciesName, responseWithFullName.getBody().getName());
+        assertEquals(speciesName, responseWithFullName.getBody().getUsername());
 
-        ResponseEntity<Species> responseWithPartialName = restTemplate.exchange("/pokemon/" + speciesName.substring(0, 3), HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
+        ResponseEntity<Species> responseWithPartialName = restTemplate.exchange("/species/" + speciesName.substring(0, 3), HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
         assertEquals(HttpStatus.OK, responseWithPartialName.getStatusCode());
-        assertEquals(speciesName, responseWithPartialName.getBody().getName());
+        assertEquals(speciesName, responseWithPartialName.getBody().getUsername());
 
-        ResponseEntity<Species> responseWithNameOfNonexistentPokemon = restTemplate.exchange("/pokemon/NON_EXISTENT_POKEMON", HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
+        ResponseEntity<Species> responseWithNameOfNonexistentPokemon = restTemplate.exchange("/species/NON_EXISTENT_POKEMON", HttpMethod.GET, null, new ParameterizedTypeReference<Species>() {});
         assertEquals(HttpStatus.NOT_FOUND, responseWithNameOfNonexistentPokemon.getStatusCode());
     }
 
     @Test
     public void createValidSpeciesTest() {
         String speciesName = "TestName";
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
 
-        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(species);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(speciesService, Mockito.times(1)).save(Mockito.any(Species.class));
     }
@@ -118,14 +84,14 @@ public class SpeciesControllerTest
     @Test
     public void createSpeciesWithNameEqualToExistingSpeciesShouldFail() {
         String speciesName = "TestName";
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
 
-        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Optional<Species> speciesOptional = Optional.of(species);
         when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
-        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(species);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("A Pokemon named " + speciesName + " already exists!", response.getBody());
     }
@@ -133,14 +99,14 @@ public class SpeciesControllerTest
     @Test
     public void createSpeciesWithInvalidAttributesShouldFail() {
         String speciesName = "TestName";
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
-        pokemon.setDexno(1000000);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
+        species.setDexno(1000000);
 
-        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(species);
 
-        ResponseEntity<String> response = restTemplate.exchange("/pokemon/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity<String> response = restTemplate.exchange("/species/createSpecies", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assert.assertTrue(response.getBody().contains("Dex No. '" + pokemon.getDexno() + "' is invalid."));
+        Assert.assertTrue(response.getBody().contains("Dex No. '" + species.getDexno() + "' is invalid."));
     }
 
     @Test
@@ -156,7 +122,7 @@ public class SpeciesControllerTest
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(updatedPokemon);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Pokemon " + speciesName + " was updated successfully!", response.getBody());
         verify(speciesService, Mockito.times(1)).save(Mockito.any(Species.class));
@@ -175,7 +141,7 @@ public class SpeciesControllerTest
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(updatedPokemon);
 
-        ResponseEntity<String> response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity<String> response = restTemplate.exchange("/species/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         Assert.assertTrue(response.getBody().contains("Dex No. '" + updatedPokemon.getDexno() + "' is invalid."));
     }
@@ -185,13 +151,13 @@ public class SpeciesControllerTest
         String speciesName = "TestName";
         String invalidName = "Test";
 
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
-        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(species);
         when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
-        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(pokemon);
+        HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(species);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/" + invalidName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/" + invalidName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
@@ -200,32 +166,32 @@ public class SpeciesControllerTest
         String speciesName = "TestName";
         String invalidName = "Test";
 
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
-        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(species);
         when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
         Species updatedPokemon = SpeciesTestFactory.createSpecies(invalidName);
 
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(updatedPokemon);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/" + speciesName, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test
     public void deleteSpeciesTest() {
-        ResponseEntity response = restTemplate.exchange("/pokemon/DOES_NOT_EXIST", HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/DOES_NOT_EXIST", HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
     public void deleteNonexistentSpeciesShouldFail() {
         String speciesName = "TestName";
-        Species pokemon = SpeciesTestFactory.createSpecies(speciesName);
-        Optional<Species> speciesOptional = Optional.of(pokemon);
+        Species species = SpeciesTestFactory.createSpecies(speciesName);
+        Optional<Species> speciesOptional = Optional.of(species);
         when(speciesService.findByUsername(speciesName)).thenReturn(speciesOptional);
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/" + speciesName, HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/" + speciesName, HttpMethod.DELETE, null, new ParameterizedTypeReference<String>() {});
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Pokemon " + speciesName + " was deleted successfully!", response.getBody());
         verify(speciesService, Mockito.times(1)).delete(Mockito.any(Species.class));
@@ -247,8 +213,8 @@ public class SpeciesControllerTest
         List<SpeciesAttack> speciesAttacks = new ArrayList<>();
         SpeciesAttack speciesAttack = new SpeciesAttack();
         Attack attack = new Attack();
-        attack.setName(ATTACK_NAME);
-        speciesAttack.setAttack(attack);
+        attack.setUsername(ATTACK_NAME);
+        speciesAttack.setAbility(attack);
         speciesAttack.setMethod(ATTACK_METHOD);
         speciesAttacks.add(speciesAttack);
         requestedSpecies.setAttacks(speciesAttacks);
@@ -256,7 +222,7 @@ public class SpeciesControllerTest
         HttpEntity<Species> requestEntity = RequestEntityTestFactory.createSpeciesRequestEntity(requestedSpecies);
         doCallRealMethod().when(speciesService).save(any(Species.class));
 
-        ResponseEntity response = restTemplate.exchange("/pokemon/" + POKEMON_NAME, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
+        ResponseEntity response = restTemplate.exchange("/species/" + POKEMON_NAME, HttpMethod.PUT, requestEntity, new ParameterizedTypeReference<String>() {});
         verify(speciesService, times(1)).save(any(Species.class));
         verify(speciesAttackService, times(1)).save(any(SpeciesAttack.class));
         assertEquals(POKEMON_DBID, speciesAttack.internalGetId().getSpeciesDbid());

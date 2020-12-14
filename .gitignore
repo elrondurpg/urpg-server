@@ -2,3 +2,4 @@
 target
 *.iml
 src/main/java/com/pokemonurpg/auxiliary/
+src/main/resources/application.properties
