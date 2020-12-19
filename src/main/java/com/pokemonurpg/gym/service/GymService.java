@@ -30,6 +30,9 @@ public class GymService implements IndexedObjectService<Gym> {
     @Resource
     private ItemService itemService;
 
+    @Resource
+    private GymPokemonService gymPokemonService;
+
     public List<Gym> findAll() {
         return gymRepository.findAll();
     }
@@ -50,6 +53,7 @@ public class GymService implements IndexedObjectService<Gym> {
         Gym gym = new Gym(input);
         updateEmbeddedValues(input, gym);
         gymRepository.save(gym);
+        updateAssociatedValues(input, gym);
         return gym;
     }
 
@@ -59,6 +63,7 @@ public class GymService implements IndexedObjectService<Gym> {
             gym.update(input);
             updateEmbeddedValues(input, gym);
             gymRepository.save(gym);
+            updateAssociatedValues(input, gym);
         }
         return gym;
     }
@@ -68,5 +73,9 @@ public class GymService implements IndexedObjectService<Gym> {
         gym.setLeague(gymLeagueService.findByName(input.getLeague()));
         gym.setBadge(badgeService.findByName(input.getBadge()));
         gym.setTm(itemService.findByName(input.getTm()));
+    }
+
+    void updateAssociatedValues(GymInputDto input, Gym gym) {
+        gymPokemonService.updateAll(input, gym);
     }
 }

@@ -35,7 +35,7 @@ public class TypeMatchupService {
                 TypeMatchup typeMatchup2 = findByTypes(attackingType, type2);
                 double multiplier = typeMatchup1.getMultiplier();
                 multiplier *= typeMatchup2 == null ? 1 : typeMatchup2.getMultiplier();
-                return new TypeMatchupDto(attackingType.getName(), multiplier);
+                return new TypeMatchupDto(attackingType, multiplier);
             })
             .collect(Collectors.toList());
     }

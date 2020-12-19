@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.contest.models.*;
+import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.SpeciesAttack;
 import com.pokemonurpg.species.models.Type;
 
@@ -94,8 +95,9 @@ public class Attack {
     @JoinColumn(name = "adv_contest_attribute")
     private ContestAttribute advContestAttribute;
 
-    @Column(name = "tm_hm_dbid")
-    private Integer tmHmDbid;
+    @OneToOne
+    @JoinColumn(name = "tm_hm_dbid")
+    private Item tm;
 
     @OneToMany(mappedBy = "attack")
     @JsonIgnoreProperties({ "attack"})
@@ -118,7 +120,6 @@ public class Attack {
         setSubstitute(input.getSubstitute());
         setSheerForce(input.getSheerForce());
         setMagicCoat(input.getMagicCoat());
-        setTmHmDbid(input.getTmHmDbid());
     }
 
     public Integer getDbid() {
@@ -344,14 +345,12 @@ public class Attack {
         }
     }
 
-    public Integer getTmHmDbid() {
-        return tmHmDbid;
+    public Item getTm() {
+        return tm;
     }
 
-    public void setTmHmDbid(Integer tmHmDbid) {
-        if (tmHmDbid != null) {
-            this.tmHmDbid = tmHmDbid;
-        }
+    public void setTm(Item tm) {
+        this.tm = tm;
     }
 
     public Set<SpeciesAttack> getPokemon() {

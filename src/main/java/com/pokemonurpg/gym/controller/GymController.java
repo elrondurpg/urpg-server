@@ -1,5 +1,7 @@
 package com.pokemonurpg.gym.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.View;
 import com.pokemonurpg.core.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.GymInputDto;
@@ -28,6 +30,7 @@ public class GymController {
     }
 
     @GetMapping(path="/{name}")
+    @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
     Gym findByName(@PathVariable("name") String name) {
         return gymService.findFirstActiveByName(name);
@@ -36,6 +39,7 @@ public class GymController {
     @Validated(ObjectCreation.class)
     @Authorized(permission = "Write Gym")
     @PostMapping
+    @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
     Gym create(@Valid @RequestBody GymInputDto input) {
         return gymService.create(input);
@@ -43,6 +47,7 @@ public class GymController {
 
     @Authorized(permission = "Write Gym")
     @PutMapping(path="/{dbid}")
+    @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
     Gym update(@Valid @RequestBody GymInputDto input, @PathVariable int dbid) {
         return gymService.update(input, dbid);

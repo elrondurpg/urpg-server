@@ -7,10 +7,13 @@ import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.EarnedBadge;
+import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
@@ -28,7 +31,7 @@ public class Gym {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration"})
+            "banned", "banExpiration", "gyms" })
     private Member owner;
 
     @OneToOne
@@ -62,6 +65,17 @@ public class Gym {
     @OneToMany(mappedBy="gym")
     @JsonIgnoreProperties("gym")
     private List<EarnedBadge> winners;
+
+    @ManyToMany(
+            targetEntity= OwnedPokemon.class,
+            cascade={CascadeType.PERSIST, CascadeType.MERGE}
+    )
+    @JoinTable(
+            name="GYM_POKEMON",
+            joinColumns=@JoinColumn(name="GYM_DBID"),
+            inverseJoinColumns=@JoinColumn(name="POKEMON_DBID")
+    )
+    private Set<OwnedPokemon> pokemon = new HashSet<>();
 
     public Gym() {
     }
@@ -193,5 +207,13 @@ public class Gym {
 
     public void setWinners(List<EarnedBadge> winners) {
         this.winners = winners;
+    }
+
+    public Set<OwnedPokemon> getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(Set<OwnedPokemon> pokemon) {
+        this.pokemon = pokemon;
     }
 }

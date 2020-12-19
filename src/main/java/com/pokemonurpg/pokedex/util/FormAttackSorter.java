@@ -12,7 +12,7 @@ public class FormAttackSorter {
         Set<String> allAttacks = new HashSet<>();
 
         alteredForms.forEach(alteredForm -> {
-            alteredForm.getSpecies().getMappedSpeciesAttacks().forEach(speciesAttack -> {
+            alteredForm.getSpecies().getAttacks().forEach(speciesAttack -> {
                 String attackName = speciesAttack.getAttack().getName();
                 alteredForm.addMappedAttack(attackName, speciesAttack.getMethod());
                 allAttacks.add(attackName);

@@ -25,7 +25,7 @@ public class AttackInputDtoTest {
     private final static String DPP_TYPE = "DPP_TYPE";
     private final static String ORAS_ATTR = "ORAS_ATTR";
     private final static String ORAS_TYPE = "ORAS_TYPE";
-    private final static Integer TM_HM_DBID = 2432;
+    private final static String TM_NAME = "TM_NAME";
 
     private AttackInputDto input = new AttackInputDto();
 
@@ -50,7 +50,7 @@ public class AttackInputDtoTest {
         input.setDppContestMoveType(DPP_TYPE);
         input.setOrasContestAttribute(ORAS_ATTR);
         input.setOrasContestMoveType(ORAS_TYPE);
-        input.setTmHmDbid(TM_HM_DBID);
+        input.setTm(TM_NAME);
 
         assertEquals(NAME, input.getName());
         assertEquals(TYPE, input.getType());
@@ -71,6 +71,6 @@ public class AttackInputDtoTest {
         assertEquals(DPP_TYPE, input.getDppContestMoveType());
         assertEquals(ORAS_ATTR, input.getOrasContestAttribute());
         assertEquals(ORAS_TYPE, input.getOrasContestMoveType());
-        assertEquals(TM_HM_DBID, input.getTmHmDbid());
+        assertEquals(TM_NAME, input.getTm());
     }
 }

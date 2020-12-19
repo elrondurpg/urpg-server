@@ -69,6 +69,8 @@ public class OwnedPokemonInputDto extends AuthenticatedInputDto {
 
     private Boolean uft;
 
+    private Boolean rental;
+
     public String getTrainer() {
         return trainer;
     }
@@ -195,5 +197,13 @@ public class OwnedPokemonInputDto extends AuthenticatedInputDto {
 
     public void setUft(Boolean uft) {
         this.uft = uft;
+    }
+
+    public Boolean getRental() {
+        return rental;
+    }
+
+    public void setRental(Boolean rental) {
+        this.rental = rental;
     }
 }

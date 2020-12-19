@@ -24,7 +24,7 @@ public class Species {
     private Integer dbid;
 
     @Column
-    @JsonView(value = { View.MemberView.Pokemon.class })
+    @JsonView(value = { View.MemberView.Summary.class })
     private Integer dexno;
 
     @Column
@@ -124,12 +124,12 @@ public class Species {
     @OneToMany(mappedBy="species")
     @JsonIgnoreProperties({ "species"})
     @JsonView(value = { View.MemberView.Pokemon.class })
-    private List<SpeciesAttack> mappedSpeciesAttacks = new ArrayList<>();
+    private List<SpeciesAttack> attacks = new ArrayList<>();
 
     @OneToMany(mappedBy="species")
     @JsonIgnoreProperties({ "species"})
     @JsonView(value = { View.MemberView.Pokemon.class })
-    private List<SpeciesAbility> mappedSpeciesAbilities = new ArrayList<>();
+    private List<SpeciesAbility> abilities = new ArrayList<>();
 
     @Column(name="legendary_tier")
     @JsonView(value = { View.MemberView.Summary.class })
@@ -146,7 +146,7 @@ public class Species {
 
     @OneToOne
     @JoinColumn(name = "pre_evolution_dbid")
-    @JsonIgnoreProperties({ "mappedSpeciesAbilities", "mappedSpeciesAttacks", "classification", "hp", "attack", "defense", "specialAttack",
+    @JsonIgnoreProperties({ "abilities", "attacks", "classification", "hp", "attack", "defense", "specialAttack",
             "specialDefense", "speed", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "mappedEvolution", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
@@ -164,8 +164,7 @@ public class Species {
 
     @OneToOne
     @JoinColumn(name = "pre_mega_dbid")
-    @JsonIgnoreProperties({ "mappedSpeciesAbilities", "mappedSpeciesAttacks", "classification", "hp", "attack", "defense", "specialAttack",
-            "specialDefense", "speed", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
+    @JsonIgnoreProperties({ "abilities", "attacks", "classification", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "mappedEvolution", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix"})
@@ -450,12 +449,12 @@ public class Species {
         }
     }
 
-    public List<SpeciesAttack> getMappedSpeciesAttacks() {
-        return mappedSpeciesAttacks;
+    public List<SpeciesAttack> getAttacks() {
+        return attacks;
     }
 
-    public List<SpeciesAbility> getMappedSpeciesAbilities() {
-        return mappedSpeciesAbilities;
+    public List<SpeciesAbility> getAbilities() {
+        return abilities;
     }
 
     public Integer getLegendaryTier() {
@@ -542,12 +541,12 @@ public class Species {
         }
     }
 
-    public void setMappedSpeciesAttacks(List<SpeciesAttack> mappedSpeciesAttacks) {
-        this.mappedSpeciesAttacks = mappedSpeciesAttacks;
+    public void setAttacks(List<SpeciesAttack> attacks) {
+        this.attacks = attacks;
     }
 
-    public void setMappedSpeciesAbilities(List<SpeciesAbility> mappedSpeciesAbilities) {
-        this.mappedSpeciesAbilities = mappedSpeciesAbilities;
+    public void setAbilities(List<SpeciesAbility> abilities) {
+        this.abilities = abilities;
     }
 
     public void setCosmeticForms(Set<CosmeticForm> cosmeticForms) {

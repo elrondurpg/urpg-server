@@ -10,6 +10,7 @@ import com.pokemonurpg.contest.repository.ORASContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.RSEContestMoveTypeRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.species.repository.TypeRepository;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,9 @@ public class AttackService implements NamedObjectService<Attack> {
     @Resource
     private DPPContestMoveTypeRepository dppContestMoveTypeRepository;
 
+    @Resource
+    private ItemRepository itemRepository;
+
     public List<String> findAllNames() {
         return attackRepository.findAllNames();
     }
@@ -58,7 +62,7 @@ public class AttackService implements NamedObjectService<Attack> {
 
     public Attack create(AttackInputDto input) {
         Attack attack = new Attack(input);
-        updateRelatedValues(attack, input);
+        updateEmbeddedValues(attack, input);
         attackRepository.save(attack);
         return attack;
     }
@@ -67,13 +71,13 @@ public class AttackService implements NamedObjectService<Attack> {
         Attack attack = attackRepository.findByDbid(dbid);
         if (attack != null) {
             attack.update(input);
-            updateRelatedValues(attack, input);
+            updateEmbeddedValues(attack, input);
             attackRepository.save(attack);
         }
         return attack;
     }
 
-    private void updateRelatedValues(Attack attack, AttackInputDto input) {
+    private void updateEmbeddedValues(Attack attack, AttackInputDto input) {
         attack.setType(typeRepository.findByName(input.getType()));
         attack.setCategory(attackCategoryRepository.findByName(input.getCategory()));
         attack.setTarget(attackTargetTypeRepository.findByName(input.getTarget()));
@@ -83,5 +87,6 @@ public class AttackService implements NamedObjectService<Attack> {
         attack.setDppContestAttribute(contestAttributeRepository.findByName(input.getDppContestAttribute()));
         attack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
         attack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
+        attack.setTm(itemRepository.findByName(input.getTm()));
     }
 }

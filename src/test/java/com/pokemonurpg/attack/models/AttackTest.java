@@ -2,6 +2,7 @@ package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.contest.models.*;
+import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.SpeciesAttack;
 import com.pokemonurpg.species.models.Type;
 import org.junit.Test;
@@ -38,6 +39,7 @@ public class AttackTest {
     private final static ContestAttribute ADV_CONTEST_ATTRIBUTE = new ContestAttribute();
     private final static Integer TM_HM_DBID = 32432;
     private final static Set<SpeciesAttack> POKEMON = new HashSet<>();
+    private final static Item TM = mock(Item.class);
 
     Attack attack = new Attack();
 
@@ -109,11 +111,11 @@ public class AttackTest {
         attack.setAdvContestMoveType(ADV_CONTEST_MOVE_TYPE);
         assertEquals(ADV_CONTEST_MOVE_TYPE, attack.getAdvContestMoveType());
 
-        attack.setTmHmDbid(TM_HM_DBID);
-        assertEquals(TM_HM_DBID, attack.getTmHmDbid());
-
         attack.setPokemon(POKEMON);
         assertEquals(POKEMON, attack.getPokemon());
+
+        attack.setTm(TM);
+        assertEquals(TM, attack.getTm());
     }
 
     @Test
@@ -129,7 +131,6 @@ public class AttackTest {
         when(input.getSubstitute()).thenReturn(SUBSTITUTE);
         when(input.getSheerForce()).thenReturn(SHEER_FORCE);
         when(input.getMagicCoat()).thenReturn(MAGIC_COAT);
-        when(input.getTmHmDbid()).thenReturn(TM_HM_DBID);
 
         Attack attack = new Attack(input);
 
@@ -143,7 +144,6 @@ public class AttackTest {
         assertEquals(SUBSTITUTE, attack.isSubstitute());
         assertEquals(SHEER_FORCE, attack.isSheerForce());
         assertEquals(MAGIC_COAT, attack.isMagicCoat());
-        assertEquals(TM_HM_DBID, attack.getTmHmDbid());
     }
 
 }

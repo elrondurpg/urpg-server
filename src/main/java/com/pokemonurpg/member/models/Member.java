@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 
@@ -92,6 +93,10 @@ public class Member {
     )
     @JsonIgnoreProperties("members")
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy="owner")
+    @JsonIgnoreProperties("owner")
+    private Set<Gym> gyms;
 
     public Member() {
     }
@@ -275,5 +280,13 @@ public class Member {
 
     public void setBanExpiration(Date banExpiration) {
         this.banExpiration = banExpiration;
+    }
+
+    public Set<Gym> getGyms() {
+        return gyms;
+    }
+
+    public void setGyms(Set<Gym> gyms) {
+        this.gyms = gyms;
     }
 }

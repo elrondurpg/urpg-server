@@ -8,11 +8,14 @@ import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GymInputDto extends AuthenticatedInputDto {
 
@@ -51,6 +54,8 @@ public class GymInputDto extends AuthenticatedInputDto {
     @Pattern(regexp = "TM\\d+.+")
     @ExistsInDb(type = Item.class)
     private String tm;
+
+    private List<@Valid GymPokemonInputDto> pokemon = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -130,5 +135,13 @@ public class GymInputDto extends AuthenticatedInputDto {
 
     public void setTm(String tm) {
         this.tm = tm;
+    }
+
+    public List<GymPokemonInputDto> getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(List<GymPokemonInputDto> pokemon) {
+        this.pokemon = pokemon;
     }
 }

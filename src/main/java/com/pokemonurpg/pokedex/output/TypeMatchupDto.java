@@ -1,20 +1,22 @@
 package com.pokemonurpg.pokedex.output;
 
+import com.pokemonurpg.species.models.Type;
+
 public class TypeMatchupDto {
-    private String name;
+    private Type type;
     private Double multiplier;
 
-    public TypeMatchupDto(String type, double multiplier) {
-        setName(type);
+    public TypeMatchupDto(Type type, double multiplier) {
+        setType(type);
         setMultiplier(multiplier);
     }
 
-    public String getName() {
-        return name;
+    public Type getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Double getMultiplier() {

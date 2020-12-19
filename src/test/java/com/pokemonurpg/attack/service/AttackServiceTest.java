@@ -15,6 +15,8 @@ import com.pokemonurpg.contest.repository.ContestAttributeRepository;
 import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.ORASContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.RSEContestMoveTypeRepository;
+import com.pokemonurpg.item.models.Item;
+import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.species.repository.TypeRepository;
 import org.junit.Test;
@@ -54,6 +56,8 @@ public class AttackServiceTest {
     private static final String DPP_CONTEST_ATTRIBUTE_NAME = "DPP_CONTEST_ATTRIBUTE";
     private static final String ORAS_CONTEST_MOVE_TYPE_NAME = "ORAS_CONTEST_MOVE_TYPE";
     private static final String ORAS_CONTEST_ATTRIBUTE_NAME = "ORAS_CONTEST_ATTRIBUTE";
+    private static final String TM_NAME = "TM_NAME";
+    private static final Item TM = mock(Item.class);
 
     @InjectMocks
     private AttackService attackService;
@@ -81,6 +85,9 @@ public class AttackServiceTest {
 
     @Mock
     private DPPContestMoveTypeRepository dppContestMoveTypeRepository;
+
+    @Mock
+    private ItemRepository itemRepository;
 
     @Test
     public void findAllNames() {
@@ -162,6 +169,7 @@ public class AttackServiceTest {
         when(input.getDppContestAttribute()).thenReturn(DPP_CONTEST_ATTRIBUTE_NAME);
         when(input.getOrasContestMoveType()).thenReturn(ORAS_CONTEST_MOVE_TYPE_NAME);
         when(input.getOrasContestAttribute()).thenReturn(ORAS_CONTEST_ATTRIBUTE_NAME);
+        when(input.getTm()).thenReturn(TM_NAME);
 
         when(typeRepository.findByName(TYPE_NAME)).thenReturn(TYPE);
         when(attackCategoryRepository.findByName(CATEGORY_NAME)).thenReturn(CATEGORY);
@@ -172,6 +180,7 @@ public class AttackServiceTest {
         when(contestAttributeRepository.findByName(DPP_CONTEST_ATTRIBUTE_NAME)).thenReturn(DPP_CONTEST_ATTRIBUTE);
         when(orasContestMoveTypeRepository.findByName(ORAS_CONTEST_MOVE_TYPE_NAME)).thenReturn(ORAS_CONTEST_MOVE_TYPE);
         when(contestAttributeRepository.findByName(ORAS_CONTEST_ATTRIBUTE_NAME)).thenReturn(ORAS_CONTEST_ATTRIBUTE);
+        when(itemRepository.findByName(TM_NAME)).thenReturn(TM);
 
         return input;
     }

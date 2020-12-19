@@ -1,5 +1,6 @@
 package com.pokemonurpg.member.models;
 
+import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 import org.junit.Test;
@@ -28,6 +29,7 @@ public class MemberTest {
     private final static Set<Role> ROLES = new HashSet<>();
     private final static Boolean BANNED = true;
     private final static Date BAN_EXPIRATION = new Date();
+    private final static Set<Gym> GYMS = new HashSet<>();
 
     @Test
     public void testPojo() {
@@ -51,6 +53,7 @@ public class MemberTest {
         member.setRoles(ROLES);
         member.setBanned(BANNED);
         member.setBanExpiration(BAN_EXPIRATION);
+        member.setGyms(GYMS);
 
         assertEquals(DBID,member.getDbid());
         assertEquals(DISCORD_ID,member.getDiscordId());
@@ -71,6 +74,7 @@ public class MemberTest {
         assertEquals(ROLES,member.getRoles());
         assertEquals(BANNED, member.getBanned());
         assertEquals(BAN_EXPIRATION, member.getBanExpiration());
+        assertEquals(GYMS, member.getGyms());
     }
 
     @Test

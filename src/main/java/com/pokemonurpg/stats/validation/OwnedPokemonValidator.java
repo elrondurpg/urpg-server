@@ -51,7 +51,7 @@ public class OwnedPokemonValidator {
     boolean areAllMovesLegal(Species species, List<OwnedExtraMoveInputDto> moves) {
         if ("Smeargle".equals(species.getName())) return true;
 
-        List<SpeciesAttack> validMoves = species.getMappedSpeciesAttacks();
+        List<SpeciesAttack> validMoves = species.getAttacks();
         List<String> validMoveNames =
             validMoves.stream()
                 .filter(speciesAttack -> !"LEVEL-UP".equals(speciesAttack.getMethod()))
@@ -74,7 +74,7 @@ public class OwnedPokemonValidator {
 
     boolean areAllAbilitiesLegal(Species species, List<OwnedHiddenAbilityInputDto> abilities) {
         List<String> invalidAbilities = new ArrayList<>();
-        List<SpeciesAbility> validAbilities = species.getMappedSpeciesAbilities();
+        List<SpeciesAbility> validAbilities = species.getAbilities();
         List<String> validAbilityNames = validAbilities.stream()
                 .filter(SpeciesAbility::getHidden)
                 .map(speciesAbility -> speciesAbility.getAbility().getName())

@@ -9,6 +9,7 @@ import com.pokemonurpg.contest.models.RSEContestMoveType;
 import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.Type;
 
 import javax.validation.constraints.Max;
@@ -84,7 +85,8 @@ public class AttackInputDto extends AuthenticatedInputDto {
     @ExistsInDb(type = ORASContestMoveType.class)
     private String orasContestMoveType;
 
-    private Integer tmHmDbid;
+    @ExistsInDb(type = Item.class)
+    private String tm;
 
     /*@ExistsInDb(type = ContestAttribute.class)
     private String advContestAttribute;
@@ -242,11 +244,11 @@ public class AttackInputDto extends AuthenticatedInputDto {
         this.orasContestMoveType = orasContestMoveType;
     }
 
-    public Integer getTmHmDbid() {
-        return tmHmDbid;
+    public String getTm() {
+        return tm;
     }
 
-    public void setTmHmDbid(Integer tmHmDbid) {
-        this.tmHmDbid = tmHmDbid;
+    public void setTm(String tm) {
+        this.tm = tm;
     }
 }

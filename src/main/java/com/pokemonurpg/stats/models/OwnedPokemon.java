@@ -31,7 +31,7 @@ public class OwnedPokemon {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration"})
+            "banned", "banExpiration", "gyms"})
     @JsonView(value = { View.MemberView.Pokemon.class })
     private Member trainer;
 
@@ -118,6 +118,12 @@ public class OwnedPokemon {
     @JsonView(value = { View.MemberView.Summary.class })
     private Boolean uft = false;
 
+    @Column
+    private Boolean rental = false;
+
+    @Transient
+    private Boolean fullyEvolved;
+
     public OwnedPokemon() {
     }
 
@@ -136,6 +142,7 @@ public class OwnedPokemon {
         setJob(input.getJob());
         setBox(input.getBox());
         setUft(input.getUft());
+        setRental(input.getRental());
     }
 
     public Integer getDbid() {
@@ -288,5 +295,23 @@ public class OwnedPokemon {
 
     public void setUft(Boolean uft) {
         this.uft = uft;
+    }
+
+    public Boolean getRental() {
+        return rental;
+    }
+
+    public void setRental(Boolean rental) {
+        if (rental != null) {
+            this.rental = rental;
+        }
+    }
+
+    public Boolean getFullyEvolved() {
+        return fullyEvolved;
+    }
+
+    public void setFullyEvolved(Boolean fullyEvolved) {
+        this.fullyEvolved = fullyEvolved;
     }
 }

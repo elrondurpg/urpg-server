@@ -38,6 +38,8 @@ public class OwnedPokemonTest {
     private final static Boolean JOB = true;
     private final static Boolean BOX = true;
     private final static Boolean UFT = true;
+    private final static Boolean FULLY_EVOLVED = true;
+    private final static Boolean RENTAL = true;
 
     @Test
     public void testPojo() {
@@ -49,6 +51,8 @@ public class OwnedPokemonTest {
         pokemon.setOwnedHiddenAbilities(OWNED_HIDDEN_ABILITIES);
         pokemon.setOwnedExtraMoves(OWNED_EXTRA_MOVES);
         pokemon.setEarnedRibbons(EARNED_RIBBONS);
+        pokemon.setFullyEvolved(FULLY_EVOLVED);
+        pokemon.setRental(RENTAL);
 
         assertEquals(DBID, pokemon.getDbid());
         assertEquals(NATURE, pokemon.getNature());
@@ -57,6 +61,8 @@ public class OwnedPokemonTest {
         assertEquals(OWNED_HIDDEN_ABILITIES, pokemon.getOwnedHiddenAbilities());
         assertEquals(OWNED_EXTRA_MOVES, pokemon.getOwnedExtraMoves());
         assertEquals(EARNED_RIBBONS, pokemon.getEarnedRibbons());
+        assertEquals(FULLY_EVOLVED, pokemon.getFullyEvolved());
+        assertEquals(RENTAL, pokemon.getRental());
     }
 
     @Test
@@ -70,6 +76,7 @@ public class OwnedPokemonTest {
         input.setJob(JOB);
         input.setBox(BOX);
         input.setUft(UFT);
+        input.setRental(RENTAL);
 
         OwnedPokemon pokemon = new OwnedPokemon(input, TRAINER, SPECIES);
         assertEquals(TRAINER, pokemon.getTrainer());
@@ -82,5 +89,6 @@ public class OwnedPokemonTest {
         assertEquals(JOB, pokemon.getJob());
         assertEquals(BOX, pokemon.getBox());
         assertEquals(UFT, pokemon.getUft());
+        assertEquals(RENTAL, pokemon.getRental());
     }
 }

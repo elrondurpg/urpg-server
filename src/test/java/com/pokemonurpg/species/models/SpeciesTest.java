@@ -5,7 +5,6 @@ import com.pokemonurpg.creative.models.ParkLocation;
 import com.pokemonurpg.creative.models.ParkRank;
 import com.pokemonurpg.creative.models.StoryRank;
 import com.pokemonurpg.species.input.SpeciesInputDto;
-import com.pokemonurpg.species.models.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -79,8 +78,8 @@ public class SpeciesTest {
         species.setType1(TYPE1);
         species.setType2(TYPE2);
         species.setClassification(CLASSIFICATION);
-        species.setMappedSpeciesAbilities(MAPPED_SPECIES_ABILITIES);
-        species.setMappedSpeciesAttacks(MAPPED_SPECIES_ATTACKS);
+        species.setAbilities(MAPPED_SPECIES_ABILITIES);
+        species.setAttacks(MAPPED_SPECIES_ATTACKS);
         species.setLegendaryTier(LEGENDARY_TIER);
         species.setAlteredFormMethod(ALTERED_FORM_METHOD);
         species.setCosmeticForms(COSMETIC_FORMS);
@@ -115,8 +114,8 @@ public class SpeciesTest {
         assertEquals(TYPE1, species.getType1());
         assertEquals(TYPE2, species.getType2());
         assertEquals(CLASSIFICATION, species.getClassification());
-        assertEquals(MAPPED_SPECIES_ATTACKS, species.getMappedSpeciesAttacks());
-        assertEquals(MAPPED_SPECIES_ABILITIES, species.getMappedSpeciesAbilities());
+        assertEquals(MAPPED_SPECIES_ATTACKS, species.getAttacks());
+        assertEquals(MAPPED_SPECIES_ABILITIES, species.getAbilities());
         assertEquals(LEGENDARY_TIER, species.getLegendaryTier());
         assertEquals(ALTERED_FORM_METHOD, species.getAlteredFormMethod());
         assertEquals(COSMETIC_FORMS, species.getCosmeticForms());

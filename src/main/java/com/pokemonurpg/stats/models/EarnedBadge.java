@@ -24,7 +24,7 @@ public class EarnedBadge {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration"})
+            "banned", "banExpiration", "gyms"})
     private Member member;
 
     @ManyToOne

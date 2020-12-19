@@ -1,18 +1,20 @@
 package com.pokemonurpg.pokedex.output;
 
+import com.pokemonurpg.species.models.Type;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class TypeMatchupDtoTest {
-    private final static String NAME = "NAME";
+    private final static Type TYPE = mock(Type.class);
     private final static Double MULTIPLIER = 2.0;
 
     @Test
     public void testPojo() {
-        TypeMatchupDto matchup = new TypeMatchupDto(NAME, MULTIPLIER);
+        TypeMatchupDto matchup = new TypeMatchupDto(TYPE, MULTIPLIER);
 
-        assertEquals(NAME, matchup.getName());
+        assertEquals(TYPE, matchup.getType());
         assertEquals(MULTIPLIER, matchup.getMultiplier());
     }
 

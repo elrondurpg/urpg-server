@@ -34,9 +34,9 @@ public class FormAttackSorterTest {
         when(ATTACK.getName()).thenReturn(ATTACK_NAME);
         when(speciesAttack.getAttack()).thenReturn(ATTACK);
         when(speciesAttack.getMethod()).thenReturn(METHOD1);
-        when(species1.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species2.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species3.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(species1.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(species2.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(species3.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
 
         // Given a set of alteredForms for each Species
         AlteredFormDto form1 = new AlteredFormDto(species1);
@@ -70,9 +70,9 @@ public class FormAttackSorterTest {
         when(speciesAttack2.getAttack()).thenReturn(ATTACK);
         when(speciesAttack2.getMethod()).thenReturn(METHOD2);
 
-        when(species1.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species2.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack2));
-        when(species3.getMappedSpeciesAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(species1.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(species2.getAttacks()).thenReturn(Collections.singletonList(speciesAttack2));
+        when(species3.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
 
         // Given a set of alteredForms for each Species
         AlteredFormDto form1 = new AlteredFormDto(species1);

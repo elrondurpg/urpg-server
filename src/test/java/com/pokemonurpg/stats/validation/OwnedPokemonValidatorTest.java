@@ -100,7 +100,7 @@ public class OwnedPokemonValidatorTest {
         attack.setName(ATTACK_NAME);
         speciesAttack.setAttack(attack);
         speciesAttack.setMethod("TM");
-        species.setMappedSpeciesAttacks(Collections.singletonList(speciesAttack));
+        species.setAttacks(Collections.singletonList(speciesAttack));
 
         OwnedExtraMoveInputDto move = new OwnedExtraMoveInputDto();
         move.setAttack(ATTACK_NAME);
@@ -115,7 +115,7 @@ public class OwnedPokemonValidatorTest {
         Attack attack = new Attack();
         attack.setName(ATTACK_NAME);
         speciesAttack.setAttack(attack);
-        species.setMappedSpeciesAttacks(Collections.singletonList(speciesAttack));
+        species.setAttacks(Collections.singletonList(speciesAttack));
 
         OwnedExtraMoveInputDto move = new OwnedExtraMoveInputDto();
         move.setAttack(INVALID_ATTACK_NAME);
@@ -130,7 +130,7 @@ public class OwnedPokemonValidatorTest {
         ability.setName(ABILITY_NAME);
         speciesAbility.setAbility(ability);
         speciesAbility.setHidden(true);
-        species.setMappedSpeciesAbilities(Collections.singletonList(speciesAbility));
+        species.setAbilities(Collections.singletonList(speciesAbility));
 
         OwnedHiddenAbilityInputDto ownedHiddenAbilityInputDto = new OwnedHiddenAbilityInputDto();
         ownedHiddenAbilityInputDto.setAbility(ABILITY_NAME);
@@ -146,7 +146,7 @@ public class OwnedPokemonValidatorTest {
         ability.setName(ABILITY_NAME);
         speciesAbility.setAbility(ability);
         speciesAbility.setHidden(true);
-        species.setMappedSpeciesAbilities(Collections.singletonList(speciesAbility));
+        species.setAbilities(Collections.singletonList(speciesAbility));
 
         OwnedHiddenAbilityInputDto ownedHiddenAbilityInputDto = new OwnedHiddenAbilityInputDto();
         ownedHiddenAbilityInputDto.setAbility(INVALID_ABILITY_NAME);

@@ -4,11 +4,10 @@ import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.EarnedBadge;
+import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -26,6 +25,7 @@ public class GymTest {
     private final static Integer DRAWS = 567;
     private final static Item TM = mock(Item.class);
     private final static List<EarnedBadge> WINNERS = new ArrayList<>();
+    private final static Set<OwnedPokemon> POKEMON = new HashSet<>();
 
     @Test
     public void testPojo() {
@@ -42,6 +42,7 @@ public class GymTest {
         gym.setDraws(DRAWS);
         gym.setTm(TM);
         gym.setWinners(WINNERS);
+        gym.setPokemon(POKEMON);
 
         assertEquals(DBID, gym.getDbid());
         assertEquals(NAME, gym.getName());
@@ -55,6 +56,7 @@ public class GymTest {
         assertEquals(DRAWS, gym.getDraws());
         assertEquals(TM, gym.getTm());
         assertEquals(WINNERS, gym.getWinners());
+        assertEquals(POKEMON, gym.getPokemon());
     }
 
     @Test

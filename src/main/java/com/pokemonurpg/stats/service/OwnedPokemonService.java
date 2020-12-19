@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.member.models.Member;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class OwnedPokemonService {
+public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
 
     @Resource
     private OwnedPokemonValidator ownedPokemonValidator;
@@ -57,7 +58,7 @@ public class OwnedPokemonService {
     @Resource
     private EarnedRibbonService earnedRibbonService;
 
-    public OwnedPokemon findByDbid(int dbid) {
+    public OwnedPokemon findByDbid(Integer dbid) {
         return ownedPokemonRepository.findByDbid(dbid);
     }
 
@@ -89,6 +90,7 @@ public class OwnedPokemonService {
         pokemon.setNature(natureService.findByName(input.getNature()));
         pokemon.setObtained(obtainedService.findByName(input.getObtained()));
         pokemon.setHiddenPowerType(typeService.findByName(input.getHiddenPowerType()));
+        pokemon.setFullyEvolved(speciesService.findByPreEvolution(pokemon.getSpecies()).isEmpty());
     }
 
     private void updateAssociatedValues(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
