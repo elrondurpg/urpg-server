@@ -3,7 +3,6 @@ package com.pokemonurpg.stats.models;
 import com.pokemonurpg.general.models.Section;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
-import com.sun.javafx.charts.Legend;
 import org.junit.Test;
 
 import java.util.Date;

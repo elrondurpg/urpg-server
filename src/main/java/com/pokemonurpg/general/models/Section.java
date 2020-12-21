@@ -17,6 +17,12 @@ public class Section {
     @Column
     private String name;
 
+    @Column(name = "tier1_legendary_requirement")
+    private Integer tier1LegendaryRequirement;
+
+    @Column(name = "tier2_legendary_requirement")
+    private Integer tier2LegendaryRequirement;
+
     public Section() {}
 
     public Section(SectionInputDto input) {
@@ -42,6 +48,26 @@ public class Section {
     public void setName(String name) {
         if (name != null) {
             this.name = name;
+        }
+    }
+
+    public Integer getTier1LegendaryRequirement() {
+        return this.tier1LegendaryRequirement;
+    }
+
+    public void setTier1LegendaryRequirement(Integer tier1LegendaryRequirement) {
+        if (tier1LegendaryRequirement != null) {
+            this.tier1LegendaryRequirement = tier1LegendaryRequirement;
+        }
+    }
+
+    public Integer getTier2LegendaryRequirement() {
+        return this.tier2LegendaryRequirement;
+    }
+
+    public void setTier2LegendaryRequirement(Integer tier2LegendaryRequirement) {
+        if (tier2LegendaryRequirement != null) {
+            this.tier2LegendaryRequirement = tier2LegendaryRequirement;
         }
     }
 }

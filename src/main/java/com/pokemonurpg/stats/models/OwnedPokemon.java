@@ -7,7 +7,6 @@ import com.pokemonurpg.ability.models.Ability;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.general.models.Nature;
 import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.member.models.Member;
@@ -55,7 +54,8 @@ public class OwnedPokemon {
 
     @OneToOne
     @JoinColumn(name = "obtained")
-    @JsonView(value = { View.MemberView.Pokemon.class })
+    @JsonView(value = { View.MemberView.Summary.class })
+    @JsonIgnoreProperties("dbid")
     private Obtained obtained;
 
     @Column(name = "obtained_link")

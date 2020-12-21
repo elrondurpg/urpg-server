@@ -7,7 +7,7 @@ import com.pokemonurpg.general.input.ObtainedInputDto;
 import javax.persistence.*;
 
 @Entity
-@JsonView(value = { View.MemberView.Pokemon.class })
+@JsonView(value = { View.MemberView.Summary.class })
 public class Obtained {
 
     @Id
