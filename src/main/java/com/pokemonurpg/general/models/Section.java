@@ -31,6 +31,8 @@ public class Section {
 
     public void update(SectionInputDto input) {
         setName(input.getName());
+        setTier1LegendaryRequirement(input.getTier1LegendaryRequirement());
+        setTier2LegendaryRequirement(input.getTier2LegendaryRequirement());
     }
 
     public Integer getDbid() {

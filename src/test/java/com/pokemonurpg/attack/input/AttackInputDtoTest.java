@@ -1,7 +1,11 @@
 package com.pokemonurpg.attack.input;
 
 import com.pokemonurpg.attack.input.AttackInputDto;
+import com.pokemonurpg.contest.input.ContestComboInputDto;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -26,6 +30,7 @@ public class AttackInputDtoTest {
     private final static String ORAS_ATTR = "ORAS_ATTR";
     private final static String ORAS_TYPE = "ORAS_TYPE";
     private final static String TM_NAME = "TM_NAME";
+    private final static List<ContestComboInputDto> CONTEST_COMBOS = new ArrayList<>();
 
     private AttackInputDto input = new AttackInputDto();
 
@@ -51,6 +56,7 @@ public class AttackInputDtoTest {
         input.setOrasContestAttribute(ORAS_ATTR);
         input.setOrasContestMoveType(ORAS_TYPE);
         input.setTm(TM_NAME);
+        input.setContestCombos(CONTEST_COMBOS);
 
         assertEquals(NAME, input.getName());
         assertEquals(TYPE, input.getType());
@@ -72,5 +78,6 @@ public class AttackInputDtoTest {
         assertEquals(ORAS_ATTR, input.getOrasContestAttribute());
         assertEquals(ORAS_TYPE, input.getOrasContestMoveType());
         assertEquals(TM_NAME, input.getTm());
+        assertEquals(CONTEST_COMBOS, input.getContestCombos());
     }
 }

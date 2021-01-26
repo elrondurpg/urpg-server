@@ -100,8 +100,12 @@ public class Attack {
     private Item tm;
 
     @OneToMany(mappedBy = "attack")
-    @JsonIgnoreProperties({ "attack"})
+    @JsonIgnoreProperties({ "attack" })
     private Set<SpeciesAttack> pokemon;
+
+    @OneToMany(mappedBy = "firstAttack")
+    @JsonIgnoreProperties({ "firstAttack" })
+    private Set<ContestCombo> contestCombos;
 
     public Attack() { }
 
@@ -359,5 +363,13 @@ public class Attack {
 
     public void setPokemon(Set<SpeciesAttack> pokemon) {
         this.pokemon = pokemon;
+    }
+
+    public Set<ContestCombo> getContestCombos() {
+        return contestCombos;
+    }
+
+    public void setContestCombos(Set<ContestCombo> contestCombos) {
+        this.contestCombos = contestCombos;
     }
 }

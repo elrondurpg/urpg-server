@@ -54,6 +54,9 @@ public class GymServiceTest {
     @Mock
     private ItemService itemService;
 
+    @Mock
+    private GymPokemonService gymPokemonService;
+
     private Gym gym = new Gym();
 
     @Test
@@ -89,6 +92,7 @@ public class GymServiceTest {
         Gym gym = gymService.create(input);
         assertEquals(NAME, gym.getName());
         verify(gymRepository, times(1)).save(gym);
+        verify(gymPokemonService, times(1)).updateAll(input, gym);
     }
 
     @Test
@@ -114,6 +118,7 @@ public class GymServiceTest {
         assertEquals(BADGE, gym1.getBadge());
         assertEquals(TM, gym1.getTm());
         verify(gymRepository, times(1)).save(gym1);
+        verify(gymPokemonService, times(1)).updateAll(input, gym1);
     }
 
     @Test

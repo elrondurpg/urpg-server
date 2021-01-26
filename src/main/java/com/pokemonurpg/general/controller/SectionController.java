@@ -21,6 +21,12 @@ public class SectionController {
     @Resource
     private SectionService sectionService;
 
+    @GetMapping(path="/all")
+    public @ResponseBody
+    List<Section> findAll() {
+        return sectionService.findAll();
+    }
+
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {

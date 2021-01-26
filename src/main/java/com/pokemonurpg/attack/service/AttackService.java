@@ -4,10 +4,12 @@ import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.repository.ContestAttributeRepository;
 import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.ORASContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.RSEContestMoveTypeRepository;
+import com.pokemonurpg.contest.service.ContestComboService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.item.repository.ItemRepository;
@@ -47,6 +49,9 @@ public class AttackService implements NamedObjectService<Attack> {
     @Resource
     private ItemRepository itemRepository;
 
+    @Resource
+    private ContestComboService contestComboService;
+
     public List<String> findAllNames() {
         return attackRepository.findAllNames();
     }
@@ -64,6 +69,7 @@ public class AttackService implements NamedObjectService<Attack> {
         Attack attack = new Attack(input);
         updateEmbeddedValues(attack, input);
         attackRepository.save(attack);
+        updateAssociatedValues(attack, input);
         return attack;
     }
 
@@ -73,6 +79,7 @@ public class AttackService implements NamedObjectService<Attack> {
             attack.update(input);
             updateEmbeddedValues(attack, input);
             attackRepository.save(attack);
+            updateAssociatedValues(attack, input);
         }
         return attack;
     }
@@ -88,5 +95,9 @@ public class AttackService implements NamedObjectService<Attack> {
         attack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
         attack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
         attack.setTm(itemRepository.findByName(input.getTm()));
+    }
+
+    private void updateAssociatedValues(Attack attack, AttackInputDto input) {
+        input.getContestCombos().forEach(combo -> contestComboService.update(attack, combo));
     }
 }

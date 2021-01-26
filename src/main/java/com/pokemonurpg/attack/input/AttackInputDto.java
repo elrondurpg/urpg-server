@@ -2,6 +2,7 @@ package com.pokemonurpg.attack.input;
 
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
@@ -12,10 +13,13 @@ import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.Type;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttackInputDto extends AuthenticatedInputDto {
     @NotNull(groups = { ObjectCreation.class })
@@ -87,6 +91,8 @@ public class AttackInputDto extends AuthenticatedInputDto {
 
     @ExistsInDb(type = Item.class)
     private String tm;
+
+    private List<@Valid ContestComboInputDto> contestCombos = new ArrayList<>();
 
     /*@ExistsInDb(type = ContestAttribute.class)
     private String advContestAttribute;
@@ -250,5 +256,13 @@ public class AttackInputDto extends AuthenticatedInputDto {
 
     public void setTm(String tm) {
         this.tm = tm;
+    }
+
+    public List<ContestComboInputDto> getContestCombos() {
+        return contestCombos;
+    }
+
+    public void setContestCombos(List<ContestComboInputDto> contestCombos) {
+        this.contestCombos = contestCombos;
     }
 }

@@ -40,6 +40,7 @@ public class AttackTest {
     private final static Integer TM_HM_DBID = 32432;
     private final static Set<SpeciesAttack> POKEMON = new HashSet<>();
     private final static Item TM = mock(Item.class);
+    private final static Set<ContestCombo> CONTEST_COMBOS = new HashSet<>();
 
     Attack attack = new Attack();
 
@@ -116,6 +117,9 @@ public class AttackTest {
 
         attack.setTm(TM);
         assertEquals(TM, attack.getTm());
+
+        attack.setContestCombos(CONTEST_COMBOS);
+        assertEquals(CONTEST_COMBOS, attack.getContestCombos());
     }
 
     @Test

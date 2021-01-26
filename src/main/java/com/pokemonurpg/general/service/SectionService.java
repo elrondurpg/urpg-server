@@ -15,6 +15,8 @@ public class SectionService implements NamedObjectService<Section> {
     @Resource
     private SectionRepository sectionRepository;
 
+    public List<Section> findAll() { return sectionRepository.findAll(); }
+
     public List<String> findAllNames() {
         return sectionRepository.findAllNames();
     }

@@ -7,6 +7,7 @@ import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
@@ -15,6 +16,7 @@ import com.pokemonurpg.contest.repository.ContestAttributeRepository;
 import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.ORASContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.RSEContestMoveTypeRepository;
+import com.pokemonurpg.contest.service.ContestComboService;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.species.models.Type;
@@ -27,6 +29,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -58,6 +61,7 @@ public class AttackServiceTest {
     private static final String ORAS_CONTEST_ATTRIBUTE_NAME = "ORAS_CONTEST_ATTRIBUTE";
     private static final String TM_NAME = "TM_NAME";
     private static final Item TM = mock(Item.class);
+    private static final ContestComboInputDto CONTEST_COMBO_INPUT_DTO = mock(ContestComboInputDto.class);
 
     @InjectMocks
     private AttackService attackService;
@@ -88,6 +92,9 @@ public class AttackServiceTest {
 
     @Mock
     private ItemRepository itemRepository;
+
+    @Mock
+    private ContestComboService contestComboService;
 
     @Test
     public void findAllNames() {
@@ -128,6 +135,7 @@ public class AttackServiceTest {
         assertEquals(DPP_CONTEST_MOVE_TYPE, attack.getDppContestMoveType());
         assertEquals(ORAS_CONTEST_ATTRIBUTE, attack.getOrasContestAttribute());
         assertEquals(ORAS_CONTEST_MOVE_TYPE, attack.getOrasContestMoveType());
+        verify(contestComboService, times(1)).update(attack, CONTEST_COMBO_INPUT_DTO);
     }
 
     @Test
@@ -146,6 +154,7 @@ public class AttackServiceTest {
         assertEquals(DPP_CONTEST_MOVE_TYPE, attack.getDppContestMoveType());
         assertEquals(ORAS_CONTEST_ATTRIBUTE, attack.getOrasContestAttribute());
         assertEquals(ORAS_CONTEST_MOVE_TYPE, attack.getOrasContestMoveType());
+        verify(contestComboService, times(1)).update(attack, CONTEST_COMBO_INPUT_DTO);
     }
 
     @Test
@@ -170,6 +179,7 @@ public class AttackServiceTest {
         when(input.getOrasContestMoveType()).thenReturn(ORAS_CONTEST_MOVE_TYPE_NAME);
         when(input.getOrasContestAttribute()).thenReturn(ORAS_CONTEST_ATTRIBUTE_NAME);
         when(input.getTm()).thenReturn(TM_NAME);
+        when(input.getContestCombos()).thenReturn(Collections.singletonList(CONTEST_COMBO_INPUT_DTO));
 
         when(typeRepository.findByName(TYPE_NAME)).thenReturn(TYPE);
         when(attackCategoryRepository.findByName(CATEGORY_NAME)).thenReturn(CATEGORY);

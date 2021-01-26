@@ -18,7 +18,7 @@ public class SpeciesAbility {
     @ManyToOne
     @MapsId("species_dbid")
     @JoinColumn(name = "species_dbid")
-    @JsonIgnoreProperties({ "mappedSpeciesAbilities", "mappedSpeciesAttacks", "classification", "hp", "attack", "defense", "specialAttack",
+    @JsonIgnoreProperties({ "abilities", "attacks", "classification", "hp", "attack", "defense", "specialAttack",
             "specialDefense", "speed", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
