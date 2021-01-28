@@ -3,3 +3,6 @@ os: linux
 files:
   - source: ./urpg-server-1.0-SNAPSHOT.jar
     destination: /tmp
+hooks:
+  ApplicationStop:
+    - location: pipeline/on-stop.sh
