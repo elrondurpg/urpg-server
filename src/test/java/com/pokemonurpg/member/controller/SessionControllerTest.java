@@ -3,6 +3,7 @@ package com.pokemonurpg.member.controller;
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.member.input.LoginInputDto;
 import com.pokemonurpg.member.service.AuthenticationService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

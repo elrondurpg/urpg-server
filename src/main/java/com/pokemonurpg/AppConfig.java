@@ -3,11 +3,17 @@ package com.pokemonurpg;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.session.web.context.AbstractHttpSessionApplicationInitializer;
+import org.springframework.transaction.PlatformTransactionManager;
+
 import javax.sql.DataSource;
 
 @Configuration
-public class AppConfig {
+@EnableJdbcHttpSession
+public class AppConfig extends AbstractHttpSessionApplicationInitializer {
 
     @Value( "${server.image-base}" )
     private String imageBase;
@@ -26,5 +32,10 @@ public class AppConfig {
 
     public String getImageBase() {
         return imageBase;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 }
