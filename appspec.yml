@@ -3,8 +3,6 @@ os: linux
 files:
   - source: ./urpg-server-1.0-SNAPSHOT.jar
     destination: /home/ec2-user
-  - source: ./onApplicationStop.sh
-    destination: /home/ec2-user/pipeline
 hooks:
   ApplicationStop:
-    - location: /home/ec2-user/pipeline/onApplicationStop.sh
+    - location: onApplicationStop.sh
