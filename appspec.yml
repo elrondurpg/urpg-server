@@ -2,7 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: ./urpg-server-1.0-SNAPSHOT.jar
-    destination: /tmp
+    destination: /home/ec2-user
+  - source: ./onApplicationStop.sh
+    destination: /home/ec2-user/pipeline
 hooks:
   ApplicationStop:
-    - location: pipeline/on-stop.sh
+    - location: /home/ec2-user/pipeline/onApplicationStop.sh
