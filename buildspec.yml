@@ -17,4 +17,6 @@ artifacts:
     - target/urpg-server-1.0-SNAPSHOT.jar
     - appspec.yml
     - pipeline/onApplicationStop.sh
+    - pipeline/onApplicationStart.sh
+    - pipeline/onAfterInstall.sh
   discard-paths: yes

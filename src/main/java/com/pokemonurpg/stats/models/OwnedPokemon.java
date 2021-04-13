@@ -122,7 +122,7 @@ public class OwnedPokemon {
     private Boolean rental = false;
 
     @Transient
-    private Boolean fullyEvolved;
+    private Boolean fullyEvolved = false;
 
     public OwnedPokemon() {
     }

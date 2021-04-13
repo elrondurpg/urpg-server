@@ -6,3 +6,7 @@ files:
 hooks:
   ApplicationStop:
     - location: onApplicationStop.sh
+  ApplicationStart:
+    - location: onApplicationStart.sh
+  AfterInstall:
+    - location: onAfterInstall.sh

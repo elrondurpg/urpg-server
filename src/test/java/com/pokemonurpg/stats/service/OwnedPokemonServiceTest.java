@@ -77,8 +77,14 @@ public class OwnedPokemonServiceTest {
 
     @Test
     public void findByDbid() {
-        when(ownedPokemonRepository.findByDbid(DBID)).thenReturn(POKEMON);
-        assertEquals(POKEMON, ownedPokemonService.findByDbid(DBID));
+        OwnedPokemon pokemon = new OwnedPokemon();
+        pokemon.setSpecies(SPECIES);
+
+        when(ownedPokemonRepository.findByDbid(DBID)).thenReturn(pokemon);
+        when(speciesService.findByPreEvolution(SPECIES)).thenReturn(null);
+
+        assertEquals(pokemon, ownedPokemonService.findByDbid(DBID));
+        assertEquals(pokemon.getFullyEvolved(), true);
     }
 
     @Test(expected = ResponseStatusException.class)

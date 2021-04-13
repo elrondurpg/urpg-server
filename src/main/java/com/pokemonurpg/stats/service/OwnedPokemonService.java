@@ -59,7 +59,15 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     private EarnedRibbonService earnedRibbonService;
 
     public OwnedPokemon findByDbid(Integer dbid) {
-        return ownedPokemonRepository.findByDbid(dbid);
+        OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);
+
+        if (pokemon != null) {
+            List<Species> evolutions = speciesService.findByPreEvolution(pokemon.getSpecies());
+            if (evolutions == null || evolutions.isEmpty()) {
+                pokemon.setFullyEvolved(true);
+            }
+        }
+        return pokemon;
     }
 
     public OwnedPokemon create(OwnedPokemonInputDto input) {
