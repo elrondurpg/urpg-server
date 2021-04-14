@@ -35,7 +35,9 @@ public class MenuItem {
     }
 
     public void update(MenuItemInputDto input) {
-
+        setName(input.getName());
+        setUrl(input.getUrl());
+        setPosition(input.getPosition());
     }
 
     public Integer getDbid() {
