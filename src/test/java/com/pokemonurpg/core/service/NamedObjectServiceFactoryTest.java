@@ -36,6 +36,8 @@ import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.site.models.MenuItem;
+import com.pokemonurpg.site.service.MenuItemService;
 import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.species.service.SpeciesService;
@@ -94,6 +96,9 @@ public class NamedObjectServiceFactoryTest {
 
     @Mock
     private MemberService memberService;
+
+    @Mock
+    private MenuItemService menuItemService;
 
     @Mock
     private NatureService natureService;
@@ -204,6 +209,12 @@ public class NamedObjectServiceFactoryTest {
     public void returnsMemberService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Member.class);
         assertEquals(memberService, service);
+    }
+
+    @Test
+    public void returnsMenuItemService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(MenuItem.class);
+        assertEquals(menuItemService, service);
     }
 
     @Test

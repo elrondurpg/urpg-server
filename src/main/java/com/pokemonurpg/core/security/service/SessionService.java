@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class SessionService {
 
     public SessionDto create(Member member, OAuthAccessTokenResponse accessTokenResponse) {
-        return new SessionDto(member.getUsername(), member.getDiscordId(), accessTokenResponse.getAccessToken(), accessTokenResponse.getRefreshToken());
+        return new SessionDto(member.getUsername(), member.getDiscordId(), accessTokenResponse.getAccessToken());
     }
 
 }

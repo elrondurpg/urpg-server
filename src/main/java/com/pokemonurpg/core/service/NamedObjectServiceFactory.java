@@ -20,6 +20,7 @@ import com.pokemonurpg.gym.service.GymLeagueService;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.site.service.MenuItemService;
 import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.member.service.PermissionService;
@@ -63,6 +64,9 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private MemberService memberService;
+
+    @Resource
+    private MenuItemService menuItemService;
 
     @Resource
     private NatureService natureService;
@@ -118,6 +122,7 @@ public class NamedObjectServiceFactory {
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "Member": return memberService;
+                case "MenuItem": return menuItemService;
                 case "Nature": return natureService;
                 case "Obtained": return obtainedService;
                 case "ORASContestMoveType": return orasContestMoveTypeService;

@@ -41,6 +41,10 @@ public class Member {
     @JsonIgnore
     private String refreshToken;
 
+    @Column(name = "refresh_token_iv")
+    @JsonIgnore
+    private byte[] refreshTokenIv;
+
     @Column(name = "session_expire")
     @JsonIgnore
     private Long sessionExpire;
@@ -166,6 +170,14 @@ public class Member {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public byte[] getRefreshTokenIv() {
+        return refreshTokenIv;
+    }
+
+    public void setRefreshTokenIv(byte[] refreshTokenIv) {
+        this.refreshTokenIv = refreshTokenIv;
     }
 
     public Long getSessionExpire() {

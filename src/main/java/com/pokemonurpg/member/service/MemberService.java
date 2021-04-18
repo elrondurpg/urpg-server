@@ -1,6 +1,7 @@
 package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.core.security.service.AesEncryptionService;
 import com.pokemonurpg.core.security.service.HashService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.MemberRoleInputDto;
@@ -18,6 +19,8 @@ import com.pokemonurpg.stats.service.OwnedItemService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.util.List;
 import java.util.Set;
 
@@ -44,6 +47,9 @@ public class MemberService implements NamedObjectService<Member> {
 
     @Resource
     private OwnedItemService ownedItemService;
+
+    @Resource
+    private AesEncryptionService aesEncryptionService;
 
     public List<String> findAllNames() {
         return memberRepository.findAllNames();
@@ -81,7 +87,13 @@ public class MemberService implements NamedObjectService<Member> {
         int salt = member.getSalt();
 
         member.setAccessToken(hashService.hash(accessTokenResponse.getAccessToken() + salt));
-        member.setRefreshToken(hashService.hash(accessTokenResponse.getRefreshToken() + salt));
+
+        IvParameterSpec iv = aesEncryptionService.generateIv();
+        SecretKey key = aesEncryptionService.getKeyFromAccessToken(accessTokenResponse.getAccessToken(), salt);
+        String encryptedRefreshToken = aesEncryptionService.encrypt(accessTokenResponse.getRefreshToken(), key, iv);
+        member.setRefreshToken(encryptedRefreshToken);
+        member.setRefreshTokenIv(iv.getIV());
+
         member.setSessionExpire(Long.parseLong(accessTokenResponse.getExpiresIn()) + (systemService.currentTimeMillis() / 1000));
 
         memberRepository.save(member);

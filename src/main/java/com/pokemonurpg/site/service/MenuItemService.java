@@ -14,6 +14,6 @@ public class MenuItemService implements NamedObjectService<MenuItem> {
 
     @Override
     public MenuItem findByName(String name) {
-        return menuItemRepository;
+        return menuItemRepository.findByName(name);
     }
 }

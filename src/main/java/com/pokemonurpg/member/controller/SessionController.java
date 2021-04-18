@@ -24,6 +24,12 @@ public class SessionController {
         return authenticationService.login(input);
     }
 
+    @PostMapping("/basic")
+    public @ResponseBody
+    SessionDto basicLogin() {
+        return authenticationService.basicLogin(/* insert request data? */);
+    }
+
     @PostMapping("/refresh")
     public @ResponseBody
     SessionDto refresh(@Valid @RequestBody SessionDto input) {

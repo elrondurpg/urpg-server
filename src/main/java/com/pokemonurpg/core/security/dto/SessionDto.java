@@ -15,17 +15,13 @@ public class SessionDto {
     @NotEmpty
     private String accessToken;
 
-    @NotEmpty
-    private String refreshToken;
-
     public SessionDto() {
     }
 
-    public SessionDto(String username, String id, String accessToken, String refreshToken) {
+    public SessionDto(String username, String id, String accessToken) {
         setUsername(username);
         setId(id);
         setAccessToken(accessToken);
-        setRefreshToken(refreshToken);
     }
 
     public String getUsername() {
@@ -50,13 +46,5 @@ public class SessionDto {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
     }
 }

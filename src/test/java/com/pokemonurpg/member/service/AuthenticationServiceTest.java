@@ -3,6 +3,7 @@ package com.pokemonurpg.member.service;
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.core.security.models.DiscordUserResponse;
 import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.core.security.service.AesEncryptionService;
 import com.pokemonurpg.core.security.service.HashService;
 import com.pokemonurpg.core.security.service.OAuthService;
 import com.pokemonurpg.core.security.service.SessionService;
@@ -17,6 +18,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.security.NoSuchAlgorithmException;
 
 import static org.junit.Assert.*;
@@ -36,6 +39,10 @@ public class AuthenticationServiceTest {
     private final static Member MEMBER = new Member();
     private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
     private final static OAuthAccessTokenResponse REFRESH_TOKEN_RESPONSE = mock(OAuthAccessTokenResponse.class);
+    private final static byte[] IV = {};
+    private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
+    private final static SecretKey SECRET_KEY = mock(SecretKey.class);
+    private final static String DECRYPTED_REFRESH_TOKEN = "DECRYPTED_REFRESH_TOKEN";
 
     @InjectMocks
     private AuthenticationService authenticationService;
@@ -54,6 +61,9 @@ public class AuthenticationServiceTest {
 
     @Mock
     private HashService hashService;
+
+    @Mock
+    private AesEncryptionService aesEncryptionService;
 
     @Test
     public void successfulLogin() throws NoSuchAlgorithmException {
@@ -153,10 +163,14 @@ public class AuthenticationServiceTest {
                 .withFoundDiscordId()
                 .withGoodAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .withValidRefreshTokenResponse()
                 .whereMemberHasAccessToken()
                 .build();
         when(sessionService.create(MEMBER, REFRESH_TOKEN_RESPONSE)).thenReturn(new SessionDto());
+
+        when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
+        when(aesEncryptionService.decrypt(eq(REFRESH_TOKEN), eq(SECRET_KEY), any(IvParameterSpec.class))).thenReturn(DECRYPTED_REFRESH_TOKEN);
 
         assertNotNull(authenticationService.refresh(session));
         verify(memberService, times(1)).update(MEMBER, REFRESH_TOKEN_RESPONSE);
@@ -263,6 +277,12 @@ public class AuthenticationServiceTest {
     public class SessionDtoTestBuilder {
         private SessionDto session = new SessionDto();
 
+        SessionDtoTestBuilder withRefreshTokenAndIv() {
+            MEMBER.setRefreshToken(REFRESH_TOKEN);
+            MEMBER.setRefreshTokenIv(IV);
+            return this;
+        }
+
         SessionDtoTestBuilder whereMemberHasAccessToken() {
             MEMBER.setAccessToken(HASHED_ACCESS_TOKEN);
             MEMBER.setSalt(SALT);
@@ -319,7 +339,7 @@ public class AuthenticationServiceTest {
         }
 
         private SessionDtoTestBuilder withRefreshTokenMatters() {
-            when(oAuthService.refreshAccessToken(REFRESH_TOKEN)).thenReturn(REFRESH_TOKEN_RESPONSE);
+            when(oAuthService.refreshAccessToken(DECRYPTED_REFRESH_TOKEN)).thenReturn(REFRESH_TOKEN_RESPONSE);
             return this;
         }
 
@@ -334,7 +354,6 @@ public class AuthenticationServiceTest {
         }
 
         SessionDto build() {
-            session.setRefreshToken(REFRESH_TOKEN);
             return session;
         }
 

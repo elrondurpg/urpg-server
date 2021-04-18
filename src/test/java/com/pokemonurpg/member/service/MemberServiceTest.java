@@ -1,6 +1,7 @@
 package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.core.security.service.AesEncryptionService;
 import com.pokemonurpg.core.security.service.HashService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.MemberInputDto;
@@ -21,6 +22,8 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -46,6 +49,10 @@ public class MemberServiceTest {
     private final static EarnedBadgeInputDto EARNED_BADGE = mock(EarnedBadgeInputDto.class);
     private final static OwnedItemInputDto OWNED_ITEM = mock(OwnedItemInputDto.class);
     private final static LegendaryProgressInputDto LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
+    private final static byte[] IV = { 12, 32 };
+    private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
+    private final static SecretKey SECRET_KEY = mock(SecretKey.class);
+    private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
 
     @InjectMocks
     private MemberService memberService;
@@ -67,6 +74,9 @@ public class MemberServiceTest {
 
     @Mock
     private OwnedItemService ownedItemService;
+
+    @Mock
+    private AesEncryptionService aesEncryptionService;
 
     private Member member = new Member();
 
@@ -203,12 +213,17 @@ public class MemberServiceTest {
         accessTokenResponse.setExpiresIn("" + EXPIRES_IN);
 
         when(hashService.hash(ACCESS_TOKEN + SALT)).thenReturn(HASHED_ACCESS_TOKEN);
-        when(hashService.hash(REFRESH_TOKEN + SALT)).thenReturn(HASHED_REFRESH_TOKEN);
+
+        when(aesEncryptionService.generateIv()).thenReturn(IV_PARAMETER_SPEC);
+        when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
+        when(aesEncryptionService.encrypt(REFRESH_TOKEN, SECRET_KEY, IV_PARAMETER_SPEC)).thenReturn(ENCRYPTED_REFRESH_TOKEN);
+
         when(systemService.currentTimeMillis()).thenReturn(CURRENT_TIME_MILLIS);
 
         memberService.update(member, accessTokenResponse);
         assertEquals(HASHED_ACCESS_TOKEN, member.getAccessToken());
-        assertEquals(HASHED_REFRESH_TOKEN, member.getRefreshToken());
+        assertEquals(ENCRYPTED_REFRESH_TOKEN, member.getRefreshToken());
+        assertArrayEquals(IV_PARAMETER_SPEC.getIV(), member.getRefreshTokenIv());
 
         long expires = EXPIRES_IN + CURRENT_TIME_MILLIS / 1000;
         assertEquals((Long) expires, member.getSessionExpire());

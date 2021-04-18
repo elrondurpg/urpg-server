@@ -15,7 +15,6 @@ public class SessionServiceTest {
     private final static String USERNAME = "USERNAME";
     private final static String DISCORD_ID = "DISCORD_ID";
     private final static String ACCESS_TOKEN = "ACCESS_TOKEN";
-    private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
 
     private SessionService sessionService = new SessionService();
 
@@ -24,14 +23,11 @@ public class SessionServiceTest {
         when(MEMBER.getUsername()).thenReturn(USERNAME);
         when(MEMBER.getDiscordId()).thenReturn(DISCORD_ID);
         when(ACCESS_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
-        when(ACCESS_TOKEN_RESPONSE.getRefreshToken()).thenReturn(REFRESH_TOKEN);
 
         SessionDto session = sessionService.create(MEMBER, ACCESS_TOKEN_RESPONSE);
         assertEquals(USERNAME, session.getUsername());
         assertEquals(DISCORD_ID, session.getId());
         assertEquals(ACCESS_TOKEN, session.getAccessToken());
-        assertEquals(REFRESH_TOKEN, session.getRefreshToken());
-
     }
 
 }
