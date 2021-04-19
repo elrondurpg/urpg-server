@@ -23,7 +23,7 @@ public class AesEncryptionService {
     public SecretKey getKeyFromAccessToken(String accessToken, Integer salt) {
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            KeySpec spec = new PBEKeySpec(accessToken.toCharArray(), ("" + salt).getBytes(), 65536, 256);
+            KeySpec spec = new PBEKeySpec(accessToken.toCharArray(), ("" + salt).getBytes(), 65536, 128);
             return new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,6 +43,8 @@ public class AesEncryptionService {
             byte[] cipherText = cipher.doFinal(input.getBytes());
             return Base64.getEncoder().encodeToString(cipherText);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidAlgorithmParameterException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+            System.out.println(e);
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

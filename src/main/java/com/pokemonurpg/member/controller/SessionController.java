@@ -1,8 +1,12 @@
 package com.pokemonurpg.member.controller;
 
+import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.member.input.LoginInputDto;
 import com.pokemonurpg.member.service.AuthenticationService;
+import com.pokemonurpg.species.models.Species;
+import com.pokemonurpg.species.service.SpeciesService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +28,9 @@ public class SessionController {
         return authenticationService.login(input);
     }
 
-    @PostMapping("/basic")
-    public @ResponseBody
-    SessionDto basicLogin() {
-        return authenticationService.basicLogin(/* insert request data? */);
-    }
-
     @PostMapping("/refresh")
     public @ResponseBody
-    SessionDto refresh(@Valid @RequestBody SessionDto input) {
-        return authenticationService.refresh(input);
+    SessionDto refresh() {
+        return authenticationService.refresh();
     }
 }

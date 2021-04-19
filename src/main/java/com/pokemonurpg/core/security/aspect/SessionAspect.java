@@ -1,22 +1,25 @@
 package com.pokemonurpg.core.security.aspect;
 
-import com.pokemonurpg.core.service.AuthorizationHeaderService;
+import com.pokemonurpg.core.security.service.SessionService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
 
 @Aspect
 @Configuration
+@Order(0)
 public class SessionAspect {
 
     @Resource
-    private Provider<AuthorizationHeaderService> sessionServiceProvider;
+    private Provider<SessionService> sessionServiceProvider;
 
-    @Before("bean(*Controller)")
-    public void before() {
-        sessionServiceProvider.get().getUser();
+    @Before("@annotation(org.springframework.web.bind.annotation.GetMapping) || @annotation(org.springframework.web.bind.annotation.PostMapping) || " +
+            "@annotation(org.springframework.web.bind.annotation.PutMapping) || @annotation(org.springframework.web.bind.annotation.DeleteMapping)")
+    private void createSession() {
+        sessionServiceProvider.get().createSession();
     }
 }

@@ -10,6 +10,7 @@ import com.pokemonurpg.core.security.service.SessionService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.LoginInputDto;
 import com.pokemonurpg.member.models.Member;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,6 +34,7 @@ public class AuthenticationServiceTest {
     private final static String HASHED_ACCESS_TOKEN = "4211131";
     private final static String BAD_ACCESS_TOKEN = "BAD_ACCESS_TOKEN";
     private final static String HASHED_BAD_ACCESS_TOKEN = "25y54yh45j";
+    private final static String USERNAME = "USERNAME";
     private final static String DISCORD_ID = "DISCORD_ID";
     private final static Long CURRENT_TIME_MILLIS = 52342000L;
     private final static Integer SALT = 32847242;
@@ -40,7 +42,6 @@ public class AuthenticationServiceTest {
     private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
     private final static OAuthAccessTokenResponse REFRESH_TOKEN_RESPONSE = mock(OAuthAccessTokenResponse.class);
     private final static byte[] IV = {};
-    private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
     private final static SecretKey SECRET_KEY = mock(SecretKey.class);
     private final static String DECRYPTED_REFRESH_TOKEN = "DECRYPTED_REFRESH_TOKEN";
 
@@ -85,15 +86,15 @@ public class AuthenticationServiceTest {
 
         // Given memberService.findByDiscordId(id) returns a MEMBER
         Member member = mock(Member.class);
+        when(member.getUsername()).thenReturn(USERNAME);
+        when(member.getDiscordId()).thenReturn(DISCORD_ID);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
-
-        // Given sessionService.create() returns a session
-        SessionDto session = mock(SessionDto.class);
-        when(sessionService.create(member, accessTokenResponse)).thenReturn(session);
 
         // When I call authenticationService.login(CODE)
         // Then I will receive a sessionDto
-        assertEquals(session, authenticationService.login(input));
+        SessionDto expected = new SessionDto(USERNAME, DISCORD_ID, ACCESS_TOKEN);
+        SessionDto actual = authenticationService.login(input);
+        assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
 
         // and the MEMBER object will be updated
         verify(memberService, times(1)).update(member, accessTokenResponse);
@@ -167,12 +168,14 @@ public class AuthenticationServiceTest {
                 .withValidRefreshTokenResponse()
                 .whereMemberHasAccessToken()
                 .build();
-        when(sessionService.create(MEMBER, REFRESH_TOKEN_RESPONSE)).thenReturn(new SessionDto());
 
         when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
         when(aesEncryptionService.decrypt(eq(REFRESH_TOKEN), eq(SECRET_KEY), any(IvParameterSpec.class))).thenReturn(DECRYPTED_REFRESH_TOKEN);
 
-        assertNotNull(authenticationService.refresh(session));
+        SessionDto expected = new SessionDto(USERNAME, DISCORD_ID, ACCESS_TOKEN);
+        SessionDto actual = authenticationService.refresh(session);
+        assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
+
         verify(memberService, times(1)).update(MEMBER, REFRESH_TOKEN_RESPONSE);
     }
 
@@ -181,8 +184,6 @@ public class AuthenticationServiceTest {
         SessionDto session = new SessionDto();
         assertNull(authenticationService.refresh(session));
         verify(memberService, times(0)).update(Matchers.any(), Matchers.any());
-        verify(sessionService, times(0)).create(Matchers.any(), Matchers.any());
-
     }
 
     @Test
@@ -197,7 +198,7 @@ public class AuthenticationServiceTest {
 
         assertNull(authenticationService.refresh(session));
         verify(memberService, times(0)).update(Matchers.any(), Matchers.any());
-        verify(sessionService, times(0)).create(Matchers.any(), Matchers.any());
+
     }
 
     @Test
@@ -333,6 +334,8 @@ public class AuthenticationServiceTest {
         }
 
         SessionDtoTestBuilder withFoundDiscordId() {
+            MEMBER.setUsername(USERNAME);
+            MEMBER.setDiscordId(DISCORD_ID);
             session.setId(DISCORD_ID);
             when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(MEMBER);
             return this;

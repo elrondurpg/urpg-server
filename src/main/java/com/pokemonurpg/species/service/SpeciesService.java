@@ -1,9 +1,11 @@
 package com.pokemonurpg.species.service;
 
+import com.pokemonurpg.core.security.service.SessionService;
 import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.species.input.SpeciesAbilityInputDto;
 import com.pokemonurpg.species.input.SpeciesAttackInputDto;
@@ -11,9 +13,11 @@ import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.input.SpeciesInputDto;
 import com.pokemonurpg.species.repository.SpeciesRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
+import org.hibernate.service.spi.SessionFactoryServiceContributor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.inject.Provider;
 import java.util.List;
 
 @Service

@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.inject.Provider;
 
 @Service
 public class AuthenticationService {
@@ -34,10 +35,10 @@ public class AuthenticationService {
     private OAuthService oAuthService;
 
     @Resource
-    private SessionService sessionService;
+    private AesEncryptionService aesEncryptionService;
 
     @Resource
-    private AesEncryptionService aesEncryptionService;
+    private Provider<SessionService> sessionServiceProvider;
 
     public SessionDto login(LoginInputDto input) {
         OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
@@ -47,36 +48,43 @@ public class AuthenticationService {
                 Member member = memberService.findByDiscordId(discordUserResponse.getId());
                 if (member != null) {
                     memberService.update(member, accessTokenResponse);
-                    return sessionService.create(member, accessTokenResponse);
+                    return new SessionDto(member.getUsername(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                 }
             }
         }
         throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while logging you in.");
     }
 
-    public SessionDto basicLogin() {
-        SessionDto response = new SessionDto();
-
-        return response;
-    }
-
-    public SessionDto refresh(SessionDto input) {
-        Member member = authenticate(input);
+    public SessionDto refresh() {
+        SessionService sessionService = sessionServiceProvider.get();
+        Member member = sessionService.getAuthenticatedMember();
         if (member != null) {
             byte[] iv = member.getRefreshTokenIv();
             String encryptedRefreshToken = member.getRefreshToken();
             if (iv != null && encryptedRefreshToken != null) {
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-                SecretKey key = aesEncryptionService.getKeyFromAccessToken(input.getAccessToken(), member.getSalt());
+                SecretKey key = aesEncryptionService.getKeyFromAccessToken(sessionService.getAccessToken(), member.getSalt());
                 String refreshToken = aesEncryptionService.decrypt(encryptedRefreshToken, key, ivParameterSpec);
                 OAuthAccessTokenResponse refreshTokenResponse = oAuthService.refreshAccessToken(refreshToken);
                 if (refreshTokenResponse.isValid()) {
                     memberService.update(member, refreshTokenResponse);
-                    return sessionService.create(member, refreshTokenResponse);
+                    return new SessionDto(member.getUsername(), member.getDiscordId(), refreshTokenResponse.getAccessToken());
                 }
             }
         }
 
+        return null;
+    }
+
+    public Member authenticate(String discordId, String accessToken) {
+        Member matchedMember = memberService.findByDiscordId(discordId);
+        if (matchedMember != null) {
+            if (hasCorrectAccessToken(matchedMember, accessToken)) {
+                if (!isSessionExpired(matchedMember.getSessionExpire())) {
+                    return matchedMember;
+                }
+            }
+        }
         return null;
     }
 

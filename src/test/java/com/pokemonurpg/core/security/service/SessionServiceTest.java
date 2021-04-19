@@ -18,16 +18,4 @@ public class SessionServiceTest {
 
     private SessionService sessionService = new SessionService();
 
-    @Test
-    public void create() {
-        when(MEMBER.getUsername()).thenReturn(USERNAME);
-        when(MEMBER.getDiscordId()).thenReturn(DISCORD_ID);
-        when(ACCESS_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
-
-        SessionDto session = sessionService.create(MEMBER, ACCESS_TOKEN_RESPONSE);
-        assertEquals(USERNAME, session.getUsername());
-        assertEquals(DISCORD_ID, session.getId());
-        assertEquals(ACCESS_TOKEN, session.getAccessToken());
-    }
-
 }
