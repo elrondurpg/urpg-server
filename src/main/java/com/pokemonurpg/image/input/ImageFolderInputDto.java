@@ -1,13 +1,13 @@
 package com.pokemonurpg.image.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class ImageFolderInputDto extends AuthenticatedInputDto {
+public class ImageFolderInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 25)
     private String name;

@@ -7,7 +7,6 @@ import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
 import com.pokemonurpg.contest.models.RSEContestMoveType;
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.item.models.Item;
@@ -21,7 +20,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackInputDto extends AuthenticatedInputDto {
+public class AttackInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 17)
     private String name;

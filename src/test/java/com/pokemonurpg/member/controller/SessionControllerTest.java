@@ -34,8 +34,8 @@ public class SessionControllerTest {
     @Test
     public void refresh() {
         SessionDto input = new SessionDto();
-        when(authenticationService.refresh(input)).thenReturn(SESSION);
-        assertEquals(SESSION, sessionController.refresh(input));
+        when(authenticationService.refresh()).thenReturn(SESSION);
+        assertEquals(SESSION, sessionController.refresh());
     }
 
 }

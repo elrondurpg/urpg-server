@@ -1,6 +1,6 @@
 package com.pokemonurpg.item.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.Min;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class ItemInputDto extends AuthenticatedInputDto {
+public class ItemInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 30)
     private String name;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.member.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.stats.input.EarnedBadgeInputDto;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MemberInputDto extends AuthenticatedInputDto {
+public class MemberInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Pattern(regexp = "\\d+")

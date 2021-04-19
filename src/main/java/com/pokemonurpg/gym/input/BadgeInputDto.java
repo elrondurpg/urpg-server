@@ -1,12 +1,12 @@
 package com.pokemonurpg.gym.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class BadgeInputDto extends AuthenticatedInputDto {
+public class BadgeInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max=20)

@@ -1,12 +1,11 @@
 package com.pokemonurpg.contest.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ContestAttributeInputDto extends AuthenticatedInputDto {
+public class ContestAttributeInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 6)
     private String name;

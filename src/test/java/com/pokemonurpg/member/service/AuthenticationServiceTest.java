@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.inject.Provider;
 import java.security.NoSuchAlgorithmException;
 
 import static org.junit.Assert.*;
@@ -38,7 +39,6 @@ public class AuthenticationServiceTest {
     private final static String DISCORD_ID = "DISCORD_ID";
     private final static Long CURRENT_TIME_MILLIS = 52342000L;
     private final static Integer SALT = 32847242;
-    private final static Member MEMBER = new Member();
     private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
     private final static OAuthAccessTokenResponse REFRESH_TOKEN_RESPONSE = mock(OAuthAccessTokenResponse.class);
     private final static byte[] IV = {};
@@ -65,6 +65,9 @@ public class AuthenticationServiceTest {
 
     @Mock
     private AesEncryptionService aesEncryptionService;
+
+    @Mock
+    private Provider<SessionService> sessionServiceProvider;
 
     @Test
     public void successfulLogin() throws NoSuchAlgorithmException {
@@ -101,7 +104,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ResponseStatusException.class)
-    public void failWhenAccessTokenResponseIsInvalid() {
+    public void failLoginWhenAccessTokenResponseIsInvalid() {
         // Given a LoginInputDto with code = CODE
         LoginInputDto input = new LoginInputDto();
         input.setCode(CODE);
@@ -115,7 +118,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ResponseStatusException.class)
-    public void failWhenDiscordUserResponseIsInvalid() {
+    public void failLoginWhenDiscordUserResponseIsInvalid() {
         // Given a LoginInputDto with code = CODE
         LoginInputDto input = new LoginInputDto();
         input.setCode(CODE);
@@ -135,7 +138,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ResponseStatusException.class)
-    public void failWhenMemberIsInvalid() {
+    public void failLoginWhenMemberIsInvalid() {
         // Given a LoginInputDto with code = CODE
         LoginInputDto input = new LoginInputDto();
         input.setCode(CODE);
@@ -160,206 +163,216 @@ public class AuthenticationServiceTest {
 
     @Test
     public void successfulRefresh() {
-        SessionDto session = new SessionDtoTestBuilder()
+        SessionService sessionService = mock(SessionService.class);
+        when(sessionServiceProvider.get()).thenReturn(sessionService);
+
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withUnexpiredSession()
                 .withRefreshTokenAndIv()
                 .withValidRefreshTokenResponse()
-                .whereMemberHasAccessToken()
                 .build();
+
+        when(sessionService.getAuthenticatedMember()).thenReturn(member);
+        when(sessionService.getAccessToken()).thenReturn(ACCESS_TOKEN);
 
         when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
         when(aesEncryptionService.decrypt(eq(REFRESH_TOKEN), eq(SECRET_KEY), any(IvParameterSpec.class))).thenReturn(DECRYPTED_REFRESH_TOKEN);
 
         SessionDto expected = new SessionDto(USERNAME, DISCORD_ID, ACCESS_TOKEN);
-        SessionDto actual = authenticationService.refresh(session);
+        SessionDto actual = authenticationService.refresh();
         assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
 
-        verify(memberService, times(1)).update(MEMBER, REFRESH_TOKEN_RESPONSE);
+        verify(memberService, times(1)).update(member, REFRESH_TOKEN_RESPONSE);
     }
 
     @Test
     public void refreshFailsWhenMemberNotFound() {
-        SessionDto session = new SessionDto();
-        assertNull(authenticationService.refresh(session));
+        SessionService sessionService = mock(SessionService.class);
+        when(sessionServiceProvider.get()).thenReturn(sessionService);
+        when(sessionService.getAuthenticatedMember()).thenReturn(null);
+
+        assertNull(authenticationService.refresh());
         verify(memberService, times(0)).update(Matchers.any(), Matchers.any());
     }
 
     @Test
     public void refreshFailsWhenRefreshTokenResponseIsInvalid() {
-        SessionDto session = new SessionDtoTestBuilder()
+        SessionService sessionService = mock(SessionService.class);
+        when(sessionServiceProvider.get()).thenReturn(sessionService);
+
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .withInvalidRefreshTokenResponse()
-                .whereMemberHasAccessToken()
                 .build();
 
-        assertNull(authenticationService.refresh(session));
+        when(sessionService.getAuthenticatedMember()).thenReturn(member);
+        when(sessionService.getAccessToken()).thenReturn(ACCESS_TOKEN);
+
+        when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
+        when(aesEncryptionService.decrypt(eq(REFRESH_TOKEN), eq(SECRET_KEY), any(IvParameterSpec.class))).thenReturn(DECRYPTED_REFRESH_TOKEN);
+
+        assertNull(authenticationService.refresh());
         verify(memberService, times(0)).update(Matchers.any(), Matchers.any());
 
     }
 
     @Test
     public void successfulAuthentication() {
-        SessionDto session = new SessionDtoTestBuilder()
-            .withFoundDiscordId()
-            .withGoodAccessToken()
-            .withUnexpiredSession()
-            .whereMemberHasAccessToken()
-            .build();
+        when(hashService.hash(ACCESS_TOKEN + SALT)).thenReturn(HASHED_ACCESS_TOKEN);
 
-        assertEquals(MEMBER, authenticationService.authenticate(session));}
+        Member member = new TestMemberBuilder()
+                .withFoundDiscordId()
+                .withUnexpiredSession()
+                .withRefreshTokenAndIv()
+                .whereMemberHasAccessToken()
+                .build();
+
+        assertEquals(member, authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
+    }
 
     @Test
     public void authenticationFailsWhenMemberNotFound() {
-        SessionDto session = new SessionDto();
-        assertNull(authenticationService.authenticate(session));
+        assertNull(authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
     }
 
     @Test
     public void authenticationFailsWhenMemberHasNullAccessToken() {
-        SessionDto session = new SessionDtoTestBuilder()
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .whereMemberHasNullAccessToken()
                 .build();
-        assertNull(authenticationService.authenticate(session));
+
+        assertNull(authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
     }
 
     @Test
     public void authenticationFailsWhenMemberHasEmptyAccessToken() {
-        SessionDto session = new SessionDtoTestBuilder()
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .whereMemberHasEmptyAccessToken()
                 .build();
-        assertNull(authenticationService.authenticate(session));
+
+        assertNull(authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
     }
 
     @Test
     public void authenticationFailsWhenAccessTokenDoesntMatch() {
-        SessionDto session = new SessionDtoTestBuilder()
+        when(hashService.hash(BAD_ACCESS_TOKEN + SALT)).thenReturn(HASHED_BAD_ACCESS_TOKEN);
+
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withBadAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .whereMemberHasAccessToken()
                 .build();
-        assertNull(authenticationService.authenticate(session));
+
+        assertNull(authenticationService.authenticate(DISCORD_ID, BAD_ACCESS_TOKEN));
     }
 
     @Test
     public void authenticationFailsWhenHashServiceThrowsError() {
-        SessionDto session = new SessionDtoTestBuilder()
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withUnexpiredSession()
+                .withRefreshTokenAndIv()
                 .whereMemberHasAccessToken()
                 .withHashException()
                 .build();
-        assertNull(authenticationService.authenticate(session));
+        assertNull(authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
     }
 
     @Test
     public void authenticationFailsWhenSessionIsExpired() {
-        SessionDto session = new SessionDtoTestBuilder()
+        Member member = new TestMemberBuilder()
                 .withFoundDiscordId()
-                .withGoodAccessToken()
                 .withExpiredSession()
+                .withRefreshTokenAndIv()
                 .whereMemberHasAccessToken()
                 .build();
 
-        assertNull(authenticationService.authenticate(session));
+        assertNull(authenticationService.authenticate(DISCORD_ID, ACCESS_TOKEN));
     }
 
-    public class SessionDtoTestBuilder {
-        private SessionDto session = new SessionDto();
+    public class TestMemberBuilder {
+        private Member member = new Member();
 
-        SessionDtoTestBuilder withRefreshTokenAndIv() {
-            MEMBER.setRefreshToken(REFRESH_TOKEN);
-            MEMBER.setRefreshTokenIv(IV);
+        TestMemberBuilder withRefreshTokenAndIv() {
+            member.setRefreshToken(REFRESH_TOKEN);
+            member.setRefreshTokenIv(IV);
             return this;
         }
 
-        SessionDtoTestBuilder whereMemberHasAccessToken() {
-            MEMBER.setAccessToken(HASHED_ACCESS_TOKEN);
-            MEMBER.setSalt(SALT);
+        TestMemberBuilder whereMemberHasAccessToken() {
+            member.setAccessToken(HASHED_ACCESS_TOKEN);
+            member.setSalt(SALT);
             return this;
         }
 
-        SessionDtoTestBuilder whereMemberHasEmptyAccessToken() {
-            MEMBER.setAccessToken("");
-            MEMBER.setSalt(SALT);
+        TestMemberBuilder whereMemberHasEmptyAccessToken() {
+            member.setAccessToken("");
+            member.setSalt(SALT);
             return this;
         }
 
-        SessionDtoTestBuilder whereMemberHasNullAccessToken() {
-            MEMBER.setSalt(SALT);
+        TestMemberBuilder whereMemberHasNullAccessToken() {
+            member.setSalt(SALT);
             return this;
         }
 
-        SessionDtoTestBuilder withGoodAccessToken() {
-            session.setAccessToken(ACCESS_TOKEN);
-            when(hashService.hash(ACCESS_TOKEN + SALT)).thenReturn(HASHED_ACCESS_TOKEN);
-            return this;
-        }
-
-        SessionDtoTestBuilder withBadAccessToken() {
-            session.setAccessToken(BAD_ACCESS_TOKEN);
-            when(hashService.hash(BAD_ACCESS_TOKEN + SALT)).thenReturn(HASHED_BAD_ACCESS_TOKEN);
-            return this;
-        }
-
-        private SessionDtoTestBuilder withSessionMatters() {
+        private TestMemberBuilder withSessionMatters() {
             when(systemService.currentTimeMillis()).thenReturn(CURRENT_TIME_MILLIS);
             return this;
         }
 
-        SessionDtoTestBuilder withExpiredSession() {
-            MEMBER.setSessionExpire(CURRENT_TIME_MILLIS / 1000 + 59);
+        TestMemberBuilder withExpiredSession() {
+            member.setSessionExpire(CURRENT_TIME_MILLIS / 1000 + 59);
             return withSessionMatters();
         }
 
-        SessionDtoTestBuilder withUnexpiredSession() {
-            MEMBER.setSessionExpire(CURRENT_TIME_MILLIS / 1000 + 61);
+        TestMemberBuilder withUnexpiredSession() {
+            member.setSessionExpire(CURRENT_TIME_MILLIS / 1000 + 61);
             return withSessionMatters();
         }
 
-        SessionDtoTestBuilder withHashException() {
+        TestMemberBuilder withFoundDiscordId() {
+            member.setUsername(USERNAME);
+            member.setDiscordId(DISCORD_ID);
+            when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
+            return this;
+        }
+
+        TestMemberBuilder withHashException() {
             when(hashService.hash(Matchers.any())).thenThrow(ResponseStatusException.class);
             return this;
         }
 
-        SessionDtoTestBuilder withFoundDiscordId() {
-            MEMBER.setUsername(USERNAME);
-            MEMBER.setDiscordId(DISCORD_ID);
-            session.setId(DISCORD_ID);
-            when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(MEMBER);
-            return this;
-        }
-
-        private SessionDtoTestBuilder withRefreshTokenMatters() {
+        private TestMemberBuilder withRefreshTokenMatters() {
             when(oAuthService.refreshAccessToken(DECRYPTED_REFRESH_TOKEN)).thenReturn(REFRESH_TOKEN_RESPONSE);
             return this;
         }
 
-        SessionDtoTestBuilder withValidRefreshTokenResponse() {
+        TestMemberBuilder withValidRefreshTokenResponse() {
+            when(REFRESH_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
             when(REFRESH_TOKEN_RESPONSE.isValid()).thenReturn(true);
             return withRefreshTokenMatters();
         }
 
-        SessionDtoTestBuilder withInvalidRefreshTokenResponse() {
+        TestMemberBuilder withInvalidRefreshTokenResponse() {
             when(REFRESH_TOKEN_RESPONSE.isValid()).thenReturn(false);
             return withRefreshTokenMatters();
         }
 
-        SessionDto build() {
-            return session;
+        Member build() {
+            member.setSalt(SALT);
+            return member;
         }
-
     }
 
 }

@@ -1,7 +1,7 @@
 package com.pokemonurpg.member.controller;
 
 import com.pokemonurpg.core.security.annotation.Authorized;
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.member.input.LoginInputDto;
 import com.pokemonurpg.member.service.AuthenticationService;

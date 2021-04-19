@@ -1,12 +1,11 @@
 package com.pokemonurpg.creative.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ParkLocationInputDto extends AuthenticatedInputDto {
+public class ParkLocationInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 10)
     private String name;

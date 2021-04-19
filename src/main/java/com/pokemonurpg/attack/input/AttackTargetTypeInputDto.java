@@ -1,12 +1,11 @@
 package com.pokemonurpg.attack.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AttackTargetTypeInputDto extends AuthenticatedInputDto {
+public class AttackTargetTypeInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 35)
     private String name;

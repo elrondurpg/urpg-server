@@ -1,12 +1,12 @@
 package com.pokemonurpg.general.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class NatureInputDto extends AuthenticatedInputDto {
+public class NatureInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 10)

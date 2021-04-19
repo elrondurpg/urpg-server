@@ -1,6 +1,5 @@
 package com.pokemonurpg.contest.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.constraints.Max;
@@ -8,7 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ContestMoveTypeInputDto extends AuthenticatedInputDto {
+public class ContestMoveTypeInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 20)
     private String name;

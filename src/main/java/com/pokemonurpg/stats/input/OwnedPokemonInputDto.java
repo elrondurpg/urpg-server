@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.general.models.Nature;
@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OwnedPokemonInputDto extends AuthenticatedInputDto {
+public class OwnedPokemonInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Member.class)

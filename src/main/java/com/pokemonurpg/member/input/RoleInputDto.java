@@ -1,6 +1,6 @@
 package com.pokemonurpg.member.input;
 
-import com.pokemonurpg.core.security.dto.AuthenticatedInputDto;
+
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import javax.validation.Valid;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.Collections;
 import java.util.List;
 
-public class RoleInputDto extends AuthenticatedInputDto  {
+public class RoleInputDto  {
     @NotNull(groups = {ObjectCreation.class})
     @Size(min = 3, max = 21)
     private String name;

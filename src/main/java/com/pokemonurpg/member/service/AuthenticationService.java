@@ -88,20 +88,6 @@ public class AuthenticationService {
         return null;
     }
 
-    public Member authenticate(SessionDto session) {
-        String providedId = session.getId();
-        Member matchedMember = memberService.findByDiscordId(providedId);
-        if (matchedMember != null) {
-            String providedAccessToken = session.getAccessToken();
-            if (hasCorrectAccessToken(matchedMember, providedAccessToken)) {
-                if (!isSessionExpired(matchedMember.getSessionExpire())) {
-                    return matchedMember;
-                }
-            }
-        }
-        return null;
-    }
-
     private boolean hasCorrectAccessToken(Member member, String accessTokenToVerify) {
         String accessToken = member.getAccessToken();
         int salt = member.getSalt();
