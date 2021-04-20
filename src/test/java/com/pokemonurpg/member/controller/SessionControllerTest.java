@@ -3,6 +3,8 @@ package com.pokemonurpg.member.controller;
 import com.pokemonurpg.core.security.dto.SessionDto;
 import com.pokemonurpg.member.input.LoginInputDto;
 import com.pokemonurpg.member.service.AuthenticationService;
+import com.pokemonurpg.member.service.LoginService;
+import com.pokemonurpg.member.service.RefreshService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,19 +24,22 @@ public class SessionControllerTest {
     private SessionController sessionController;
 
     @Mock
-    private AuthenticationService authenticationService;
+    private LoginService loginService;
+
+    @Mock
+    private RefreshService refreshService;
 
     @Test
     public void login() {
         LoginInputDto input = new LoginInputDto();
-        when(authenticationService.login(input)).thenReturn(SESSION);
+        when(loginService.login(input)).thenReturn(SESSION);
         assertEquals(SESSION, sessionController.login(input));
     }
 
     @Test
     public void refresh() {
         SessionDto input = new SessionDto();
-        when(authenticationService.refresh()).thenReturn(SESSION);
+        when(refreshService.refresh()).thenReturn(SESSION);
         assertEquals(SESSION, sessionController.refresh());
     }
 

@@ -11,7 +11,7 @@ public class PokedexEntryDto {
 
     private Species species;
     @JsonIgnoreProperties({ "dbid", "displayName", "formName",
-            "type1", "type2", "mappedSpeciesAttacks", "mappedSpeciesAbilities",
+            "type1", "type2", "attacks", "abilities",
             "hp", "attack", "defense", "specialAttack", "specialDefense", "speed",
             "classification", "height", "weight", "maleAllowed", "femaleAllowed",
             "pokemart", "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits",
@@ -20,7 +20,7 @@ public class PokedexEntryDto {
             "preMega", "megaStone", "megaSuffix" })
     private Species prevDex;
     @JsonIgnoreProperties({ "dbid", "displayName", "formName",
-            "type1", "type2", "mappedSpeciesAttacks", "mappedSpeciesAbilities",
+            "type1", "type2", "attacks", "abilities",
             "hp", "attack", "defense", "specialAttack", "specialDefense", "speed",
             "classification", "height", "weight", "maleAllowed", "femaleAllowed",
             "pokemart", "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits",
@@ -29,7 +29,7 @@ public class PokedexEntryDto {
             "preMega", "megaStone", "megaSuffix" })
     private Species nextDex;
     private List<AlteredFormDto> alteredForms;
-    @JsonIgnoreProperties({ "formName", "type1", "type2", "mappedSpeciesAttacks", "mappedSpeciesAbilities",
+    @JsonIgnoreProperties({ "formName", "type1", "type2", "attacks", "abilities",
             "hp", "attack", "defense", "specialAttack", "specialDefense", "speed",
             "classification", "height", "weight", "maleAllowed", "femaleAllowed",
             "pokemart", "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits",

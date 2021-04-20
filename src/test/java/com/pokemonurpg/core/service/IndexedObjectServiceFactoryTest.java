@@ -40,5 +40,6 @@ public class IndexedObjectServiceFactoryTest {
         assertEquals(gymService, indexedObjectServiceFactory.getServiceForClass(Gym.class));
         assertEquals(legendaryProgressService, indexedObjectServiceFactory.getServiceForClass(LegendaryProgress.class));
         assertEquals(ownedPokemonService, indexedObjectServiceFactory.getServiceForClass(OwnedPokemon.class));
+        assertNull(indexedObjectServiceFactory.getServiceForClass(Object.class));
     }
 }

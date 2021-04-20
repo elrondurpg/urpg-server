@@ -148,7 +148,7 @@ public class Species {
     @JoinColumn(name = "pre_evolution_dbid")
     @JsonIgnoreProperties({ "abilities", "attacks", "classification", "hp", "attack", "defense", "specialAttack",
             "specialDefense", "speed", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
-            "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "mappedEvolution", "cosmeticForms",
+            "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix" })
     @JsonView(value = { View.MemberView.Pokemon.class })
@@ -165,7 +165,7 @@ public class Species {
     @OneToOne
     @JoinColumn(name = "pre_mega_dbid")
     @JsonIgnoreProperties({ "abilities", "attacks", "classification", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
-            "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "mappedEvolution", "cosmeticForms",
+            "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix"})
     @JsonView(value = { View.MemberView.Pokemon.class })

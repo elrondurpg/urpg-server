@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.core.security.dto.SessionDto;
-import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
@@ -102,6 +100,9 @@ public class Member {
     @JsonIgnoreProperties("owner")
     private Set<Gym> gyms;
 
+    @Column
+    private Boolean bot = false;
+
     public Member() {
     }
 
@@ -118,6 +119,7 @@ public class Member {
         setLosses(input.getLosses());
         setDraws(input.getDraws());
         setJoinDate(input.getJoinDate());
+        setBot(input.isBot());
     }
 
     public Integer getDbid() {
@@ -300,5 +302,15 @@ public class Member {
 
     public void setGyms(Set<Gym> gyms) {
         this.gyms = gyms;
+    }
+
+    public Boolean isBot() {
+        return bot;
+    }
+
+    public void setBot(Boolean bot) {
+        if (bot != null) {
+            this.bot = bot;
+        }
     }
 }

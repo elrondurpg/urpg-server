@@ -19,7 +19,7 @@ public class SessionAspect {
 
     @Before("@annotation(org.springframework.web.bind.annotation.GetMapping) || @annotation(org.springframework.web.bind.annotation.PostMapping) || " +
             "@annotation(org.springframework.web.bind.annotation.PutMapping) || @annotation(org.springframework.web.bind.annotation.DeleteMapping)")
-    private void createSession() {
+    void createSession() {
         sessionServiceProvider.get().createSession();
     }
 }

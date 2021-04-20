@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlteredFormDto {
-    @JsonIgnoreProperties({ "mappedSpeciesAttacks", "mappedSpeciesAbilities",
+    @JsonIgnoreProperties({ "attacks", "abilities",
             "classification", "height", "weight", "maleAllowed", "femaleAllowed",
             "legendaryTier", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix" })

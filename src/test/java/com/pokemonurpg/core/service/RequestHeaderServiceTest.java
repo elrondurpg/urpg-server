@@ -1,5 +1,6 @@
 package com.pokemonurpg.core.service;
 
+import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -398,4 +399,9 @@ public class RequestHeaderServiceTest {
         assertNull(requestHeaderService.findByName(UNKNOWN_HEADER_NAME));
     }
 
+    @Test
+    public void findByNameFailsWhenAttrsAreNull() {
+        RequestContextHolder.setRequestAttributes(null);
+        assertNull(requestHeaderService.findByName(KNOWN_HEADER_NAME));
+    }
 }

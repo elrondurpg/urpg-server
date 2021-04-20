@@ -214,7 +214,7 @@ public class MemberServiceTest {
 
         when(hashService.hash(ACCESS_TOKEN + SALT)).thenReturn(HASHED_ACCESS_TOKEN);
 
-        when(aesEncryptionService.generateIv()).thenReturn(IV_PARAMETER_SPEC);
+        when(aesEncryptionService.createIvParameterSpec()).thenReturn(IV_PARAMETER_SPEC);
         when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
         when(aesEncryptionService.encrypt(REFRESH_TOKEN, SECRET_KEY, IV_PARAMETER_SPEC)).thenReturn(ENCRYPTED_REFRESH_TOKEN);
 

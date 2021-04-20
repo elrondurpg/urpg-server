@@ -88,7 +88,7 @@ public class MemberService implements NamedObjectService<Member> {
 
         member.setAccessToken(hashService.hash(accessTokenResponse.getAccessToken() + salt));
 
-        IvParameterSpec iv = aesEncryptionService.generateIv();
+        IvParameterSpec iv = aesEncryptionService.createIvParameterSpec();
         SecretKey key = aesEncryptionService.getKeyFromAccessToken(accessTokenResponse.getAccessToken(), salt);
         String encryptedRefreshToken = aesEncryptionService.encrypt(accessTokenResponse.getRefreshToken(), key, iv);
         member.setRefreshToken(encryptedRefreshToken);

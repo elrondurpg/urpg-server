@@ -48,19 +48,4 @@ public class SessionDto {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SessionDto that = (SessionDto) o;
-        return Objects.equals(username, that.username) &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(accessToken, that.accessToken);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, id, accessToken);
-    }
 }

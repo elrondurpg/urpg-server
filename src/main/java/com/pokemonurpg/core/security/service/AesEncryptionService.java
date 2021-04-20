@@ -30,9 +30,13 @@ public class AesEncryptionService {
         }
     }
 
-    public IvParameterSpec generateIv() {
+    public IvParameterSpec createIvParameterSpec() {
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
+        return new IvParameterSpec(iv);
+    }
+
+    public IvParameterSpec createIvParameterSpec(byte[] iv) {
         return new IvParameterSpec(iv);
     }
 
