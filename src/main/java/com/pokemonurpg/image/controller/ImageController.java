@@ -1,7 +1,7 @@
 package com.pokemonurpg.image.controller;
 
 import com.pokemonurpg.image.input.ImageInputDto;
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.image.service.ImageService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package com.pokemonurpg.ability.controller;
 
 import com.pokemonurpg.ability.models.Ability;
 import com.pokemonurpg.ability.input.AbilityInputDto;
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.ability.service.AbilityService;
 import org.apache.logging.log4j.LogManager;

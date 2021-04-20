@@ -4,7 +4,7 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.creative.input.ArtRankInputDto;
 import com.pokemonurpg.creative.models.ArtRank;
 import com.pokemonurpg.creative.service.ArtRankService;
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

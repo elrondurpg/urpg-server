@@ -119,7 +119,7 @@ public class Member {
         setLosses(input.getLosses());
         setDraws(input.getDraws());
         setJoinDate(input.getJoinDate());
-        setBot(input.isBot());
+        setBot(input.getBot());
     }
 
     public Integer getDbid() {

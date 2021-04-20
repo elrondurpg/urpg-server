@@ -1,6 +1,6 @@
 package com.pokemonurpg.member.controller;
 
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.PermissionInputDto;
 import com.pokemonurpg.member.models.Permission;

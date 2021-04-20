@@ -1,5 +1,8 @@
 package com.pokemonurpg.member.service;
 
+import com.pokemonurpg.security.service.AccessTokenVerificationService;
+import com.pokemonurpg.security.service.BotAuthenticationService;
+import com.pokemonurpg.security.service.SessionExpirationService;
 import com.pokemonurpg.member.models.Member;
 import org.junit.Before;
 import org.junit.Test;

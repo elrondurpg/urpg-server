@@ -1,6 +1,6 @@
 package com.pokemonurpg.species.controller;
 
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.species.input.TypeInputDto;
 import com.pokemonurpg.species.models.Type;

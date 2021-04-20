@@ -1,6 +1,6 @@
 package com.pokemonurpg.core.service;
 
-import org.apache.tomcat.util.http.fileupload.RequestContext;
+import com.pokemonurpg.security.service.RequestHeaderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

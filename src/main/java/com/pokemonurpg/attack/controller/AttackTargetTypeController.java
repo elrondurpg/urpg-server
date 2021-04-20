@@ -3,7 +3,7 @@ package com.pokemonurpg.attack.controller;
 import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.attack.input.AttackTargetTypeInputDto;
 import com.pokemonurpg.attack.service.AttackTargetTypeService;
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

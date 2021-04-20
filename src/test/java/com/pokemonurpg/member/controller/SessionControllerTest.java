@@ -1,11 +1,10 @@
 package com.pokemonurpg.member.controller;
 
-import com.pokemonurpg.core.security.dto.SessionDto;
-import com.pokemonurpg.member.input.LoginInputDto;
-import com.pokemonurpg.member.service.AuthenticationService;
-import com.pokemonurpg.member.service.LoginService;
-import com.pokemonurpg.member.service.RefreshService;
-import org.junit.Before;
+import com.pokemonurpg.security.controller.SessionController;
+import com.pokemonurpg.security.dto.SessionDto;
+import com.pokemonurpg.security.dto.LoginInputDto;
+import com.pokemonurpg.security.service.LoginService;
+import com.pokemonurpg.security.service.RefreshService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

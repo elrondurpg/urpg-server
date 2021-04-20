@@ -1,8 +1,8 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.core.security.models.OAuthAccessTokenResponse;
-import com.pokemonurpg.core.security.service.AesEncryptionService;
-import com.pokemonurpg.core.security.service.HashService;
+import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.security.service.AesEncryptionService;
+import com.pokemonurpg.security.service.HashService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.MemberRoleInputDto;
 import com.pokemonurpg.member.models.Member;
@@ -77,6 +77,10 @@ public class MemberService implements NamedObjectService<Member> {
 
     public Member create(MemberInputDto input) {
         Member member = new Member(input);
+        if (input.getBot()) {
+            String accessToken = hashService.hash(input.getBotAccessToken() + member.getSalt());
+            member.setAccessToken(accessToken);
+        }
         updateEmbeddedValues(input, member);
         memberRepository.save(member);
         updateAssociatedValues(input, member);

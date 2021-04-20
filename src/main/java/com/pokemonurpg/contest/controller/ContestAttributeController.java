@@ -3,7 +3,7 @@ package com.pokemonurpg.contest.controller;
 import com.pokemonurpg.contest.input.ContestAttributeInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.service.ContestAttributeService;
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

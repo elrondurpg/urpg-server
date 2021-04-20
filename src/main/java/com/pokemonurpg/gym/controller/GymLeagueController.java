@@ -1,6 +1,6 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.GymLeagueInputDto;
 import com.pokemonurpg.gym.models.GymLeague;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.item.controller;
 
-import com.pokemonurpg.core.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.Authorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.item.input.ItemInputDto;
 import com.pokemonurpg.item.models.Item;

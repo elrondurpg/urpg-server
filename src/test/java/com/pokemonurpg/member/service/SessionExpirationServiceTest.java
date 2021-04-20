@@ -1,5 +1,6 @@
 package com.pokemonurpg.member.service;
 
+import com.pokemonurpg.security.service.SessionExpirationService;
 import com.pokemonurpg.core.service.SystemService;
 import org.junit.Before;
 import org.junit.Test;

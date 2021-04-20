@@ -1,15 +1,10 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.core.security.dto.SessionDto;
-import com.pokemonurpg.core.security.service.HashService;
-import com.pokemonurpg.core.security.service.OAuthService;
-import com.pokemonurpg.core.security.service.SessionService;
-import com.pokemonurpg.core.service.SystemService;
+import com.pokemonurpg.security.dto.SessionDto;
+import com.pokemonurpg.security.service.*;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.repository.PermissionRepository;
-import com.pokemonurpg.member.repository.RoleRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.inject.Provider;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
