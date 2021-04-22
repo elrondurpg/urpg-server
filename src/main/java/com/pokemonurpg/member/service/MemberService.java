@@ -92,11 +92,13 @@ public class MemberService implements NamedObjectService<Member> {
 
         member.setAccessToken(hashService.hash(accessTokenResponse.getAccessToken() + salt));
 
-        IvParameterSpec iv = aesEncryptionService.createIvParameterSpec();
-        SecretKey key = aesEncryptionService.getKeyFromAccessToken(accessTokenResponse.getAccessToken(), salt);
-        String encryptedRefreshToken = aesEncryptionService.encrypt(accessTokenResponse.getRefreshToken(), key, iv);
-        member.setRefreshToken(encryptedRefreshToken);
-        member.setRefreshTokenIv(iv.getIV());
+        if (accessTokenResponse.getRefreshToken() != null) {
+            IvParameterSpec iv = aesEncryptionService.createIvParameterSpec();
+            SecretKey key = aesEncryptionService.getKeyFromAccessToken(accessTokenResponse.getAccessToken(), salt);
+            String encryptedRefreshToken = aesEncryptionService.encrypt(accessTokenResponse.getRefreshToken(), key, iv);
+            member.setRefreshToken(encryptedRefreshToken);
+            member.setRefreshTokenIv(iv.getIV());
+        }
 
         member.setSessionExpire(Long.parseLong(accessTokenResponse.getExpiresIn()) + (systemService.currentTimeMillis() / 1000));
 
@@ -156,5 +158,12 @@ public class MemberService implements NamedObjectService<Member> {
         for (OwnedItemInputDto item : items) {
             ownedItemService.update(member, item);
         }
+    }
+
+    public void logout(Member member) {
+        member.setRefreshToken(null);
+        member.setRefreshTokenIv(null);
+        member.setAccessToken(null);
+        memberRepository.save(member);
     }
 }

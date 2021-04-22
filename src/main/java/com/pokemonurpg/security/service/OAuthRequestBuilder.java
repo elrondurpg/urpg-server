@@ -49,6 +49,20 @@ public class OAuthRequestBuilder {
                 .build();
     }
 
+    public Request buildClientCredentialsRequest(String id, String secret) {
+        RequestBody formBody = new FormBody.Builder()
+            .add("grant_type", "client_credentials")
+            .add("scope", "bot identify")
+            .build();
+
+        return new Request.Builder()
+            .url("https://discordapp.com/api/oauth2/token")
+            .addHeader("Content-Type", "application/x-www-form-urlencoded")
+            .header("Authorization", Credentials.basic(id, secret))
+            .post(formBody)
+            .build();
+    }
+
     public static void setClientId(String clientId) {
         CLIENT_ID = clientId;
     }

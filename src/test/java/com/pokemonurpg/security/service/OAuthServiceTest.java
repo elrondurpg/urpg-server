@@ -29,6 +29,9 @@ public class OAuthServiceTest {
     private final static DiscordUserResponse DISCORD_USER_RESPONSE = mock(DiscordUserResponse.class);
     private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
 
+    private final static String ID = "ID";
+    private final static String SECRET = "SECRET";
+
     @InjectMocks
     private OAuthService oAuthService;
 
@@ -90,6 +93,19 @@ public class OAuthServiceTest {
         assertNull(oAuthService.refreshAccessToken(REFRESH_TOKEN));
     }
 
+    @Test
+    public void getAccessTokenForClientCredentials() throws IOException {
+        when(oAuthRequestBuilder.buildClientCredentialsRequest(ID, SECRET)).thenReturn(REQUEST);
+        when(okHttpClientService.sendRequest(REQUEST)).thenReturn(RESPONSE);
+        when(objectMapper.readValue(RESPONSE, OAuthAccessTokenResponse.class)).thenReturn(O_AUTH_ACCESS_TOKEN_RESPONSE);
+        assertEquals(O_AUTH_ACCESS_TOKEN_RESPONSE, oAuthService.getAccessTokenForClientCredentials(ID, SECRET));
+    }
 
+    @Test
+    public void failGetAccessTokenForClientCredentials() throws IOException {
+        when(oAuthRequestBuilder.buildClientCredentialsRequest(ID, SECRET)).thenReturn(REQUEST);
+        when(okHttpClientService.sendRequest(REQUEST)).thenThrow(IOException.class);
+        assertNull(oAuthService.getAccessTokenForClientCredentials(ID, SECRET));
+    }
 
 }

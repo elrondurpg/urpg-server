@@ -13,7 +13,7 @@ import java.util.Base64;
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class SessionService {
     @Resource
-    private RequestHeaderService requestHeaderService;
+    private AuthorizationCredentialsService authorizationCredentialsService;
 
     @Resource
     private AuthenticationService authenticationService;
@@ -22,18 +22,12 @@ public class SessionService {
     private String accessToken = null;
 
     public void createSession() {
-        String header = requestHeaderService.findByName("authorization");
-        if (header != null && header.toLowerCase().startsWith("basic")) {
-            String base64Credentials = header.substring("basic".length()).trim();
-            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-            final String[] values = credentials.split(":", 2);
-            if (values.length == 2 && !values[0].isEmpty() && !values[1].isEmpty()) {
-                Member member = authenticationService.authenticate(values[0], values[1]);
-                if (member != null) {
-                    setAuthenticatedMember(member);
-                    setAccessToken(values[1]);
-                }
+        String[] credentials = authorizationCredentialsService.getCredentials();
+        if (credentials != null) {
+            Member member = authenticationService.authenticate(credentials[0], credentials[1]);
+            if (member != null) {
+                setAuthenticatedMember(member);
+                setAccessToken(credentials[1]);
             }
         }
     }

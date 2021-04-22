@@ -53,6 +53,16 @@ public class OAuthService {
         }
     }
 
+    public OAuthAccessTokenResponse getAccessTokenForClientCredentials(String id, String secret) {
+        Request request = oAuthRequestBuilder.buildClientCredentialsRequest(id, secret);
+        try {
+            String response = okHttpClientService.sendRequest(request);
+            return mapper.readValue(response, OAuthAccessTokenResponse.class);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     public void setMapper(ObjectMapper mapper) {
         this.mapper = mapper;
     }

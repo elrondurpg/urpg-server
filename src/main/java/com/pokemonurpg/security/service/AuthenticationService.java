@@ -13,19 +13,20 @@ public class AuthenticationService {
     private MemberService memberService;
 
     @Resource
-    private BotAuthenticationService botAuthenticationService;
+    private AccessTokenVerificationService accessTokenVerificationService;
 
     @Resource
-    private HumanAuthenticationService humanAuthenticationService;
+    private SessionExpirationService sessionExpirationService;
 
     public Member authenticate(String discordId, String accessToken) {
-        Member matchedMember = memberService.findByDiscordId(discordId);
-        if (matchedMember != null) {
-            if (matchedMember.isBot()) {
-                return botAuthenticationService.authenticate(matchedMember, accessToken);
+        Member member = memberService.findByDiscordId(discordId);
+        if (member != null) {
+            if (accessTokenVerificationService.verify(member, accessToken)) {
+                if (!sessionExpirationService.isExpired(member.getSessionExpire())) {
+                    return member;
+                }
             }
-            else return humanAuthenticationService.authenticate(matchedMember, accessToken);
         }
-        else return null;
+        return null;
     }
 }

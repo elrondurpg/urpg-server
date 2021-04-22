@@ -78,7 +78,8 @@ public class OAuthAccessTokenResponse {
 
     public boolean isValid() {
         if (accessToken == null || accessToken.isEmpty()) return false;
-        if (refreshToken == null || refreshToken.isEmpty()) return false;
+        if (scope == null || scope.isEmpty()) return false;
+        if (!scope.contains("bot") && (refreshToken == null || refreshToken.isEmpty())) return false;
         if (expiresIn == null || expiresIn.isEmpty()) return false;
         if (error != null) return false;
         if (errorDescription != null) return false;

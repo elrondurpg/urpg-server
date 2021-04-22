@@ -3,7 +3,9 @@ package com.pokemonurpg.member.controller;
 import com.pokemonurpg.security.controller.SessionController;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.dto.LoginInputDto;
+import com.pokemonurpg.security.service.BotLoginService;
 import com.pokemonurpg.security.service.LoginService;
+import com.pokemonurpg.security.service.LogoutService;
 import com.pokemonurpg.security.service.RefreshService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SessionControllerTest {
@@ -26,7 +27,13 @@ public class SessionControllerTest {
     private LoginService loginService;
 
     @Mock
+    private BotLoginService botLoginService;
+
+    @Mock
     private RefreshService refreshService;
+
+    @Mock
+    private LogoutService logoutService;
 
     @Test
     public void login() {
@@ -36,10 +43,22 @@ public class SessionControllerTest {
     }
 
     @Test
+    public void botLogin() {
+        when(botLoginService.login()).thenReturn(SESSION);
+        assertEquals(SESSION, sessionController.botLogin());
+    }
+
+    @Test
     public void refresh() {
         SessionDto input = new SessionDto();
         when(refreshService.refresh()).thenReturn(SESSION);
         assertEquals(SESSION, sessionController.refresh());
+    }
+
+    @Test
+    public void logout() {
+        sessionController.logout();
+        verify(logoutService, times(1)).logout();
     }
 
 }

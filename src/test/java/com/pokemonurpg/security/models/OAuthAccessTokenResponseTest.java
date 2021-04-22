@@ -47,9 +47,25 @@ public class OAuthAccessTokenResponseTest {
     }
 
     @Test
+    public void invalidIfScopeIsNull() {
+        OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
+        accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        assertFalse(accessTokenResponse.isValid());
+    }
+
+    @Test
+    public void invalidIfScopeIsEmpty() {
+        OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
+        accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope("");
+        assertFalse(accessTokenResponse.isValid());
+    }
+
+    @Test
     public void invalidIfRefreshTokenIsNull() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         assertFalse(accessTokenResponse.isValid());
     }
 
@@ -57,6 +73,7 @@ public class OAuthAccessTokenResponseTest {
     public void invalidIfRefreshTokenIsEmpty() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken("");
         assertFalse(accessTokenResponse.isValid());
     }
@@ -65,6 +82,7 @@ public class OAuthAccessTokenResponseTest {
     public void invalidIfExpiresInIsNull() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken(REFRESH_TOKEN);
         assertFalse(accessTokenResponse.isValid());
     }
@@ -73,6 +91,7 @@ public class OAuthAccessTokenResponseTest {
     public void invalidIfExpiresInIsEmpty() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken(REFRESH_TOKEN);
         accessTokenResponse.setExpiresIn("");
         assertFalse(accessTokenResponse.isValid());
@@ -82,6 +101,7 @@ public class OAuthAccessTokenResponseTest {
     public void invalidIfErrorIsNotNull() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken(REFRESH_TOKEN);
         accessTokenResponse.setExpiresIn(EXPIRES_IN);
         accessTokenResponse.setError(ERROR);
@@ -92,6 +112,7 @@ public class OAuthAccessTokenResponseTest {
     public void invalidIfErrorDescriptionIsNotNull() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken(REFRESH_TOKEN);
         accessTokenResponse.setExpiresIn(EXPIRES_IN);
         accessTokenResponse.setErrorDescription(ERROR_DESCRIPTION);
@@ -102,6 +123,7 @@ public class OAuthAccessTokenResponseTest {
     public void validIfRequiredFieldsAreNotNullAndErrorsAre() {
         OAuthAccessTokenResponse accessTokenResponse = new OAuthAccessTokenResponse();
         accessTokenResponse.setAccessToken(ACCESS_TOKEN);
+        accessTokenResponse.setScope(SCOPE);
         accessTokenResponse.setRefreshToken(REFRESH_TOKEN);
         accessTokenResponse.setExpiresIn(EXPIRES_IN);
         assertTrue(accessTokenResponse.isValid());

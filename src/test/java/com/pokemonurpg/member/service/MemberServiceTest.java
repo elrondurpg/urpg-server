@@ -238,4 +238,18 @@ public class MemberServiceTest {
         assertEquals((Long) expires, member.getSessionExpire());
         verify(memberRepository, times(1)).save(member);
     }
+
+    @Test
+    public void logout() {
+        Member member = new Member();
+        member.setRefreshTokenIv(IV);
+        member.setRefreshToken(REFRESH_TOKEN);
+        member.setAccessToken(ACCESS_TOKEN);
+
+        memberService.logout(member);
+        assertNull(member.getRefreshToken());
+        assertNull(member.getRefreshTokenIv());
+        assertNull(member.getAccessToken());
+        verify(memberRepository, times(1)).save(member);
+    }
 }
