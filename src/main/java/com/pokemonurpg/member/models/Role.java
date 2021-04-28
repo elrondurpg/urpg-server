@@ -35,8 +35,9 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnoreProperties({ "roles", "salt", "accessToken", "refreshToken", "sessionExpire",
-                            "money", "wins", "losses", "draws", "joinDate", "species",
-                            "items", "badges", "championRecords", "legendaryProgress", "earnedLegendaries" })
+                            "money", "wins", "losses", "draws", "joinDate", "pokemon",
+                            "items", "badges", "championRecords", "legendaryProgress",
+                            "earnedLegendaries", "gyms", "banned", "banExpiration" })
     private Set<Member> members;
 
     public Role() {
