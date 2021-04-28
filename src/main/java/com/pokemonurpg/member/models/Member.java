@@ -119,7 +119,6 @@ public class Member {
         setLosses(input.getLosses());
         setDraws(input.getDraws());
         setJoinDate(input.getJoinDate());
-        setBot(input.getBot());
     }
 
     public Integer getDbid() {
@@ -302,15 +301,5 @@ public class Member {
 
     public void setGyms(Set<Gym> gyms) {
         this.gyms = gyms;
-    }
-
-    public Boolean isBot() {
-        return bot;
-    }
-
-    public void setBot(Boolean bot) {
-        if (bot != null) {
-            this.bot = bot;
-        }
     }
 }

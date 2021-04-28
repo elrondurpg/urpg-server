@@ -77,10 +77,6 @@ public class MemberService implements NamedObjectService<Member> {
 
     public Member create(MemberInputDto input) {
         Member member = new Member(input);
-        if (input.getBot()) {
-            String accessToken = hashService.hash(input.getBotAccessToken() + member.getSalt());
-            member.setAccessToken(accessToken);
-        }
         updateEmbeddedValues(input, member);
         memberRepository.save(member);
         updateAssociatedValues(input, member);

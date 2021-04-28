@@ -55,8 +55,6 @@ public class MemberServiceTest {
     private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
     private final static SecretKey SECRET_KEY = mock(SecretKey.class);
     private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
-    private final static String BOT_ACCESS_TOKEN = "BOT_ACCESS_TOKEN";
-    private final static String HASHED_BOT_ACCESS_TOKEN = "HASHED_BOT_ACCESS_TOKEN";
 
     @InjectMocks
     private MemberService memberService;
@@ -142,10 +140,6 @@ public class MemberServiceTest {
         input.setBadges(Collections.singletonList(EARNED_BADGE));
         input.setItems(Collections.singletonList(OWNED_ITEM));
         input.setLegendaryProgress(Collections.singletonList(LEGENDARY_PROGRESS));
-        input.setBot(true);
-        input.setBotAccessToken(BOT_ACCESS_TOKEN);
-
-        when(hashService.hash(any())).thenReturn(HASHED_BOT_ACCESS_TOKEN);
 
         // When I call memberService.create(input)
         Member member = memberService.create(input);
@@ -154,7 +148,6 @@ public class MemberServiceTest {
         verify(earnedBadgeService, times(1)).update(member, EARNED_BADGE);
         verify(ownedItemService, times(1)).update(member, OWNED_ITEM);
         verify(legendaryProgressService, times(1)).update(LEGENDARY_PROGRESS, member);
-        assertEquals(HASHED_BOT_ACCESS_TOKEN, member.getAccessToken());
 
         // Then that member's roles will contain NEW_ROLE
         assertTrue(member.getRoles().contains(NEW_ROLE));
