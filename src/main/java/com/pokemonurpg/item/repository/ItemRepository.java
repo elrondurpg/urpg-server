@@ -11,5 +11,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     List<String> findAllNames();
     Item findByDbid(int dbid);
     Item findByName(String name);
+    List<Item> findByTypeIn(List<String> types);
     Item findFirstByNameStartingWith(String name);
 }

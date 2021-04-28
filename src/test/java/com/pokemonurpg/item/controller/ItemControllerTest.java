@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -19,6 +20,8 @@ import static org.mockito.Mockito.when;
 public class ItemControllerTest {
     private final static String NAME = "TEST";
     private final static Integer DBID = 2342;
+    private final static List<String> TYPES = Arrays.asList("TM", "HM");
+    private final static List<Item> ITEMS = Arrays.asList(new Item(), new Item());
 
     @InjectMocks
     private ItemController itemController;
@@ -39,6 +42,12 @@ public class ItemControllerTest {
     public void findByName() {
         when(itemService.findByName(NAME)).thenReturn(item);
         assertEquals(item, itemController.findByName(NAME));
+    }
+
+    @Test
+    public void findByTypeIn() {
+        when(itemService.findByTypeIn(TYPES)).thenReturn(ITEMS);
+        assertEquals(ITEMS, itemController.findByTypeIn(TYPES));
     }
 
     @Test

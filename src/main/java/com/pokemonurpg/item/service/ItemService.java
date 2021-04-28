@@ -31,6 +31,13 @@ public class ItemService implements NamedObjectService<Item> {
         else return item;
     }
 
+    public List<Item> findByTypeIn(List<String> types) {
+        List<Item> items = itemRepository.findByTypeIn(types);
+        if (items != null && items.isEmpty())
+            return null;
+        else return items;
+    }
+
     public Item create(ItemInputDto input) {
         Item item = new Item(input);
         itemRepository.save(item);

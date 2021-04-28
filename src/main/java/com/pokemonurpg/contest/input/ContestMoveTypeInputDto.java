@@ -16,12 +16,12 @@ public class ContestMoveTypeInputDto {
     private String description;
 
     @NotNull(groups = { ObjectCreation.class })
-    @Min(0)
+    @Min(-1)
     @Max(8)
     private Integer score;
 
     @NotNull(groups = { ObjectCreation.class })
-    @Min(0)
+    @Min(-1)
     @Max(8)
     private Integer jam;
 

@@ -27,6 +27,12 @@ public class ItemController {
         return itemService.findAllNames();
     }
 
+    @GetMapping(path="/type/{types}")
+    public @ResponseBody
+    List<Item> findByTypeIn(@PathVariable("types") List<String> types) {
+        return itemService.findByTypeIn(types);
+    }
+
     @GetMapping(path="/{name}")
     public @ResponseBody
     Item findByName(@PathVariable("name") String name) {

@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -20,6 +21,8 @@ import static org.mockito.Mockito.*;
 public class ItemServiceTest {
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
+    private final static List<String> TYPES = Arrays.asList("TM", "HM");
+    private final static List<Item> ITEMS = Arrays.asList(new Item(), new Item());
 
     @InjectMocks
     private ItemService itemService;
@@ -54,6 +57,18 @@ public class ItemServiceTest {
         when(itemRepository.findByName(NAME)).thenReturn(null);
         when(itemRepository.findFirstByNameStartingWith(NAME)).thenReturn(item);
         assertEquals(item, itemService.findByName(NAME));
+    }
+
+    @Test
+    public void findByTypeIn() {
+        when(itemRepository.findByTypeIn(TYPES)).thenReturn(ITEMS);
+        assertEquals(ITEMS, itemService.findByTypeIn(TYPES));
+    }
+
+    @Test
+    public void findByTypeInReturnsNull() {
+        when(itemRepository.findByTypeIn(TYPES)).thenReturn(new ArrayList<Item> ());
+        assertNull(itemService.findByTypeIn(TYPES));
     }
 
     @Test
