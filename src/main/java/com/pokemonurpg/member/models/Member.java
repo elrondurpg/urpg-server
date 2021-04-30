@@ -64,7 +64,7 @@ public class Member {
     private Date joinDate;
 
     @Column(name = "banned")
-    private Boolean banned = false;
+    private Boolean banned;
 
     @Column(name = "ban_expiration")
     private Date banExpiration;
@@ -102,7 +102,7 @@ public class Member {
     private Set<Gym> gyms;
 
     @Column
-    private Boolean bot = false;
+    private Boolean bot;
 
     public Member() {
     }
