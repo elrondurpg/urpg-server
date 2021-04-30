@@ -30,6 +30,7 @@ public class MemberTest {
     private final static Boolean BANNED = true;
     private final static Date BAN_EXPIRATION = new Date();
     private final static Set<Gym> GYMS = new HashSet<>();
+    private final static Boolean BOT = true;
 
     @Test
     public void testPojo() {
@@ -54,6 +55,7 @@ public class MemberTest {
         member.setBanned(BANNED);
         member.setBanExpiration(BAN_EXPIRATION);
         member.setGyms(GYMS);
+        member.setBot(BOT);
 
         assertEquals(DBID,member.getDbid());
         assertEquals(DISCORD_ID,member.getDiscordId());
@@ -75,6 +77,7 @@ public class MemberTest {
         assertEquals(BANNED, member.getBanned());
         assertEquals(BAN_EXPIRATION, member.getBanExpiration());
         assertEquals(GYMS, member.getGyms());
+        assertEquals(BOT, member.getBot());
     }
 
     @Test
@@ -87,6 +90,7 @@ public class MemberTest {
         input.setLosses(LOSSES);
         input.setDraws(DRAWS);
         input.setJoinDate(JOIN_DATE);
+        input.setBot(BOT);
 
         Member member = new Member(input);
 
@@ -97,6 +101,7 @@ public class MemberTest {
         assertEquals(LOSSES,member.getLosses());
         assertEquals(DRAWS,member.getDraws());
         assertEquals(JOIN_DATE,member.getJoinDate());
+        assertEquals(BOT, member.getBot());
     }
 
 }

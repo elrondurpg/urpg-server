@@ -21,6 +21,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
@@ -55,6 +57,7 @@ public class MemberServiceTest {
     private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
     private final static SecretKey SECRET_KEY = mock(SecretKey.class);
     private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
+    private final static Boolean BOT = true;
 
     @InjectMocks
     private MemberService memberService;
@@ -86,11 +89,17 @@ public class MemberServiceTest {
     private RoleService roleService;
 
     @Test
-    public void findAllNamesReturnsValueFromRepository() {
-        List<String> types = new ArrayList<>();
-        when(memberRepository.findAllNames()).thenReturn(types);
+    public void findNamesByReturnsValueFromRepository() {
+        Member m = new Member();
+        m.setUsername(NAME);
 
-        assertEquals(types, memberService.findAllNames());
+        when(memberRepository.findAll(any(Example.class))).thenReturn(Arrays.asList(m));
+
+        List<String> names = memberService.findNamesBy(NAME, BOT);
+
+        assertNotNull(names);
+        assertEquals(1, names.size());
+        assertEquals(NAME, names.get(0));
     }
 
     @Test

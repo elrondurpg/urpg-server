@@ -7,6 +7,7 @@ import com.pokemonurpg.View;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.*;
@@ -48,16 +49,16 @@ public class Member {
     private Long sessionExpire;
 
     @Column
-    private Integer money = 0;
+    private Integer money;
 
     @Column
-    private Integer wins = 0;
+    private Integer wins;
 
     @Column
-    private Integer losses = 0;
+    private Integer losses;
 
     @Column
-    private Integer draws = 0;
+    private Integer draws;
 
     @Column(name = "join_date")
     private Date joinDate;
@@ -119,6 +120,7 @@ public class Member {
         setLosses(input.getLosses());
         setDraws(input.getDraws());
         setJoinDate(input.getJoinDate());
+        setBot(input.getBot());
     }
 
     public Integer getDbid() {
@@ -301,5 +303,15 @@ public class Member {
 
     public void setGyms(Set<Gym> gyms) {
         this.gyms = gyms;
+    }
+
+    public Boolean getBot() {
+        return bot;
+    }
+
+    public void setBot(Boolean bot) {
+        if (bot != null) {
+            this.bot = bot;
+        }
     }
 }

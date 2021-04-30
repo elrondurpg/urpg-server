@@ -19,6 +19,7 @@ import static org.mockito.Mockito.when;
 public class MemberControllerTest {
     private final static String NAME = "TEST";
     private final static Integer DBID = 2342;
+    private final static Boolean BOT = true;
 
     @InjectMocks
     private MemberController memberController;
@@ -31,8 +32,8 @@ public class MemberControllerTest {
     @Test
     public void findAllNames() {
         List<String> names = new ArrayList<>();
-        when(memberService.findAllNames()).thenReturn(names);
-        assertEquals(names, memberController.findAllNames());
+        when(memberService.findNamesBy(NAME, BOT)).thenReturn(names);
+        assertEquals(names, memberController.findNamesBy(NAME, BOT));
     }
 
     @Test

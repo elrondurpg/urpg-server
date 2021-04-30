@@ -48,6 +48,8 @@ public class MemberInputDto {
 
     private List<@Valid OwnedItemInputDto> items = new ArrayList<>();
 
+    private Boolean bot;
+
     public String getDiscordId() {
         return discordId;
     }
@@ -134,5 +136,13 @@ public class MemberInputDto {
 
     public void setItems(List<OwnedItemInputDto> items) {
         this.items = items;
+    }
+
+    public Boolean getBot() {
+        return bot;
+    }
+
+    public void setBot(Boolean bot) {
+        this.bot = bot;
     }
 }

@@ -16,6 +16,8 @@ import com.pokemonurpg.stats.input.OwnedItemInputDto;
 import com.pokemonurpg.stats.service.EarnedBadgeService;
 import com.pokemonurpg.stats.service.LegendaryProgressService;
 import com.pokemonurpg.stats.service.OwnedItemService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,6 +25,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 
 @Service
 public class MemberService implements NamedObjectService<Member> {
@@ -51,12 +56,20 @@ public class MemberService implements NamedObjectService<Member> {
     @Resource
     private AesEncryptionService aesEncryptionService;
 
-    public List<String> findAllNames() {
-        return memberRepository.findAllNames();
-    }
-
     public Member findByDbid(int dbid) {
         return memberRepository.findByDbid(dbid);
+    }
+
+    public List<String> findNamesBy(String username, Boolean bot) {
+        Member example = new Member();
+        example.setUsername(username);
+        example.setBot(bot);
+
+        ExampleMatcher matcher = ExampleMatcher.matchingAll()
+            .withMatcher("username", startsWith());
+
+        List<Member> members = memberRepository.findAll(Example.of(example, matcher));
+        return members.stream().map(Member::getUsername).collect(Collectors.toList());
     }
 
     public Member findByName(String name) {
