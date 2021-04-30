@@ -23,12 +23,6 @@ public class MemberController {
     @Resource
     private MemberService memberService;
 
-    /*@GetMapping
-    public @ResponseBody
-    List<String> findAllNames() {
-        return memberService.findAllNames();
-    }*/
-
     @GetMapping
     public @ResponseBody
     List<String> findNamesBy(@RequestParam(required = false) String username, @RequestParam(required = false) Boolean bot) {
