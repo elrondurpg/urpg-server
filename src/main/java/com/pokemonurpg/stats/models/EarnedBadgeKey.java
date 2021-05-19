@@ -10,22 +10,37 @@ public class EarnedBadgeKey implements Serializable {
     @Column(name = "trainer_dbid")
     private Integer trainerDbid;
 
-    @Column(name = "gym_dbid")
-    private Integer gymDbid;
+    @Column(name = "type_dbid")
+    private Integer typeDbid;
+
+    @Column(name = "league_dbid")
+    private Integer leagueDbid;
+
+    @Column(name = "trainer_name")
+    private String trainerName;
 
     public EarnedBadgeKey() {
     }
 
-    public EarnedBadgeKey(Integer trainerDbid, Integer gymDbid) {
+    public EarnedBadgeKey(Integer trainerDbid, Integer typeDbid, Integer leagueDbid, String trainerName) {
         this.trainerDbid = trainerDbid;
-        this.gymDbid = gymDbid;
+        //this.gymDbid = gymDbid;
     }
+
     public Integer getTrainerDbid() {
         return trainerDbid;
     }
 
-    public Integer getGymDbid() {
-        return gymDbid;
+    public Integer getTypeDbid() {
+        return typeDbid;
+    }
+
+    public Integer getLeagueDbid() {
+        return leagueDbid;
+    }
+
+    public String getTrainerName() {
+        return trainerName;
     }
 
     @Override
@@ -34,11 +49,13 @@ public class EarnedBadgeKey implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         EarnedBadgeKey that = (EarnedBadgeKey) o;
         return Objects.equals(trainerDbid, that.trainerDbid) &&
-                Objects.equals(gymDbid, that.gymDbid);
+                Objects.equals(typeDbid, that.typeDbid) &&
+                Objects.equals(leagueDbid, that.leagueDbid) &&
+                Objects.equals(trainerName, that.trainerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trainerDbid, gymDbid);
+        return Objects.hash(trainerDbid, typeDbid, leagueDbid, trainerName);
     }
 }

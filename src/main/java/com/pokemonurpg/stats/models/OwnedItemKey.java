@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Embeddable
 public class OwnedItemKey implements Serializable {
+
     @Column(name = "trainer_dbid")
     private Integer trainerDbid;
 

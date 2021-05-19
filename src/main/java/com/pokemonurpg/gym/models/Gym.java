@@ -62,9 +62,9 @@ public class Gym {
     @JoinColumn(name = "tm_dbid")
     private Item tm;
 
-    @OneToMany(mappedBy="gym")
-    @JsonIgnoreProperties("gym")
-    private List<EarnedBadge> winners;
+//    @OneToMany(mappedBy="gym")
+//    @JsonIgnoreProperties("gym")
+//    private List<EarnedBadge> winners;
 
     @ManyToMany(
             targetEntity= OwnedPokemon.class,
@@ -201,13 +201,13 @@ public class Gym {
         }
     }
 
-    public List<EarnedBadge> getWinners() {
-        return winners;
-    }
-
-    public void setWinners(List<EarnedBadge> winners) {
-        this.winners = winners;
-    }
+//    public List<EarnedBadge> getWinners() {
+//        return winners;
+//    }
+//
+//    public void setWinners(List<EarnedBadge> winners) {
+//        this.winners = winners;
+//    }
 
     public Set<OwnedPokemon> getPokemon() {
         return pokemon;

@@ -2,9 +2,7 @@ package com.pokemonurpg.member.input;
 
 
 import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.stats.input.EarnedBadgeInputDto;
-import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
+import com.pokemonurpg.stats.input.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -49,6 +47,10 @@ public class MemberInputDto {
     private List<@Valid OwnedItemInputDto> items = new ArrayList<>();
 
     private Boolean bot;
+
+    private List<@Valid EliteFourVictoryInputDto> eliteFourVictories = new ArrayList<>();
+
+    private List<@Valid ChampionVictoryInputDto> championVictories = new ArrayList<>();
 
     public String getDiscordId() {
         return discordId;
@@ -144,5 +146,21 @@ public class MemberInputDto {
 
     public void setBot(Boolean bot) {
         this.bot = bot;
+    }
+
+    public List<EliteFourVictoryInputDto> getEliteFourVictories() {
+        return eliteFourVictories;
+    }
+
+    public void setEliteFourVictories(List<EliteFourVictoryInputDto> eliteFourVictories) {
+        this.eliteFourVictories = eliteFourVictories;
+    }
+
+    public List<ChampionVictoryInputDto> getChampionVictories() {
+        return championVictories;
+    }
+
+    public void setChampionVictories(List<ChampionVictoryInputDto> championVictories) {
+        this.championVictories = championVictories;
     }
 }

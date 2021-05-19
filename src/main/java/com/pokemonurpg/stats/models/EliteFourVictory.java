@@ -3,46 +3,31 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.stats.input.EarnedBadgeInputDto;
+import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "earned_badge")
+@Table(name = "elite_four_victory")
 @JsonView(value = { View.MemberView.Summary.class })
-public class EarnedBadge {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer dbid;
+public class EliteFourVictory {
+
+    @EmbeddedId
+    EliteFourVictoryKey id;
 
     @ManyToOne
-    @JoinColumn(name="trainer_dbid")
+    @MapsId("challenger_dbid")
+    @JoinColumn(name="challenger_dbid", nullable=false)
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
             "banned", "banExpiration", "gyms", "bot", "eliteFourVictories" })
-    private Member member;
+    private Member challenger;
 
-    @Column(name = "trainer_name")
-    private String trainerName;
-
-    @OneToOne
-    @JoinColumn(name = "type_dbid")
-    private Type type;
-
-    @Column(name = "league_dbid")
-    private Integer leagueDbid;
-
-    @ManyToOne
-    @MapsId("gym_dbid")
-    @JoinColumn(name="gym_dbid")
-    @JsonIgnoreProperties("winners")
-    private Gym gym;
+    @Column(insertable = false, updatable = false)
+    private String defender;
 
     @Column
     private Date date;
@@ -50,35 +35,34 @@ public class EarnedBadge {
     @Column(name = "log_url")
     private String logUrl;
 
-    public EarnedBadge() {
-    }
+    public EliteFourVictory() {}
 
-    public EarnedBadge(EarnedBadgeInputDto input, Member member, Gym gym) {
+    public EliteFourVictory(EliteFourVictoryInputDto input, Member challenger) {
         this.update(input);
-        //this.id = new EarnedBadgeKey(member.getDbid(), gym.getDbid());
-        setMember(member);
-        setGym(gym);
+        this.id = new EliteFourVictoryKey(challenger.getDbid(), input.getDefender());
+        setChallenger(challenger);
+        setDefender(input.getDefender());
     }
 
-    public void update(EarnedBadgeInputDto input) {
+    public void update(EliteFourVictoryInputDto input) {
         setDate(input.getDate());
         setLogUrl(input.getLogUrl());
     }
 
-    public Member getMember() {
-        return member;
+    public Member getChallenger() {
+        return challenger;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setChallenger(Member challenger) {
+        this.challenger = challenger;
     }
 
-    public Gym getGym() {
-        return gym;
+    public String getDefender() {
+        return defender;
     }
 
-    public void setGym(Gym gym) {
-        this.gym = gym;
+    public void setDefender(String defender) {
+        this.defender = defender;
     }
 
     public Date getDate() {

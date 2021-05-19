@@ -9,12 +9,8 @@ import com.pokemonurpg.member.input.MemberRoleInputDto;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.repository.MemberRepository;
-import com.pokemonurpg.stats.input.EarnedBadgeInputDto;
-import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
-import com.pokemonurpg.stats.service.EarnedBadgeService;
-import com.pokemonurpg.stats.service.LegendaryProgressService;
-import com.pokemonurpg.stats.service.OwnedItemService;
+import com.pokemonurpg.stats.input.*;
+import com.pokemonurpg.stats.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -58,6 +54,8 @@ public class MemberServiceTest {
     private final static SecretKey SECRET_KEY = mock(SecretKey.class);
     private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
     private final static Boolean BOT = true;
+    private final static EliteFourVictoryInputDto ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
+    private final static ChampionVictoryInputDto CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
 
     @InjectMocks
     private MemberService memberService;
@@ -87,6 +85,12 @@ public class MemberServiceTest {
 
     @Mock
     private RoleService roleService;
+
+    @Mock
+    private EliteFourVictoryService eliteFourVictoryService;
+
+    @Mock
+    private ChampionVictoryService championVictoryService;
 
     @Test
     public void findNamesByReturnsValueFromRepository() {
@@ -149,6 +153,8 @@ public class MemberServiceTest {
         input.setBadges(Collections.singletonList(EARNED_BADGE));
         input.setItems(Collections.singletonList(OWNED_ITEM));
         input.setLegendaryProgress(Collections.singletonList(LEGENDARY_PROGRESS));
+        input.setEliteFourVictories(Collections.singletonList(ELITE_FOUR_VICTORY));
+        input.setChampionVictories(Collections.singletonList(CHAMPION_VICTORY));
 
         // When I call memberService.create(input)
         Member member = memberService.create(input);
@@ -157,6 +163,8 @@ public class MemberServiceTest {
         verify(earnedBadgeService, times(1)).update(member, EARNED_BADGE);
         verify(ownedItemService, times(1)).update(member, OWNED_ITEM);
         verify(legendaryProgressService, times(1)).update(LEGENDARY_PROGRESS, member);
+        verify(eliteFourVictoryService, times(1)).update(ELITE_FOUR_VICTORY, member);
+        verify(championVictoryService, times(1)).update(CHAMPION_VICTORY, member);
 
         // Then that member's roles will contain NEW_ROLE
         assertTrue(member.getRoles().contains(NEW_ROLE));

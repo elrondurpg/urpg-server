@@ -7,7 +7,6 @@ import com.pokemonurpg.View;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.*;
@@ -77,10 +76,6 @@ public class Member {
     @JsonIgnoreProperties("trainer")
     private List<OwnedItem> items;
 
-    @OneToMany(mappedBy="member")
-    @JsonIgnoreProperties("member")
-    private List<EarnedBadge> badges;
-
     @OneToMany(mappedBy="trainer")
     @JsonIgnoreProperties("trainer")
     private List<LegendaryProgress> legendaryProgress;
@@ -103,6 +98,14 @@ public class Member {
 
     @Column
     private Boolean bot;
+
+    @OneToMany(mappedBy="challenger")
+    @JsonIgnoreProperties("challenger")
+    private List<EliteFourVictory> eliteFourVictories;
+
+    @OneToMany(mappedBy="challenger")
+    @JsonIgnoreProperties("challenger")
+    private List<ChampionVictory> championVictories;
 
     public Member() {
     }
@@ -257,14 +260,6 @@ public class Member {
         }
     }
 
-    public List<EarnedBadge> getBadges() {
-        return badges;
-    }
-
-    public void setBadges(List<EarnedBadge> badges) {
-        this.badges = badges;
-    }
-
     public List<LegendaryProgress> getLegendaryProgress() {
         return legendaryProgress;
     }
@@ -313,5 +308,21 @@ public class Member {
         if (bot != null) {
             this.bot = bot;
         }
+    }
+
+    public List<EliteFourVictory> getEliteFourVictories() {
+        return eliteFourVictories;
+    }
+
+    public void setEliteFourVictories(List<EliteFourVictory> eliteFourVictories) {
+        this.eliteFourVictories = eliteFourVictories;
+    }
+
+    public List<ChampionVictory> getChampionVictories() {
+        return championVictories;
+    }
+
+    public void setChampionVictories(List<ChampionVictory> championVictories) {
+        this.championVictories = championVictories;
     }
 }

@@ -3,6 +3,7 @@ package com.pokemonurpg.member.models;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -31,6 +32,20 @@ public class MemberTest {
     private final static Date BAN_EXPIRATION = new Date();
     private final static Set<Gym> GYMS = new HashSet<>();
     private final static Boolean BOT = true;
+    private final static List<EliteFourVictory> ELITE_FOUR_VICTORIES = new ArrayList<>();
+    private final static List<ChampionVictory> CHAMPION_VICTORIES = new ArrayList<>();
+
+    private final static Integer OTHER_DBID = 432432;
+    private final static Member MEMBER_WITH_DBID = new Member();
+    private final static EliteFourVictory VICTORY_WITH_DBID = new EliteFourVictory();
+    private final static String DEFENDER_NAME = "DEFENDER_NAME";
+    private final static EliteFourVictory VICTORY_WITH_NAME = new EliteFourVictory();
+    private final static Boolean IS_CHAMPION = true;
+
+    @Before
+    public void init() {
+        MEMBER_WITH_DBID.setDbid(OTHER_DBID);
+    }
 
     @Test
     public void testPojo() {
@@ -49,13 +64,14 @@ public class MemberTest {
         member.setJoinDate(JOIN_DATE);
         member.setPokemon(POKEMON);
         member.setItems(ITEMS);
-        member.setBadges(BADGES);
         member.setLegendaryProgress(LEGENDARY_PROGRESS);
         member.setRoles(ROLES);
         member.setBanned(BANNED);
         member.setBanExpiration(BAN_EXPIRATION);
         member.setGyms(GYMS);
         member.setBot(BOT);
+        member.setEliteFourVictories(ELITE_FOUR_VICTORIES);
+        member.setChampionVictories(CHAMPION_VICTORIES);
 
         assertEquals(DBID,member.getDbid());
         assertEquals(DISCORD_ID,member.getDiscordId());
@@ -71,13 +87,14 @@ public class MemberTest {
         assertEquals(JOIN_DATE,member.getJoinDate());
         assertEquals(POKEMON,member.getPokemon());
         assertEquals(ITEMS,member.getItems());
-        assertEquals(BADGES,member.getBadges());
         assertEquals(LEGENDARY_PROGRESS,member.getLegendaryProgress());
         assertEquals(ROLES,member.getRoles());
         assertEquals(BANNED, member.getBanned());
         assertEquals(BAN_EXPIRATION, member.getBanExpiration());
         assertEquals(GYMS, member.getGyms());
         assertEquals(BOT, member.getBot());
+        assertEquals(ELITE_FOUR_VICTORIES, member.getEliteFourVictories());
+        assertEquals(CHAMPION_VICTORIES, member.getChampionVictories());
     }
 
     @Test

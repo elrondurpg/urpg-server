@@ -13,7 +13,6 @@ import java.util.Date;
 @Table(name = "legendary_progress")
 @JsonView(value = { View.MemberView.Summary.class })
 public class LegendaryProgress {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

@@ -10,12 +10,8 @@ import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.repository.MemberRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.stats.input.EarnedBadgeInputDto;
-import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
-import com.pokemonurpg.stats.service.EarnedBadgeService;
-import com.pokemonurpg.stats.service.LegendaryProgressService;
-import com.pokemonurpg.stats.service.OwnedItemService;
+import com.pokemonurpg.stats.input.*;
+import com.pokemonurpg.stats.service.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -55,6 +51,12 @@ public class MemberService implements NamedObjectService<Member> {
 
     @Resource
     private AesEncryptionService aesEncryptionService;
+
+    @Resource
+    private EliteFourVictoryService eliteFourVictoryService;
+
+    @Resource
+    private ChampionVictoryService championVictoryService;
 
     public Member findByDbid(int dbid) {
         return memberRepository.findByDbid(dbid);
@@ -146,6 +148,8 @@ public class MemberService implements NamedObjectService<Member> {
         updateEarnedBadges(input, member);
         updateLegendaryProgress(input, member);
         updateOwnedItems(input, member);
+        updateEliteFourVictories(input, member);
+        updateChampionVictories(input, member);
     }
 
     private void updateEarnedBadges(MemberInputDto input, Member member) {
@@ -166,6 +170,20 @@ public class MemberService implements NamedObjectService<Member> {
         List<OwnedItemInputDto> items = input.getItems();
         for (OwnedItemInputDto item : items) {
             ownedItemService.update(member, item);
+        }
+    }
+
+    private void updateEliteFourVictories(MemberInputDto input, Member member) {
+        List<EliteFourVictoryInputDto> victories = input.getEliteFourVictories();
+        for(EliteFourVictoryInputDto victory : victories) {
+            eliteFourVictoryService.update(victory, member);
+        }
+    }
+
+    private void updateChampionVictories(MemberInputDto input, Member member) {
+        List<ChampionVictoryInputDto> victories = input.getChampionVictories();
+        for(ChampionVictoryInputDto victory : victories) {
+            championVictoryService.update(victory, member);
         }
     }
 

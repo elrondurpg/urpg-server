@@ -41,7 +41,6 @@ public class GymTest {
         gym.setLosses(LOSSES);
         gym.setDraws(DRAWS);
         gym.setTm(TM);
-        gym.setWinners(WINNERS);
         gym.setPokemon(POKEMON);
 
         assertEquals(DBID, gym.getDbid());
@@ -55,7 +54,6 @@ public class GymTest {
         assertEquals(LOSSES, gym.getLosses());
         assertEquals(DRAWS, gym.getDraws());
         assertEquals(TM, gym.getTm());
-        assertEquals(WINNERS, gym.getWinners());
         assertEquals(POKEMON, gym.getPokemon());
     }
 
