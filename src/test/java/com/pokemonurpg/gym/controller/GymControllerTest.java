@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class GymControllerTest {
     private final static String NAME = "TEST";
     private final static Integer DBID = 2342;
-    private final static List<Gym> GYMS = new ArrayList<>();
+    private final static List<String> GYMS = new ArrayList<>();
 
     @InjectMocks
     private GymController gymController;
@@ -31,13 +31,13 @@ public class GymControllerTest {
 
     @Test
     public void findAllNames() {
-        when(gymService.findAll()).thenReturn(GYMS);
+        when(gymService.findAllNames()).thenReturn(GYMS);
         assertEquals(GYMS, gymController.findAll());
     }
 
     @Test
     public void findByName() {
-        when(gymService.findFirstActiveByName(NAME)).thenReturn(gym);
+        when(gymService.findByName(NAME)).thenReturn(gym);
         assertEquals(gym, gymController.findByName(NAME));
     }
 

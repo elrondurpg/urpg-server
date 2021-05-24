@@ -2,6 +2,7 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.core.service.IndexedObjectServiceFactory;
+import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.gym.repository.GymRepository;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class GymService implements IndexedObjectService<Gym> {
+public class GymService implements IndexedObjectService<Gym>, NamedObjectService<Gym> {
 
     @Resource
     private GymRepository gymRepository;
@@ -33,18 +34,18 @@ public class GymService implements IndexedObjectService<Gym> {
     @Resource
     private GymPokemonService gymPokemonService;
 
-    public List<Gym> findAll() {
-        return gymRepository.findAll();
+    public List<String> findAllNames() {
+        return gymRepository.findAllNames();
     }
 
     public Gym findByDbid(Integer dbid) {
         return gymRepository.findByDbid(dbid);
     }
 
-    public Gym findFirstActiveByName(String name) {
-        Gym gym = gymRepository.findFirstByNameAndActiveIsTrue(name);
+    public Gym findByName(String name) {
+        Gym gym = gymRepository.findByName(name);
         if (gym == null && name != null) {
-            return gymRepository.findFirstByNameStartingWithAndActiveIsTrue(name);
+            return gymRepository.findFirstByNameStartingWith(name);
         }
         else return gym;
     }

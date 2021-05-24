@@ -107,6 +107,10 @@ public class Member {
     @JsonIgnoreProperties("challenger")
     private List<ChampionVictory> championVictories;
 
+    @OneToMany(mappedBy="challenger")
+    @JsonIgnoreProperties("challenger")
+    private List<GymVictory> gymVictories;
+
     public Member() {
     }
 
@@ -324,5 +328,13 @@ public class Member {
 
     public void setChampionVictories(List<ChampionVictory> championVictories) {
         this.championVictories = championVictories;
+    }
+
+    public List<GymVictory> getGymVictories() {
+        return gymVictories;
+    }
+
+    public void setGymVictories(List<GymVictory> gymVictories) {
+        this.gymVictories = gymVictories;
     }
 }

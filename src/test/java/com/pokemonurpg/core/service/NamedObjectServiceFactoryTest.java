@@ -28,9 +28,11 @@ import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
 import com.pokemonurpg.gym.models.Badge;
+import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.gym.service.BadgeService;
 import com.pokemonurpg.gym.service.GymLeagueService;
+import com.pokemonurpg.gym.service.GymService;
 import com.pokemonurpg.image.models.ImageFolder;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.models.Item;
@@ -87,6 +89,9 @@ public class NamedObjectServiceFactoryTest {
 
     @Mock
     private DPPContestMoveTypeService dppContestMoveTypeService;
+
+    @Mock
+    private GymService gymService;
 
     @Mock
     private GymLeagueService gymLeagueService;
@@ -185,6 +190,12 @@ public class NamedObjectServiceFactoryTest {
     public void returnsDppContestMoveTypeService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(DPPContestMoveType.class);
         assertEquals(dppContestMoveTypeService, service);
+    }
+
+    @Test
+    public void returnsGymService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Gym.class);
+        assertEquals(gymService, service);
     }
 
     @Test

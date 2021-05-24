@@ -6,7 +6,6 @@ import com.pokemonurpg.View;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.models.EarnedBadge;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import javax.persistence.*;
@@ -31,7 +30,7 @@ public class Gym {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
     private Member owner;
 
     @OneToOne
@@ -43,28 +42,21 @@ public class Gym {
     @JoinColumn(name = "badge_dbid")
     private Badge badge;
 
-    @Column
-    private Boolean active;
-
     @Column(name = "open_date")
     private Date openDate;
 
     @Column
-    private Integer wins = 0;
+    private Integer wins;
 
     @Column
-    private Integer losses = 0;
+    private Integer losses;
 
     @Column
-    private Integer draws = 0;
+    private Integer draws;
 
     @OneToOne
     @JoinColumn(name = "tm_dbid")
     private Item tm;
-
-//    @OneToMany(mappedBy="gym")
-//    @JsonIgnoreProperties("gym")
-//    private List<EarnedBadge> winners;
 
     @ManyToMany(
             targetEntity= OwnedPokemon.class,
@@ -82,11 +74,13 @@ public class Gym {
 
     public Gym (GymInputDto input) {
         this.update(input);
+        setWins(input.getWins() != null ? input.getWins() : 0);
+        setLosses(input.getLosses() != null ? input.getLosses() : 0);
+        setDraws(input.getDraws() != null ? input.getDraws() : 0);
     }
 
     public void update(GymInputDto input) {
         setName(input.getName());
-        setActive(input.getActive());
         setOpenDate(input.getOpenDate());
         setWins(input.getWins());
         setLosses(input.getLosses());
@@ -141,12 +135,6 @@ public class Gym {
         }
     }
 
-    public void setActive(Boolean active) {
-        if (active != null) {
-            this.active = active;
-        }
-    }
-
     public Date getOpenDate() {
         return openDate;
     }
@@ -185,10 +173,6 @@ public class Gym {
         if (draws != null) {
             this.draws = draws;
         }
-    }
-
-    public Boolean getActive() {
-        return active;
     }
 
     public Item getTm() {

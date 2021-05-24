@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.general.models.Section;
@@ -20,6 +21,10 @@ public class LegendaryProgress {
 
     @ManyToOne
     @JoinColumn(name="trainer_dbid", nullable=false)
+    @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
+            "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
+            "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
     private Member trainer;
 
     @ManyToOne

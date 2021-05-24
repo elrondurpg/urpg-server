@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface GymRepository extends JpaRepository<Gym, Integer> {
+    @Query("select s.name from Gym s")
+    List<String> findAllNames();
     Gym findByDbid(int dbid);
-    Gym findFirstByNameAndActiveIsTrue(String name);
-    Gym findFirstByNameStartingWithAndActiveIsTrue(String name);
+    Gym findByName(String name);
+    Gym findFirstByNameStartingWith(String name);
 }

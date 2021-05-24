@@ -3,19 +3,21 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
+import com.pokemonurpg.stats.input.GymVictoryInputDto;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "champion_victory")
+@Table(name = "gym_victory")
 @JsonView(value = { View.MemberView.Summary.class })
-public class ChampionVictory {
+public class GymVictory {
 
     @EmbeddedId
-    ChampionVictoryKey id;
+    GymVictoryKey id;
 
     @ManyToOne
     @MapsId("challenger_dbid")
@@ -29,23 +31,37 @@ public class ChampionVictory {
     @Column(insertable = false, updatable = false)
     private String defender;
 
+    @ManyToOne
+    @MapsId("gym_dbid")
+    @JoinColumn(name="gym_dbid")
+    @JsonIgnoreProperties({ "dbid", "owner", "league", "active", "openDate", "wins", "losses", "draws", "tm" })
+    private Gym gym;
+
+    @ManyToOne
+    @MapsId("league_dbid")
+    @JoinColumn(name="league_dbid")
+    @JsonIgnoreProperties({ "dbid", "gyms" })
+    private GymLeague league;
+
     @Column
     private Date date;
 
     @Column(name = "log_url")
     private String logUrl;
 
-    public ChampionVictory() {
+    public GymVictory() {
     }
 
-    public ChampionVictory(ChampionVictoryInputDto input, Member challenger) {
+    public GymVictory(GymVictoryInputDto input, Member challenger, Gym gym, GymLeague league) {
         this.update(input);
-        this.id = new ChampionVictoryKey(challenger.getDbid(), input.getDefender());
+        this.id = new GymVictoryKey(challenger.getDbid(), input.getDefender(), gym.getDbid(), league.getDbid());
         setChallenger(challenger);
         setDefender(input.getDefender());
+        setGym(gym);
+        setLeague(league);
     }
 
-    public void update(ChampionVictoryInputDto input) {
+    public void update(GymVictoryInputDto input) {
         setDate(input.getDate());
         setLogUrl(input.getLogUrl());
     }
@@ -64,6 +80,22 @@ public class ChampionVictory {
 
     public void setDefender(String defender) {
         this.defender = defender;
+    }
+
+    public Gym getGym() {
+        return gym;
+    }
+
+    public void setGym(Gym gym) {
+        this.gym = gym;
+    }
+
+    public GymLeague getLeague() {
+        return league;
+    }
+
+    public void setLeague(GymLeague league) {
+        this.league = league;
     }
 
     public Date getDate() {

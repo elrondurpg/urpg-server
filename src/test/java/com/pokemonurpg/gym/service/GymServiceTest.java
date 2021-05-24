@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GymServiceTest {
-    private final static List<Gym> GYMS = new ArrayList<>();
+    private final static List<String> GYMS = new ArrayList<>();
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
     private final static String OWNER_NAME = "OWNER";
@@ -61,8 +61,8 @@ public class GymServiceTest {
 
     @Test
     public void findAllNamesReturnsValueFromRepository() {
-        when(gymRepository.findAll()).thenReturn(GYMS);
-        assertEquals(GYMS, gymService.findAll());
+        when(gymRepository.findAllNames()).thenReturn(GYMS);
+        assertEquals(GYMS, gymService.findAllNames());
     }
 
     @Test
@@ -73,15 +73,15 @@ public class GymServiceTest {
 
     @Test
     public void findByNameExactMatch() {
-        when(gymRepository.findFirstByNameAndActiveIsTrue(NAME)).thenReturn(gym);
-        assertEquals(gym, gymService.findFirstActiveByName(NAME));
+        when(gymRepository.findByName(NAME)).thenReturn(gym);
+        assertEquals(gym, gymService.findByName(NAME));
     }
 
     @Test
     public void findByNameNotExactMatch() {
-        when(gymRepository.findFirstByNameAndActiveIsTrue(NAME)).thenReturn(null);
-        when(gymRepository.findFirstByNameStartingWithAndActiveIsTrue(NAME)).thenReturn(gym);
-        assertEquals(gym, gymService.findFirstActiveByName(NAME));
+        when(gymRepository.findByName(NAME)).thenReturn(null);
+        when(gymRepository.findFirstByNameStartingWith(NAME)).thenReturn(gym);
+        assertEquals(gym, gymService.findByName(NAME));
     }
 
     @Test

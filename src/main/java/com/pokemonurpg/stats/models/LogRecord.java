@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemonurpg.member.models.Member;
 
 import javax.persistence.*;
@@ -15,10 +16,19 @@ public class LogRecord {
 
     @OneToOne
     @JoinColumn(name = "member_dbid")
+    @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
+            "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
+            "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
+
     private Member member;
 
     @OneToOne
     @JoinColumn(name = "creator_dbid")
+    @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
+            "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
+            "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
     private Member creator;
 
     @Column

@@ -23,7 +23,7 @@ public class EliteFourVictory {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
     private Member challenger;
 
     @Column(insertable = false, updatable = false)

@@ -46,7 +46,6 @@ public class MemberServiceTest {
     private final static Long CURRENT_TIME_MILLIS = 432000L;
     private final static String HASHED_ACCESS_TOKEN = "43242324";
     private final static String HASHED_REFRESH_TOKEN = "432411523562";
-    private final static EarnedBadgeInputDto EARNED_BADGE = mock(EarnedBadgeInputDto.class);
     private final static OwnedItemInputDto OWNED_ITEM = mock(OwnedItemInputDto.class);
     private final static LegendaryProgressInputDto LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
     private final static byte[] IV = { 12, 32 };
@@ -56,6 +55,7 @@ public class MemberServiceTest {
     private final static Boolean BOT = true;
     private final static EliteFourVictoryInputDto ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
     private final static ChampionVictoryInputDto CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
+    private final static GymVictoryInputDto GYM_VICTORY = mock(GymVictoryInputDto.class);
 
     @InjectMocks
     private MemberService memberService;
@@ -68,9 +68,6 @@ public class MemberServiceTest {
 
     @Mock
     private SystemService systemService;
-
-    @Mock
-    private EarnedBadgeService earnedBadgeService;
 
     @Mock
     private LegendaryProgressService legendaryProgressService;
@@ -91,6 +88,9 @@ public class MemberServiceTest {
 
     @Mock
     private ChampionVictoryService championVictoryService;
+
+    @Mock
+    private GymVictoryService gymVictoryService;
 
     @Test
     public void findNamesByReturnsValueFromRepository() {
@@ -150,21 +150,21 @@ public class MemberServiceTest {
         MemberInputDto input = new MemberInputDto();
         input.setUsername(NAME);
         input.setRoles(Collections.singletonList(permInput1));
-        input.setBadges(Collections.singletonList(EARNED_BADGE));
         input.setItems(Collections.singletonList(OWNED_ITEM));
         input.setLegendaryProgress(Collections.singletonList(LEGENDARY_PROGRESS));
         input.setEliteFourVictories(Collections.singletonList(ELITE_FOUR_VICTORY));
         input.setChampionVictories(Collections.singletonList(CHAMPION_VICTORY));
+        input.setGymVictories(Collections.singletonList(GYM_VICTORY));
 
         // When I call memberService.create(input)
         Member member = memberService.create(input);
         assertEquals(NAME, member.getUsername());
         verify(memberRepository, times(1)).save(member);
-        verify(earnedBadgeService, times(1)).update(member, EARNED_BADGE);
         verify(ownedItemService, times(1)).update(member, OWNED_ITEM);
         verify(legendaryProgressService, times(1)).update(LEGENDARY_PROGRESS, member);
         verify(eliteFourVictoryService, times(1)).update(ELITE_FOUR_VICTORY, member);
         verify(championVictoryService, times(1)).update(CHAMPION_VICTORY, member);
+        verify(gymVictoryService, times(1)).update(GYM_VICTORY, member);
 
         // Then that member's roles will contain NEW_ROLE
         assertTrue(member.getRoles().contains(NEW_ROLE));

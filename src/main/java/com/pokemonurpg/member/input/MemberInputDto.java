@@ -40,8 +40,6 @@ public class MemberInputDto {
     @NotNull(groups = { ObjectCreation.class })
     private List<@Valid MemberRoleInputDto> roles = new ArrayList<>();
 
-    private List<@Valid EarnedBadgeInputDto> badges = new ArrayList<>();
-
     private List<@Valid LegendaryProgressInputDto> legendaryProgress = new ArrayList<>();
 
     private List<@Valid OwnedItemInputDto> items = new ArrayList<>();
@@ -51,6 +49,8 @@ public class MemberInputDto {
     private List<@Valid EliteFourVictoryInputDto> eliteFourVictories = new ArrayList<>();
 
     private List<@Valid ChampionVictoryInputDto> championVictories = new ArrayList<>();
+
+    private List<@Valid GymVictoryInputDto> gymVictories = new ArrayList<>();
 
     public String getDiscordId() {
         return discordId;
@@ -116,14 +116,6 @@ public class MemberInputDto {
         this.roles = roles;
     }
 
-    public List<EarnedBadgeInputDto> getBadges() {
-        return badges;
-    }
-
-    public void setBadges(List<EarnedBadgeInputDto> badges) {
-        this.badges = badges;
-    }
-
     public List<LegendaryProgressInputDto> getLegendaryProgress() {
         return legendaryProgress;
     }
@@ -162,5 +154,13 @@ public class MemberInputDto {
 
     public void setChampionVictories(List<ChampionVictoryInputDto> championVictories) {
         this.championVictories = championVictories;
+    }
+
+    public List<GymVictoryInputDto> getGymVictories() {
+        return gymVictories;
+    }
+
+    public void setGymVictories(List<GymVictoryInputDto> gymVictories) {
+        this.gymVictories = gymVictories;
     }
 }

@@ -23,20 +23,15 @@ public class GymInputDto {
     @Size(min = 3, max = 20)
     private String name;
 
-    @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Member.class)
     private String owner;
 
-    @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = GymLeague.class)
     private String league;
 
     @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Badge.class)
     private String badge;
-
-    @NotNull(groups = { ObjectCreation.class })
-    private Boolean active;
 
     @NotNull(groups = { ObjectCreation.class })
     private Date openDate;
@@ -50,7 +45,6 @@ public class GymInputDto {
     @Min(0)
     private Integer draws;
 
-    @NotNull(groups = { ObjectCreation.class })
     @Pattern(regexp = "TM\\d+.+")
     @ExistsInDb(type = Item.class)
     private String tm;
@@ -87,14 +81,6 @@ public class GymInputDto {
 
     public void setBadge(String badge) {
         this.badge = badge;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public Date getOpenDate() {

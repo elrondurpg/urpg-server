@@ -25,7 +25,6 @@ public class MemberTest {
     private final static Date JOIN_DATE = new Date();
     private final static List<OwnedPokemon> POKEMON = new ArrayList<>();
     private final static List<OwnedItem> ITEMS = new ArrayList<>();
-    private final static List<EarnedBadge> BADGES = new ArrayList<>();
     private final static List<LegendaryProgress> LEGENDARY_PROGRESS = new ArrayList<>();
     private final static Set<Role> ROLES = new HashSet<>();
     private final static Boolean BANNED = true;
@@ -34,6 +33,7 @@ public class MemberTest {
     private final static Boolean BOT = true;
     private final static List<EliteFourVictory> ELITE_FOUR_VICTORIES = new ArrayList<>();
     private final static List<ChampionVictory> CHAMPION_VICTORIES = new ArrayList<>();
+    private final static List<GymVictory> GYM_VICTORIES = new ArrayList<>();
 
     private final static Integer OTHER_DBID = 432432;
     private final static Member MEMBER_WITH_DBID = new Member();
@@ -72,6 +72,7 @@ public class MemberTest {
         member.setBot(BOT);
         member.setEliteFourVictories(ELITE_FOUR_VICTORIES);
         member.setChampionVictories(CHAMPION_VICTORIES);
+        member.setGymVictories(GYM_VICTORIES);
 
         assertEquals(DBID,member.getDbid());
         assertEquals(DISCORD_ID,member.getDiscordId());
@@ -95,6 +96,7 @@ public class MemberTest {
         assertEquals(BOT, member.getBot());
         assertEquals(ELITE_FOUR_VICTORIES, member.getEliteFourVictories());
         assertEquals(CHAMPION_VICTORIES, member.getChampionVictories());
+        assertEquals(GYM_VICTORIES, member.getGymVictories());
     }
 
     @Test

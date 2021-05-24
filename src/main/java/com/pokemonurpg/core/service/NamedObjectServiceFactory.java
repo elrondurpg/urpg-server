@@ -17,6 +17,7 @@ import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
 import com.pokemonurpg.gym.service.BadgeService;
 import com.pokemonurpg.gym.service.GymLeagueService;
+import com.pokemonurpg.gym.service.GymService;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
@@ -55,6 +56,9 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private DPPContestMoveTypeService dppContestMoveTypeService;
+
+    @Resource
+    private GymService gymService;
 
     @Resource
     private GymLeagueService gymLeagueService;
@@ -118,6 +122,7 @@ public class NamedObjectServiceFactory {
                 case "Badge": return badgeService;
                 case "ContestAttribute": return contestAttributeService;
                 case "DPPContestMoveType": return dppContestMoveTypeService;
+                case "Gym": return gymService;
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;

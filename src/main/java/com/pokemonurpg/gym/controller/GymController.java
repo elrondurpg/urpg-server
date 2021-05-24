@@ -25,15 +25,15 @@ public class GymController {
 
     @GetMapping
     public @ResponseBody
-    List<Gym> findAll() {
-        return gymService.findAll();
+    List<String> findAll() {
+        return gymService.findAllNames();
     }
 
     @GetMapping(path="/{name}")
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
     Gym findByName(@PathVariable("name") String name) {
-        return gymService.findFirstActiveByName(name);
+        return gymService.findByName(name);
     }
 
     @Validated(ObjectCreation.class)

@@ -41,9 +41,6 @@ public class MemberService implements NamedObjectService<Member> {
     private SystemService systemService;
 
     @Resource
-    private EarnedBadgeService earnedBadgeService;
-
-    @Resource
     private LegendaryProgressService legendaryProgressService;
 
     @Resource
@@ -57,6 +54,9 @@ public class MemberService implements NamedObjectService<Member> {
 
     @Resource
     private ChampionVictoryService championVictoryService;
+
+    @Resource
+    private GymVictoryService gymVictoryService;
 
     public Member findByDbid(int dbid) {
         return memberRepository.findByDbid(dbid);
@@ -145,18 +145,11 @@ public class MemberService implements NamedObjectService<Member> {
     }
 
     private void updateAssociatedValues(MemberInputDto input, Member member) {
-        updateEarnedBadges(input, member);
         updateLegendaryProgress(input, member);
         updateOwnedItems(input, member);
         updateEliteFourVictories(input, member);
         updateChampionVictories(input, member);
-    }
-
-    private void updateEarnedBadges(MemberInputDto input, Member member) {
-        List<EarnedBadgeInputDto> badges = input.getBadges();
-        for(EarnedBadgeInputDto badge : badges) {
-            earnedBadgeService.update(member, badge);
-        }
+        updateGymVictories(input, member);
     }
 
     private void updateLegendaryProgress(MemberInputDto input, Member member) {
@@ -184,6 +177,13 @@ public class MemberService implements NamedObjectService<Member> {
         List<ChampionVictoryInputDto> victories = input.getChampionVictories();
         for(ChampionVictoryInputDto victory : victories) {
             championVictoryService.update(victory, member);
+        }
+    }
+
+    private void updateGymVictories(MemberInputDto input, Member member) {
+        List<GymVictoryInputDto> victories = input.getGymVictories();
+        for(GymVictoryInputDto victory : victories) {
+            gymVictoryService.update(victory, member);
         }
     }
 
