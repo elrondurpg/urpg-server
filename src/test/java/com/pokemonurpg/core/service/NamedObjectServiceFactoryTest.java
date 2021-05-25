@@ -27,12 +27,8 @@ import com.pokemonurpg.general.models.Section;
 import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
-import com.pokemonurpg.gym.models.Badge;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.service.BadgeService;
-import com.pokemonurpg.gym.service.GymLeagueService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.gym.models.*;
+import com.pokemonurpg.gym.service.*;
 import com.pokemonurpg.image.models.ImageFolder;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.models.Item;
@@ -98,6 +94,15 @@ public class NamedObjectServiceFactoryTest {
 
     @Mock
     private ItemService itemService;
+
+    @Mock
+    private KnownChampionService knownChampionService;
+
+    @Mock
+    private KnownEliteFourMemberService knownEliteFourMemberService;
+
+    @Mock
+    private KnownGymLeaderService knownGymLeaderService;
 
     @Mock
     private MemberService memberService;
@@ -214,6 +219,24 @@ public class NamedObjectServiceFactoryTest {
     public void returnsItemService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Item.class);
         assertEquals(itemService, service);
+    }
+
+    @Test
+    public void returnsKnownChampionService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownChampion.class);
+        assertEquals(knownChampionService, service);
+    }
+
+    @Test
+    public void returnsKnownEliteFourMemberService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownEliteFourMember.class);
+        assertEquals(knownEliteFourMemberService, service);
+    }
+
+    @Test
+    public void returnsKnownGymLeaderService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownGymLeader.class);
+        assertEquals(knownGymLeaderService, service);
     }
 
     @Test

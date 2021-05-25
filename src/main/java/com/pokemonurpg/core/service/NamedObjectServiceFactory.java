@@ -15,9 +15,7 @@ import com.pokemonurpg.creative.service.StoryRankService;
 import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
-import com.pokemonurpg.gym.service.BadgeService;
-import com.pokemonurpg.gym.service.GymLeagueService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.gym.service.*;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
@@ -65,6 +63,15 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private ItemService itemService;
+
+    @Resource
+    private KnownChampionService knownChampionService;
+
+    @Resource
+    private KnownEliteFourMemberService knownEliteFourMemberService;
+
+    @Resource
+    private KnownGymLeaderService knownGymLeaderService;
 
     @Resource
     private MemberService memberService;
@@ -126,6 +133,9 @@ public class NamedObjectServiceFactory {
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
+                case "KnownChampion": return knownChampionService;
+                case "KnownEliteFourMember": return knownEliteFourMemberService;
+                case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
                 case "Nature": return natureService;
