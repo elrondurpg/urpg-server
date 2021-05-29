@@ -1,11 +1,12 @@
 package com.pokemonurpg.contest.models;
 
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
+import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-public class ContestMoveType {
+public class ContestMoveType implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

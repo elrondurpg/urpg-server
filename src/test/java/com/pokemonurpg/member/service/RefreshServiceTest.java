@@ -63,7 +63,7 @@ public class RefreshServiceTest {
         member.setRefreshTokenIv(IV);
         member.setRefreshToken(ENCRYPTED_REFRESH_TOKEN);
         member.setSalt(SALT);
-        member.setUsername(USERNAME);
+        member.setName(USERNAME);
         member.setDiscordId(DISCORD_ID);
 
         expectedResponse.setUsername(USERNAME);

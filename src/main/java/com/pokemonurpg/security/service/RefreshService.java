@@ -41,7 +41,7 @@ public class RefreshService {
                 OAuthAccessTokenResponse refreshTokenResponse = oAuthService.refreshAccessToken(refreshToken);
                 if (refreshTokenResponse != null && refreshTokenResponse.isValid()) {
                     memberService.update(member, refreshTokenResponse);
-                    return new SessionDto(member.getUsername(), member.getDiscordId(), refreshTokenResponse.getAccessToken());
+                    return new SessionDto(member.getName(), member.getDiscordId(), refreshTokenResponse.getAccessToken());
                 }
             }
         }

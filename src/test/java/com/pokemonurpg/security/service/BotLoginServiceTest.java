@@ -44,7 +44,7 @@ public class BotLoginServiceTest {
     @Before
     public void init() {
         member = new Member();
-        member.setUsername(USERNAME);
+        member.setName(USERNAME);
         member.setDiscordId(DISCORD_ID);
 
         expectedResponse = new SessionDto();

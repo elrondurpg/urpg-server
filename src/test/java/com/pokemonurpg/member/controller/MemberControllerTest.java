@@ -45,7 +45,7 @@ public class MemberControllerTest {
     @Test
     public void create() {
         MemberInputDto input = new MemberInputDto();
-        input.setUsername(NAME);
+        input.setName(NAME);
         when(memberService.create(input)).thenReturn(member);
         assertEquals(member, memberController.create(input));
     }
@@ -53,7 +53,7 @@ public class MemberControllerTest {
     @Test
     public void update() {
         MemberInputDto input = new MemberInputDto();
-        input.setUsername(NAME);
+        input.setName(NAME);
         when(memberService.update(input, DBID)).thenReturn(member);
         assertEquals(member, memberController.update(input, DBID));
     }

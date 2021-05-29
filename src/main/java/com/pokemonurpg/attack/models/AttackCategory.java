@@ -1,12 +1,13 @@
 package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
+import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "attack_category")
-public class AttackCategory {
+public class AttackCategory implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

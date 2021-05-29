@@ -2,13 +2,14 @@ package com.pokemonurpg.general.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.general.input.SectionInputDto;
 
 import javax.persistence.*;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class Section {
+public class Section implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

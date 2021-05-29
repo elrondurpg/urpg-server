@@ -3,6 +3,7 @@ package com.pokemonurpg.gym.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.GymLeagueInputDto;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class GymLeague {
+public class GymLeague implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

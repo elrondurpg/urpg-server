@@ -3,6 +3,7 @@ package com.pokemonurpg.species.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.creative.models.ArtRank;
 import com.pokemonurpg.creative.models.ParkLocation;
 import com.pokemonurpg.creative.models.ParkRank;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Species {
+public class Species implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

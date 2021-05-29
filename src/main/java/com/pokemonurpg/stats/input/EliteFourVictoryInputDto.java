@@ -1,14 +1,15 @@
 package com.pokemonurpg.stats.input;
 
 import com.pokemonurpg.core.input.ChildInputDto;
+import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.gym.models.KnownEliteFourMember;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class EliteFourVictoryInputDto extends ChildInputDto {
     @NotNull
-    @Size(min = 3, max = 30)
+    @ExistsInDb(type = KnownEliteFourMember.class)
     private String defender;
 
     private Date date;

@@ -45,7 +45,7 @@ public class LoginServiceTest {
     public void init() {
         input.setCode(CODE);
 
-        member.setUsername(USERNAME);
+        member.setName(USERNAME);
         member.setDiscordId(DISCORD_ID);
 
         expectedResponse.setUsername(USERNAME);

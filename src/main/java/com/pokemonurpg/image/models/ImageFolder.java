@@ -1,11 +1,12 @@
 package com.pokemonurpg.image.models;
 
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.image.input.ImageFolderInputDto;
 
 import javax.persistence.*;
 
 @Entity
-public class ImageFolder {
+public class ImageFolder implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

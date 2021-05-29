@@ -1,12 +1,13 @@
 package com.pokemonurpg.contest.models;
 
 import com.pokemonurpg.contest.input.ContestAttributeInputDto;
+import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @Table(name = "contest_attribute")
 @Entity
-public class ContestAttribute {
+public class ContestAttribute implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

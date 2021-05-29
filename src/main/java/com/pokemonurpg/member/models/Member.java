@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
@@ -13,7 +14,7 @@ import java.util.*;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class Member {
+public class Member implements NamedObject {
     private final static Random RANDOM = new Random();
 
     @Id
@@ -25,7 +26,7 @@ public class Member {
     private String discordId;
 
     @Column
-    private String username;
+    private String name;
 
     @Column
     @JsonIgnore
@@ -121,7 +122,7 @@ public class Member {
 
     public void update(MemberInputDto input) {
         setDiscordId(input.getDiscordId());
-        setUsername(input.getUsername());
+        setName(input.getName());
         setMoney(input.getMoney());
         setWins(input.getWins());
         setLosses(input.getLosses());
@@ -148,13 +149,13 @@ public class Member {
         }
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        if (username != null) {
-            this.username = username;
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
         }
     }
 

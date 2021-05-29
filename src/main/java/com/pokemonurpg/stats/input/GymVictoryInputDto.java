@@ -4,14 +4,14 @@ import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.gym.models.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class GymVictoryInputDto extends ChildInputDto {
     @NotNull
-    @Size(min = 3, max = 30)
+    @ExistsInDb(type = KnownGymLeader.class)
     private String defender;
 
     @NotNull

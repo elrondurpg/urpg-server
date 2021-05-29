@@ -64,24 +64,24 @@ public class MemberService implements NamedObjectService<Member> {
 
     public List<String> findNamesBy(String username, Boolean bot) {
         Member example = new Member();
-        example.setUsername(username);
+        example.setName(username);
         example.setBot(bot);
 
         ExampleMatcher matcher = ExampleMatcher.matchingAll()
             .withMatcher("username", startsWith());
 
         List<Member> members = memberRepository.findAll(Example.of(example, matcher));
-        return members.stream().map(Member::getUsername).collect(Collectors.toList());
+        return members.stream().map(Member::getName).collect(Collectors.toList());
     }
 
     public Member findByName(String name) {
-        return memberRepository.findByUsername(name);
+        return memberRepository.findByName(name);
     }
 
     public Member findByUsername(String username) {
-        Member member = memberRepository.findByUsername(username);
+        Member member = memberRepository.findByName(username);
         if (member == null && username != null) {
-            return memberRepository.findFirstByUsernameStartingWith(username);
+            return memberRepository.findFirstByNameStartingWith(username);
         }
         else return member;
     }

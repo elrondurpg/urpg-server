@@ -1,5 +1,7 @@
 package com.pokemonurpg.core.service;
 
-public interface NamedObjectService<T> {
+import com.pokemonurpg.core.model.NamedObject;
+
+public interface NamedObjectService<T extends NamedObject> {
     T findByName(String name);
 }

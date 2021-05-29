@@ -14,15 +14,12 @@ import com.pokemonurpg.stats.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -95,7 +92,7 @@ public class MemberServiceTest {
     @Test
     public void findNamesByReturnsValueFromRepository() {
         Member m = new Member();
-        m.setUsername(NAME);
+        m.setName(NAME);
 
         when(memberRepository.findAll(any(Example.class))).thenReturn(Arrays.asList(m));
 
@@ -120,20 +117,20 @@ public class MemberServiceTest {
 
     @Test
     public void findByName() {
-        when(memberRepository.findByUsername(NAME)).thenReturn(member);
+        when(memberRepository.findByName(NAME)).thenReturn(member);
         assertEquals(member, memberService.findByName(NAME));
     }
 
     @Test
     public void findByUsernameExactMatch() {
-        when(memberRepository.findByUsername(NAME)).thenReturn(member);
+        when(memberRepository.findByName(NAME)).thenReturn(member);
         assertEquals(member, memberService.findByUsername(NAME));
     }
 
     @Test
     public void findByUsernameNotExactMatch() {
-        when(memberRepository.findByUsername(NAME)).thenReturn(null);
-        when(memberRepository.findFirstByUsernameStartingWith(NAME)).thenReturn(member);
+        when(memberRepository.findByName(NAME)).thenReturn(null);
+        when(memberRepository.findFirstByNameStartingWith(NAME)).thenReturn(member);
         assertEquals(member, memberService.findByUsername(NAME));
     }
 
@@ -148,7 +145,7 @@ public class MemberServiceTest {
 
         // Given a MemberInputDto whose "roles" list includes permInput1
         MemberInputDto input = new MemberInputDto();
-        input.setUsername(NAME);
+        input.setName(NAME);
         input.setRoles(Collections.singletonList(permInput1));
         input.setItems(Collections.singletonList(OWNED_ITEM));
         input.setLegendaryProgress(Collections.singletonList(LEGENDARY_PROGRESS));
@@ -158,7 +155,7 @@ public class MemberServiceTest {
 
         // When I call memberService.create(input)
         Member member = memberService.create(input);
-        assertEquals(NAME, member.getUsername());
+        assertEquals(NAME, member.getName());
         verify(memberRepository, times(1)).save(member);
         verify(ownedItemService, times(1)).update(member, OWNED_ITEM);
         verify(legendaryProgressService, times(1)).update(LEGENDARY_PROGRESS, member);
@@ -194,14 +191,14 @@ public class MemberServiceTest {
 
         // Given a MemberInputDto whose "roles" list includes permInput1 and permInput2
         MemberInputDto input = new MemberInputDto();
-        input.setUsername(NAME);
+        input.setName(NAME);
         input.setRoles(Arrays.asList(permInput1, permInput2));
 
         when(memberRepository.findByDbid(DBID)).thenReturn(CURRENT_MEMBER);
 
         // When I call memberService.updateAll(input, DBID)
         Member newMember = memberService.update(input, DBID);
-        assertEquals(NAME, newMember.getUsername());
+        assertEquals(NAME, newMember.getName());
         verify(memberRepository, times(1)).save(newMember);
 
         // Then currentRoles will contain NEW_ROLE and not CURRENT_ROLE
@@ -212,13 +209,13 @@ public class MemberServiceTest {
     @Test
     public void updateNonExistingRecord() {
         MemberInputDto input = new MemberInputDto();
-        input.setUsername(NAME);
+        input.setName(NAME);
 
         when(memberRepository.findByDbid(DBID)).thenReturn(null);
 
         Member member1 = memberService.update(input, DBID);
         assertNull(member1);
-        verify(memberRepository, times(0)).save(Matchers.any());
+        verify(memberRepository, times(0)).save(any());
     }
 
     @Test

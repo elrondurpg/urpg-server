@@ -29,7 +29,7 @@ public class BotLoginService {
                 Member member = memberService.findByDiscordId(credentials[0]);
                 if (member != null) {
                     memberService.update(member, accessTokenResponse);
-                    return new SessionDto(member.getUsername(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                    return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                 }
             }
         }

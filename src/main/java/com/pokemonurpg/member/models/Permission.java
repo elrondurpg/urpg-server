@@ -3,6 +3,7 @@ package com.pokemonurpg.member.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.member.input.PermissionInputDto;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class Permission {
+public class Permission implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

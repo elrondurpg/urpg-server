@@ -1,7 +1,10 @@
 package com.pokemonurpg.member.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.*;
 
 import javax.validation.Valid;
@@ -13,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MemberInputDto {
+@UniqueName(type = Member.class)
+public class MemberInputDto implements UniquelyNamedInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Pattern(regexp = "\\d+")
@@ -21,7 +25,7 @@ public class MemberInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 30)
-    private String username;
+    private String name;
 
     private Integer money;
 
@@ -37,7 +41,6 @@ public class MemberInputDto {
     @NotNull(groups = { ObjectCreation.class })
     private Date joinDate;
 
-    @NotNull(groups = { ObjectCreation.class })
     private List<@Valid MemberRoleInputDto> roles = new ArrayList<>();
 
     private List<@Valid LegendaryProgressInputDto> legendaryProgress = new ArrayList<>();
@@ -60,12 +63,12 @@ public class MemberInputDto {
         this.discordId = discordId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getMoney() {

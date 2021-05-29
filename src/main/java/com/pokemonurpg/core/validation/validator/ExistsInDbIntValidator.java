@@ -26,8 +26,8 @@ public class ExistsInDbIntValidator extends ExistsInDbValidator<Integer> {
     public boolean isValid(Integer input, ConstraintValidatorContext context) {
         try {
             if (input == null) return true;
-            IndexedObjectService namedObjectService = indexedObjectServiceFactory.getServiceForClass(type);
-            Object obj = namedObjectService.findByDbid(input);
+            IndexedObjectService indexedObjectService = indexedObjectServiceFactory.getServiceForClass(type);
+            Object obj = indexedObjectService.findByDbid(input);
             return obj != null;
         } catch (Exception e) {
             return false;

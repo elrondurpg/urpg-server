@@ -85,7 +85,7 @@ public class SpeciesService implements NamedObjectService<Species> {
 
         if (speciesList != null) {
             for (Species species : speciesList) {
-                speciesNames.add(species.getUsername());
+                speciesNames.add(species.getName());
             }
         }
 

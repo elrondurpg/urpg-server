@@ -52,7 +52,7 @@ public class MemberTest {
         Member member = new Member();
         member.setDbid(DBID);
         member.setDiscordId(DISCORD_ID);
-        member.setUsername(USERNAME);
+        member.setName(USERNAME);
         member.setSalt(SALT);
         member.setAccessToken(ACCESS_TOKEN);
         member.setRefreshToken(REFRESH_TOKEN);
@@ -76,7 +76,7 @@ public class MemberTest {
 
         assertEquals(DBID,member.getDbid());
         assertEquals(DISCORD_ID,member.getDiscordId());
-        assertEquals(USERNAME,member.getUsername());
+        assertEquals(USERNAME,member.getName());
         assertEquals(SALT,member.getSalt());
         assertEquals(ACCESS_TOKEN,member.getAccessToken());
         assertEquals(REFRESH_TOKEN,member.getRefreshToken());
@@ -103,7 +103,7 @@ public class MemberTest {
     public void testConstructor() {
         MemberInputDto input = new MemberInputDto();
         input.setDiscordId(DISCORD_ID);
-        input.setUsername(USERNAME);
+        input.setName(USERNAME);
         input.setMoney(MONEY);
         input.setWins(WINS);
         input.setLosses(LOSSES);
@@ -114,7 +114,7 @@ public class MemberTest {
         Member member = new Member(input);
 
         assertEquals(DISCORD_ID,member.getDiscordId());
-        assertEquals(USERNAME,member.getUsername());
+        assertEquals(USERNAME,member.getName());
         assertEquals(MONEY,member.getMoney());
         assertEquals(WINS,member.getWins());
         assertEquals(LOSSES,member.getLosses());

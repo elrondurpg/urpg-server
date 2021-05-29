@@ -1,13 +1,19 @@
 package com.pokemonurpg.site.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.site.input.MenuItemInputDto;
 
 import javax.persistence.*;
 
 @Entity
-public class MenuItem {
+public class MenuItem implements NamedObject {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Integer dbid;
+
     @Column
     private String name;
 
@@ -33,6 +39,14 @@ public class MenuItem {
         setUrl(input.getUrl());
         setPosition(input.getPosition());
         setIndent(input.getIndent());
+    }
+
+    public Integer getDbid() {
+        return dbid;
+    }
+
+    public void setDbid(Integer dbid) {
+        this.dbid = dbid;
     }
 
     public String getName() {

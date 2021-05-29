@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.contest.models.*;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.SpeciesAttack;
 import com.pokemonurpg.species.models.Type;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Attack {
+public class Attack implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

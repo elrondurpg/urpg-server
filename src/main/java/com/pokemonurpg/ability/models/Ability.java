@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.ability.input.AbilityInputDto;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.species.models.SpeciesAbility;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Ability {
+public class Ability implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.pokemonurpg.gym.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class Gym {
+public class Gym implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
