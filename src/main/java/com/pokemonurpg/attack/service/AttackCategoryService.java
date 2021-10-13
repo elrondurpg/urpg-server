@@ -31,6 +31,11 @@ public class AttackCategoryService implements NamedObjectService<AttackCategory>
         else return attackCategory;
     }
 
+    @Override
+    public AttackCategory findByNameExact(String name) {
+        return attackCategoryRepository.findByName(name);
+    }
+
     public AttackCategory create(AttackCategoryInputDto input) {
         AttackCategory attackCategory = new AttackCategory(input);
         attackCategoryRepository.save(attackCategory);

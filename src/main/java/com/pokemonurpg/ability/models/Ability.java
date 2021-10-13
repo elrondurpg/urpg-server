@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.ability.input.AbilityInputDto;
 import com.pokemonurpg.core.model.NamedObject;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.species.models.SpeciesAbility;
 
 import javax.persistence.*;

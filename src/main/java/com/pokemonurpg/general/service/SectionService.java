@@ -26,11 +26,16 @@ public class SectionService implements NamedObjectService<Section> {
     }
 
     public Section findByName(String name) {
-        Section section = sectionRepository.findByName(name);
+        Section section = findByNameExact(name);
         if (section == null && name != null) {
             return sectionRepository.findFirstByNameStartingWith(name);
         }
         else return section;
+    }
+
+    @Override
+    public Section findByNameExact(String name) {
+        return sectionRepository.findByName(name);
     }
 
     public Section create(SectionInputDto input) {

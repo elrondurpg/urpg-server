@@ -1,12 +1,16 @@
 package com.pokemonurpg.member.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.member.models.Permission;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class PermissionInputDto {
+@UniqueName(type = Permission.class)
+public class PermissionInputDto implements UniquelyNamedInputDto {
 
     @NotNull(groups = {ObjectCreation.class})
     @Size(min = 3, max = 20)

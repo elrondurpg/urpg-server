@@ -24,11 +24,16 @@ public class StoryRankService implements NamedObjectService<StoryRank> {
     }
 
     public StoryRank findByName(String name) {
-        StoryRank storyRank = storyRankRepository.findByName(name);
+        StoryRank storyRank = findByNameExact(name);
         if (storyRank == null && name != null) {
             return storyRankRepository.findFirstByNameStartingWith(name);
         }
         else return storyRank;
+    }
+
+    @Override
+    public StoryRank findByNameExact(String name) {
+        return storyRankRepository.findByName(name);
     }
 
     public StoryRank create(StoryRankInputDto input) {

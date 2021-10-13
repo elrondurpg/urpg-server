@@ -1,11 +1,15 @@
 package com.pokemonurpg.ability.input;
 
+import com.pokemonurpg.ability.models.Ability;
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AbilityInputDto {
+@UniqueName(type = Ability.class)
+public class AbilityInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 25)
     private String name;

@@ -21,7 +21,10 @@ import static org.mockito.Mockito.*;
 public class KnownChampionServiceTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static String NAME = "NAME";
-    private final static KnownChampion KNOWN_CHAMPION = mock(KnownChampion.class);
+    private final static String NEW_NAME = "NEW_NAME";
+    private final static String OLD_NAME = "OLD_NAME";
+
+    private KnownChampion knownChampion = new KnownChampion();
 
     @InjectMocks
     private KnownChampionService knownChampionService;
@@ -40,18 +43,28 @@ public class KnownChampionServiceTest {
 
     @Test
     public void findByName() {
-        when(knownChampionRepository.findByName(NAME)).thenReturn(KNOWN_CHAMPION);
-        assertEquals(KNOWN_CHAMPION, knownChampionService.findByName(NAME));
+        when(knownChampionRepository.findByName(NAME)).thenReturn(knownChampion);
+        assertEquals(knownChampion, knownChampionService.findByName(NAME));
     }
 
     @Test
     public void findFirstByNameStartingWith() {
-        when(knownChampionRepository.findFirstByNameStartingWith(NAME)).thenReturn(KNOWN_CHAMPION);
-        assertEquals(KNOWN_CHAMPION, knownChampionService.findByName(NAME));
+        when(knownChampionRepository.findFirstByNameStartingWith(NAME)).thenReturn(knownChampion);
+        assertEquals(knownChampion, knownChampionService.findByName(NAME));
     }
 
     @Test
     public void create() {
+        when(knownChampionRepository.findByName(NAME)).thenReturn(null);
+        knownChampionService.create(NAME);
+
+        verify(knownChampionRepository, times(1)).save(captor.capture());
+        KnownChampion savedObject = captor.getValue();
+        assertEquals(NAME, savedObject.getName());
+    }
+
+    @Test
+    public void createByInputDto() {
         KnownChampionInputDto input = new KnownChampionInputDto();
         input.setName(NAME);
 
@@ -69,9 +82,19 @@ public class KnownChampionServiceTest {
         input.setName(NAME);
         input.setDelete(true);
 
-        when(knownChampionRepository.findByName(NAME)).thenReturn(KNOWN_CHAMPION);
+        when(knownChampionRepository.findByName(NAME)).thenReturn(knownChampion);
 
         knownChampionService.update(input);
-        verify(knownChampionRepository, times(1)).delete(KNOWN_CHAMPION);
+        verify(knownChampionRepository, times(1)).delete(knownChampion);
+    }
+
+    @Test
+    public void update_ByNewAndOldName_Succeeds() {
+        when(knownChampionRepository.findByName(OLD_NAME)).thenReturn(knownChampion);
+        knownChampionService.update(NEW_NAME, OLD_NAME);
+        assertEquals(NEW_NAME, knownChampion.getName());
+        verify(knownChampionRepository, times(1)).save(captor.capture());
+        KnownChampion savedObject = captor.getValue();
+        assertEquals(knownChampion, savedObject);
     }
 }

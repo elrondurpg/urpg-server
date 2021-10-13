@@ -24,11 +24,16 @@ public class ParkRankService implements NamedObjectService<ParkRank> {
     }
 
     public ParkRank findByName(String name) {
-        ParkRank parkRank = parkRankRepository.findByName(name);
+        ParkRank parkRank = findByNameExact(name);
         if (parkRank == null && name != null) {
             return parkRankRepository.findFirstByNameStartingWith(name);
         }
         else return parkRank;
+    }
+
+    @Override
+    public ParkRank findByNameExact(String name) {
+        return parkRankRepository.findByName(name);
     }
 
     public ParkRank create(ParkRankInputDto input) {

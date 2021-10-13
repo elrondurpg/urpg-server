@@ -1,5 +1,7 @@
 package com.pokemonurpg.attack.input;
 
+import com.pokemonurpg.ability.models.Ability;
+import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
@@ -7,8 +9,10 @@ import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
 import com.pokemonurpg.contest.models.RSEContestMoveType;
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.species.models.Type;
 
@@ -20,7 +24,8 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackInputDto {
+@UniqueName(type = Attack.class)
+public class AttackInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 17)
     private String name;

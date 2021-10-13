@@ -20,11 +20,34 @@ public class KnownGymLeaderService implements NamedObjectService<KnownGymLeader>
     }
 
     public KnownGymLeader findByName(String name) {
-        KnownGymLeader leader = knownGymLeaderRepository.findByName(name);
+        KnownGymLeader leader = findByNameExact(name);
         if (leader == null && name != null) {
             return knownGymLeaderRepository.findFirstByNameStartingWith(name);
         }
         else return leader;
+    }
+
+    public KnownGymLeader findByNameExact(String name) {
+        return knownGymLeaderRepository.findByName(name);
+    }
+
+    public void create(String name) {
+        KnownGymLeader leader = findByNameExact(name);
+        if (leader == null) {
+            leader = new KnownGymLeader();
+            leader.setName(name);
+            knownGymLeaderRepository.save(leader);
+        }
+    }
+
+    public void update(String newName, String oldName) {
+        if (newName != null && oldName != null) {
+            KnownGymLeader leader = knownGymLeaderRepository.findByName(oldName);
+            if (leader != null) {
+                leader.setName(newName);
+                knownGymLeaderRepository.save(leader);
+            }
+        }
     }
 
     public void update(KnownGymLeaderInputDto input) {

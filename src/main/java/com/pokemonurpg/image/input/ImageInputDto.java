@@ -1,10 +1,12 @@
 package com.pokemonurpg.image.input;
 
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.image.models.ImageFolder;
 
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class ImageInputDto {
@@ -14,6 +16,7 @@ public class ImageInputDto {
 
     @NotNull
     @Size(min = 1, max = 50)
+    @Pattern(regexp = "^[A-Za-z0-9\\-_\\.]*$")
     private String name;
 
     @NotNull

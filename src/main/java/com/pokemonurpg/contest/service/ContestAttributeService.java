@@ -31,6 +31,11 @@ public class ContestAttributeService implements NamedObjectService<ContestAttrib
         else return contestAttribute;
     }
 
+    @Override
+    public ContestAttribute findByNameExact(String name) {
+        return contestAttributeRepository.findByName(name);
+    }
+
     public ContestAttribute create(ContestAttributeInputDto input) {
         ContestAttribute contestAttribute = new ContestAttribute(input);
         contestAttributeRepository.save(contestAttribute);

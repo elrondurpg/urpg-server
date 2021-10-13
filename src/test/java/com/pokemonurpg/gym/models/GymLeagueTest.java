@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class GymLeagueTest {
     private final static Integer DBID = 3242;
     private final static String NAME = "NAME";
-    private final static List<Gym> GYMS = new ArrayList<>();
+    private final static List<GymOwnershipTerm> GYMS = new ArrayList<>();
 
     @Test
     public void testPojo() {

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 
@@ -91,11 +92,12 @@ public class Member implements NamedObject {
             inverseJoinColumns=@JoinColumn(name="ROLE_DBID")
     )
     @JsonIgnoreProperties("members")
+    @JsonView(value = { View.MemberView.Secure.class })
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy="owner")
     @JsonIgnoreProperties("owner")
-    private Set<Gym> gyms;
+    private Set<GymOwnershipTerm> gyms;
 
     @Column
     private Boolean bot;
@@ -113,11 +115,14 @@ public class Member implements NamedObject {
     private List<GymVictory> gymVictories;
 
     public Member() {
+        salt = RANDOM.nextInt(1000000000);
     }
 
     public Member(MemberInputDto input) {
+        this();
         this.update(input);
-        salt = RANDOM.nextInt(1000000000);
+        setBot(input.getBot());
+        if (bot == null) bot = false;
     }
 
     public void update(MemberInputDto input) {
@@ -128,7 +133,6 @@ public class Member implements NamedObject {
         setLosses(input.getLosses());
         setDraws(input.getDraws());
         setJoinDate(input.getJoinDate());
-        setBot(input.getBot());
     }
 
     public Integer getDbid() {
@@ -297,11 +301,11 @@ public class Member implements NamedObject {
         this.banExpiration = banExpiration;
     }
 
-    public Set<Gym> getGyms() {
+    public Set<GymOwnershipTerm> getGyms() {
         return gyms;
     }
 
-    public void setGyms(Set<Gym> gyms) {
+    public void setGyms(Set<GymOwnershipTerm> gyms) {
         this.gyms = gyms;
     }
 
@@ -337,5 +341,9 @@ public class Member implements NamedObject {
 
     public void setGymVictories(List<GymVictory> gymVictories) {
         this.gymVictories = gymVictories;
+    }
+
+    public boolean hasStarter() {
+        return pokemon.stream().anyMatch(ownedPokemon -> "Starter".equalsIgnoreCase(ownedPokemon.getObtained().getName()));
     }
 }

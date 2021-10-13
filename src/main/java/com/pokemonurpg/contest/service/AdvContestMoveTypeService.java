@@ -31,6 +31,11 @@ public class AdvContestMoveTypeService implements NamedObjectService<AdvContestM
         else return advContestMoveType;
     }
 
+    @Override
+    public AdvContestMoveType findByNameExact(String name) {
+        return advContestMoveTypeRepository.findByName(name);
+    }
+
     public AdvContestMoveType create(ContestMoveTypeInputDto input) {
         AdvContestMoveType advContestMoveType = new AdvContestMoveType(input);
         advContestMoveTypeRepository.save(advContestMoveType);

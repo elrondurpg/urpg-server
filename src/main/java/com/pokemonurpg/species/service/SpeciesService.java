@@ -61,23 +61,28 @@ public class SpeciesService implements NamedObjectService<Species> {
     public Integer findMaxDexno() { return speciesRepository.findMaxDexno(); }
 
     public Species findByName(String name) {
-        Species species = speciesRepository.findByName(name);
+        Species species = findByNameExact(name);
         if (species == null && name != null) {
             return speciesRepository.findFirstByNameStartingWith(name);
         }
         else return species;
     }
 
+    @Override
+    public Species findByNameExact(String name) {
+        return speciesRepository.findByName(name);
+    }
+
     /*public List<String> findByRank(String rankName) {
         List<String> speciesNames = new ArrayList<>();
         List<Species> speciesList = null;
 
-        StoryRank rank = storyRankRepository.findByName(rankName);
+        StoryRank rank = storyRankRepository.findByNameExact(rankName);
         if (rank != null) {
             speciesList = speciesRepository.findByStoryRank(rank);
         }
         else {
-            ParkRank parkRank = parkRankRepository.findByName(rankName);
+            ParkRank parkRank = parkRankRepository.findByNameExact(rankName);
             if (parkRank != null) {
                 speciesList = speciesRepository.findByParkRank(parkRank);
             }

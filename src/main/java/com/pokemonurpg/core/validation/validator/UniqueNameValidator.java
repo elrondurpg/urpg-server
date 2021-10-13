@@ -32,7 +32,7 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Uniq
             String newName = input.getName();
             if (newName != null) {
                 NamedObjectService namedObjectService = namedObjectServiceFactory.getServiceForClass(getType());
-                NamedObject existingObject = namedObjectService.findByName(newName);
+                NamedObject existingObject = namedObjectService.findByNameExact(newName);
 
                 if (existingObject != null) {
                     Integer requestDbid = requestPathVariableService.findIntByName("dbid");

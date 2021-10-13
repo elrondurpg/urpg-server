@@ -1,5 +1,6 @@
 package com.pokemonurpg.core.service;
 
+import com.pokemonurpg.gym.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
 import com.pokemonurpg.stats.service.EarnedRibbonService;
 import com.pokemonurpg.stats.service.LegendaryProgressService;
@@ -15,6 +16,9 @@ public class IndexedObjectServiceFactory {
     private EarnedRibbonService earnedRibbonService;
 
     @Resource
+    private GymOwnershipTermService gymOwnershipTermService;
+
+    @Resource
     private GymService gymService;
 
     @Resource
@@ -28,6 +32,7 @@ public class IndexedObjectServiceFactory {
             switch (type.getSimpleName()) {
                 case "EarnedRibbon": return earnedRibbonService;
                 case "Gym": return gymService;
+                case "GymOwnershipTerm": return gymOwnershipTermService;
                 case "LegendaryProgress": return legendaryProgressService;
                 case "OwnedPokemon": return ownedPokemonService;
             }

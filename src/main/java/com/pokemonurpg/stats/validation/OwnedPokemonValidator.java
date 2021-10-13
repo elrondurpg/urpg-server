@@ -3,6 +3,7 @@ package com.pokemonurpg.stats.validation;
 import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.models.SpeciesAbility;
 import com.pokemonurpg.species.models.SpeciesAttack;
+import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
 import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
@@ -10,12 +11,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class OwnedPokemonValidator {
+
+    @Resource
+    private SpeciesService speciesService;
+
+    public boolean isValidStarter(Species species) {
+        return isOwnable(species) && species.getPreEvolution() == null && !speciesService.findByPreEvolution(species).isEmpty();
+    }
 
     public boolean isValid(Species species, OwnedPokemonInputDto input) {
         return isOwnable(species)
@@ -30,7 +39,7 @@ public class OwnedPokemonValidator {
         else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't own a Mega form!");
     }
 
-    boolean isGenderLegal(Species species, String gender) {
+    public boolean isGenderLegal(Species species, String gender) {
         if (gender == null) {
             return true;
         }

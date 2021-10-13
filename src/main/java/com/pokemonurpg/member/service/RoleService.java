@@ -30,11 +30,16 @@ public class RoleService implements NamedObjectService<Role> {
     }
 
     public Role findByName(String name) {
-        Role role = roleRepository.findByName(name);
+        Role role = findByNameExact(name);
         if (role == null && name != null) {
             return roleRepository.findFirstByNameStartingWith(name);
         }
         else return role;
+    }
+
+    @Override
+    public Role findByNameExact(String name) {
+        return roleRepository.findByName(name);
     }
 
     public Role create(RoleInputDto input) {

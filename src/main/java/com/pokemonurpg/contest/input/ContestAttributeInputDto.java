@@ -1,13 +1,17 @@
 package com.pokemonurpg.contest.input;
 
+import com.pokemonurpg.contest.models.ContestAttribute;
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ContestAttributeInputDto {
+@UniqueName(type = ContestAttribute.class)
+public class ContestAttributeInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
-    @Size(min = 3, max = 6)
+    @Size(min = 3, max = 15)
     private String name;
 
     public String getName() {

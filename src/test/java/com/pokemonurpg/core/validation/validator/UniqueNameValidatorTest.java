@@ -59,7 +59,7 @@ public class UniqueNameValidatorTest {
         input.setName(NAME);
 
         when(namedObjectServiceFactory.getServiceForClass(Member.class)).thenReturn(memberService);
-        when(memberService.findByName(NAME)).thenReturn(null);
+        when(memberService.findByNameExact(NAME)).thenReturn(null);
 
         assertTrue(uniqueNameValidator.isValid(input, null));
     }
@@ -72,7 +72,7 @@ public class UniqueNameValidatorTest {
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(null);
 
         when(namedObjectServiceFactory.getServiceForClass(Member.class)).thenReturn(memberService);
-        when(memberService.findByName(NAME)).thenReturn(MEMBER);
+        when(memberService.findByNameExact(NAME)).thenReturn(MEMBER);
         when(MEMBER.getDbid()).thenReturn(WRONG_DBID);
 
         assertFalse(uniqueNameValidator.isValid(input, null));
@@ -86,7 +86,7 @@ public class UniqueNameValidatorTest {
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(REQUEST_DBID);
 
         when(namedObjectServiceFactory.getServiceForClass(Member.class)).thenReturn(memberService);
-        when(memberService.findByName(NAME)).thenReturn(MEMBER);
+        when(memberService.findByNameExact(NAME)).thenReturn(MEMBER);
         when(MEMBER.getDbid()).thenReturn(WRONG_DBID);
 
         assertFalse(uniqueNameValidator.isValid(input, null));
@@ -100,7 +100,7 @@ public class UniqueNameValidatorTest {
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(REQUEST_DBID);
 
         when(namedObjectServiceFactory.getServiceForClass(Member.class)).thenReturn(memberService);
-        when(memberService.findByName(NAME)).thenReturn(MEMBER);
+        when(memberService.findByNameExact(NAME)).thenReturn(MEMBER);
         when(MEMBER.getDbid()).thenReturn(REQUEST_DBID);
 
         assertTrue(uniqueNameValidator.isValid(input, null));

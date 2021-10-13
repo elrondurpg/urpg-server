@@ -50,10 +50,16 @@ public class NamedObjectServiceFactory {
     private BadgeService badgeService;
 
     @Resource
+    private ChampionService championService;
+
+    @Resource
     private ContestAttributeService contestAttributeService;
 
     @Resource
     private DPPContestMoveTypeService dppContestMoveTypeService;
+
+    @Resource
+    private EliteFourService eliteFourService;
 
     @Resource
     private GymService gymService;
@@ -127,8 +133,10 @@ public class NamedObjectServiceFactory {
                 case "Attack": return attackService;
                 case "AttackTargetType": return attackTargetTypeService;
                 case "Badge": return badgeService;
+                case "Champion": return championService;
                 case "ContestAttribute": return contestAttributeService;
                 case "DPPContestMoveType": return dppContestMoveTypeService;
+                case "EliteFour": return eliteFourService;
                 case "Gym": return gymService;
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;

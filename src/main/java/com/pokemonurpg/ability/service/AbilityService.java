@@ -31,6 +31,11 @@ public class AbilityService implements NamedObjectService<Ability> {
         return ability;
     }
 
+    @Override
+    public Ability findByNameExact(String name) {
+        return abilityRepository.findByName(name);
+    }
+
     public Ability create(AbilityInputDto input) {
         Ability ability = new Ability(input);
         abilityRepository.save(ability);

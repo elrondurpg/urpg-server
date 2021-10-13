@@ -1,13 +1,17 @@
 package com.pokemonurpg.image.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.image.models.ImageFolder;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class ImageFolderInputDto {
+@UniqueName(type = ImageFolder.class)
+public class ImageFolderInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 25)
     private String name;

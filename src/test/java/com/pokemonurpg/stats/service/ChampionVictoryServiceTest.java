@@ -13,7 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -25,6 +27,7 @@ public class ChampionVictoryServiceTest {
     private final static Member CHALLENGER = mock(Member.class);
     private final static String LOG_URL = "LOG_URL";
     private final static ChampionVictory EXISTING_RECORD = mock(ChampionVictory.class);
+    private final static List<ChampionVictory> VICTORIES = new ArrayList<>();
 
     @InjectMocks
     private ChampionVictoryService championVictoryService;
@@ -42,6 +45,12 @@ public class ChampionVictoryServiceTest {
         input = new ChampionVictoryInputDto();
         input.setDefender(DEFENDER);
         input.setLogUrl(LOG_URL);
+    }
+
+    @Test
+    public void findAll() {
+        when(championVictoryRepository.findAll()).thenReturn(VICTORIES);
+        assertEquals(VICTORIES, championVictoryService.findAll());
     }
 
     @Test

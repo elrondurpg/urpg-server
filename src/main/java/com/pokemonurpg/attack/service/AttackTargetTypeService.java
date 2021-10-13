@@ -31,6 +31,11 @@ public class AttackTargetTypeService implements NamedObjectService<AttackTargetT
         else return attackTargetType;
     }
 
+    @Override
+    public AttackTargetType findByNameExact(String name) {
+        return attackTargetTypeRepository.findByName(name);
+    }
+
     public AttackTargetType create(AttackTargetTypeInputDto input) {
         AttackTargetType attackTargetType = new AttackTargetType(input);
         attackTargetTypeRepository.save(attackTargetType);

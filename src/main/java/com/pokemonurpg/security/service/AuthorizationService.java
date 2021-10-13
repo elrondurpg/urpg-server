@@ -15,18 +15,10 @@ public class AuthorizationService
     public boolean isAuthorized(String permission) {
         SessionService sessionService = sessionServiceProvider.get();
         Member member = sessionService.getAuthenticatedMember();
-        if (member != null) {
-            if (!member.getBanned()) {
-                for (Role role : member.getRoles()) {
-                    for (Permission perm : role.getPermissions()) {
-                        if (perm.getName().equals(permission)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+        return member != null &&
+            !member.getBanned() &&
+            sessionService.getAuthenticatedPermissions().stream()
+                .anyMatch(permissionObj -> permissionObj != null && permissionObj.getName().equals(permission));
     }
 
 }

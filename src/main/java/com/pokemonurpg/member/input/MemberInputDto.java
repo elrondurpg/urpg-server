@@ -3,6 +3,8 @@ package com.pokemonurpg.member.input;
 
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLeader;
+import com.pokemonurpg.core.validation.annotation.UniqueDiscordId;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.*;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @UniqueName(type = Member.class)
+@UniqueDiscordId
 public class MemberInputDto implements UniquelyNamedInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
@@ -24,6 +27,7 @@ public class MemberInputDto implements UniquelyNamedInputDto {
     private String discordId;
 
     @NotNull(groups = { ObjectCreation.class })
+    @DoesNotConflictWithKnownGymLeader
     @Size(min = 3, max = 30)
     private String name;
 

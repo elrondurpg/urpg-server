@@ -3,7 +3,8 @@ package com.pokemonurpg.contest.controller;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.contest.models.RSEContestMoveType;
 import com.pokemonurpg.contest.service.RSEContestMoveTypeService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +22,14 @@ public class RSEContestMoveTypeController {
     @Resource
     private RSEContestMoveTypeService rseContestMoveTypeService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return rseContestMoveTypeService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     RSEContestMoveType findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class RSEContestMoveTypeController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Contest Type")
+    @AllowAuthorized(permission = "Write Contest Type")
     @PostMapping
     public @ResponseBody
     RSEContestMoveType create(@Valid @RequestBody ContestMoveTypeInputDto input) {
         return rseContestMoveTypeService.create(input);
     }
 
-    @Authorized(permission = "Write Contest Type")
+    @AllowAuthorized(permission = "Write Contest Type")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     RSEContestMoveType update(@Valid @RequestBody ContestMoveTypeInputDto input, @PathVariable int dbid) {

@@ -1,7 +1,10 @@
 package com.pokemonurpg.member.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.member.models.Role;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -9,7 +12,8 @@ import javax.validation.constraints.Size;
 import java.util.Collections;
 import java.util.List;
 
-public class RoleInputDto  {
+@UniqueName(type = Role.class)
+public class RoleInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = {ObjectCreation.class})
     @Size(min = 3, max = 21)
     private String name;

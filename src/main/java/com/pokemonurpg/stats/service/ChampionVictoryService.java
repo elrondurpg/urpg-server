@@ -7,12 +7,17 @@ import com.pokemonurpg.stats.repository.ChampionVictoryRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class ChampionVictoryService {
 
     @Resource
     private ChampionVictoryRepository championVictoryRepository;
+
+    public List<ChampionVictory> findAll() {
+        return championVictoryRepository.findAll();
+    }
 
     public void update(ChampionVictoryInputDto input, Member challenger) {
         ChampionVictory existingRecord = championVictoryRepository.findByChallengerAndDefender(challenger, input.getDefender());

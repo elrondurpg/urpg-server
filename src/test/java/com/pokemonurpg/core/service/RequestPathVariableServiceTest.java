@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 public class RequestPathVariableServiceTest {
     private final static Integer DBID = 4322;
     private final static String NAME = "NAME";
+    private final static String INT_AS_STRING = "89742";
 
     private RequestPathVariableService requestPathVariableService = new RequestPathVariableService();
 
@@ -27,6 +28,7 @@ public class RequestPathVariableServiceTest {
         Map<String, Object> pathVariables = new HashMap<>();
         pathVariables.put("dbid", DBID);
         pathVariables.put("name", NAME);
+        pathVariables.put("intAsString", INT_AS_STRING);
 
         when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenReturn(pathVariables);
     }
@@ -52,6 +54,15 @@ public class RequestPathVariableServiceTest {
     }
 
     @Test
+    public void findStringByName_ReturnsNull_OnException() {
+        request = mock(HttpServletRequest.class);
+        when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenThrow(new IllegalStateException());
+        ServletRequestAttributes attrs = new ServletRequestAttributes(request);
+        RequestContextHolder.setRequestAttributes(attrs);
+        assertNull(requestPathVariableService.findStringByName("name"));
+    }
+
+    @Test
     public void findIntegerByName() {
         ServletRequestAttributes attrs = new ServletRequestAttributes(request);
         RequestContextHolder.setRequestAttributes(attrs);
@@ -69,5 +80,21 @@ public class RequestPathVariableServiceTest {
     public void findIntegerByNameReturnsNullWhenAttrsIsNull() {
         RequestContextHolder.setRequestAttributes(null);
         assertNull(requestPathVariableService.findIntByName("dbid"));
+    }
+
+    @Test
+    public void findIntegerByName_ReturnsNull_OnException() {
+        request = mock(HttpServletRequest.class);
+        when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenThrow(new IllegalStateException());
+        ServletRequestAttributes attrs = new ServletRequestAttributes(request);
+        RequestContextHolder.setRequestAttributes(attrs);
+        assertNull(requestPathVariableService.findIntByName("dbid"));
+    }
+
+    @Test
+    public void findIntegerByName_ReturnsInteger_WhenVariableIsAString() {
+        ServletRequestAttributes attrs = new ServletRequestAttributes(request);
+        RequestContextHolder.setRequestAttributes(attrs);
+        assertEquals((Integer) Integer.parseInt(INT_AS_STRING), requestPathVariableService.findIntByName("intAsString"));
     }
 }

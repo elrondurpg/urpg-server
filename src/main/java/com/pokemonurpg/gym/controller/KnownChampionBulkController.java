@@ -3,7 +3,8 @@ package com.pokemonurpg.gym.controller;
 import com.pokemonurpg.gym.input.KnownChampionBulkInputDto;
 import com.pokemonurpg.gym.service.KnownChampionBulkService;
 import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,13 +24,14 @@ public class KnownChampionBulkController {
     @Resource
     private KnownChampionBulkService knownChampionBulkService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return knownChampionService.findAllNames();
     }
 
-    @Authorized(permission = "Write Gym")
+    @AllowAuthorized(permission = "Write Gym")
     @PostMapping
     public @ResponseBody
     List<String> update(@Valid @RequestBody KnownChampionBulkInputDto input) {

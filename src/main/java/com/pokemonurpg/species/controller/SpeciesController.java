@@ -1,7 +1,8 @@
 package com.pokemonurpg.species.controller;
 
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.species.input.SpeciesInputDto;
 import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.service.SpeciesService;
@@ -21,12 +22,14 @@ public class SpeciesController {
     @Resource
     private SpeciesService speciesService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return speciesService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     Species findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class SpeciesController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Species")
+    @AllowAuthorized(permission = "Write Species")
     @PostMapping
     public @ResponseBody
     Species create(@Valid @RequestBody SpeciesInputDto input) {
         return speciesService.create(input);
     }
 
-    @Authorized(permission = "Write Species")
+    @AllowAuthorized(permission = "Write Species")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     Species update(@Valid @RequestBody SpeciesInputDto input, @PathVariable int dbid) {

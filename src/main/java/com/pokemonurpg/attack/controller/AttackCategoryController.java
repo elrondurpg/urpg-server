@@ -3,8 +3,9 @@ package com.pokemonurpg.attack.controller;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
 import com.pokemonurpg.attack.service.AttackCategoryService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,14 @@ public class AttackCategoryController {
     @Resource
     private AttackCategoryService attackCategoryService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return attackCategoryService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path = "/{name}")
     public @ResponseBody
     AttackCategory findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class AttackCategoryController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Attack")
+    @AllowAuthorized(permission = "Write Attack")
     @PostMapping
     public @ResponseBody
     AttackCategory create(@Valid @RequestBody AttackCategoryInputDto input) {
         return attackCategoryService.create(input);
     }
 
-    @Authorized(permission = "Write Attack")
+    @AllowAuthorized(permission = "Write Attack")
     @PutMapping(path = "/{dbid}")
     public @ResponseBody
     AttackCategory update(@Valid @RequestBody AttackCategoryInputDto input, @PathVariable int dbid) {

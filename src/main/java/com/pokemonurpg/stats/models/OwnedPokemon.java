@@ -30,7 +30,7 @@ public class OwnedPokemon {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories"})
     @JsonView(value = { View.MemberView.Pokemon.class })
     private Member trainer;
 
@@ -108,18 +108,18 @@ public class OwnedPokemon {
 
     @Column
     @JsonView(value = { View.MemberView.Summary.class })
-    private Boolean job = false;
+    private Boolean job;
 
     @Column
     @JsonView(value = { View.MemberView.Summary.class })
-    private Boolean box = false;
+    private Boolean box;
 
     @Column
     @JsonView(value = { View.MemberView.Summary.class })
-    private Boolean uft = false;
+    private Boolean uft;
 
     @Column
-    private Boolean rental = false;
+    private Boolean rental;
 
     @Transient
     private Boolean fullyEvolved = false;
@@ -127,10 +127,25 @@ public class OwnedPokemon {
     public OwnedPokemon() {
     }
 
-    public OwnedPokemon(OwnedPokemonInputDto input, Member member, Species species) {
-        this.update(input);
+    public OwnedPokemon(Member member, Species species, String gender) {
         setTrainer(member);
         setSpecies(species);
+        setGender(gender);
+        setJob(false);
+        setBox(false);
+        setUft(false);
+        setRental(false);
+    }
+
+    public OwnedPokemon(OwnedPokemonInputDto input, Member member, Species species) {
+        update(input);
+        setTrainer(member);
+        setSpecies(species);
+        setRental(input.getRental());
+        if (job == null) setJob(false);
+        if (box == null) setBox(false);
+        if (uft == null) setUft(false);
+        if (rental == null) setRental(false);
     }
 
     public void update(OwnedPokemonInputDto input) {
@@ -142,7 +157,6 @@ public class OwnedPokemon {
         setJob(input.getJob());
         setBox(input.getBox());
         setUft(input.getUft());
-        setRental(input.getRental());
     }
 
     public Integer getDbid() {

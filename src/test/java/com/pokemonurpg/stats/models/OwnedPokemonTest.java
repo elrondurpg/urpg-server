@@ -33,11 +33,11 @@ public class OwnedPokemonTest {
     private final static Set<Ability> OWNED_HIDDEN_ABILITIES = new HashSet<>();
     private final static Set<Attack> OWNED_EXTRA_MOVES = new HashSet<>();
     private final static List<EarnedRibbon> EARNED_RIBBONS = new ArrayList<>();
-    private final static Boolean JOB = true;
-    private final static Boolean BOX = true;
-    private final static Boolean UFT = true;
     private final static Boolean FULLY_EVOLVED = true;
-    private final static Boolean RENTAL = true;
+    private final static Boolean JOB = null;
+    private final static Boolean RENTAL = null;
+    private final static Boolean UFT = null;
+    private final static Boolean BOX = null;
 
     @Test
     public void testPojo() {
@@ -50,7 +50,6 @@ public class OwnedPokemonTest {
         pokemon.setOwnedExtraMoves(OWNED_EXTRA_MOVES);
         pokemon.setEarnedRibbons(EARNED_RIBBONS);
         pokemon.setFullyEvolved(FULLY_EVOLVED);
-        pokemon.setRental(RENTAL);
 
         assertEquals(DBID, pokemon.getDbid());
         assertEquals(NATURE, pokemon.getNature());
@@ -60,7 +59,6 @@ public class OwnedPokemonTest {
         assertEquals(OWNED_EXTRA_MOVES, pokemon.getOwnedExtraMoves());
         assertEquals(EARNED_RIBBONS, pokemon.getEarnedRibbons());
         assertEquals(FULLY_EVOLVED, pokemon.getFullyEvolved());
-        assertEquals(RENTAL, pokemon.getRental());
     }
 
     @Test
@@ -73,8 +71,8 @@ public class OwnedPokemonTest {
         input.setHiddenPowerLink(HIDDEN_POWER_LINK);
         input.setJob(JOB);
         input.setBox(BOX);
-        input.setUft(UFT);
         input.setRental(RENTAL);
+        input.setUft(UFT);
 
         OwnedPokemon pokemon = new OwnedPokemon(input, TRAINER, SPECIES);
         assertEquals(TRAINER, pokemon.getTrainer());
@@ -84,9 +82,9 @@ public class OwnedPokemonTest {
         assertEquals(OBTAINED_LINK, pokemon.getObtainedLink());
         assertEquals(NICKNAME, pokemon.getNickname());
         assertEquals(HIDDEN_POWER_LINK, pokemon.getHiddenPowerLink());
-        assertEquals(JOB, pokemon.getJob());
-        assertEquals(BOX, pokemon.getBox());
-        assertEquals(UFT, pokemon.getUft());
-        assertEquals(RENTAL, pokemon.getRental());
+        assertEquals(false, pokemon.getJob());
+        assertEquals(false, pokemon.getBox());
+        assertEquals(false, pokemon.getUft());
+        assertEquals(false, pokemon.getRental());
     }
 }

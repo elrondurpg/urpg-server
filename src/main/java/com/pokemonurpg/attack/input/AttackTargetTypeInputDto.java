@@ -1,11 +1,15 @@
 package com.pokemonurpg.attack.input;
 
+import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AttackTargetTypeInputDto {
+@UniqueName(type = AttackTargetType.class)
+public class AttackTargetTypeInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 35)
     private String name;

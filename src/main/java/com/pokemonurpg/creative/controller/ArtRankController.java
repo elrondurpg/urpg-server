@@ -4,7 +4,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.creative.input.ArtRankInputDto;
 import com.pokemonurpg.creative.models.ArtRank;
 import com.pokemonurpg.creative.service.ArtRankService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,14 @@ public class ArtRankController {
     @Resource
     private ArtRankService artRankService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return artRankService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     ArtRank findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class ArtRankController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Art")
+    @AllowAuthorized(permission = "Write Art")
     @PostMapping
     public @ResponseBody
     ArtRank create(@Valid @RequestBody ArtRankInputDto input) {
         return artRankService.create(input);
     }
 
-    @Authorized(permission = "Write Art")
+    @AllowAuthorized(permission = "Write Art")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     ArtRank update(@Valid @RequestBody ArtRankInputDto input, @PathVariable int dbid) {

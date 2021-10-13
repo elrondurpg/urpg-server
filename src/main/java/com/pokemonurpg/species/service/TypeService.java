@@ -26,11 +26,16 @@ public class TypeService implements NamedObjectService<Type> {
     }
 
     public Type findByName(String name) {
-        Type type = typeRepository.findByName(name);
+        Type type = findByNameExact(name);
         if (type == null && name != null) {
             return typeRepository.findFirstByNameStartingWith(name);
         }
         else return type;
+    }
+
+    @Override
+    public Type findByNameExact(String name) {
+        return typeRepository.findByName(name);
     }
 
     public Type create(TypeInputDto input) {

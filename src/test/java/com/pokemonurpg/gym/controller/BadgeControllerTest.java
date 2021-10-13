@@ -5,15 +5,19 @@ import com.pokemonurpg.gym.input.BadgeInputDto;
 import com.pokemonurpg.gym.service.BadgeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BadgeControllerTest {
@@ -27,6 +31,9 @@ public class BadgeControllerTest {
     private BadgeService badgeService;
 
     private Badge badge = new Badge();
+
+    @Captor
+    ArgumentCaptor<Integer> captor;
 
     @Test
     public void findAllNames() {
@@ -55,6 +62,20 @@ public class BadgeControllerTest {
         input.setName(NAME);
         when(badgeService.update(input, DBID)).thenReturn(badge);
         assertEquals(badge, badgeController.update(input, DBID));
+    }
+
+    @Test
+    public void delete() {
+        badgeController.delete(DBID);
+        verify(badgeService, times(1)).delete(captor.capture());
+        assertEquals(DBID, captor.getValue());
+    }
+
+    @Test
+    public void delete_ThrowsInternalServerError_OnException() {
+        doThrow(new IllegalStateException()).when(badgeService).delete(DBID);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> badgeController.delete(DBID));
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.getStatus());
     }
 
 }

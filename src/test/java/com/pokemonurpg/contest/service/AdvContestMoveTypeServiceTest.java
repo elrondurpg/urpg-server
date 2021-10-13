@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdvContestMoveTypeServiceTest {
+    private final static AdvContestMoveType    ADV_CONTEST_MOVE_TYPE = mock(AdvContestMoveType.class);
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
 
@@ -54,6 +55,12 @@ public class AdvContestMoveTypeServiceTest {
         when(advContestMoveTypeRepository.findByName(NAME)).thenReturn(null);
         when(advContestMoveTypeRepository.findFirstByNameStartingWith(NAME)).thenReturn(advContestMoveType);
         assertEquals(advContestMoveType, advContestMoveTypeService.findByName(NAME));
+    }
+
+    @Test
+    public void findByNameExact() {
+        when(advContestMoveTypeRepository.findByName(NAME)).thenReturn(ADV_CONTEST_MOVE_TYPE);
+        assertEquals(ADV_CONTEST_MOVE_TYPE, advContestMoveTypeService.findByNameExact(NAME));
     }
 
     @Test

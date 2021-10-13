@@ -4,7 +4,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.creative.input.ParkLocationInputDto;
 import com.pokemonurpg.creative.models.ParkLocation;
 import com.pokemonurpg.creative.service.ParkLocationService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,14 @@ public class ParkLocationController {
     @Resource
     private ParkLocationService parkLocationService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return parkLocationService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     ParkLocation findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class ParkLocationController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Park")
+    @AllowAuthorized(permission = "Write Park")
     @PostMapping
     public @ResponseBody
     ParkLocation create(@Valid @RequestBody ParkLocationInputDto input) {
         return parkLocationService.create(input);
     }
 
-    @Authorized(permission = "Write Park")
+    @AllowAuthorized(permission = "Write Park")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     ParkLocation update(@Valid @RequestBody ParkLocationInputDto input, @PathVariable int dbid) {

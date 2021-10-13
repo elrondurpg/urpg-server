@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface ExistsInDb {
 
-    String message() default "Invalid attribute";
+    String message() default "The provided index does not belong to an existing object.";
 
     Class<?>[] groups() default { };
 

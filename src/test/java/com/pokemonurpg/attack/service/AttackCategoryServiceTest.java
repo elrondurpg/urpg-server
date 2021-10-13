@@ -1,5 +1,6 @@
 package com.pokemonurpg.attack.service;
 
+import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AttackCategoryServiceTest {
+    private final static AttackCategory ATTACK_CATEGORY = mock(AttackCategory.class);
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
 
@@ -54,6 +56,12 @@ public class AttackCategoryServiceTest {
         when(attackCategoryRepository.findByName(NAME)).thenReturn(null);
         when(attackCategoryRepository.findFirstByNameStartingWith(NAME)).thenReturn(category);
         assertEquals(category, attackCategoryService.findByName(NAME));
+    }
+
+    @Test
+    public void findByNameExact() {
+        when(attackCategoryRepository.findByName(NAME)).thenReturn(ATTACK_CATEGORY);
+        assertEquals(ATTACK_CATEGORY, attackCategoryService.findByNameExact(NAME));
     }
 
     @Test

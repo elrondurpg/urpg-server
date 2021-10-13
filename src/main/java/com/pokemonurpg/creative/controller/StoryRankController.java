@@ -4,7 +4,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.creative.input.StoryRankInputDto;
 import com.pokemonurpg.creative.models.StoryRank;
 import com.pokemonurpg.creative.service.StoryRankService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,14 @@ public class StoryRankController {
     @Resource
     private StoryRankService storyRankService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return storyRankService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     StoryRank findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class StoryRankController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Story")
+    @AllowAuthorized(permission = "Write Story")
     @PostMapping
     public @ResponseBody
     StoryRank create(@Valid @RequestBody StoryRankInputDto input) {
         return storyRankService.create(input);
     }
 
-    @Authorized(permission = "Write Story")
+    @AllowAuthorized(permission = "Write Story")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     StoryRank update(@Valid @RequestBody StoryRankInputDto input, @PathVariable int dbid) {

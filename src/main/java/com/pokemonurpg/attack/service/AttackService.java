@@ -65,6 +65,11 @@ public class AttackService implements NamedObjectService<Attack> {
         return attack;
     }
 
+    @Override
+    public Attack findByNameExact(String name) {
+        return attackRepository.findByName(name);
+    }
+
     public Attack create(AttackInputDto input) {
         Attack attack = new Attack(input);
         updateEmbeddedValues(attack, input);

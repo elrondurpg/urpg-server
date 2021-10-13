@@ -1,6 +1,7 @@
 package com.pokemonurpg.species.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.*;
 import com.pokemonurpg.creative.models.ArtRank;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SpeciesInputDto {
+@UniqueName(type = Species.class)
+public class SpeciesInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Min(1)
     private Integer dexno;

@@ -123,6 +123,12 @@ public class AttackServiceTest {
     }
 
     @Test
+    public void findByNameExact() {
+        when(attackRepository.findByName(NAME)).thenReturn(ATTACK);
+        assertEquals(ATTACK, attackService.findByNameExact(NAME));
+    }
+
+    @Test
     public void create() {
         AttackInputDto input = createAttackInputDto();
         Attack attack = attackService.create(input);

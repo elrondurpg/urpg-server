@@ -22,7 +22,7 @@ public class GymLeague implements NamedObject {
 
     @OneToMany(mappedBy="league")
     @JsonIgnoreProperties("league")
-    private List<Gym> gyms;
+    private List<GymOwnershipTerm> gyms;
 
     public GymLeague() {}
     public GymLeague(GymLeagueInputDto input) {
@@ -51,11 +51,11 @@ public class GymLeague implements NamedObject {
         }
     }
 
-    public List<Gym> getGyms() {
+    public List<GymOwnershipTerm> getGyms() {
         return gyms;
     }
 
-    public void setGyms(List<Gym> gyms) {
+    public void setGyms(List<GymOwnershipTerm> gyms) {
         this.gyms = gyms;
     }
 }

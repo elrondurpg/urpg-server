@@ -19,6 +19,19 @@ public class OwnedItemService {
     @Resource
     private ItemRepository itemRepository;
 
+    public void add(Member member, String name, int quantity) {
+        Item item = itemRepository.findByName(name);
+        OwnedItem existingRecord = ownedItemRepository.findByTrainerAndItem(member, item);
+        if (existingRecord != null) {
+            existingRecord.update(quantity);
+            ownedItemRepository.save(existingRecord);
+        }
+        else {
+            OwnedItem newRecord = new OwnedItem(member, item, quantity);
+            ownedItemRepository.save(newRecord);
+        }
+    }
+
     public void update(Member member, OwnedItemInputDto input) {
         Item item = itemRepository.findByName(input.getItem());
         OwnedItem existingRecord = ownedItemRepository.findByTrainerAndItem(member, item);

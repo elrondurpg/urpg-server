@@ -19,9 +19,6 @@ public class OAuthService {
 
     @Resource
     private OkHttpClientService okHttpClientService;
-
-    private Logger logger = LogManager.getLogger(OAuthService.class);
-
     private ObjectMapper mapper = new ObjectMapper();
 
     public OAuthAccessTokenResponse exchangeCodeForAccessToken(String code) {

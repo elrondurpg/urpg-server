@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AttackTargetTypeServiceTest {
+    private final static AttackTargetType ATTACK_TARGET_TYPE = mock(AttackTargetType.class);
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
     private final static String DESCRIPTION = "TEST DESCRIPTION";
@@ -55,6 +56,12 @@ public class AttackTargetTypeServiceTest {
         when(attackTargetTypeRepository.findByName(NAME)).thenReturn(null);
         when(attackTargetTypeRepository.findFirstByNameStartingWith(NAME)).thenReturn(attackTargetType);
         assertEquals(attackTargetType, attackTargetTypeService.findByName(NAME));
+    }
+
+    @Test
+    public void findByNameExact() {
+        when(attackTargetTypeRepository.findByName(NAME)).thenReturn(ATTACK_TARGET_TYPE);
+        assertEquals(ATTACK_TARGET_TYPE, attackTargetTypeService.findByNameExact(NAME));
     }
 
     @Test

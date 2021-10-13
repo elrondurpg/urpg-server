@@ -1,12 +1,16 @@
 package com.pokemonurpg.general.input;
 
 
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.general.models.Nature;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class NatureInputDto {
+@UniqueName(type = Nature.class)
+public class NatureInputDto implements UniquelyNamedInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 10)

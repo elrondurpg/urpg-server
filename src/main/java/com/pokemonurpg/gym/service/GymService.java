@@ -1,13 +1,13 @@
 package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.core.service.IndexedObjectService;
-import com.pokemonurpg.core.service.IndexedObjectServiceFactory;
 import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.input.GymInputDto;
+import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.species.service.TypeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,16 +20,13 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
     private GymRepository gymRepository;
 
     @Resource
-    private MemberService memberService;
-
-    @Resource
-    private GymLeagueService gymLeagueService;
-
-    @Resource
     private BadgeService badgeService;
 
     @Resource
-    private ItemService itemService;
+    private TypeService typeService;
+
+    @Resource
+    private GymOwnershipTermService gymOwnershipTermService;
 
     @Resource
     private GymPokemonService gymPokemonService;
@@ -43,18 +40,27 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
     }
 
     public Gym findByName(String name) {
-        Gym gym = gymRepository.findByName(name);
+        Gym gym = findByNameExact(name);
         if (gym == null && name != null) {
             return gymRepository.findFirstByNameStartingWith(name);
         }
         else return gym;
     }
 
+    @Override
+    public Gym findByNameExact(String name) {
+        return gymRepository.findByName(name);
+    }
+
+    public Gym findByCurrentOwnerRecord(GymOwnershipTerm ownerRecord) {
+        return gymRepository.findByCurrentOwnerRecord(ownerRecord);
+    }
+
+
     public Gym create(GymInputDto input) {
         Gym gym = new Gym(input);
         updateEmbeddedValues(input, gym);
         gymRepository.save(gym);
-        updateAssociatedValues(input, gym);
         return gym;
     }
 
@@ -64,19 +70,28 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
             gym.update(input);
             updateEmbeddedValues(input, gym);
             gymRepository.save(gym);
-            updateAssociatedValues(input, gym);
         }
         return gym;
     }
 
-    void updateEmbeddedValues(GymInputDto input, Gym gym) {
-        gym.setOwner(memberService.findByName(input.getOwner()));
-        gym.setLeague(gymLeagueService.findByName(input.getLeague()));
-        gym.setBadge(badgeService.findByName(input.getBadge()));
-        gym.setTm(itemService.findByName(input.getTm()));
+    public void updateCurrentOwnerRecord(Gym gym, GymOwnershipTerm record) {
+        gym.setCurrentOwnerRecord(record);
+        gymRepository.save(gym);
     }
 
-    void updateAssociatedValues(GymInputDto input, Gym gym) {
+    void updateEmbeddedValues(GymInputDto input, Gym gym) {
+        gym.setType(typeService.findByName(input.getType()));
+        gym.setBadge(badgeService.findByName(input.getBadge()));
         gymPokemonService.updateAll(input, gym);
+        if (input.getCurrentOwnerRecordDbid() != null)
+            gym.setCurrentOwnerRecord(gymOwnershipTermService.findByDbid(input.getCurrentOwnerRecordDbid()));
+        else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
+            gym.setCurrentOwnerRecord(null);
+            gym.getPokemon().clear();
+        }
+    }
+
+    public void delete(int dbid) {
+        gymRepository.deleteByDbid(dbid);
     }
 }

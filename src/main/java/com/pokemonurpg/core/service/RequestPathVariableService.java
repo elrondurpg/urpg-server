@@ -11,23 +11,33 @@ import java.util.Map;
 @Service
 public class RequestPathVariableService {
     public String findStringByName(String name) {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attrs != null) {
-            HttpServletRequest request = attrs.getRequest();
-            Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-            return (String) pathVariables.get(name);
+        try {
+            ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attrs != null) {
+                HttpServletRequest request = attrs.getRequest();
+                Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+                return (String) pathVariables.get(name);
+            }
+            else return null;
+        } catch (Exception e) {
+            return null;
         }
-        else return null;
     }
 
     public Integer findIntByName(String name) {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attrs != null) {
-            HttpServletRequest request = attrs.getRequest();
-            Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-            return Integer.parseInt((String) pathVariables.get(name));
+        try {
+            ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attrs != null) {
+                HttpServletRequest request = attrs.getRequest();
+                Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+                if (pathVariables.get(name) instanceof String) {
+                    return Integer.parseInt((String) pathVariables.get(name));
+                }
+                return (Integer) pathVariables.get(name);
+            } else return null;
+        } catch (Exception e) {
+            return null;
         }
-        else return null;
     }
 
 }

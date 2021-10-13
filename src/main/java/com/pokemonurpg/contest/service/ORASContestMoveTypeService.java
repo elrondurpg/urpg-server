@@ -24,11 +24,16 @@ public class ORASContestMoveTypeService implements NamedObjectService<ORASContes
     }
 
     public ORASContestMoveType findByName(String name) {
-        ORASContestMoveType orasContestMoveType = orasContestMoveTypeRepository.findByName(name);
+        ORASContestMoveType orasContestMoveType = findByNameExact(name);
         if (orasContestMoveType == null && name != null) {
             return orasContestMoveTypeRepository.findFirstByNameStartingWith(name);
         }
         else return orasContestMoveType;
+    }
+
+    @Override
+    public ORASContestMoveType findByNameExact(String name) {
+        return orasContestMoveTypeRepository.findByName(name);
     }
 
     public ORASContestMoveType create(ContestMoveTypeInputDto input) {

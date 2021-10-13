@@ -1,7 +1,7 @@
 package com.pokemonurpg.image.controller;
 
 import com.pokemonurpg.image.input.ImageInputDto;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.image.service.ImageService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class ImageController {
     @Resource
     private ImageService imageService;
 
-    @Authorized(permission = "Write Image")
+    @AllowAuthorized(permission = "Write Image")
     @PostMapping
     public @ResponseBody
     ImageInputDto create(@Valid @RequestBody ImageInputDto input) {

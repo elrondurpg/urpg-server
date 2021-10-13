@@ -24,11 +24,16 @@ public class ArtRankService implements NamedObjectService<ArtRank> {
     }
 
     public ArtRank findByName(String name) {
-        ArtRank artRank = artRankRepository.findByName(name);
+        ArtRank artRank = findByNameExact(name);
         if (artRank == null && name != null) {
             return artRankRepository.findFirstByNameStartingWith(name);
         }
         else return artRank;
+    }
+
+    @Override
+    public ArtRank findByNameExact(String name) {
+        return artRankRepository.findByName(name);
     }
 
     public ArtRank create(ArtRankInputDto input) {

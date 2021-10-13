@@ -24,11 +24,16 @@ public class ItemService implements NamedObjectService<Item> {
     }
 
     public Item findByName(String name) {
-        Item item = itemRepository.findByName(name);
+        Item item = findByNameExact(name);
         if (item == null && name != null) {
             return itemRepository.findFirstByNameStartingWith(name);
         }
         else return item;
+    }
+
+    @Override
+    public Item findByNameExact(String name) {
+        return itemRepository.findByName(name);
     }
 
     public List<Item> findByTypeIn(List<String> types) {

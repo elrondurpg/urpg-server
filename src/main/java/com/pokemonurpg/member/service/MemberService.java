@@ -1,7 +1,13 @@
 package com.pokemonurpg.member.service;
 
+import com.pokemonurpg.gym.service.KnownChampionService;
+import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
+import com.pokemonurpg.gym.service.KnownGymLeaderService;
+import com.pokemonurpg.member.models.KnownNameClaim;
+import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.service.AesEncryptionService;
+import com.pokemonurpg.security.service.AuthorizationService;
 import com.pokemonurpg.security.service.HashService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.MemberRoleInputDto;
@@ -12,6 +18,8 @@ import com.pokemonurpg.member.repository.MemberRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.stats.input.*;
 import com.pokemonurpg.stats.service.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -23,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 
 @Service
@@ -58,7 +67,22 @@ public class MemberService implements NamedObjectService<Member> {
     @Resource
     private GymVictoryService gymVictoryService;
 
-    public Member findByDbid(int dbid) {
+    @Resource
+    private KnownGymLeaderService knownGymLeaderService;
+
+    @Resource
+    private KnownEliteFourMemberService knownEliteFourMemberService;
+
+    @Resource
+    private KnownChampionService knownChampionService;
+
+    @Resource
+    private AuthorizationService authorizationService;
+
+    @Resource
+    private KnownNameClaimService knownNameClaimService;
+
+    public Member findByDbid(Integer dbid) {
         return memberRepository.findByDbid(dbid);
     }
 
@@ -74,14 +98,14 @@ public class MemberService implements NamedObjectService<Member> {
         return members.stream().map(Member::getName).collect(Collectors.toList());
     }
 
-    public Member findByName(String name) {
+    public Member findByNameExact(String name) {
         return memberRepository.findByName(name);
     }
 
-    public Member findByUsername(String username) {
-        Member member = memberRepository.findByName(username);
-        if (member == null && username != null) {
-            return memberRepository.findFirstByNameStartingWith(username);
+    public Member findByName(String name) {
+        Member member = findByNameExact(name);
+        if (member == null && name != null) {
+            return memberRepository.findFirstByNameStartingWith(name);
         }
         else return member;
     }
@@ -96,6 +120,49 @@ public class MemberService implements NamedObjectService<Member> {
         memberRepository.save(member);
         updateAssociatedValues(input, member);
         return member;
+    }
+
+    public Member registerNew(RegistrationInputDto input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
+        Member member = new Member();
+        member.setName(input.getName());
+        member.setDiscordId(discordId);
+        member.setBot(false);
+
+        member.setMoney(15000);
+
+        memberRepository.save(member);
+
+        ownedItemService.add(member, "Pokemon Mart Ticket", 3);
+        ownedItemService.add(member, "EM Mart Ticket", 3);
+        ownedItemService.add(member, "HM Mart Ticket", 1);
+        ownedItemService.add(member, "Starter Ribbon Coupon", 1);
+        ownedItemService.add(member, "Rare Candy", 5);
+
+        update(member, accessTokenResponse);
+        return member;
+    }
+
+    public Member registerVet(RegistrationInputDto input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
+        Member member = new Member();
+        member.setName(input.getName());
+        member.setDiscordId(discordId);
+        member.setBot(false);
+
+        memberRepository.save(member);
+
+        update(member, accessTokenResponse);
+        return member;
+    }
+
+    public void registerForKnownName(String discordId) {
+        KnownNameClaim claim = knownNameClaimService.findByDiscordId(discordId);
+        if (claim != null) {
+            Member member = new Member();
+            member.setName(claim.getName());
+            member.setDiscordId(discordId);
+            member.setBot(false);
+            memberRepository.save(member);
+        }
     }
 
     public void update(Member member, OAuthAccessTokenResponse accessTokenResponse) {
@@ -119,6 +186,7 @@ public class MemberService implements NamedObjectService<Member> {
     public Member update(MemberInputDto input, int dbid) {
         Member member = memberRepository.findByDbid(dbid);
         if (member != null) {
+            preupdateAssociatedValues(input, member);
             member.update(input);
             updateEmbeddedValues(input, member);
             memberRepository.save(member);
@@ -127,20 +195,28 @@ public class MemberService implements NamedObjectService<Member> {
         return member;
     }
 
+    private void preupdateAssociatedValues(MemberInputDto input, Member member) {
+        knownGymLeaderService.update(input.getName(), member.getName());
+        knownEliteFourMemberService.update(input.getName(), member.getName());
+        knownChampionService.update(input.getName(), member.getName());
+    }
+
     private void updateEmbeddedValues(MemberInputDto input, Member member) {
         updateRoles(input, member);
     }
 
     private void updateRoles(MemberInputDto input, Member member) {
-        Set<Role> currentRoles = member.getRoles();
+        if (authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION)) {
+            Set<Role> currentRoles = member.getRoles();
 
-        for (MemberRoleInputDto role : input.getRoles()) {
-            String name = role.getName();
-            Role roleObject = roleService.findByName(name);
-            if (role.getDelete())
-                currentRoles.remove(roleObject);
-            else
-                currentRoles.add(roleObject);
+            for (MemberRoleInputDto role : input.getRoles()) {
+                String name = role.getName();
+                Role roleObject = roleService.findByName(name);
+                if (role.getDelete())
+                    currentRoles.remove(roleObject);
+                else
+                    currentRoles.add(roleObject);
+            }
         }
     }
 
@@ -192,5 +268,10 @@ public class MemberService implements NamedObjectService<Member> {
         member.setRefreshTokenIv(null);
         member.setAccessToken(null);
         memberRepository.save(member);
+    }
+
+    public void delete(int dbid) {
+        // TODO delete dependencies properly
+        memberRepository.deleteByDbid(dbid);
     }
 }

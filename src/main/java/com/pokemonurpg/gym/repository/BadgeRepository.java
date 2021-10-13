@@ -12,4 +12,5 @@ public interface BadgeRepository extends JpaRepository<Badge, Integer> {
     Badge findByDbid(int dbid);
     Badge findByName(String name);
     Badge findFirstByNameStartingWith(String name);
+    void deleteByDbid(int dbid);
 }

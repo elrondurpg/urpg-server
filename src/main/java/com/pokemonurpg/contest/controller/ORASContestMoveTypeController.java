@@ -3,7 +3,8 @@ package com.pokemonurpg.contest.controller;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
 import com.pokemonurpg.contest.service.ORASContestMoveTypeService;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +22,14 @@ public class ORASContestMoveTypeController {
     @Resource
     private ORASContestMoveTypeService orasContestMoveTypeService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return orasContestMoveTypeService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     ORASContestMoveType findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class ORASContestMoveTypeController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Contest Type")
+    @AllowAuthorized(permission = "Write Contest Type")
     @PostMapping
     public @ResponseBody
     ORASContestMoveType create(@Valid @RequestBody ContestMoveTypeInputDto input) {
         return orasContestMoveTypeService.create(input);
     }
 
-    @Authorized(permission = "Write Contest Type")
+    @AllowAuthorized(permission = "Write Contest Type")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     ORASContestMoveType update(@Valid @RequestBody ContestMoveTypeInputDto input, @PathVariable int dbid) {

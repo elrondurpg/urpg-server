@@ -5,7 +5,6 @@ import com.pokemonurpg.core.service.NamedObjectServiceFactory;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 
 import javax.annotation.Resource;
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class ExistsInDbStringValidator extends ExistsInDbValidator<String> {
@@ -28,7 +27,7 @@ public class ExistsInDbStringValidator extends ExistsInDbValidator<String> {
         try {
             if (input == null) return true;
             NamedObjectService namedObjectService = namedObjectServiceFactory.getServiceForClass(type);
-            Object obj = namedObjectService.findByName(input);
+            Object obj = namedObjectService.findByNameExact(input);
             return obj != null;
         } catch (Exception e) {
             return false;

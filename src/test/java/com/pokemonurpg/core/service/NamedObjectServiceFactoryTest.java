@@ -81,10 +81,16 @@ public class NamedObjectServiceFactoryTest {
     private BadgeService badgeService;
 
     @Mock
+    private ChampionService championService;
+
+    @Mock
     private ContestAttributeService contestAttributeService;
 
     @Mock
     private DPPContestMoveTypeService dppContestMoveTypeService;
+
+    @Mock
+    private EliteFourService eliteFourService;
 
     @Mock
     private GymService gymService;
@@ -186,6 +192,12 @@ public class NamedObjectServiceFactoryTest {
     }
 
     @Test
+    public void returnsChampionService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Champion.class);
+        assertEquals(championService, service);
+    }
+
+    @Test
     public void returnsContestAttributeService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(ContestAttribute.class);
         assertEquals(contestAttributeService, service);
@@ -195,6 +207,12 @@ public class NamedObjectServiceFactoryTest {
     public void returnsDppContestMoveTypeService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(DPPContestMoveType.class);
         assertEquals(dppContestMoveTypeService, service);
+    }
+
+    @Test
+    public void returnsEliteFourService() {
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(EliteFour.class);
+        assertEquals(eliteFourService, service);
     }
 
     @Test

@@ -24,11 +24,16 @@ public class ParkLocationService implements NamedObjectService<ParkLocation> {
     }
 
     public ParkLocation findByName(String name) {
-        ParkLocation parkLocation = parkLocationRepository.findByName(name);
+        ParkLocation parkLocation = findByNameExact(name);
         if (parkLocation == null && name != null) {
             return parkLocationRepository.findFirstByNameStartingWith(name);
         }
         else return parkLocation;
+    }
+
+    @Override
+    public ParkLocation findByNameExact(String name) {
+        return parkLocationRepository.findByName(name);
     }
 
     public ParkLocation create(ParkLocationInputDto input) {

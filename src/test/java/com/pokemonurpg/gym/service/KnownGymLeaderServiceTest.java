@@ -21,7 +21,8 @@ import static org.mockito.Mockito.*;
 public class KnownGymLeaderServiceTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static String NAME = "NAME";
-    private final static KnownGymLeader KNOWN_GYM_LEADER = mock(KnownGymLeader.class);
+    private final static String OLD_NAME = "OLD_NAME";
+    private final static String NEW_NAME = "NEW_NAME";
 
     @InjectMocks
     private KnownGymLeaderService knownGymLeaderService;
@@ -32,6 +33,8 @@ public class KnownGymLeaderServiceTest {
     @Captor
     ArgumentCaptor<KnownGymLeader> captor;
 
+    private KnownGymLeader knownGymLeader = new KnownGymLeader();
+
     @Test
     public void findAllNames() {
         when(knownGymLeaderRepository.findAllNames()).thenReturn(ALL_NAMES);
@@ -40,18 +43,28 @@ public class KnownGymLeaderServiceTest {
 
     @Test
     public void findByName() {
-        when(knownGymLeaderRepository.findByName(NAME)).thenReturn(KNOWN_GYM_LEADER);
-        assertEquals(KNOWN_GYM_LEADER, knownGymLeaderService.findByName(NAME));
+        when(knownGymLeaderRepository.findByName(NAME)).thenReturn(knownGymLeader);
+        assertEquals(knownGymLeader, knownGymLeaderService.findByName(NAME));
     }
 
     @Test
     public void findFirstByNameStartingWith() {
-        when(knownGymLeaderRepository.findFirstByNameStartingWith(NAME)).thenReturn(KNOWN_GYM_LEADER);
-        assertEquals(KNOWN_GYM_LEADER, knownGymLeaderService.findByName(NAME));
+        when(knownGymLeaderRepository.findFirstByNameStartingWith(NAME)).thenReturn(knownGymLeader);
+        assertEquals(knownGymLeader, knownGymLeaderService.findByName(NAME));
     }
 
     @Test
     public void create() {
+        when(knownGymLeaderRepository.findByName(NAME)).thenReturn(null);
+        knownGymLeaderService.create(NAME);
+
+        verify(knownGymLeaderRepository, times(1)).save(captor.capture());
+        KnownGymLeader savedObject = captor.getValue();
+        assertEquals(NAME, savedObject.getName());
+    }
+
+    @Test
+    public void createByInputDto() {
         KnownGymLeaderInputDto input = new KnownGymLeaderInputDto();
         input.setName(NAME);
 
@@ -69,9 +82,19 @@ public class KnownGymLeaderServiceTest {
         input.setName(NAME);
         input.setDelete(true);
 
-        when(knownGymLeaderRepository.findByName(NAME)).thenReturn(KNOWN_GYM_LEADER);
+        when(knownGymLeaderRepository.findByName(NAME)).thenReturn(knownGymLeader);
 
         knownGymLeaderService.update(input);
-        verify(knownGymLeaderRepository, times(1)).delete(KNOWN_GYM_LEADER);
+        verify(knownGymLeaderRepository, times(1)).delete(knownGymLeader);
+    }
+
+    @Test
+    public void update_ByNewAndOldName_Succeeds() {
+        when(knownGymLeaderRepository.findByName(OLD_NAME)).thenReturn(knownGymLeader);
+        knownGymLeaderService.update(NEW_NAME, OLD_NAME);
+        assertEquals(NEW_NAME, knownGymLeader.getName());
+        verify(knownGymLeaderRepository, times(1)).save(captor.capture());
+        KnownGymLeader savedObject = captor.getValue();
+        assertEquals(knownGymLeader, savedObject);
     }
 }

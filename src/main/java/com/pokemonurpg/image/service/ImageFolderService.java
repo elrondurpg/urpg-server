@@ -34,6 +34,11 @@ public class ImageFolderService implements NamedObjectService<ImageFolder> {
     }
 
     public ImageFolder findByName(String name) {
+        return findByNameExact(name);
+    }
+
+    @Override
+    public ImageFolder findByNameExact(String name) {
         return imageFolderRepository.findByName(name);
     }
 

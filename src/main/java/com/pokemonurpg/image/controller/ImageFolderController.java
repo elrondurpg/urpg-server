@@ -1,10 +1,11 @@
 package com.pokemonurpg.image.controller;
 
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.image.input.ImageFolderInputDto;
 import com.pokemonurpg.image.models.ImageFolder;
 import com.pokemonurpg.image.service.ImageFolderService;
+import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,14 @@ public class ImageFolderController {
     @Resource
     private ImageFolderService imageFolderService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return imageFolderService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     ImageFolder findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class ImageFolderController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Image")
+    @AllowAuthorized(permission = "Write Image")
     @PostMapping
     public @ResponseBody
     ImageFolder create(@Valid @RequestBody ImageFolderInputDto input) {
         return imageFolderService.create(input);
     }
 
-    @Authorized(permission = "Write Image")
+    @AllowAuthorized(permission = "Write Image")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     ImageFolder update(@Valid @RequestBody ImageFolderInputDto input, @PathVariable int dbid) {

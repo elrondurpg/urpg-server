@@ -46,6 +46,7 @@ public class BotLoginServiceTest {
         member = new Member();
         member.setName(USERNAME);
         member.setDiscordId(DISCORD_ID);
+        member.setBot(true);
 
         expectedResponse = new SessionDto();
         expectedResponse.setUsername(USERNAME);
@@ -55,6 +56,7 @@ public class BotLoginServiceTest {
 
     @Test
     public void login() {
+
         when(authorizationCredentialsService.getCredentials()).thenReturn(CREDENTIALS);
         when(oAuthService.getAccessTokenForClientCredentials(DISCORD_ID, SECRET)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
@@ -103,6 +105,18 @@ public class BotLoginServiceTest {
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(null);
 
         botLoginService.login();
+    }
+
+    @Test(expected = ResponseStatusException.class)
+    public void loginFailsWhenMemberNotBot() {
+        member.setBot(false);
+
+        when(authorizationCredentialsService.getCredentials()).thenReturn(CREDENTIALS);
+        when(oAuthService.getAccessTokenForClientCredentials(DISCORD_ID, SECRET)).thenReturn(ACCESS_TOKEN_RESPONSE);
+        when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
+        when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
+
+        SessionDto response = botLoginService.login();
     }
 
 }

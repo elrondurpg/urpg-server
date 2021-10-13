@@ -24,11 +24,16 @@ public class GymLeagueService implements NamedObjectService<GymLeague> {
     }
 
     public GymLeague findByName(String name) {
-        GymLeague gymLeague = gymLeagueRepository.findByName(name);
+        GymLeague gymLeague = findByNameExact(name);
         if (gymLeague == null && name != null) {
             return gymLeagueRepository.findFirstByNameStartingWith(name);
         }
         else return gymLeague;
+    }
+
+    @Override
+    public GymLeague findByNameExact(String name) {
+        return gymLeagueRepository.findByName(name);
     }
 
     public GymLeague create(GymLeagueInputDto input) {

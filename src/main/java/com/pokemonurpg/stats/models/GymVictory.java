@@ -34,7 +34,7 @@ public class GymVictory {
     @ManyToOne
     @MapsId("gym_dbid")
     @JoinColumn(name="gym_dbid")
-    @JsonIgnoreProperties({ "dbid", "owner", "league", "active", "openDate", "wins", "losses", "draws", "tm" })
+    @JsonIgnoreProperties({"dbid", "badge", "type", "victories", "pokemon" })
     private Gym gym;
 
     @ManyToOne

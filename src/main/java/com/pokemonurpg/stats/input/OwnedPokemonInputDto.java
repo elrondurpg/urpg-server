@@ -20,64 +20,52 @@ import java.util.List;
 public class OwnedPokemonInputDto {
 
     @NotNull(groups = { ObjectCreation.class })
-    @ExistsInDb(type = Member.class)
-    private String trainer;
-
-    @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Species.class)
-    private String species;
+    protected String species;
 
     @NotNull(groups = { ObjectCreation.class })
     @Pattern(regexp = "^(F|M|G)$")
-    private String gender;
+    protected String gender;
 
     @Pattern(regexp = "^(?!NONE).*$", message = "Nature must not be NONE.")
     @ExistsInDb(type = Nature.class)
-    private String nature;
+    protected String nature;
 
     @Min(0)
-    private Integer exp;
+    protected Integer exp;
 
     @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Obtained.class)
-    private String obtained;
+    protected String obtained;
 
     @Pattern(regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$")
     @Size(max = 2083)
-    private String obtainedLink;
+    protected String obtainedLink;
 
     @Size(min = 0, max = 34)
-    private String nickname;
+    protected String nickname;
 
     @Pattern(regexp = "^(?!NONE|NORMAL|FAIRY).*$", message = "Hidden power type is invalid.")
     @ExistsInDb(type = Type.class)
-    private String hiddenPowerType;
+    protected String hiddenPowerType;
 
     @Pattern(regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$")
     @Size(max = 2083)
-    private String hiddenPowerLink;
+    protected String hiddenPowerLink;
 
-    private List<@Valid OwnedExtraMoveInputDto> ownedExtraMoves = new ArrayList<>();
+    protected List<@Valid OwnedExtraMoveInputDto> ownedExtraMoves = new ArrayList<>();
 
-    private List<@Valid OwnedHiddenAbilityInputDto> ownedHiddenAbilities = new ArrayList<>();
+    protected List<@Valid OwnedHiddenAbilityInputDto> ownedHiddenAbilities = new ArrayList<>();
 
-    private List<@Valid EarnedRibbonInputDto> earnedRibbons = new ArrayList<>();
+    protected List<@Valid EarnedRibbonInputDto> earnedRibbons = new ArrayList<>();
 
-    private Boolean job;
+    protected Boolean job;
 
-    private Boolean box;
+    protected Boolean box;
 
-    private Boolean uft;
+    protected Boolean uft;
 
-    private Boolean rental;
-
-    public String getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(String trainer) {
-        this.trainer = trainer;
-    }
+    protected Boolean rental;
 
     public String getSpecies() {
         return species;

@@ -1,7 +1,11 @@
 package com.pokemonurpg.member.service;
 
+import com.pokemonurpg.gym.service.KnownChampionService;
+import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
+import com.pokemonurpg.gym.service.KnownGymLeaderService;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.service.AesEncryptionService;
+import com.pokemonurpg.security.service.AuthorizationService;
 import com.pokemonurpg.security.service.HashService;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.member.input.MemberInputDto;
@@ -13,6 +17,8 @@ import com.pokemonurpg.stats.input.*;
 import com.pokemonurpg.stats.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -23,36 +29,51 @@ import javax.crypto.spec.IvParameterSpec;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MemberServiceTest {
-    private final static Integer DBID = 32432;
-    private final static String DISCORD_ID = "DISCORD_ID";
-    private final static String NAME = "TEST";
-    private final static Role CURRENT_ROLE = mock(Role.class);
-    private final static String CURRENT_ROLE_NAME = "CURRENT_ROLE_NAME";
-    private final static Role NEW_ROLE = mock(Role.class);
-    private final static String NEW_ROLE_NAME = "NEW_ROLE_NAME";
-    private final static Member CURRENT_MEMBER = new Member();
-    private final static Integer SALT = 34222;
-    private final static String ACCESS_TOKEN = "ACCESS_TOKEN";
-    private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
-    private final static Long EXPIRES_IN = 69L;
-    private final static Long CURRENT_TIME_MILLIS = 432000L;
-    private final static String HASHED_ACCESS_TOKEN = "43242324";
-    private final static String HASHED_REFRESH_TOKEN = "432411523562";
-    private final static OwnedItemInputDto OWNED_ITEM = mock(OwnedItemInputDto.class);
-    private final static LegendaryProgressInputDto LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
-    private final static byte[] IV = { 12, 32 };
-    private final static IvParameterSpec IV_PARAMETER_SPEC = new IvParameterSpec(IV);
-    private final static SecretKey SECRET_KEY = mock(SecretKey.class);
-    private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
-    private final static Boolean BOT = true;
-    private final static EliteFourVictoryInputDto ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
-    private final static ChampionVictoryInputDto CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
-    private final static GymVictoryInputDto GYM_VICTORY = mock(GymVictoryInputDto.class);
+    private final static Boolean                    BOT = true;
+
+    private final static byte[]                     IV = { 12, 32 };
+
+    private final static ChampionVictoryInputDto    CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
+
+    private final static EliteFourVictoryInputDto   ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
+
+    private final static GymVictoryInputDto         GYM_VICTORY = mock(GymVictoryInputDto.class);
+
+    private final static Integer                    DBID = 32432;
+    private final static Integer                    SALT = 34222;
+
+    private final static IvParameterSpec            IV_PARAMETER_SPEC = new IvParameterSpec(IV);
+
+    private final static Long                       EXPIRES_IN = 69L;
+    private final static Long                       CURRENT_TIME_MILLIS = 432000L;
+
+    private final static LegendaryProgressInputDto  LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
+
+    private final static Member                     CURRENT_MEMBER = new Member();
+
+    private final static OwnedItemInputDto          OWNED_ITEM = mock(OwnedItemInputDto.class);
+
+    private final static Role                       CURRENT_ROLE = mock(Role.class);
+    private final static Role                       NEW_ROLE = mock(Role.class);
+
+    private final static SecretKey                  SECRET_KEY = mock(SecretKey.class);
+
+    private final static String                     ACCESS_TOKEN = "ACCESS_TOKEN";
+    private final static String                     CURRENT_ROLE_NAME = "CURRENT_ROLE_NAME";
+    private final static String                     DISCORD_ID = "DISCORD_ID";
+    private final static String                     ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
+    private final static String                     HASHED_ACCESS_TOKEN = "43242324";
+    private final static String                     NAME = "TEST";
+    private final static String                     NEW_NAME = "NEW_NAME";
+    private final static String                     NEW_ROLE_NAME = "NEW_ROLE_NAME";
+    private final static String                     OLD_NAME = "OLD_NAME";
+    private final static String                     REFRESH_TOKEN = "REFRESH_TOKEN";
 
     @InjectMocks
     private MemberService memberService;
@@ -89,6 +110,24 @@ public class MemberServiceTest {
     @Mock
     private GymVictoryService gymVictoryService;
 
+    @Mock
+    private KnownChampionService knownChampionService;
+
+    @Mock
+    private KnownEliteFourMemberService knownEliteFourMemberService;
+
+    @Mock
+    private KnownGymLeaderService knownGymLeaderService;
+
+    @Mock
+    private AuthorizationService authorizationService;
+
+    @Captor
+    ArgumentCaptor<String> knownBattleRecordNewName;
+
+    @Captor
+    ArgumentCaptor<String> knownBattleRecordOldName;
+
     @Test
     public void findNamesByReturnsValueFromRepository() {
         Member m = new Member();
@@ -118,20 +157,20 @@ public class MemberServiceTest {
     @Test
     public void findByName() {
         when(memberRepository.findByName(NAME)).thenReturn(member);
-        assertEquals(member, memberService.findByName(NAME));
+        assertEquals(member, memberService.findByNameExact(NAME));
     }
 
     @Test
     public void findByUsernameExactMatch() {
         when(memberRepository.findByName(NAME)).thenReturn(member);
-        assertEquals(member, memberService.findByUsername(NAME));
+        assertEquals(member, memberService.findByName(NAME));
     }
 
     @Test
     public void findByUsernameNotExactMatch() {
         when(memberRepository.findByName(NAME)).thenReturn(null);
         when(memberRepository.findFirstByNameStartingWith(NAME)).thenReturn(member);
-        assertEquals(member, memberService.findByUsername(NAME));
+        assertEquals(member, memberService.findByName(NAME));
     }
 
     @Test
@@ -176,6 +215,7 @@ public class MemberServiceTest {
         when(roleService.findByName(NEW_ROLE_NAME)).thenReturn(NEW_ROLE);
 
         // Given a member that has role CURRENT_ROLE
+        when(authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION)).thenReturn(true);
         Set<Role> currentRoles = new HashSet<>();
         currentRoles.add(CURRENT_ROLE);
         CURRENT_MEMBER.setRoles(currentRoles);
@@ -191,15 +231,20 @@ public class MemberServiceTest {
 
         // Given a MemberInputDto whose "roles" list includes permInput1 and permInput2
         MemberInputDto input = new MemberInputDto();
-        input.setName(NAME);
+        input.setName(NEW_NAME);
         input.setRoles(Arrays.asList(permInput1, permInput2));
 
         when(memberRepository.findByDbid(DBID)).thenReturn(CURRENT_MEMBER);
+        CURRENT_MEMBER.setName(OLD_NAME);
 
         // When I call memberService.updateAll(input, DBID)
         Member newMember = memberService.update(input, DBID);
-        assertEquals(NAME, newMember.getName());
+        assertEquals(NEW_NAME, newMember.getName());
         verify(memberRepository, times(1)).save(newMember);
+
+        verify(knownGymLeaderService, times(1)).update(knownBattleRecordNewName.capture(), knownBattleRecordOldName.capture());
+        assertEquals(NEW_NAME, knownBattleRecordNewName.getValue());
+        assertEquals(OLD_NAME, knownBattleRecordOldName.getValue());
 
         // Then currentRoles will contain NEW_ROLE and not CURRENT_ROLE
         assertTrue(currentRoles.contains(NEW_ROLE));
@@ -258,5 +303,11 @@ public class MemberServiceTest {
         assertNull(member.getRefreshTokenIv());
         assertNull(member.getAccessToken());
         verify(memberRepository, times(1)).save(member);
+    }
+
+    @Test
+    public void delete() {
+        memberService.delete(DBID);
+        verify(memberRepository, times(1)).deleteByDbid(DBID);
     }
 }

@@ -2,7 +2,8 @@ package com.pokemonurpg.attack.controller;
 
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.input.AttackInputDto;
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.attack.service.AttackService;
 import org.springframework.validation.annotation.Validated;
@@ -21,12 +22,14 @@ public class AttackController {
     @Resource
     private AttackService attackService;
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return attackService.findAllNames();
     }
 
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     Attack findByName(@PathVariable("name") String name) {
@@ -34,14 +37,14 @@ public class AttackController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Attack")
+    @AllowAuthorized(permission = "Write Attack")
     @PostMapping
     public @ResponseBody
     Attack create(@Valid @RequestBody AttackInputDto input) {
         return attackService.create(input);
     }
 
-    @Authorized(permission = "Write Attack")
+    @AllowAuthorized(permission = "Write Attack")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     Attack update(@Valid @RequestBody AttackInputDto input, @PathVariable int dbid) {

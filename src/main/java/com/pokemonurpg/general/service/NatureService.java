@@ -24,11 +24,16 @@ public class NatureService implements NamedObjectService<Nature> {
     }
 
     public Nature findByName(String name) {
-        Nature nature = natureRepository.findByName(name);
+        Nature nature = findByNameExact(name);
         if (nature == null && name != null) {
             return natureRepository.findFirstByNameStartingWith(name);
         }
         else return nature;
+    }
+
+    @Override
+    public Nature findByNameExact(String name) {
+        return natureRepository.findByName(name);
     }
 
     public Nature create(NatureInputDto input) {

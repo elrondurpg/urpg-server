@@ -5,9 +5,7 @@ import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.repository.BadgeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -28,6 +26,9 @@ public class BadgeServiceTest {
     private BadgeRepository badgeRepository;
 
     private Badge badge = new Badge();
+
+    @Captor
+    ArgumentCaptor<Integer> captor;
 
     @Test
     public void findAllNamesReturnsValueFromRepository() {
@@ -89,6 +90,13 @@ public class BadgeServiceTest {
         Badge badge1 = badgeService.update(input, DBID);
         assertNull(badge1);
         verify(badgeRepository, times(0)).save(Matchers.any());
+    }
+
+    @Test
+    public void delete() {
+        badgeService.delete(DBID);
+        verify(badgeRepository, times(1)).deleteByDbid(captor.capture());
+        assertEquals(DBID, captor.getValue());
     }
 
 }

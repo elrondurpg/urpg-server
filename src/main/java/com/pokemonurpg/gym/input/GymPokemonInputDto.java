@@ -2,6 +2,7 @@ package com.pokemonurpg.gym.input;
 
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import javax.validation.constraints.NotNull;

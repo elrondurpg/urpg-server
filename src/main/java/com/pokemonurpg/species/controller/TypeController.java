@@ -1,6 +1,6 @@
 package com.pokemonurpg.species.controller;
 
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.species.input.TypeInputDto;
 import com.pokemonurpg.species.models.Type;
@@ -33,14 +33,14 @@ public class TypeController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Species")
+    @AllowAuthorized(permission = "Write Species")
     @PostMapping
     public @ResponseBody
     Type create(@Valid @RequestBody TypeInputDto input) {
         return typeService.create(input);
     }
 
-    @Authorized(permission = "Write Species")
+    @AllowAuthorized(permission = "Write Species")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     Type update(@Valid @RequestBody TypeInputDto input, @PathVariable int dbid) {

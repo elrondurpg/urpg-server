@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AbilityServiceTest {
+    private final static Ability    ABILITY = mock(Ability.class);
     private final static String NAME = "ABILITY_NAME";
     private final static String DESCRIPTION = "DESCRIPTION TEST";
     private final static String DESCRIPTION_2 = "DIFFERENT DESCRIPTION";
@@ -76,6 +78,12 @@ public class AbilityServiceTest {
 
         assertNotNull(returnedRole);
         assertEquals(NAME, returnedRole.getName());
+    }
+
+    @Test
+    public void findByNameExact() {
+        when(abilityRepository.findByName(NAME)).thenReturn(ABILITY);
+        assertEquals(ABILITY, abilityService.findByNameExact(NAME));
     }
 
     @Test

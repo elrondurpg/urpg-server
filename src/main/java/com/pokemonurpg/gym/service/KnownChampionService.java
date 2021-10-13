@@ -20,11 +20,35 @@ public class KnownChampionService implements NamedObjectService<KnownChampion> {
     }
 
     public KnownChampion findByName(String name) {
-        KnownChampion champion = knownChampionRepository.findByName(name);
+        KnownChampion champion = findByNameExact(name);
         if (champion == null && name != null) {
             return knownChampionRepository.findFirstByNameStartingWith(name);
         }
         else return champion;
+    }
+
+    @Override
+    public KnownChampion findByNameExact(String name) {
+        return knownChampionRepository.findByName(name);
+    }
+
+    public void create(String name) {
+        KnownChampion champion = findByNameExact(name);
+        if (champion == null) {
+            champion = new KnownChampion();
+            champion.setName(name);
+            knownChampionRepository.save(champion);
+        }
+    }
+
+    public void update(String newName, String oldName) {
+        if (newName != null && oldName != null) {
+            KnownChampion champion = knownChampionRepository.findByName(oldName);
+            if (champion != null) {
+                champion.setName(newName);
+                knownChampionRepository.save(champion);
+            }
+        }
     }
 
     public void update(KnownChampionInputDto input) {

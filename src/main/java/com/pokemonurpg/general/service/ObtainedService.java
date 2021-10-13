@@ -24,11 +24,16 @@ public class ObtainedService implements NamedObjectService<Obtained> {
     }
 
     public Obtained findByName(String name) {
-        Obtained obtained = obtainedRepository.findByName(name);
+        Obtained obtained = findByNameExact(name);
         if (obtained == null && name != null) {
             return obtainedRepository.findFirstByNameStartingWith(name);
         }
         else return obtained;
+    }
+
+    @Override
+    public Obtained findByNameExact(String name) {
+        return obtainedRepository.findByName(name);
     }
 
     public Obtained create(ObtainedInputDto input) {

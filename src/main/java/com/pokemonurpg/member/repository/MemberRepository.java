@@ -9,8 +9,9 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Query("select x.name from Member x")
     List<String> findAllNames();
-    Member findByDbid(int dbid);
+    Member findByDbid(Integer dbid);
     Member findByName(String name);
     Member findByDiscordId(String discordId);
     Member findFirstByNameStartingWith(String name);
+    void deleteByDbid(int dbid);
 }

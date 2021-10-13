@@ -1,6 +1,8 @@
 package com.pokemonurpg.core.service;
 
 import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.gym.models.GymOwnershipTerm;
+import com.pokemonurpg.gym.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.LegendaryProgress;
@@ -29,6 +31,9 @@ public class IndexedObjectServiceFactoryTest {
     private GymService gymService;
 
     @Mock
+    private GymOwnershipTermService gymOwnershipTermService;
+
+    @Mock
     private LegendaryProgressService legendaryProgressService;
 
     @Mock
@@ -38,6 +43,7 @@ public class IndexedObjectServiceFactoryTest {
     public void testAll() {
         assertEquals(earnedRibbonService, indexedObjectServiceFactory.getServiceForClass(EarnedRibbon.class));
         assertEquals(gymService, indexedObjectServiceFactory.getServiceForClass(Gym.class));
+        assertEquals(gymOwnershipTermService, indexedObjectServiceFactory.getServiceForClass(GymOwnershipTerm.class));
         assertEquals(legendaryProgressService, indexedObjectServiceFactory.getServiceForClass(LegendaryProgress.class));
         assertEquals(ownedPokemonService, indexedObjectServiceFactory.getServiceForClass(OwnedPokemon.class));
         assertNull(indexedObjectServiceFactory.getServiceForClass(Object.class));

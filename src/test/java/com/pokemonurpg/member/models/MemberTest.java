@@ -1,6 +1,7 @@
 package com.pokemonurpg.member.models;
 
 import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 import org.junit.Before;
@@ -29,8 +30,8 @@ public class MemberTest {
     private final static Set<Role> ROLES = new HashSet<>();
     private final static Boolean BANNED = true;
     private final static Date BAN_EXPIRATION = new Date();
-    private final static Set<Gym> GYMS = new HashSet<>();
-    private final static Boolean BOT = true;
+    private final static Set<GymOwnershipTerm> GYMS = new HashSet<>();
+    private final static Boolean BOT = null;
     private final static List<EliteFourVictory> ELITE_FOUR_VICTORIES = new ArrayList<>();
     private final static List<ChampionVictory> CHAMPION_VICTORIES = new ArrayList<>();
     private final static List<GymVictory> GYM_VICTORIES = new ArrayList<>();
@@ -69,7 +70,6 @@ public class MemberTest {
         member.setBanned(BANNED);
         member.setBanExpiration(BAN_EXPIRATION);
         member.setGyms(GYMS);
-        member.setBot(BOT);
         member.setEliteFourVictories(ELITE_FOUR_VICTORIES);
         member.setChampionVictories(CHAMPION_VICTORIES);
         member.setGymVictories(GYM_VICTORIES);
@@ -93,7 +93,6 @@ public class MemberTest {
         assertEquals(BANNED, member.getBanned());
         assertEquals(BAN_EXPIRATION, member.getBanExpiration());
         assertEquals(GYMS, member.getGyms());
-        assertEquals(BOT, member.getBot());
         assertEquals(ELITE_FOUR_VICTORIES, member.getEliteFourVictories());
         assertEquals(CHAMPION_VICTORIES, member.getChampionVictories());
         assertEquals(GYM_VICTORIES, member.getGymVictories());
@@ -120,7 +119,7 @@ public class MemberTest {
         assertEquals(LOSSES,member.getLosses());
         assertEquals(DRAWS,member.getDraws());
         assertEquals(JOIN_DATE,member.getJoinDate());
-        assertEquals(BOT, member.getBot());
+        assertEquals(false, member.getBot());
     }
 
 }

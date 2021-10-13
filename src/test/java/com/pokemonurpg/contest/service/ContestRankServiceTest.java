@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContestRankServiceTest {
+    private final static ContestRank    CONTEST_RANK = mock(ContestRank.class);
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
 
@@ -54,6 +55,12 @@ public class ContestRankServiceTest {
         when(contestRankRepository.findByName(NAME)).thenReturn(null);
         when(contestRankRepository.findFirstByNameStartingWith(NAME)).thenReturn(contestRank);
         assertEquals(contestRank, contestRankService.findByName(NAME));
+    }
+
+    @Test
+    public void findByNameExact() {
+        when(contestRankRepository.findByName(NAME)).thenReturn(CONTEST_RANK);
+        assertEquals(CONTEST_RANK, contestRankService.findByNameExact(NAME));
     }
 
     @Test

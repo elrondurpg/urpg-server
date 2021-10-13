@@ -24,11 +24,16 @@ public class PermissionService implements NamedObjectService<Permission> {
     }
 
     public Permission findByName(String name) {
-        Permission permission = permissionRepository.findByName(name);
+        Permission permission = findByNameExact(name);
         if (permission == null && name != null) {
             return permissionRepository.findFirstByNameStartingWith(name);
         }
         else return permission;
+    }
+
+    @Override
+    public Permission findByNameExact(String name) {
+        return permissionRepository.findByName(name);
     }
 
     public Permission create(PermissionInputDto input) {

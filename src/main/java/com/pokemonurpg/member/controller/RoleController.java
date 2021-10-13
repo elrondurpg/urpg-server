@@ -1,6 +1,7 @@
 package com.pokemonurpg.member.controller;
 
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.RoleInputDto;
 import com.pokemonurpg.member.models.Role;
@@ -12,6 +13,9 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.pokemonurpg.strings.PermissionNames.READ_ROLE_PERMISSION;
+import static com.pokemonurpg.strings.PermissionNames.WRITE_ROLE_PERMISSION;
+
 @RestController
 @RequestMapping("/role")
 @CrossOrigin
@@ -21,12 +25,14 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
+    @AllowAuthorized(permission = READ_ROLE_PERMISSION)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return roleService.findAllNames();
     }
 
+    @AllowAuthorized(permission = READ_ROLE_PERMISSION)
     @GetMapping(path="/{name}")
     public @ResponseBody
     Role findByName(@PathVariable("name") String name) {
@@ -34,14 +40,14 @@ public class RoleController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write Gym")
+    @AllowAuthorized(permission = WRITE_ROLE_PERMISSION)
     @PostMapping
     public @ResponseBody
     Role create(@Valid @RequestBody RoleInputDto input) {
         return roleService.create(input);
     }
 
-    @Authorized(permission = "Write Gym")
+    @AllowAuthorized(permission = WRITE_ROLE_PERMISSION)
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     Role update(@Valid @RequestBody RoleInputDto input, @PathVariable int dbid) {

@@ -31,6 +31,11 @@ public class ContestRankService implements NamedObjectService<ContestRank> {
         else return contestRank;
     }
 
+    @Override
+    public ContestRank findByNameExact(String name) {
+        return contestRankRepository.findByName(name);
+    }
+
     public ContestRank create(ContestRankInputDto input) {
         ContestRank contestRank = new ContestRank(input);
         contestRankRepository.save(contestRank);

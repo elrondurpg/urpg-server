@@ -32,7 +32,7 @@ public class OwnedItem {
     private Item item;
 
     @Column
-    private Integer quantity = 1;
+    private Integer quantity = 0;
 
     public OwnedItem() {
     }
@@ -44,8 +44,19 @@ public class OwnedItem {
         setItem(item);
     }
 
+    public OwnedItem(Member member, Item item, int quantity) {
+        this.id = new OwnedItemKey(member.getDbid(), item.getDbid());
+        setTrainer(member);
+        setItem(item);
+        setQuantity(quantity);
+    }
+
     public void update(OwnedItemInputDto input) {
         setQuantity(input.getQuantity());
+    }
+
+    public void update(int quantity) {
+        this.quantity += quantity;
     }
 
     public Member getTrainer() {

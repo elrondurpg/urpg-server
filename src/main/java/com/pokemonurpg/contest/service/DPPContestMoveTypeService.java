@@ -24,11 +24,16 @@ public class DPPContestMoveTypeService implements NamedObjectService<DPPContestM
     }
 
     public DPPContestMoveType findByName(String name) {
-        DPPContestMoveType dppContestMoveType = dppContestMoveTypeRepository.findByName(name);
+        DPPContestMoveType dppContestMoveType = findByNameExact(name);
         if (dppContestMoveType == null && name != null) {
             return dppContestMoveTypeRepository.findFirstByNameStartingWith(name);
         }
         else return dppContestMoveType;
+    }
+
+    @Override
+    public DPPContestMoveType findByNameExact(String name) {
+        return dppContestMoveTypeRepository.findByName(name);
     }
 
     public DPPContestMoveType create(ContestMoveTypeInputDto input) {

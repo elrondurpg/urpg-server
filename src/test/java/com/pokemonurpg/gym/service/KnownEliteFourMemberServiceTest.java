@@ -21,7 +21,10 @@ import static org.mockito.Mockito.*;
 public class KnownEliteFourMemberServiceTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static String NAME = "NAME";
-    private final static KnownEliteFourMember KNOWN_ELITE_FOUR_MEMBER = mock(KnownEliteFourMember.class);
+    private final static String NEW_NAME = "NEW_NAME";
+    private final static String OLD_NAME = "OLD_NAME";
+
+    private KnownEliteFourMember knownEliteFourMember = new KnownEliteFourMember();
 
     @InjectMocks
     private KnownEliteFourMemberService knownEliteFourMemberService;
@@ -40,18 +43,28 @@ public class KnownEliteFourMemberServiceTest {
 
     @Test
     public void findByName() {
-        when(knownEliteFourMemberRepository.findByName(NAME)).thenReturn(KNOWN_ELITE_FOUR_MEMBER);
-        assertEquals(KNOWN_ELITE_FOUR_MEMBER, knownEliteFourMemberService.findByName(NAME));
+        when(knownEliteFourMemberRepository.findByName(NAME)).thenReturn(knownEliteFourMember);
+        assertEquals(knownEliteFourMember, knownEliteFourMemberService.findByName(NAME));
     }
 
     @Test
     public void findFirstByNameStartingWith() {
-        when(knownEliteFourMemberRepository.findFirstByNameStartingWith(NAME)).thenReturn(KNOWN_ELITE_FOUR_MEMBER);
-        assertEquals(KNOWN_ELITE_FOUR_MEMBER, knownEliteFourMemberService.findByName(NAME));
+        when(knownEliteFourMemberRepository.findFirstByNameStartingWith(NAME)).thenReturn(knownEliteFourMember);
+        assertEquals(knownEliteFourMember, knownEliteFourMemberService.findByName(NAME));
     }
 
     @Test
     public void create() {
+        when(knownEliteFourMemberRepository.findByName(NAME)).thenReturn(null);
+        knownEliteFourMemberService.create(NAME);
+
+        verify(knownEliteFourMemberRepository, times(1)).save(captor.capture());
+        KnownEliteFourMember savedObject = captor.getValue();
+        assertEquals(NAME, savedObject.getName());
+    }
+
+    @Test
+    public void createByInputDto() {
         KnownEliteFourMemberInputDto input = new KnownEliteFourMemberInputDto();
         input.setName(NAME);
 
@@ -69,9 +82,19 @@ public class KnownEliteFourMemberServiceTest {
         input.setName(NAME);
         input.setDelete(true);
 
-        when(knownEliteFourMemberRepository.findByName(NAME)).thenReturn(KNOWN_ELITE_FOUR_MEMBER);
+        when(knownEliteFourMemberRepository.findByName(NAME)).thenReturn(knownEliteFourMember);
 
         knownEliteFourMemberService.update(input);
-        verify(knownEliteFourMemberRepository, times(1)).delete(KNOWN_ELITE_FOUR_MEMBER);
+        verify(knownEliteFourMemberRepository, times(1)).delete(knownEliteFourMember);
+    }
+
+    @Test
+    public void update_ByNewAndOldName_Succeeds() {
+        when(knownEliteFourMemberRepository.findByName(OLD_NAME)).thenReturn(knownEliteFourMember);
+        knownEliteFourMemberService.update(NEW_NAME, OLD_NAME);
+        assertEquals(NEW_NAME, knownEliteFourMember.getName());
+        verify(knownEliteFourMemberRepository, times(1)).save(captor.capture());
+        KnownEliteFourMember savedObject = captor.getValue();
+        assertEquals(knownEliteFourMember, savedObject);
     }
 }

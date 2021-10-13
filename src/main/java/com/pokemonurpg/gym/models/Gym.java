@@ -7,13 +7,12 @@ import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
@@ -27,37 +26,16 @@ public class Gym implements NamedObject {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "owner_dbid")
-    @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
-            "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
-            "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
-    private Member owner;
-
-    @OneToOne
-    @JoinColumn(name = "league_dbid")
-    @JsonIgnoreProperties("gyms")
-    private GymLeague league;
-
-    @OneToOne
     @JoinColumn(name = "badge_dbid")
     private Badge badge;
 
-    @Column(name = "open_date")
-    private Date openDate;
-
-    @Column
-    private Integer wins;
-
-    @Column
-    private Integer losses;
-
-    @Column
-    private Integer draws;
-
     @OneToOne
-    @JoinColumn(name = "tm_dbid")
-    private Item tm;
+    @JoinColumn(name = "type_dbid")
+    private Type type;
+
+    @OneToMany(mappedBy="gym")
+    @JsonIgnoreProperties({ "gym"})
+    private List<GymVictory> victories = new ArrayList<>();
 
     @ManyToMany(
             targetEntity= OwnedPokemon.class,
@@ -70,22 +48,20 @@ public class Gym implements NamedObject {
     )
     private Set<OwnedPokemon> pokemon = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "term_dbid")
+    @JsonIgnoreProperties({"gym" })
+    private GymOwnershipTerm currentOwnerRecord;
+
     public Gym() {
     }
 
     public Gym (GymInputDto input) {
         this.update(input);
-        setWins(input.getWins() != null ? input.getWins() : 0);
-        setLosses(input.getLosses() != null ? input.getLosses() : 0);
-        setDraws(input.getDraws() != null ? input.getDraws() : 0);
     }
 
     public void update(GymInputDto input) {
         setName(input.getName());
-        setOpenDate(input.getOpenDate());
-        setWins(input.getWins());
-        setLosses(input.getLosses());
-        setDraws(input.getDraws());
     }
 
     public Integer getDbid() {
@@ -106,26 +82,6 @@ public class Gym implements NamedObject {
         }
     }
 
-    public Member getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Member owner) {
-        if (owner != null) {
-            this.owner = owner;
-        }
-    }
-
-    public GymLeague getLeague() {
-        return league;
-    }
-
-    public void setLeague(GymLeague league) {
-        if (league != null) {
-            this.league = league;
-        }
-    }
-
     public Badge getBadge() {
         return badge;
     }
@@ -136,63 +92,31 @@ public class Gym implements NamedObject {
         }
     }
 
-    public Date getOpenDate() {
-        return openDate;
+    public Type getType() {
+        return type;
     }
 
-    public void setOpenDate(Date openDate) {
-        if (openDate != null) {
-            this.openDate = openDate;
+    public void setType(Type type) {
+        if (type != null) {
+            this.type = type;
         }
     }
 
-    public Integer getWins() {
-        return wins;
+    public GymOwnershipTerm getCurrentOwnerRecord() {
+        return currentOwnerRecord;
     }
 
-    public void setWins(Integer wins) {
-        if (wins != null) {
-            this.wins = wins;
-        }
+    public void setCurrentOwnerRecord(GymOwnershipTerm currentOwnerRecord) {
+        this.currentOwnerRecord = currentOwnerRecord;
     }
 
-    public Integer getLosses() {
-        return losses;
+    public List<GymVictory> getVictories() {
+        return victories;
     }
 
-    public void setLosses(Integer losses) {
-        if (losses != null) {
-            this.losses = losses;
-        }
+    public void setVictories(List<GymVictory> victories) {
+        this.victories = victories;
     }
-
-    public Integer getDraws() {
-        return draws;
-    }
-
-    public void setDraws(Integer draws) {
-        if (draws != null) {
-            this.draws = draws;
-        }
-    }
-
-    public Item getTm() {
-        return tm;
-    }
-
-    public void setTm(Item tm) {
-        if (tm != null) {
-            this.tm = tm;
-        }
-    }
-
-//    public List<EarnedBadge> getWinners() {
-//        return winners;
-//    }
-//
-//    public void setWinners(List<EarnedBadge> winners) {
-//        this.winners = winners;
-//    }
 
     public Set<OwnedPokemon> getPokemon() {
         return pokemon;

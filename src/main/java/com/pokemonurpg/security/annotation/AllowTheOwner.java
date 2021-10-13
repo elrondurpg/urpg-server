@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Authorized {
-    public String permission() default "9787t5dce3657ftgvioug6tfrr4d5";
+public @interface AllowTheOwner {
+    public Class type();
 }

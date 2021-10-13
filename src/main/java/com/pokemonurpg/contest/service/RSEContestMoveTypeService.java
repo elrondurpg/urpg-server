@@ -24,11 +24,16 @@ public class RSEContestMoveTypeService implements NamedObjectService<RSEContestM
     }
 
     public RSEContestMoveType findByName(String name) {
-        RSEContestMoveType rseContestMoveType = rseContestMoveTypeRepository.findByName(name);
+        RSEContestMoveType rseContestMoveType = findByNameExact(name);
         if (rseContestMoveType == null && name != null) {
             return rseContestMoveTypeRepository.findFirstByNameStartingWith(name);
         }
         else return rseContestMoveType;
+    }
+
+    @Override
+    public RSEContestMoveType findByNameExact(String name) {
+        return rseContestMoveTypeRepository.findByName(name);
     }
 
     public RSEContestMoveType create(ContestMoveTypeInputDto input) {

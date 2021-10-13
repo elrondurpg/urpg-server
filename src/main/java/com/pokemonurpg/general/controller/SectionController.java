@@ -1,6 +1,7 @@
 package com.pokemonurpg.general.controller;
 
-import com.pokemonurpg.security.annotation.Authorized;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.general.input.SectionInputDto;
 import com.pokemonurpg.general.models.Section;
@@ -21,12 +22,14 @@ public class SectionController {
     @Resource
     private SectionService sectionService;
 
+    @AllowAll
     @GetMapping(path="/all")
     public @ResponseBody
     List<Section> findAll() {
         return sectionService.findAll();
     }
 
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
@@ -40,14 +43,14 @@ public class SectionController {
     }
 
     @Validated(ObjectCreation.class)
-    @Authorized(permission = "Write General")
+    @AllowAuthorized(permission = "Write General")
     @PostMapping
     public @ResponseBody
     Section create(@Valid @RequestBody SectionInputDto input) {
         return sectionService.create(input);
     }
 
-    @Authorized(permission = "Write General")
+    @AllowAuthorized(permission = "Write General")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     Section update(@Valid @RequestBody SectionInputDto input, @PathVariable int dbid) {
