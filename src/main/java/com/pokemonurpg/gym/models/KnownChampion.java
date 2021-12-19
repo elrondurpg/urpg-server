@@ -1,6 +1,7 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.core.model.NamedObject;
+import com.pokemonurpg.gym.input.KnownChampionInputDto;
 
 import javax.persistence.*;
 
@@ -23,6 +24,14 @@ public class KnownChampion implements NamedObject {
         setName(name);
     }
 
+    public KnownChampion(KnownChampionInputDto input) {
+        this.update(input);
+    }
+
+    public void update(KnownChampionInputDto input) {
+        setName(input.getName());
+    }
+
     @Override
     public Integer getDbid() {
         return dbid;
@@ -38,6 +47,8 @@ public class KnownChampion implements NamedObject {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null) {
+            this.name = name;
+        }
     }
 }

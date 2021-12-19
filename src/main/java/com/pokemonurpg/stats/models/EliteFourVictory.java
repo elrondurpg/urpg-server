@@ -3,6 +3,8 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.gym.models.KnownChampion;
+import com.pokemonurpg.gym.models.KnownEliteFourMember;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
 
@@ -23,11 +25,15 @@ public class EliteFourVictory {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories",
+            "championTerms", "eliteFourTerms" })
     private Member challenger;
 
-    @Column(insertable = false, updatable = false)
-    private String defender;
+    @ManyToOne
+    @MapsId("defender_dbid")
+    @JoinColumn(name="defender_dbid")
+    @JsonIgnoreProperties({"dbid"})
+    private KnownEliteFourMember defender;
 
     @Column
     private Date date;
@@ -37,11 +43,11 @@ public class EliteFourVictory {
 
     public EliteFourVictory() {}
 
-    public EliteFourVictory(EliteFourVictoryInputDto input, Member challenger) {
+    public EliteFourVictory(EliteFourVictoryInputDto input, Member challenger, KnownEliteFourMember defender) {
         this.update(input);
-        this.id = new EliteFourVictoryKey(challenger.getDbid(), input.getDefender());
+        this.id = new EliteFourVictoryKey(challenger.getDbid(), defender.getDbid());
         setChallenger(challenger);
-        setDefender(input.getDefender());
+        setDefender(defender);
     }
 
     public void update(EliteFourVictoryInputDto input) {
@@ -57,11 +63,11 @@ public class EliteFourVictory {
         this.challenger = challenger;
     }
 
-    public String getDefender() {
+    public KnownEliteFourMember getDefender() {
         return defender;
     }
 
-    public void setDefender(String defender) {
+    public void setDefender(KnownEliteFourMember defender) {
         this.defender = defender;
     }
 

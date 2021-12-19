@@ -25,6 +25,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_CLAIM;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
+import static com.pokemonurpg.strings.PermissionNames.WRITE_ROLE_PERMISSION;
 
 @RestController
 @RequestMapping("/member")
@@ -50,7 +51,7 @@ public class MemberController {
     public @ResponseBody
     MappingJacksonValue findByName(@PathVariable("name") String name) {
         MappingJacksonValue value = new MappingJacksonValue( memberService.findByName(name) );
-        if( authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION) ) {
+        if( authorizationService.isAuthorized(WRITE_ROLE_PERMISSION) ) {
             value.setSerializationView( View.MemberView.Secure.class );
         } else {
             value.setSerializationView( View.MemberView.Summary.class );

@@ -1,5 +1,6 @@
 package com.pokemonurpg.species.controller;
 
+import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.species.input.TypeInputDto;
@@ -21,12 +22,14 @@ public class TypeController {
     private TypeService typeService;
 
     @GetMapping
+	@AllowAll
     public @ResponseBody
     List<String> findAllNames() {
         return typeService.findAllNames();
     }
 
     @GetMapping(path="/{name}")
+	@AllowAll
     public @ResponseBody
     Type findByName(@PathVariable("name") String name) {
         return typeService.findByName(name);

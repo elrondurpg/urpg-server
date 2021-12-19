@@ -1,6 +1,7 @@
 package com.pokemonurpg.security.controller;
 
 import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.RegisterNewUser;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.dto.SessionDto;
@@ -52,7 +53,7 @@ public class SessionController {
     }
 
     @AllowAll
-    @Validated(ObjectCreation.class)
+    @Validated({ObjectCreation.class, RegisterNewUser.class})
     @PostMapping("/register/new")
     public @ResponseBody
     SessionDto registerNew(@Valid @RequestBody RegistrationInputDto input) {

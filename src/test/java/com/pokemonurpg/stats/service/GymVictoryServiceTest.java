@@ -59,7 +59,7 @@ public class GymVictoryServiceTest {
         input.setGym(GYM_NAME);
         input.setLeague(LEAGUE_NAME);
     }
-
+/*
     @Test
     public void updateDeletesARecord() {
         when(gymRepository.findByName(GYM_NAME)).thenReturn(GYM);
@@ -98,5 +98,5 @@ public class GymVictoryServiceTest {
         assertEquals(DEFENDER, savedObject.getDefender());
         assertEquals(GYM, savedObject.getGym());
         assertEquals(LEAGUE, savedObject.getLeague());
-    }
+    }*/
 }

@@ -53,7 +53,7 @@ public class ChampionVictoryServiceTest {
         assertEquals(VICTORIES, championVictoryService.findAll());
     }
 
-    @Test
+    /*@Test
     public void updateDeletesARecord() {
         input.setDelete(true);
 
@@ -85,5 +85,5 @@ public class ChampionVictoryServiceTest {
         ChampionVictory savedObject = captor.getValue();
         assertEquals(CHALLENGER, savedObject.getChallenger());
         assertEquals(DEFENDER, savedObject.getDefender());
-    }
+    }*/
 }

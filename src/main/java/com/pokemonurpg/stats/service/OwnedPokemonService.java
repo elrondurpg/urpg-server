@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -70,18 +71,6 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
             }
         }
         return pokemon;
-    }
-
-    public OwnedPokemon createStarter(StarterPokemonInputDto input) {
-        Member member = sessionServiceProvider.get().getAuthenticatedMember();
-        Species species = speciesService.findByName(input.getSpecies());
-        if (!member.hasStarter() && ownedPokemonValidator.isGenderLegal(species, input.getGender()) && ownedPokemonValidator.isValidStarter(species)) {
-            OwnedPokemon pokemon = new OwnedPokemon(member, species, input.getGender());
-            pokemon.setObtained(obtainedService.findByName("Starter"));
-            ownedPokemonRepository.save(pokemon);
-            return pokemon;
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Starter create() request was invalid.");
     }
 
     public OwnedPokemon create(OwnedPokemonInputDto input) {

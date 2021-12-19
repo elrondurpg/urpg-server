@@ -43,15 +43,6 @@ public class OwnedPokemonController {
 
     @Validated(ObjectCreation.class)
     @AllowAuthenticated
-    @PostMapping("/starter")
-    @JsonView(value = { View.MemberView.Pokemon.class })
-    public @ResponseBody
-    OwnedPokemon createStarter(@Valid @RequestBody StarterPokemonInputDto input) {
-        return ownedPokemonService.createStarter(input);
-    }
-
-    @Validated(ObjectCreation.class)
-    @AllowAuthenticated
     @PostMapping("/forMe")
     @JsonView(value = { View.MemberView.Pokemon.class })
     public @ResponseBody

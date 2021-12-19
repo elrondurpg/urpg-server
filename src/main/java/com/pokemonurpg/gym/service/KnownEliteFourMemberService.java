@@ -1,9 +1,11 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.gym.input.KnownEliteFourMemberInputDto;
 import com.pokemonurpg.gym.models.KnownEliteFourMember;
+import com.pokemonurpg.gym.input.KnownEliteFourMemberInputDto;
 import com.pokemonurpg.gym.repository.KnownEliteFourMemberRepository;
+import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.member.input.MemberInputDto;
+import com.pokemonurpg.member.models.Member;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +21,10 @@ public class KnownEliteFourMemberService implements NamedObjectService<KnownElit
         return knownEliteFourMemberRepository.findAllNames();
     }
 
+    public KnownEliteFourMember findByDbid(int dbid) {
+        return knownEliteFourMemberRepository.findByDbid(dbid);
+    }
+
     public KnownEliteFourMember findByName(String name) {
         KnownEliteFourMember eliteFourMember = findByNameExact(name);
         if (eliteFourMember == null && name != null) {
@@ -32,33 +38,35 @@ public class KnownEliteFourMemberService implements NamedObjectService<KnownElit
         return knownEliteFourMemberRepository.findByName(name);
     }
 
-    public void create(String name) {
-        KnownEliteFourMember member = findByNameExact(name);
-        if (member == null) {
-            member = new KnownEliteFourMember();
-            member.setName(name);
-            knownEliteFourMemberRepository.save(member);
+    public KnownEliteFourMember create(String name) {
+        KnownEliteFourMember knownEliteFourMember = knownEliteFourMemberRepository.findByName(name);
+        if (knownEliteFourMember == null) {
+            knownEliteFourMember = new KnownEliteFourMember(name);
+            knownEliteFourMemberRepository.save(knownEliteFourMember);
         }
+        return knownEliteFourMember;
     }
 
-    public void update(String newName, String oldName) {
-        if (newName != null && oldName != null) {
-            KnownEliteFourMember eliteFourMember = knownEliteFourMemberRepository.findByName(oldName);
-            if (eliteFourMember != null) {
-                eliteFourMember.setName(newName);
-                knownEliteFourMemberRepository.save(eliteFourMember);
-            }
-        }
+    public KnownEliteFourMember create(KnownEliteFourMemberInputDto input) {
+        KnownEliteFourMember eliteFourMember = new KnownEliteFourMember(input);
+        knownEliteFourMemberRepository.save(eliteFourMember);
+        return eliteFourMember;
     }
 
-    public void update(KnownEliteFourMemberInputDto input) {
-        KnownEliteFourMember eliteFourMember = knownEliteFourMemberRepository.findByName(input.getName());
-        if (eliteFourMember != null && input.getDelete()) {
-            knownEliteFourMemberRepository.delete(eliteFourMember);
-        }
-        else if (eliteFourMember == null) {
-            eliteFourMember = new KnownEliteFourMember(input.getName());
+    public KnownEliteFourMember update(KnownEliteFourMemberInputDto input, int dbid) {
+        KnownEliteFourMember eliteFourMember = knownEliteFourMemberRepository.findByDbid(dbid);
+        if (eliteFourMember != null) {
+            eliteFourMember.update(input);
             knownEliteFourMemberRepository.save(eliteFourMember);
+        }
+        return eliteFourMember;
+    }
+
+    public void rename(MemberInputDto input, Member member) {
+        KnownEliteFourMember knownEliteFourMember = findByNameExact(member.getName());
+        if (knownEliteFourMember != null) {
+            knownEliteFourMember.setName(input.getName());
+            knownEliteFourMemberRepository.save(knownEliteFourMember);
         }
     }
 }

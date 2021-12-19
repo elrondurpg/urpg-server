@@ -32,6 +32,7 @@ public class Role implements NamedObject {
             inverseJoinColumns=@JoinColumn(name="PERMISSION_DBID")
     )
     @JsonIgnoreProperties("roles")
+    @JsonView(value = { View.MemberView.Secure.class })
     private Set<Permission> permissions = new HashSet<>();
 
     @ManyToMany(mappedBy = "roles")

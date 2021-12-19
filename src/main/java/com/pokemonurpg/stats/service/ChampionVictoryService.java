@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.gym.models.KnownChampion;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
 import com.pokemonurpg.stats.models.ChampionVictory;
@@ -19,8 +20,8 @@ public class ChampionVictoryService {
         return championVictoryRepository.findAll();
     }
 
-    public void update(ChampionVictoryInputDto input, Member challenger) {
-        ChampionVictory existingRecord = championVictoryRepository.findByChallengerAndDefender(challenger, input.getDefender());
+    public void update(ChampionVictoryInputDto input, Member challenger, KnownChampion defender) {
+        ChampionVictory existingRecord = championVictoryRepository.findByChallengerAndDefender(challenger, defender);
 
         if (existingRecord != null) {
             if (input.getDelete()) {
@@ -32,7 +33,7 @@ public class ChampionVictoryService {
             }
         }
         else {
-            ChampionVictory newRecord = new ChampionVictory(input, challenger);
+            ChampionVictory newRecord = new ChampionVictory(input, challenger, defender);
             championVictoryRepository.save(newRecord);
 
         }

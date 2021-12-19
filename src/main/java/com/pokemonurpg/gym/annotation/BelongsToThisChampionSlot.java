@@ -1,5 +1,6 @@
 package com.pokemonurpg.gym.annotation;
 
+import com.pokemonurpg.gym.validation.BelongsToThisChampionSlotValidator;
 import com.pokemonurpg.gym.validation.BelongsToThisGymValidator;
 
 import javax.validation.Constraint;
@@ -13,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ FIELD })
 @Retention(RUNTIME)
-@Constraint(validatedBy = BelongsToThisGymValidator.class)
+@Constraint(validatedBy = BelongsToThisChampionSlotValidator.class)
 @Documented
 public @interface BelongsToThisChampionSlot {
 

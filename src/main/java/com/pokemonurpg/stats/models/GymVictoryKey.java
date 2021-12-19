@@ -11,8 +11,8 @@ public class GymVictoryKey implements Serializable {
     @Column(name = "challenger_dbid")
     private Integer challengerDbid;
 
-    @Column
-    private String defender;
+    @Column(name = "defender_dbid")
+    private Integer defenderDbid;
 
     @Column(name = "gym_dbid")
     private Integer gymDbid;
@@ -23,9 +23,9 @@ public class GymVictoryKey implements Serializable {
     public GymVictoryKey() {
     }
 
-    public GymVictoryKey(int challengerDbid, String defender, int gymDbid, int leagueDbid) {
+    public GymVictoryKey(int challengerDbid, int defenderDbid, int gymDbid, int leagueDbid) {
         this.challengerDbid = challengerDbid;
-        this.defender = defender;
+        this.defenderDbid = defenderDbid;
         this.gymDbid = gymDbid;
         this.leagueDbid = leagueDbid;
     }
@@ -34,8 +34,8 @@ public class GymVictoryKey implements Serializable {
         return challengerDbid;
     }
 
-    public String getDefender() {
-        return defender;
+    public Integer getDefenderDbid() {
+        return defenderDbid;
     }
 
     public Integer getGymDbid() {
@@ -51,14 +51,11 @@ public class GymVictoryKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GymVictoryKey that = (GymVictoryKey) o;
-        return Objects.equals(challengerDbid, that.challengerDbid) &&
-                Objects.equals(defender, that.defender) &&
-                Objects.equals(gymDbid, that.gymDbid) &&
-                Objects.equals(leagueDbid, that.leagueDbid);
+        return Objects.equals(challengerDbid, that.challengerDbid) && Objects.equals(defenderDbid, that.defenderDbid) && Objects.equals(gymDbid, that.gymDbid) && Objects.equals(leagueDbid, that.leagueDbid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(challengerDbid, defender, gymDbid, leagueDbid);
+        return Objects.hash(challengerDbid, defenderDbid, gymDbid, leagueDbid);
     }
 }

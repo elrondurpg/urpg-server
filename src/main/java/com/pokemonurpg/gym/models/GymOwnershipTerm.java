@@ -21,7 +21,7 @@ public class GymOwnershipTerm {
 
     @OneToOne
     @JoinColumn(name = "gym_dbid")
-    @JsonIgnoreProperties({"dbid", "badge", "type", "victories", "pokemon" })
+    @JsonIgnoreProperties({"dbid", "badge", "type", "victories" })
     private Gym gym;
 
     @OneToOne
@@ -29,7 +29,8 @@ public class GymOwnershipTerm {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories",
+            "championTerms", "eliteFourTerms" })
     private Member owner;
 
     @OneToOne

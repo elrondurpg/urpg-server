@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.gym.models.KnownEliteFourMember;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
 import com.pokemonurpg.stats.models.EliteFourVictory;
@@ -19,8 +20,8 @@ public class EliteFourVictoryService {
         return eliteFourVictoryRepository.findAll();
     }
 
-    public void update(EliteFourVictoryInputDto input, Member challenger) {
-        EliteFourVictory existingRecord = eliteFourVictoryRepository.findByChallengerAndDefender(challenger, input.getDefender());
+    public void update(EliteFourVictoryInputDto input, Member challenger, KnownEliteFourMember defender) {
+        EliteFourVictory existingRecord = eliteFourVictoryRepository.findByChallengerAndDefender(challenger, defender);
 
         if (existingRecord != null) {
             if (input.getDelete()) {
@@ -32,7 +33,7 @@ public class EliteFourVictoryService {
             }
         }
         else {
-            EliteFourVictory newRecord = new EliteFourVictory(input, challenger);
+            EliteFourVictory newRecord = new EliteFourVictory(input, challenger, defender);
             eliteFourVictoryRepository.save(newRecord);
         }
     }

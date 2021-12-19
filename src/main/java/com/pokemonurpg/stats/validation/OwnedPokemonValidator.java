@@ -23,7 +23,10 @@ public class OwnedPokemonValidator {
     private SpeciesService speciesService;
 
     public boolean isValidStarter(Species species) {
-        return isOwnable(species) && species.getPreEvolution() == null && !speciesService.findByPreEvolution(species).isEmpty();
+        return isOwnable(species)
+                && species.getPreEvolution() == null
+                && !speciesService.findByPreEvolution(species).isEmpty()
+                && species.getLegendaryTier() == 0;
     }
 
     public boolean isValid(Species species, OwnedPokemonInputDto input) {

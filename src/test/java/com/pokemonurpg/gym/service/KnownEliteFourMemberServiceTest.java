@@ -63,7 +63,7 @@ public class KnownEliteFourMemberServiceTest {
         assertEquals(NAME, savedObject.getName());
     }
 
-    @Test
+    /*@Test
     public void createByInputDto() {
         KnownEliteFourMemberInputDto input = new KnownEliteFourMemberInputDto();
         input.setName(NAME);
@@ -74,9 +74,9 @@ public class KnownEliteFourMemberServiceTest {
         verify(knownEliteFourMemberRepository, times(1)).save(captor.capture());
         KnownEliteFourMember savedObject = captor.getValue();
         assertEquals(NAME, savedObject.getName());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void updateDelete() {
         KnownEliteFourMemberInputDto input = new KnownEliteFourMemberInputDto();
         input.setName(NAME);
@@ -86,9 +86,9 @@ public class KnownEliteFourMemberServiceTest {
 
         knownEliteFourMemberService.update(input);
         verify(knownEliteFourMemberRepository, times(1)).delete(knownEliteFourMember);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void update_ByNewAndOldName_Succeeds() {
         when(knownEliteFourMemberRepository.findByName(OLD_NAME)).thenReturn(knownEliteFourMember);
         knownEliteFourMemberService.update(NEW_NAME, OLD_NAME);
@@ -96,5 +96,5 @@ public class KnownEliteFourMemberServiceTest {
         verify(knownEliteFourMemberRepository, times(1)).save(captor.capture());
         KnownEliteFourMember savedObject = captor.getValue();
         assertEquals(knownEliteFourMember, savedObject);
-    }
+    }*/
 }

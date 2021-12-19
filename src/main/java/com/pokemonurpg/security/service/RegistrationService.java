@@ -1,5 +1,7 @@
 package com.pokemonurpg.security.service;
 
+import com.pokemonurpg.general.models.Flag;
+import com.pokemonurpg.general.service.FlagService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.KnownNameClaimService;
 import com.pokemonurpg.member.service.MemberService;
@@ -19,6 +21,9 @@ import javax.servlet.Registration;
 public class RegistrationService {
 
     @Resource
+    private FlagService flagService;
+
+    @Resource
     private MemberService memberService;
 
     @Resource
@@ -28,20 +33,28 @@ public class RegistrationService {
     private KnownNameClaimService knownNameClaimService;
 
     public void claimKnownName(RegistrationInputDto input) {
-        OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
-        if (accessTokenResponse != null && accessTokenResponse.isValid()) {
-            DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
-            if (discordUserResponse != null && discordUserResponse.isValid()) {
-                Member member = memberService.findByDiscordId(discordUserResponse.getId());
-                if (member == null) {
-                    knownNameClaimService.create(discordUserResponse.getId(), input.getName());
+        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+        if (canRegisterMembers.getBooleanValue()) {
+            OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
+            if (accessTokenResponse != null && accessTokenResponse.isValid()) {
+                DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
+                if (discordUserResponse != null && discordUserResponse.isValid()) {
+                    Member member = memberService.findByDiscordId(discordUserResponse.getId());
+                    if (member == null) {
+                        knownNameClaimService.create(discordUserResponse.getId(), input.getName());
+                    }
                 }
             }
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while registering your account.");
         }
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while registering your account.");
+        else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Registration not permitted at this time.");
+        }
     }
 
     public SessionDto registerNew(RegistrationInputDto input) {
+        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+        if (canRegisterMembers != null && canRegisterMembers.getBooleanValue()) {
         OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
         if (accessTokenResponse != null && accessTokenResponse.isValid()) {
             DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
@@ -56,22 +69,32 @@ public class RegistrationService {
             }
         }
         throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while registering your account.");
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Registration not permitted at this time.");
+        }
     }
 
     public SessionDto registerVet(RegistrationInputDto input) {
-        OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
-        if (accessTokenResponse != null && accessTokenResponse.isValid()) {
-            DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
-            if (discordUserResponse != null && discordUserResponse.isValid()) {
-                Member member = memberService.findByDiscordId(discordUserResponse.getId());
-                if (member == null) {
-                    member = memberService.registerVet(input, discordUserResponse.getId(), accessTokenResponse);
-                    if (member != null) {
-                        return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+        if (canRegisterMembers.getBooleanValue()) {
+            OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
+            if (accessTokenResponse != null && accessTokenResponse.isValid()) {
+                DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
+                if (discordUserResponse != null && discordUserResponse.isValid()) {
+                    Member member = memberService.findByDiscordId(discordUserResponse.getId());
+                    if (member == null) {
+                        member = memberService.registerVet(input, discordUserResponse.getId(), accessTokenResponse);
+                        if (member != null) {
+                            return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                        }
                     }
                 }
             }
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while registering your account.");
         }
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Encountered an error while registering your account.");
+        else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Registration not permitted at this time.");
+        }
     }
 }

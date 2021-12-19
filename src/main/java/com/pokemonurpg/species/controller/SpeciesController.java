@@ -30,6 +30,11 @@ public class SpeciesController {
     }
 
     @AllowAll
+    @GetMapping(path="/starters")
+    public @ResponseBody
+    List<String> findAllStarterNames() { return speciesService.findAllStarterNames(); }
+
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     Species findByName(@PathVariable("name") String name) {

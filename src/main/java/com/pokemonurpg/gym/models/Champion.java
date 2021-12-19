@@ -35,7 +35,7 @@ public class Champion implements NamedObject {
 
     @OneToOne
     @JoinColumn(name = "term_dbid")
-    @JsonIgnoreProperties({ "champion" })
+    @JsonIgnoreProperties({ "slot" })
     private ChampionOwnershipTerm currentOwnerRecord;
 
     public Champion() {

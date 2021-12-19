@@ -40,7 +40,7 @@ public class EliteFour implements NamedObject {
 
     @OneToOne
     @JoinColumn(name = "term_dbid")
-    @JsonIgnoreProperties({ "eliteFour" })
+    @JsonIgnoreProperties({ "slot" })
     private EliteFourOwnershipTerm currentOwnerRecord;
 
     public EliteFour() {

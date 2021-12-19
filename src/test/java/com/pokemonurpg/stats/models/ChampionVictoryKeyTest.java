@@ -14,6 +14,7 @@ public class ChampionVictoryKeyTest {
     public void testPojo() {
         assertNotNull(new ChampionVictoryKey());
     }
+/*
 
     @Test
     public void testConstructor() {
@@ -36,5 +37,6 @@ public class ChampionVictoryKeyTest {
 
         assertEquals(Objects.hash(CHALLENGER_DBID, DEFENDER_NAME), key2.hashCode());
     }
+*/
 
 }

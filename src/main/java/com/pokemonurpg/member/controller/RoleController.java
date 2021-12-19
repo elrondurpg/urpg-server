@@ -1,11 +1,14 @@
 package com.pokemonurpg.member.controller;
 
+import com.pokemonurpg.View;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.RoleInputDto;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.service.RoleService;
+import com.pokemonurpg.security.service.AuthorizationService;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +16,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.pokemonurpg.strings.PermissionNames.READ_ROLE_PERMISSION;
-import static com.pokemonurpg.strings.PermissionNames.WRITE_ROLE_PERMISSION;
+import static com.pokemonurpg.strings.PermissionNames.*;
 
 @RestController
 @RequestMapping("/role")
@@ -25,18 +27,27 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
-    @AllowAuthorized(permission = READ_ROLE_PERMISSION)
+    @Resource
+    private AuthorizationService authorizationService;
+
+    @AllowAll
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return roleService.findAllNames();
     }
 
-    @AllowAuthorized(permission = READ_ROLE_PERMISSION)
+    @AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
-    Role findByName(@PathVariable("name") String name) {
-        return roleService.findByName(name);
+    MappingJacksonValue findByName(@PathVariable("name") String name) {
+        MappingJacksonValue value = new MappingJacksonValue( roleService.findByName(name) );
+        if( authorizationService.isAuthorized(WRITE_ROLE_PERMISSION) ) {
+            value.setSerializationView( View.MemberView.Secure.class );
+        } else {
+            value.setSerializationView( View.MemberView.Summary.class );
+        }
+        return value;
     }
 
     @Validated(ObjectCreation.class)

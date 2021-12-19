@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.gym.models.KnownChampion;
+import com.pokemonurpg.gym.models.KnownGymLeader;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 
@@ -25,11 +27,15 @@ public class GymVictory {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories",
+            "championTerms", "eliteFourTerms" })
     private Member challenger;
 
-    @Column(insertable = false, updatable = false)
-    private String defender;
+    @ManyToOne
+    @MapsId("defender_dbid")
+    @JoinColumn(name="defender_dbid")
+    @JsonIgnoreProperties({"dbid"})
+    private KnownGymLeader defender;
 
     @ManyToOne
     @MapsId("gym_dbid")
@@ -52,11 +58,11 @@ public class GymVictory {
     public GymVictory() {
     }
 
-    public GymVictory(GymVictoryInputDto input, Member challenger, Gym gym, GymLeague league) {
+    public GymVictory(GymVictoryInputDto input, Member challenger, KnownGymLeader defender, Gym gym, GymLeague league) {
         this.update(input);
-        this.id = new GymVictoryKey(challenger.getDbid(), input.getDefender(), gym.getDbid(), league.getDbid());
+        this.id = new GymVictoryKey(challenger.getDbid(), defender.getDbid(), gym.getDbid(), league.getDbid());
         setChallenger(challenger);
-        setDefender(input.getDefender());
+        setDefender(defender);
         setGym(gym);
         setLeague(league);
     }
@@ -74,11 +80,11 @@ public class GymVictory {
         this.challenger = challenger;
     }
 
-    public String getDefender() {
+    public KnownGymLeader getDefender() {
         return defender;
     }
 
-    public void setDefender(String defender) {
+    public void setDefender(KnownGymLeader defender) {
         this.defender = defender;
     }
 

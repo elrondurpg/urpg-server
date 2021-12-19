@@ -14,7 +14,7 @@ public class ChampionVictoryTest {
     private final static Date DATE = new Date();
     private final static String LOG_URL = "LOG_URL";
 
-    @Test
+    /*@Test
     public void testPojo() {
         ChampionVictory model = new ChampionVictory();
         model.setChallenger(CHALLENGER);
@@ -42,5 +42,5 @@ public class ChampionVictoryTest {
         assertEquals(DEFENDER, model.getDefender());
         assertEquals(DATE, model.getDate());
         assertEquals(LOG_URL, model.getLogUrl());
-    }
+    }*/
 }

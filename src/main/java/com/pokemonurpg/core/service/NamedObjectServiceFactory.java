@@ -12,6 +12,7 @@ import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.general.service.FlagService;
 import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
@@ -60,6 +61,9 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private EliteFourService eliteFourService;
+
+    @Resource
+    private FlagService flagService;
 
     @Resource
     private GymService gymService;
@@ -137,6 +141,7 @@ public class NamedObjectServiceFactory {
                 case "ContestAttribute": return contestAttributeService;
                 case "DPPContestMoveType": return dppContestMoveTypeService;
                 case "EliteFour": return eliteFourService;
+                case "Flag": return flagService;
                 case "Gym": return gymService;
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;

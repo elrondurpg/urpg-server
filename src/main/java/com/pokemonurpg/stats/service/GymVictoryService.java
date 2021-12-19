@@ -2,6 +2,7 @@ package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.gym.models.KnownGymLeader;
 import com.pokemonurpg.gym.repository.GymLeagueRepository;
 import com.pokemonurpg.gym.repository.GymRepository;
 import com.pokemonurpg.member.models.Member;
@@ -24,11 +25,11 @@ public class GymVictoryService {
     @Resource
     private GymLeagueRepository gymLeagueRepository;
 
-    public void update(GymVictoryInputDto input, Member challenger) {
+    public void update(GymVictoryInputDto input, Member challenger, KnownGymLeader defender) {
         Gym gym = gymRepository.findByName(input.getGym());
         GymLeague league = gymLeagueRepository.findByName(input.getLeague());
 
-        GymVictory existingRecord = gymVictoryRepository.findByChallengerAndDefenderAndGymAndLeague(challenger, input.getDefender(), gym, league);
+        GymVictory existingRecord = gymVictoryRepository.findByChallengerAndDefenderAndGymAndLeague(challenger, defender, gym, league);
 
         if (existingRecord != null) {
             if (input.getDelete()) {
@@ -40,7 +41,7 @@ public class GymVictoryService {
             }
         }
         else {
-            GymVictory newRecord = new GymVictory(input, challenger, gym, league);
+            GymVictory newRecord = new GymVictory(input, challenger, defender, gym, league);
             gymVictoryRepository.save(newRecord);
 
         }

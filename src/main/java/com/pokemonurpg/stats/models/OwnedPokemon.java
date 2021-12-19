@@ -30,7 +30,8 @@ public class OwnedPokemon {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories"})
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories",
+            "championTerms", "eliteFourTerms" })
     @JsonView(value = { View.MemberView.Pokemon.class })
     private Member trainer;
 

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.core.model.NamedObject;
+import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
+import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
@@ -92,12 +94,19 @@ public class Member implements NamedObject {
             inverseJoinColumns=@JoinColumn(name="ROLE_DBID")
     )
     @JsonIgnoreProperties("members")
-    @JsonView(value = { View.MemberView.Secure.class })
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy="owner")
     @JsonIgnoreProperties("owner")
     private Set<GymOwnershipTerm> gyms;
+
+    @OneToMany(mappedBy="owner")
+    @JsonIgnoreProperties("owner")
+    private Set<EliteFourOwnershipTerm> eliteFourTerms;
+
+    @OneToMany(mappedBy="owner")
+    @JsonIgnoreProperties("owner")
+    private Set<ChampionOwnershipTerm> championTerms;
 
     @Column
     private Boolean bot;
@@ -115,12 +124,12 @@ public class Member implements NamedObject {
     private List<GymVictory> gymVictories;
 
     public Member() {
-        salt = RANDOM.nextInt(1000000000);
+
     }
 
     public Member(MemberInputDto input) {
-        this();
         this.update(input);
+        initSalt();
         setBot(input.getBot());
         if (bot == null) bot = false;
     }
@@ -165,6 +174,10 @@ public class Member implements NamedObject {
 
     public Integer getSalt() {
         return salt;
+    }
+
+    public void initSalt() {
+        setSalt(RANDOM.nextInt(1000000000));
     }
 
     public void setSalt(Integer salt) {
@@ -307,6 +320,22 @@ public class Member implements NamedObject {
 
     public void setGyms(Set<GymOwnershipTerm> gyms) {
         this.gyms = gyms;
+    }
+
+    public Set<EliteFourOwnershipTerm> getEliteFourTerms() {
+        return eliteFourTerms;
+    }
+
+    public void setEliteFourTerms(Set<EliteFourOwnershipTerm> eliteFourTerms) {
+        this.eliteFourTerms = eliteFourTerms;
+    }
+
+    public Set<ChampionOwnershipTerm> getChampionTerms() {
+        return championTerms;
+    }
+
+    public void setChampionTerms(Set<ChampionOwnershipTerm> championTerms) {
+        this.championTerms = championTerms;
     }
 
     public Boolean getBot() {

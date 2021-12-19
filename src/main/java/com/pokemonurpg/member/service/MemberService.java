@@ -1,5 +1,7 @@
 package com.pokemonurpg.member.service;
 
+import com.pokemonurpg.general.service.ObtainedService;
+import com.pokemonurpg.gym.models.KnownChampion;
 import com.pokemonurpg.gym.service.KnownChampionService;
 import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
 import com.pokemonurpg.gym.service.KnownGymLeaderService;
@@ -16,7 +18,11 @@ import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.repository.MemberRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.species.models.Species;
+import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.stats.input.*;
+import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
 import com.pokemonurpg.stats.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +33,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -82,6 +91,15 @@ public class MemberService implements NamedObjectService<Member> {
     @Resource
     private KnownNameClaimService knownNameClaimService;
 
+    @Resource
+    private SpeciesService speciesService;
+
+    @Resource
+    private ObtainedService obtainedService;
+
+    @Resource
+    private OwnedPokemonRepository ownedPokemonRepository;
+
     public Member findByDbid(Integer dbid) {
         return memberRepository.findByDbid(dbid);
     }
@@ -127,6 +145,13 @@ public class MemberService implements NamedObjectService<Member> {
         member.setName(input.getName());
         member.setDiscordId(discordId);
         member.setBot(false);
+        member.initSalt();
+
+        Set<Role> currentRoles = member.getRoles();
+        Role memberRole = roleService.findByName("Member");
+        currentRoles.add(memberRole);
+
+        member.setJoinDate(new Date());
 
         member.setMoney(15000);
 
@@ -138,6 +163,11 @@ public class MemberService implements NamedObjectService<Member> {
         ownedItemService.add(member, "Starter Ribbon Coupon", 1);
         ownedItemService.add(member, "Rare Candy", 5);
 
+        Species species = speciesService.findByName(input.getStarter().getSpecies());
+        OwnedPokemon pokemon = new OwnedPokemon(member, species, input.getStarter().getGender());
+        pokemon.setObtained(obtainedService.findByName("Starter"));
+        ownedPokemonRepository.save(pokemon);
+
         update(member, accessTokenResponse);
         return member;
     }
@@ -147,6 +177,11 @@ public class MemberService implements NamedObjectService<Member> {
         member.setName(input.getName());
         member.setDiscordId(discordId);
         member.setBot(false);
+        member.initSalt();
+
+        Set<Role> currentRoles = member.getRoles();
+        Role memberRole = roleService.findByName("Member");
+        currentRoles.add(memberRole);
 
         memberRepository.save(member);
 
@@ -161,6 +196,12 @@ public class MemberService implements NamedObjectService<Member> {
             member.setName(claim.getName());
             member.setDiscordId(discordId);
             member.setBot(false);
+            member.initSalt();
+
+            Set<Role> currentRoles = member.getRoles();
+            Role memberRole = roleService.findByName("Member");
+            currentRoles.add(memberRole);
+
             memberRepository.save(member);
         }
     }
@@ -196,9 +237,9 @@ public class MemberService implements NamedObjectService<Member> {
     }
 
     private void preupdateAssociatedValues(MemberInputDto input, Member member) {
-        knownGymLeaderService.update(input.getName(), member.getName());
-        knownEliteFourMemberService.update(input.getName(), member.getName());
-        knownChampionService.update(input.getName(), member.getName());
+        knownGymLeaderService.rename(input, member);
+        knownEliteFourMemberService.rename(input, member);
+        knownChampionService.rename(input, member);
     }
 
     private void updateEmbeddedValues(MemberInputDto input, Member member) {
@@ -245,21 +286,21 @@ public class MemberService implements NamedObjectService<Member> {
     private void updateEliteFourVictories(MemberInputDto input, Member member) {
         List<EliteFourVictoryInputDto> victories = input.getEliteFourVictories();
         for(EliteFourVictoryInputDto victory : victories) {
-            eliteFourVictoryService.update(victory, member);
+            eliteFourVictoryService.update(victory, member, knownEliteFourMemberService.findByName(victory.getDefender()));
         }
     }
 
     private void updateChampionVictories(MemberInputDto input, Member member) {
         List<ChampionVictoryInputDto> victories = input.getChampionVictories();
         for(ChampionVictoryInputDto victory : victories) {
-            championVictoryService.update(victory, member);
+            championVictoryService.update(victory, member, knownChampionService.findByName(victory.getDefender()));
         }
     }
 
     private void updateGymVictories(MemberInputDto input, Member member) {
         List<GymVictoryInputDto> victories = input.getGymVictories();
         for(GymVictoryInputDto victory : victories) {
-            gymVictoryService.update(victory, member);
+            gymVictoryService.update(victory, member, knownGymLeaderService.findByName(victory.getDefender()));
         }
     }
 

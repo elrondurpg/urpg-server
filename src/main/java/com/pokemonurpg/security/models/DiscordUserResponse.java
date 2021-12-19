@@ -25,6 +25,12 @@ public class DiscordUserResponse {
     private String errorDescription;
     @JsonProperty("premium_type")
     private String premiumType;
+    @JsonProperty("banner")
+    private String banner;
+    @JsonProperty("banner_color")
+    private String bannerColor;
+    @JsonProperty("accent_color")
+    private String accentColor;
 
     public DiscordUserResponse() {
     }
@@ -115,6 +121,30 @@ public class DiscordUserResponse {
 
     public void setPremiumType(String premiumType) {
         this.premiumType = premiumType;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public String getBannerColor() {
+        return bannerColor;
+    }
+
+    public void setBannerColor(String bannerColor) {
+        this.bannerColor = bannerColor;
+    }
+
+    public String getAccentColor() {
+        return accentColor;
+    }
+
+    public void setAccentColor(String accentColor) {
+        this.accentColor = accentColor;
     }
 
     public boolean isValid() {

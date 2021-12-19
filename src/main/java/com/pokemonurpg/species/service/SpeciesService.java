@@ -14,6 +14,7 @@ import com.pokemonurpg.core.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,6 +49,10 @@ public class SpeciesService implements NamedObjectService<Species> {
 
     public List<String> findAllNames() {
         return speciesRepository.findAllNames();
+    }
+
+    public List<String> findAllStarterNames() {
+        return speciesRepository.findAllStarterNames();
     }
 
     public Species findByDbid(int dbid) {

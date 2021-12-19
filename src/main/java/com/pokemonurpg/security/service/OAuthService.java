@@ -36,7 +36,9 @@ public class OAuthService {
         try {
             String response = okHttpClientService.sendRequest(request);
             return mapper.readValue(response, DiscordUserResponse.class);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+
+        }
         return null;
     }
 

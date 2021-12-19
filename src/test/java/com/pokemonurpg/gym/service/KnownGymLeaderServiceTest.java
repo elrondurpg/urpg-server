@@ -62,7 +62,7 @@ public class KnownGymLeaderServiceTest {
         KnownGymLeader savedObject = captor.getValue();
         assertEquals(NAME, savedObject.getName());
     }
-
+/*
     @Test
     public void createByInputDto() {
         KnownGymLeaderInputDto input = new KnownGymLeaderInputDto();
@@ -96,5 +96,5 @@ public class KnownGymLeaderServiceTest {
         verify(knownGymLeaderRepository, times(1)).save(captor.capture());
         KnownGymLeader savedObject = captor.getValue();
         assertEquals(knownGymLeader, savedObject);
-    }
+    }*/
 }

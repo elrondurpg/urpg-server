@@ -43,14 +43,14 @@ public class EliteFourOwnershipTermController {
     }
 
     @Validated(ObjectCreation.class)
-    @AllowAuthorized(permission = "Write EliteFour")
+    @AllowAuthorized(permission = "Write Gym")
     @PostMapping
     public @ResponseBody
     EliteFourOwnershipTerm create(@Valid @RequestBody EliteFourOwnershipTermInputDto input) {
         return eliteFourOwnershipTermService.create(input);
     }
 
-    @AllowAuthorized(permission = "Write EliteFour")
+    @AllowAuthorized(permission = "Write Gym")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     EliteFourOwnershipTerm update(@Valid @RequestBody EliteFourOwnershipTermInputDto input, @PathVariable int dbid) {
@@ -58,7 +58,7 @@ public class EliteFourOwnershipTermController {
     }
 
     @Transactional
-    @AllowAuthorized(permission = "Delete EliteFour")
+    @AllowAuthorized(permission = "Delete Gym")
     @DeleteMapping(path="/{dbid}")
     public @ResponseBody
     ResponseEntity delete(@PathVariable int dbid) {

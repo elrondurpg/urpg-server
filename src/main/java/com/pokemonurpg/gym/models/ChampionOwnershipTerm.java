@@ -20,7 +20,7 @@ public class ChampionOwnershipTerm {
 
     @OneToOne
     @JoinColumn(name = "slot_dbid")
-    @JsonIgnoreProperties({"dbid", "pokemon" })
+    @JsonIgnoreProperties({"dbid", "currentOwnerRecord" })
     private Champion slot;
 
     @OneToOne
@@ -28,7 +28,8 @@ public class ChampionOwnershipTerm {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories", "gymVictories",
+            "championTerms", "eliteFourTerms" })
     private Member owner;
 
     @Column(name = "open_date")

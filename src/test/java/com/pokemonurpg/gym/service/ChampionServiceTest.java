@@ -1,12 +1,9 @@
 package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.gym.input.ChampionInputDto;
-import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.models.Champion;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.repository.ChampionRepository;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,7 +111,7 @@ public class ChampionServiceTest {
 
         Champion champion1 = championService.update(input, DBID);
         assertNull(champion1);
-        verify(championRepository, times(0)).save(Matchers.any());
+        verify(championRepository, times(0)).save(Matchers.any(Champion.class));
     }
 
     @Test

@@ -172,7 +172,7 @@ public class MemberServiceTest {
         when(memberRepository.findFirstByNameStartingWith(NAME)).thenReturn(member);
         assertEquals(member, memberService.findByName(NAME));
     }
-
+/*
     @Test
     public void create() throws NoSuchAlgorithmException {
         // Given a Role "newRole" known by name "NEW_ROLE_NAME"
@@ -204,8 +204,8 @@ public class MemberServiceTest {
 
         // Then that member's roles will contain NEW_ROLE
         assertTrue(member.getRoles().contains(NEW_ROLE));
-    }
-
+    }*/
+/*
     @Test
     public void updateExistingRecord() {
         // Given a Role "currentRole" known by name "CURRENT_ROLE_NAME"
@@ -249,7 +249,7 @@ public class MemberServiceTest {
         // Then currentRoles will contain NEW_ROLE and not CURRENT_ROLE
         assertTrue(currentRoles.contains(NEW_ROLE));
         assertFalse(currentRoles.contains(CURRENT_ROLE));
-    }
+    }*/
 
     @Test
     public void updateNonExistingRecord() {

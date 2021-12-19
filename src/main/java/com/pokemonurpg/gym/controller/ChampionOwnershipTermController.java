@@ -43,14 +43,14 @@ public class ChampionOwnershipTermController {
     }
 
     @Validated(ObjectCreation.class)
-    @AllowAuthorized(permission = "Write Champion")
+    @AllowAuthorized(permission = "Write Gym")
     @PostMapping
     public @ResponseBody
     ChampionOwnershipTerm create(@Valid @RequestBody ChampionOwnershipTermInputDto input) {
         return championOwnershipTermService.create(input);
     }
 
-    @AllowAuthorized(permission = "Write Champion")
+    @AllowAuthorized(permission = "Write Gym")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
     ChampionOwnershipTerm update(@Valid @RequestBody ChampionOwnershipTermInputDto input, @PathVariable int dbid) {
@@ -58,7 +58,7 @@ public class ChampionOwnershipTermController {
     }
 
     @Transactional
-    @AllowAuthorized(permission = "Delete Champion")
+    @AllowAuthorized(permission = "Delete Gym")
     @DeleteMapping(path="/{dbid}")
     public @ResponseBody
     ResponseEntity delete(@PathVariable int dbid) {

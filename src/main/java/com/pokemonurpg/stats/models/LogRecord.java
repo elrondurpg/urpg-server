@@ -19,7 +19,8 @@ public class LogRecord {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories",
+            "championTerms", "eliteFourTerms" })
 
     private Member member;
 
@@ -28,7 +29,8 @@ public class LogRecord {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories"})
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories",
+            "championTerms", "eliteFourTerms" })
     private Member creator;
 
     @Column

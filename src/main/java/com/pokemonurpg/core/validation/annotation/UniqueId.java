@@ -1,5 +1,7 @@
 package com.pokemonurpg.core.validation.annotation;
 
+import com.pokemonurpg.core.validation.validator.UniqueChampionOwnershipTermIdValidator;
+import com.pokemonurpg.core.validation.validator.UniqueEliteFourOwnershipTermIdValidator;
 import com.pokemonurpg.core.validation.validator.UniqueGymOwnershipTermIdValidator;
 
 import javax.validation.Constraint;
@@ -13,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = { UniqueGymOwnershipTermIdValidator.class })
+@Constraint(validatedBy = { UniqueGymOwnershipTermIdValidator.class, UniqueEliteFourOwnershipTermIdValidator.class, UniqueChampionOwnershipTermIdValidator.class })
 @Documented
 public @interface UniqueId {
 
