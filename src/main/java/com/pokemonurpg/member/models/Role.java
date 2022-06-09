@@ -39,7 +39,8 @@ public class Role implements NamedObject {
     @JsonIgnoreProperties({ "roles", "salt", "accessToken", "refreshToken", "sessionExpire",
                             "money", "wins", "losses", "draws", "joinDate", "pokemon",
                             "items", "badges", "championRecords", "legendaryProgress",
-                            "earnedLegendaries", "gyms", "banned", "banExpiration" })
+                            "earnedLegendaries", "gyms", "banned", "banExpiration",
+                            "eliteFourTerms", "championTerms", "eliteFourVictories", "championVictories", "gymVictories" })
     private Set<Member> members;
 
     public Role() {

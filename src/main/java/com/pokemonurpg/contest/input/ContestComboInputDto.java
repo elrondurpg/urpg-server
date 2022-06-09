@@ -16,7 +16,7 @@ public class ContestComboInputDto extends ChildInputDto {
     @Pattern(regexp = "^(RSE|DPP|ORAS|ADV)$")
     private String contestType;
 
-    private Boolean overpowered = false;
+    private Boolean overpowered;
 
     public Boolean getOverpowered() {
         return overpowered;

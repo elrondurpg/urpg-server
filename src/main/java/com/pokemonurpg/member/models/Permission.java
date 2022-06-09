@@ -26,7 +26,7 @@ public class Permission implements NamedObject {
     private String description;
 
     @ManyToMany( mappedBy = "permissions" )
-    @JsonIgnoreProperties("permissions")
+    @JsonIgnoreProperties({ "permissions", "members" })
     private Set<Role> roles;
 
     public Permission() {

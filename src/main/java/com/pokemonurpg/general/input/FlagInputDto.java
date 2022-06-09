@@ -21,7 +21,7 @@ public class FlagInputDto {
     @Pattern(regexp = "BOOLEAN|STRING|DOUBLE|INTEGER")
     private String type;
 
-    @Size(min = 3, max = 60)
+    @Size(max = 60)
     private String value;
 
     public String getName() {

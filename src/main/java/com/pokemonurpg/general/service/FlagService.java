@@ -15,8 +15,8 @@ public class FlagService implements NamedObjectService<Flag> {
     @Resource
     private FlagRepository flagRepository;
 
-    public List<Flag> findAll() {
-        return flagRepository.findAll();
+    public List<String> findAllNames() {
+        return flagRepository.findAllNames();
     }
 
     public Flag findByDbid(int dbid) {

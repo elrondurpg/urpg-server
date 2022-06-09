@@ -38,7 +38,6 @@ public class SpeciesInputDto implements UniquelyNamedInputDto {
     @Pattern(regexp = "^(?!NONE).*$", message = "Type 1 must not be NONE.")
     private String type1;
 
-    @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Type.class)
     private String type2;
 

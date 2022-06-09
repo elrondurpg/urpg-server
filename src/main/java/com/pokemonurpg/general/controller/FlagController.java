@@ -24,8 +24,8 @@ public class FlagController {
     @AllowAuthorized(permission = "Write Admin")
     @GetMapping
     public @ResponseBody
-    List<Flag> findAll() {
-        return flagService.findAll();
+    List<String> findAllNames() {
+        return flagService.findAllNames();
     }
 
     @AllowAuthorized(permission = "Write Admin")

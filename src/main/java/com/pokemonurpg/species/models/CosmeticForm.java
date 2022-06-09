@@ -2,6 +2,7 @@ package com.pokemonurpg.species.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.species.input.CosmeticFormInputDto;
 
 import javax.persistence.*;
@@ -16,11 +17,15 @@ public class CosmeticForm {
     @Column(name = "form_name")
     private String formName;
 
+    @Column(name = "species_dbid")
+    private Integer speciesDbid;
+
     public CosmeticForm() {}
 
-    public CosmeticForm(CosmeticFormInputDto input) {
+    public CosmeticForm(CosmeticFormInputDto input, Integer speciesDbid) {
         this.update(input);
         setName(input.getName());
+        setSpeciesDbid(speciesDbid);
     }
 
     public void update(CosmeticFormInputDto input) {
@@ -43,5 +48,13 @@ public class CosmeticForm {
         if (formName != null) {
             this.formName = formName;
         }
+    }
+
+    public Integer getSpeciesDbid() {
+        return speciesDbid;
+    }
+
+    public void setSpeciesDbid(Integer speciesDbid) {
+        this.speciesDbid = speciesDbid;
     }
 }

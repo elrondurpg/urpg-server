@@ -32,6 +32,7 @@ public class Item implements NamedObject {
 
     public Item(ItemInputDto item) {
         this.update(item);
+		if (price == null) price = 0;
     }
 
     public void update(ItemInputDto input) {

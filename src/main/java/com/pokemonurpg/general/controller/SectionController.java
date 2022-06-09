@@ -36,6 +36,7 @@ public class SectionController {
         return sectionService.findAllNames();
     }
 
+	@AllowAll
     @GetMapping(path="/{name}")
     public @ResponseBody
     Section findByName(@PathVariable("name") String name) {

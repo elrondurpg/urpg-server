@@ -20,7 +20,7 @@ public class LogRecord {
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
             "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories",
-            "championTerms", "eliteFourTerms" })
+            "championTerms", "eliteFourTerms", "gymVictories" })
 
     private Member member;
 
@@ -30,7 +30,7 @@ public class LogRecord {
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
             "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories",
-            "championTerms", "eliteFourTerms" })
+            "championTerms", "eliteFourTerms", "gymVictories" })
     private Member creator;
 
     @Column

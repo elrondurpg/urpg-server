@@ -17,8 +17,8 @@ public class ItemInputDto implements UniquelyNamedInputDto {
     @Size(min = 3, max = 30)
     private String name;
 
-    @Min(1)
-    private int price;
+    @Min(0)
+    private Integer price;
 
     @NotNull(groups = { ObjectCreation.class })
     @Pattern(regexp = "^(TM|HM|Held|Mail|Evolution|Other|Mega|Special|Berry|Contest|Fossil|ZCrystal)$")
@@ -35,11 +35,11 @@ public class ItemInputDto implements UniquelyNamedInputDto {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

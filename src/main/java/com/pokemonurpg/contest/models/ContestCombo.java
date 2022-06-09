@@ -47,6 +47,7 @@ public class ContestCombo {
         this.id = new ContestComboKey(firstAttack.getDbid(), secondAttack.getDbid(), input.getContestType());
         setFirstAttack(firstAttack);
         setSecondAttack(secondAttack);
+        if (overpowered == null) overpowered = false;
     }
 
     public void update(ContestComboInputDto input) {

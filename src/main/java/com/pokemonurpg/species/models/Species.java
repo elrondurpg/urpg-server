@@ -184,6 +184,7 @@ public class Species implements NamedObject {
 
     public Species(SpeciesInputDto input) {
         this.update(input);
+		if (this.displayName == null) setDisplayName(getName());
     }
 
     public void update(SpeciesInputDto input) {

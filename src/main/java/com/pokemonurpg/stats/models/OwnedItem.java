@@ -23,8 +23,8 @@ public class OwnedItem {
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
             "badges", "championRecords", "legendaryProgress", "earnedLegendaries", "roles",
-            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories",
-            "championTerms", "eliteFourTerms" })
+            "banned", "banExpiration", "gyms", "bot", "eliteFourVictories", "championVictories",
+            "championTerms", "eliteFourTerms", "gymVictories" })
     private Member trainer;
 
     @ManyToOne

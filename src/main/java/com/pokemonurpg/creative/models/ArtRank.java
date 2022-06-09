@@ -57,7 +57,7 @@ public class ArtRank implements NamedObject {
     }
 
     public void setRequirement(String requirement) {
-        if (name != null) {
+        if (requirement != null) {
             this.requirement = requirement;
         }
     }

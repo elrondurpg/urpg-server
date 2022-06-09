@@ -4,10 +4,7 @@ import com.pokemonurpg.ability.service.AbilityService;
 import com.pokemonurpg.attack.service.AttackCategoryService;
 import com.pokemonurpg.attack.service.AttackService;
 import com.pokemonurpg.attack.service.AttackTargetTypeService;
-import com.pokemonurpg.contest.service.ContestAttributeService;
-import com.pokemonurpg.contest.service.DPPContestMoveTypeService;
-import com.pokemonurpg.contest.service.ORASContestMoveTypeService;
-import com.pokemonurpg.contest.service.RSEContestMoveTypeService;
+import com.pokemonurpg.contest.service.*;
 import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
@@ -21,6 +18,7 @@ import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.site.service.MenuItemService;
+import com.pokemonurpg.species.service.CosmeticFormService;
 import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.member.service.PermissionService;
@@ -55,6 +53,9 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private ContestAttributeService contestAttributeService;
+
+    @Resource
+    private ContestRankService contestRankService;
 
     @Resource
     private DPPContestMoveTypeService dppContestMoveTypeService;
@@ -139,6 +140,7 @@ public class NamedObjectServiceFactory {
                 case "Badge": return badgeService;
                 case "Champion": return championService;
                 case "ContestAttribute": return contestAttributeService;
+                case "ContestRank": return contestRankService;
                 case "DPPContestMoveType": return dppContestMoveTypeService;
                 case "EliteFour": return eliteFourService;
                 case "Flag": return flagService;

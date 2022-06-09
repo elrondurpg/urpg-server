@@ -1,5 +1,7 @@
 package com.pokemonurpg.species.service;
 
+import com.pokemonurpg.core.annotation.Cached;
+import com.pokemonurpg.core.service.CacheService;
 import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
@@ -47,6 +49,9 @@ public class SpeciesService implements NamedObjectService<Species> {
     @Resource
     private CosmeticFormService cosmeticFormService;
 
+    @Resource
+    private CacheService cacheService;
+
     public List<String> findAllNames() {
         return speciesRepository.findAllNames();
     }
@@ -55,6 +60,7 @@ public class SpeciesService implements NamedObjectService<Species> {
         return speciesRepository.findAllStarterNames();
     }
 
+    @Cached(type = Species.class)
     public Species findByDbid(int dbid) {
         return speciesRepository.findByDbid(dbid);
     }
@@ -73,7 +79,7 @@ public class SpeciesService implements NamedObjectService<Species> {
         else return species;
     }
 
-    @Override
+    @Cached(type = Species.class)
     public Species findByNameExact(String name) {
         return speciesRepository.findByName(name);
     }
@@ -112,6 +118,9 @@ public class SpeciesService implements NamedObjectService<Species> {
         Species species = new Species(input);
 
         updateEmbeddedValues(species, input);
+        if (species.getType2() == null) {
+            species.setType2(typeService.findByName("NONE"));
+        }
         speciesRepository.save(species);
 
         updateAssociatedValues(species, input);
@@ -146,7 +155,7 @@ public class SpeciesService implements NamedObjectService<Species> {
     void updateAssociatedValues(Species species, SpeciesInputDto input) {
         updateSpeciesAttacks(species, input);
         updateSpeciesAbilities(species, input);
-        updateCosmeticForms(input);
+        updateCosmeticForms(species, input);
     }
 
     private void updateSpeciesAttacks(Species species, SpeciesInputDto input) {
@@ -163,10 +172,10 @@ public class SpeciesService implements NamedObjectService<Species> {
         }
     }
 
-    private void updateCosmeticForms(SpeciesInputDto input) {
+    private void updateCosmeticForms(Species species, SpeciesInputDto input) {
         List<CosmeticFormInputDto> forms = input.getCosmeticForms();
         for (CosmeticFormInputDto form : forms) {
-            cosmeticFormService.update(form);
+            cosmeticFormService.update(form, species.getDbid());
         }
     }
 }
