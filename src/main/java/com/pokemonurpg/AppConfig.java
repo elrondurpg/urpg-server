@@ -25,10 +25,10 @@ public class AppConfig implements WebMvcConfigurer {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
         dataSource.setUsername("urpg_secure");
         dataSource.setPassword(System.getenv("URPG_DB_PASSWORD"));
-        dataSource.setUrl("jdbc:mysql://localhost:3306/urpg_db");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/URPG_DB");
 
         return dataSource;
     }

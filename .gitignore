@@ -6,3 +6,5 @@ src/main/resources/application.properties
 .factorypath
 .project
 .settings
+src/main/java/com/pokemonurpg/auxiliary/
+.vscode

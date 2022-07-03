@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="artifactId">urpg-server</Property>
-        <Property name="defaultLogPath">/home/ec2-user/logs/${artifactId}</Property>
+        <Property name="defaultLogPath">/home/ec2-user/${artifactId}/target/logs</Property>
         <Property name="filePath">${sys:logPathProperty:-${defaultLogPath}}</Property>
         <Property name="LOG_PATTERN">
             %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
