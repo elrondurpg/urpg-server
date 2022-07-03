@@ -16,6 +16,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CosmeticFormServiceTest {
     private final static String NAME = "NAME";
+    private final static Integer SPECIES_DBID = 123;
 
     @InjectMocks
     private CosmeticFormService cosmeticFormService;
@@ -33,7 +34,7 @@ public class CosmeticFormServiceTest {
 
         when(cosmeticFormRepository.findByName(NAME)).thenReturn(cosmeticForm);
 
-        cosmeticFormService.update(input);
+        cosmeticFormService.update(input, SPECIES_DBID);
 
         verify(cosmeticFormRepository, times(1)).delete(cosmeticForm);
     }
@@ -48,7 +49,7 @@ public class CosmeticFormServiceTest {
 
         when(cosmeticFormRepository.findByName(NAME)).thenReturn(cosmeticForm);
 
-        cosmeticFormService.update(input);
+        cosmeticFormService.update(input, SPECIES_DBID);
 
         verify(cosmeticForm, times(1)).update(input);
         verify(cosmeticFormRepository, times(1)).save(cosmeticForm);
@@ -59,7 +60,7 @@ public class CosmeticFormServiceTest {
         CosmeticFormInputDto input = new CosmeticFormInputDto();
         input.setName(NAME);
 
-        cosmeticFormService.update(input);
+        cosmeticFormService.update(input, SPECIES_DBID);
 
         verify(cosmeticFormRepository, times(1)).save(Matchers.any());
     }

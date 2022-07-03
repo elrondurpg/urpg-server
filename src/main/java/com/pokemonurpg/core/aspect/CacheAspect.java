@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javax.inject.Provider;
 
 import java.lang.reflect.Method;
 
@@ -16,12 +17,9 @@ import java.lang.reflect.Method;
 @Component
 public class CacheAspect {
 
-    private final CacheService cacheService;
-
     @Autowired
-    public CacheAspect (CacheService cacheService) {
-        this.cacheService = cacheService;
-    }
+    private Provider<CacheService> cacheProvider;
+
 
     @Around(value = "@annotation(com.pokemonurpg.core.annotation.Cached)")
     public Object handleCache(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -50,25 +48,25 @@ public class CacheAspect {
     }
 
     public Object getCachedObjectById(Integer id, Class<?> T, ProceedingJoinPoint joinPoint) throws Throwable {
-        Object object = cacheService.getById(T, id);
+        Object object = cacheProvider.get().getById(T, id);
         if (object != null) {
             return object;
         }
         else {
             object = joinPoint.proceed();
-            cacheService.putById(T, id, object);
+            cacheProvider.get().putById(T, id, object);
             return object;
         }
     }
 
     public Object getCachedObjectByName(String name, Class<?> T, ProceedingJoinPoint joinPoint) throws Throwable {
-        Object object = cacheService.getByName(T, name);
+        Object object = cacheProvider.get().getByName(T, name);
         if (object != null) {
             return object;
         }
         else {
             object = joinPoint.proceed();
-            cacheService.putByName(T, name, object);
+            cacheProvider.get().putByName(T, name, object);
             return object;
         }
     }

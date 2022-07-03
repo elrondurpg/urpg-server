@@ -7,12 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebMvc
 public class AppConfig implements WebMvcConfigurer {
 
     @Value( "${server.image-base}" )
@@ -28,6 +31,12 @@ public class AppConfig implements WebMvcConfigurer {
         dataSource.setUrl("jdbc:mysql://localhost:3306/urpg_db");
 
         return dataSource;
+    }
+    
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*");
     }
 
     public String getImageBase() {

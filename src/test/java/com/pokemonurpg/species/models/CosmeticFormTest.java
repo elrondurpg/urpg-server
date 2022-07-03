@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 public class CosmeticFormTest {
     public final static String NAME = "TEST";
     public final static String FORM_NAME = "FORM_NAME";
+    public final static Integer SPECIES_DBID = 123;
 
     @Test
     public void testPojo() {
@@ -25,7 +26,7 @@ public class CosmeticFormTest {
         input.setName(NAME);
         input.setFormName(FORM_NAME);
 
-        CosmeticForm cosmeticForm = new CosmeticForm(input);
+        CosmeticForm cosmeticForm = new CosmeticForm(input, SPECIES_DBID);
         assertEquals(NAME, cosmeticForm.getName());
         assertEquals(FORM_NAME, cosmeticForm.getFormName());
     }

@@ -232,7 +232,7 @@ public class SpeciesServiceTest {
         verify(speciesAttackService, times(1)).update(species, attack2);
         verify(speciesAbilityService, times(1)).update(species, ability1);
         verify(speciesAbilityService, times(1)).update(species, ability2);
-        verify(cosmeticFormService, times(1)).update(form1);
-        verify(cosmeticFormService, times(1)).update(form2);
+        verify(cosmeticFormService, times(1)).update(form1, DBID);
+        verify(cosmeticFormService, times(1)).update(form2, DBID);
     }
 }

@@ -1,7 +1,5 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.core.annotation.Cached;
-import com.pokemonurpg.core.service.CacheService;
 import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
@@ -16,7 +14,6 @@ import com.pokemonurpg.core.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,9 +46,6 @@ public class SpeciesService implements NamedObjectService<Species> {
     @Resource
     private CosmeticFormService cosmeticFormService;
 
-    @Resource
-    private CacheService cacheService;
-
     public List<String> findAllNames() {
         return speciesRepository.findAllNames();
     }
@@ -60,7 +54,6 @@ public class SpeciesService implements NamedObjectService<Species> {
         return speciesRepository.findAllStarterNames();
     }
 
-    @Cached(type = Species.class)
     public Species findByDbid(int dbid) {
         return speciesRepository.findByDbid(dbid);
     }
@@ -79,7 +72,6 @@ public class SpeciesService implements NamedObjectService<Species> {
         else return species;
     }
 
-    @Cached(type = Species.class)
     public Species findByNameExact(String name) {
         return speciesRepository.findByName(name);
     }

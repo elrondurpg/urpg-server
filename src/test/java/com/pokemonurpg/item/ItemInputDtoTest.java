@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class ItemInputDtoTest {
     public static final String NAME = "TEST_NAME";
-    public static final int PRICE = 10000;
+    public static final Integer PRICE = 10000;
     public static final String TYPE = "TM";
     public static final String DESCRIPTION = "This is a test.";
 

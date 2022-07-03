@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_CLAIM;
-import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
 @RequestMapping("/session")
