@@ -17,6 +17,8 @@ public class DiscordUserResponse {
     private String publicFlags;
     @JsonProperty("avatar")
     private String avatar;
+    @JsonProperty("avatar_decoration")
+    private Object avatarDecoration;
     @JsonProperty("discriminator")
     private String discriminator;
     @JsonProperty("error")
@@ -89,6 +91,14 @@ public class DiscordUserResponse {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Object getAvatarDecoration() {
+        return avatarDecoration;
+    }
+
+    public void setAvatarDecoration(Object avatarDecoration) {
+        this.avatarDecoration = avatarDecoration;
     }
 
     public String getDiscriminator() {
