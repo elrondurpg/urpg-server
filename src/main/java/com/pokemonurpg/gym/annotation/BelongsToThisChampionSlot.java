@@ -1,7 +1,6 @@
 package com.pokemonurpg.gym.annotation;
 
 import com.pokemonurpg.gym.validation.BelongsToThisChampionSlotValidator;
-import com.pokemonurpg.gym.validation.BelongsToThisGymValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

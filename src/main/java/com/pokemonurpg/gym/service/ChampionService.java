@@ -4,6 +4,7 @@ import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.input.ChampionInputDto;
 import com.pokemonurpg.gym.models.Champion;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
+import com.pokemonurpg.gym.repository.ChampionOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.ChampionRepository;
 import com.pokemonurpg.species.service.TypeService;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ChampionService implements NamedObjectService<Champion> {
     private TypeService typeService;
 
     @Resource
-    private ChampionOwnershipTermService championOwnershipTermService;
+    private ChampionOwnershipTermRepository championOwnershipTermRepository;
 
     @Resource
     private ChampionPokemonService championPokemonService;
@@ -80,7 +81,7 @@ public class ChampionService implements NamedObjectService<Champion> {
     void updateEmbeddedValues(ChampionInputDto input, Champion champion) {
         championPokemonService.updateAll(input, champion);
         if (input.getCurrentOwnerRecordDbid() != null)
-            champion.setCurrentOwnerRecord(championOwnershipTermService.findByDbid(input.getCurrentOwnerRecordDbid()));
+            champion.setCurrentOwnerRecord(championOwnershipTermRepository.findByDbid(input.getCurrentOwnerRecordDbid()));
         else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
             champion.setCurrentOwnerRecord(null);
             champion.getPokemon().clear();

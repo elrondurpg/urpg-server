@@ -1,12 +1,10 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
 import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFour;
 import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.repository.EliteFourRepository;
+import com.pokemonurpg.gym.repository.EliteFourOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.EliteFourRepository;
 import com.pokemonurpg.species.service.TypeService;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class EliteFourService implements NamedObjectService<EliteFour> {
     private TypeService typeService;
 
     @Resource
-    private EliteFourOwnershipTermService eliteFourOwnershipTermService;
+    private EliteFourOwnershipTermRepository eliteFourOwnershipTermRepository;
 
     @Resource
     private EliteFourPokemonService eliteFourPokemonService;
@@ -83,7 +81,7 @@ public class EliteFourService implements NamedObjectService<EliteFour> {
     void updateEmbeddedValues(EliteFourInputDto input, EliteFour eliteFour) {
         eliteFourPokemonService.updateAll(input, eliteFour);
         if (input.getCurrentOwnerRecordDbid() != null)
-            eliteFour.setCurrentOwnerRecord(eliteFourOwnershipTermService.findByDbid(input.getCurrentOwnerRecordDbid()));
+            eliteFour.setCurrentOwnerRecord(eliteFourOwnershipTermRepository.findByDbid(input.getCurrentOwnerRecordDbid()));
         else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
             eliteFour.setCurrentOwnerRecord(null);
             eliteFour.getPokemon().clear();

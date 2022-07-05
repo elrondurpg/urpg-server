@@ -2,10 +2,10 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
+import com.pokemonurpg.gym.repository.GymOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.GymRepository;
 import com.pokemonurpg.species.service.TypeService;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
     private TypeService typeService;
 
     @Resource
-    private GymOwnershipTermService gymOwnershipTermService;
+    private GymOwnershipTermRepository gymOwnershipTermRepository;
 
     @Resource
     private GymPokemonService gymPokemonService;
@@ -84,7 +84,7 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
         gym.setBadge(badgeService.findByName(input.getBadge()));
         gymPokemonService.updateAll(input, gym);
         if (input.getCurrentOwnerRecordDbid() != null)
-            gym.setCurrentOwnerRecord(gymOwnershipTermService.findByDbid(input.getCurrentOwnerRecordDbid()));
+            gym.setCurrentOwnerRecord(gymOwnershipTermRepository.findByDbid(input.getCurrentOwnerRecordDbid()));
         else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
             gym.setCurrentOwnerRecord(null);
             gym.getPokemon().clear();

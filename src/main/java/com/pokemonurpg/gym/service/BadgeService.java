@@ -2,10 +2,8 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.input.BadgeInputDto;
-import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.repository.BadgeRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.gym.repository.GymRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,9 +14,6 @@ public class BadgeService implements NamedObjectService<Badge> {
 
     @Resource
     private BadgeRepository badgeRepository;
-
-    @Resource
-    private GymService gymService;
 
     public List<String> findAllNames() {
         return badgeRepository.findAllNames();
