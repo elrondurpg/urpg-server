@@ -5,15 +5,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
-import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
@@ -29,18 +30,25 @@ public class GymOwnershipTermController {
     private GymOwnershipTermService gymOwnershipTermService;
 
     @AllowAll
+    @GetMapping
+    public @ResponseBody
+    List<GymOwnershipTerm> findAll() {
+        return gymOwnershipTermService.findAll();
+    }
+
+    @AllowAll
     @GetMapping(path="/{dbid}")
     public @ResponseBody
     GymOwnershipTerm findByDbid(@PathVariable("dbid") Integer dbid) {
         return gymOwnershipTermService.findByDbid(dbid);
     }
 
-    @AllowAll
-    @GetMapping
-    public @ResponseBody
-    GymOwnershipTerm findByGymAndOwnerAndOpenDate(@RequestParam(required = true) String gym, @RequestParam(required = true) String owner, @RequestParam(required = true) Date openDate) {
-        return gymOwnershipTermService.findByGymAndOwnerAndOpenDate(gym, owner, openDate);
-    }
+    // @AllowAll
+    // @GetMapping
+    // public @ResponseBody
+    // GymOwnershipTerm findByGymAndOwnerAndOpenDate(@RequestParam(required = true) String gym, @RequestParam(required = true) String owner, @RequestParam(required = true) Date openDate) {
+    //     return gymOwnershipTermService.findByGymAndOwnerAndOpenDate(gym, owner, openDate);
+    // }
 
     @Validated(ObjectCreation.class)
     @AllowAuthorized(permission = "Write Gym")

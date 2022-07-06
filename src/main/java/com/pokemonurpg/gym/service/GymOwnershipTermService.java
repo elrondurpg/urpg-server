@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class GymOwnershipTermService implements IndexedObjectService<GymOwnershipTerm> {
@@ -33,6 +34,10 @@ public class GymOwnershipTermService implements IndexedObjectService<GymOwnershi
 
     @Resource
     private KnownGymLeaderService knownGymLeaderService;
+
+    public List<GymOwnershipTerm> findAll() {
+        return gymOwnershipTermRepository.findAll();
+    }
 
     public GymOwnershipTerm findByDbid(Integer dbid) {
         return gymOwnershipTermRepository.findByDbid(dbid);

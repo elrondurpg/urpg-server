@@ -25,8 +25,8 @@ public class ItemController {
     @AllowAll
     @GetMapping
     public @ResponseBody
-    List<String> findAllNames() {
-        return itemService.findAllNames();
+    List<String> findNamesBy(@RequestParam(required = false) String type) {
+        return itemService.findNamesBy(type);
     }
 
     @AllowAll

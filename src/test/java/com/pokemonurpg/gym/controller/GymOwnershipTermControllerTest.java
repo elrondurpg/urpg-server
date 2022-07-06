@@ -40,11 +40,11 @@ public class GymOwnershipTermControllerTest {
         assertEquals(term, gymOwnershipTermController.findByDbid(DBID));
     }
 
-    @Test
-    public void findByGymAndOwnerAndOpenDate() {
-        when(gymOwnershipTermService.findByGymAndOwnerAndOpenDate(GYM, OWNER, DATE)).thenReturn(term);
-        assertEquals(term, gymOwnershipTermController.findByGymAndOwnerAndOpenDate(GYM, OWNER, DATE));
-    }
+    // @Test
+    // public void findByGymAndOwnerAndOpenDate() {
+    //     when(gymOwnershipTermService.findByGymAndOwnerAndOpenDate(GYM, OWNER, DATE)).thenReturn(term);
+    //     assertEquals(term, gymOwnershipTermController.findByGymAndOwnerAndOpenDate(GYM, OWNER, DATE));
+    // }
 
     @Test
     public void create() {

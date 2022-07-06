@@ -37,7 +37,7 @@ public class ItemServiceTest {
         List<String> types = new ArrayList<>();
         when(itemRepository.findAllNames()).thenReturn(types);
 
-        assertEquals(types, itemService.findAllNames());
+        assertEquals(types, itemService.findNamesBy(null));
     }
 
     @Test

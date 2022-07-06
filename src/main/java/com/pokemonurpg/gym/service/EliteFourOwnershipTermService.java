@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class EliteFourOwnershipTermService implements IndexedObjectService<EliteFourOwnershipTerm> {
@@ -30,6 +31,10 @@ public class EliteFourOwnershipTermService implements IndexedObjectService<Elite
 
     @Resource
     private KnownEliteFourMemberService knownEliteFourMemberService;
+
+    public List<EliteFourOwnershipTerm> findAll() {
+        return eliteFourOwnershipTermRepository.findAll();
+    }
 
     public EliteFourOwnershipTerm findByDbid(Integer dbid) {
         return eliteFourOwnershipTermRepository.findByDbid(dbid);

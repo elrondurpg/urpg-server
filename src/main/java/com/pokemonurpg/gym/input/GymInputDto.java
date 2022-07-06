@@ -24,7 +24,6 @@ public class GymInputDto {
     @ExistsInDb(type = Badge.class)
     private String badge;
 
-    @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Type.class)
     private String type;
 

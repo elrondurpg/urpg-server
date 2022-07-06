@@ -40,11 +40,11 @@ public class EliteFourOwnershipTermControllerTest {
         assertEquals(term, eliteFourOwnershipTermController.findByDbid(DBID));
     }
 
-    @Test
-    public void findByEliteFourAndOwnerAndOpenDate() {
-        when(eliteFourOwnershipTermService.findBySlotAndOwnerAndOpenDate(ELITE_FOUR, OWNER, DATE)).thenReturn(term);
-        assertEquals(term, eliteFourOwnershipTermController.findBySlotAndOwnerAndOpenDate(ELITE_FOUR, OWNER, DATE));
-    }
+    // @Test
+    // public void findByEliteFourAndOwnerAndOpenDate() {
+    //     when(eliteFourOwnershipTermService.findBySlotAndOwnerAndOpenDate(ELITE_FOUR, OWNER, DATE)).thenReturn(term);
+    //     assertEquals(term, eliteFourOwnershipTermController.findBySlotAndOwnerAndOpenDate(ELITE_FOUR, OWNER, DATE));
+    // }
 
     @Test
     public void create() {

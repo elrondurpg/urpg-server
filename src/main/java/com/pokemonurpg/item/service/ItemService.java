@@ -4,10 +4,15 @@ import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.item.input.ItemInputDto;
 import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.core.service.NamedObjectService;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemService implements NamedObjectService<Item> {
@@ -15,8 +20,17 @@ public class ItemService implements NamedObjectService<Item> {
     @Resource
     private ItemRepository itemRepository;
 
-    public List<String> findAllNames() {
-        return itemRepository.findAllNames();
+    public List<String> findNamesBy(String type) {
+        Item example = new Item();
+        example.setType(type);
+
+        ExampleMatcher matcher = ExampleMatcher.matchingAll();
+        if (type != null) {
+            matcher = matcher.withMatcher("type", startsWith());
+        }
+            
+        List<Item> items = itemRepository.findAll(Example.of(example, matcher));
+        return items.stream().map(Item::getName).collect(Collectors.toList());
     }
 
     public Item findByDbid(int dbid) {

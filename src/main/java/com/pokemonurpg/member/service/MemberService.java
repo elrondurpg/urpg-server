@@ -1,7 +1,6 @@
 package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.general.service.ObtainedService;
-import com.pokemonurpg.gym.models.KnownChampion;
 import com.pokemonurpg.gym.service.KnownChampionService;
 import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
 import com.pokemonurpg.gym.service.KnownGymLeaderService;
@@ -24,8 +23,6 @@ import com.pokemonurpg.stats.input.*;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
 import com.pokemonurpg.stats.service.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -33,8 +30,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;

@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
@@ -29,17 +30,17 @@ public class ChampionOwnershipTermController {
     private ChampionOwnershipTermService championOwnershipTermService;
 
     @AllowAll
+    @GetMapping
+    public @ResponseBody
+    List<ChampionOwnershipTerm> findAll() {
+        return championOwnershipTermService.findAll();
+    }
+
+    @AllowAll
     @GetMapping(path="/{dbid}")
     public @ResponseBody
     ChampionOwnershipTerm findByDbid(@PathVariable("dbid") Integer dbid) {
         return championOwnershipTermService.findByDbid(dbid);
-    }
-
-    @AllowAll
-    @GetMapping
-    public @ResponseBody
-    ChampionOwnershipTerm findBySlotAndOwnerAndOpenDate(@RequestParam(required = true) String champion, @RequestParam(required = true) String owner, @RequestParam(required = true) Date openDate) {
-        return championOwnershipTermService.findBySlotAndOwnerAndOpenDate(champion, owner, openDate);
     }
 
     @Validated(ObjectCreation.class)

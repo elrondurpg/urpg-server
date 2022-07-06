@@ -34,8 +34,8 @@ public class ItemControllerTest {
     @Test
     public void findAllNames() {
         List<String> names = new ArrayList<>();
-        when(itemService.findAllNames()).thenReturn(names);
-        assertEquals(names, itemController.findAllNames());
+        when(itemService.findNamesBy(null)).thenReturn(names);
+        assertEquals(names, itemController.findNamesBy(null));
     }
 
     @Test

@@ -40,11 +40,11 @@ public class ChampionOwnershipTermControllerTest {
         assertEquals(term, championOwnershipTermController.findByDbid(DBID));
     }
 
-    @Test
-    public void findByChampionAndOwnerAndOpenDate() {
-        when(championOwnershipTermService.findBySlotAndOwnerAndOpenDate(CHAMPION, OWNER, DATE)).thenReturn(term);
-        assertEquals(term, championOwnershipTermController.findBySlotAndOwnerAndOpenDate(CHAMPION, OWNER, DATE));
-    }
+    // @Test
+    // public void findByChampionAndOwnerAndOpenDate() {
+    //     when(championOwnershipTermService.findBySlotAndOwnerAndOpenDate(CHAMPION, OWNER, DATE)).thenReturn(term);
+    //     assertEquals(term, championOwnershipTermController.findBySlotAndOwnerAndOpenDate(CHAMPION, OWNER, DATE));
+    // }
 
     @Test
     public void create() {
