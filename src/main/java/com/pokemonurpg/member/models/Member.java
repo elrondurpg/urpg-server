@@ -7,7 +7,6 @@ import com.pokemonurpg.View;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
@@ -130,12 +129,12 @@ public class Member implements NamedObject {
     public Member(MemberInputDto input) {
         this.update(input);
         initSalt();
+        setDiscordId(input.getDiscordId());
         setBot(input.getBot());
         if (bot == null) bot = false;
     }
 
     public void update(MemberInputDto input) {
-        setDiscordId(input.getDiscordId());
         setName(input.getName());
         setMoney(input.getMoney());
         setWins(input.getWins());
