@@ -7,9 +7,7 @@ import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
 import com.pokemonurpg.stats.models.LegendaryProgress;
 import com.pokemonurpg.general.models.Section;
 import com.pokemonurpg.stats.repository.LegendaryProgressRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
 
