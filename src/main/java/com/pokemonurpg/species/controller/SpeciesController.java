@@ -25,8 +25,8 @@ public class SpeciesController {
     @AllowAll
     @GetMapping
     public @ResponseBody
-    List<String> findAllNames() {
-        return speciesService.findAllNames();
+    List<String> findAllNames(@RequestParam(required = false) Boolean ownable) {
+        return speciesService.findAllNames(ownable);
     }
 
     @AllowAll

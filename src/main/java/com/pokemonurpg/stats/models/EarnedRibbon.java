@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.ContestRank;
+import com.pokemonurpg.contest.models.ContestType;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 
 import javax.persistence.*;
@@ -30,20 +31,26 @@ public class EarnedRibbon {
     @JoinColumn(name = "attribute_dbid")
     private ContestAttribute attribute;
 
+    @OneToOne
+    @JoinColumn(name = "contest_type_dbid")
+    private ContestType contestType;
+
     @Column
     private String url;
 
     @Column
-    private Boolean spent = false;
+    private Boolean spent;
 
     public EarnedRibbon() {
     }
 
-    public EarnedRibbon (EarnedRibbonInputDto input, OwnedPokemon pokemon, ContestRank rank, ContestAttribute attribute) {
+    public EarnedRibbon (EarnedRibbonInputDto input, OwnedPokemon pokemon, ContestRank rank, ContestAttribute attribute, ContestType contestType) {
         this.update(input);
         setPokemon(pokemon);
         setRank(rank);
         setAttribute(attribute);
+        setContestType(contestType);
+        if (spent == null) spent = false;
     }
 
     public void update(EarnedRibbonInputDto input) {
@@ -102,4 +109,14 @@ public class EarnedRibbon {
             this.spent = spent;
         }
     }
+
+    public ContestType getContestType() {
+        return contestType;
+    }
+
+    public void setContestType(ContestType contestType) {
+        this.contestType = contestType;
+    }
+
+    
 }

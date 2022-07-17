@@ -7,6 +7,9 @@ import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.gym.models.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 public class GymVictoryInputDto extends ChildInputDto {
@@ -24,6 +27,11 @@ public class GymVictoryInputDto extends ChildInputDto {
 
     private Date date;
 
+    @Size(max = 2083)
+    @Pattern(
+        regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$",
+        message = "The provided log URL must come from forum.pokemonurpg.com or one of the URPG forum archives."
+    )
     private String logUrl;
 
     public String getDefender() {

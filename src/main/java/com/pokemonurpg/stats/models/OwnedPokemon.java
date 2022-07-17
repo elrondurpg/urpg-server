@@ -158,6 +158,7 @@ public class OwnedPokemon {
         setJob(input.getJob());
         setBox(input.getBox());
         setUft(input.getUft());
+        setRental(input.getRental());
     }
 
     public Integer getDbid() {
@@ -293,7 +294,9 @@ public class OwnedPokemon {
     }
 
     public void setJob(Boolean job) {
-        this.job = job;
+        if (job != null) {
+            this.job = job;
+        }
     }
 
     public Boolean getBox() {
@@ -301,7 +304,9 @@ public class OwnedPokemon {
     }
 
     public void setBox(Boolean box) {
-        this.box = box;
+        if (box != null) {
+            this.box = box;
+        }
     }
 
     public Boolean getUft() {
@@ -309,7 +314,9 @@ public class OwnedPokemon {
     }
 
     public void setUft(Boolean uft) {
-        this.uft = uft;
+        if (uft != null) {
+            this.uft = uft;
+        }
     }
 
     public Boolean getRental() {

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class LegendaryProgressService implements IndexedObjectService<LegendaryProgress> {
+public class LegendaryProgressService {
 
     @Resource
     private LegendaryProgressRepository legendaryProgressRepository;
@@ -20,12 +20,9 @@ public class LegendaryProgressService implements IndexedObjectService<LegendaryP
     @Resource
     private SectionService sectionService;
 
-    public LegendaryProgress findByDbid(Integer dbid) {
-        return legendaryProgressRepository.findByDbid(dbid);
-    }
-
     public void update(LegendaryProgressInputDto input, Member member) {
-        LegendaryProgress existingRecord = legendaryProgressRepository.findByDbid(input.getDbid());
+        Section section = sectionService.findByName(input.getSection());
+        LegendaryProgress existingRecord = legendaryProgressRepository.findByTrainerAndIdLogUrlAndSection(member, input.getLogUrl(), section);
         if (existingRecord != null) {
             if (input.getDelete()) {
                 legendaryProgressRepository.delete(existingRecord);
@@ -36,7 +33,6 @@ public class LegendaryProgressService implements IndexedObjectService<LegendaryP
             }
         }
         else {
-            Section section = sectionService.findByName(input.getSection());
             LegendaryProgress legendaryProgress = new LegendaryProgress(input, member, section);
             legendaryProgressRepository.save(legendaryProgress);
         }

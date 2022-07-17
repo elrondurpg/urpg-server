@@ -90,7 +90,7 @@ public class SpeciesServiceTest {
     public void findAllNames() {
         List<String> names = new ArrayList<>();
         when(speciesRepository.findAllNames()).thenReturn(names);
-        assertEquals(names, speciesService.findAllNames());
+        assertEquals(names, speciesService.findAllNames(false));
     }
 
     @Test

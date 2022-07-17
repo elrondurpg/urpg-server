@@ -1,15 +1,16 @@
-package com.pokemonurpg.gym.models;
+package com.pokemonurpg.contest.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.contest.input.ContestTypeInputDto;
 import com.pokemonurpg.core.model.NamedObject;
-import com.pokemonurpg.gym.input.KnownEliteFourMemberInputDto;
 
 import javax.persistence.*;
 
+@Table(name = "contest_type")
 @Entity
-@JsonView(value = { View.MemberView.Summary.class })
-public class KnownEliteFourMember implements NamedObject {
+@JsonView(value = { View.MemberView.Pokemon.class })
+public class ContestType implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,28 +20,20 @@ public class KnownEliteFourMember implements NamedObject {
     @Column
     private String name;
 
-    public KnownEliteFourMember() {
+    public ContestType() {}
 
-    }
-
-    public KnownEliteFourMember(String name) {
-        setName(name);
-    }
-
-    public KnownEliteFourMember(KnownEliteFourMemberInputDto input) {
+    public ContestType(ContestTypeInputDto input) {
         this.update(input);
     }
 
-    public void update(KnownEliteFourMemberInputDto input) {
+    public void update(ContestTypeInputDto input) {
         setName(input.getName());
     }
 
-    @Override
     public Integer getDbid() {
         return dbid;
     }
 
-    @Override
     public void setDbid(Integer dbid) {
         this.dbid = dbid;
     }

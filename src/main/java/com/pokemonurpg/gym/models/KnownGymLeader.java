@@ -1,11 +1,14 @@
 package com.pokemonurpg.gym.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.View;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.KnownGymLeaderInputDto;
 
 import javax.persistence.*;
 
 @Entity
+@JsonView(value = { View.MemberView.Summary.class })
 public class KnownGymLeader implements NamedObject {
 
     @Id

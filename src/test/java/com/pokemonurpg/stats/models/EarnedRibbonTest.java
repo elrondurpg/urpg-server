@@ -30,7 +30,7 @@ public class EarnedRibbonTest {
         input.setUrl(URL);
         input.setSpent(SPENT);
 
-        EarnedRibbon ribbon = new EarnedRibbon(input, POKEMON, RANK, ATTRIBUTE);
+        EarnedRibbon ribbon = new EarnedRibbon(input, POKEMON, RANK, ATTRIBUTE, null);
         assertEquals(POKEMON, ribbon.getPokemon());
         assertEquals(RANK, ribbon.getRank());
         assertEquals(ATTRIBUTE, ribbon.getAttribute());

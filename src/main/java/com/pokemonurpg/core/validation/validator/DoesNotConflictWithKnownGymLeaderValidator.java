@@ -1,16 +1,12 @@
 package com.pokemonurpg.core.validation.validator;
 
-import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.core.service.NamedObjectServiceFactory;
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLeader;
-import com.pokemonurpg.gym.models.KnownGymLeader;
 import com.pokemonurpg.gym.service.KnownChampionService;
 import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
 import com.pokemonurpg.gym.service.KnownGymLeaderService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
-import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;

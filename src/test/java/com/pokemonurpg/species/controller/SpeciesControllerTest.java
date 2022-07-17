@@ -31,8 +31,8 @@ public class SpeciesControllerTest {
     @Test
     public void findAllNames() {
         List<String> names = new ArrayList<>();
-        when(speciesService.findAllNames()).thenReturn(names);
-        assertEquals(names, speciesController.findAllNames());
+        when(speciesService.findAllNames(false)).thenReturn(names);
+        assertEquals(names, speciesController.findAllNames(false));
     }
 
     @Test

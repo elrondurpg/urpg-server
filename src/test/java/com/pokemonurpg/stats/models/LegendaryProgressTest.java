@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 public class LegendaryProgressTest {
-    private final static Integer DBID = 3432;
     private final static Member MEMBER = mock(Member.class);
     private final static Section SECTION = mock(Section.class);
     private final static Integer VALUE = 43242;
@@ -21,8 +20,6 @@ public class LegendaryProgressTest {
     @Test
     public void testPojo() {
         LegendaryProgress legendaryProgress = new LegendaryProgress();
-        legendaryProgress.setDbid(DBID);
-        assertEquals(DBID, legendaryProgress.getDbid());
     }
 
     @Test

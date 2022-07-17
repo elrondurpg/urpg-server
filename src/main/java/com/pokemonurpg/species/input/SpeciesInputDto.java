@@ -143,6 +143,8 @@ public class SpeciesInputDto implements UniquelyNamedInputDto {
     @Max(2)
     private Integer legendaryTier;
 
+    private Boolean battleOnly;
+
     public Integer getDexno() {
         return dexno;
     }
@@ -417,4 +419,14 @@ public class SpeciesInputDto implements UniquelyNamedInputDto {
     public void setMegaSuffix(String megaSuffix) {
         this.megaSuffix = megaSuffix;
     }
+
+    public Boolean getBattleOnly() {
+        return battleOnly;
+    }
+
+    public void setBattleOnly(Boolean battleOnly) {
+        this.battleOnly = battleOnly;
+    }
+
+    
 }

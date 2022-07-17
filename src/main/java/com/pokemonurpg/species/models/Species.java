@@ -180,11 +180,16 @@ public class Species implements NamedObject {
     @JsonView(value = { View.MemberView.Pokemon.class })
     private String megaSuffix;
 
+    @Column(name="battle_only")
+    @JsonView(value = { View.MemberView.Pokemon.class })
+    private Boolean battleOnly;
+
     public Species() { }
 
     public Species(SpeciesInputDto input) {
         this.update(input);
 		if (this.displayName == null) setDisplayName(getName());
+        if (this.battleOnly == null) setBattleOnly(false);
     }
 
     public void update(SpeciesInputDto input) {
@@ -211,6 +216,7 @@ public class Species implements NamedObject {
         setEvolutionExpRequirement(input.getEvolutionExpRequirement());
         setMegaStone(input.getMegaStone());
         setMegaSuffix(input.getMegaSuffix());
+        setBattleOnly(input.getBattleOnly());
     }
 
     public Double getHeight() {
@@ -553,5 +559,15 @@ public class Species implements NamedObject {
 
     public void setCosmeticForms(Set<CosmeticForm> cosmeticForms) {
         this.cosmeticForms = cosmeticForms;
+    }
+
+    public Boolean isBattleOnly() {
+        return battleOnly;
+    }
+
+    public void setBattleOnly(Boolean battleOnly) {
+        if (battleOnly != null) {
+            this.battleOnly = battleOnly;
+        }
     }
 }

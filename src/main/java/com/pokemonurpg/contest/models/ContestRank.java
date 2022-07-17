@@ -1,5 +1,7 @@
 package com.pokemonurpg.contest.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.View;
 import com.pokemonurpg.contest.input.ContestRankInputDto;
 import com.pokemonurpg.core.model.NamedObject;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 
 @Table(name = "contest_rank")
 @Entity
+@JsonView(value = { View.MemberView.Pokemon.class })
 public class ContestRank implements NamedObject {
 
     @Id

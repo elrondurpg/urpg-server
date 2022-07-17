@@ -3,7 +3,6 @@ package com.pokemonurpg.core.service;
 import com.pokemonurpg.gym.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
 import com.pokemonurpg.stats.service.EarnedRibbonService;
-import com.pokemonurpg.stats.service.LegendaryProgressService;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +21,6 @@ public class IndexedObjectServiceFactory {
     private GymService gymService;
 
     @Resource
-    private LegendaryProgressService legendaryProgressService;
-
-    @Resource
     private OwnedPokemonService ownedPokemonService;
 
     public IndexedObjectService getServiceForClass(Class type) {
@@ -33,7 +29,6 @@ public class IndexedObjectServiceFactory {
                 case "EarnedRibbon": return earnedRibbonService;
                 case "Gym": return gymService;
                 case "GymOwnershipTerm": return gymOwnershipTermService;
-                case "LegendaryProgress": return legendaryProgressService;
                 case "OwnedPokemon": return ownedPokemonService;
             }
         }

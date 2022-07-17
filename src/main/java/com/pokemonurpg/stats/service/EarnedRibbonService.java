@@ -2,18 +2,16 @@ package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.ContestRank;
-import com.pokemonurpg.contest.repository.ContestAttributeRepository;
-import com.pokemonurpg.contest.repository.ContestRankRepository;
+import com.pokemonurpg.contest.models.ContestType;
 import com.pokemonurpg.contest.service.ContestAttributeService;
 import com.pokemonurpg.contest.service.ContestRankService;
+import com.pokemonurpg.contest.service.ContestTypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.EarnedRibbonRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
 
@@ -29,6 +27,9 @@ public class EarnedRibbonService implements IndexedObjectService<EarnedRibbon> {
     @Resource
     private ContestAttributeService contestAttributeService;
 
+    @Resource
+    private ContestTypeService contestTypeService;
+
     public EarnedRibbon findByDbid(Integer dbid) {
         return earnedRibbonRepository.findByDbid(dbid);
     }
@@ -38,7 +39,8 @@ public class EarnedRibbonService implements IndexedObjectService<EarnedRibbon> {
         if (dbid == null) {
             ContestRank rank = contestRankService.findByName(input.getRank());
             ContestAttribute attribute = contestAttributeService.findByName(input.getAttribute());
-            EarnedRibbon ribbon = new EarnedRibbon(input, pokemon, rank, attribute);
+            ContestType contestType = contestTypeService.findByName(input.getContestType());
+            EarnedRibbon ribbon = new EarnedRibbon(input, pokemon, rank, attribute, contestType);
             earnedRibbonRepository.save(ribbon);
         }
         else {

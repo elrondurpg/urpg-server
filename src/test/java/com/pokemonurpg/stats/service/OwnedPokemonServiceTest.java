@@ -12,7 +12,6 @@ import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonCreateForMemberInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
@@ -99,17 +98,6 @@ public class OwnedPokemonServiceTest {
         assertEquals(pokemon.getFullyEvolved(), true);
     }
 
-    @Test(expected = ResponseStatusException.class)
-    public void createFails() {
-        OwnedPokemonCreateForMemberInputDto input = new OwnedPokemonCreateForMemberInputDto();
-        input.setSpecies(SPECIES_NAME);
-
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
-        when(ownedPokemonValidator.isValid(SPECIES, input)).thenReturn(false);
-
-        ownedPokemonService.create(input);
-    }
-
     @Test
     public void create() {
         OwnedPokemonInputDto input = new OwnedPokemonInputDto();
@@ -127,39 +115,6 @@ public class OwnedPokemonServiceTest {
         when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
         when(ownedPokemonValidator.isValid(SPECIES, input)).thenReturn(true);
 
-        when(natureService.findByName(NATURE_NAME)).thenReturn(NATURE);
-        when(obtainedService.findByName(OBTAINED_NAME)).thenReturn(OBTAINED);
-        when(typeService.findByName(HP_TYPE_NAME)).thenReturn(HP_TYPE);
-
-        OwnedPokemon pokemon = ownedPokemonService.create(input);
-        assertEquals(MEMBER, pokemon.getTrainer());
-        assertEquals(SPECIES, pokemon.getSpecies());
-        assertEquals(NATURE, pokemon.getNature());
-        assertEquals(OBTAINED, pokemon.getObtained());
-        assertEquals(HP_TYPE, pokemon.getHiddenPowerType());
-
-        verify(ownedPokemonRepository).save(pokemon);
-        verify(ownedExtraMoveService).updateAll(input, pokemon);
-        verify(ownedHiddenAbilityService).updateAll(input, pokemon);
-        verify(earnedRibbonService).update(ribbon, pokemon);
-    }
-
-    @Test
-    public void createWithTrainer() {
-        OwnedPokemonCreateForMemberInputDto input = new OwnedPokemonCreateForMemberInputDto();
-        input.setSpecies(SPECIES_NAME);
-        input.setTrainer(MEMBER_NAME);
-        input.setNature(NATURE_NAME);
-        input.setObtained(OBTAINED_NAME);
-        input.setHiddenPowerType(HP_TYPE_NAME);
-
-        EarnedRibbonInputDto ribbon = mock(EarnedRibbonInputDto.class);
-        input.setEarnedRibbons(Collections.singletonList(ribbon));
-
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
-        when(ownedPokemonValidator.isValid(SPECIES, input)).thenReturn(true);
-
-        when(memberService.findByNameExact(MEMBER_NAME)).thenReturn(MEMBER);
         when(natureService.findByName(NATURE_NAME)).thenReturn(NATURE);
         when(obtainedService.findByName(OBTAINED_NAME)).thenReturn(OBTAINED);
         when(typeService.findByName(HP_TYPE_NAME)).thenReturn(HP_TYPE);

@@ -14,12 +14,12 @@ import java.util.Date;
 @Table(name = "legendary_progress")
 @JsonView(value = { View.MemberView.Summary.class })
 public class LegendaryProgress {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer dbid;
+
+    @EmbeddedId
+    LegendaryProgressKey id;
 
     @ManyToOne
+    @MapsId("trainer_dbid")
     @JoinColumn(name="trainer_dbid", nullable=false)
     @JsonIgnoreProperties({"dbid", "discordId", "salt", "accessToken", "refreshToken", "sessionExpire",
             "money", "wins", "losses", "draws", "joinDate", "pokemon", "items",
@@ -29,6 +29,7 @@ public class LegendaryProgress {
     private Member trainer;
 
     @ManyToOne
+    @MapsId("section_dbid")
     @JoinColumn(name="section_dbid", nullable=false)
     private Section section;
 
@@ -38,40 +39,23 @@ public class LegendaryProgress {
     @Column
     private Date date;
 
-    @Column(name = "log_url")
-    private String logUrl;
-
     public LegendaryProgress() {
     }
 
     public LegendaryProgress(LegendaryProgressInputDto input, Member member, Section section) {
         this.update(input);
+        this.id = new LegendaryProgressKey(input.getLogUrl(), member.getDbid(), section.getDbid());
         setTrainer(member);
         setSection(section);
     }
 
     public void update(LegendaryProgressInputDto input) {
-        setLogUrl(input.getLogUrl());
         setValue(input.getValue());
         setDate(input.getDate());
     }
 
-    public Integer getDbid() {
-        return dbid;
-    }
-
-    public void setDbid(Integer dbid) {
-        this.dbid = dbid;
-    }
-
     public String getLogUrl() {
-        return logUrl;
-    }
-
-    public void setLogUrl(String logUrl) {
-        if (logUrl != null) {
-            this.logUrl = logUrl;
-        }
+        return id.getLogUrl();
     }
 
     public Member getTrainer() {

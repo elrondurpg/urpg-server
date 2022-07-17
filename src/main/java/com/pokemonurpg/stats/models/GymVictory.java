@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownChampion;
 import com.pokemonurpg.gym.models.KnownGymLeader;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;

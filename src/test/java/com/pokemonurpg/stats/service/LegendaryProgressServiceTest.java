@@ -21,7 +21,7 @@ public class LegendaryProgressServiceTest {
     private final static Member MEMBER = mock(Member.class);
     private final static String SECTION_NAME = "SECTION_NAME";
     private final static Section SECTION = mock(Section.class);
-
+/*
     @Captor
     private ArgumentCaptor<LegendaryProgress> captor;
 
@@ -81,4 +81,5 @@ public class LegendaryProgressServiceTest {
 
         verify(legendaryProgressRepository, times(1)).delete(LEGENDARY_PROGRESS);
     }
+    */
 }

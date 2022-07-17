@@ -3,7 +3,6 @@ package com.pokemonurpg.stats.input;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.species.models.Species;
 
 import javax.validation.constraints.NotNull;
 

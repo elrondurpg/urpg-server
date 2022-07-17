@@ -8,6 +8,8 @@ import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -18,6 +20,10 @@ public class OwnedHiddenAbilityService {
 
     public void updateAll(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
         Set<Ability> abilities = pokemon.getOwnedHiddenAbilities();
+        if (abilities == null) {
+            abilities = new HashSet<Ability>();
+            pokemon.setOwnedHiddenAbilities(abilities);
+        }
 
         for (OwnedHiddenAbilityInputDto ability : input.getOwnedHiddenAbilities()) {
             String name = ability.getAbility();

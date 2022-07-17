@@ -37,9 +37,9 @@ public class OwnedPokemonValidator {
     }
 
     boolean isOwnable(Species species) {
-        if (species.getPreMega() == null)
+        if (species.getPreMega() == null && !species.isBattleOnly())
             return true;
-        else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't own a Mega form!");
+        else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't own that Pokemon form!");
     }
 
     public boolean isGenderLegal(Species species, String gender) {

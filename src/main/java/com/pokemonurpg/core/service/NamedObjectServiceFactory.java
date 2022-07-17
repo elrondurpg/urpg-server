@@ -18,7 +18,6 @@ import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.site.service.MenuItemService;
-import com.pokemonurpg.species.service.CosmeticFormService;
 import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.member.service.PermissionService;
@@ -56,6 +55,9 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private ContestRankService contestRankService;
+
+    @Resource
+    private ContestTypeService contestTypeService;
 
     @Resource
     private DPPContestMoveTypeService dppContestMoveTypeService;
@@ -141,6 +143,7 @@ public class NamedObjectServiceFactory {
                 case "Champion": return championService;
                 case "ContestAttribute": return contestAttributeService;
                 case "ContestRank": return contestRankService;
+                case "ContestType": return contestTypeService;
                 case "DPPContestMoveType": return dppContestMoveTypeService;
                 case "EliteFour": return eliteFourService;
                 case "Flag": return flagService;

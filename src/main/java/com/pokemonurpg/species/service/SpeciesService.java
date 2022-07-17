@@ -46,8 +46,11 @@ public class SpeciesService implements NamedObjectService<Species> {
     @Resource
     private CosmeticFormService cosmeticFormService;
 
-    public List<String> findAllNames() {
-        return speciesRepository.findAllNames();
+    public List<String> findAllNames(Boolean ownable) {
+        if (ownable != null && ownable) {
+            return speciesRepository.findAllOwnableNames();
+        }
+        else return speciesRepository.findAllNames();
     }
 
     public List<String> findAllStarterNames() {

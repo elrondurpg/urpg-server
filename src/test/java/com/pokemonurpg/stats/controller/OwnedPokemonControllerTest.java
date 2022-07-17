@@ -1,6 +1,5 @@
 package com.pokemonurpg.stats.controller;
 
-import com.pokemonurpg.stats.input.OwnedPokemonCreateForMemberInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
@@ -40,13 +39,6 @@ public class OwnedPokemonControllerTest {
     @Test
     public void create() {
         OwnedPokemonInputDto input = new OwnedPokemonInputDto();
-        when(ownedPokemonService.create(input)).thenReturn(POKEMON);
-        assertEquals(POKEMON, ownedPokemonController.create(input));
-    }
-
-    @Test
-    public void createForMember() {
-        OwnedPokemonCreateForMemberInputDto input = new OwnedPokemonCreateForMemberInputDto();
         when(ownedPokemonService.create(input)).thenReturn(POKEMON);
         assertEquals(POKEMON, ownedPokemonController.create(input));
     }

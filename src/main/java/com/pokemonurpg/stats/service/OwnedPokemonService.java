@@ -10,9 +10,7 @@ import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonCreateForMemberInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.input.StarterPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
 import com.pokemonurpg.stats.validation.OwnedPokemonValidator;
@@ -22,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,20 +71,24 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     }
 
     public OwnedPokemon create(OwnedPokemonInputDto input) {
-        return createForMember(input, sessionServiceProvider.get().getAuthenticatedMember());
+        if (input.getTrainer() == null) {
+            return create(input, sessionServiceProvider.get().getAuthenticatedMember());
+        }
+        else {
+            Member member = memberService.findByNameExact(input.getTrainer());
+            return create(input, member);
+        }
     }
 
-    public OwnedPokemon create(OwnedPokemonCreateForMemberInputDto input) {
-        return createForMember(input, memberService.findByNameExact(input.getTrainer()));
-    }
-
-    private OwnedPokemon createForMember(OwnedPokemonInputDto input, Member member) {
+    private OwnedPokemon create(OwnedPokemonInputDto input, Member member) {
         Species species = speciesService.findByName(input.getSpecies());
         if (ownedPokemonValidator.isValid(species, input)) {
             OwnedPokemon pokemon = new OwnedPokemon(input, member, species);
             updateEmbeddedValues(input, pokemon);
             ownedPokemonRepository.save(pokemon);
             updateAssociatedValues(input, pokemon);
+            ownedPokemonRepository.save(pokemon);
+            pokemon = ownedPokemonRepository.findByDbid(pokemon.getDbid());
             return pokemon;
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OwnedPokemon create() request was invalid.");
@@ -100,6 +101,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
             updateEmbeddedValues(input, pokemon);
             ownedPokemonRepository.save(pokemon);
             updateAssociatedValues(input, pokemon);
+            ownedPokemonRepository.save(pokemon);
         }
         return pokemon;
     }

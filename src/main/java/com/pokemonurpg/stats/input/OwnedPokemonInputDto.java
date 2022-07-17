@@ -19,6 +19,9 @@ import java.util.List;
 
 public class OwnedPokemonInputDto {
 
+    @ExistsInDb(type = Member.class)
+    private String trainer;
+
     @NotNull(groups = { ObjectCreation.class })
     @ExistsInDb(type = Species.class)
     protected String species;
@@ -66,6 +69,14 @@ public class OwnedPokemonInputDto {
     protected Boolean uft;
 
     protected Boolean rental;
+
+    public String getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(String trainer) {
+        this.trainer = trainer;
+    }
 
     public String getSpecies() {
         return species;
