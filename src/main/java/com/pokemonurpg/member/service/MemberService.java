@@ -269,6 +269,7 @@ public class MemberService implements NamedObjectService<Member> {
         for (LegendaryProgressInputDto legendaryProgress : legendaryProgresses) {
             legendaryProgressService.update(legendaryProgress, member);
         }
+        member.setLegendaryProgress(legendaryProgressService.findByTrainer(member));
     }
 
     private void updateOwnedItems(MemberInputDto input, Member member) {

@@ -4,6 +4,8 @@ import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.general.models.Section;
+import com.pokemonurpg.strings.GeneralConstants;
+
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import javax.validation.constraints.Min;
@@ -20,7 +22,7 @@ public class LegendaryProgressInputDto extends ChildInputDto {
     @NotNull
     @Size(max = 2083)
     @Pattern(
-        regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$",
+        regexp = GeneralConstants.ALLOWED_URL_PATTERN,
         message = "The provided log URL must come from forum.pokemonurpg.com or one of the URPG forum archives."
     )
     private String logUrl;

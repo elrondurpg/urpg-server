@@ -9,6 +9,8 @@ import com.pokemonurpg.general.models.Section;
 import com.pokemonurpg.stats.repository.LegendaryProgressRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 @Service
@@ -19,6 +21,10 @@ public class LegendaryProgressService {
 
     @Resource
     private SectionService sectionService;
+
+    public List<LegendaryProgress> findByTrainer(Member trainer) {
+        return legendaryProgressRepository.findByTrainer(trainer);
+    }
 
     public void update(LegendaryProgressInputDto input, Member member) {
         Section section = sectionService.findByName(input.getSection());

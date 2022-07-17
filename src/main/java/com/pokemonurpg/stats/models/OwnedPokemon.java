@@ -139,17 +139,16 @@ public class OwnedPokemon {
     }
 
     public OwnedPokemon(OwnedPokemonInputDto input, Member member, Species species) {
-        update(input);
-        setTrainer(member);
+        update(input, member);
         setSpecies(species);
-        setRental(input.getRental());
         if (job == null) setJob(false);
         if (box == null) setBox(false);
         if (uft == null) setUft(false);
         if (rental == null) setRental(false);
     }
 
-    public void update(OwnedPokemonInputDto input) {
+    public void update(OwnedPokemonInputDto input, Member member) {
+        setTrainer(member);
         setGender(input.getGender());
         setExp(input.getExp());
         setObtainedLink(input.getObtainedLink());
@@ -174,7 +173,9 @@ public class OwnedPokemon {
     }
 
     public void setTrainer(Member trainer) {
-        this.trainer = trainer;
+        if (trainer != null) {
+            this.trainer = trainer;
+        }
     }
 
     public Species getSpecies() {

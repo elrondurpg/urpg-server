@@ -95,9 +95,14 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     }
 
     public OwnedPokemon update(OwnedPokemonInputDto input, int dbid) {
+        Member member = null;
+        if (input.getTrainer() != null) {
+            member = memberService.findByNameExact(input.getTrainer());
+        }
+
         OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);
         if (pokemon != null && ownedPokemonValidator.isValid(pokemon.getSpecies(), input)) {
-            pokemon.update(input);
+            pokemon.update(input, member);
             updateEmbeddedValues(input, pokemon);
             ownedPokemonRepository.save(pokemon);
             updateAssociatedValues(input, pokemon);
@@ -124,6 +129,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         for (EarnedRibbonInputDto ribbon : ribbons) {
             earnedRibbonService.update(ribbon, pokemon);
         }
+        pokemon.setEarnedRibbons(earnedRibbonService.findByOwnedPokemon(pokemon));
     }
 
     public void delete(int dbid) {

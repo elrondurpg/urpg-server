@@ -3,55 +3,56 @@ package com.pokemonurpg.stats.service;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.ContestRank;
 import com.pokemonurpg.contest.models.ContestType;
-import com.pokemonurpg.contest.service.ContestAttributeService;
-import com.pokemonurpg.contest.service.ContestRankService;
-import com.pokemonurpg.contest.service.ContestTypeService;
-import com.pokemonurpg.core.service.IndexedObjectService;
+import com.pokemonurpg.contest.repository.ContestAttributeRepository;
+import com.pokemonurpg.contest.repository.ContestRankRepository;
+import com.pokemonurpg.contest.repository.ContestTypeRepository;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.EarnedRibbonRepository;
+
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
 @Service
-public class EarnedRibbonService implements IndexedObjectService<EarnedRibbon> {
+public class EarnedRibbonService {
 
     @Resource
     private EarnedRibbonRepository earnedRibbonRepository;
 
     @Resource
-    private ContestRankService contestRankService;
+    private ContestRankRepository contestRankRepository;
 
     @Resource
-    private ContestAttributeService contestAttributeService;
+    private ContestAttributeRepository contestAttributeRepository;
 
     @Resource
-    private ContestTypeService contestTypeService;
+    private ContestTypeRepository contestTypeRepository;
 
-    public EarnedRibbon findByDbid(Integer dbid) {
-        return earnedRibbonRepository.findByDbid(dbid);
+    List<EarnedRibbon> findByOwnedPokemon(OwnedPokemon pokemon) {
+        return earnedRibbonRepository.findByPokemon(pokemon);
     }
 
     public void update(EarnedRibbonInputDto input, OwnedPokemon pokemon) {
-        Integer dbid = input.getDbid();
-        if (dbid == null) {
-            ContestRank rank = contestRankService.findByName(input.getRank());
-            ContestAttribute attribute = contestAttributeService.findByName(input.getAttribute());
-            ContestType contestType = contestTypeService.findByName(input.getContestType());
-            EarnedRibbon ribbon = new EarnedRibbon(input, pokemon, rank, attribute, contestType);
-            earnedRibbonRepository.save(ribbon);
-        }
-        else {
-            EarnedRibbon ribbon = findByDbid(input.getDbid());
+        ContestRank rank = contestRankRepository.findByName(input.getRank());
+        ContestAttribute attribute = contestAttributeRepository.findByName(input.getAttribute());
+        ContestType generation = contestTypeRepository.findByName(input.getGeneration());
+        EarnedRibbon existingRecord = earnedRibbonRepository.findByPokemonAndIdLogUrlAndGenerationAndRankAndAttribute(pokemon, input.getLogUrl(), generation, rank, attribute);
+        if (existingRecord != null) {
             if (input.getDelete()) {
-                earnedRibbonRepository.delete(ribbon);
+                earnedRibbonRepository.delete(existingRecord);
             }
             else {
-                ribbon.update(input);
-                earnedRibbonRepository.save(ribbon);
+                existingRecord.update(input);
+                earnedRibbonRepository.save(existingRecord);
             }
+        }
+        else {
+            EarnedRibbon earnedRibbon = new EarnedRibbon(input, pokemon, generation, rank, attribute);
+            earnedRibbonRepository.save(earnedRibbon);
         }
     }
 }

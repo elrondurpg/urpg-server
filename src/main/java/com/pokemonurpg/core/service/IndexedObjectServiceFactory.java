@@ -12,9 +12,6 @@ import javax.annotation.Resource;
 public class IndexedObjectServiceFactory {
 
     @Resource
-    private EarnedRibbonService earnedRibbonService;
-
-    @Resource
     private GymOwnershipTermService gymOwnershipTermService;
 
     @Resource
@@ -26,7 +23,6 @@ public class IndexedObjectServiceFactory {
     public IndexedObjectService getServiceForClass(Class type) {
         if (type != null) {
             switch (type.getSimpleName()) {
-                case "EarnedRibbon": return earnedRibbonService;
                 case "Gym": return gymService;
                 case "GymOwnershipTerm": return gymOwnershipTermService;
                 case "OwnedPokemon": return ownedPokemonService;

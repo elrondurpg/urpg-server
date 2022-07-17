@@ -4,44 +4,34 @@ import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.ContestRank;
 import com.pokemonurpg.contest.models.ContestType;
 import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.stats.models.EarnedRibbon;
+import com.pokemonurpg.strings.GeneralConstants;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class EarnedRibbonInputDto extends ChildInputDto {
-
-    @ExistsInDb(type = EarnedRibbon.class)
-    private Integer dbid;
-
-    @NotNull(groups = { ObjectCreation.class })
+    @NotNull
     @ExistsInDb(type = ContestRank.class)
     private String rank;
 
-    @NotNull(groups = { ObjectCreation.class })
+    @NotNull
     @ExistsInDb(type = ContestAttribute.class)
     private String attribute;
 
-    @NotNull(groups = { ObjectCreation.class })
+    @NotNull
     @ExistsInDb(type = ContestType.class)
-    private String contestType;
+    private String generation;
 
-    @Pattern(regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$")
+    @NotNull
+    @Pattern(regexp = GeneralConstants.ALLOWED_URL_PATTERN)
     @Size(max = 2083)
-    private String url;
+    private String logUrl;
 
-    private Boolean spent;
+    private Integer spent;
 
-    public Integer getDbid() {
-        return dbid;
-    }
-
-    public void setDbid(Integer dbid) {
-        this.dbid = dbid;
-    }
+    private Integer quantity;
 
     public String getRank() {
         return rank;
@@ -59,28 +49,36 @@ public class EarnedRibbonInputDto extends ChildInputDto {
         this.attribute = attribute;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLogUrl() {
+        return logUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLogUrl(String logUrl) {
+        this.logUrl = logUrl;
     }
 
-    public Boolean getSpent() {
+    public Integer getSpent() {
         return spent;
     }
 
-    public void setSpent(Boolean spent) {
+    public void setSpent(Integer spent) {
         this.spent = spent;
     }
 
-    public String getContestType() {
-        return contestType;
+    public String getGeneration() {
+        return generation;
     }
 
-    public void setContestType(String contestType) {
-        this.contestType = contestType;
+    public void getGeneration(String generation) {
+        this.generation = generation;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     

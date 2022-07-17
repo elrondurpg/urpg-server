@@ -14,56 +14,56 @@ import javax.persistence.*;
 @JsonView(value = { View.MemberView.Pokemon.class })
 public class EarnedRibbon {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer dbid;
+    @EmbeddedId
+    EarnedRibbonKey id;
 
     @OneToOne
+    @MapsId("pokemon_dbid")
     @JoinColumn(name = "pokemon_dbid")
     private OwnedPokemon pokemon;
 
     @OneToOne
+    @MapsId("rank_dbid")
     @JoinColumn(name = "rank_dbid")
     private ContestRank rank;
 
     @OneToOne
+    @MapsId("attribute_dbid")
     @JoinColumn(name = "attribute_dbid")
     private ContestAttribute attribute;
 
     @OneToOne
+    @MapsId("generation_dbid")
     @JoinColumn(name = "contest_type_dbid")
-    private ContestType contestType;
+    private ContestType generation;
 
     @Column
-    private String url;
+    private Integer spent;
 
     @Column
-    private Boolean spent;
+    private Integer quantity;
 
     public EarnedRibbon() {
     }
 
-    public EarnedRibbon (EarnedRibbonInputDto input, OwnedPokemon pokemon, ContestRank rank, ContestAttribute attribute, ContestType contestType) {
+    public EarnedRibbon (EarnedRibbonInputDto input, OwnedPokemon pokemon, ContestType generation, ContestRank rank, ContestAttribute attribute) {
         this.update(input);
+        this.id = new EarnedRibbonKey(input.getLogUrl(), pokemon.getDbid(), generation.getDbid(), rank.getDbid(), attribute.getDbid());
         setPokemon(pokemon);
+        setGeneration(generation);
         setRank(rank);
         setAttribute(attribute);
-        setContestType(contestType);
-        if (spent == null) spent = false;
+        if (spent == null) spent = 0;
+        if (quantity == null) quantity = 0;
     }
 
     public void update(EarnedRibbonInputDto input) {
-        setUrl(input.getUrl());
         setSpent(input.getSpent());
+        setQuantity(input.getQuantity());
     }
 
-    public Integer getDbid() {
-        return dbid;
-    }
-
-    public void setDbid(Integer dbid) {
-        this.dbid = dbid;
+    public String getLogUrl() {
+        return id.getLogUrl();
     }
 
     public OwnedPokemon getPokemon() {
@@ -90,32 +90,32 @@ public class EarnedRibbon {
         this.attribute = attribute;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        if (url != null) {
-            this.url = url;
-        }
-    }
-
-    public Boolean getSpent() {
+    public Integer getSpent() {
         return spent;
     }
 
-    public void setSpent(Boolean spent) {
+    public void setSpent(Integer spent) {
         if (spent != null) {
             this.spent = spent;
         }
     }
 
-    public ContestType getContestType() {
-        return contestType;
+    public ContestType getGeneration() {
+        return generation;
     }
 
-    public void setContestType(ContestType contestType) {
-        this.contestType = contestType;
+    public void setGeneration(ContestType generation) {
+        this.generation = generation;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        if (quantity != null) {
+            this.quantity = quantity;
+        }
     }
 
     

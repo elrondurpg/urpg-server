@@ -8,6 +8,7 @@ import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.strings.GeneralConstants;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -41,7 +42,7 @@ public class OwnedPokemonInputDto {
     @ExistsInDb(type = Obtained.class)
     protected String obtained;
 
-    @Pattern(regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$")
+    @Pattern(regexp = GeneralConstants.ALLOWED_URL_PATTERN)
     @Size(max = 2083)
     protected String obtainedLink;
 
@@ -52,7 +53,7 @@ public class OwnedPokemonInputDto {
     @ExistsInDb(type = Type.class)
     protected String hiddenPowerType;
 
-    @Pattern(regexp = "^((https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+(&page=\\d+)?|^(https://)?forum\\.pokemonurpg\\.com/showthread\\.php\\?tid=\\d+&pid=\\d+#pid\\d+|(https://)?pokemonurpg\\.com/archive/([a-z0-9\\-]+\\.\\d+/)*[a-z0-9\\-]+\\.\\d+(-page-\\d+)?\\.html|(https://)?pokemonurpg\\.com/archive/pxr/(\\d+-[A-Za-z0-9\\-()!]+/)+(page\\d+\\.html)?)$")
+    @Pattern(regexp = GeneralConstants.ALLOWED_URL_PATTERN)
     @Size(max = 2083)
     protected String hiddenPowerLink;
 

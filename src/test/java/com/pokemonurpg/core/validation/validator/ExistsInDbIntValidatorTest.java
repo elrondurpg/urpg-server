@@ -1,7 +1,6 @@
 package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.core.service.IndexedObjectServiceFactory;
-import com.pokemonurpg.ability.models.Ability;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.service.EarnedRibbonService;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExistsInDbIntValidatorTest {
@@ -39,24 +37,6 @@ public class ExistsInDbIntValidatorTest {
     public void initialize() throws NoSuchFieldException {
         existsInDbValidator.initialize(this.getClass().getDeclaredField("dbid").getAnnotation(ExistsInDb.class));
         assertEquals(EarnedRibbon.class, existsInDbValidator.getType());
-    }
-
-    @Test
-    public void returnsFalseWhenUnique() throws NoSuchFieldException {
-        existsInDbValidator.initialize(this.getClass().getDeclaredField("dbid").getAnnotation(ExistsInDb.class));
-        when(indexedObjectServiceFactory.getServiceForClass(EarnedRibbon.class)).thenReturn(earnedRibbonService);
-        when(earnedRibbonService.findByDbid(DBID)).thenReturn(null);
-
-        assertFalse(existsInDbValidator.isValid(DBID, null));
-    }
-
-    @Test
-    public void returnsTrueWhenNotUnique() throws NoSuchFieldException {
-        existsInDbValidator.initialize(this.getClass().getDeclaredField("dbid").getAnnotation(ExistsInDb.class));
-        when(indexedObjectServiceFactory.getServiceForClass(EarnedRibbon.class)).thenReturn(earnedRibbonService);
-        when(earnedRibbonService.findByDbid(DBID)).thenReturn(new EarnedRibbon());
-
-        assertTrue(existsInDbValidator.isValid(DBID, null));
     }
 
     @Test
