@@ -20,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -57,6 +59,14 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
 
     @Resource
     private Provider<SessionService> sessionServiceProvider;
+
+    public List<OwnedPokemon> findByOwner(String ownerName) {
+        Member owner = memberService.findByNameExact(ownerName);
+        if (owner != null) {
+            return ownedPokemonRepository.findByTrainer(owner);
+        }
+        else return Collections.emptyList();
+    }
 
     public OwnedPokemon findByDbid(Integer dbid) {
         OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);

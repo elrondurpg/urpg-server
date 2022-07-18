@@ -28,6 +28,8 @@ import javax.validation.Valid;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ownedPokemon")
 @CrossOrigin
@@ -42,6 +44,14 @@ public class OwnedPokemonController {
 
     @Resource
     private OwnedPokemonService ownedPokemonService;
+
+    @AllowAll
+    @GetMapping
+    @JsonView(value = { View.MemberView.Summary.class })
+    public @ResponseBody
+    List<OwnedPokemon> findAllNamesByMember(@RequestParam(required = true) String owner) {
+        return ownedPokemonService.findByOwner(owner);
+    }
 
     @AllowAll
     @GetMapping(path="/{dbid}")
