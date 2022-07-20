@@ -11,6 +11,9 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,16 +24,10 @@ public class ItemService implements NamedObjectService<Item> {
     private ItemRepository itemRepository;
 
     public List<String> findNamesBy(String type) {
-        Item example = new Item();
-        example.setType(type);
-
-        ExampleMatcher matcher = ExampleMatcher.matchingAll();
-        if (type != null) {
-            matcher = matcher.withMatcher("type", startsWith());
+        if (type == null || "".equals(type)) {
+            return itemRepository.findAllNames();
         }
-            
-        List<Item> items = itemRepository.findAll(Example.of(example, matcher));
-        return items.stream().map(Item::getName).collect(Collectors.toList());
+        else return itemRepository.findByTypeIn(Arrays.asList(type.split(","))).stream().map(Item::getName).collect(Collectors.toList());
     }
 
     public Item findByDbid(int dbid) {

@@ -190,6 +190,7 @@ public class Species implements NamedObject {
         this.update(input);
 		if (this.displayName == null) setDisplayName(getName());
         if (this.battleOnly == null) setBattleOnly(false);
+        if (this.legendaryTier == null) setLegendaryTier(0);
     }
 
     public void update(SpeciesInputDto input) {

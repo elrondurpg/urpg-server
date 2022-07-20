@@ -1,11 +1,11 @@
 package com.pokemonurpg.contest.input;
 
 import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.contest.models.ContestType;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class ContestComboInputDto extends ChildInputDto {
     @NotNull
@@ -13,8 +13,8 @@ public class ContestComboInputDto extends ChildInputDto {
     private String secondAttack;
 
     @NotNull
-    @Pattern(regexp = "^(RSE|DPP|ORAS|ADV)$")
-    private String contestType;
+    @ExistsInDb(type = ContestType.class)
+    private String generation;
 
     private Boolean overpowered;
 
@@ -34,11 +34,13 @@ public class ContestComboInputDto extends ChildInputDto {
         this.secondAttack = secondAttack;
     }
 
-    public String getContestType() {
-        return contestType;
+    public String getGeneration() {
+        return generation;
     }
 
-    public void setContestType(String contestType) {
-        this.contestType = contestType;
+    public void setGeneration(String generation) {
+        this.generation = generation;
     }
+
+    
 }

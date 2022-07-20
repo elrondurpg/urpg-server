@@ -1,8 +1,6 @@
 package com.pokemonurpg.contest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.View;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 
@@ -35,6 +33,11 @@ public class ContestCombo {
             "advContestAttribute", "tm", "pokemon", "contestCombos" })
     private Attack secondAttack;
 
+    @OneToOne
+    @MapsId("generation_dbid")
+    @JoinColumn(name = "generation_dbid")
+    private ContestType generation;
+
     @Column
     private Boolean overpowered;
 
@@ -42,11 +45,12 @@ public class ContestCombo {
 
     }
 
-    public ContestCombo(ContestComboInputDto input, Attack firstAttack, Attack secondAttack) {
+    public ContestCombo(ContestComboInputDto input, Attack firstAttack, Attack secondAttack, ContestType generation) {
         this.update(input);
-        this.id = new ContestComboKey(firstAttack.getDbid(), secondAttack.getDbid(), input.getContestType());
+        this.id = new ContestComboKey(firstAttack.getDbid(), secondAttack.getDbid(), generation.getDbid());
         setFirstAttack(firstAttack);
         setSecondAttack(secondAttack);
+        setGeneration(generation);
         if (overpowered == null) overpowered = false;
     }
 
@@ -80,7 +84,13 @@ public class ContestCombo {
         }
     }
 
-    public String getContestType() {
-        return id.getContestType();
+    public ContestType getGeneration() {
+        return generation;
     }
+
+    public void setGeneration(ContestType generation) {
+        this.generation = generation;
+    }
+
+    
 }

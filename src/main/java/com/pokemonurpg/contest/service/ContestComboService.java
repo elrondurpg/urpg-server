@@ -4,7 +4,10 @@ import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestCombo;
+import com.pokemonurpg.contest.models.ContestType;
 import com.pokemonurpg.contest.repository.ContestComboRepository;
+import com.pokemonurpg.contest.repository.ContestTypeRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,9 +21,13 @@ public class ContestComboService {
     @Resource
     private AttackRepository attackRepository;
 
+    @Resource
+    private ContestTypeRepository contestTypeRepository;
+
     public void update(Attack attack, ContestComboInputDto input) {
         Attack secondAttack = attackRepository.findByName(input.getSecondAttack());
-        ContestCombo existingRecord = contestComboRepository.findByFirstAttackAndSecondAttackAndIdContestType(attack, secondAttack, input.getContestType());
+        ContestType generation = contestTypeRepository.findByName(input.getGeneration());
+        ContestCombo existingRecord = contestComboRepository.findByFirstAttackAndSecondAttackAndGeneration(attack, secondAttack, generation);
         if (existingRecord != null) {
             if (input.getDelete()) {
                 contestComboRepository.delete(existingRecord);
@@ -31,7 +38,7 @@ public class ContestComboService {
             }
         }
         else {
-            ContestCombo newRecord = new ContestCombo(input, attack, secondAttack);
+            ContestCombo newRecord = new ContestCombo(input, attack, secondAttack, generation);
             contestComboRepository.save(newRecord);
         }
     }

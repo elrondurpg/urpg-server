@@ -1,6 +1,5 @@
 package com.pokemonurpg.attack.input;
 
-import com.pokemonurpg.ability.models.Ability;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.models.AttackTargetType;
@@ -97,10 +96,6 @@ public class AttackInputDto implements UniquelyNamedInputDto {
     private String tm;
 
     private List<@Valid ContestComboInputDto> contestCombos = new ArrayList<>();
-
-    /*@ExistsInDb(type = ContestAttribute.class)
-    private String advContestAttribute;
-    private String advContestMoveType;*/
 
     public String getName() {
         return name;

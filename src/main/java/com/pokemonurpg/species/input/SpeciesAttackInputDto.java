@@ -2,7 +2,6 @@ package com.pokemonurpg.species.input;
 
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 
 import javax.validation.constraints.Max;
