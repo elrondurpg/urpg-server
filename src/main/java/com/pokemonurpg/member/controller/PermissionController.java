@@ -5,7 +5,6 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.PermissionInputDto;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.service.PermissionService;
-import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,5 @@
 package com.pokemonurpg.image.input;
 
-import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.image.models.ImageFolder;
 
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;

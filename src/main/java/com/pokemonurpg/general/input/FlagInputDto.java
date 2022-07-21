@@ -18,7 +18,7 @@ public class FlagInputDto {
     private String description;
 
     @NotNull(groups = { ObjectCreation.class })
-    @Pattern(regexp = "BOOLEAN|STRING|DOUBLE|INTEGER")
+    @Pattern(regexp = "BOOLEAN|STRING|NUMBER")
     private String type;
 
     @Size(max = 60)

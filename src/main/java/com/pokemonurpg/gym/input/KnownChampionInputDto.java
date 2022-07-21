@@ -1,10 +1,8 @@
 package com.pokemonurpg.gym.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
-import com.pokemonurpg.general.models.Nature;
 import com.pokemonurpg.gym.models.KnownChampion;
 
 import javax.validation.constraints.NotNull;

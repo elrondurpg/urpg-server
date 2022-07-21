@@ -1,6 +1,5 @@
 package com.pokemonurpg.gym.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
