@@ -62,7 +62,9 @@ public class Champion implements NamedObject {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null) {
+            this.name = name;
+        }
     }
 
     public ChampionOwnershipTerm getCurrentOwnerRecord() {
