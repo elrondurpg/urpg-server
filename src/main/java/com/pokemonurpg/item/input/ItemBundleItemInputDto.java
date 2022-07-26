@@ -7,12 +7,8 @@ import javax.validation.constraints.NotNull;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.models.ItemBundle;
 
 public class ItemBundleItemInputDto extends ChildInputDto {
-    @NotNull
-    @ExistsInDb(type = ItemBundle.class)
-    private String bundle;
 
     @NotNull
     @ExistsInDb(type = Item.class)
@@ -21,14 +17,6 @@ public class ItemBundleItemInputDto extends ChildInputDto {
     @Min(0)
     @Max(Integer.MAX_VALUE)
     private Integer quantity;
-
-    public String getBundle() {
-        return bundle;
-    }
-
-    public void setBundle(String bundle) {
-        this.bundle = bundle;
-    }
 
     public String getItem() {
         return item;

@@ -29,6 +29,8 @@ public class ItemBundleItem {
     @Column
     private Integer quantity;
 
+    public ItemBundleItem() {}
+
     public ItemBundleItem(ItemBundleItemInputDto input, ItemBundle bundle, Item item) {
         this.update(input);
         this.id = new ItemBundleItemKey(bundle.getDbid(), item.getDbid());

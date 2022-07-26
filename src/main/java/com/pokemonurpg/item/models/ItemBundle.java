@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.pokemonurpg.core.model.NamedObject;
+import com.pokemonurpg.item.input.ItemBundleInputDto;
 
 @Entity
-public class ItemBundle {
+public class ItemBundle implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -28,6 +30,17 @@ public class ItemBundle {
     @OneToMany(mappedBy="bundle")
     @JsonIgnoreProperties({ "bundle"})
     private List<ItemBundleItem> items = new ArrayList<>();
+
+    public ItemBundle() {}
+
+    public ItemBundle(ItemBundleInputDto input) {
+        this.update(input);
+    }
+
+    public void update(ItemBundleInputDto input) {
+        setName(input.getName());
+        setPrice(input.getPrice());
+    }
 
     public Integer getDbid() {
         return dbid;

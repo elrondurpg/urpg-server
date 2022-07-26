@@ -1,15 +1,19 @@
 package com.pokemonurpg.item.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ItemBundleItemKey {
+public class ItemBundleItemKey implements Serializable {
     @Column(name = "bundle_dbid")
     private Integer bundleDbid;
 
     @Column(name = "item_dbid")
     private Integer itemDbid;
+
+    public ItemBundleItemKey() {}
 
     public ItemBundleItemKey(Integer bundleDbid, Integer itemDbid) {
         this.bundleDbid = bundleDbid;
