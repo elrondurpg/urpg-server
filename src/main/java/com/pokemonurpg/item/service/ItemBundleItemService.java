@@ -1,5 +1,7 @@
 package com.pokemonurpg.item.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,10 @@ public class ItemBundleItemService {
 
     @Resource
     private ItemRepository itemRepository;
+
+    public List<ItemBundleItem> findByBundle(ItemBundle bundle) {
+        return itemBundleItemRepository.findByBundle(bundle);
+    }
 
     public void update(ItemBundle bundle, ItemBundleItemInputDto input) {
         Item item = itemRepository.findByName(input.getItem());

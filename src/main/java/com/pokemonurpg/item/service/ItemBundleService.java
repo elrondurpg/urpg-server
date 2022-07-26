@@ -64,5 +64,6 @@ public class ItemBundleService implements NamedObjectService<ItemBundle> {
         for (ItemBundleItemInputDto item : items) {
             itemBundleItemService.update(bundle, item);
         }
+        bundle.setItems(itemBundleItemService.findByBundle(bundle));
     }
 }

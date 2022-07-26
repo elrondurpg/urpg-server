@@ -2,7 +2,6 @@ package com.pokemonurpg.species.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.species.input.CosmeticFormInputDto;
 
 import javax.persistence.*;

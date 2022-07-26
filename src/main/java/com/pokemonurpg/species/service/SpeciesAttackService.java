@@ -8,6 +8,8 @@ import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.species.repository.SpeciesAttackRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 @Service
@@ -18,6 +20,10 @@ public class SpeciesAttackService {
 
     @Resource
     private AttackRepository attackRepository;
+
+    public List<SpeciesAttack> findBySpecies(Species species) {
+        return speciesAttackRepository.findBySpecies(species);
+    }
 
     public void update(Species species, SpeciesAttackInputDto input) {
         Attack attack = attackRepository.findByName(input.getName());

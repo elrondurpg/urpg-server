@@ -1,11 +1,11 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.species.models.CosmeticForm;
-import com.pokemonurpg.species.models.Species;
 import com.pokemonurpg.species.repository.CosmeticFormRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -14,6 +14,10 @@ public class CosmeticFormService
 {
     @Resource
     private CosmeticFormRepository cosmeticFormRepository;
+
+    public Set<CosmeticForm> findBySpeciesDbid(Integer speciesDbid) {
+        return cosmeticFormRepository.findBySpeciesDbid(speciesDbid);
+    }
 
     public void update(CosmeticFormInputDto input, Integer speciesDbid) {
         CosmeticForm form = cosmeticFormRepository.findByName(input.getName());

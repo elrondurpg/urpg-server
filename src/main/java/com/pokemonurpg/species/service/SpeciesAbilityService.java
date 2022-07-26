@@ -8,6 +8,8 @@ import com.pokemonurpg.species.models.SpeciesAbility;
 import com.pokemonurpg.species.repository.SpeciesAbilityRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 @Service
@@ -18,6 +20,10 @@ public class SpeciesAbilityService {
 
     @Resource
     private AbilityRepository abilityRepository;
+
+    public List<SpeciesAbility> findBySpecies(Species species) {
+        return speciesAbilityRepository.findBySpecies(species);
+    }
 
     public void update(Species species, SpeciesAbilityInputDto input) {
         Ability ability = abilityRepository.findByName(input.getName());

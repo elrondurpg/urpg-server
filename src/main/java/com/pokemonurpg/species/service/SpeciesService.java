@@ -113,9 +113,7 @@ public class SpeciesService implements NamedObjectService<Species> {
         Species species = new Species(input);
 
         updateEmbeddedValues(species, input);
-        if (species.getType2() == null) {
-            species.setType2(typeService.findByName("NONE"));
-        }
+
         speciesRepository.save(species);
 
         updateAssociatedValues(species, input);
@@ -158,6 +156,7 @@ public class SpeciesService implements NamedObjectService<Species> {
         for (SpeciesAttackInputDto attack : attacks) {
             speciesAttackService.update(species, attack);
         }
+        species.setAttacks(speciesAttackService.findBySpecies(species));
     }
 
     private void updateSpeciesAbilities(Species species, SpeciesInputDto input) {
@@ -165,6 +164,7 @@ public class SpeciesService implements NamedObjectService<Species> {
         for (SpeciesAbilityInputDto ability : abilities) {
             speciesAbilityService.update(species, ability);
         }
+        species.setAbilities(speciesAbilityService.findBySpecies(species));
     }
 
     private void updateCosmeticForms(Species species, SpeciesInputDto input) {
@@ -172,5 +172,6 @@ public class SpeciesService implements NamedObjectService<Species> {
         for (CosmeticFormInputDto form : forms) {
             cosmeticFormService.update(form, species.getDbid());
         }
+        species.setCosmeticForms(cosmeticFormService.findBySpeciesDbid(species.getDbid()));
     }
 }

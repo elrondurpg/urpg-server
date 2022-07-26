@@ -40,7 +40,7 @@ public class ItemBundleController {
     @AllowAuthorized(permission = "Write Item")
     @PostMapping
     public @ResponseBody
-    ItemBundle create(@RequestBody ItemBundleInputDto input) {
+    ItemBundle create(@Valid @RequestBody ItemBundleInputDto input) {
         return itemBundleService.create(input);
     }
 

@@ -70,5 +70,14 @@ public class ItemBundle implements NamedObject {
         }
     }
 
+    public List<ItemBundleItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemBundleItem> items) {
+        this.items = items;
+    }
+
+    
     
 }
