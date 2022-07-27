@@ -11,7 +11,10 @@ import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
+import com.pokemonurpg.stats.input.WishlistAbilityInputDto;
+import com.pokemonurpg.stats.input.WishlistMoveInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.stats.models.WishlistAbility;
 import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
 import com.pokemonurpg.stats.validation.OwnedPokemonValidator;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,7 @@ import javax.inject.Provider;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
@@ -60,6 +64,12 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     @Resource
     private Provider<SessionService> sessionServiceProvider;
 
+    @Resource
+    private WishlistAbilityService wishlistAbilityService;
+
+    @Resource
+    private WishlistMoveService wishlistMoveService;
+
     public List<OwnedPokemon> findByOwner(String ownerName) {
         Member owner = memberService.findByNameExact(ownerName);
         if (owner != null) {
@@ -69,15 +79,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     }
 
     public OwnedPokemon findByDbid(Integer dbid) {
-        OwnedPokemon pokemon = ownedPokemonRepository.findByDbid(dbid);
-
-        if (pokemon != null) {
-            List<Species> evolutions = speciesService.findByPreEvolution(pokemon.getSpecies());
-            if (evolutions == null || evolutions.isEmpty()) {
-                pokemon.setFullyEvolved(true);
-            }
-        }
-        return pokemon;
+        return ownedPokemonRepository.findByDbid(dbid);
     }
 
     public OwnedPokemon create(OwnedPokemonInputDto input) {
@@ -125,13 +127,14 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         pokemon.setNature(natureService.findByName(input.getNature()));
         pokemon.setObtained(obtainedService.findByName(input.getObtained()));
         pokemon.setHiddenPowerType(typeService.findByName(input.getHiddenPowerType()));
-        pokemon.setFullyEvolved(speciesService.findByPreEvolution(pokemon.getSpecies()).isEmpty());
     }
 
     private void updateAssociatedValues(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
         ownedExtraMoveService.updateAll(input, pokemon);
         ownedHiddenAbilityService.updateAll(input, pokemon);
         updateEarnedRibbons(input, pokemon);
+        updateWishlistAbilities(input, pokemon);
+        updateWishlistMoves(input, pokemon);
     }
 
     private void updateEarnedRibbons(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
@@ -140,6 +143,22 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
             earnedRibbonService.update(ribbon, pokemon);
         }
         pokemon.setEarnedRibbons(earnedRibbonService.findByOwnedPokemon(pokemon));
+    }
+
+    private void updateWishlistAbilities(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+        Set<WishlistAbilityInputDto> abilities = input.getWishlistAbilities();
+        for(WishlistAbilityInputDto ability : abilities) {
+            wishlistAbilityService.update(ability, pokemon);
+        }
+        pokemon.setWishlistAbilities(wishlistAbilityService.findByPokemon(pokemon));
+    }
+
+    private void updateWishlistMoves(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+        Set<WishlistMoveInputDto> moves = input.getWishlistMoves();
+        for(WishlistMoveInputDto move : moves) {
+            wishlistMoveService.update(move, pokemon);
+        }
+        pokemon.setWishlistMoves(wishlistMoveService.findByPokemon(pokemon));
     }
 
     public void delete(int dbid) {

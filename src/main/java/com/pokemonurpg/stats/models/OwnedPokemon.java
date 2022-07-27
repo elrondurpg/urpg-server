@@ -122,6 +122,16 @@ public class OwnedPokemon {
     @Column
     private Boolean rental;
 
+    @OneToMany(mappedBy="pokemon")
+    @JsonIgnoreProperties({ "pokemon" })
+    @JsonView(value = { View.MemberView.Pokemon.class })
+    private Set<WishlistAbility> wishlistAbilities;
+
+    @OneToMany(mappedBy="pokemon")
+    @JsonIgnoreProperties({ "pokemon" })
+    @JsonView(value = { View.MemberView.Pokemon.class })
+    private Set<WishlistMove> wishlistMoves;
+
     public OwnedPokemon() {
     }
 
@@ -325,5 +335,21 @@ public class OwnedPokemon {
         if (rental != null) {
             this.rental = rental;
         }
+    }
+
+    public Set<WishlistAbility> getWishlistAbilities() {
+        return wishlistAbilities;
+    }
+
+    public void setWishlistAbilities(Set<WishlistAbility> wishlistAbilities) {
+        this.wishlistAbilities = wishlistAbilities;
+    }
+
+    public Set<WishlistMove> getWishlistMoves() {
+        return wishlistMoves;
+    }
+
+    public void setWishlistMoves(Set<WishlistMove> wishlistMoves) {
+        this.wishlistMoves = wishlistMoves;
     }
 }

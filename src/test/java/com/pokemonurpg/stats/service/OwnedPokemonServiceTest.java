@@ -95,7 +95,6 @@ public class OwnedPokemonServiceTest {
         when(speciesService.findByPreEvolution(SPECIES)).thenReturn(null);
 
         assertEquals(pokemon, ownedPokemonService.findByDbid(DBID));
-        assertEquals(pokemon.getFullyEvolved(), true);
     }
 
     @Test

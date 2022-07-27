@@ -49,7 +49,6 @@ public class OwnedPokemonTest {
         pokemon.setOwnedHiddenAbilities(OWNED_HIDDEN_ABILITIES);
         pokemon.setOwnedExtraMoves(OWNED_EXTRA_MOVES);
         pokemon.setEarnedRibbons(EARNED_RIBBONS);
-        pokemon.setFullyEvolved(FULLY_EVOLVED);
 
         assertEquals(DBID, pokemon.getDbid());
         assertEquals(NATURE, pokemon.getNature());
@@ -58,7 +57,6 @@ public class OwnedPokemonTest {
         assertEquals(OWNED_HIDDEN_ABILITIES, pokemon.getOwnedHiddenAbilities());
         assertEquals(OWNED_EXTRA_MOVES, pokemon.getOwnedExtraMoves());
         assertEquals(EARNED_RIBBONS, pokemon.getEarnedRibbons());
-        assertEquals(FULLY_EVOLVED, pokemon.getFullyEvolved());
     }
 
     @Test

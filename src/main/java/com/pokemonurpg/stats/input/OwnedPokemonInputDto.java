@@ -16,7 +16,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OwnedPokemonInputDto {
 
@@ -70,6 +72,10 @@ public class OwnedPokemonInputDto {
     protected Boolean uft;
 
     protected Boolean rental;
+
+    protected Set<@Valid WishlistAbilityInputDto> wishlistAbilities = new HashSet<>();
+
+    protected Set<@Valid WishlistMoveInputDto> wishlistMoves = new HashSet<>();
 
     public String getTrainer() {
         return trainer;
@@ -206,4 +212,22 @@ public class OwnedPokemonInputDto {
     public void setRental(Boolean rental) {
         this.rental = rental;
     }
+
+    public Set<WishlistAbilityInputDto> getWishlistAbilities() {
+        return wishlistAbilities;
+    }
+
+    public void setWishlistAbilities(Set<WishlistAbilityInputDto> wishlistAbilities) {
+        this.wishlistAbilities = wishlistAbilities;
+    }
+
+    public Set<WishlistMoveInputDto> getWishlistMoves() {
+        return wishlistMoves;
+    }
+
+    public void setWishlistMoves(Set<WishlistMoveInputDto> wishlistMoves) {
+        this.wishlistMoves = wishlistMoves;
+    }
+
+    
 }
