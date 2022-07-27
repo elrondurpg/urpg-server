@@ -122,9 +122,6 @@ public class OwnedPokemon {
     @Column
     private Boolean rental;
 
-    @Transient
-    private Boolean fullyEvolved = false;
-
     public OwnedPokemon() {
     }
 
@@ -328,13 +325,5 @@ public class OwnedPokemon {
         if (rental != null) {
             this.rental = rental;
         }
-    }
-
-    public Boolean getFullyEvolved() {
-        return fullyEvolved;
-    }
-
-    public void setFullyEvolved(Boolean fullyEvolved) {
-        this.fullyEvolved = fullyEvolved;
     }
 }
