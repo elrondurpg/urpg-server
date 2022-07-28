@@ -208,7 +208,7 @@ public class MemberService implements NamedObjectService<Member> {
 
         if (accessTokenResponse.getRefreshToken() != null) {
             IvParameterSpec iv = aesEncryptionService.createIvParameterSpec();
-            //System.out.println("Updated member access token: " + accessTokenResponse.getAccessToken());
+            System.out.println("Updated member access token: " + accessTokenResponse.getAccessToken());
             SecretKey key = aesEncryptionService.getKeyFromAccessToken(accessTokenResponse.getAccessToken(), salt);
             String encryptedRefreshToken = aesEncryptionService.encrypt(accessTokenResponse.getRefreshToken(), key, iv);
             member.setRefreshToken(encryptedRefreshToken);
