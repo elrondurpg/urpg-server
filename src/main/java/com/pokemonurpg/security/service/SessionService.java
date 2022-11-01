@@ -2,14 +2,11 @@ package com.pokemonurpg.security.service;
 
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.models.Permission;
-import com.pokemonurpg.member.models.Role;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service

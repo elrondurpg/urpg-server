@@ -5,7 +5,6 @@ import com.pokemonurpg.general.service.FlagService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.KnownNameClaimService;
 import com.pokemonurpg.member.service.MemberService;
-import com.pokemonurpg.security.dto.LoginInputDto;
 import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.models.DiscordUserResponse;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
-import javax.servlet.Registration;
 
 @Service
 public class RegistrationService {
