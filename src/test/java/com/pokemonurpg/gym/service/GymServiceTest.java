@@ -1,12 +1,12 @@
 package com.pokemonurpg.gym.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.gym.models.Badge;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;

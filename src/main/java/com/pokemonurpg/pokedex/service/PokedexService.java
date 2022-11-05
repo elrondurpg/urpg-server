@@ -1,8 +1,9 @@
 package com.pokemonurpg.pokedex.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.PokedexEntryDto;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

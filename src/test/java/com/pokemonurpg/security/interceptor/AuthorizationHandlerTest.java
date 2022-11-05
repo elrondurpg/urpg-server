@@ -1,11 +1,11 @@
 package com.pokemonurpg.security.interceptor;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.security.annotation.*;
 import com.pokemonurpg.security.service.AuthorizationService;
 import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import com.pokemonurpg.test.HttpServletRequestImpl;

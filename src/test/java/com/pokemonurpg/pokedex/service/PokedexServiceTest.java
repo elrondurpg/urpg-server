@@ -1,11 +1,12 @@
 package com.pokemonurpg.pokedex.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.AlteredFormDto;
 import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
 import com.pokemonurpg.pokedex.output.PokedexEntryDto;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

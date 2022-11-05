@@ -4,6 +4,7 @@ import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.repository.ContestAttributeRepository;
 import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
@@ -13,7 +14,7 @@ import com.pokemonurpg.contest.service.ContestComboService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.item.repository.ItemRepository;
-import com.pokemonurpg.species.repository.TypeRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

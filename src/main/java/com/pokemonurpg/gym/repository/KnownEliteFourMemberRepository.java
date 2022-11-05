@@ -1,7 +1,8 @@
 package com.pokemonurpg.gym.repository;
 
-import com.pokemonurpg.general.models.Nature;
+import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.gym.models.KnownEliteFourMember;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,12 +1,12 @@
 package com.pokemonurpg.gym.input;
 
 
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.gym.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.gym.annotation.BelongsToThisGym;
 import com.pokemonurpg.gym.models.Badge;
-import com.pokemonurpg.species.models.Type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

@@ -3,12 +3,12 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.ability.models.Ability;
 import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.general.models.Nature;
+import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 

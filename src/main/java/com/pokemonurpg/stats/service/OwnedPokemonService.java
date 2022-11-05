@@ -1,14 +1,14 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
-import com.pokemonurpg.general.service.NatureService;
 import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
-import com.pokemonurpg.species.service.TypeService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.input.WishlistAbilityInputDto;

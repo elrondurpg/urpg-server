@@ -2,6 +2,7 @@ package com.pokemonurpg.creative.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.creative.input.StoryRankInputDto;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "story_rank")
-@JsonView(value = { View.MemberView.Pokemon.class })
+@JsonView(value = { View.MemberView.Pokemon.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
 public class StoryRank implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

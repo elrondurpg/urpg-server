@@ -1,8 +1,8 @@
 package com.pokemonurpg.security.validator;
 
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.security.annotation.ValidStarter;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
 import com.pokemonurpg.stats.input.StarterPokemonInputDto;
 import com.pokemonurpg.stats.validation.OwnedPokemonValidator;
 

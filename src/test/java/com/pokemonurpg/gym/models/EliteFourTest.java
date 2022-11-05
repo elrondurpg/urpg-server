@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
-import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.stats.models.EliteFourVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;

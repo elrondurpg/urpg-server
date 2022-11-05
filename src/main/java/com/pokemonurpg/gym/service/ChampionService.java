@@ -1,12 +1,13 @@
 package com.pokemonurpg.gym.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.input.ChampionInputDto;
 import com.pokemonurpg.gym.models.Champion;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.repository.ChampionOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.ChampionRepository;
-import com.pokemonurpg.species.service.TypeService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

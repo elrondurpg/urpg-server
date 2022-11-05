@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.output;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.species.models.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 
 import java.util.HashMap;
 import java.util.Map;

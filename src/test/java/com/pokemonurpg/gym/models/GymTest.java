@@ -1,9 +1,7 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.species.models.Type;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;

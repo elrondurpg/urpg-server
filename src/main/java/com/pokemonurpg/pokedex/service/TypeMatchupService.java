@@ -1,11 +1,12 @@
 package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.pokedex.models.TypeMatchup;
 import com.pokemonurpg.pokedex.repository.TypeMatchupRepository;
-import com.pokemonurpg.species.service.TypeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

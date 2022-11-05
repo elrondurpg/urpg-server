@@ -3,6 +3,7 @@ package com.pokemonurpg.attack.input;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
@@ -13,7 +14,6 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.species.models.Type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;

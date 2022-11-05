@@ -1,14 +1,16 @@
 package com.pokemonurpg.general.service;
 
-import com.pokemonurpg.general.input.NatureInputDto;
-import com.pokemonurpg.general.models.Nature;
-import com.pokemonurpg.general.repository.NatureRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
+import com.pokemonurpg.configuration.v1.pokemon.nature.repository.NatureRepository;
+import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 
 import java.util.ArrayList;
 import java.util.List;

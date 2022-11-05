@@ -1,20 +1,10 @@
 package com.pokemonurpg.stats.input;
 
-
-import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.general.models.Nature;
-import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.Type;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StarterPokemonInputDto {
 

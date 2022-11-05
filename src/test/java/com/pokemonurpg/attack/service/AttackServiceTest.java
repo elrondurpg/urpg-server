@@ -7,6 +7,8 @@ import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
@@ -19,8 +21,7 @@ import com.pokemonurpg.contest.repository.RSEContestMoveTypeRepository;
 import com.pokemonurpg.contest.service.ContestComboService;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.item.repository.ItemRepository;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.repository.TypeRepository;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

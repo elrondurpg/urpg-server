@@ -12,6 +12,10 @@ public class View {
 
         }
 
+        public static interface PokemonBrief extends Pokemon {
+            
+        }
+
         public static interface Secure extends Summary {
 
         }

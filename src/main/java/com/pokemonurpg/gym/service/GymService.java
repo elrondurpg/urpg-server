@@ -1,5 +1,6 @@
 package com.pokemonurpg.gym.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.models.Gym;
@@ -7,7 +8,7 @@ import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.gym.repository.GymOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.species.service.TypeService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

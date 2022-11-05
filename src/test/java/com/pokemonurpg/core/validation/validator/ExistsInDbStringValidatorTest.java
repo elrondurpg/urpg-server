@@ -1,8 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
+import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
 import com.pokemonurpg.core.service.NamedObjectServiceFactory;
-import com.pokemonurpg.ability.models.Ability;
-import com.pokemonurpg.ability.service.AbilityService;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import org.junit.Test;
 import org.junit.runner.RunWith;
