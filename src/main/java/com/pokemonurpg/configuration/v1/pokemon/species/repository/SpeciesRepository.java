@@ -13,18 +13,6 @@ import java.util.List;
 public interface SpeciesRepository extends JpaRepository<Species, Integer> {
     @Query("select max(dexno) from Species s")
     Integer findMaxDexno();
-    @Query("select s.name from Species s")
-    List<String> findAllNames();
-    @Query("select s.name from Species s " +
-            "where s.preMega is null " +
-            "and s.battleOnly is false ")
-    List<String> findAllOwnableNames();
-    @Query("select s.name from Species s " +
-            "where s.preEvolution is null " +
-            "and s.legendaryTier = 0 " +
-            "and s.preMega is null " +
-            "and s in (select s2.preEvolution from Species s2)")
-    List<String> findAllStarterNames();
     Species findByName(String name);
     Species findByDbid(Integer dbid);
     List<Species> findByDexno(Integer dexno);

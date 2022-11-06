@@ -47,17 +47,6 @@ public class SpeciesService extends ConfigurationService<Species, SpeciesGetPara
     @Resource
     private CosmeticFormService cosmeticFormService;
 
-    public List<String> findAllNames(Boolean ownable) {
-        if (ownable != null && ownable) {
-            return repository.findAllOwnableNames();
-        }
-        else return repository.findAllNames();
-    }
-
-    public List<String> findAllStarterNames() {
-        return repository.findAllStarterNames();
-    }
-
     public Species findByDbid(int dbid) {
         return repository.findByDbid(dbid);
     }

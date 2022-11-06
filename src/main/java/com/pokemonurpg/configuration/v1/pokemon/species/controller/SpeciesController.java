@@ -18,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/configuration/v1/pokemon/species")
@@ -26,22 +25,9 @@ import java.util.List;
 @Validated
 public class SpeciesController extends ConfigurationController<Species, SpeciesGetParams, SpeciesService> {
 
-    protected Class<? extends ConfigurationViews.V1> getIdViewClass() {
-        return ConfigurationViews.V1.Pokemon.Species.Id.class;
+    public SpeciesController() {
+        super(Id.class, Brief.class, Full.class);
     }
-
-    protected Class<? extends ConfigurationViews.V1> getBriefViewClass() {
-        return ConfigurationViews.V1.Pokemon.Species.Brief.class;
-    }
-
-    protected Class<? extends ConfigurationViews.V1> getFullViewClass() {
-        return ConfigurationViews.V1.Pokemon.Species.Full.class;
-    }
-
-    @AllowAll
-    @GetMapping(path="/starters")
-    public @ResponseBody
-    List<String> findAllStarterNames() { return service.findAllStarterNames(); }
 
     @AllowAll
     @GetMapping(path="/{name}")

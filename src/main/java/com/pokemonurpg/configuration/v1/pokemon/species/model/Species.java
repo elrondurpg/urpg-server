@@ -1,5 +1,6 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
@@ -12,6 +13,9 @@ import com.pokemonurpg.creative.models.ParkRank;
 import com.pokemonurpg.creative.models.StoryRank;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Formula;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -81,11 +85,11 @@ public class Species implements NamedObject {
 
     @Column(name = "male_allowed")
     @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
-    private Boolean maleAllowed = false;
+    private Boolean maleAllowed;
 
     @Column(name = "female_allowed")
     @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
-    private Boolean femaleAllowed = false;
+    private Boolean femaleAllowed;
 
     @Column
     @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
@@ -185,6 +189,21 @@ public class Species implements NamedObject {
     @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Boolean battleOnly;
 
+    // This field exists to be used in search queries using Spring's Example class.
+    @Formula("(select (count(*) = 0) from Species s2 where dbid = s2.pre_evolution_dbid)")
+    @JsonIgnore
+    private Boolean fullyEvolved;
+    
+    // This field exists to be used in search queries using Spring's Example class.
+    @Formula(value = "(pre_evolution_dbid is not null)")
+    @JsonIgnore
+    private Boolean evolved;
+    
+    // This field exists to be used in search queries using Spring's Example class.
+    @Formula(value = "(pre_mega_dbid is not null)")
+    @JsonIgnore
+    private Boolean megaEvolved;
+
     public Species() { }
 
     public Species(SpeciesInputDto input) {
@@ -192,6 +211,8 @@ public class Species implements NamedObject {
 		if (this.displayName == null) setDisplayName(getName());
         if (this.battleOnly == null) setBattleOnly(false);
         if (this.legendaryTier == null) setLegendaryTier(0);
+        if (this.femaleAllowed == null) setFemaleAllowed(false);
+        if (this.maleAllowed == null) setMaleAllowed(false);
     }
 
     public void update(SpeciesInputDto input) {
@@ -572,4 +593,31 @@ public class Species implements NamedObject {
             this.battleOnly = battleOnly;
         }
     }
+
+    public Boolean isFullyEvolved() {
+        return fullyEvolved;
+    }
+
+    public void setFullyEvolved(Boolean fullyEvolved) {
+        this.fullyEvolved = fullyEvolved;
+    }
+
+    public Boolean isEvolved() {
+        return evolved;
+    }
+
+    public void setEvolved(Boolean evolved) {
+        this.evolved = evolved;
+    }
+
+    public Boolean isMegaEvolved() {
+        return megaEvolved;
+    }
+
+    public void setMegaEvolved(Boolean megaEvolved) {
+        this.megaEvolved = megaEvolved;
+    }
+
+    
+    
 }

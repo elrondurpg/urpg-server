@@ -10,10 +10,10 @@ import org.springframework.data.domain.Sort;
 
 public abstract class GetParams {
 
-    @Min(1)
+    @Min(0)
     Integer page = 1;
 
-    @Min(0)
+    @Min(1)
     @Max(50)
     Integer itemsPerPage = 25;
 

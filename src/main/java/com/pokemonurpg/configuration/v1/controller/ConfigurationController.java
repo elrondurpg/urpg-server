@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,9 +22,18 @@ public abstract class ConfigurationController<
     @Autowired
     protected ConfigurationServiceClass service;
 
-    protected abstract Class<? extends ConfigurationViews.V1> getIdViewClass();
-    protected abstract Class<? extends ConfigurationViews.V1> getBriefViewClass();
-    protected abstract Class<? extends ConfigurationViews.V1> getFullViewClass();
+    protected final Class<? extends ConfigurationViews.V1> idViewClass;
+    protected final Class<? extends ConfigurationViews.V1> briefViewClass;
+    protected final Class<? extends ConfigurationViews.V1> fullViewClass;
+
+    public ConfigurationController(
+        Class<? extends ConfigurationViews.V1> idViewClass, 
+        Class<? extends ConfigurationViews.V1> briefViewClass, 
+        Class<? extends ConfigurationViews.V1> fullViewClass) {
+        this.idViewClass = idViewClass;
+        this.briefViewClass = briefViewClass;
+        this.fullViewClass = fullViewClass;
+    }
 
     @AllowAll
     @GetMapping
@@ -38,13 +46,13 @@ public abstract class ConfigurationController<
 
     private Class<? extends ConfigurationViews.V1> getViewByDetailLevel(String detailLevel) {
         if ("brief".equals(detailLevel)) {
-            return getBriefViewClass();
+            return briefViewClass;
         }
         else if ("full".equals(detailLevel)) {
-            return getFullViewClass();
+            return fullViewClass;
         }
         else {
-            return getIdViewClass();
+            return idViewClass;
         }
     }
 }
