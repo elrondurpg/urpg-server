@@ -25,7 +25,7 @@ public class BotLoginService {
         String[] credentials = authorizationCredentialsService.getCredentials();
         if (credentials != null && credentials.length == 2) {
             OAuthAccessTokenResponse accessTokenResponse = oAuthService.getAccessTokenForClientCredentials(credentials[0], credentials[1]);
-            if (accessTokenResponse != null && accessTokenResponse.isValid()) {
+            if (accessTokenResponse != null && accessTokenResponse.isValidBotLogin()) {
                 Member member = memberService.findByDiscordId(credentials[0]);
                 if (member != null && Boolean.TRUE.equals(member.getBot())) {
                     memberService.update(member, accessTokenResponse);

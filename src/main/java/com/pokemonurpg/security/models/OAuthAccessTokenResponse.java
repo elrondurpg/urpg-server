@@ -85,4 +85,13 @@ public class OAuthAccessTokenResponse {
         if (errorDescription != null) return false;
         return true;
     }
+
+    public boolean isValidBotLogin() {
+        if (accessToken == null || accessToken.isEmpty()) return false;
+        if (scope == null || scope.isEmpty()) return false;
+        if (expiresIn == null || expiresIn.isEmpty()) return false;
+        if (error != null) return false;
+        if (errorDescription != null) return false;
+        return true;
+    }
 }

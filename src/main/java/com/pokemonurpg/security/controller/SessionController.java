@@ -2,6 +2,8 @@ package com.pokemonurpg.security.controller;
 
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.RegisterNewUser;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.dto.SessionDto;
@@ -74,6 +76,7 @@ public class SessionController {
         return loginService.login(input);
     }
 
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @AllowAll
     @PostMapping("/botLogin")
     public @ResponseBody

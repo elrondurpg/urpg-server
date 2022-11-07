@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationAttribute;
 import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.lib.resource.v1.model.ApiResource;

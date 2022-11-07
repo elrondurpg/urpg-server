@@ -1,6 +1,5 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.member.models.Member;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
