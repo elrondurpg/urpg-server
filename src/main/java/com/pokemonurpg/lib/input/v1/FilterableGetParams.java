@@ -1,4 +1,4 @@
-package com.pokemonurpg.lib.v1;
+package com.pokemonurpg.lib.input.v1;
 
 import org.springframework.data.domain.Example;
 

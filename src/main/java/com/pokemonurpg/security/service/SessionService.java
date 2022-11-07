@@ -34,6 +34,16 @@ public class SessionService {
         }
     }
 
+    public boolean isMemberAuthorizedFor(String permission) {
+        return authenticatedMember != null && !authenticatedMember.isBanned() && hasAuthorizedPermission(permission);
+    }
+
+    public boolean hasAuthorizedPermission(String permission) {
+        return permission != null && getAuthenticatedPermissions()
+            .stream()
+            .anyMatch(permissionObj -> permissionObj.getName().equals(permission));
+    }
+
     public Member getAuthenticatedMember() {
         return authenticatedMember;
     }

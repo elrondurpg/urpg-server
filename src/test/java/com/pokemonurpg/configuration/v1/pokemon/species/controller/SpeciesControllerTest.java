@@ -3,9 +3,13 @@ package com.pokemonurpg.configuration.v1.pokemon.species.controller;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
+import com.pokemonurpg.configuration.v1.config.ConfigurationPageMapper;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
@@ -31,8 +35,8 @@ public class SpeciesControllerTest {
 
     @Test
     public void findAllNames() {
-        List<String> names = new ArrayList<>();
-        when(speciesService.findAllNames(false)).thenReturn(names);
+        //List<String> names = new ArrayList<>();
+        //when(speciesService.find(Matchers.any())).thenReturn(new PageImp);
         //assertEquals(names, speciesController.findAllNames(false, false));
     }
 

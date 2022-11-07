@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.pokemonurpg.lib.security.v1.SessionCreator;
 import com.pokemonurpg.security.interceptor.AuthorizationHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -63,7 +64,18 @@ public class AppConfig implements WebMvcConfigurer {
         return new AuthorizationHandler();
     }
 
+    @Bean
+    public com.pokemonurpg.lib.security.v1.AuthorizationHandler libSecurityV1authenticationInterceptor() {
+        return new com.pokemonurpg.lib.security.v1.AuthorizationHandler();
+    }
+
+    @Bean SessionCreator sessionHandlerInterceptor() {
+        return new SessionCreator();
+    }
+
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");;
+        //registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");
+        registry.addInterceptor(sessionHandlerInterceptor());
+        registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error");
     }
 }

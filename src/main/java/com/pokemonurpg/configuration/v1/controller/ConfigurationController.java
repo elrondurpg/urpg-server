@@ -11,8 +11,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pokemonurpg.configuration.v1.config.ConfigurationPageMapper;
 import com.pokemonurpg.configuration.v1.service.ConfigurationService;
 import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
-import com.pokemonurpg.lib.v1.FilterableGetParams;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.input.v1.FilterableGetParams;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 
 public abstract class ConfigurationController<
         ModelClass, 
@@ -25,17 +26,16 @@ public abstract class ConfigurationController<
     protected final Class<? extends ConfigurationViews.V1> idViewClass;
     protected final Class<? extends ConfigurationViews.V1> briefViewClass;
     protected final Class<? extends ConfigurationViews.V1> fullViewClass;
+    protected final String resourceName;
 
-    public ConfigurationController(
-        Class<? extends ConfigurationViews.V1> idViewClass, 
-        Class<? extends ConfigurationViews.V1> briefViewClass, 
-        Class<? extends ConfigurationViews.V1> fullViewClass) {
-        this.idViewClass = idViewClass;
-        this.briefViewClass = briefViewClass;
-        this.fullViewClass = fullViewClass;
+    public ConfigurationController(ConfigControllerDefinition definition) {
+        this.idViewClass = definition.getIdViewClass();
+        this.briefViewClass = definition.getBriefViewClass();
+        this.fullViewClass = definition.getFullViewClass();
+        this.resourceName = definition.getResourceName();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
     @GetMapping
     public @ResponseBody
     ConfigurationPageMapper find(@Valid FilterableGetParamSubclass params) throws JsonProcessingException {
@@ -44,7 +44,7 @@ public abstract class ConfigurationController<
         return new ConfigurationPageMapper(page, view);
     }
 
-    private Class<? extends ConfigurationViews.V1> getViewByDetailLevel(String detailLevel) {
+    protected Class<? extends ConfigurationViews.V1> getViewByDetailLevel(String detailLevel) {
         if ("brief".equals(detailLevel)) {
             return briefViewClass;
         }

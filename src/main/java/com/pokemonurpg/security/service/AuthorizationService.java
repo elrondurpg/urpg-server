@@ -16,7 +16,7 @@ public class AuthorizationService
         SessionService sessionService = sessionServiceProvider.get();
         Member member = sessionService.getAuthenticatedMember();
         return member != null &&
-            !member.getBanned() &&
+            !member.isBanned() &&
             sessionService.getAuthenticatedPermissions().stream()
                 .anyMatch(permissionObj -> permissionObj != null && permissionObj.getName().equals(permission));
     }

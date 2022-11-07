@@ -2,6 +2,9 @@ package com.pokemonurpg.configuration.v1.pokemon.species.controller;
 
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pokemonurpg.configuration.v1.config.ConfigurationPageMapper;
+import com.pokemonurpg.configuration.v1.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.controller.ConfigurationController;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesGetParams;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
@@ -13,7 +16,9 @@ import com.pokemonurpg.configuration.v1.view.ConfigurationViews.V1.Pokemon.Speci
 import com.pokemonurpg.configuration.v1.view.ConfigurationViews.V1.Pokemon.Species.Id;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthenticated;
 
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +31,12 @@ import javax.validation.Valid;
 public class SpeciesController extends ConfigurationController<Species, SpeciesGetParams, SpeciesService> {
 
     public SpeciesController() {
-        super(Id.class, Brief.class, Full.class);
+        super(new ConfigControllerDefinition.Builder()
+            .withIdViewClass(Id.class)
+            .withBriefViewClass(Brief.class)
+            .withFullViewClass(Full.class)
+            .withResourceName("Species")
+            .build());
     }
 
     @AllowAll

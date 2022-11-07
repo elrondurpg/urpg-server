@@ -90,7 +90,7 @@ public class MemberTest {
         assertEquals(ITEMS,member.getItems());
         assertEquals(LEGENDARY_PROGRESS,member.getLegendaryProgress());
         assertEquals(ROLES,member.getRoles());
-        assertEquals(BANNED, member.getBanned());
+        assertEquals(BANNED, member.isBanned());
         assertEquals(BAN_EXPIRATION, member.getBanExpiration());
         assertEquals(GYMS, member.getGyms());
         assertEquals(ELITE_FOUR_VICTORIES, member.getEliteFourVictories());

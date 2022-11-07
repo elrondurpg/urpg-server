@@ -297,7 +297,7 @@ public class Member implements NamedObject {
         this.roles = roles;
     }
 
-    public Boolean getBanned() {
+    public Boolean isBanned() {
         return banned;
     }
 

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
 public class Species implements NamedObject {
 
     @Id
@@ -48,75 +49,58 @@ public class Species implements NamedObject {
     private Type type2;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String classification;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer hp;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer attack;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer defense;
 
     @Column(name = "special_attack")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer specialAttack;
 
     @Column(name = "special_defense")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer specialDefense;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer speed;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Double height;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Double weight;
 
     @Column(name = "male_allowed")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Boolean maleAllowed;
 
     @Column(name = "female_allowed")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Boolean femaleAllowed;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer pokemart;
 
     @OneToOne
     @JoinColumn(name = "story_rank")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private StoryRank storyRank;
 
     @OneToOne
     @JoinColumn(name = "art_rank")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private ArtRank artRank;
 
     @OneToOne
     @JoinColumn(name = "park_location")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private ParkLocation parkLocation;
 
     @OneToOne
     @JoinColumn(name = "park_rank")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private ParkRank parkRank;
 
     @Column(name = "contest_credits")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer contestCredits;
 
     @Column(name = "display_name")
@@ -124,30 +108,24 @@ public class Species implements NamedObject {
     private String displayName;
 
     @Column(name = "form_name")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String formName;
 
     @OneToMany(mappedBy="species")
     @JsonIgnoreProperties({ "species"})
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private List<SpeciesAttack> attacks = new ArrayList<>();
 
     @OneToMany(mappedBy="species")
     @JsonIgnoreProperties({ "species"})
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private List<SpeciesAbility> abilities = new ArrayList<>();
 
     @Column(name="legendary_tier")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer legendaryTier;
 
     @Column(name="altered_form_method")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String alteredFormMethod;
 
     @OneToMany
     @JoinColumn(name="species_dbid")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Set<CosmeticForm> cosmeticForms;
 
     @OneToOne
@@ -157,15 +135,12 @@ public class Species implements NamedObject {
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix" })
-     @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Species preEvolution;
 
     @Column(name="evolution_method")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String evolutionMethod;
 
     @Column(name="evolution_exp_requirement")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Integer evolutionExpRequirement;
 
     @OneToOne
@@ -174,19 +149,15 @@ public class Species implements NamedObject {
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix"})
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Species preMega;
 
     @Column(name="mega_stone")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String megaStone;
 
     @Column(name="mega_suffix")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private String megaSuffix;
 
     @Column(name="battle_only")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
     private Boolean battleOnly;
 
     // This field exists to be used in search queries using Spring's Example class.

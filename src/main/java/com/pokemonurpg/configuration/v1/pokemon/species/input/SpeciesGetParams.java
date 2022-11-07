@@ -6,7 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.lib.v1.FilterableGetParams;
+import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 
 public class SpeciesGetParams extends FilterableGetParams<Species> {
     Boolean ownableOnly = false;
