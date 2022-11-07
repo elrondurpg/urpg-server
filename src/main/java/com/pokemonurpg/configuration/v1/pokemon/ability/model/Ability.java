@@ -2,9 +2,9 @@ package com.pokemonurpg.configuration.v1.pokemon.ability.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
@@ -13,17 +13,17 @@ import java.util.Set;
 @Entity
 public class Ability implements NamedObject {
 
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer dbid;
 
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
     @Column
     private String name;
 
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Ability.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
     @Column
     private String description;
 

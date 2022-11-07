@@ -4,6 +4,7 @@ import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
@@ -12,7 +13,6 @@ import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.configuration.v1.service.ConfigurationService;
 import com.pokemonurpg.core.service.NamedObjectService;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class SpeciesService extends ConfigurationService<Species, SpeciesGetParams, SpeciesRepository> implements NamedObjectService<Species> {
+public class SpeciesService extends NamedConfigurationService<Species, SpeciesGetParams, SpeciesRepository> implements NamedObjectService<Species> {
 
     @Resource
     private TypeService typeService;
@@ -56,18 +56,6 @@ public class SpeciesService extends ConfigurationService<Species, SpeciesGetPara
     public Species findFirstByDexno(int dexno) { return repository.findFirstByDexno(dexno); }
 
     public Integer findMaxDexno() { return repository.findMaxDexno(); }
-
-    public Species findByName(String name) {
-        Species species = findByNameExact(name);
-        if (species == null && name != null) {
-            return repository.findFirstByNameStartingWith(name);
-        }
-        else return species;
-    }
-
-    public Species findByNameExact(String name) {
-        return repository.findByName(name);
-    }
 
     /*public List<String> findByRank(String rankName) {
         List<String> speciesNames = new ArrayList<>();

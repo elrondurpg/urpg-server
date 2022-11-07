@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.view;
+package com.pokemonurpg.configuration.v1.lib.view;
 
 public class ConfigurationViews {
     public static interface V1 {

@@ -1,6 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.input;
 
 
+import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
@@ -18,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @UniqueName(type = Species.class)
-public class SpeciesInputDto implements UniquelyNamedInputDto {
+public class SpeciesInputDto extends ConfigurationInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Min(1)
     private Integer dexno;

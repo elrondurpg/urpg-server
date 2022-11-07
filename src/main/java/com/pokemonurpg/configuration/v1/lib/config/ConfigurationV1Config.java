@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.config;
+package com.pokemonurpg.configuration.v1.lib.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

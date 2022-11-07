@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.controller;
+package com.pokemonurpg.configuration.v1.lib.controller;
 
 import javax.validation.Valid;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pokemonurpg.configuration.v1.config.ConfigurationPageMapper;
-import com.pokemonurpg.configuration.v1.service.ConfigurationService;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.config.ConfigurationPageMapper;
+import com.pokemonurpg.configuration.v1.lib.service.ConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 import com.pokemonurpg.lib.security.v1.AuthorizationType;
 import com.pokemonurpg.lib.security.v1.CheckAuthorization;
@@ -35,7 +35,7 @@ public abstract class ConfigurationController<
         this.resourceName = definition.getResourceName();
     }
 
-    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     ConfigurationPageMapper find(@Valid FilterableGetParamSubclass params) throws JsonProcessingException {

@@ -1,9 +1,9 @@
-package com.pokemonurpg.configuration.v1.config;
+package com.pokemonurpg.configuration.v1.lib.config;
 
 import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 
 @JsonSerialize(using = ConfigurationPageSerializer.class)
 public class ConfigurationPageMapper {

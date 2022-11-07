@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.service;
+package com.pokemonurpg.configuration.v1.lib.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

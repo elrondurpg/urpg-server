@@ -2,10 +2,10 @@ package com.pokemonurpg.configuration.v1.pokemon.nature.controller;
 
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.security.annotation.AllowAll;
 import org.springframework.validation.annotation.Validated;

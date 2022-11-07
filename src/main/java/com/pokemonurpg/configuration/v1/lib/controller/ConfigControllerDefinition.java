@@ -1,6 +1,6 @@
-package com.pokemonurpg.configuration.v1.controller;
+package com.pokemonurpg.configuration.v1.lib.controller;
 
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 
 public class ConfigControllerDefinition {
     private Class<? extends ConfigurationViews.V1> idViewClass;

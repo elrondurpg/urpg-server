@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.pokemon.nature.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;

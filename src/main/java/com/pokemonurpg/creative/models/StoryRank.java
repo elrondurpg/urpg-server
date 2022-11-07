@@ -2,7 +2,7 @@ package com.pokemonurpg.creative.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.creative.input.StoryRankInputDto;
 

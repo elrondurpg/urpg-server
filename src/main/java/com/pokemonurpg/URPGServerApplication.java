@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.pokemonurpg.configuration.v1.config.ConfigurationPageMapper;
-import com.pokemonurpg.configuration.v1.config.ConfigurationPageSerializer;
+import com.pokemonurpg.configuration.v1.lib.config.ConfigurationPageMapper;
+import com.pokemonurpg.configuration.v1.lib.config.ConfigurationPageSerializer;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;

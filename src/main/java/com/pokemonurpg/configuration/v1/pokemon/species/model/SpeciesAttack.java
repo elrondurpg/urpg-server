@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 
 import javax.persistence.*;
 

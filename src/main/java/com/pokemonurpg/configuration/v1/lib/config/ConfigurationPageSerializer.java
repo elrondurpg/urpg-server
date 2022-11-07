@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.config;
+package com.pokemonurpg.configuration.v1.lib.config;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 
 public class ConfigurationPageSerializer extends JsonSerializer<ConfigurationPageMapper> {
 	@Override

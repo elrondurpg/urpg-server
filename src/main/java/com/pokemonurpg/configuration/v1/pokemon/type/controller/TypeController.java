@@ -3,10 +3,10 @@ package com.pokemonurpg.configuration.v1.pokemon.type.controller;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.type.input.TypeInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.configuration.v1.view.ConfigurationViews;
 import com.pokemonurpg.core.validation.ObjectCreation;
 
 import org.springframework.validation.annotation.Validated;
