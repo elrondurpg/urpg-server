@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.input.AttackInputDto;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.contest.models.*;
@@ -20,102 +21,102 @@ public class Attack implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Integer dbid;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private String name;
 
     @OneToOne
     @JoinColumn(name = "type")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Type type;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private String description;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Integer power;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Integer accuracy;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Integer pp;
 
     @OneToOne
     @JoinColumn(name = "category")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private AttackCategory category;
 
     @OneToOne
     @JoinColumn(name = "target")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private AttackTargetType target;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Boolean contact;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Boolean snatch;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Boolean substitute;
 
     @Column(name = "sheer_force")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Boolean sheerForce;
 
     @Column(name = "magic_coat")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Boolean magicCoat;
 
     @OneToOne
     @JoinColumn(name = "rse_contest_move_type")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private RSEContestMoveType rseContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "rse_contest_attribute")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private ContestAttribute rseContestAttribute;
 
     @OneToOne
     @JoinColumn(name = "oras_contest_move_type")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private ORASContestMoveType orasContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "oras_contest_attribute")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private ContestAttribute orasContestAttribute;
 
     @OneToOne
     @JoinColumn(name = "dpp_contest_move_type")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private DPPContestMoveType dppContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "dpp_contest_attribute")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private ContestAttribute dppContestAttribute;
 
     @OneToOne
     @JoinColumn(name = "adv_contest_move_type")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private AdvContestMoveType advContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "adv_contest_attribute")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private ContestAttribute advContestAttribute;
 
     @OneToOne

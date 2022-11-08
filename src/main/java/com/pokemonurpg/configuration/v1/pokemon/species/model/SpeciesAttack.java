@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
 
 import javax.persistence.*;
@@ -30,15 +30,15 @@ public class SpeciesAttack {
     @MapsId("attack_dbid")
     @JoinColumn(name = "attack_dbid")
     @JsonIgnoreProperties({ "pokemon" })
-    @JsonView(value = { View.MemberView.Pokemon.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
     private Attack attack;
 
     @Column
-    @JsonView(value = { View.MemberView.Pokemon.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
     private String method = "LEVEL-UP";
 
     @Column
-    @JsonView(value = { View.MemberView.Pokemon.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
     private Integer generation;
 
     public SpeciesAttack() {    }

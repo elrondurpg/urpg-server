@@ -3,8 +3,10 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.model.NamedObject;
@@ -22,31 +24,31 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+@JsonView(value = { SpeciesViews.Full.class })
 public class Species extends ConfigurationModel implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Id.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
+    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class })
     private Integer dbid;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Brief.class })
+    @JsonView(value = { SpeciesViews.Brief.class })
     private Integer dexno;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Id.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
+    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class })
     private String name;
 
     @OneToOne
     @JoinColumn(name = "type1_dbid")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Brief.class })
+    @JsonView(value = { SpeciesViews.Brief.class })
     private Type type1;
 
     @OneToOne
     @JoinColumn(name = "type2_dbid")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Brief.class })
+    @JsonView(value = { SpeciesViews.Brief.class })
     private Type type2;
 
     @Column
@@ -105,7 +107,7 @@ public class Species extends ConfigurationModel implements NamedObject {
     private Integer contestCredits;
 
     @Column(name = "display_name")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Brief.class })
+    @JsonView(value = { SpeciesViews.Brief.class })
     private String displayName;
 
     @Column(name = "form_name")

@@ -3,7 +3,8 @@ package com.pokemonurpg.configuration.v1.pokemon.type.controller;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.type.TypeViews;
 import com.pokemonurpg.configuration.v1.pokemon.type.input.TypeInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
@@ -33,7 +34,7 @@ public class TypeController {
 
     @GetMapping(path="/{name}")
 	@AllowAll
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Type.class })
+    @JsonView(value = { TypeViews.class })
     public @ResponseBody
     Type findByName(@PathVariable("name") String name) {
         return typeService.findByName(name);
@@ -42,7 +43,7 @@ public class TypeController {
     @Validated(ObjectCreation.class)
     @AllowAuthorized(permission = "Write Species")
     @PostMapping
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Type.class })
+    @JsonView(value = { TypeViews.class })
     public @ResponseBody
     Type create(@Valid @RequestBody TypeInputDto input) {
         return typeService.create(input);
@@ -50,7 +51,7 @@ public class TypeController {
 
     @AllowAuthorized(permission = "Write Species")
     @PutMapping(path="/{dbid}")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Type.class })
+    @JsonView(value = { TypeViews.class })
     public @ResponseBody
     Type update(@Valid @RequestBody TypeInputDto input, @PathVariable int dbid) {
         return typeService.update(input, dbid);

@@ -24,5 +24,4 @@ public @interface UniqueName {
     Class<? extends Payload>[] payload() default { };
 
     public Class type();
-
 }

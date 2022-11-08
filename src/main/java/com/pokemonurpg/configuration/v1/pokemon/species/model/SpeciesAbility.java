@@ -3,8 +3,10 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
 
 import javax.persistence.*;
@@ -30,11 +32,11 @@ public class SpeciesAbility {
     @MapsId("ability_dbid")
     @JoinColumn(name = "ability_dbid")
     @JsonIgnoreProperties({ "pokemon" })
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class })
     private Ability ability;
 
     @Column(name = "is_hidden")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
+    @JsonView(value = { SpeciesViews.Full.class, AbilityViews.Full.class })
     private Boolean hidden = false;
 
     public SpeciesAbility() {    }

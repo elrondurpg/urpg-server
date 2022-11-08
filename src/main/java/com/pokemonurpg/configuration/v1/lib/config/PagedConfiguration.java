@@ -3,15 +3,15 @@ package com.pokemonurpg.configuration.v1.lib.config;
 import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 
-@JsonSerialize(using = ConfigurationPageSerializer.class)
-public class ConfigurationPageMapper {
+@JsonSerialize(using = PagedConfigurationSerializer.class)
+public class PagedConfiguration {
 
     Page<?> page;
     Class<? extends ConfigurationViews.V1> view;
 
-    public ConfigurationPageMapper(Page<?> page, Class<? extends ConfigurationViews.V1> view) {
+    public PagedConfiguration(Page<?> page, Class<? extends ConfigurationViews.V1> view) {
         this.page = page;
         this.view = view;
     }

@@ -1,14 +1,14 @@
 package com.pokemonurpg.contest.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-@JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+@JsonView(value = { SpeciesViews.Full.class })
 public class ContestMoveType implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,9 @@
 package com.pokemonurpg.core.validation.validator;
 
+import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationServiceFactory;
-import com.pokemonurpg.core.input.UniquelyNamedInputDto;
-import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.core.service.*;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 
@@ -12,8 +11,11 @@ import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueNameValidator implements ConstraintValidator<UniqueName, UniquelyNamedInputDto> {
-    private Class type;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.ResolvableType;
+
+public class UniqueNameValidator implements ConstraintValidator<UniqueName, NamedConfigurationInputDto> {
+    private Class<? extends ConfigurationModel> objectClass;
 
     @Resource
     private NamedObjectServiceFactory namedObjectServiceFactory;
@@ -22,46 +24,47 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Uniq
     private NamedConfigurationServiceFactory namedConfigurationServiceFactory;
 
     @Resource
+    private BeanFactory beanFactory;
+
+    @Resource
     private RequestPathVariableService requestPathVariableService;
 
-    public Class getType() {
-        return type;
+    public Class<? extends ConfigurationModel> getType() {
+        return objectClass;
     }
+
     @Override
     public void initialize(UniqueName constraint) {
-        this.type = constraint.type();
+        this.objectClass = constraint.type();
     }
 
     @Override
-    public boolean isValid(UniquelyNamedInputDto input, ConstraintValidatorContext constraintValidatorContext) {
-        if (input != null) {
-            String newName = input.getName();
-            if (newName != null) {
-                NamedObjectService namedObjectService = namedObjectServiceFactory.getServiceForClass(getType());
-                if (namedObjectService == null) {
-                    NamedConfigurationService<?, ?> namedConfigurationService = namedConfigurationServiceFactory.getServiceForClass(getType());
-                    ConfigurationModel existingObject = namedConfigurationService.findByNameExact(newName);
-
-                    if (existingObject != null) {
-                        Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-                        Integer objectDbid = existingObject.getDbid();
-                        return requestDbid != null && objectDbid == (int) requestDbid;
-                    }
-                    else return true;
-                }
-                else {
-                    NamedObject existingObject = namedObjectService.findByNameExact(newName);
-
-                    if (existingObject != null) {
-                        Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-                        Integer objectDbid = existingObject.getDbid();
-                        return requestDbid != null && objectDbid == (int) requestDbid;
-                    }
-                    else return true;
-                }
-            }
-            else return true;
+    public boolean isValid(NamedConfigurationInputDto input, ConstraintValidatorContext constraintValidatorContext) {
+        boolean valid = true;
+        if (isInputTestable(input)) {
+            NamedConfigurationService<?, ?> service = getService(input.getClass());
+            ConfigurationModel existingObject = service.findByNameExact(input.getName());
+            valid = existingObject == null || doesRequestDbidMatch(existingObject.getDbid());
         }
-        else return true;
+        
+        return valid;
+    }
+
+    private boolean isInputTestable(NamedConfigurationInputDto input) {
+        return input != null && input.getName() != null;
+    }
+
+    private NamedConfigurationService<?, ?> getService(Class<? extends NamedConfigurationInputDto> dtoClass) {
+        return (NamedConfigurationService<?, ?>) 
+            beanFactory.getBeanProvider(getResolvableTypeForServiceClass(dtoClass)).getObject();
+    }
+
+    private ResolvableType getResolvableTypeForServiceClass(Class<? extends NamedConfigurationInputDto> dtoClass) {
+        return ResolvableType.forClassWithGenerics(NamedConfigurationService.class, objectClass, dtoClass);
+    }
+
+    private boolean doesRequestDbidMatch(Integer dbid) {
+        Integer requestDbid = requestPathVariableService.findIntByName("dbid");
+        return requestDbid != null && dbid == (int) requestDbid;
     }
 }

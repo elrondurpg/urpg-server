@@ -2,14 +2,15 @@ package com.pokemonurpg.attack.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "attack_category")
-@JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+@JsonView(value = { SpeciesViews.Full.class })
 public class AttackCategory implements NamedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

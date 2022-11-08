@@ -161,7 +161,7 @@ public class NamedObjectServiceFactory {
                 case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
-                case "Nature": return natureService;
+                //case "Nature": return natureService;
                 case "Obtained": return obtainedService;
                 case "ORASContestMoveType": return orasContestMoveTypeService;
                 case "ParkLocation": return parkLocationService;

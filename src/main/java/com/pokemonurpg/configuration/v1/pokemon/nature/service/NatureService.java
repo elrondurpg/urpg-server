@@ -1,53 +1,30 @@
 package com.pokemonurpg.configuration.v1.pokemon.nature.service;
 
+import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.repository.NatureRepository;
-import com.pokemonurpg.core.service.NamedObjectService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.List;
-
 @Service
-public class NatureService implements NamedObjectService<Nature> {
+public class NatureService extends SimpleNamedConfigurationService<Nature, NatureInputDto> {
 
-    @Resource
-    private NatureRepository natureRepository;
-
-    public List<String> findAllNames() {
-        return natureRepository.findAllNames();
-    }
-
-    public Nature findByDbid(int dbid) {
-        return natureRepository.findByDbid(dbid);
-    }
-
-    public Nature findByName(String name) {
-        Nature nature = findByNameExact(name);
-        if (nature == null && name != null) {
-            return natureRepository.findFirstByNameStartingWith(name);
-        }
-        else return nature;
+    @Autowired
+    public NatureService(NatureRepository repo) {
+        super(repo);
     }
 
     @Override
-    public Nature findByNameExact(String name) {
-        return natureRepository.findByName(name);
-    }
-
-    public Nature create(NatureInputDto input) {
-        Nature nature = new Nature(input);
-        natureRepository.save(nature);
+    protected Nature createBase(NatureInputDto input) {
+        Nature nature = new Nature();
+        updateBase(nature, input);
         return nature;
     }
 
-    public Nature update(NatureInputDto input, int dbid) {
-        Nature nature = natureRepository.findByDbid(dbid);
-        if (nature != null) {
-            nature.update(input);
-            natureRepository.save(nature);
-        }
-        return nature;
+    @Override
+    protected void updateBase(Nature nature, NatureInputDto input) {
+        nature.setName(input.getName());
     }
 }

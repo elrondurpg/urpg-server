@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
+import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
@@ -15,7 +16,7 @@ import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 public abstract class NamedConfigurationController<
         ModelClass extends ConfigurationModel, 
         FilterableGetParamsClass extends FilterableGetParams<ModelClass>,
-        InputDtoClass extends ConfigurationInputDto
+        InputDtoClass extends NamedConfigurationInputDto
     > 
     extends ConfigurationController <ModelClass, FilterableGetParamsClass, InputDtoClass> {
 

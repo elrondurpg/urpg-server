@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import com.pokemonurpg.configuration.v1.lib.config.ConfigurationPageMapper;
+import com.pokemonurpg.configuration.v1.lib.config.PagedConfiguration;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;

@@ -1,12 +1,11 @@
 package com.pokemonurpg.configuration.v1.lib.controller;
 
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 
 public class ConfigControllerDefinition {
     private Class<? extends ConfigurationViews.V1> idViewClass;
     private Class<? extends ConfigurationViews.V1> briefViewClass;
     private Class<? extends ConfigurationViews.V1> fullViewClass;
-    private String resourceName;
 
     private ConfigControllerDefinition() {
 
@@ -24,10 +23,6 @@ public class ConfigControllerDefinition {
         return fullViewClass;
     }
 
-    public String getResourceName() {
-        return resourceName;
-    }
-
     public static class Builder {
         private ConfigControllerDefinition definition = new ConfigControllerDefinition();
 
@@ -43,11 +38,6 @@ public class ConfigControllerDefinition {
 
         public Builder withFullViewClass(Class<? extends ConfigurationViews.V1> fullViewClass) {
             definition.fullViewClass = fullViewClass;
-            return this;
-        }   
-
-        public Builder withResourceName(String resourceName) {
-            definition.resourceName = resourceName;
             return this;
         }   
 

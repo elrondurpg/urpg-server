@@ -1,15 +1,16 @@
 package com.pokemonurpg.configuration.v1.pokemon.nature.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
+import com.pokemonurpg.configuration.v1.pokemon.nature.NatureViews;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;
 
 @Entity
-@JsonView(value = { ConfigurationViews.V1.Pokemon.Nature.class })
-public class Nature implements NamedObject {
+@JsonView(value = { NatureViews.Id.class })
+public class Nature extends ConfigurationModel implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

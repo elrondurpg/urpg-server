@@ -10,6 +10,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 public class ConfigurationV1Config {
     @Autowired
     void configureObjectMapper(final ObjectMapper mapper) {
-        mapper.registerModule(new SimpleModule().addSerializer(ConfigurationPageMapper.class, new ConfigurationPageSerializer()));
+        mapper.registerModule(new SimpleModule().addSerializer(PagedConfiguration.class, new PagedConfigurationSerializer()));
     }
 }

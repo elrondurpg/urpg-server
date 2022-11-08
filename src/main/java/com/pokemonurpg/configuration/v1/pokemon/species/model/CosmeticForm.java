@@ -2,13 +2,14 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 
 import javax.persistence.*;
 
 @Entity
-@JsonView(value = { View.MemberView.Pokemon.class, ConfigurationViews.V1.Pokemon.Species.Full.class })
+@JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
 public class CosmeticForm {
     @Id
     @Column

@@ -8,15 +8,15 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
+import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 
-public class ConfigurationPageSerializer extends JsonSerializer<ConfigurationPageMapper> {
+public class PagedConfigurationSerializer extends JsonSerializer<PagedConfiguration> {
 	@Override
-	public void serialize(ConfigurationPageMapper pageMapper, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        Page<?> page = pageMapper.getPage();
+	public void serialize(PagedConfiguration configuration, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        Page<?> page = configuration.getPage();
 		gen.writeStartObject();
         useJsonGeneratorToWritePageFields(gen, page);
-        useJsonGeneratorToWritePageContentMaskedByView(gen, page, pageMapper.getView());
+        useJsonGeneratorToWritePageContentMaskedByView(gen, page, configuration.getView());
 		gen.writeEndObject();
 	}
 
