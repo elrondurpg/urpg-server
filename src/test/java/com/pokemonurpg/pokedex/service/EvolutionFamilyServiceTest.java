@@ -7,9 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
-
-import javax.annotation.Resource;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +22,7 @@ public class EvolutionFamilyServiceTest {
     private EvolutionFamilyService evolutionFamilyService;
 
     @Mock
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Test
     public void getBasicSpeciesReturnsBasic() {
@@ -48,12 +46,12 @@ public class EvolutionFamilyServiceTest {
         // Given a Species that evolves from the basic
         Species firstStage = new Species();
         firstStage.setPreEvolution(basic);
-        when(speciesService.findByPreEvolution(basic)).thenReturn(Collections.singletonList(firstStage));
+        when(speciesRepository.findByPreEvolution(basic)).thenReturn(Collections.singletonList(firstStage));
 
         // Given a Species that evolves from the firstStage
         Species secondStage = new Species();
         secondStage.setPreEvolution(firstStage);
-        when(speciesService.findByPreEvolution(firstStage)).thenReturn(Collections.singletonList(secondStage));
+        when(speciesRepository.findByPreEvolution(firstStage)).thenReturn(Collections.singletonList(secondStage));
 
         // When I call findBySpecies()
         List<List<Species>> evolutionFamily = evolutionFamilyService.findBySpecies(basic);

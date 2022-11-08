@@ -17,30 +17,34 @@ import javax.annotation.Resource;
 public class SpeciesAbilityService {
 
     @Resource
-    private SpeciesAbilityRepository speciesAbilityRepository;
+    private SpeciesAbilityRepository repository;
 
     @Resource
     private AbilityRepository abilityRepository;
 
     public List<SpeciesAbility> findBySpecies(Species species) {
-        return speciesAbilityRepository.findBySpecies(species);
+        return repository.findBySpecies(species);
     }
 
     public void update(Species species, SpeciesAbilityInputDto input) {
         Ability ability = abilityRepository.findByName(input.getName());
-        SpeciesAbility existingRecord = speciesAbilityRepository.findBySpeciesAndAbility(species, ability);
+        SpeciesAbility existingRecord = repository.findBySpeciesAndAbility(species, ability);
         if (existingRecord != null) {
             if (input.getDelete()) {
-                speciesAbilityRepository.delete(existingRecord);
+                repository.delete(existingRecord);
             }
             else {
                 existingRecord.update(input);
-                speciesAbilityRepository.save(existingRecord);
+                repository.save(existingRecord);
             }
         }
         else {
             SpeciesAbility newRecord = new SpeciesAbility(input, species, ability);
-            speciesAbilityRepository.save(newRecord);
+            repository.save(newRecord);
         }
+    }
+
+    public void delete(SpeciesAbility record) {
+        repository.delete(record);
     }
 }

@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.service;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.general.models.Obtained;
@@ -23,7 +23,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.inject.Provider;
 import java.util.Collections;
@@ -60,7 +59,7 @@ public class OwnedPokemonServiceTest {
     private MemberService memberService;
 
     @Mock
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Mock
     private NatureService natureService;
@@ -92,7 +91,7 @@ public class OwnedPokemonServiceTest {
         pokemon.setSpecies(SPECIES);
 
         when(ownedPokemonRepository.findByDbid(DBID)).thenReturn(pokemon);
-        when(speciesService.findByPreEvolution(SPECIES)).thenReturn(null);
+        when(speciesRepository.findByPreEvolution(SPECIES)).thenReturn(null);
 
         assertEquals(pokemon, ownedPokemonService.findByDbid(DBID));
     }
@@ -111,7 +110,7 @@ public class OwnedPokemonServiceTest {
         EarnedRibbonInputDto ribbon = mock(EarnedRibbonInputDto.class);
         input.setEarnedRibbons(Collections.singletonList(ribbon));
 
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
+        when(speciesRepository.findByName(SPECIES_NAME)).thenReturn(SPECIES);
         when(ownedPokemonValidator.isValid(SPECIES, input)).thenReturn(true);
 
         when(natureService.findByName(NATURE_NAME)).thenReturn(NATURE);

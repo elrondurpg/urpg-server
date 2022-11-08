@@ -1,14 +1,21 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
+import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
+import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
-import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 
-public class NamedConfigurationService <
-        ModelClass, 
-        FilterableGetParamSubclass extends FilterableGetParams<ModelClass>, 
-        RepositorySubclass extends NamedConfigurationRepository<ModelClass>
+public abstract class NamedConfigurationService <
+        ModelClass extends ConfigurationModel, 
+        InputDtoClass extends ConfigurationInputDto
     > 
-    extends ConfigurationService<ModelClass, FilterableGetParamSubclass, RepositorySubclass> {
+    extends ConfigurationService<ModelClass, InputDtoClass> {
+
+    protected NamedConfigurationRepository<ModelClass> repository;
+
+    public NamedConfigurationService(NamedConfigurationRepository<ModelClass> repository) {
+        super(repository);
+        this.repository = repository;
+    }
 
     public ModelClass findByName(String name) {
         ModelClass model = findByNameExact(name);

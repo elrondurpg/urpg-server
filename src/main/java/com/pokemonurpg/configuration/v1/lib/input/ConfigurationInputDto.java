@@ -1,5 +1,7 @@
 package com.pokemonurpg.configuration.v1.lib.input;
 
-public class ConfigurationInputDto {
+import java.io.Serializable;
+
+public abstract class ConfigurationInputDto implements Serializable {
     
 }

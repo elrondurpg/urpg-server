@@ -20,6 +20,10 @@ public class Type implements NamedObject {
 
     public Type() {}
 
+    public Type(String name) {
+        this.name = name;
+    }
+
     public Type(TypeInputDto input) {
         this.update(input);
     }

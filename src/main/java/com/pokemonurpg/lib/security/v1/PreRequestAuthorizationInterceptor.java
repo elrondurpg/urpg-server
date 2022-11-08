@@ -18,8 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-public class AuthorizationHandler implements HandlerInterceptor, ApplicationContextAware {
-    private static final Logger log = LogManager.getLogger(AuthorizationHandler.class);
+public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, ApplicationContextAware {
+    private static final Logger log = LogManager.getLogger(PreRequestAuthorizationInterceptor.class);
 
     private ApplicationContext applicationContext;
 

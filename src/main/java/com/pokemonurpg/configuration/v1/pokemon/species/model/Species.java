@@ -3,6 +3,7 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.view.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
@@ -22,12 +23,12 @@ import java.util.Set;
 
 @Entity
 @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
-public class Species implements NamedObject {
+public class Species extends ConfigurationModel implements NamedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Brief.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Id.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
     private Integer dbid;
 
     @Column
@@ -35,7 +36,7 @@ public class Species implements NamedObject {
     private Integer dexno;
 
     @Column
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Id.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Id.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
     private String name;
 
     @OneToOne
@@ -111,11 +112,9 @@ public class Species implements NamedObject {
     private String formName;
 
     @OneToMany(mappedBy="species")
-    @JsonIgnoreProperties({ "species"})
     private List<SpeciesAttack> attacks = new ArrayList<>();
 
     @OneToMany(mappedBy="species")
-    @JsonIgnoreProperties({ "species"})
     private List<SpeciesAbility> abilities = new ArrayList<>();
 
     @Column(name="legendary_tier")
@@ -148,7 +147,7 @@ public class Species implements NamedObject {
     @JsonIgnoreProperties({ "abilities", "attacks", "classification", "height", "weight", "maleAllowed", "femaleAllowed", "pokemart",
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "type1", "type2", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
-            "preMega", "megaStone", "megaSuffix"})
+            "preMega", "megaStone", "megaSuffix", "battleOnly"})
     private Species preMega;
 
     @Column(name="mega_stone")
@@ -175,42 +174,8 @@ public class Species implements NamedObject {
     @JsonIgnore
     private Boolean megaEvolved;
 
-    public Species() { }
-
-    public Species(SpeciesInputDto input) {
-        this.update(input);
-		if (this.displayName == null) setDisplayName(getName());
-        if (this.battleOnly == null) setBattleOnly(false);
-        if (this.legendaryTier == null) setLegendaryTier(0);
-        if (this.femaleAllowed == null) setFemaleAllowed(false);
-        if (this.maleAllowed == null) setMaleAllowed(false);
-    }
-
-    public void update(SpeciesInputDto input) {
-        setDexno(input.getDexno());
-        setName(input.getName());
-        setClassification(input.getClassification());
-        setHp(input.getHp());
-        setAttack(input.getAttack());
-        setDefense(input.getDefense());
-        setSpecialAttack(input.getSpecialAttack());
-        setSpecialDefense(input.getSpecialDefense());
-        setSpeed(input.getSpeed());
-        setHeight(input.getHeight());
-        setWeight(input.getWeight());
-        setMaleAllowed(input.getMaleAllowed());
-        setFemaleAllowed(input.getFemaleAllowed());
-        setPokemart(input.getPokemart());
-        setContestCredits(input.getContestCredits());
-        setDisplayName(input.getDisplayName());
-        setFormName(input.getFormName());
-        setLegendaryTier(input.getLegendaryTier());
-        setAlteredFormMethod(input.getAlteredFormMethod());
-        setEvolutionMethod(input.getEvolutionMethod());
-        setEvolutionExpRequirement(input.getEvolutionExpRequirement());
-        setMegaStone(input.getMegaStone());
-        setMegaSuffix(input.getMegaSuffix());
-        setBattleOnly(input.getBattleOnly());
+    public Species() {
+        
     }
 
     public Double getHeight() {

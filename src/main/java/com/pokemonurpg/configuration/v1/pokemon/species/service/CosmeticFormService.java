@@ -14,26 +14,30 @@ import javax.annotation.Resource;
 public class CosmeticFormService
 {
     @Resource
-    private CosmeticFormRepository cosmeticFormRepository;
+    private CosmeticFormRepository repository;
 
     public Set<CosmeticForm> findBySpeciesDbid(Integer speciesDbid) {
-        return cosmeticFormRepository.findBySpeciesDbid(speciesDbid);
+        return repository.findBySpeciesDbid(speciesDbid);
     }
 
     public void update(CosmeticFormInputDto input, Integer speciesDbid) {
-        CosmeticForm form = cosmeticFormRepository.findByName(input.getName());
+        CosmeticForm form = repository.findByName(input.getName());
         if (form != null) {
             if (input.getDelete()) {
-                cosmeticFormRepository.delete(form);
+                repository.delete(form);
             }
             else {
                 form.update(input);
-                cosmeticFormRepository.save(form);
+                repository.save(form);
             }
         }
         else {
             CosmeticForm newForm = new CosmeticForm(input, speciesDbid);
-            cosmeticFormRepository.save(newForm);
+            repository.save(newForm);
         }
+    }
+
+    public void delete(CosmeticForm record) {
+        repository.delete(record);
     }
 }

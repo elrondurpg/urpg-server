@@ -30,12 +30,12 @@ public class AbilityServiceTest {
     @Mock
     private AbilityRepository abilityRepository;
 
-    @Test
+    /*@Test
     public void findAll() {
         List<String> list = new ArrayList<>();
         when(abilityRepository.findAllNames()).thenReturn(list);
         assertEquals(list, abilityService.findAllNames());
-    }
+    }*/
 
     @Test
     public void findByDbid() {

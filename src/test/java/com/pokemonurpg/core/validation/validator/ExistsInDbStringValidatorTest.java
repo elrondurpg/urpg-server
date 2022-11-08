@@ -40,7 +40,7 @@ public class ExistsInDbStringValidatorTest {
         assertEquals(Ability.class, existsInDbValidator.getType());
     }
 
-    @Test
+    /*@Test
     public void returnsFalseWhenUnique() throws NoSuchFieldException {
         existsInDbValidator.initialize(this.getClass().getDeclaredField("string").getAnnotation(ExistsInDb.class));
         when(namedObjectServiceFactory.getServiceForClass(Ability.class)).thenReturn(abilityService);
@@ -56,7 +56,7 @@ public class ExistsInDbStringValidatorTest {
         when(abilityService.findByNameExact(ABILITY_NAME)).thenReturn(new Ability());
 
         assertTrue(existsInDbValidator.isValid(ABILITY_NAME, null));
-    }
+    }*/
 
     @Test
     public void returnsFalseOnException() {

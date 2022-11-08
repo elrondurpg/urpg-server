@@ -1,7 +1,5 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.input;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.pokemonurpg.security.service.SessionService;
 
 public class SessionCreator implements HandlerInterceptor {
-    private static final Logger log = LogManager.getLogger(AuthorizationHandler.class);
+    private static final Logger log = LogManager.getLogger(PreRequestAuthorizationInterceptor.class);
 
     @Resource
     private Provider<SessionService> sessionServiceProvider;

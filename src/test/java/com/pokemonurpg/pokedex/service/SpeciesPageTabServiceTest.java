@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -20,16 +20,16 @@ public class SpeciesPageTabServiceTest {
     private SpeciesPageTabService speciesPageTabService;
 
     @Mock
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Test
     public void getNextDexBySpecies() {
         Species species = new Species();
         species.setDexno(MAX_DEXNO);
-        when(speciesService.findMaxDexno()).thenReturn(MAX_DEXNO);
+        when(speciesRepository.findMaxDexno()).thenReturn(MAX_DEXNO);
 
         Species species2 = new Species();
-        when(speciesService.findFirstByDexno(1)).thenReturn(species2);
+        when(speciesRepository.findFirstByDexno(1)).thenReturn(species2);
 
         Species result = speciesPageTabService.findNextDexBySpecies(species);
         assertEquals(species2, result);
@@ -39,10 +39,10 @@ public class SpeciesPageTabServiceTest {
     public void getPrevDexBySpecies() {
         Species species = new Species();
         species.setDexno(1);
-        when(speciesService.findMaxDexno()).thenReturn(MAX_DEXNO);
+        when(speciesRepository.findMaxDexno()).thenReturn(MAX_DEXNO);
 
         Species species2 = new Species();
-        when(speciesService.findFirstByDexno(MAX_DEXNO)).thenReturn(species2);
+        when(speciesRepository.findFirstByDexno(MAX_DEXNO)).thenReturn(species2);
 
         Species result = speciesPageTabService.findPrevDexBySpecies(species);
         assertEquals(species2, result);

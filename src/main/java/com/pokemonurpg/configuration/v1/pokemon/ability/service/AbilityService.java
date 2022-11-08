@@ -1,55 +1,49 @@
 package com.pokemonurpg.configuration.v1.pokemon.ability.service;
 
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
-import com.pokemonurpg.core.service.NamedObjectService;
-
-import org.springframework.stereotype.Service;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesAbilityService;
 
 import javax.annotation.Resource;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
-public class AbilityService implements NamedObjectService<Ability> {
+public class AbilityService extends NamedConfigurationService<Ability, AbilityInputDto> {
 
     @Resource
-    private AbilityRepository abilityRepository;
+    private SpeciesAbilityService speciesAbilityService;
 
-    public List<String> findAllNames() {
-        return abilityRepository.findAllNames();
+    @Autowired
+    public AbilityService(AbilityRepository abilityRepository) {
+        super(abilityRepository);
     }
 
-    public Ability findByDbid(Integer dbid) {
-        return abilityRepository.findByDbid(dbid);
-    }
-
-    public Ability findByName(String name) {
-        Ability ability = abilityRepository.findByName(name);
-        if (ability == null) {
-            ability = abilityRepository.findFirstByNameStartingWith(name);
-        }
+    @Override
+    protected Ability createBase(AbilityInputDto input) {
+        Ability ability = new Ability();
+        updateBase(ability, input);
         return ability;
     }
 
     @Override
-    public Ability findByNameExact(String name) {
-        return abilityRepository.findByName(name);
+    protected void updateBase(Ability ability, AbilityInputDto input) {
+        ability.setName(input.getName());
+        ability.setDescription(input.getDescription());
     }
 
-    public Ability create(AbilityInputDto input) {
-        Ability ability = new Ability(input);
-        abilityRepository.save(ability);
-        return ability;
-    }
+    @Override
+    protected void updateEmbeddedValues(Ability model, AbilityInputDto input) { }
 
-    public Ability update(AbilityInputDto input, int dbid) {
-        Ability ability = abilityRepository.findByDbid(dbid);
-        if (ability != null) {
-            ability.update(input);
-            abilityRepository.save(ability);
-        }
-        return ability;
+    @Override
+    protected void updateAssociatedValues(Ability model, AbilityInputDto input) { }
+
+    @Override
+    protected void deleteAssociatedValues(Ability model) {
+        model.getPokemon().forEach(record -> speciesAbilityService.delete(record));
     }
 
 }

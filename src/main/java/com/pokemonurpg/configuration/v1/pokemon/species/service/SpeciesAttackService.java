@@ -31,7 +31,7 @@ public class SpeciesAttackService {
         SpeciesAttack existingRecord = speciesAttackRepository.findBySpeciesAndAttack(species, attack);
         if (existingRecord != null) {
             if (input.getDelete()) {
-                speciesAttackRepository.delete(existingRecord);
+                delete(existingRecord);
             }
             else {
                 existingRecord.update(input);
@@ -42,5 +42,9 @@ public class SpeciesAttackService {
             SpeciesAttack newRecord = new SpeciesAttack(input, species, attack);
             speciesAttackRepository.save(newRecord);
         }
+    }
+
+    public void delete(SpeciesAttack speciesAttack) {
+        speciesAttackRepository.delete(speciesAttack);
     }
 }

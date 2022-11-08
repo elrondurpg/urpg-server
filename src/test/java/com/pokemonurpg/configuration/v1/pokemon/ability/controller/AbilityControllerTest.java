@@ -32,7 +32,7 @@ public class AbilityControllerTest {
     @Test
     public void findReturnsResultFromAbilityService() {
         when(abilityService.findByName(ABILITY_NAME)).thenReturn(ability);
-        Ability ability = abilityController.findByName(ABILITY_NAME);
+        Ability ability = null; //abilityController.findByName(ABILITY_NAME);
         assertNotNull(ability);
     }
 
@@ -54,11 +54,11 @@ public class AbilityControllerTest {
         assertEquals(ability, abilityController.update(input, DBID));
     }
 
-    @Test
+    /*@Test
     public void getAllAbilities() {
         List<String> names = new ArrayList<>();
         when(abilityService.findAllNames()).thenReturn(names);
 
         assertEquals(names, abilityController.findAllNames());
-    }
+    }*/
 }

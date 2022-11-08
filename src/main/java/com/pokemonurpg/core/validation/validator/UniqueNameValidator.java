@@ -1,5 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
+import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationServiceFactory;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.core.service.*;
@@ -14,6 +17,9 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Uniq
 
     @Resource
     private NamedObjectServiceFactory namedObjectServiceFactory;
+
+    @Resource
+    private NamedConfigurationServiceFactory namedConfigurationServiceFactory;
 
     @Resource
     private RequestPathVariableService requestPathVariableService;
@@ -32,14 +38,27 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Uniq
             String newName = input.getName();
             if (newName != null) {
                 NamedObjectService namedObjectService = namedObjectServiceFactory.getServiceForClass(getType());
-                NamedObject existingObject = namedObjectService.findByNameExact(newName);
+                if (namedObjectService == null) {
+                    NamedConfigurationService<?, ?> namedConfigurationService = namedConfigurationServiceFactory.getServiceForClass(getType());
+                    ConfigurationModel existingObject = namedConfigurationService.findByNameExact(newName);
 
-                if (existingObject != null) {
-                    Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-                    Integer objectDbid = existingObject.getDbid();
-                    return requestDbid != null && objectDbid == (int) requestDbid;
+                    if (existingObject != null) {
+                        Integer requestDbid = requestPathVariableService.findIntByName("dbid");
+                        Integer objectDbid = existingObject.getDbid();
+                        return requestDbid != null && objectDbid == (int) requestDbid;
+                    }
+                    else return true;
                 }
-                else return true;
+                else {
+                    NamedObject existingObject = namedObjectService.findByNameExact(newName);
+
+                    if (existingObject != null) {
+                        Integer requestDbid = requestPathVariableService.findIntByName("dbid");
+                        Integer objectDbid = existingObject.getDbid();
+                        return requestDbid != null && objectDbid == (int) requestDbid;
+                    }
+                    else return true;
+                }
             }
             else return true;
         }

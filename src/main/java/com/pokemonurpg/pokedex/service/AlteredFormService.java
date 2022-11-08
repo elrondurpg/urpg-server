@@ -1,6 +1,7 @@
 package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.AlteredFormDto;
 import com.pokemonurpg.pokedex.util.FormAttackSorter;
@@ -14,14 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class AlteredFormService {
     @Resource
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Resource
     private FormAttackSorter formAttackSorter;
 
     public List<AlteredFormDto> findBySpecies(Species input) {
         List<AlteredFormDto> alteredForms =
-            speciesService.findByDexno(input.getDexno())
+            speciesRepository.findByDexno(input.getDexno())
             .stream()
             .filter(species -> species.getPreMega() == null)
             .map(AlteredFormDto::new)

@@ -1,6 +1,7 @@
 package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
 
@@ -13,13 +14,13 @@ import java.util.stream.Collectors;
 @Service
 public class MegaEvolutionService {
     @Resource
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Resource
     private TypeMatchupService typeMatchupService;
 
     public List<MegaEvolutionDto> findBySpecies(Species species) {
-        List<Species> megaSpecies = speciesService.findByPreMega(species);
+        List<Species> megaSpecies = speciesRepository.findByPreMega(species);
 
         return megaSpecies.stream().map(mega -> {
             MegaEvolutionDto dto = new MegaEvolutionDto(mega);

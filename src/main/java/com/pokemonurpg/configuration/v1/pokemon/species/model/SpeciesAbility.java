@@ -34,7 +34,7 @@ public class SpeciesAbility {
     private Ability ability;
 
     @Column(name = "is_hidden")
-    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class })
+    @JsonView(value = { ConfigurationViews.V1.Pokemon.Species.Full.class, ConfigurationViews.V1.Pokemon.Ability.Full.class })
     private Boolean hidden = false;
 
     public SpeciesAbility() {    }

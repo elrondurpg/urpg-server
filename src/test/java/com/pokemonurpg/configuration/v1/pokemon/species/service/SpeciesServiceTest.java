@@ -1,6 +1,5 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
@@ -18,7 +17,6 @@ import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
 
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -103,40 +101,10 @@ public class SpeciesServiceTest {
     }
 
     @Test
-    public void findByDexno() {
-        when(speciesRepository.findByDexno(DEXNO)).thenReturn(SPECIES_LIST);
-        assertEquals(SPECIES_LIST, speciesService.findByDexno(DEXNO));
-    }
-
-    @Test
-    public void findFirstByDexno() {
-        when(speciesRepository.findFirstByDexno(DEXNO)).thenReturn(SPECIES);
-        assertEquals(SPECIES, speciesService.findFirstByDexno(DEXNO));
-    }
-
-    @Test
-    public void findMaxDexno() {
-        when(speciesRepository.findMaxDexno()).thenReturn(MAX_DEXNO);
-        assertEquals(MAX_DEXNO, speciesService.findMaxDexno());
-    }
-
-    @Test
     public void findByNameNotExactMatch() {
         when(speciesRepository.findByName(NAME)).thenReturn(null);
         when(speciesRepository.findFirstByNameStartingWith(NAME)).thenReturn(SPECIES);
         assertEquals(SPECIES, speciesService.findByName(NAME));
-    }
-
-    @Test
-    public void findByPreEvolution() {
-        when(speciesRepository.findByPreEvolution(PRE_EVOLUTION)).thenReturn(SPECIES_LIST);
-        assertEquals(SPECIES_LIST, speciesService.findByPreEvolution(PRE_EVOLUTION));
-    }
-
-    @Test
-    public void findByPreMega() {
-        when(speciesRepository.findByPreMega(PRE_EVOLUTION)).thenReturn(SPECIES_LIST);
-        assertEquals(SPECIES_LIST, speciesService.findByPreMega(PRE_EVOLUTION));
     }
 
     @Test

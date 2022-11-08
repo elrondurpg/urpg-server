@@ -3,6 +3,7 @@ package com.pokemonurpg.stats.validation;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
 import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
@@ -20,12 +21,12 @@ import java.util.stream.Collectors;
 public class OwnedPokemonValidator {
 
     @Resource
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     public boolean isValidStarter(Species species) {
         return isOwnable(species)
                 && species.getPreEvolution() == null
-                && !speciesService.findByPreEvolution(species).isEmpty()
+                && !speciesRepository.findByPreEvolution(species).isEmpty()
                 && species.getLegendaryTier() == 0;
     }
 

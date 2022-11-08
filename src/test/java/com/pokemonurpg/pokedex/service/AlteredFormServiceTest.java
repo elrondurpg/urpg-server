@@ -1,6 +1,7 @@
 package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.AlteredFormDto;
 import com.pokemonurpg.pokedex.util.FormAttackSorter;
@@ -26,7 +27,7 @@ public class AlteredFormServiceTest {
     private AlteredFormService alteredFormService;
 
     @Mock
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Mock
     private FormAttackSorter formAttackSorter;
@@ -35,7 +36,7 @@ public class AlteredFormServiceTest {
     public void returnsEmptyListWhenSpeciesHasNoAlternateForms() {
         Species species1 = new Species();
         species1.setDexno(DEXNO);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Collections.singletonList(species1));
+        when(speciesRepository.findByDexno(DEXNO)).thenReturn(Collections.singletonList(species1));
 
         List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
         assertEquals(0, alteredForms.size());
@@ -47,7 +48,7 @@ public class AlteredFormServiceTest {
         species1.setDexno(DEXNO);
         Species species2 = new Species();
         species2.setDexno(DEXNO);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
+        when(speciesRepository.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
 
         List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
         verify(formAttackSorter, times(1)).run(alteredForms);
@@ -61,7 +62,7 @@ public class AlteredFormServiceTest {
         Species species2 = new Species();
         species2.setDexno(DEXNO);
         species2.setPreMega(species1);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
+        when(speciesRepository.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
 
         List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
         assertEquals(0, alteredForms.size());

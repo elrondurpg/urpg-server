@@ -1,6 +1,7 @@
 package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
@@ -25,7 +26,7 @@ public class MegaEvolutionServiceTest {
     private MegaEvolutionService megaEvolutionService;
 
     @Mock
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     @Mock
     private TypeMatchupService typeMatchupService;
@@ -38,7 +39,7 @@ public class MegaEvolutionServiceTest {
         // Given a Species that is the mega-evolution of that species
         Species mega = new Species();
         mega.setPreMega(mega);
-        when(speciesService.findByPreMega(preMega)).thenReturn(Collections.singletonList(mega));
+        when(speciesRepository.findByPreMega(preMega)).thenReturn(Collections.singletonList(mega));
 
         // Given a set of type matchups
         List<TypeMatchupDto> typeMatchups = new ArrayList<>();
@@ -53,7 +54,7 @@ public class MegaEvolutionServiceTest {
     public void findBySpeciesReturnsEmptyList() {
         Species species = new Species();
 
-        when(speciesService.findByPreMega(species)).thenReturn(Collections.emptyList());
+        when(speciesRepository.findByPreMega(species)).thenReturn(Collections.emptyList());
 
         List<MegaEvolutionDto> megaEvolutions = megaEvolutionService.findBySpecies(species);
         assertNotNull(megaEvolutions);

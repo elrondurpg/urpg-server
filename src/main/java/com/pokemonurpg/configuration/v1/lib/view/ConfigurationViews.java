@@ -4,7 +4,15 @@ public class ConfigurationViews {
     public static interface V1 {
         public static interface Pokemon extends V1 {
             public static interface Ability extends V1 {
+                public static interface Id extends Species {
 
+                }
+                public static interface Brief extends Id {
+
+                }
+                public static interface Full extends Brief {
+
+                }
             }
             public static interface Nature extends V1 {
 

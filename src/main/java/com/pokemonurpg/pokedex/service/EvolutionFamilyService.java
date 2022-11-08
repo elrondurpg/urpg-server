@@ -3,7 +3,7 @@ package com.pokemonurpg.pokedex.service;
 import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 public class EvolutionFamilyService {
 
     @Resource
-    private SpeciesService speciesService;
+    private SpeciesRepository speciesRepository;
 
     public List<List<Species>> findBySpecies(Species species) {
         List<List<Species>> evolutionFamily = new ArrayList<>();
@@ -22,11 +22,11 @@ public class EvolutionFamilyService {
         Species basic = getBasicSpecies(species);
         evolutionFamily.add(Collections.singletonList(basic));
 
-        List<Species> stageOne = speciesService.findByPreEvolution(basic);
+        List<Species> stageOne = speciesRepository.findByPreEvolution(basic);
         evolutionFamily.add(stageOne);
 
         List<Species> stageTwo = new ArrayList<>();
-        stageOne.forEach(firstStageSpecies -> stageTwo.addAll(speciesService.findByPreEvolution(firstStageSpecies)));
+        stageOne.forEach(firstStageSpecies -> stageTwo.addAll(speciesRepository.findByPreEvolution(firstStageSpecies)));
         evolutionFamily.add(stageTwo);
 
         return evolutionFamily;
