@@ -52,52 +52,45 @@ public class SpeciesService extends NamedConfigurationService<Species, SpeciesIn
     }
 
     protected Species createBase(SpeciesInputDto input) {
-        Species species = new Species();
-        updateBase(species, input);
-		if (species.getDisplayName() == null) species.setDisplayName(species.getName());
-        if (species.isBattleOnly() == null) species.setBattleOnly(false);
-        if (species.getLegendaryTier() == null) species.setLegendaryTier(0);
-        if (species.getFemaleAllowed() == null) species.setFemaleAllowed(false);
-        if (species.getMaleAllowed() == null) species.setMaleAllowed(false);
-        return species;
+        return new Species();
     }
 
     protected void updateBase(Species species, SpeciesInputDto input) {
-        species.setDexno(input.getDexno());
-        species.setName(input.getName());
-        species.setClassification(input.getClassification());
-        species.setHp(input.getHp());
-        species.setAttack(input.getAttack());
-        species.setDefense(input.getDefense());
-        species.setSpecialAttack(input.getSpecialAttack());
-        species.setSpecialDefense(input.getSpecialDefense());
-        species.setSpeed(input.getSpeed());
-        species.setHeight(input.getHeight());
-        species.setWeight(input.getWeight());
-        species.setMaleAllowed(input.getMaleAllowed());
-        species.setFemaleAllowed(input.getFemaleAllowed());
-        species.setPokemart(input.getPokemart());
-        species.setContestCredits(input.getContestCredits());
-        species.setDisplayName(input.getDisplayName());
-        species.setFormName(input.getFormName());
-        species.setLegendaryTier(input.getLegendaryTier());
-        species.setAlteredFormMethod(input.getAlteredFormMethod());
-        species.setEvolutionMethod(input.getEvolutionMethod());
-        species.setEvolutionExpRequirement(input.getEvolutionExpRequirement());
-        species.setMegaStone(input.getMegaStone());
-        species.setMegaSuffix(input.getMegaSuffix());
-        species.setBattleOnly(input.getBattleOnly());
+        set(input.getDexno(), species::setDexno);
+        set(input.getName(), species::setName);
+        set(input.getClassification(), species::setClassification);
+        set(input.getHp(), species::setHp);
+        set(input.getAttack(), species::setAttack);
+        set(input.getDefense(), species::setDefense);
+        set(input.getSpecialAttack(), species::setSpecialAttack);
+        set(input.getSpecialDefense(), species::setSpecialDefense);
+        set(input.getSpeed(), species::setSpeed);
+        set(input.getHeight(), species::setHeight);
+        set(input.getWeight(), species::setWeight);
+        set(input.getMaleAllowed(), species::setMaleAllowed);
+        set(input.getFemaleAllowed(), species::setFemaleAllowed);
+        set(input.getPokemart(), species::setPokemart);
+        set(input.getContestCredits(), species::setContestCredits);
+        set(input.getDisplayName(), species::setDisplayName);
+        set(input.getFormName(), species::setFormName);
+        set(input.getLegendaryTier(), species::setLegendaryTier);
+        set(input.getAlteredFormMethod(), species::setAlteredFormMethod);
+        set(input.getEvolutionMethod(), species::setEvolutionMethod);
+        set(input.getEvolutionExpRequirement(), species::setEvolutionExpRequirement);
+        set(input.getMegaStone(), species::setMegaStone);
+        set(input.getMegaSuffix(), species::setMegaSuffix);
+        set(input.getBattleOnly(), species::setBattleOnly);
     }
 
     protected void updateEmbeddedValues(Species species, SpeciesInputDto input) {
-        species.setType1(typeService.findByName(input.getType1()));
-        species.setType2(typeService.findByName(input.getType2()));
-        species.setStoryRank(storyRankService.findByName(input.getStoryRank()));
-        species.setArtRank(artRankService.findByName(input.getArtRank()));
-        species.setParkRank(parkRankService.findByName(input.getParkRank()));
-        species.setParkLocation(parkLocationService.findByName(input.getParkLocation()));
-        species.setPreMega(findByName(input.getPreMega()));
-        species.setPreEvolution(findByName(input.getPreEvolution()));
+        set(typeService.findByName(input.getType1()), species::setType1);
+        set(typeService.findByName(input.getType2()), species::setType2);
+        set(storyRankService.findByName(input.getStoryRank()), species::setStoryRank);
+        set(artRankService.findByName(input.getArtRank()), species::setArtRank);
+        set(parkRankService.findByName(input.getParkRank()), species::setParkRank);
+        set(parkLocationService.findByName(input.getParkLocation()), species::setParkLocation);
+        set(findByName(input.getPreMega()), species::setPreMega);
+        set(findByName(input.getPreEvolution()), species::setPreEvolution);
     }
 
     protected void updateAssociatedValues(Species species, SpeciesInputDto input) {

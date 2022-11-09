@@ -1,5 +1,7 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
+import java.util.function.Function;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 
@@ -33,6 +35,8 @@ public abstract class ConfigurationService<
 
     public ModelClass create(InputDtoClass input) {
         ModelClass model = createBase(input);
+        updateBase(model, input);
+        model.setDefaultValues();
         updateEmbeddedValues(model, input);
         repository.save(model);
         updateAssociatedValues(model, input);
@@ -40,6 +44,13 @@ public abstract class ConfigurationService<
     }
 
     protected abstract ModelClass createBase(InputDtoClass input);
+    protected void setDefaultValues() {}
+
+    protected <T> void set(T value, FieldSetter<T> setter) {
+        if (value != null) {
+            setter.setValue(value);
+        }
+    }
 
     public ModelClass update(InputDtoClass input, int dbid) {
         ModelClass model = repository.findByDbid(dbid);
@@ -52,7 +63,7 @@ public abstract class ConfigurationService<
         return model;
     }
 
-    protected abstract void updateBase(ModelClass model, InputDtoClass input);
+    protected void updateBase(ModelClass model, InputDtoClass input) {}
     protected abstract void updateEmbeddedValues(ModelClass model, InputDtoClass input);
     protected abstract void updateAssociatedValues(ModelClass model, InputDtoClass input);
 

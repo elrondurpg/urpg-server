@@ -38,7 +38,7 @@ public class OwnedPokemonValidator {
     }
 
     boolean isOwnable(Species species) {
-        if (species.getPreMega() == null && !species.isBattleOnly())
+        if (species.getPreMega() == null && !species.getBattleOnly())
             return true;
         else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't own that Pokemon form!");
     }
