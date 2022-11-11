@@ -2,8 +2,6 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;

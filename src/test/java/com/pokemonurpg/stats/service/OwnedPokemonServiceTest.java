@@ -1,13 +1,13 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.security.service.SessionService;
@@ -41,7 +41,7 @@ public class OwnedPokemonServiceTest {
     private final static String         MEMBER_NAME     = "MEMBER_NAME";
     private final static Nature         NATURE          = mock(Nature.class);
     private final static String         NATURE_NAME     = "NATURE_NAME";
-    private final static Obtained       OBTAINED        = mock(Obtained.class);
+    private final static CaptureMethod       OBTAINED        = mock(CaptureMethod.class);
     private final static String         OBTAINED_NAME   = "OBTAINED_NAME";
     private final static Type           HP_TYPE         = mock(Type.class);
     private final static String         HP_TYPE_NAME    = "HP_TYPE_NAME";
@@ -65,7 +65,7 @@ public class OwnedPokemonServiceTest {
     private NatureService natureService;
 
     @Mock
-    private ObtainedService obtainedService;
+    private CaptureMethodService obtainedService;
 
     @Mock
     private TypeService typeService;

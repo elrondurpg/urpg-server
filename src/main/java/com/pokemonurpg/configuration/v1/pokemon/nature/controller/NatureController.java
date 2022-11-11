@@ -12,16 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-
 @RestController
 @RequestMapping("/configuration/v1/pokemon/nature")
 @CrossOrigin
 @Validated
 public class NatureController extends NamedConfigurationController<Nature, FilterlessGetParams<Nature>, NatureInputDto> {
-
-    @Resource
-    private NatureService natureService;
 
     @Autowired
     public NatureController(NatureService service) {

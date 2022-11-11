@@ -2,7 +2,7 @@ package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
+import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
 import com.pokemonurpg.pokedex.models.TypeMatchup;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
 import com.pokemonurpg.pokedex.repository.TypeMatchupRepository;
@@ -38,7 +38,7 @@ public class TypeMatchupServiceTest {
     private TypeMatchupRepository typeMatchupRepository;
 
     @Mock
-    private TypeService typeService;
+    private TypeRepository typeRepository;
 
     private Type type1;
     private Type type2;
@@ -54,7 +54,7 @@ public class TypeMatchupServiceTest {
         type2.setDbid(TYPE2_DBID);
 
         // Given a list of types stored in the DB
-        when(typeService.findAll()).thenReturn(Arrays.asList(type1, type2));
+        when(typeRepository.findAll()).thenReturn(Arrays.asList(type1, type2));
 
         // Given TypeMatchup records for each combination of types
         TypeMatchup matchup1vs1 = new TypeMatchup();

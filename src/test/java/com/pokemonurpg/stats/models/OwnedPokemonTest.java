@@ -2,10 +2,10 @@ package com.pokemonurpg.stats.models;
 
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class OwnedPokemonTest {
     private final static String GENDER = "GENDER";
     private final static Nature NATURE = mock(Nature.class);
     private final static Integer EXP = 4311;
-    private final static Obtained OBTAINED = mock(Obtained.class);
+    private final static CaptureMethod OBTAINED = mock(CaptureMethod.class);
     private final static String OBTAINED_LINK = "OBTAINED_LINK";
     private final static String NICKNAME = "NICKNAME";
     private final static Type HIDDEN_POWER_TYPE = mock(Type.class);

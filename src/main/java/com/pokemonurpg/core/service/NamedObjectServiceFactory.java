@@ -4,6 +4,7 @@ import com.pokemonurpg.attack.service.AttackCategoryService;
 import com.pokemonurpg.attack.service.AttackService;
 import com.pokemonurpg.attack.service.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
@@ -13,7 +14,6 @@ import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
 import com.pokemonurpg.general.service.FlagService;
-import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
 import com.pokemonurpg.gym.service.*;
 import com.pokemonurpg.image.service.ImageFolderService;
@@ -100,7 +100,7 @@ public class NamedObjectServiceFactory {
     private NatureService natureService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService obtainedService;
 
     @Resource
     private ORASContestMoveTypeService orasContestMoveTypeService;
@@ -136,7 +136,7 @@ public class NamedObjectServiceFactory {
     private ImageFolderService imageFolderService;
 
     public NamedObjectService getServiceForClass(Class type) {
-        if (type != null) {
+        /*if (type != null) {
             switch (type.getSimpleName()) {
                 //case "Ability": return abilityService;
                 case "ArtRank": return artRankService;
@@ -172,9 +172,8 @@ public class NamedObjectServiceFactory {
                 case "Section": return sectionService;
                 //case "Species": return speciesService;
                 case "StoryRank": return storyRankService;
-                case "Type": return typeService;
             }
-        }
+        }*/
         return null;
     }
 

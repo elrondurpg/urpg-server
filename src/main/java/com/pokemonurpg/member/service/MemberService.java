@@ -1,6 +1,5 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.gym.service.KnownChampionService;
 import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
 import com.pokemonurpg.gym.service.KnownGymLeaderService;
@@ -16,6 +15,7 @@ import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.repository.MemberRepository;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.core.service.NamedObjectService;
@@ -90,7 +90,7 @@ public class MemberService implements NamedObjectService<Member> {
     private SpeciesService speciesService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService obtainedService;
 
     @Resource
     private OwnedPokemonRepository ownedPokemonRepository;

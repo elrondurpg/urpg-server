@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 
@@ -57,7 +57,7 @@ public class OwnedPokemon {
     @JoinColumn(name = "obtained")
     @JsonView(value = { View.MemberView.Summary.class })
     @JsonIgnoreProperties("dbid")
-    private Obtained obtained;
+    private CaptureMethod obtained;
 
     @Column(name = "obtained_link")
     @JsonView(value = { View.MemberView.Pokemon.class })
@@ -223,11 +223,11 @@ public class OwnedPokemon {
         }
     }
 
-    public Obtained getObtained() {
+    public CaptureMethod getObtained() {
         return obtained;
     }
 
-    public void setObtained(Obtained obtained) {
+    public void setObtained(CaptureMethod obtained) {
         if (obtained != null) {
             this.obtained = obtained;
         }

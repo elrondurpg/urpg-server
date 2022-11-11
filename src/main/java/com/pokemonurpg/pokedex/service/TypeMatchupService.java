@@ -3,15 +3,13 @@ package com.pokemonurpg.pokedex.service;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
+import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
 import com.pokemonurpg.pokedex.models.TypeMatchup;
 import com.pokemonurpg.pokedex.repository.TypeMatchupRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,14 +20,14 @@ public class TypeMatchupService {
     private TypeMatchupRepository typeMatchupRepository;
 
     @Resource
-    private TypeService typeService;
+    private TypeRepository typeRepository;
 
     public List<TypeMatchupDto> findBySpecies(Species species) {
         return findTypeMatchupsByTypes(species.getType1(), species.getType2());
     }
 
     public List<TypeMatchupDto> findTypeMatchupsByTypes(Type type1, Type type2) {
-        return typeService.findAll().stream()
+        return typeRepository.findAll().stream()
             .filter(type -> type.getDbid() != -1)
             .map(attackingType -> {
                 TypeMatchup typeMatchup1 = findByTypes(attackingType, type1);

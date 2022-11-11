@@ -1,12 +1,12 @@
 package com.pokemonurpg.stats.input;
 
 
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.strings.GeneralConstants;
 
@@ -41,7 +41,7 @@ public class OwnedPokemonInputDto {
     protected Integer exp;
 
     @NotNull(groups = { ObjectCreation.class })
-    @ExistsInDb(type = Obtained.class)
+    @ExistsInDb(type = CaptureMethod.class)
     protected String obtained;
 
     @Pattern(regexp = GeneralConstants.ALLOWED_URL_PATTERN)

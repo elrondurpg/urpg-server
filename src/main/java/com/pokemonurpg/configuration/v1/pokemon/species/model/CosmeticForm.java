@@ -2,7 +2,6 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 

@@ -8,6 +8,8 @@ import com.pokemonurpg.attack.service.AttackService;
 import com.pokemonurpg.attack.service.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
@@ -27,9 +29,7 @@ import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
-import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.general.service.SectionService;
 import com.pokemonurpg.gym.models.*;
 import com.pokemonurpg.gym.service.*;
@@ -120,7 +120,7 @@ public class NamedObjectServiceFactoryTest {
     private NatureService natureService;
 
     @Mock
-    private ObtainedService obtainedService;
+    private CaptureMethodService obtainedService;
 
     @Mock
     private ORASContestMoveTypeService orasContestMoveTypeService;
@@ -277,7 +277,7 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsObtainedService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Obtained.class);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(CaptureMethod.class);
         assertEquals(obtainedService, service);
     }
 

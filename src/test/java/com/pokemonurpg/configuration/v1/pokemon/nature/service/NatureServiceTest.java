@@ -28,17 +28,4 @@ public class NatureServiceTest {
         assertNotNull(nature);
     }
 
-    @Test
-    public void test_updateBase() {
-        NatureInputTestDto input = new NatureInputTestDto();
-        Nature nature = new Nature();
-        service.updateBase(nature, input);
-        assertNotNull(nature);
-    }
-
-
-    public void assert_UpdateBase_Valid(Nature nature, NatureInputTestDto input) {
-        assertEquals(input.getName(), nature.getName());
-    }
-
 }

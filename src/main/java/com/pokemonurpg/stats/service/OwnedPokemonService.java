@@ -1,11 +1,11 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
-import com.pokemonurpg.general.service.ObtainedService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.security.service.SessionService;
@@ -47,7 +47,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     private NatureService natureService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService obtainedService;
 
     @Resource
     private TypeService typeService;

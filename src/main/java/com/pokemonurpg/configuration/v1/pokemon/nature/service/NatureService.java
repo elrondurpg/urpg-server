@@ -22,9 +22,4 @@ public class NatureService extends SimpleNamedConfigurationService<Nature, Natur
         updateBase(nature, input);
         return nature;
     }
-
-    @Override
-    protected void updateBase(Nature nature, NatureInputDto input) {
-        nature.setName(input.getName());
-    }
 }

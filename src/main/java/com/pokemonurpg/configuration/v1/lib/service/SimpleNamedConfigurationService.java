@@ -1,17 +1,25 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
-import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
+import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
 
 public abstract class SimpleNamedConfigurationService <
-        ModelClass extends ConfigurationModel, 
-        InputDtoClass extends ConfigurationInputDto
+        ModelClass extends NamedConfigurationModel, 
+        InputDtoClass extends NamedConfigurationInputDto
     > 
 extends NamedConfigurationService<ModelClass, InputDtoClass> {
 
+    @Autowired
     public SimpleNamedConfigurationService(NamedConfigurationRepository<ModelClass> repository) {
         super(repository);
+    }
+
+    @Override
+    protected void updateBase(ModelClass model, InputDtoClass input) {
+        setIfNotNull(input.getName(), model::setName);
     }
 
     @Override
