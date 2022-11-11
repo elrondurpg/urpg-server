@@ -1,7 +1,5 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
-import java.util.function.Function;
-
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 
