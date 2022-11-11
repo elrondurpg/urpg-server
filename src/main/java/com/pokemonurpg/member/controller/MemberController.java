@@ -2,7 +2,8 @@ package com.pokemonurpg.member.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.MemberInputDto;
@@ -39,14 +40,14 @@ public class MemberController {
     @Resource
     private AuthorizationService authorizationService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findNamesBy(@RequestParam(required = false) String username, @RequestParam(required = false) Boolean bot) {
         return memberService.findNamesBy(username, bot);
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     MappingJacksonValue findByName(@PathVariable("name") String name) {

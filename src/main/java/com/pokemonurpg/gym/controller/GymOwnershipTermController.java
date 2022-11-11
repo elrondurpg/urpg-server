@@ -5,7 +5,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.gym.service.GymOwnershipTermService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,21 +30,21 @@ public class GymOwnershipTermController {
     @Resource
     private GymOwnershipTermService gymOwnershipTermService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<GymOwnershipTerm> findAll() {
         return gymOwnershipTermService.findAll();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{dbid}")
     public @ResponseBody
     GymOwnershipTerm findByDbid(@PathVariable("dbid") Integer dbid) {
         return gymOwnershipTermService.findByDbid(dbid);
     }
 
-    // @AllowAll
+    // @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     // @GetMapping
     // public @ResponseBody
     // GymOwnershipTerm findByGymAndOwnerAndOpenDate(@RequestParam(required = true) String gym, @RequestParam(required = true) String owner, @RequestParam(required = true) Date openDate) {

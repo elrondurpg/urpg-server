@@ -1,6 +1,7 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.stats.models.EliteFourVictory;
 import com.pokemonurpg.stats.service.EliteFourVictoryService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class EliteFourVictoriesController {
     @Resource
     private EliteFourVictoryService eliteFourVictoryService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<EliteFourVictory> findAll() {

@@ -5,7 +5,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.item.input.ItemBundleInputDto;
 import com.pokemonurpg.item.models.ItemBundle;
 import com.pokemonurpg.item.service.ItemBundleService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,14 +23,14 @@ public class ItemBundleController {
     @Resource
     private ItemBundleService itemBundleService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return itemBundleService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     ItemBundle findByName(@PathVariable("name") String name) {

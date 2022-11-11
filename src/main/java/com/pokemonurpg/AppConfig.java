@@ -65,7 +65,7 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");
+        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");
         registry.addInterceptor(sessionHandlerInterceptor());
         registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error");
     }

@@ -4,7 +4,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.ChampionOwnershipTermInputDto;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.service.ChampionOwnershipTermService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,14 @@ public class ChampionOwnershipTermController {
     @Resource
     private ChampionOwnershipTermService championOwnershipTermService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<ChampionOwnershipTerm> findAll() {
         return championOwnershipTermService.findAll();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{dbid}")
     public @ResponseBody
     ChampionOwnershipTerm findByDbid(@PathVariable("dbid") Integer dbid) {

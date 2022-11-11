@@ -2,7 +2,8 @@ package com.pokemonurpg.gym.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.GymInputDto;
@@ -30,14 +31,14 @@ public class GymController {
     @Resource
     private GymService gymService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAll() {
         return gymService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody

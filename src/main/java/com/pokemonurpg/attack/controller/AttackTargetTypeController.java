@@ -3,7 +3,8 @@ package com.pokemonurpg.attack.controller;
 import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.attack.input.AttackTargetTypeInputDto;
 import com.pokemonurpg.attack.service.AttackTargetTypeService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
@@ -21,14 +22,14 @@ public class AttackTargetTypeController {
     @Resource
     private AttackTargetTypeService attackTargetTypeService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return attackTargetTypeService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path = "/{name}")
     public @ResponseBody
     AttackTargetType findByName(@PathVariable("name") String name) {

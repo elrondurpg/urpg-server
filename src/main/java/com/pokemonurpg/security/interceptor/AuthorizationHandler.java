@@ -1,6 +1,7 @@
 package com.pokemonurpg.security.interceptor;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.security.annotation.*;
 import com.pokemonurpg.security.service.AuthorizationService;
@@ -47,7 +48,8 @@ public class AuthorizationHandler implements HandlerInterceptor {
 
                 sessionServiceProvider.get().createSession();
 
-                if (allowAll(method) ||
+                if (usingNewCheckAuthorizationHeader(method) ||
+                    allowAll(method) ||
                     allowAuthenticated(method) ||
                     allowThisMember(method) ||
                     allowTheOwner(method) ||
@@ -64,6 +66,10 @@ public class AuthorizationHandler implements HandlerInterceptor {
         }
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return false;
+    }
+
+    boolean usingNewCheckAuthorizationHeader(HandlerMethod method) {
+        return method.getMethodAnnotation(CheckAuthorization.class) != null;
     }
 
     boolean allowAll(HandlerMethod method) {

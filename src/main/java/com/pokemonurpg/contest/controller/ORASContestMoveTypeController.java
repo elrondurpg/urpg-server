@@ -3,7 +3,8 @@ package com.pokemonurpg.contest.controller;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
 import com.pokemonurpg.contest.service.ORASContestMoveTypeService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
@@ -22,14 +23,14 @@ public class ORASContestMoveTypeController {
     @Resource
     private ORASContestMoveTypeService orasContestMoveTypeService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return orasContestMoveTypeService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     ORASContestMoveType findByName(@PathVariable("name") String name) {

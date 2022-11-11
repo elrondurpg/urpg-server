@@ -1,7 +1,8 @@
 package com.pokemonurpg.member.controller;
 
 import com.pokemonurpg.View;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.member.input.RoleInputDto;
@@ -30,14 +31,14 @@ public class RoleController {
     @Resource
     private AuthorizationService authorizationService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return roleService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     MappingJacksonValue findByName(@PathVariable("name") String name) {

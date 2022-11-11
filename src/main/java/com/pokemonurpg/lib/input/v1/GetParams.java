@@ -9,13 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public abstract class GetParams {
+    private final static int DEFAULT_PAGE = 1;
+    private final static int DEFAULT_ITEMS_PER_PAGE = 25;
 
     @Min(0)
-    Integer page = 0;
+    Integer page;
 
     @Min(1)
     @Max(50)
-    Integer itemsPerPage = 25;
+    Integer itemsPerPage;
 
     @Pattern(regexp = "^id|brief|full$")
     String detailLevel = "id";
@@ -47,12 +49,33 @@ public abstract class GetParams {
     }
     
     public Pageable asPageRequest() {
-        if (sortBy != null) {
-            return PageRequest.of(page, itemsPerPage, Sort.by(sortBy));
+        if (shouldGetUnpagedResults()) {
+            return Pageable.unpaged();
         }
         else {
-            return PageRequest.of(page, itemsPerPage);
+            return getPagedRequest();
         }
+    }
+
+    private boolean shouldGetUnpagedResults() {
+        return "id".equals(detailLevel) && page == null && itemsPerPage == null;
+    }
+
+    private Pageable getPagedRequest() {
+        if (sortBy != null) {
+            return PageRequest.of(getPageValueForPagedResults(), getItemsPerPageForPagedResults(), Sort.by(sortBy));
+        }
+        else {
+            return PageRequest.of(getPageValueForPagedResults(), getItemsPerPageForPagedResults());
+        }
+    }
+
+    private Integer getPageValueForPagedResults() {
+        return page == null ? DEFAULT_PAGE : page;
+    }
+
+    private Integer getItemsPerPageForPagedResults() {
+        return itemsPerPage == null ? DEFAULT_ITEMS_PER_PAGE : itemsPerPage;
     }
 
     public String getDetailLevel() {

@@ -18,6 +18,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthenticated;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.annotation.AllowTheOwner;
+import com.pokemonurpg.security.annotation.AllowThisMember;
+
 public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, ApplicationContextAware {
     private static final Logger log = LogManager.getLogger(PreRequestAuthorizationInterceptor.class);
 
@@ -33,6 +39,7 @@ public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, A
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         boolean authorized = false;
         try {
+            if (handlerHasOtherAuthAnnotation(handler)) return true;
             AuthorizationService service = determineAuthorizationService(handler);
             authorized = service.isAuthorized(request);
             updateResponseBasedOnAuthorized(response, authorized);
@@ -40,6 +47,15 @@ public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, A
             catchAuthorizationExceptionAndUpdateResponse(e, response);
         }
         return authorized;
+    }
+
+    private boolean handlerHasOtherAuthAnnotation(Object handler) {
+        HandlerMethod method = (HandlerMethod) handler;
+        return method.getMethodAnnotation(AllowAll.class) != null ||
+        method.getMethodAnnotation(AllowAuthorized.class) != null ||
+        method.getMethodAnnotation(AllowTheOwner.class) != null ||
+        method.getMethodAnnotation(AllowThisMember.class) != null ||
+        method.getMethodAnnotation(AllowAuthenticated.class) != null;
     }
 
     private AuthorizationService determineAuthorizationService(Object handler) {

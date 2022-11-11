@@ -4,7 +4,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
 import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 
 import org.springframework.http.HttpStatus;
@@ -30,14 +31,14 @@ public class EliteFourOwnershipTermController {
     @Resource
     private EliteFourOwnershipTermService eliteFourOwnershipTermService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<EliteFourOwnershipTerm> findAll() {
         return eliteFourOwnershipTermService.findAll();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{dbid}")
     public @ResponseBody
     EliteFourOwnershipTerm findByDbid(@PathVariable("dbid") Integer dbid) {

@@ -136,9 +136,8 @@ public class NamedObjectServiceFactory {
     private ImageFolderService imageFolderService;
 
     public NamedObjectService getServiceForClass(Class type) {
-        /*if (type != null) {
+        if (type != null) {
             switch (type.getSimpleName()) {
-                //case "Ability": return abilityService;
                 case "ArtRank": return artRankService;
                 case "AttackCategory": return attackCategoryService;
                 case "Attack": return attackService;
@@ -161,8 +160,6 @@ public class NamedObjectServiceFactory {
                 case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
-                //case "Nature": return natureService;
-                case "Obtained": return obtainedService;
                 case "ORASContestMoveType": return orasContestMoveTypeService;
                 case "ParkLocation": return parkLocationService;
                 case "ParkRank": return parkRankService;
@@ -170,10 +167,9 @@ public class NamedObjectServiceFactory {
                 case "Role": return roleService;
                 case "RSEContestMoveType": return rseContestMoveTypeService;
                 case "Section": return sectionService;
-                //case "Species": return speciesService;
                 case "StoryRank": return storyRankService;
             }
-        }*/
+        }
         return null;
     }
 

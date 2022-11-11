@@ -5,7 +5,8 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.gym.input.GymLeagueInputDto;
 import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.gym.service.GymLeagueService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,14 +23,14 @@ public class GymLeagueController {
     @Resource
     private GymLeagueService gymLeagueService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return gymLeagueService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     GymLeague findByName(@PathVariable("name") String name) {

@@ -4,7 +4,6 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.RegisterNewUser;
 import com.pokemonurpg.lib.security.v1.AuthorizationType;
 import com.pokemonurpg.lib.security.v1.CheckAuthorization;
-import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.dto.LoginInputDto;
@@ -41,7 +40,7 @@ public class SessionController {
     @Resource
     private LogoutService logoutService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @PostMapping("/claimKnownName")
     public @ResponseBody
     ResponseEntity claimKnownName(@Valid @RequestBody RegistrationInputDto input) {
@@ -53,7 +52,7 @@ public class SessionController {
         }
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @Validated({ObjectCreation.class, RegisterNewUser.class})
     @PostMapping("/register/new")
     public @ResponseBody
@@ -61,7 +60,7 @@ public class SessionController {
         return registrationService.registerNew(input);
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @Validated(ObjectCreation.class)
     @PostMapping("/register/vet")
     public @ResponseBody
@@ -69,7 +68,7 @@ public class SessionController {
         return registrationService.registerVet(input);
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @PostMapping("/login")
     public @ResponseBody
     SessionDto login(@Valid @RequestBody LoginInputDto input) {
@@ -77,21 +76,20 @@ public class SessionController {
     }
 
     @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
-    @AllowAll
     @PostMapping("/botLogin")
     public @ResponseBody
     SessionDto botLogin() {
         return botLoginService.login();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @PostMapping("/refresh")
     public @ResponseBody
     SessionDto refresh() {
         return refreshService.refresh();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @PostMapping("/logout")
     public void logout() {
         logoutService.logout();

@@ -3,7 +3,8 @@ package com.pokemonurpg.contest.controller;
 import com.pokemonurpg.contest.models.ContestRank;
 import com.pokemonurpg.contest.input.ContestRankInputDto;
 import com.pokemonurpg.contest.service.ContestRankService;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import org.springframework.validation.annotation.Validated;
@@ -22,14 +23,14 @@ public class ContestRankController {
     @Resource
     private ContestRankService contestRankService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return contestRankService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     ContestRank findByName(@PathVariable("name") String name) {

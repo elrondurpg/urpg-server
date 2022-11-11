@@ -5,7 +5,8 @@ import com.pokemonurpg.View;
 import com.pokemonurpg.security.annotation.AllowAuthenticated;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
 import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowTheOwner;
 import com.pokemonurpg.security.service.AuthorizationService;
 import com.pokemonurpg.security.service.SessionService;
@@ -45,7 +46,7 @@ public class OwnedPokemonController {
     @Resource
     private OwnedPokemonService ownedPokemonService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
@@ -53,7 +54,7 @@ public class OwnedPokemonController {
         return ownedPokemonService.findByOwner(owner);
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{dbid}")
     @JsonView(value = { View.MemberView.Pokemon.class })
     public @ResponseBody

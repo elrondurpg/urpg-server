@@ -1,6 +1,7 @@
 package com.pokemonurpg.core.validation.annotation;
 
 import com.pokemonurpg.core.validation.validator.UniqueNameValidator;
+import com.pokemonurpg.core.validation.validator.UniqueNameValidatorOld;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = UniqueNameValidator.class)
+@Constraint(validatedBy = { UniqueNameValidator.class, UniqueNameValidatorOld.class })
 @Documented
 public @interface UniqueName {
 

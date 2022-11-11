@@ -5,7 +5,8 @@ import com.pokemonurpg.creative.input.ParkRankInputDto;
 import com.pokemonurpg.creative.models.ParkRank;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.security.annotation.AllowAuthorized;
-import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,14 +23,14 @@ public class ParkRankController {
     @Resource
     private ParkRankService parkRankService;
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping
     public @ResponseBody
     List<String> findAllNames() {
         return parkRankService.findAllNames();
     }
 
-    @AllowAll
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")
     public @ResponseBody
     ParkRank findByName(@PathVariable("name") String name) {
