@@ -3,19 +3,19 @@ package com.pokemonurpg.general.controller;
 import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.general.input.ObtainedInputDto;
 import com.pokemonurpg.general.service.ObtainedService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ObtainedControllerTest {
     private final static String NAME = "TEST";
     private final static Integer DBID = 2342;

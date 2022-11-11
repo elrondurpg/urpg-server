@@ -3,19 +3,19 @@ package com.pokemonurpg.creative.controller;
 import com.pokemonurpg.creative.models.StoryRank;
 import com.pokemonurpg.creative.input.StoryRankInputDto;
 import com.pokemonurpg.creative.service.StoryRankService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class StoryRankControllerTest {
     private final static String NAME = "TEST";
     private final static Integer DBID = 2342;

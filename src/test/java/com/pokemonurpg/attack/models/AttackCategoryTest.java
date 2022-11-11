@@ -1,9 +1,9 @@
 package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AttackCategoryTest {
     private final static Integer DBID = 23489;

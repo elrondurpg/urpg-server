@@ -5,21 +5,21 @@ import com.pokemonurpg.gym.input.GymPokemonInputDto;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GymPokemonServiceTest {
     private final static OwnedPokemon OWNED_POKEMON1 = mock(OwnedPokemon.class);
     private final static OwnedPokemon OWNED_POKEMON2 = mock(OwnedPokemon.class);

@@ -1,12 +1,12 @@
 package com.pokemonurpg.security.service;
 
 import okhttp3.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +24,7 @@ public class OkHttpClientServiceTest {
     private OkHttpClientService okHttpClientService = new OkHttpClientService();
     private OkHttpClient okHttpClient = mock(OkHttpClient.class);
 
-    @Before
+    @BeforeEach
     public void init() {
         okHttpClientService.setHttpClient(okHttpClient);
     }
@@ -37,20 +37,20 @@ public class OkHttpClientServiceTest {
         assertEquals(RESPONSE_STRING, okHttpClientService.sendRequest(REQUEST));
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void throwsIOExceptionWhenResponseIsUnsuccessful() throws IOException {
         when(okHttpClient.newCall(REQUEST)).thenReturn(CALL);
         when(CALL.execute()).thenReturn(BAD_RESPONSE);
 
-        okHttpClientService.sendRequest(REQUEST);
+        assertThrows(IOException.class, () -> okHttpClientService.sendRequest(REQUEST));
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void throwsIOExceptionWhenResponseBodyIsNull() throws IOException {
         when(okHttpClient.newCall(REQUEST)).thenReturn(CALL);
         when(CALL.execute()).thenReturn(BAD_RESPONSE);
 
-        okHttpClientService.sendRequest(REQUEST);
+        assertThrows(IOException.class, () -> okHttpClientService.sendRequest(REQUEST));
     }
 
 

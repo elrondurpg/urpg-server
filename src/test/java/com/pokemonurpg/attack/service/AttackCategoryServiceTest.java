@@ -4,20 +4,20 @@ import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AttackCategoryServiceTest {
     private final static AttackCategory ATTACK_CATEGORY = mock(AttackCategory.class);
     private final static Integer DBID = 32432;
@@ -96,6 +96,6 @@ public class AttackCategoryServiceTest {
 
         AttackCategory category2 = attackCategoryService.update(input, DBID);
         assertNull(category2);
-        verify(attackCategoryRepository, times(0)).save(Matchers.any());
+        verify(attackCategoryRepository, times(0)).save(ArgumentMatchers.any());
     }
 }

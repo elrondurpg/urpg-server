@@ -9,16 +9,16 @@ import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
 import com.pokemonurpg.gym.service.KnownGymLeaderService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class DoesNotConflictWithKnownGymLeaderValidatorTest {
     private final static Integer    DBID = 432;
     private final static String     NAME = "NAME";

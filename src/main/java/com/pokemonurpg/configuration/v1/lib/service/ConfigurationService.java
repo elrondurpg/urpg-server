@@ -46,7 +46,7 @@ public abstract class ConfigurationService<
     protected abstract ModelClass createBase(InputDtoClass input);
     protected void setDefaultValues() {}
 
-    protected <T> void set(T value, FieldSetter<T> setter) {
+    protected <T> void setIfNotNull(T value, FieldSetter<T> setter) {
         if (value != null) {
             setter.setValue(value);
         }

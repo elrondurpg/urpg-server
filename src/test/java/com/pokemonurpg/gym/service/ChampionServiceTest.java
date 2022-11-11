@@ -5,20 +5,20 @@ import com.pokemonurpg.gym.models.Champion;
 import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.repository.ChampionRepository;
 import com.pokemonurpg.stats.models.OwnedPokemon;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ChampionServiceTest {
     private final static ChampionOwnershipTerm  TERM        = mock(ChampionOwnershipTerm.class);
     private final static Integer                TERM_DBID   = 32742;
@@ -111,7 +111,7 @@ public class ChampionServiceTest {
 
         Champion champion1 = championService.update(input, DBID);
         assertNull(champion1);
-        verify(championRepository, times(0)).save(Matchers.any(Champion.class));
+        verify(championRepository, times(0)).save(ArgumentMatchers.any(Champion.class));
     }
 
     @Test

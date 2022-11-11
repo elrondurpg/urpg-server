@@ -5,7 +5,6 @@ import com.pokemonurpg.attack.repository.AttackCategoryRepository;
 import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.repository.ContestAttributeRepository;
 import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
 import com.pokemonurpg.contest.repository.ORASContestMoveTypeRepository;

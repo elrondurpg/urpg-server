@@ -4,11 +4,11 @@ import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class GymTest {

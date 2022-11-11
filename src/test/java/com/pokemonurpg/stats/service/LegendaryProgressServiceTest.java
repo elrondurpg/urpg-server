@@ -6,15 +6,15 @@ import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
 import com.pokemonurpg.stats.models.LegendaryProgress;
 import com.pokemonurpg.stats.repository.LegendaryProgressRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class LegendaryProgressServiceTest {
     private final static Integer DBID = 432;
     private final static LegendaryProgress LEGENDARY_PROGRESS = mock(LegendaryProgress.class);

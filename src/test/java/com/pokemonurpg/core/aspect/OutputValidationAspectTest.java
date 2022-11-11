@@ -1,9 +1,9 @@
 package com.pokemonurpg.core.aspect;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OutputValidationAspectTest {
     private OutputValidationAspect aspect = new OutputValidationAspect();
@@ -13,8 +13,9 @@ public class OutputValidationAspectTest {
         aspect.validateOutput(new Object());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void throwNotFoundWhenOutputIsNull() {
-        aspect.validateOutput(null);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () ->
+            aspect.validateOutput(null));
     }
 }

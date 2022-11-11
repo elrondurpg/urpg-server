@@ -3,20 +3,20 @@ package com.pokemonurpg.contest.service;
 import com.pokemonurpg.contest.input.ContestRankInputDto;
 import com.pokemonurpg.contest.models.ContestRank;
 import com.pokemonurpg.contest.repository.ContestRankRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ContestRankServiceTest {
     private final static ContestRank    CONTEST_RANK = mock(ContestRank.class);
     private final static Integer DBID = 32432;
@@ -95,7 +95,7 @@ public class ContestRankServiceTest {
 
         ContestRank contestRank1 = contestRankService.update(input, DBID);
         assertNull(contestRank1);
-        verify(contestRankRepository, times(0)).save(Matchers.any());
+        verify(contestRankRepository, times(0)).save(ArgumentMatchers.any());
     }
 
 }

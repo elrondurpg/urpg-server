@@ -6,20 +6,18 @@ import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesAbilityService;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AbilityService extends NamedConfigurationService<Ability, AbilityInputDto> {
 
-    @Resource
     private SpeciesAbilityService speciesAbilityService;
 
     @Autowired
-    public AbilityService(AbilityRepository abilityRepository) {
+    public AbilityService(AbilityRepository abilityRepository, SpeciesAbilityService speciesAbilityService) {
         super(abilityRepository);
+        this.speciesAbilityService = speciesAbilityService;
     }
 
     @Override
@@ -31,8 +29,8 @@ public class AbilityService extends NamedConfigurationService<Ability, AbilityIn
 
     @Override
     protected void updateBase(Ability ability, AbilityInputDto input) {
-        ability.setName(input.getName());
-        ability.setDescription(input.getDescription());
+        setIfNotNull(input.getName(), ability::setName);
+        setIfNotNull(input.getDescription(), ability::setDescription);
     }
 
     @Override

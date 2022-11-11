@@ -8,20 +8,20 @@ import com.pokemonurpg.gym.models.EliteFour;
 import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.repository.EliteFourRepository;
 import com.pokemonurpg.stats.models.OwnedPokemon;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class EliteFourServiceTest {
     private final static EliteFourOwnershipTerm TERM        = mock(EliteFourOwnershipTerm.class);
     private final static Integer                TERM_DBID   = 32742;
@@ -117,7 +117,7 @@ public class EliteFourServiceTest {
 
         EliteFour eliteFour1 = eliteFourService.update(input, DBID);
         assertNull(eliteFour1);
-        verify(eliteFourRepository, times(0)).save(Matchers.any());
+        verify(eliteFourRepository, times(0)).save(ArgumentMatchers.any());
     }
 
     @Test

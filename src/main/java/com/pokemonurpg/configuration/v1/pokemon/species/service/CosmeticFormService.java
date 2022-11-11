@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.repository.CosmeticFormRepository;
 
 import java.util.Set;
@@ -20,7 +21,7 @@ public class CosmeticFormService
         return repository.findBySpeciesDbid(speciesDbid);
     }
 
-    public void update(CosmeticFormInputDto input, Integer speciesDbid) {
+    public void update(Species species, CosmeticFormInputDto input) {
         CosmeticForm form = repository.findByName(input.getName());
         if (form != null) {
             if (input.getDelete()) {
@@ -32,7 +33,7 @@ public class CosmeticFormService
             }
         }
         else {
-            CosmeticForm newForm = new CosmeticForm(input, speciesDbid);
+            CosmeticForm newForm = new CosmeticForm(input, species.getDbid());
             repository.save(newForm);
         }
     }

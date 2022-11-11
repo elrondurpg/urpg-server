@@ -3,22 +3,22 @@ package com.pokemonurpg.gym.controller;
 import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
 import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class EliteFourOwnershipTermControllerTest {
     private final static Date       DATE    = new Date();
     private final static Integer    DBID    = 432;

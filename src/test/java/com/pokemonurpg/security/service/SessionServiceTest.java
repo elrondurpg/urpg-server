@@ -4,22 +4,22 @@ import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.member.models.Member;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Base64;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SessionServiceTest {
     private final static Permission         PERMISSION  = new Permission();
     private final static Role               ROLE        = new Role();

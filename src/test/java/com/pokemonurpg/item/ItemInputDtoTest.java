@@ -1,9 +1,9 @@
 package com.pokemonurpg.item;
 
 import com.pokemonurpg.item.input.ItemInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ItemInputDtoTest {
     public static final String NAME = "TEST_NAME";

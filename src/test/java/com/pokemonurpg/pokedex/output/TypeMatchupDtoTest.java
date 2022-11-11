@@ -1,10 +1,10 @@
 package com.pokemonurpg.pokedex.output;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class TypeMatchupDtoTest {

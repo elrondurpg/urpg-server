@@ -3,20 +3,20 @@ package com.pokemonurpg.gym.service;
 import com.pokemonurpg.gym.input.GymLeagueInputDto;
 import com.pokemonurpg.gym.models.GymLeague;
 import com.pokemonurpg.gym.repository.GymLeagueRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GymLeagueServiceTest {
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
@@ -88,7 +88,7 @@ public class GymLeagueServiceTest {
 
         GymLeague gymLeague1 = gymLeagueService.update(input, DBID);
         assertNull(gymLeague1);
-        verify(gymLeagueRepository, times(0)).save(Matchers.any());
+        verify(gymLeagueRepository, times(0)).save(ArgumentMatchers.any());
     }
 
 }

@@ -1,9 +1,9 @@
 package com.pokemonurpg.creative.models;
 
 import com.pokemonurpg.creative.input.StoryRankInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StoryRankTest {
     private final static String NAME = "TEST";

@@ -5,16 +5,16 @@ import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestCombo;
 import com.pokemonurpg.contest.repository.ContestComboRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ContestComboServiceTest {
     private final static Attack FIRST_ATTACK = new Attack();
     private final static Attack SECOND_ATTACK = new Attack();
@@ -74,6 +74,6 @@ public class ContestComboServiceTest {
         when(attackRepository.findByName(SECOND_ATTACK_NAME)).thenReturn(SECOND_ATTACK);
         contestComboService.update(FIRST_ATTACK, input);
 
-        verify(contestComboRepository, times(1)).save(Matchers.any());
+        verify(contestComboRepository, times(1)).save(ArgumentMatchers.any());
     }
 }

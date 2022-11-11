@@ -2,12 +2,12 @@ package com.pokemonurpg.attack.input;
 
 import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.contest.input.ContestComboInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AttackInputDtoTest {
     private final static String NAME = "TEST";

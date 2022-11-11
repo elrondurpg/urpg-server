@@ -7,20 +7,20 @@ import com.pokemonurpg.pokedex.models.TypeMatchup;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
 import com.pokemonurpg.pokedex.repository.TypeMatchupRepository;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TypeMatchupServiceTest {
     private final static String TYPE1_NAME = "TYPE1";
     private final static String TYPE2_NAME = "TYPE2";
@@ -43,7 +43,7 @@ public class TypeMatchupServiceTest {
     private Type type1;
     private Type type2;
 
-    @Before
+    @BeforeEach
     public void setUpMatchups() {
         type1 = new Type();
         type1.setName(TYPE1_NAME);

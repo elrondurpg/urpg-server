@@ -1,8 +1,8 @@
 package com.pokemonurpg.security.models;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OAuthAccessTokenResponseTest {
     private final static String ACCESS_TOKEN = "ACCESS_TOKEN";

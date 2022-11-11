@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;

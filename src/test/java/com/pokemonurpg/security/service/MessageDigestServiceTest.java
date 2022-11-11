@@ -1,10 +1,10 @@
 package com.pokemonurpg.security.service;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MessageDigestServiceTest {
 

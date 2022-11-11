@@ -8,20 +8,20 @@ import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.gym.repository.GymRepository;
 import com.pokemonurpg.stats.models.OwnedPokemon;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GymServiceTest {
     private final static Badge              BADGE       = mock(Badge.class);
     private final static GymOwnershipTerm   TERM        = mock(GymOwnershipTerm.class);
@@ -130,7 +130,7 @@ public class GymServiceTest {
 
         Gym gym1 = gymService.update(input, DBID);
         assertNull(gym1);
-        verify(gymRepository, times(0)).save(Matchers.any());
+        verify(gymRepository, times(0)).save(ArgumentMatchers.any());
     }
 
     @Test

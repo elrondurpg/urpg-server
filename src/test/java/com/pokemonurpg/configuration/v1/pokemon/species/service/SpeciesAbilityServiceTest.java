@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
@@ -14,10 +14,9 @@ import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
 import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesAbilityRepository;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SpeciesAbilityServiceTest {
     private final static String NAME = "NAME";
     private final static Ability ABILITY = new Ability();
@@ -74,6 +73,6 @@ public class SpeciesAbilityServiceTest {
 
         speciesAbilityService.update(SPECIES, input);
 
-        verify(speciesAbilityRepository, times(1)).save(Matchers.any());
+        verify(speciesAbilityRepository, times(1)).save(ArgumentMatchers.any());
     }
 }

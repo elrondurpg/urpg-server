@@ -2,9 +2,9 @@ package com.pokemonurpg.item;
 
 import com.pokemonurpg.item.input.ItemInputDto;
 import com.pokemonurpg.item.models.Item;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ItemTest {
     private final static Integer DBID = 32432;

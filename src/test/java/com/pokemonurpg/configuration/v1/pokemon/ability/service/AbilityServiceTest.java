@@ -1,129 +1,92 @@
 package com.pokemonurpg.configuration.v1.pokemon.ability.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
-import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputTestDto;
 import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesAbilityService;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AbilityServiceTest {
-    private final static Ability    ABILITY = mock(Ability.class);
-    private final static String NAME = "ABILITY_NAME";
-    private final static String DESCRIPTION = "DESCRIPTION TEST";
-    private final static String DESCRIPTION_2 = "DIFFERENT DESCRIPTION";
-    private final static Integer DBID = 23243;
 
     @InjectMocks
-    private AbilityService abilityService;
+    private AbilityService service;
 
     @Mock
     private AbilityRepository abilityRepository;
 
-    /*@Test
-    public void findAll() {
-        List<String> list = new ArrayList<>();
-        when(abilityRepository.findAllNames()).thenReturn(list);
-        assertEquals(list, abilityService.findAllNames());
-    }*/
+    @Mock
+    private SpeciesAbilityService speciesAbilityService;
+
+    @Captor
+    ArgumentCaptor<SpeciesAbility> abilityCaptor;
 
     @Test
-    public void findByDbid() {
+    public void test_createBase() {
+        AbilityInputTestDto input = new AbilityInputTestDto();
+        Ability ability = service.createBase(input);
+        assertNotNull(ability);
+    }
+
+    @Test
+    public void test_updateBase() {
+        AbilityInputTestDto input = new AbilityInputTestDto();
         Ability ability = new Ability();
-        when(abilityRepository.findByDbid(DBID)).thenReturn(ability);
+        service.updateBase(ability, input);
+        assertNotNull(ability);
+    }
 
-        assertEquals(ability, abilityService.findByDbid(DBID));
+
+    public void assert_UpdateBase_Valid(Ability ability, AbilityInputTestDto input) {
+        assertEquals(input.getName(), ability.getName());
+        assertEquals(input.getDescription(), ability.getDescription());
     }
 
     @Test
-    public void findByNameReturnsNull() {
-        when(abilityRepository.findByName(NAME)).thenReturn(null);
-        when(abilityRepository.findFirstByNameStartingWith(NAME)).thenReturn(null);
-
-        assertNull(abilityService.findByName(NAME));
-    }
-
-    @Test
-    public void findByNameReturnsExactMatch() {
+    public void test_updateEmbeddedValues() {
+        AbilityInputTestDto input = new AbilityInputTestDto();
         Ability ability = new Ability();
-        ability.setName(NAME);
-
-        when(abilityRepository.findByName(NAME)).thenReturn(ability);
-
-        Ability returnedAbility = abilityService.findByName(NAME);
-
-        assertNotNull(returnedAbility);
-        assertEquals(NAME, returnedAbility.getName());
+        service.updateEmbeddedValues(ability, input);
     }
 
     @Test
-    public void findByNameReturnsFirstMatchStartingWith() {
+    public void test_updateAssociatedValues() {
+        AbilityInputTestDto input = new AbilityInputTestDto();
         Ability ability = new Ability();
-        ability.setName(NAME);
-
-        when(abilityRepository.findByName(NAME)).thenReturn(null);
-        when(abilityRepository.findFirstByNameStartingWith(NAME)).thenReturn(ability);
-
-        Ability returnedRole = abilityService.findByName(NAME);
-
-        assertNotNull(returnedRole);
-        assertEquals(NAME, returnedRole.getName());
+        service.updateAssociatedValues(ability, input);
     }
-
-    @Test
-    public void findByNameExact() {
-        when(abilityRepository.findByName(NAME)).thenReturn(ABILITY);
-        assertEquals(ABILITY, abilityService.findByNameExact(NAME));
-    }
-
-    @Test
-    public void create() {
-        AbilityInputDto input = new AbilityInputDto();
-        input.setName(NAME);
-        input.setDescription(DESCRIPTION);
-
-        Ability ability = abilityService.create(input);
-        assertEquals(NAME, ability.getName());
-        assertEquals(DESCRIPTION, ability.getDescription());
-    }
-
-    @Test
-    public void update() {
-        AbilityInputDto input = new AbilityInputDto();
-        input.setDescription(DESCRIPTION_2);
-
+    
+    private Ability setup_deleteAssociatedValues() {
         Ability ability = new Ability();
-        ability.setName(NAME);
-        ability.setDescription(DESCRIPTION);
-
-        when(abilityRepository.findByDbid(DBID)).thenReturn(ability);
-        Ability updatedAbility = abilityService.update(input, DBID);
-
-        assertEquals(DESCRIPTION_2, updatedAbility.getDescription());
+        SpeciesAbility speciesAbility = new SpeciesAbility();
+        ability.setPokemon(Collections.singleton(speciesAbility));
+        return ability;
     }
 
     @Test
-    public void updateReturnsNullWhenNotFound() {
-        AbilityInputDto input = new AbilityInputDto();
-        input.setDescription(DESCRIPTION_2);
+    public void test_deleteAssociatedValues() {
+        Ability ability = setup_deleteAssociatedValues();
+        service.deleteAssociatedValues(ability);
+        assert_deleteAssociatedValues_Valid(ability);
+    }
 
-        Ability ability = new Ability();
-        ability.setName(NAME);
-        ability.setDescription(DESCRIPTION);
-
-        when(abilityRepository.findByDbid(DBID)).thenReturn(null);
-        Ability updatedAbility = abilityService.update(input, DBID);
-
-        assertNull(updatedAbility);
+    private void assert_deleteAssociatedValues_Valid(Ability ability) {
+        ability.getPokemon().forEach(pokemon -> {
+            verify(speciesAbilityService, times(1)).delete(abilityCaptor.capture());
+            assertEquals(pokemon, abilityCaptor.getValue());
+        });
     }
 }

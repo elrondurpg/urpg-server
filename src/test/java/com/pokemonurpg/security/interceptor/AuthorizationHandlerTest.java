@@ -10,12 +10,12 @@ import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import com.pokemonurpg.test.HttpServletRequestImpl;
 import com.pokemonurpg.test.HttpServletResponseImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 
@@ -23,11 +23,11 @@ import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AuthorizationHandlerTest {
     private static final Integer        DBID            = 4322;
     private static final Integer        OTHER_DBID      = 983472;
@@ -87,7 +87,7 @@ public class AuthorizationHandlerTest {
     private HttpServletRequest request = new HttpServletRequestImpl();
     private HttpServletResponse response = new HttpServletResponseImpl();
 
-    @Before
+    @BeforeEach
     public void init() throws NoSuchMethodException {
         when(sessionServiceProvider.get()).thenReturn(SESSION_SERVICE);
         allowAllHandlerMethod = new HandlerMethod(new TestClass(), TestClass.class.getMethod("allowAllMethod"));

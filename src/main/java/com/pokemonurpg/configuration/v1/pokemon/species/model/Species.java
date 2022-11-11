@@ -13,9 +13,7 @@ import com.pokemonurpg.creative.models.ParkLocation;
 import com.pokemonurpg.creative.models.ParkRank;
 import com.pokemonurpg.creative.models.StoryRank;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -182,7 +180,6 @@ public class Species extends ConfigurationModel {
     private Boolean megaEvolved;
 
     public Species() {
-        
     }
 
     public void setDefaultValues() {

@@ -2,11 +2,11 @@ package com.pokemonurpg.stats.models;
 
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class EliteFourVictoryTest {

@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.pokemon.type.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v1.pokemon.type.input.TypeInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TypeTest {
     private final static String NAME = "TEST";

@@ -3,19 +3,19 @@ package com.pokemonurpg.attack.controller;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.input.AttackInputDto;
 import com.pokemonurpg.attack.service.AttackService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AttackControllerTest {
     private static final String ATTACK_NAME = "TEST";
     private static final Integer DBID = 23423;

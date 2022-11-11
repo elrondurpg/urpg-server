@@ -3,11 +3,11 @@ package com.pokemonurpg.gym.models;
 import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class EliteFourOwnershipTermTest {

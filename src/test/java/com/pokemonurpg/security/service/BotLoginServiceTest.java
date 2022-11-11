@@ -5,18 +5,18 @@ import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BotLoginServiceTest {
     private final static String DISCORD_ID = "DISCORD_ID";
     private final static String SECRET = "SECRET";
@@ -41,7 +41,7 @@ public class BotLoginServiceTest {
 
     private SessionDto expectedResponse;
 
-    @Before
+    @BeforeEach
     public void init() {
         member = new Member();
         member.setName(USERNAME);
@@ -69,45 +69,45 @@ public class BotLoginServiceTest {
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenCredentialsAreNull() {
         when(authorizationCredentialsService.getCredentials()).thenReturn(null);
-        botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> botLoginService.login());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenCredentialsAreWrongSize() {
         when(authorizationCredentialsService.getCredentials()).thenReturn(new String[] { });
-        botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> botLoginService.login());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenAccessTokenResponseIsNull() {
         when(authorizationCredentialsService.getCredentials()).thenReturn(CREDENTIALS);
         when(oAuthService.getAccessTokenForClientCredentials(DISCORD_ID, SECRET)).thenReturn(null);
-        botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> botLoginService.login());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenAccessTokenResponseIsInvalid() {
         when(authorizationCredentialsService.getCredentials()).thenReturn(CREDENTIALS);
         when(oAuthService.getAccessTokenForClientCredentials(DISCORD_ID, SECRET)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(false);
 
-        botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> botLoginService.login());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenMemberNotFound() {
         when(authorizationCredentialsService.getCredentials()).thenReturn(CREDENTIALS);
         when(oAuthService.getAccessTokenForClientCredentials(DISCORD_ID, SECRET)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(null);
 
-        botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> botLoginService.login());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenMemberNotBot() {
         member.setBot(false);
 
@@ -116,7 +116,7 @@ public class BotLoginServiceTest {
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
 
-        SessionDto response = botLoginService.login();
+        assertThrows(ResponseStatusException.class, () -> { SessionDto response = botLoginService.login(); });
     }
 
 }

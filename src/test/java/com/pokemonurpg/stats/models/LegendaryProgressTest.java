@@ -3,11 +3,11 @@ package com.pokemonurpg.stats.models;
 import com.pokemonurpg.general.models.Section;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class LegendaryProgressTest {

@@ -4,23 +4,23 @@ import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
 import com.pokemonurpg.stats.models.EliteFourVictory;
 import com.pokemonurpg.stats.repository.EliteFourVictoryRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class EliteFourVictoryServiceTest {
     private final static Integer CHALLENGER_DBID = 432;
     private final static String DEFENDER = "DEFENDER";
@@ -40,7 +40,7 @@ public class EliteFourVictoryServiceTest {
     @Captor
     private ArgumentCaptor<EliteFourVictory> captor;
 
-    @Before
+    @BeforeEach
     public void init() {
         input = new EliteFourVictoryInputDto();
         input.setDefender(DEFENDER);

@@ -7,20 +7,20 @@ import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
 import com.pokemonurpg.pokedex.output.PokedexEntryDto;
 import com.pokemonurpg.pokedex.output.TypeMatchupDto;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PokedexServiceTest {
     private final static Species SPECIES = new Species();
     private final static String SPECIES_NAME = "SPECIES";
@@ -78,7 +78,7 @@ public class PokedexServiceTest {
         assertNull(pokedexService.findByName(SPECIES_NAME));
     }
 
-    @Before
+    @BeforeEach
     public void setUpAlteredFormAttacks() {
         ALTERED_FORMS.add(ALTERED_FORM);
         when(ALTERED_FORM.getAttacksThatDifferByForm()).thenReturn(ATTACKS_THAT_DIFFER_BY_FORM);

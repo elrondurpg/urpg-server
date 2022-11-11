@@ -3,20 +3,20 @@ package com.pokemonurpg.attack.service;
 import com.pokemonurpg.attack.models.AttackTargetType;
 import com.pokemonurpg.attack.input.AttackTargetTypeInputDto;
 import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AttackTargetTypeServiceTest {
     private final static AttackTargetType ATTACK_TARGET_TYPE = mock(AttackTargetType.class);
     private final static Integer DBID = 32432;
@@ -101,6 +101,6 @@ public class AttackTargetTypeServiceTest {
 
         AttackTargetType attackTargetType2 = attackTargetTypeService.update(input, DBID);
         assertNull(attackTargetType2);
-        verify(attackTargetTypeRepository, times(0)).save(Matchers.any());
+        verify(attackTargetTypeRepository, times(0)).save(ArgumentMatchers.any());
     }
 }

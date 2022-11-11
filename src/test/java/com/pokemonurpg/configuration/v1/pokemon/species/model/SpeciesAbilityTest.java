@@ -1,13 +1,11 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SpeciesAbilityTest {
     private final static Species SPECIES = new Species();

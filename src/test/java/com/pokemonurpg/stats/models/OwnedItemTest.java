@@ -3,9 +3,9 @@ package com.pokemonurpg.stats.models;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.OwnedItemInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OwnedItemTest {
     private final static Integer QUANTITY = 432;

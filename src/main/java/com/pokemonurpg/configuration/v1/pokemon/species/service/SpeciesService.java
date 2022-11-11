@@ -16,39 +16,34 @@ import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class SpeciesService extends NamedConfigurationService<Species, SpeciesInputDto> {
 
-    @Resource
     private TypeService typeService;
-
-    @Resource
     private StoryRankService storyRankService;
-
-    @Resource
     private ArtRankService artRankService;
-
-    @Resource
     private ParkRankService parkRankService;
-
-    @Resource
     private ParkLocationService parkLocationService;
-
-    @Resource
     private SpeciesAttackService speciesAttackService;
-
-    @Resource
     private SpeciesAbilityService speciesAbilityService;
-
-    @Resource
     private CosmeticFormService cosmeticFormService;
 
     @Autowired
-    public SpeciesService(SpeciesRepository repository) {
+    public SpeciesService(SpeciesRepository repository, TypeService typeService,
+            StoryRankService storyRankService, ArtRankService artRankService, ParkRankService parkRankService,
+            ParkLocationService parkLocationService, SpeciesAttackService speciesAttackService,
+            SpeciesAbilityService speciesAbilityService, CosmeticFormService cosmeticFormService) {
         super(repository);
+        this.typeService = typeService;
+        this.storyRankService = storyRankService;
+        this.artRankService = artRankService;
+        this.parkRankService = parkRankService;
+        this.parkLocationService = parkLocationService;
+        this.speciesAttackService = speciesAttackService;
+        this.speciesAbilityService = speciesAbilityService;
+        this.cosmeticFormService = cosmeticFormService;
     }
 
     protected Species createBase(SpeciesInputDto input) {
@@ -56,41 +51,41 @@ public class SpeciesService extends NamedConfigurationService<Species, SpeciesIn
     }
 
     protected void updateBase(Species species, SpeciesInputDto input) {
-        set(input.getDexno(), species::setDexno);
-        set(input.getName(), species::setName);
-        set(input.getClassification(), species::setClassification);
-        set(input.getHp(), species::setHp);
-        set(input.getAttack(), species::setAttack);
-        set(input.getDefense(), species::setDefense);
-        set(input.getSpecialAttack(), species::setSpecialAttack);
-        set(input.getSpecialDefense(), species::setSpecialDefense);
-        set(input.getSpeed(), species::setSpeed);
-        set(input.getHeight(), species::setHeight);
-        set(input.getWeight(), species::setWeight);
-        set(input.getMaleAllowed(), species::setMaleAllowed);
-        set(input.getFemaleAllowed(), species::setFemaleAllowed);
-        set(input.getPokemart(), species::setPokemart);
-        set(input.getContestCredits(), species::setContestCredits);
-        set(input.getDisplayName(), species::setDisplayName);
-        set(input.getFormName(), species::setFormName);
-        set(input.getLegendaryTier(), species::setLegendaryTier);
-        set(input.getAlteredFormMethod(), species::setAlteredFormMethod);
-        set(input.getEvolutionMethod(), species::setEvolutionMethod);
-        set(input.getEvolutionExpRequirement(), species::setEvolutionExpRequirement);
-        set(input.getMegaStone(), species::setMegaStone);
-        set(input.getMegaSuffix(), species::setMegaSuffix);
-        set(input.getBattleOnly(), species::setBattleOnly);
+        setIfNotNull(input.getDexno(), species::setDexno);
+        setIfNotNull(input.getName(), species::setName);
+        setIfNotNull(input.getClassification(), species::setClassification);
+        setIfNotNull(input.getHp(), species::setHp);
+        setIfNotNull(input.getAttack(), species::setAttack);
+        setIfNotNull(input.getDefense(), species::setDefense);
+        setIfNotNull(input.getSpecialAttack(), species::setSpecialAttack);
+        setIfNotNull(input.getSpecialDefense(), species::setSpecialDefense);
+        setIfNotNull(input.getSpeed(), species::setSpeed);
+        setIfNotNull(input.getHeight(), species::setHeight);
+        setIfNotNull(input.getWeight(), species::setWeight);
+        setIfNotNull(input.getMaleAllowed(), species::setMaleAllowed);
+        setIfNotNull(input.getFemaleAllowed(), species::setFemaleAllowed);
+        setIfNotNull(input.getPokemart(), species::setPokemart);
+        setIfNotNull(input.getContestCredits(), species::setContestCredits);
+        setIfNotNull(input.getDisplayName(), species::setDisplayName);
+        setIfNotNull(input.getFormName(), species::setFormName);
+        setIfNotNull(input.getLegendaryTier(), species::setLegendaryTier);
+        setIfNotNull(input.getAlteredFormMethod(), species::setAlteredFormMethod);
+        setIfNotNull(input.getEvolutionMethod(), species::setEvolutionMethod);
+        setIfNotNull(input.getEvolutionExpRequirement(), species::setEvolutionExpRequirement);
+        setIfNotNull(input.getMegaStone(), species::setMegaStone);
+        setIfNotNull(input.getMegaSuffix(), species::setMegaSuffix);
+        setIfNotNull(input.getBattleOnly(), species::setBattleOnly);
     }
 
     protected void updateEmbeddedValues(Species species, SpeciesInputDto input) {
-        set(typeService.findByName(input.getType1()), species::setType1);
-        set(typeService.findByName(input.getType2()), species::setType2);
-        set(storyRankService.findByName(input.getStoryRank()), species::setStoryRank);
-        set(artRankService.findByName(input.getArtRank()), species::setArtRank);
-        set(parkRankService.findByName(input.getParkRank()), species::setParkRank);
-        set(parkLocationService.findByName(input.getParkLocation()), species::setParkLocation);
-        set(findByName(input.getPreMega()), species::setPreMega);
-        set(findByName(input.getPreEvolution()), species::setPreEvolution);
+        setIfNotNull(typeService.findByName(input.getType1()), species::setType1);
+        setIfNotNull(typeService.findByName(input.getType2()), species::setType2);
+        setIfNotNull(storyRankService.findByName(input.getStoryRank()), species::setStoryRank);
+        setIfNotNull(artRankService.findByName(input.getArtRank()), species::setArtRank);
+        setIfNotNull(parkRankService.findByName(input.getParkRank()), species::setParkRank);
+        setIfNotNull(parkLocationService.findByName(input.getParkLocation()), species::setParkLocation);
+        setIfNotNull(findByName(input.getPreMega()), species::setPreMega);
+        setIfNotNull(findByName(input.getPreEvolution()), species::setPreEvolution);
     }
 
     protected void updateAssociatedValues(Species species, SpeciesInputDto input) {
@@ -118,7 +113,7 @@ public class SpeciesService extends NamedConfigurationService<Species, SpeciesIn
     private void updateCosmeticForms(Species species, SpeciesInputDto input) {
         List<CosmeticFormInputDto> forms = input.getCosmeticForms();
         for (CosmeticFormInputDto form : forms) {
-            cosmeticFormService.update(form, species.getDbid());
+            cosmeticFormService.update(species, form);
         }
         species.setCosmeticForms(cosmeticFormService.findBySpeciesDbid(species.getDbid()));
     }

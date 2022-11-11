@@ -8,14 +8,14 @@ import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.general.models.Obtained;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class OwnedPokemonTest {

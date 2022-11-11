@@ -2,12 +2,9 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SpeciesAttackTest {
     private final static Species SPECIES = new Species();

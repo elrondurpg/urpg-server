@@ -3,21 +3,21 @@ package com.pokemonurpg.gym.service;
 import com.pokemonurpg.gym.models.KnownEliteFourMember;
 import com.pokemonurpg.gym.input.KnownEliteFourMemberInputDto;
 import com.pokemonurpg.gym.repository.KnownEliteFourMemberRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class KnownEliteFourMemberServiceTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static String NAME = "NAME";

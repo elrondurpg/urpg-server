@@ -8,21 +8,21 @@ import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.repository.GymVictoryRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GymVictoryServiceTest {
     private final static Member CHALLENGER = mock(Member.class);
     private final static Integer CHALLENGER_DBID = 432;
@@ -51,7 +51,7 @@ public class GymVictoryServiceTest {
     @Captor
     private ArgumentCaptor<GymVictory> captor;
 
-    @Before
+    @BeforeEach
     public void init() {
         input = new GymVictoryInputDto();
         input.setDefender(DEFENDER);

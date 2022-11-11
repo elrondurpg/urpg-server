@@ -1,11 +1,10 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CosmeticFormTest {
     public final static String NAME = "TEST";

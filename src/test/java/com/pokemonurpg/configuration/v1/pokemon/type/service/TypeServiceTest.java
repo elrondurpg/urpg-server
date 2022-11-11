@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.pokemon.type.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pokemonurpg.configuration.v1.pokemon.type.input.TypeInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
@@ -15,10 +15,10 @@ import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TypeServiceTest {
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
@@ -97,7 +97,7 @@ public class TypeServiceTest {
 
         Type type1 = typeService.update(input, DBID);
         assertNull(type1);
-        verify(typeRepository, times(0)).save(Matchers.any());
+        verify(typeRepository, times(0)).save(ArgumentMatchers.any());
     }
 
 }

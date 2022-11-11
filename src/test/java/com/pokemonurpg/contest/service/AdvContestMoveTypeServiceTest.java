@@ -3,20 +3,20 @@ package com.pokemonurpg.contest.service;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.contest.models.AdvContestMoveType;
 import com.pokemonurpg.contest.repository.AdvContestMoveTypeRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AdvContestMoveTypeServiceTest {
     private final static AdvContestMoveType    ADV_CONTEST_MOVE_TYPE = mock(AdvContestMoveType.class);
     private final static Integer DBID = 32432;
@@ -95,6 +95,6 @@ public class AdvContestMoveTypeServiceTest {
 
         AdvContestMoveType advContestMoveType1 = advContestMoveTypeService.update(input, DBID);
         assertNull(advContestMoveType1);
-        verify(advContestMoveTypeRepository, times(0)).save(Matchers.any());
+        verify(advContestMoveTypeRepository, times(0)).save(ArgumentMatchers.any());
     }
 }

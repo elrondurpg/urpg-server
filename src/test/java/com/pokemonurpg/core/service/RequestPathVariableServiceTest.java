@@ -1,7 +1,7 @@
 package com.pokemonurpg.core.service;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.HandlerMapping;
@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +23,7 @@ public class RequestPathVariableServiceTest {
 
     private HttpServletRequest request = mock(HttpServletRequest.class);
 
-    @Before
+    @BeforeEach
     public void init() {
         Map<String, Object> pathVariables = new HashMap<>();
         pathVariables.put("dbid", DBID);

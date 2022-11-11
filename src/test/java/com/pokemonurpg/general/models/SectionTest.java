@@ -1,9 +1,9 @@
 package com.pokemonurpg.general.models;
 
 import com.pokemonurpg.general.input.SectionInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SectionTest {
     private final static Integer DBID = 3242;

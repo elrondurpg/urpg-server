@@ -3,20 +3,20 @@ package com.pokemonurpg.creative.service;
 import com.pokemonurpg.creative.input.ArtRankInputDto;
 import com.pokemonurpg.creative.models.ArtRank;
 import com.pokemonurpg.creative.repository.ArtRankRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ArtRankServiceTest {
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
@@ -88,7 +88,7 @@ public class ArtRankServiceTest {
 
         ArtRank artRank1 = artRankService.update(input, DBID);
         assertNull(artRank1);
-        verify(artRankRepository, times(0)).save(Matchers.any());
+        verify(artRankRepository, times(0)).save(ArgumentMatchers.any());
     }
 
 }

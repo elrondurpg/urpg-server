@@ -5,22 +5,22 @@ import com.pokemonurpg.core.service.FolderService;
 import com.pokemonurpg.image.input.ImageFolderInputDto;
 import com.pokemonurpg.image.models.ImageFolder;
 import com.pokemonurpg.image.repository.ImageFolderRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ImageFolderServiceTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static Integer DBID = 2342;
@@ -42,7 +42,7 @@ public class ImageFolderServiceTest {
 
     private ImageFolderInputDto input;
 
-    @Before
+    @BeforeEach
     public void init() {
         input = new ImageFolderInputDto();
         input.setName(NAME);
@@ -66,13 +66,13 @@ public class ImageFolderServiceTest {
         assertEquals(IMAGE_FOLDER, imageFolderService.findByName(NAME));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void createReturnsNullWhenImageFolderExists() {
         // Given an Image Folder with the desired name already exists
         when(imageFolderRepository.findByName(NAME)).thenReturn(IMAGE_FOLDER);
 
         // When I try to create a new Image Folder with that name
-        imageFolderService.create(input);
+        assertThrows(ResponseStatusException.class, () -> imageFolderService.create(input));
 
         // Then I will receive a ResponseStatusException
     }
@@ -89,7 +89,7 @@ public class ImageFolderServiceTest {
         imageFolderService.create(input);
 
         // Then the repository will save the new persisted DB object
-        verify(imageFolderRepository, times(1)).save(Matchers.any());
+        verify(imageFolderRepository, times(1)).save(ArgumentMatchers.any());
     }
 
     @Test
@@ -98,24 +98,24 @@ public class ImageFolderServiceTest {
         assertNull(imageFolderService.update(input, DBID));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void updateFailsWhenDesiredFolderExists() {
         when(imageFolderRepository.findByDbid(DBID)).thenReturn(IMAGE_FOLDER);
         when(imageFolderRepository.findByName(NAME)).thenReturn(NEW_IMAGE_FOLDER);
-        imageFolderService.update(input, DBID);
+        assertThrows(ResponseStatusException.class, () -> imageFolderService.update(input, DBID));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void updateFailsWhenFolderServiceCantRename() {
         when(imageFolderRepository.findByDbid(DBID)).thenReturn(IMAGE_FOLDER);
-        when(folderService.rename(Matchers.any(), Matchers.any())).thenReturn(false);
-        imageFolderService.update(input, DBID);
+        when(folderService.rename(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(false);
+        assertThrows(ResponseStatusException.class, () -> imageFolderService.update(input, DBID));
     }
 
     @Test
     public void updateSucceeds() {
         when(imageFolderRepository.findByDbid(DBID)).thenReturn(IMAGE_FOLDER);
-        when(folderService.rename(Matchers.any(), Matchers.any())).thenReturn(true);
+        when(folderService.rename(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(true);
         imageFolderService.update(input, DBID);
         verify(IMAGE_FOLDER, times(1)).update(input);
         verify(imageFolderRepository, times(1)).save(IMAGE_FOLDER);

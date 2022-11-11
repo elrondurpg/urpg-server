@@ -1,9 +1,9 @@
 package com.pokemonurpg.contest.input;
 
 import com.pokemonurpg.contest.input.ContestAttributeInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ContestAttributeInputDtoTest {
     private final static String NAME = "TEST";

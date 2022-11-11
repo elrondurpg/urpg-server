@@ -8,18 +8,18 @@ import com.pokemonurpg.security.service.OAuthService;
 import com.pokemonurpg.security.dto.LoginInputDto;
 import com.pokemonurpg.member.models.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class LoginServiceTest {
     private final static String CODE = "32436892452";
     private final static OAuthAccessTokenResponse ACCESS_TOKEN_RESPONSE = mock(OAuthAccessTokenResponse.class);
@@ -41,7 +41,7 @@ public class LoginServiceTest {
     private Member member = new Member();
     private SessionDto expectedResponse = new SessionDto();
 
-    @Before
+    @BeforeEach
     public void init() {
         input.setCode(CODE);
 
@@ -69,40 +69,40 @@ public class LoginServiceTest {
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenAccessTokenResponseIsNull() {
         when(oAuthService.exchangeCodeForAccessToken(CODE)).thenReturn(null);
-        loginService.login(input);
+        assertThrows(ResponseStatusException.class, () -> loginService.login(input));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenAccessTokenResponseIsInvalid() {
         when(oAuthService.exchangeCodeForAccessToken(CODE)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(false);
-        loginService.login(input);
+        assertThrows(ResponseStatusException.class, () -> loginService.login(input));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenDiscordUserResponseIsNull() {
         when(oAuthService.exchangeCodeForAccessToken(CODE)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(ACCESS_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
         when(oAuthService.getDiscordId(ACCESS_TOKEN)).thenReturn(null);
-        loginService.login(input);
+        assertThrows(ResponseStatusException.class, () -> loginService.login(input));
 
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenDiscordUserResponseIsInvalid() {
         when(oAuthService.exchangeCodeForAccessToken(CODE)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(ACCESS_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
         when(oAuthService.getDiscordId(ACCESS_TOKEN)).thenReturn(DISCORD_USER_RESPONSE);
         when(DISCORD_USER_RESPONSE.isValid()).thenReturn(false);
-        loginService.login(input);
+        assertThrows(ResponseStatusException.class, () -> loginService.login(input));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void loginFailsWhenMemberNotFound() {
         when(oAuthService.exchangeCodeForAccessToken(CODE)).thenReturn(ACCESS_TOKEN_RESPONSE);
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
@@ -111,7 +111,7 @@ public class LoginServiceTest {
         when(DISCORD_USER_RESPONSE.isValid()).thenReturn(true);
         when(DISCORD_USER_RESPONSE.getId()).thenReturn(DISCORD_ID);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(null);
-        loginService.login(input);
+        assertThrows(ResponseStatusException.class, () -> loginService.login(input));
     }
 
 }

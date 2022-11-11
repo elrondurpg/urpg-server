@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.gym.input.BadgeInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BadgeTest {
     private final static Integer DBID = 324;

@@ -1,9 +1,9 @@
 package com.pokemonurpg.site.models;
 
 import com.pokemonurpg.site.input.MenuItemInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class MenuItemTest {

@@ -1,8 +1,8 @@
 package com.pokemonurpg.controller;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpeciesControllerTest
 {
@@ -208,7 +208,7 @@ public class SpeciesControllerTest
         when(attackService.findByNameExact(ATTACK_NAME)).thenReturn(Optional.of(existingAttack));
 
         Species requestedSpecies = SpeciesTestFactory.createSpecies(POKEMON_NAME, POKEMON_DBID);
-        when(typeService.findByDbid(Matchers.any(Integer.class))).thenReturn(Optional.of(new Type("Electric")));
+        when(typeService.findByDbid(ArgumentMatchers.any(Integer.class))).thenReturn(Optional.of(new Type("Electric")));
 
         List<SpeciesAttack> speciesAttacks = new ArrayList<>();
         SpeciesAttack speciesAttack = new SpeciesAttack();

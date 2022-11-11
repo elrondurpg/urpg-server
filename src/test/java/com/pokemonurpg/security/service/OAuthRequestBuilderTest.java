@@ -3,12 +3,12 @@ package com.pokemonurpg.security.service;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okio.Buffer;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OAuthRequestBuilderTest {
     private final static String CODE = "CODE";
@@ -19,7 +19,7 @@ public class OAuthRequestBuilderTest {
 
     private OAuthRequestBuilder oAuthRequestBuilder = new OAuthRequestBuilder();
 
-    @Before
+    @BeforeEach
     public void init() {
         OAuthRequestBuilder.setClientId("");
         OAuthRequestBuilder.setClientSecret("");

@@ -1,12 +1,10 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
-import org.junit.Test;
-
-import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbilityKey;
+import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SpeciesAbilityKeyTest {
     private final static Integer SPECIES_DBID = 32432;

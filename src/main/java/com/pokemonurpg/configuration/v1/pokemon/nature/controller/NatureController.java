@@ -6,7 +6,7 @@ import com.pokemonurpg.configuration.v1.pokemon.nature.NatureViews;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
-import com.pokemonurpg.lib.input.v1.FilterableGetParams;
+import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @RequestMapping("/configuration/v1/pokemon/nature")
 @CrossOrigin
 @Validated
-public class NatureController extends NamedConfigurationController<Nature, FilterableGetParams<Nature>, NatureInputDto> {
+public class NatureController extends NamedConfigurationController<Nature, FilterlessGetParams<Nature>, NatureInputDto> {
 
     @Resource
     private NatureService natureService;

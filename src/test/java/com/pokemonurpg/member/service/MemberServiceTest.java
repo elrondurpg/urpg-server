@@ -15,13 +15,13 @@ import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.repository.MemberRepository;
 import com.pokemonurpg.stats.input.*;
 import com.pokemonurpg.stats.service.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Example;
 
 import javax.crypto.SecretKey;
@@ -30,10 +30,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MemberServiceTest {
     private final static Boolean                    BOT = true;
 

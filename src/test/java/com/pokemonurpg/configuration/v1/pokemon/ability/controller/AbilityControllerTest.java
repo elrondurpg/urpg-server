@@ -1,64 +1,28 @@
 package com.pokemonurpg.configuration.v1.pokemon.ability.controller;
 
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
-import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AbilityControllerTest {
-    private static final String ABILITY_NAME = "TEST";
-    private static final Integer DBID = 23423;
 
     @InjectMocks
-    private AbilityController abilityController;
+    private AbilityController controller;
 
     @Mock
-    private AbilityService abilityService;
-
-    @Mock
-    private Ability ability;
+    private AbilityService service;
 
     @Test
-    public void findReturnsResultFromAbilityService() {
-        when(abilityService.findByName(ABILITY_NAME)).thenReturn(ability);
-        Ability ability = null; //abilityController.findByName(ABILITY_NAME);
-        assertNotNull(ability);
+    public void test_constructor() {
+        assertEquals(service, controller.getService());
+        assertEquals(AbilityViews.Id.class, controller.getIdViewClass());
+        assertEquals(AbilityViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(AbilityViews.Full.class, controller.getFullViewClass());
     }
-
-    @Test
-    public void createReturnsResultFromAbilityService() {
-        AbilityInputDto input = new AbilityInputDto();
-        Ability ability = new Ability();
-
-        when (abilityService.create(input)).thenReturn(ability);
-        assertEquals(ability, abilityController.create(input));
-    }
-
-    @Test
-    public void updateReturnsResultFromAbilityService() {
-        AbilityInputDto input = new AbilityInputDto();
-        Ability ability = new Ability();
-
-        when (abilityService.update(input, DBID)).thenReturn(ability);
-        assertEquals(ability, abilityController.update(input, DBID));
-    }
-
-    /*@Test
-    public void getAllAbilities() {
-        List<String> names = new ArrayList<>();
-        when(abilityService.findAllNames()).thenReturn(names);
-
-        assertEquals(names, abilityController.findAllNames());
-    }*/
 }

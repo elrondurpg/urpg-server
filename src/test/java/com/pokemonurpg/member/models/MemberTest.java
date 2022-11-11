@@ -4,12 +4,12 @@ import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MemberTest {
     private final static Integer DBID = 2432;
@@ -43,7 +43,7 @@ public class MemberTest {
     private final static EliteFourVictory VICTORY_WITH_NAME = new EliteFourVictory();
     private final static Boolean IS_CHAMPION = true;
 
-    @Before
+    @BeforeEach
     public void init() {
         MEMBER_WITH_DBID.setDbid(OTHER_DBID);
     }

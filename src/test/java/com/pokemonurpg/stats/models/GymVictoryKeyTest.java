@@ -1,10 +1,10 @@
 package com.pokemonurpg.stats.models;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GymVictoryKeyTest {
     private final static Integer CHALLENGER_DBID = 43242;

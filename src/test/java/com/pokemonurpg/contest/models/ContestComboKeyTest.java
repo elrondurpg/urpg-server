@@ -1,10 +1,10 @@
 package com.pokemonurpg.contest.models;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ContestComboKeyTest {
     private final static Integer FIRST_ATTACK_DBID = 32432;

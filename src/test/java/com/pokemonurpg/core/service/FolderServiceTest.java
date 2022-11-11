@@ -1,18 +1,18 @@
 package com.pokemonurpg.core.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class FolderServiceTest {
     private final static String OLDPATH = "/old/path";
     private static File OLDFILE;
@@ -26,7 +26,7 @@ public class FolderServiceTest {
     @Mock
     private FileService fileService;
 
-    @Before
+    @BeforeEach
     public void init() {
         NEWFILE = mock(File.class);
         when(fileService.findByName(NEWPATH)).thenReturn(NEWFILE);

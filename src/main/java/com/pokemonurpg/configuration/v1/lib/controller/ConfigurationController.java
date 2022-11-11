@@ -24,15 +24,21 @@ import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 import com.pokemonurpg.lib.security.v1.AuthorizationType;
 import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 
+import lombok.Getter;
+
 public abstract class ConfigurationController<
         ModelClass extends ConfigurationModel, 
         FilterableGetParamsClass extends FilterableGetParams<ModelClass>,
         InputDtoClass extends ConfigurationInputDto> {
 
+    @Getter
     protected ConfigurationService<ModelClass, InputDtoClass> service;
 
+    @Getter
     protected final Class<? extends ConfigurationViews.V1> idViewClass;
+    @Getter
     protected final Class<? extends ConfigurationViews.V1> briefViewClass;
+    @Getter
     protected final Class<? extends ConfigurationViews.V1> fullViewClass;
 
     public ConfigurationController(ConfigControllerDefinition definition, ConfigurationService<ModelClass, InputDtoClass> service) {

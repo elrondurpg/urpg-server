@@ -8,12 +8,12 @@ import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
 import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OwnedPokemonValidatorTest {
     private final static String ATTACK_NAME = "ATTACK_NAME";
@@ -40,11 +40,11 @@ public class OwnedPokemonValidatorTest {
         assertTrue(ownedPokemonValidator.isOwnable(species));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void failsNotOwnable() {
         Species species = new Species();
         species.setPreMega(new Species());
-        ownedPokemonValidator.isOwnable(species);
+        assertThrows(ResponseStatusException.class, () -> ownedPokemonValidator.isOwnable(species));
     }
 
     @Test
@@ -78,10 +78,10 @@ public class OwnedPokemonValidatorTest {
         assertTrue(ownedPokemonValidator.isGenderLegal(species, null));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void failsGenderNotLegal() {
         Species species = new Species();
-        ownedPokemonValidator.isGenderLegal(species, "F");
+        assertThrows(ResponseStatusException.class, () -> ownedPokemonValidator.isGenderLegal(species, "F"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class OwnedPokemonValidatorTest {
         assertTrue(ownedPokemonValidator.areAllMovesLegal(species, Collections.singletonList(move)));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void failsAllMovesNotLegal() {
         Species species = new Species();
         SpeciesAttack speciesAttack = new SpeciesAttack();
@@ -119,7 +119,7 @@ public class OwnedPokemonValidatorTest {
 
         OwnedExtraMoveInputDto move = new OwnedExtraMoveInputDto();
         move.setAttack(INVALID_ATTACK_NAME);
-        ownedPokemonValidator.areAllMovesLegal(species, Collections.singletonList(move));
+        assertThrows(ResponseStatusException.class, () -> ownedPokemonValidator.areAllMovesLegal(species, Collections.singletonList(move)));
     }
 
     @Test
@@ -138,7 +138,7 @@ public class OwnedPokemonValidatorTest {
         assertTrue(ownedPokemonValidator.areAllAbilitiesLegal(species, Collections.singletonList(ownedHiddenAbilityInputDto)));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void failsAllAbilitiesNotLegal() {
         Species species = new Species();
         SpeciesAbility speciesAbility = new SpeciesAbility();
@@ -151,6 +151,7 @@ public class OwnedPokemonValidatorTest {
         OwnedHiddenAbilityInputDto ownedHiddenAbilityInputDto = new OwnedHiddenAbilityInputDto();
         ownedHiddenAbilityInputDto.setAbility(INVALID_ABILITY_NAME);
 
-        assertFalse(ownedPokemonValidator.areAllAbilitiesLegal(species, Collections.singletonList(ownedHiddenAbilityInputDto)));
+        assertThrows(ResponseStatusException.class, () -> 
+            assertFalse(ownedPokemonValidator.areAllAbilitiesLegal(species, Collections.singletonList(ownedHiddenAbilityInputDto))));
     }
 }

@@ -8,22 +8,23 @@ import com.pokemonurpg.security.service.RefreshService;
 import com.pokemonurpg.security.service.SessionService;
 import com.pokemonurpg.member.models.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.inject.Provider;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class RefreshServiceTest {
     private final static byte[] IV = { 4, 20, 69 };
     private final static String ENCRYPTED_REFRESH_TOKEN = "ENCRYPTED_REFRESH_TOKEN";
@@ -55,7 +56,7 @@ public class RefreshServiceTest {
     private Member member;
     private SessionDto expectedResponse = new SessionDto();
 
-    @Before
+    @BeforeEach
     public void init() {
         when(sessionServiceProvider.get()).thenReturn(sessionService);
 
@@ -87,27 +88,27 @@ public class RefreshServiceTest {
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void refreshFailsWhenNoAuthenticatedMemberIsPresent() {
         when(sessionService.getAuthenticatedMember()).thenReturn(null);
-        refreshService.refresh();
+        assertThrows(ResponseStatusException.class, () -> refreshService.refresh());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void refreshFailsWhenIvIsNull() {
         when(sessionService.getAuthenticatedMember()).thenReturn(member);
         when(aesEncryptionService.createIvParameterSpec(IV)).thenReturn(null);
-        refreshService.refresh();
+        assertThrows(ResponseStatusException.class, () -> refreshService.refresh());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void refreshFailsWhenRefreshTokenIsNull() {
         when(sessionService.getAuthenticatedMember()).thenReturn(member);
         member.setRefreshToken(null);
-        refreshService.refresh();
+        assertThrows(ResponseStatusException.class, () -> refreshService.refresh());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void refreshFailsWhenRefreshTokenResponseIsNull() {
         when(sessionService.getAuthenticatedMember()).thenReturn(member);
         when(aesEncryptionService.createIvParameterSpec(IV)).thenReturn(IV_PARAMETER_SPEC);
@@ -115,10 +116,10 @@ public class RefreshServiceTest {
         when(aesEncryptionService.getKeyFromAccessToken(ACCESS_TOKEN, SALT)).thenReturn(SECRET_KEY);
         when(aesEncryptionService.decrypt(ENCRYPTED_REFRESH_TOKEN, SECRET_KEY, IV_PARAMETER_SPEC)).thenReturn(DECRYPTED_REFRESH_TOKEN);
         when(oAuthService.refreshAccessToken(DECRYPTED_REFRESH_TOKEN)).thenReturn(null);
-        refreshService.refresh();
+        assertThrows(ResponseStatusException.class, () -> refreshService.refresh());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void refreshFailsWhenRefreshTokenResponseIsInvalid() {
         when(sessionService.getAuthenticatedMember()).thenReturn(member);
         when(aesEncryptionService.createIvParameterSpec(IV)).thenReturn(IV_PARAMETER_SPEC);
@@ -127,6 +128,6 @@ public class RefreshServiceTest {
         when(aesEncryptionService.decrypt(ENCRYPTED_REFRESH_TOKEN, SECRET_KEY, IV_PARAMETER_SPEC)).thenReturn(DECRYPTED_REFRESH_TOKEN);
         when(oAuthService.refreshAccessToken(DECRYPTED_REFRESH_TOKEN)).thenReturn(REFRESH_TOKEN_RESPONSE);
         when(REFRESH_TOKEN_RESPONSE.isValid()).thenReturn(false);
-        refreshService.refresh();
+        assertThrows(ResponseStatusException.class, () -> refreshService.refresh());
     }
 }

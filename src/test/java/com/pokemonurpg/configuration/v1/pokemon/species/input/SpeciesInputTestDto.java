@@ -1,7 +1,5 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.input;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +25,9 @@ public class SpeciesInputTestDto extends SpeciesInputDto {
     public static ParkRank PARK_RANK = new ParkRank();
     public static Species PRE_EVOLUTION = new Species();
     public static Species PRE_MEGA = new Species();
+    public static List<SpeciesAttack> ATTACKS = Collections.emptyList();
+    public static List<SpeciesAbility> ABILITIES = Collections.emptyList();
+    public static Set<CosmeticForm> COSMETIC_FORMS = Collections.emptySet();
 
     public SpeciesInputTestDto() {
         setDexno(RandomNumberGenerator.generate());
@@ -64,57 +65,5 @@ public class SpeciesInputTestDto extends SpeciesInputDto {
         setAbilities(Collections.singletonList(new SpeciesAbilityInputTestDto()));
         setCosmeticForms(Collections.singletonList(new CosmeticFormInputTestDto()));
         setBattleOnly(true);
-    }
-
-    public void assertValid(Species species) {
-        assertEquals(getHeight(), species.getHeight());
-        assertEquals(getWeight(), species.getWeight());
-        assertEquals(getMaleAllowed(), species.getMaleAllowed());
-        assertEquals(getFemaleAllowed(), species.getFemaleAllowed());
-        assertEquals(getPokemart(), species.getPokemart());
-        assertEquals(getContestCredits(), species.getContestCredits());
-        assertEquals(getDisplayName(), species.getDisplayName());
-        assertEquals(getFormName(), species.getFormName());
-        assertEquals(getName(), species.getName());
-        assertEquals(getHp(), species.getHp());
-        assertEquals(getAttack(), species.getAttack());
-        assertEquals(getDefense(), species.getDefense());
-        assertEquals(getSpecialAttack(), species.getSpecialAttack());
-        assertEquals(getSpecialDefense(), species.getSpecialDefense());
-        assertEquals(getSpeed(), species.getSpeed());
-        assertEquals(getDexno(), species.getDexno());
-        assertEquals(getClassification(), species.getClassification());
-        assertEquals(getLegendaryTier(), species.getLegendaryTier());
-        assertEquals(getAlteredFormMethod(), species.getAlteredFormMethod());
-        assertEquals(getEvolutionMethod(), species.getEvolutionMethod());
-        assertEquals(getEvolutionExpRequirement(), species.getEvolutionExpRequirement());
-        assertEquals(getMegaStone(), species.getMegaStone());
-        assertEquals(getMegaSuffix(), species.getMegaSuffix());
-        assertEquals(TYPE1, species.getType1());
-        assertEquals(TYPE2, species.getType2());
-        assertEquals(STORY_RANK, species.getStoryRank());
-        assertEquals(ART_RANK, species.getArtRank());
-        assertEquals(PARK_LOCATION, species.getParkLocation());
-        assertEquals(PARK_RANK, species.getParkRank());
-        assertEquals(PRE_EVOLUTION, species.getPreEvolution());
-        assertEquals(PRE_MEGA, species.getPreMega());
-
-        List<SpeciesAbility> abilities = species.getAbilities();
-        assertNotNull(abilities);
-        this.getAbilities().forEach(ability -> {
-            assertTrue(abilities.stream().anyMatch(foundAbility -> ability.getName().equals(foundAbility.getAbility().getName())));
-        });
-
-        List<SpeciesAttack> attacks = species.getAttacks();
-        assertNotNull(attacks);
-        this.getAbilities().forEach(attack -> {
-            assertTrue(attacks.stream().anyMatch(foundAttack -> attack.getName().equals(foundAttack.getAttack().getName())));
-        });
-
-        Set<CosmeticForm> forms = species.getCosmeticForms();
-        assertNotNull(forms);
-        this.getAbilities().forEach(form -> {
-            assertTrue(forms.stream().anyMatch(foundForm -> form.getName().equals(foundForm.getName())));
-        });
     }
 }

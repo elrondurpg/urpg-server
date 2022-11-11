@@ -5,22 +5,22 @@ import com.pokemonurpg.security.service.*;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.inject.Provider;
 import java.util.Collections;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AuthorizationServiceTest {
     private final static Permission         PERMISSION  = mock(Permission.class);
     private final static SessionDto         SESSION     = mock(SessionDto.class);
@@ -39,7 +39,7 @@ public class AuthorizationServiceTest {
 
     private SessionService sessionService = mock(SessionService.class);
 
-    @Before
+    @BeforeEach
     public void init() {
         when(sessionServiceProvider.get()).thenReturn(sessionService);
     }

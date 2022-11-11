@@ -1,9 +1,9 @@
 package com.pokemonurpg.image.models;
 
 import com.pokemonurpg.image.input.ImageFolderInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ImageFolderTest {
     private final static String NAME = "FOLDER";

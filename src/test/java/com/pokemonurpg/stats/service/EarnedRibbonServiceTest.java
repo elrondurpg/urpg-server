@@ -8,17 +8,17 @@ import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.repository.EarnedRibbonRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class EarnedRibbonServiceTest {
     private final static Integer DBID = 432;
     private final OwnedPokemon POKEMON = mock(OwnedPokemon.class);
@@ -51,7 +51,7 @@ public class EarnedRibbonServiceTest {
 
         earnedRibbonService.update(input, POKEMON);
 
-        verify(earnedRibbonRepository, times(1)).save(Matchers.any());
+        verify(earnedRibbonRepository, times(1)).save(ArgumentMatchers.any());
     }
 
     @Test

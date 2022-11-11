@@ -1,8 +1,8 @@
 package com.pokemonurpg.gym.models;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KnownGymLeaderTest {
     private final static Integer DBID = 4324;

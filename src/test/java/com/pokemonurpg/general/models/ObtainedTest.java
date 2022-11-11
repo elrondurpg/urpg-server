@@ -1,9 +1,9 @@
 package com.pokemonurpg.general.models;
 
 import com.pokemonurpg.general.input.ObtainedInputDto;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ObtainedTest {
     private final static Integer DBID = 324;

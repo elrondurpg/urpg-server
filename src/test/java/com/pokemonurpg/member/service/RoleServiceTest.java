@@ -5,19 +5,19 @@ import com.pokemonurpg.member.input.RolePermissionInputDto;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.member.repository.RoleRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {
     private final static Integer DBID = 32432;
     private final static String NAME = "TEST";
@@ -136,7 +136,7 @@ public class RoleServiceTest {
 
         Role role1 = roleService.update(input, DBID);
         assertNull(role1);
-        verify(roleRepository, times(0)).save(Matchers.any());
+        verify(roleRepository, times(0)).save(ArgumentMatchers.any());
     }
 
 }
