@@ -35,7 +35,7 @@ public class SpeciesService extends NamedConfigurationService<Species, SpeciesIn
             StoryRankService storyRankService, ArtRankService artRankService, ParkRankService parkRankService,
             ParkLocationService parkLocationService, SpeciesAttackService speciesAttackService,
             SpeciesAbilityService speciesAbilityService, CosmeticFormService cosmeticFormService) {
-        super(repository);
+        super(repository, Species.class);
         this.typeService = typeService;
         this.storyRankService = storyRankService;
         this.artRankService = artRankService;
@@ -44,10 +44,6 @@ public class SpeciesService extends NamedConfigurationService<Species, SpeciesIn
         this.speciesAttackService = speciesAttackService;
         this.speciesAbilityService = speciesAbilityService;
         this.cosmeticFormService = cosmeticFormService;
-    }
-
-    protected Species createBase(SpeciesInputDto input) {
-        return new Species();
     }
 
     protected void updateBase(Species species, SpeciesInputDto input) {

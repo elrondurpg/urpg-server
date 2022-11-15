@@ -13,13 +13,6 @@ public class TypeService extends SimpleNamedConfigurationService<Type, TypeInput
 
     @Autowired
     public TypeService(NamedConfigurationRepository<Type> repository) {
-        super(repository);
-    }
-
-    @Override
-    protected Type createBase(TypeInputDto input) {
-        Type type = new Type();
-        updateBase(type, input);
-        return type;
+        super(repository, Type.class);
     }
 }

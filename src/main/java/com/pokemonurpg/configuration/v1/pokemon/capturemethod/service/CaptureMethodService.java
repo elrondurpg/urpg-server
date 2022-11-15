@@ -13,11 +13,6 @@ public class CaptureMethodService extends SimpleNamedConfigurationService<Captur
 
     @Autowired
     public CaptureMethodService(NamedConfigurationRepository<CaptureMethod> repository) {
-        super(repository);
-    }
-
-    @Override
-    protected CaptureMethod createBase(CaptureMethodInputDto input) {
-        return new CaptureMethod();
+        super(repository, CaptureMethod.class);
     }
 }

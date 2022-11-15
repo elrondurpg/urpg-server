@@ -13,13 +13,6 @@ public class NatureService extends SimpleNamedConfigurationService<Nature, Natur
 
     @Autowired
     public NatureService(NatureRepository repo) {
-        super(repo);
-    }
-
-    @Override
-    protected Nature createBase(NatureInputDto input) {
-        Nature nature = new Nature();
-        updateBase(nature, input);
-        return nature;
+        super(repo, Nature.class);
     }
 }

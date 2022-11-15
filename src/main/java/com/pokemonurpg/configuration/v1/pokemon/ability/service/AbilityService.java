@@ -16,15 +16,8 @@ public class AbilityService extends NamedConfigurationService<Ability, AbilityIn
 
     @Autowired
     public AbilityService(AbilityRepository abilityRepository, SpeciesAbilityService speciesAbilityService) {
-        super(abilityRepository);
+        super(abilityRepository, Ability.class);
         this.speciesAbilityService = speciesAbilityService;
-    }
-
-    @Override
-    protected Ability createBase(AbilityInputDto input) {
-        Ability ability = new Ability();
-        updateBase(ability, input);
-        return ability;
     }
 
     @Override

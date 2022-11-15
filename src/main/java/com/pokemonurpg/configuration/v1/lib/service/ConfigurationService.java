@@ -1,5 +1,7 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 
@@ -13,10 +15,12 @@ public abstract class ConfigurationService<
         InputDtoClass extends ConfigurationInputDto
     > {
 
+    protected Class<ModelClass> modelClass;
     protected ConfigurationRepository<ModelClass> repository;
 
-    public ConfigurationService(ConfigurationRepository<ModelClass> repository) {
+    public ConfigurationService(ConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         this.repository = repository;
+        this.modelClass = modelClass;
     }
 
     public Page<ModelClass> find(FilterableGetParams<ModelClass> params) {
@@ -31,8 +35,17 @@ public abstract class ConfigurationService<
         return repository.findByDbid(dbid);
     }
 
+    protected ModelClass callDefaultConstructor() {
+        try {
+            return modelClass.getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            throw new IllegalStateException();
+        }
+    }
+
     public ModelClass create(InputDtoClass input) {
-        ModelClass model = createBase(input);
+        ModelClass model = callDefaultConstructor();
         updateBase(model, input);
         model.setDefaultValues();
         updateEmbeddedValues(model, input);
@@ -41,7 +54,6 @@ public abstract class ConfigurationService<
         return model;
     }
 
-    protected abstract ModelClass createBase(InputDtoClass input);
     protected void setDefaultValues() {}
 
     protected <T> void setIfNotNull(T value, FieldSetter<T> setter) {
@@ -73,4 +85,10 @@ public abstract class ConfigurationService<
     }
 
     protected abstract void deleteAssociatedValues(ModelClass model);
+
+    public Class<ModelClass> getModelClass() {
+        return modelClass;
+    }
+
+    
 }

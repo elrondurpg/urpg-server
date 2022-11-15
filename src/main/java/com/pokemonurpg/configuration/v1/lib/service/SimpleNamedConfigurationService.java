@@ -13,8 +13,8 @@ public abstract class SimpleNamedConfigurationService <
 extends NamedConfigurationService<ModelClass, InputDtoClass> {
 
     @Autowired
-    public SimpleNamedConfigurationService(NamedConfigurationRepository<ModelClass> repository) {
-        super(repository);
+    public SimpleNamedConfigurationService(NamedConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
+        super(repository, modelClass);
     }
 
     @Override
