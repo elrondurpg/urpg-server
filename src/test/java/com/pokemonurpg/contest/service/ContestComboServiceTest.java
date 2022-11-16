@@ -2,9 +2,11 @@ package com.pokemonurpg.contest.service;
 
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.repository.AttackRepository;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
-import com.pokemonurpg.contest.models.ContestCombo;
-import com.pokemonurpg.contest.repository.ContestComboRepository;
+import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
+import com.pokemonurpg.configuration.v1.attack.attack.repository.ContestComboRepository;
+import com.pokemonurpg.configuration.v1.attack.attack.service.ContestComboService;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

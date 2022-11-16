@@ -1,5 +1,6 @@
 package com.pokemonurpg.contest.models;
 
+import com.pokemonurpg.configuration.v1.contest.ContestMoveType;
 import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
 import org.junit.jupiter.api.Test;
 

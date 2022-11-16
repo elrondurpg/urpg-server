@@ -8,7 +8,6 @@ import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMet
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.contest.service.*;
 import com.pokemonurpg.creative.service.ArtRankService;
 import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
@@ -52,18 +51,6 @@ public class NamedObjectServiceFactory {
     private ChampionService championService;
 
     @Resource
-    private ContestAttributeService contestAttributeService;
-
-    @Resource
-    private ContestRankService contestRankService;
-
-    @Resource
-    private ContestTypeService contestTypeService;
-
-    @Resource
-    private DPPContestMoveTypeService dppContestMoveTypeService;
-
-    @Resource
     private EliteFourService eliteFourService;
 
     @Resource
@@ -103,9 +90,6 @@ public class NamedObjectServiceFactory {
     private CaptureMethodService obtainedService;
 
     @Resource
-    private ORASContestMoveTypeService orasContestMoveTypeService;
-
-    @Resource
     private ParkLocationService parkLocationService;
 
     @Resource
@@ -116,9 +100,6 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private RoleService roleService;
-
-    @Resource
-    private RSEContestMoveTypeService rseContestMoveTypeService;
 
     @Resource
     private SectionService sectionService;
@@ -144,10 +125,6 @@ public class NamedObjectServiceFactory {
                 case "AttackTargetType": return attackTargetTypeService;
                 case "Badge": return badgeService;
                 case "Champion": return championService;
-                case "ContestAttribute": return contestAttributeService;
-                case "ContestRank": return contestRankService;
-                case "ContestType": return contestTypeService;
-                case "DPPContestMoveType": return dppContestMoveTypeService;
                 case "EliteFour": return eliteFourService;
                 case "Flag": return flagService;
                 case "Gym": return gymService;
@@ -160,12 +137,10 @@ public class NamedObjectServiceFactory {
                 case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
-                case "ORASContestMoveType": return orasContestMoveTypeService;
                 case "ParkLocation": return parkLocationService;
                 case "ParkRank": return parkRankService;
                 case "Permission": return permissionService;
                 case "Role": return roleService;
-                case "RSEContestMoveType": return rseContestMoveTypeService;
                 case "Section": return sectionService;
                 case "StoryRank": return storyRankService;
             }

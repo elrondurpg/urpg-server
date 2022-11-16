@@ -3,8 +3,8 @@ package com.pokemonurpg.attack.input;
 import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
 import com.pokemonurpg.contest.models.ContestAttribute;
 import com.pokemonurpg.contest.models.DPPContestMoveType;
 import com.pokemonurpg.contest.models.ORASContestMoveType;
@@ -95,7 +95,7 @@ public class AttackInputDto implements UniquelyNamedInputDto {
     @ExistsInDb(type = Item.class)
     private String tm;
 
-    private List<@Valid ContestComboInputDto> contestCombos = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto> contestCombos = new ArrayList<>();
 
     public String getName() {
         return name;

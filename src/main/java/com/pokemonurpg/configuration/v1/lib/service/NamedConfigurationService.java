@@ -12,6 +12,10 @@ public abstract class NamedConfigurationService <
 
     protected NamedConfigurationRepository<ModelClass> repository;
 
+    public NamedConfigurationService() {
+        
+    }
+
     public NamedConfigurationService(NamedConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         super(repository, modelClass);
         this.repository = repository;

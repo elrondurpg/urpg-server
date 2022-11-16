@@ -20,11 +20,4 @@ public class TypeServiceTest {
 
     @Mock
     private TypeRepository typeRepository;
-
-    @Test
-    public void test_createBase() {
-        TypeInputTestDto input = new TypeInputTestDto();
-        Type type = service.createBase(input);
-        assertNotNull(type);
-    }
 }

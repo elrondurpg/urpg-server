@@ -1,10 +1,11 @@
 package com.pokemonurpg.contest.models;
 
 import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

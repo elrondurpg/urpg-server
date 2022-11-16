@@ -1,7 +1,5 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
@@ -12,7 +10,6 @@ public abstract class SimpleNamedConfigurationService <
     > 
 extends NamedConfigurationService<ModelClass, InputDtoClass> {
 
-    @Autowired
     public SimpleNamedConfigurationService(NamedConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         super(repository, modelClass);
     }

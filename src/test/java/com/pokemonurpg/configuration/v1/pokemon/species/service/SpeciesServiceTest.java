@@ -86,16 +86,9 @@ public class SpeciesServiceTest {
     ArgumentCaptor<CosmeticForm> cosmeticFormCaptor;
 
     @Test
-    public void test_createBase() {
-        SpeciesInputTestDto input = new SpeciesInputTestDto();
-        Species species = speciesService.createBase(input);
-        assertNotNull(species);
-    }
-
-    @Test
     public void test_updateBase() {
         SpeciesInputTestDto input = new SpeciesInputTestDto();
-        Species species = speciesService.createBase(input);
+        Species species = new Species();
         speciesService.updateBase(species, input);
         assertUpdateBaseValid(species, input);
     }
@@ -143,7 +136,7 @@ public class SpeciesServiceTest {
     public void test_updateEmbeddedValues() {
         SpeciesInputTestDto input = new SpeciesInputTestDto();
         setupUpdateEmbeddedValues(input);
-        Species species = speciesService.createBase(input);
+        Species species = new Species();
         speciesService.updateEmbeddedValues(species, input);
         assertUpdateEmbeddedValuesValid(species, input);
     }
@@ -168,7 +161,7 @@ public class SpeciesServiceTest {
     @Test
     public void test_updateAssociatedValues() {
         SpeciesInputTestDto input = new SpeciesInputTestDto();
-        Species species = speciesService.createBase(input);
+        Species species = new Species();
         species.setDbid(DBID);
         setupUpdateAssociatedValues(species, input);
         speciesService.updateAssociatedValues(species, input);

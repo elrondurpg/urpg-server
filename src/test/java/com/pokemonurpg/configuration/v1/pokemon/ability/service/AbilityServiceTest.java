@@ -35,13 +35,6 @@ public class AbilityServiceTest {
     ArgumentCaptor<SpeciesAbility> abilityCaptor;
 
     @Test
-    public void test_createBase() {
-        AbilityInputTestDto input = new AbilityInputTestDto();
-        Ability ability = service.createBase(input);
-        assertNotNull(ability);
-    }
-
-    @Test
     public void test_updateBase() {
         AbilityInputTestDto input = new AbilityInputTestDto();
         Ability ability = new Ability();

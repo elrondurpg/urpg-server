@@ -2,6 +2,8 @@ package com.pokemonurpg.contest.models;
 
 import org.junit.jupiter.api.Test;
 
+import com.pokemonurpg.configuration.v1.attack.attack.model.ContestComboKey;
+
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;

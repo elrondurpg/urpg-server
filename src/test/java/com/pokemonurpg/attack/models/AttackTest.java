@@ -1,6 +1,7 @@
 package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.attack.input.AttackInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.contest.models.*;

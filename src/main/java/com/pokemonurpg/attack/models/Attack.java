@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.attack.input.AttackInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
 import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;

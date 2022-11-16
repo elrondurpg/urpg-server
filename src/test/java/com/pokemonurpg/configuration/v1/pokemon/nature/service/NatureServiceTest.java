@@ -21,11 +21,4 @@ public class NatureServiceTest {
     @Mock
     private NatureRepository natureRepository;
 
-    @Test
-    public void test_createBase() {
-        NatureInputTestDto input = new NatureInputTestDto();
-        Nature nature = service.createBase(input);
-        assertNotNull(nature);
-    }
-
 }

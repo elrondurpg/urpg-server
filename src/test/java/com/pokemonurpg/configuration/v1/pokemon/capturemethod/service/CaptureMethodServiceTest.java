@@ -20,11 +20,4 @@ public class CaptureMethodServiceTest {
     @Mock
     private CaptureMethodRepository repository;
 
-    @Test
-    protected void test_createBase() {
-        CaptureMethodInputTestDto input = new CaptureMethodInputTestDto();
-        CaptureMethod captureMethod = service.createBase(input);
-        assertNotNull(captureMethod);
-    }
-
 }

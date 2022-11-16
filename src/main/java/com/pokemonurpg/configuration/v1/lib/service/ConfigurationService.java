@@ -18,6 +18,8 @@ public abstract class ConfigurationService<
     protected Class<ModelClass> modelClass;
     protected ConfigurationRepository<ModelClass> repository;
 
+    public ConfigurationService() {}
+
     public ConfigurationService(ConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         this.repository = repository;
         this.modelClass = modelClass;
