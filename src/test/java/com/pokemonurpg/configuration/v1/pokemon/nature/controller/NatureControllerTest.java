@@ -24,8 +24,8 @@ public class NatureControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(NatureViews.Id.class, controller.getIdViewClass());
-        assertEquals(NatureViews.class, controller.getBriefViewClass());
-        assertEquals(NatureViews.class, controller.getFullViewClass());
+        assertEquals(NatureViews.Id.class, controller.getBriefViewClass());
+        assertEquals(NatureViews.Id.class, controller.getFullViewClass());
     }
 
 }

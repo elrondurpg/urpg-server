@@ -1,24 +1,21 @@
-package com.pokemonurpg.configuration.v1.contest.input;
+package com.pokemonurpg.configuration.v1.contest.type.input;
 
-import com.pokemonurpg.configuration.v1.contest.models.ContestType;
-import com.pokemonurpg.core.input.UniquelyNamedInputDto;
+import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Getter
+@Setter
 @UniqueName(type = ContestType.class)
-public class ContestTypeInputDto implements UniquelyNamedInputDto {
+public class ContestTypeInputDto extends NamedConfigurationInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 30)
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -1,15 +1,7 @@
-package com.pokemonurpg.configuration.v1.contest.repository;
+package com.pokemonurpg.configuration.v1.contest.type.repository;
 
-import com.pokemonurpg.configuration.v1.contest.models.ContestType;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
 
-import java.util.List;
-
-public interface ContestTypeRepository extends JpaRepository<ContestType, Integer> {
-    @Query("select a.name from ContestType a")
-    List<String> findAllNames();
-    ContestType findByName(String name);
-    ContestType findByDbid(Integer dbid);
-    ContestType findFirstByNameStartingWith(String name);
+public interface ContestTypeRepository extends NamedConfigurationRepository<ContestType> {
 }

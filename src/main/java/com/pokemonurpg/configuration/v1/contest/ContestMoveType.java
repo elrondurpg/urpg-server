@@ -2,7 +2,6 @@ package com.pokemonurpg.configuration.v1.contest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
-import com.pokemonurpg.configuration.v1.contest.input.ContestMoveTypeInputDto;
 import com.pokemonurpg.core.model.NamedObject;
 
 import javax.persistence.*;

@@ -10,6 +10,9 @@ import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.lib.repository.ConfigurationRepository;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 
+import lombok.Getter;
+
+@Getter
 public abstract class ConfigurationService<
         ModelClass extends ConfigurationModel, 
         InputDtoClass extends ConfigurationInputDto
@@ -86,11 +89,5 @@ public abstract class ConfigurationService<
         return model;
     }
 
-    protected abstract void deleteAssociatedValues(ModelClass model);
-
-    public Class<ModelClass> getModelClass() {
-        return modelClass;
-    }
-
-    
+    protected abstract void deleteAssociatedValues(ModelClass model);    
 }

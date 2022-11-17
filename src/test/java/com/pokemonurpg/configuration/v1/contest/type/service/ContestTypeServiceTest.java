@@ -1,4 +1,4 @@
-package com.pokemonurpg.configuration.v1.pokemon.type.service;
+package com.pokemonurpg.configuration.v1.contest.type.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,21 +8,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
+import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.configuration.v1.contest.type.repository.ContestTypeRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class TypeServiceTest {
+public class ContestTypeServiceTest {
 
     @InjectMocks
-    private TypeService service;
+    private ContestTypeService service;
 
     @Mock
-    private TypeRepository repository;
+    private ContestTypeRepository repository;
 
     @Test
     public void test_constructor() {
         assertEquals(repository, service.getRepository());
-        assertEquals(Type.class, service.getModelClass());
+        assertEquals(ContestType.class, service.getModelClass());
     }
 }

@@ -6,7 +6,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputTestDto;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.repository.NatureRepository;
 
@@ -19,6 +18,12 @@ public class NatureServiceTest {
     private NatureService service;
 
     @Mock
-    private NatureRepository natureRepository;
+    private NatureRepository repository;
+
+    @Test
+    public void test_constructor() {
+        assertEquals(repository, service.getRepository());
+        assertEquals(Nature.class, service.getModelClass());
+    }
 
 }
