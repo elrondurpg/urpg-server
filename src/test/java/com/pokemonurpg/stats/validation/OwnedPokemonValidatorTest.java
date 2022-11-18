@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.validation;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;

@@ -1,7 +1,8 @@
 package com.pokemonurpg.configuration.v1.attack.attack.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.attack.models.Attack;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
 import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
 import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
 
@@ -32,11 +33,13 @@ public class ContestCombo {
             "magicCoat", "rseContestMoveType", "rseContestAttribute", "orasContestMoveType",
             "orasContestAttribute", "dppContestMoveType", "dppContestAttribute", "advContestMoveType",
             "advContestAttribute", "tm", "pokemon", "contestCombos" })
+    @JsonView(value = { AttackViews.Full.class })
     private Attack secondAttack;
 
     @OneToOne
     @MapsId("generation_dbid")
     @JoinColumn(name = "generation_dbid")
+    @JsonView(value = { AttackViews.Full.class })
     private ContestType generation;
 
     @Column

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 
 @Entity
 @Table(name = "wishlist_move")

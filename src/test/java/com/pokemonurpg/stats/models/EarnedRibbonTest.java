@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
+import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
+import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import org.junit.jupiter.api.Test;
 

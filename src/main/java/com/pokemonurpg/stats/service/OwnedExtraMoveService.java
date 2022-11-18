@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.attack.service.AttackService;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.service.AttackService;
 import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;

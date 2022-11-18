@@ -20,9 +20,11 @@ public abstract class NamedConfigurationModel extends ConfigurationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @JsonView(value = { ConfigurationViews.V1.class })
     private Integer dbid;
 
     @Column
+    @JsonView(value = { ConfigurationViews.V1.class })
     private String name;
 
     public NamedConfigurationModel() {

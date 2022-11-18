@@ -1,50 +1,14 @@
 package com.pokemonurpg.configuration.v1.contest.attribute.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
-import com.pokemonurpg.configuration.v1.contest.input.ContestAttributeInputDto;
-import com.pokemonurpg.core.model.NamedObject;
+import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
+import com.pokemonurpg.configuration.v1.contest.attribute.ContestAttributeViews;
+import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
 
 import javax.persistence.*;
 
 @Table(name = "contest_attribute")
 @Entity
-@JsonView(value = { SpeciesViews.Full.class })
-public class ContestAttribute implements NamedObject {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer dbid;
-
-    @Column
-    private String name;
-
-    public ContestAttribute() {}
-
-    public ContestAttribute(ContestAttributeInputDto input) {
-        this.update(input);
-    }
-
-    public void update(ContestAttributeInputDto input) {
-        setName(input.getName());
-    }
-
-    public Integer getDbid() {
-        return dbid;
-    }
-
-    public void setDbid(Integer dbid) {
-        this.dbid = dbid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null) {
-            this.name = name;
-        }
-    }
+@JsonView(value = { AttackViews.Full.class, ContestAttributeViews.Id.class })
+public class ContestAttribute extends NamedConfigurationModel {
 }

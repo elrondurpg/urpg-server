@@ -3,7 +3,8 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
 
@@ -24,6 +25,7 @@ public class SpeciesAttack {
             "storyRank", "artRank", "parkRank", "parkLocation", "contestCredits", "legendaryTier", "cosmeticForms",
             "alteredFormMethod", "formName", "preEvolution", "evolutionMethod", "evolutionExpRequirement",
             "preMega", "megaStone", "megaSuffix" })
+    @JsonView(value = { AttackViews.Full.class })
     private Species species;
 
     @ManyToOne
@@ -34,11 +36,11 @@ public class SpeciesAttack {
     private Attack attack;
 
     @Column
-    @JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
+    @JsonView(value = { View.MemberView.Pokemon.class, AttackViews.Full.class, SpeciesViews.Full.class })
     private String method = "LEVEL-UP";
 
     @Column
-    @JsonView(value = { View.MemberView.Pokemon.class, SpeciesViews.Full.class })
+    @JsonView(value = { View.MemberView.Pokemon.class, AttackViews.Full.class, SpeciesViews.Full.class })
     private Integer generation;
 
     public SpeciesAttack() {    }

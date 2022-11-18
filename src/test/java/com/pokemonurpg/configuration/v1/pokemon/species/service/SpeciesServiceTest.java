@@ -1,8 +1,17 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputTestDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
@@ -16,19 +25,6 @@ import com.pokemonurpg.creative.service.ParkLocationService;
 import com.pokemonurpg.creative.service.ParkRankService;
 import com.pokemonurpg.creative.service.StoryRankService;
 import com.pokemonurpg.test.RandomNumberGenerator;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.Collections;
 
 @ExtendWith(MockitoExtension.class)
 public class SpeciesServiceTest {
@@ -63,27 +59,6 @@ public class SpeciesServiceTest {
 
     @Mock
     private CosmeticFormService cosmeticFormService;
-
-    @Captor
-    ArgumentCaptor<Species> speciesCaptor;
-
-    @Captor
-    ArgumentCaptor<SpeciesAttackInputDto> attackInputCaptor;
-
-    @Captor
-    ArgumentCaptor<SpeciesAbilityInputDto> abilityInputCaptor;
-
-    @Captor
-    ArgumentCaptor<CosmeticFormInputDto> cosmeticFormInputCaptor;
-
-    @Captor
-    ArgumentCaptor<SpeciesAttack> attackCaptor;
-
-    @Captor
-    ArgumentCaptor<SpeciesAbility> abilityCaptor;
-
-    @Captor
-    ArgumentCaptor<CosmeticForm> cosmeticFormCaptor;
 
     @Test
     public void test_updateBase() {
@@ -171,23 +146,17 @@ public class SpeciesServiceTest {
     private void assertUpdateAssociatedValuesValid(Species species, SpeciesInputDto input) {
         assertEquals(SpeciesInputTestDto.ATTACKS, species.getAttacks());
         input.getAttacks().forEach(attack -> {
-            verify(speciesAttackService, times(1)).update(speciesCaptor.capture(), attackInputCaptor.capture());
-            assertEquals(species, speciesCaptor.getValue());
-            assertEquals(attack, attackInputCaptor.getValue());
+            verify(speciesAttackService, times(1)).update(species, attack);
         });
 
         assertEquals(SpeciesInputTestDto.ABILITIES, species.getAbilities());
         input.getAbilities().forEach(ability -> {
-            verify(speciesAbilityService, times(1)).update(speciesCaptor.capture(), abilityInputCaptor.capture());
-            assertEquals(species, speciesCaptor.getValue());
-            assertEquals(ability, abilityInputCaptor.getValue());
+            verify(speciesAbilityService, times(1)).update(species, ability);
         });
 
         assertEquals(SpeciesInputTestDto.COSMETIC_FORMS, species.getCosmeticForms());
         input.getCosmeticForms().forEach(form -> {
-            verify(cosmeticFormService, times(1)).update(speciesCaptor.capture(), cosmeticFormInputCaptor.capture());
-            assertEquals(species, speciesCaptor.getValue());
-            assertEquals(form, cosmeticFormInputCaptor.getValue());
+            verify(cosmeticFormService, times(1)).update(species, form);
         });
     }
     
@@ -215,16 +184,13 @@ public class SpeciesServiceTest {
 
     private void assert_deleteAssociatedValues_Valid(Species species) {
         species.getAttacks().forEach(attack -> {
-            verify(speciesAttackService, times(1)).delete(attackCaptor.capture());
-            assertEquals(attack, attackCaptor.getValue());
+            verify(speciesAttackService, times(1)).delete(attack);
         });
         species.getAbilities().forEach(ability -> {
-            verify(speciesAbilityService, times(1)).delete(abilityCaptor.capture());
-            assertEquals(ability, abilityCaptor.getValue());
+            verify(speciesAbilityService, times(1)).delete(ability);
         });
         species.getCosmeticForms().forEach(form -> {
-            verify(cosmeticFormService, times(1)).delete(cosmeticFormCaptor.capture());
-            assertEquals(form, cosmeticFormCaptor.getValue());
+            verify(cosmeticFormService, times(1)).delete(form);
         });
     }
 }

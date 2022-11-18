@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.attack.repository.AttackRepository;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
 import com.pokemonurpg.stats.input.WishlistMoveInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.models.WishlistMove;

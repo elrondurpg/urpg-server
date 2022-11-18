@@ -3,6 +3,7 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
 import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
 import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
@@ -33,7 +34,7 @@ public class Species extends ConfigurationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class })
+    @JsonView(value = { SpeciesViews.Id.class, AttackViews.Full.class, AbilityViews.Full.class })
     private Integer dbid;
 
     @Column
@@ -41,7 +42,7 @@ public class Species extends ConfigurationModel {
     private Integer dexno;
 
     @Column
-    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class })
+    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class, AttackViews.Full.class })
     private String name;
 
     @OneToOne

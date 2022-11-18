@@ -1,9 +1,10 @@
 package com.pokemonurpg.attack.service;
 
-import com.pokemonurpg.attack.models.Attack;
 import com.pokemonurpg.attack.models.AttackCategory;
 import com.pokemonurpg.attack.input.AttackCategoryInputDto;
 import com.pokemonurpg.attack.repository.AttackCategoryRepository;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

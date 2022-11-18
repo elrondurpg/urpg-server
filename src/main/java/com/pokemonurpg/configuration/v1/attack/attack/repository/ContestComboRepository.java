@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.attack.attack.repository;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
 import com.pokemonurpg.configuration.v1.attack.attack.model.ContestComboKey;
 import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;

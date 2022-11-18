@@ -1,16 +1,19 @@
 package com.pokemonurpg.configuration.v1.contest;
 
-import com.pokemonurpg.core.input.UniquelyNamedInputDto;
+import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.core.validation.annotation.UniqueName;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@UniqueName(type = ContestMoveType.class)
-public class ContestMoveTypeInputDto implements UniquelyNamedInputDto {
+@Getter
+@Setter
+public class ContestMoveTypeInputDto extends NamedConfigurationInputDto {
     @NotNull(groups = { ObjectCreation.class })
     @Size(min = 3, max = 20)
     private String name;
@@ -27,36 +30,4 @@ public class ContestMoveTypeInputDto implements UniquelyNamedInputDto {
     @Min(-1)
     @Max(8)
     private Integer jam;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public Integer getJam() {
-        return jam;
-    }
-
-    public void setJam(Integer jam) {
-        this.jam = jam;
-    }
 }

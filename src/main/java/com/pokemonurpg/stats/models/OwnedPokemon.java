@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;

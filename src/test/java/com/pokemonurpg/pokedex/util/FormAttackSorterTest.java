@@ -1,6 +1,6 @@
 package com.pokemonurpg.pokedex.util;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.pokedex.output.AlteredFormDto;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.input;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 

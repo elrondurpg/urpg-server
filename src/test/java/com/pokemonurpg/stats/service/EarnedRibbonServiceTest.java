@@ -1,9 +1,9 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
-import com.pokemonurpg.contest.service.ContestAttributeService;
-import com.pokemonurpg.contest.service.ContestRankService;
+import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
+import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
+import com.pokemonurpg.configuration.v1.contest.attribute.service.ContestAttributeService;
+import com.pokemonurpg.configuration.v1.contest.rank.service.ContestRankService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;

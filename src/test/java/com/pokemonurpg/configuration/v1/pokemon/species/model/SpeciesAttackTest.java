@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.model;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
 import org.junit.jupiter.api.Test;
 

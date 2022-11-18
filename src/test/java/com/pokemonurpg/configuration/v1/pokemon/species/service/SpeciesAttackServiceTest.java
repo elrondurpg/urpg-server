@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.attack.repository.AttackRepository;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;

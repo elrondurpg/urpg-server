@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Table(name = "contest_type")
 @Entity
-@JsonView(value = { ContestTypeViews.class })
+@JsonView(value = { ContestTypeViews.Id.class })
 public class ContestType extends NamedConfigurationModel {
 
 }

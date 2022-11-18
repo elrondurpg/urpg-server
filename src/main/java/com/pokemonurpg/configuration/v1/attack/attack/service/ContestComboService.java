@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.attack.attack.service;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.attack.repository.AttackRepository;
 import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
+import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
 import com.pokemonurpg.configuration.v1.attack.attack.repository.ContestComboRepository;
 import com.pokemonurpg.configuration.v1.contest.type.repository.ContestTypeRepository;
 import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;

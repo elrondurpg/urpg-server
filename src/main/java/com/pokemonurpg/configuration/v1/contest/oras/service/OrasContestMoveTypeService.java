@@ -1,0 +1,26 @@
+package com.pokemonurpg.configuration.v1.contest.oras.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.contest.oras.input.OrasContestMoveTypeInputDto;
+import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
+import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
+import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
+
+@Service
+public class OrasContestMoveTypeService extends SimpleNamedConfigurationService<OrasContestMoveType, OrasContestMoveTypeInputDto> {
+
+    @Autowired
+    public OrasContestMoveTypeService(NamedConfigurationRepository<OrasContestMoveType> repository) {
+        super(repository, OrasContestMoveType.class);
+    }
+
+    @Override
+    public void updateBase(OrasContestMoveType model, OrasContestMoveTypeInputDto input) {
+        super.updateBase(model, input);
+        setIfNotNull(input.getDescription(), model::setDescription);
+        setIfNotNull(input.getScore(), model::setScore);
+        setIfNotNull(input.getJam(), model::setJam);
+    }
+}

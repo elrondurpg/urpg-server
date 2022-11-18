@@ -1,6 +1,6 @@
 package com.pokemonurpg.attack.input;
 
-import com.pokemonurpg.attack.input.AttackInputDto;
+import com.pokemonurpg.configuration.v1.attack.attack.input.AttackInputDto;
 import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
 
 import org.junit.jupiter.api.Test;
@@ -26,8 +26,6 @@ public class AttackInputDtoTest {
     private final static Boolean MAGIC_COAT = true;
     private final static String RSE_ATTR = "RSE_ATTR";
     private final static String RSE_TYPE = "RSE_TYPE";
-    private final static String DPP_ATTR = "DPP_ATTR";
-    private final static String DPP_TYPE = "DPP_TYPE";
     private final static String ORAS_ATTR = "ORAS_ATTR";
     private final static String ORAS_TYPE = "ORAS_TYPE";
     private final static String TM_NAME = "TM_NAME";
@@ -52,8 +50,6 @@ public class AttackInputDtoTest {
         input.setMagicCoat(MAGIC_COAT);
         input.setRseContestAttribute(RSE_ATTR);
         input.setRseContestMoveType(RSE_TYPE);
-        input.setDppContestAttribute(DPP_ATTR);
-        input.setDppContestMoveType(DPP_TYPE);
         input.setOrasContestAttribute(ORAS_ATTR);
         input.setOrasContestMoveType(ORAS_TYPE);
         input.setTm(TM_NAME);
@@ -74,8 +70,6 @@ public class AttackInputDtoTest {
         assertEquals(MAGIC_COAT, input.getMagicCoat());
         assertEquals(RSE_ATTR, input.getRseContestAttribute());
         assertEquals(RSE_TYPE, input.getRseContestMoveType());
-        assertEquals(DPP_ATTR, input.getDppContestAttribute());
-        assertEquals(DPP_TYPE, input.getDppContestMoveType());
         assertEquals(ORAS_ATTR, input.getOrasContestAttribute());
         assertEquals(ORAS_TYPE, input.getOrasContestMoveType());
         assertEquals(TM_NAME, input.getTm());
