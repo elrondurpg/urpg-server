@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.gymownershipterm;
 
-import com.pokemonurpg.configuration.v1.gym.GymViews;
+import com.pokemonurpg.configuration.v1.gym.GymSubdomainViews;
 
-public interface GymOwnershipTermViews extends GymViews {
+public interface GymOwnershipTermViews extends GymSubdomainViews {
     public static interface Id extends GymOwnershipTermViews {
 
     }

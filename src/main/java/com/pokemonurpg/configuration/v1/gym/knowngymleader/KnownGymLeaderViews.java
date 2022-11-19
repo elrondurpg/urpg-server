@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.knowngymleader;
 
-import com.pokemonurpg.configuration.v1.gym.GymViews;
+import com.pokemonurpg.configuration.v1.gym.GymSubdomainViews;
 
-public interface KnownGymLeaderViews extends GymViews {
+public interface KnownGymLeaderViews extends GymSubdomainViews {
     public static interface Id extends KnownGymLeaderViews {
 
     }

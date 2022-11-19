@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.elitefourownershipterm;
 
-import com.pokemonurpg.configuration.v1.gym.GymViews;
+import com.pokemonurpg.configuration.v1.gym.GymSubdomainViews;
 
-public interface EliteFourOwnershipTermViews extends GymViews {
+public interface EliteFourOwnershipTermViews extends GymSubdomainViews {
     public static interface Id extends EliteFourOwnershipTermViews {
 
     }
