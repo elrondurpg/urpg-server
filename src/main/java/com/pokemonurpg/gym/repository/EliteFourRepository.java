@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.repository;
 
 import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,8 +1,7 @@
 package com.pokemonurpg.core.service;
 
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
-import com.pokemonurpg.stats.service.EarnedRibbonService;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,6 @@ public class IndexedObjectServiceFactory {
         if (type != null) {
             switch (type.getSimpleName()) {
                 case "Gym": return gymService;
-                case "GymOwnershipTerm": return gymOwnershipTermService;
                 case "OwnedPokemon": return ownedPokemonService;
             }
         }

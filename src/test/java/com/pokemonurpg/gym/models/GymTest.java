@@ -1,5 +1,7 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.gym.input.GymInputDto;
 import com.pokemonurpg.stats.models.GymVictory;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.repository;
 
 import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

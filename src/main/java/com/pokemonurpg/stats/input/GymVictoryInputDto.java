@@ -4,7 +4,7 @@ import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownGymLeader;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

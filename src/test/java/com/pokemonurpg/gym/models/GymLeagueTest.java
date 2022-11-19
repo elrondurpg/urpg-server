@@ -1,5 +1,6 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.gym.input.GymLeagueInputDto;
 import org.junit.jupiter.api.Test;
 

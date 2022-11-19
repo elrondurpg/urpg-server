@@ -1,8 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
-import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipTermInputDto;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.input.ChampionInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.jupiter.api.Test;

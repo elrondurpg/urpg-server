@@ -24,8 +24,8 @@ public class StoryRankControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(StoryRankViews.Id.class, controller.getIdViewClass());
-        assertEquals(StoryRankViews.Id.class, controller.getBriefViewClass());
-        assertEquals(StoryRankViews.Id.class, controller.getFullViewClass());
+        assertEquals(StoryRankViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(StoryRankViews.Brief.class, controller.getFullViewClass());
     }
 
 }

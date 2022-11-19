@@ -1,8 +1,8 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.member.models.KnownNameClaim;
 import com.pokemonurpg.security.dto.RegistrationInputDto;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
@@ -232,9 +232,9 @@ public class MemberService implements NamedObjectService<Member> {
     }
 
     private void preupdateAssociatedValues(MemberInputDto input, Member member) {
-        knownGymLeaderService.rename(input, member);
-        knownEliteFourMemberService.rename(input, member);
-        knownChampionService.rename(input, member);
+        knownGymLeaderService.renameForMember(member, input.getName());
+        knownEliteFourMemberService.renameForMember(member, input.getName());
+        knownChampionService.renameForMember(member, input.getName());
     }
 
     private void updateEmbeddedValues(MemberInputDto input, Member member) {

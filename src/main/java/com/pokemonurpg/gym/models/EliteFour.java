@@ -3,6 +3,7 @@ package com.pokemonurpg.gym.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;

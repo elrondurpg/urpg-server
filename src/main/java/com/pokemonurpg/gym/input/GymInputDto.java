@@ -6,7 +6,7 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.gym.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.gym.annotation.BelongsToThisGym;
-import com.pokemonurpg.gym.models.Badge;
+import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

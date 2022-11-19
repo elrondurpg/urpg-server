@@ -2,8 +2,8 @@ package com.pokemonurpg.gym.validation;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

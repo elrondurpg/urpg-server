@@ -2,7 +2,8 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.gym.input.ChampionInputDto;
 import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.service.ChampionOwnershipTermService;
 import com.pokemonurpg.gym.repository.ChampionRepository;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.jupiter.api.Test;

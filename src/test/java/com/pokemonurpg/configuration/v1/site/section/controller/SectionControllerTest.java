@@ -24,8 +24,8 @@ public class SectionControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(SectionViews.Id.class, controller.getIdViewClass());
-        assertEquals(SectionViews.Id.class, controller.getBriefViewClass());
-        assertEquals(SectionViews.Id.class, controller.getFullViewClass());
+        assertEquals(SectionViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(SectionViews.Brief.class, controller.getFullViewClass());
     }
 
 }

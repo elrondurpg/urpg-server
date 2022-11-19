@@ -4,7 +4,7 @@ import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.gym.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.gym.input.EliteFourPokemonInputDto;
 import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.gym.service.EliteFourService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;

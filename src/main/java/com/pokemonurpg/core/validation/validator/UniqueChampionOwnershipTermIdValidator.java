@@ -1,8 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.core.validation.annotation.UniqueId;
-import com.pokemonurpg.gym.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.gym.service.ChampionOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.input.ChampionOwnershipTermInputDto;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.service.ChampionOwnershipTermService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidatorContext;

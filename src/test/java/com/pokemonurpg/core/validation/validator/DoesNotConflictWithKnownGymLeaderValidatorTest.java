@@ -1,12 +1,12 @@
 package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.gym.models.KnownChampion;
-import com.pokemonurpg.gym.models.KnownEliteFourMember;
-import com.pokemonurpg.gym.models.KnownGymLeader;
-import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import org.junit.jupiter.api.Test;

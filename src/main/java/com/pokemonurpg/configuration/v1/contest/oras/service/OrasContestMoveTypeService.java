@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.contest.oras.input.OrasContestMoveTypeInputDto;
 import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
-import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
+import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
 
 @Service
 public class OrasContestMoveTypeService extends SimpleNamedConfigurationService<OrasContestMoveType, OrasContestMoveTypeInputDto> {
 
     @Autowired
-    public OrasContestMoveTypeService(NamedConfigurationRepository<OrasContestMoveType> repository) {
+    public OrasContestMoveTypeService(OrasContestMoveTypeRepository repository) {
         super(repository, OrasContestMoveType.class);
     }
 

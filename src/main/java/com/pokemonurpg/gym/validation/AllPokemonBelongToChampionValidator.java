@@ -4,7 +4,7 @@ import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.gym.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.gym.input.ChampionPokemonInputDto;
 import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import com.pokemonurpg.gym.service.ChampionService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;

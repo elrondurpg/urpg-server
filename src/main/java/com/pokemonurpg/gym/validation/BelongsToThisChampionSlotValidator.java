@@ -3,8 +3,8 @@ package com.pokemonurpg.gym.validation;
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.gym.annotation.BelongsToThisChampionSlot;
 import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
-import com.pokemonurpg.gym.service.ChampionOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.championownershipterm.service.ChampionOwnershipTermService;
 import com.pokemonurpg.gym.service.ChampionService;
 
 import javax.annotation.Resource;

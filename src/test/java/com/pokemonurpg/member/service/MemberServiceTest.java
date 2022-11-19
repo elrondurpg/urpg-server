@@ -1,8 +1,8 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.service.AesEncryptionService;
 import com.pokemonurpg.security.service.AuthorizationService;

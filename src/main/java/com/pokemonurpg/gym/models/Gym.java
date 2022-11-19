@@ -3,11 +3,11 @@ package com.pokemonurpg.gym.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 

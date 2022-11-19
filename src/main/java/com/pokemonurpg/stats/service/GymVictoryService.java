@@ -2,7 +2,7 @@ package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.gym.models.Gym;
 import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownGymLeader;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 import com.pokemonurpg.gym.repository.GymLeagueRepository;
 import com.pokemonurpg.gym.repository.GymRepository;
 import com.pokemonurpg.member.models.Member;

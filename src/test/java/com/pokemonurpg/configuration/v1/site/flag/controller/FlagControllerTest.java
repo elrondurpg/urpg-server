@@ -24,8 +24,8 @@ public class FlagControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(FlagViews.Id.class, controller.getIdViewClass());
-        assertEquals(FlagViews.Id.class, controller.getBriefViewClass());
-        assertEquals(FlagViews.Id.class, controller.getFullViewClass());
+        assertEquals(FlagViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(FlagViews.Brief.class, controller.getFullViewClass());
     }
 
 }

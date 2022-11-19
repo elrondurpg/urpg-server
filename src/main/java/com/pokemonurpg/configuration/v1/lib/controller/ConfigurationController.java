@@ -5,11 +5,8 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -63,22 +60,6 @@ public abstract class ConfigurationController<
     public @ResponseBody
     MappingJacksonValue create(@Valid @RequestBody InputDtoClass input) {
         ModelClass model = service.create(input);
-        return createMappingJacksonValueForModelWithView(model, fullViewClass);
-    }
-
-    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
-    @PutMapping(path="/{dbid}")
-    public @ResponseBody
-    MappingJacksonValue update(@Valid @RequestBody InputDtoClass input, @PathVariable int dbid) {
-        ModelClass model = service.update(input, dbid);
-        return createMappingJacksonValueForModelWithView(model, fullViewClass);
-    }
-
-    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
-    @DeleteMapping(path="/{dbid}")
-    public @ResponseBody
-    MappingJacksonValue delete(@PathVariable int dbid) {
-        ModelClass model = service.delete(dbid);
         return createMappingJacksonValueForModelWithView(model, fullViewClass);
     }
 

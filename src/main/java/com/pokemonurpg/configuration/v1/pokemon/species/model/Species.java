@@ -3,10 +3,8 @@ package com.pokemonurpg.configuration.v1.pokemon.species.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
 import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
-import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
-import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
+import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
 import com.pokemonurpg.configuration.v1.pokemon.species.SpeciesViews;
 import com.pokemonurpg.configuration.v1.pokemon.species.constants.SpeciesConstants;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
@@ -29,21 +27,10 @@ import java.util.Set;
 @JsonView(value = { SpeciesViews.Full.class })
 @Getter
 @Setter
-public class Species extends ConfigurationModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    @JsonView(value = { SpeciesViews.Id.class, AttackViews.Full.class, AbilityViews.Full.class })
-    private Integer dbid;
-
+public class Species extends NamedConfigurationModel{
     @Column
     @JsonView(value = { SpeciesViews.Brief.class })
     private Integer dexno;
-
-    @Column
-    @JsonView(value = { SpeciesViews.Id.class, AbilityViews.Full.class, AttackViews.Full.class })
-    private String name;
 
     @OneToOne
     @JoinColumn(name = "type1_dbid")

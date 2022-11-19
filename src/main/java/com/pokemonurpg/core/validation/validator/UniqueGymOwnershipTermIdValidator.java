@@ -1,11 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.core.validation.annotation.UniqueId;
-import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
-import com.pokemonurpg.gym.service.GymService;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipTermInputDto;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidatorContext;

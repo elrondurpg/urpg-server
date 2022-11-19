@@ -29,9 +29,6 @@ public class NamedObjectServiceFactory {
     private AbilityService abilityService;
 
     @Resource
-    private BadgeService badgeService;
-
-    @Resource
     private ChampionService championService;
 
     @Resource
@@ -51,15 +48,6 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private ItemBundleService itemBundleService;
-
-    @Resource
-    private KnownChampionService knownChampionService;
-
-    @Resource
-    private KnownEliteFourMemberService knownEliteFourMemberService;
-
-    @Resource
-    private KnownGymLeaderService knownGymLeaderService;
 
     @Resource
     private MemberService memberService;
@@ -103,7 +91,6 @@ public class NamedObjectServiceFactory {
     public NamedObjectService getServiceForClass(Class type) {
         if (type != null) {
             switch (type.getSimpleName()) {
-                case "Badge": return badgeService;
                 case "Champion": return championService;
                 case "EliteFour": return eliteFourService;
                 case "Gym": return gymService;
@@ -111,9 +98,6 @@ public class NamedObjectServiceFactory {
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "ItemBundle": return itemBundleService;
-                case "KnownChampion": return knownChampionService;
-                case "KnownEliteFourMember": return knownEliteFourMemberService;
-                case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
                 case "Permission": return permissionService;

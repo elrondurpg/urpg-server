@@ -2,8 +2,8 @@ package com.pokemonurpg.gym.validation;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.service.EliteFourOwnershipTermService;
 import com.pokemonurpg.gym.service.EliteFourService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

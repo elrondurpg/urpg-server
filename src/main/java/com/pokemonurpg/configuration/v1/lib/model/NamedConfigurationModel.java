@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.lib.model;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -16,12 +13,7 @@ import lombok.Setter;
 @JsonView(value = { ConfigurationViews.V1.class })
 @Getter
 @Setter
-public abstract class NamedConfigurationModel extends ConfigurationModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    @JsonView(value = { ConfigurationViews.V1.class })
-    private Integer dbid;
+public abstract class NamedConfigurationModel extends IndexedConfigurationModel {
 
     @Column
     @JsonView(value = { ConfigurationViews.V1.class })

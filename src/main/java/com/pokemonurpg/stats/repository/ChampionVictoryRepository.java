@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.repository;
 
-import com.pokemonurpg.gym.models.KnownChampion;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.models.ChampionVictory;
 import com.pokemonurpg.stats.models.ChampionVictoryKey;

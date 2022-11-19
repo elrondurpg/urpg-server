@@ -4,11 +4,11 @@ import com.pokemonurpg.configuration.v1.attack.category.repository.AttackCategor
 import com.pokemonurpg.configuration.v1.attack.target.repository.AttackTargetTypeRepository;
 import com.pokemonurpg.configuration.v1.attack.attack.input.AttackInputDto;
 import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
 import com.pokemonurpg.configuration.v1.contest.attribute.repository.ContestAttributeRepository;
 import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.contest.rse.repository.RseContestMoveTypeRepository;
-import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.item.repository.ItemRepository;
 
@@ -28,7 +28,7 @@ public class AttackService extends NamedConfigurationService<Attack, AttackInput
     private ContestComboService contestComboService;
 
     @Autowired
-    public AttackService(NamedConfigurationRepository<Attack> repository,
+    public AttackService(AttackRepository repository,
             AttackCategoryRepository attackCategoryRepository, AttackTargetTypeRepository attackTargetTypeRepository,
             TypeRepository typeRepository, ContestAttributeRepository contestAttributeRepository,
             RseContestMoveTypeRepository rseContestMoveTypeRepository,

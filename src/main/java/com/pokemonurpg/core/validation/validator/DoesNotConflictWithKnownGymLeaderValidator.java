@@ -2,9 +2,9 @@ package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLeader;
-import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 

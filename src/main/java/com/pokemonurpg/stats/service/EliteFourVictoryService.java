@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.gym.models.KnownEliteFourMember;
+import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
 import com.pokemonurpg.stats.models.EliteFourVictory;

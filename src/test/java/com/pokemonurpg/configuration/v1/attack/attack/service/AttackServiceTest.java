@@ -30,7 +30,7 @@ public class AttackServiceTest {
     private AttackService service;
 
     @Mock
-    private AttackRepository attackRepository;
+    private AttackRepository repository;
 
     @Mock
     private AttackCategoryRepository attackCategoryRepository;
@@ -55,6 +55,12 @@ public class AttackServiceTest {
 
     @Mock
     private ContestComboService contestComboService;
+
+    @Test
+    public void test_constructor() {
+        assertEquals(repository, service.getRepository());
+        assertEquals(Attack.class, service.getModelClass());
+    }
 
     @Test
     public void test_updateBase() {

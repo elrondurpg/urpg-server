@@ -24,8 +24,8 @@ public class ArtRankControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(ArtRankViews.Id.class, controller.getIdViewClass());
-        assertEquals(ArtRankViews.Id.class, controller.getBriefViewClass());
-        assertEquals(ArtRankViews.Id.class, controller.getFullViewClass());
+        assertEquals(ArtRankViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(ArtRankViews.Brief.class, controller.getFullViewClass());
     }
 
 }

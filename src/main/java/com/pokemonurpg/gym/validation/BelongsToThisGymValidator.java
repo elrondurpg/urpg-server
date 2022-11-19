@@ -3,8 +3,8 @@ package com.pokemonurpg.gym.validation;
 import com.pokemonurpg.core.service.*;
 import com.pokemonurpg.gym.annotation.BelongsToThisGym;
 import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
 import com.pokemonurpg.gym.service.GymService;
 
 import javax.annotation.Resource;

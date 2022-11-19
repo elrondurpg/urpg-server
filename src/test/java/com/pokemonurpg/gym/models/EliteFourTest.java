@@ -1,5 +1,6 @@
 package com.pokemonurpg.gym.models;
 
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
 import com.pokemonurpg.stats.models.EliteFourVictory;

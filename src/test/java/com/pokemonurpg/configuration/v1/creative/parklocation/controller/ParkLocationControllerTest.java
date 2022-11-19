@@ -24,8 +24,8 @@ public class ParkLocationControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(ParkLocationViews.Id.class, controller.getIdViewClass());
-        assertEquals(ParkLocationViews.Id.class, controller.getBriefViewClass());
-        assertEquals(ParkLocationViews.Id.class, controller.getFullViewClass());
+        assertEquals(ParkLocationViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(ParkLocationViews.Brief.class, controller.getFullViewClass());
     }
 
 }

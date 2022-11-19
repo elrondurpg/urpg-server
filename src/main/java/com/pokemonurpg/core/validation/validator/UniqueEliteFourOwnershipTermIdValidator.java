@@ -1,9 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.core.validation.annotation.UniqueId;
-import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.input.EliteFourOwnershipTermInputDto;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.service.EliteFourOwnershipTermService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidatorContext;

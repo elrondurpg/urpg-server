@@ -1,11 +1,12 @@
 package com.pokemonurpg.gym.service;
 
+import com.pokemonurpg.configuration.v1.gym.badge.service.BadgeService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.NamedObjectService;
 import com.pokemonurpg.gym.input.EliteFourInputDto;
 import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.repository.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.repository.EliteFourOwnershipTermRepository;
 import com.pokemonurpg.gym.repository.EliteFourRepository;
 
 import org.springframework.stereotype.Service;
