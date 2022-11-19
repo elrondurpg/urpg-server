@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public abstract class GetParams {
-    private final static int DEFAULT_PAGE = 1;
+    private final static int DEFAULT_PAGE = 0;
     private final static int DEFAULT_ITEMS_PER_PAGE = 25;
 
     @Min(0)

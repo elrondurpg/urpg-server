@@ -1,7 +1,5 @@
 package com.pokemonurpg.core.service;
 
-import com.pokemonurpg.attack.service.AttackCategoryService;
-import com.pokemonurpg.attack.service.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
@@ -33,12 +31,6 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private ArtRankService artRankService;
-
-    @Resource
-    private AttackCategoryService attackCategoryService;
-
-    @Resource
-    private AttackTargetTypeService attackTargetTypeService;
 
     @Resource
     private BadgeService badgeService;
@@ -116,8 +108,6 @@ public class NamedObjectServiceFactory {
         if (type != null) {
             switch (type.getSimpleName()) {
                 case "ArtRank": return artRankService;
-                case "AttackCategory": return attackCategoryService;
-                case "AttackTargetType": return attackTargetTypeService;
                 case "Badge": return badgeService;
                 case "Champion": return championService;
                 case "EliteFour": return eliteFourService;

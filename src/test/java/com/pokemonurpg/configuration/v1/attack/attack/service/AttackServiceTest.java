@@ -11,8 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.pokemonurpg.attack.repository.AttackCategoryRepository;
-import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.configuration.v1.attack.category.repository.AttackCategoryRepository;
+import com.pokemonurpg.configuration.v1.attack.target.repository.AttackTargetTypeRepository;
 import com.pokemonurpg.configuration.v1.attack.attack.input.AttackInputDto;
 import com.pokemonurpg.configuration.v1.attack.attack.input.AttackInputTestDto;
 import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;

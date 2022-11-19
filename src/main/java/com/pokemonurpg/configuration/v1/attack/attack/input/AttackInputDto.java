@@ -8,8 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.pokemonurpg.attack.models.AttackCategory;
-import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.configuration.v1.attack.category.model.AttackCategory;
+import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
 import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
 import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
 import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;

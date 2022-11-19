@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.attack.attack.input;
 
 import java.util.Collections;
 
-import com.pokemonurpg.attack.models.AttackCategory;
-import com.pokemonurpg.attack.models.AttackTargetType;
+import com.pokemonurpg.configuration.v1.attack.category.model.AttackCategory;
+import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
 import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
 import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
