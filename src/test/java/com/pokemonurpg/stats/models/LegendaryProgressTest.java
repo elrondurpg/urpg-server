@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.general.models.Section;
+import com.pokemonurpg.configuration.v1.site.section.model.Section;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
 import org.junit.jupiter.api.Test;

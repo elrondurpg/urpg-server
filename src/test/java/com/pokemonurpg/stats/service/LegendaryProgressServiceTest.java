@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.general.service.SectionService;
+import com.pokemonurpg.configuration.v1.site.section.model.Section;
+import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
 import com.pokemonurpg.stats.models.LegendaryProgress;

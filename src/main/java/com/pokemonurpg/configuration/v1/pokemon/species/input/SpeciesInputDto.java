@@ -1,14 +1,14 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.input;
 
+import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.*;
-import com.pokemonurpg.creative.models.ArtRank;
-import com.pokemonurpg.creative.models.ParkLocation;
-import com.pokemonurpg.creative.models.ParkRank;
-import com.pokemonurpg.creative.models.StoryRank;
+import com.pokemonurpg.configuration.v1.creative.parklocation.model.ParkLocation;
+import com.pokemonurpg.configuration.v1.creative.parkrank.model.ParkRank;
+import com.pokemonurpg.configuration.v1.creative.storyrank.model.StoryRank;
 
 import lombok.Getter;
 import lombok.Setter;

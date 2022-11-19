@@ -5,12 +5,11 @@ import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMet
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.creative.service.ArtRankService;
-import com.pokemonurpg.creative.service.ParkLocationService;
-import com.pokemonurpg.creative.service.ParkRankService;
-import com.pokemonurpg.creative.service.StoryRankService;
-import com.pokemonurpg.general.service.FlagService;
-import com.pokemonurpg.general.service.SectionService;
+import com.pokemonurpg.configuration.v1.creative.parklocation.service.ParkLocationService;
+import com.pokemonurpg.configuration.v1.creative.parkrank.service.ParkRankService;
+import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
+import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
+import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
 import com.pokemonurpg.gym.service.*;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemBundleService;
@@ -28,9 +27,6 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private AbilityService abilityService;
-
-    @Resource
-    private ArtRankService artRankService;
 
     @Resource
     private BadgeService badgeService;
@@ -107,11 +103,9 @@ public class NamedObjectServiceFactory {
     public NamedObjectService getServiceForClass(Class type) {
         if (type != null) {
             switch (type.getSimpleName()) {
-                case "ArtRank": return artRankService;
                 case "Badge": return badgeService;
                 case "Champion": return championService;
                 case "EliteFour": return eliteFourService;
-                case "Flag": return flagService;
                 case "Gym": return gymService;
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;
@@ -122,12 +116,8 @@ public class NamedObjectServiceFactory {
                 case "KnownGymLeader": return knownGymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
-                case "ParkLocation": return parkLocationService;
-                case "ParkRank": return parkRankService;
                 case "Permission": return permissionService;
                 case "Role": return roleService;
-                case "Section": return sectionService;
-                case "StoryRank": return storyRankService;
             }
         }
         return null;

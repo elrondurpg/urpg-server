@@ -1,6 +1,5 @@
 package com.pokemonurpg.configuration.v1.pokemon.nature.input;
 
-
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.core.validation.ObjectCreation;

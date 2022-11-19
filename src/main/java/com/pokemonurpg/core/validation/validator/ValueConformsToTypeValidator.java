@@ -7,9 +7,9 @@ import com.pokemonurpg.core.service.NamedObjectServiceFactory;
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.core.validation.annotation.ValueConformsToType;
-import com.pokemonurpg.general.input.FlagInputDto;
-import com.pokemonurpg.general.models.Flag;
-import com.pokemonurpg.general.service.FlagService;
+import com.pokemonurpg.configuration.v1.site.flag.input.FlagInputDto;
+import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
+import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;

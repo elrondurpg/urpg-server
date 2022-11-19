@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import com.pokemonurpg.creative.service.ArtRankService;
-import com.pokemonurpg.creative.service.ParkLocationService;
-import com.pokemonurpg.creative.service.ParkRankService;
-import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.configuration.v1.creative.artrank.service.ArtRankService;
+import com.pokemonurpg.configuration.v1.creative.parklocation.service.ParkLocationService;
+import com.pokemonurpg.configuration.v1.creative.parkrank.service.ParkRankService;
+import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;

@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.creative.models.ArtRank;
-import com.pokemonurpg.creative.models.ParkLocation;
-import com.pokemonurpg.creative.models.ParkRank;
-import com.pokemonurpg.creative.models.StoryRank;
+import com.pokemonurpg.configuration.v1.creative.parklocation.model.ParkLocation;
+import com.pokemonurpg.configuration.v1.creative.parkrank.model.ParkRank;
+import com.pokemonurpg.configuration.v1.creative.storyrank.model.StoryRank;
 import com.pokemonurpg.test.RandomNumberGenerator;
 import com.pokemonurpg.test.RandomStringGenerator;
 

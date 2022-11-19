@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.input;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.general.models.Section;
+import com.pokemonurpg.configuration.v1.site.section.model.Section;
 import com.pokemonurpg.strings.GeneralConstants;
 
 import org.hibernate.validator.group.GroupSequenceProvider;

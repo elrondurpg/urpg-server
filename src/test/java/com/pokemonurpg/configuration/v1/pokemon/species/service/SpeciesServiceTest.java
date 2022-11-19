@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.pokemonurpg.configuration.v1.creative.artrank.service.ArtRankService;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesInputTestDto;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
@@ -20,10 +22,9 @@ import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
 import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
-import com.pokemonurpg.creative.service.ArtRankService;
-import com.pokemonurpg.creative.service.ParkLocationService;
-import com.pokemonurpg.creative.service.ParkRankService;
-import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.configuration.v1.creative.parklocation.service.ParkLocationService;
+import com.pokemonurpg.configuration.v1.creative.parkrank.service.ParkRankService;
+import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
 import com.pokemonurpg.test.RandomNumberGenerator;
 
 @ExtendWith(MockitoExtension.class)

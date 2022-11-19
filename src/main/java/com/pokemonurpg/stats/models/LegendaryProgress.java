@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.general.models.Section;
+import com.pokemonurpg.configuration.v1.site.section.model.Section;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
 

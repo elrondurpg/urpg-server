@@ -1,7 +1,7 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.general.models.Flag;
-import com.pokemonurpg.general.service.FlagService;
+import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
+import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.KnownNameClaimService;
 import com.pokemonurpg.member.service.MemberService;
