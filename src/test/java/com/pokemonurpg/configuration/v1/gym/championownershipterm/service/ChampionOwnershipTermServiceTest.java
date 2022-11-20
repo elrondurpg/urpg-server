@@ -18,8 +18,8 @@ import com.pokemonurpg.configuration.v1.gym.championownershipterm.input.Champion
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.repository.ChampionOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
-import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.service.ChampionService;
+import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
+import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;

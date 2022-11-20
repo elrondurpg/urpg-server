@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.championownershipterm.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.service.ChampionService;
+import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
+import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.input.ChampionOwnershipTermInputDto;

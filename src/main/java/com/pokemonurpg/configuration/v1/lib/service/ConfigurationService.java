@@ -60,8 +60,6 @@ public abstract class ConfigurationService<
 
     }
 
-    protected void setDefaultValues() {}
-
     protected <T> void setIfNotNull(T value, FieldSetter<T> setter) {
         if (value != null) {
             setter.setValue(value);

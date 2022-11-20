@@ -11,8 +11,8 @@ import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.input.EliteFo
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.repository.EliteFourOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.service.EliteFourService;
+import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
+import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;

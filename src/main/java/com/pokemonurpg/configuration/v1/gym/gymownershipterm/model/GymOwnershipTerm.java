@@ -6,6 +6,7 @@ import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
 import com.pokemonurpg.configuration.v1.gym.gym.GymViews;
 import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.model.League;
+import com.pokemonurpg.configuration.v1.gym.lib.constants.GymConstants;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 
@@ -54,4 +55,9 @@ public class GymOwnershipTerm extends IndexedConfigurationModel {
     @JoinColumn(name = "tm_dbid")
     private Item tm;
 
+    public void setDefaultValues() {
+        if (getWins() == null) setWins(GymConstants.DEFAULT_WINS);
+        if (getDraws() == null) setDraws(GymConstants.DEFAULT_LOSSES);
+        if (getLosses() == null) setLosses(GymConstants.DEFAULT_DRAWS);
+    }
 }

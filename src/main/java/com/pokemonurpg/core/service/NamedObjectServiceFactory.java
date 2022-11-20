@@ -10,7 +10,6 @@ import com.pokemonurpg.configuration.v1.creative.parkrank.service.ParkRankServic
 import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
 import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
 import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
-import com.pokemonurpg.gym.service.*;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemBundleService;
 import com.pokemonurpg.item.service.ItemService;
@@ -27,12 +26,6 @@ public class NamedObjectServiceFactory {
 
     @Resource
     private AbilityService abilityService;
-
-    @Resource
-    private ChampionService championService;
-
-    @Resource
-    private EliteFourService eliteFourService;
 
     @Resource
     private FlagService flagService;
@@ -85,8 +78,6 @@ public class NamedObjectServiceFactory {
     public NamedObjectService getServiceForClass(Class type) {
         if (type != null) {
             switch (type.getSimpleName()) {
-                case "Champion": return championService;
-                case "EliteFour": return eliteFourService;
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "ItemBundle": return itemBundleService;

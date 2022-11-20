@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueId;
-import com.pokemonurpg.gym.models.Champion;
+import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
 import com.pokemonurpg.member.models.Member;
 
 import lombok.Getter;

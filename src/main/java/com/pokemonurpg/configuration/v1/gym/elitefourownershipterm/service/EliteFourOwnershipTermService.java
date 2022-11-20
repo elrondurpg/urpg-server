@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.service.EliteFourService;
+import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
+import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.input.EliteFourOwnershipTermInputDto;

@@ -23,13 +23,13 @@ public class GymService extends NamedConfigurationService<Gym, GymInputDto> {
 
     @Autowired
     public GymService(
-        GymRepository repo,
-        BadgeService badgeService,
-        TypeService typeService,
-        GymOwnershipTermRepository gymOwnershipTermRepository,
-        GymPokemonService gymPokemonService) {
-        super(repo, Gym.class);
-        this.repository = repo;
+            GymRepository repository,
+            BadgeService badgeService,
+            TypeService typeService,
+            GymOwnershipTermRepository gymOwnershipTermRepository,
+            GymPokemonService gymPokemonService) {
+        super(repository, Gym.class);
+        this.repository = repository;
         this.badgeService = badgeService;
         this.typeService = typeService;
         this.gymOwnershipTermRepository = gymOwnershipTermRepository;
