@@ -1,6 +1,12 @@
 package com.pokemonurpg.member.input;
 
 
+import com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.MemberRoleInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLeader;
@@ -45,19 +51,19 @@ public class MemberInputDto implements UniquelyNamedInputDto {
     @NotNull(groups = { ObjectCreation.class })
     private Date joinDate;
 
-    private List<@Valid MemberRoleInputDto> roles = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.MemberRoleInputDto> roles = new ArrayList<>();
 
-    private List<@Valid LegendaryProgressInputDto> legendaryProgress = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto> legendaryProgress = new ArrayList<>();
 
-    private List<@Valid OwnedItemInputDto> items = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto> items = new ArrayList<>();
 
     private Boolean bot;
 
-    private List<@Valid EliteFourVictoryInputDto> eliteFourVictories = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto> eliteFourVictories = new ArrayList<>();
 
-    private List<@Valid ChampionVictoryInputDto> championVictories = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto> championVictories = new ArrayList<>();
 
-    private List<@Valid GymVictoryInputDto> gymVictories = new ArrayList<>();
+    private List<com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto> gymVictories = new ArrayList<>();
 
     public String getDiscordId() {
         return discordId;

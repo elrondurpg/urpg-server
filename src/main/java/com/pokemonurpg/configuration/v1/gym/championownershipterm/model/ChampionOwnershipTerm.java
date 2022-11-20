@@ -5,6 +5,7 @@ import com.pokemonurpg.configuration.v1.gym.champion.ChampionViews;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.ChampionOwnershipTermViews;
 import com.pokemonurpg.configuration.v1.gym.lib.constants.GymConstants;
 import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
+import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
 import com.pokemonurpg.member.models.Member;
 
@@ -23,7 +24,7 @@ public class ChampionOwnershipTerm extends IndexedConfigurationModel {
 
     @OneToOne
     @JoinColumn(name = "slot_dbid")
-    @JsonView(value = { ChampionOwnershipTermViews.Id.class })
+    @JsonView(value = { ChampionOwnershipTermViews.Id.class, MemberViews.Full.class })
     private Champion slot;
 
     @OneToOne
@@ -32,16 +33,19 @@ public class ChampionOwnershipTerm extends IndexedConfigurationModel {
     private Member owner;
 
     @Column(name = "open_date")
-    @JsonView(value = { ChampionOwnershipTermViews.Id.class, ChampionViews.Brief.class })
+    @JsonView(value = { ChampionOwnershipTermViews.Id.class, ChampionViews.Brief.class, MemberViews.Full.class })
     private Date openDate;
 
     @Column
+    @JsonView(value = { ChampionOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer wins;
 
     @Column
+    @JsonView(value = { ChampionOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer losses;
 
     @Column
+    @JsonView(value = { ChampionOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer draws;
 
     public void setDefaultValues() {

@@ -3,11 +3,11 @@ package com.pokemonurpg.stats.service;
 import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.configuration.v1.gym.league.repository.LeagueRepository;
+import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
+import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 import com.pokemonurpg.configuration.v1.gym.gym.repository.GymRepository;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.GymVictoryInputDto;
-import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.repository.GymVictoryRepository;
 import org.springframework.stereotype.Service;
 

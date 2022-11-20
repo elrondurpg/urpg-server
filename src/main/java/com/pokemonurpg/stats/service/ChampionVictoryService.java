@@ -1,9 +1,9 @@
 package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
+import com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto;
+import com.pokemonurpg.configuration.v1.member.member.model.ChampionVictory;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
-import com.pokemonurpg.stats.models.ChampionVictory;
 import com.pokemonurpg.stats.repository.ChampionVictoryRepository;
 import org.springframework.stereotype.Service;
 

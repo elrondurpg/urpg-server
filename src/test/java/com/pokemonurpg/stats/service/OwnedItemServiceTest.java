@@ -1,10 +1,10 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
+import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
-import com.pokemonurpg.stats.models.OwnedItem;
 import com.pokemonurpg.stats.repository.OwnedItemRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

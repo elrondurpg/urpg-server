@@ -3,6 +3,7 @@ package com.pokemonurpg.configuration.v1.gym.gymownershipterm.model;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.GymOwnershipTermViews;
 import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
+import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.gym.gym.GymViews;
 import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.model.League;
@@ -25,7 +26,7 @@ public class GymOwnershipTerm extends IndexedConfigurationModel {
 
     @OneToOne
     @JoinColumn(name = "gym_dbid")
-    @JsonView(value = { GymOwnershipTermViews.Id.class })
+    @JsonView(value = { GymOwnershipTermViews.Id.class, MemberViews.Full.class })
     private Gym gym;
 
     @OneToOne
@@ -35,24 +36,28 @@ public class GymOwnershipTerm extends IndexedConfigurationModel {
 
     @OneToOne
     @JoinColumn(name = "league_dbid")
-    @JsonView(value = { GymOwnershipTermViews.Brief.class, GymViews.Brief.class })
+    @JsonView(value = { GymOwnershipTermViews.Brief.class, GymViews.Brief.class, MemberViews.Full.class })
     private League league;
 
     @Column(name = "open_date")
-    @JsonView(value = { GymOwnershipTermViews.Id.class, GymViews.Brief.class })
+    @JsonView(value = { GymOwnershipTermViews.Id.class, GymViews.Brief.class, MemberViews.Full.class })
     private Date openDate;
 
     @Column
+    @JsonView(value = { GymOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer wins;
 
     @Column
+    @JsonView(value = { GymOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer losses;
 
     @Column
+    @JsonView(value = { GymOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Integer draws;
 
     @OneToOne
     @JoinColumn(name = "tm_dbid")
+    @JsonView(value = { GymOwnershipTermViews.Brief.class, MemberViews.Full.class })
     private Item tm;
 
     public void setDefaultValues() {

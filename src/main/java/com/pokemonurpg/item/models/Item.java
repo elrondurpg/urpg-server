@@ -3,6 +3,7 @@ package com.pokemonurpg.item.models;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.configuration.v1.attack.attack.AttackViews;
+import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.item.input.ItemInputDto;
 
@@ -23,6 +24,7 @@ public class Item implements NamedObject {
     private Integer price;
 
     @Column
+    @JsonView(value = { MemberViews.Full.class })
     private String type;
 
     @Column

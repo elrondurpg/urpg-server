@@ -1,11 +1,12 @@
 package com.pokemonurpg.stats.service;
 
+import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
+import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.item.repository.ItemRepository;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
 import com.pokemonurpg.stats.repository.OwnedItemRepository;
-import com.pokemonurpg.stats.models.OwnedItem;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

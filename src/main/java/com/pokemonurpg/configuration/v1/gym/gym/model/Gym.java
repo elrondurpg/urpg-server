@@ -5,8 +5,8 @@ import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
 import com.pokemonurpg.configuration.v1.gym.gym.GymViews;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
+import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import lombok.Getter;

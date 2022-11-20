@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.champion;
 
-import com.pokemonurpg.configuration.v1.gym.GymViews;
+import com.pokemonurpg.configuration.v1.gym.GymSubdomainViews;
 
-public interface ChampionViews extends GymViews {
+public interface ChampionViews extends GymSubdomainViews {
     public static interface Id extends ChampionViews {
 
     }

@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.elitefour;
 
-import com.pokemonurpg.configuration.v1.gym.GymViews;
+import com.pokemonurpg.configuration.v1.gym.GymSubdomainViews;
 
-public interface EliteFourViews extends GymViews {
+public interface EliteFourViews extends GymSubdomainViews {
     public static interface Id extends EliteFourViews {
 
     }

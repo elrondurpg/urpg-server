@@ -8,6 +8,11 @@ import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.member.member.model.ChampionVictory;
+import com.pokemonurpg.configuration.v1.member.member.model.EliteFourVictory;
+import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
+import com.pokemonurpg.configuration.v1.member.member.model.LegendaryProgress;
+import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 
