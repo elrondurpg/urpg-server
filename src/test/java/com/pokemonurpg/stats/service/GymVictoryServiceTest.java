@@ -1,15 +1,8 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.repository.GymLeagueRepository;
-import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.GymVictoryInputDto;
-import com.pokemonurpg.stats.models.GymVictory;
-import com.pokemonurpg.stats.repository.GymVictoryRepository;
+import static org.mockito.Mockito.mock;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -17,10 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.repository.GymRepository;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
+import com.pokemonurpg.configuration.v1.gym.league.repository.LeagueRepository;
+import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.stats.input.GymVictoryInputDto;
+import com.pokemonurpg.stats.models.GymVictory;
+import com.pokemonurpg.stats.repository.GymVictoryRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class GymVictoryServiceTest {
@@ -29,7 +26,7 @@ public class GymVictoryServiceTest {
     private final static String DEFENDER = "DEFENDER";
     private final static Gym GYM = mock(Gym.class);
     private final static String GYM_NAME = "GYM_NAME";
-    private final static GymLeague LEAGUE = mock(GymLeague.class);
+    private final static League LEAGUE = mock(League.class);
     private final static String LEAGUE_NAME = "LEAGUE_NAME";
     private final static String LOG_URL = "LOG_URL";
     private final static GymVictory EXISTING_RECORD = mock(GymVictory.class);
@@ -44,7 +41,7 @@ public class GymVictoryServiceTest {
     private GymRepository gymRepository;
 
     @Mock
-    private GymLeagueRepository gymLeagueRepository;
+    private LeagueRepository gymLeagueRepository;
 
     private GymVictoryInputDto input;
 

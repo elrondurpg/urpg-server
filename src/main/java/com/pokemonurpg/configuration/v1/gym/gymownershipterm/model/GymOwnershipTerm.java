@@ -3,8 +3,8 @@ package com.pokemonurpg.configuration.v1.gym.gymownershipterm.model;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.GymOwnershipTermViews;
 import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 
@@ -33,7 +33,7 @@ public class GymOwnershipTerm extends IndexedConfigurationModel {
 
     @OneToOne
     @JoinColumn(name = "league_dbid")
-    private GymLeague league;
+    private League league;
 
     @Column(name = "open_date")
     @JsonView(value = { GymOwnershipTermViews.Id.class })

@@ -38,12 +38,6 @@ public class NamedObjectServiceFactory {
     private FlagService flagService;
 
     @Resource
-    private GymService gymService;
-
-    @Resource
-    private GymLeagueService gymLeagueService;
-
-    @Resource
     private ItemService itemService;
 
     @Resource
@@ -93,8 +87,6 @@ public class NamedObjectServiceFactory {
             switch (type.getSimpleName()) {
                 case "Champion": return championService;
                 case "EliteFour": return eliteFourService;
-                case "Gym": return gymService;
-                case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "ItemBundle": return itemBundleService;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.site.flag.service;
 
-import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.site.flag.input.FlagInputDto;
 import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
 import com.pokemonurpg.configuration.v1.site.flag.repository.FlagRepository;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FlagService extends SimpleNamedConfigurationService<Flag, FlagInputDto> {
+public class FlagService extends NamedConfigurationService<Flag, FlagInputDto> {
 
     @Autowired
     public FlagService(FlagRepository repo) {
@@ -22,5 +22,23 @@ public class FlagService extends SimpleNamedConfigurationService<Flag, FlagInput
         setIfNotNull(input.getDescription(), model::setDescription);
         setIfNotNull(input.getType(), model::setType);
         setIfNotNull(input.getValue(), model::setValue);
+    }
+
+    @Override
+    protected void updateEmbeddedValues(Flag model, FlagInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void updateAssociatedValues(Flag model, FlagInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void deleteAssociatedValues(Flag model) {
+        // TODO Auto-generated method stub
+        
     }
 }

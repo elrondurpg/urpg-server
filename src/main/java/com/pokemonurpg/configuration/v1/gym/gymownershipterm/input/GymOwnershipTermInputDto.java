@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueId;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 
@@ -44,7 +44,7 @@ public class GymOwnershipTermInputDto extends ConfigurationInputDto {
     private String owner;
 
     @NotNull(groups = { ObjectCreation.class })
-    @ExistsInDb(type = GymLeague.class)
+    @ExistsInDb(type = League.class)
     private String league;
 
     @NotNull(groups = { ObjectCreation.class })

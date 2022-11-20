@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ public class GymVictoryTest {
     private final static Member CHALLENGER = new Member();
     private final static String DEFENDER = "DEFENDER_NAME";
     private final static Gym GYM = new Gym();
-    private final static GymLeague LEAGUE = new GymLeague();
+    private final static League LEAGUE = new League();
     private final static Date DATE = new Date();
     private final static String LOG_URL = "LOG_URL";
 /*

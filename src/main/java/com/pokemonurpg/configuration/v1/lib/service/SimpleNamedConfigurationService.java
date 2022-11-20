@@ -15,16 +15,16 @@ extends NamedConfigurationService<ModelClass, InputDtoClass> {
     }
 
     @Override
-    protected void updateBase(ModelClass model, InputDtoClass input) {
+    protected final void updateBase(ModelClass model, InputDtoClass input) {
         setIfNotNull(input.getName(), model::setName);
     }
 
     @Override
-    protected void updateEmbeddedValues(ModelClass model, InputDtoClass input) {    }
+    protected final void updateEmbeddedValues(ModelClass model, InputDtoClass input) {    }
 
     @Override
-    protected void updateAssociatedValues(ModelClass model, InputDtoClass input) {    }
+    protected final void updateAssociatedValues(ModelClass model, InputDtoClass input) {    }
 
     @Override
-    protected void deleteAssociatedValues(ModelClass model) {    }
+    protected final void deleteAssociatedValues(ModelClass model) {    }
 }

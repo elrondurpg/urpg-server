@@ -1,28 +1,28 @@
 package com.pokemonurpg.configuration.v1.gym.gymownershipterm.service;
 
-import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.service.GymLeagueService;
-import com.pokemonurpg.gym.service.GymService;
-import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwnershipTermRepository;
-import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
-
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipTermInputDto;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwnershipTermRepository;
+import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
+import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
+import com.pokemonurpg.item.service.ItemService;
+import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.member.service.MemberService;
 
 @Service
 public class GymOwnershipTermService extends IndexedConfigurationService<GymOwnershipTerm, GymOwnershipTermInputDto> {
 
     private GymOwnershipTermRepository repository;
     private GymService gymService;
-    private GymLeagueService gymLeagueService;
+    private LeagueService gymLeagueService;
     private ItemService itemService;
     private MemberService memberService;
     private KnownGymLeaderService knownGymLeaderService;
@@ -31,7 +31,7 @@ public class GymOwnershipTermService extends IndexedConfigurationService<GymOwne
     public GymOwnershipTermService(
         GymOwnershipTermRepository repository,
         GymService gymService, 
-        GymLeagueService gymLeagueService,
+        LeagueService gymLeagueService,
         ItemService itemService,
         MemberService memberService,
         KnownGymLeaderService knownGymLeaderService) {

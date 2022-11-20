@@ -1,9 +1,9 @@
 package com.pokemonurpg.core.service;
 
-import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.LegendaryProgress;
 import com.pokemonurpg.stats.models.OwnedPokemon;

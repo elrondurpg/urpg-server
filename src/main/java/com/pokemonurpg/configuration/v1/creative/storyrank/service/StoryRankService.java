@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.creative.storyrank.service;
 
-import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.creative.storyrank.input.StoryRankInputDto;
 import com.pokemonurpg.configuration.v1.creative.storyrank.model.StoryRank;
 import com.pokemonurpg.configuration.v1.creative.storyrank.repository.StoryRankRepository;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StoryRankService extends SimpleNamedConfigurationService<StoryRank, StoryRankInputDto> {
+public class StoryRankService extends NamedConfigurationService<StoryRank, StoryRankInputDto> {
 
     @Autowired
     public StoryRankService(StoryRankRepository repo) {
@@ -20,5 +20,23 @@ public class StoryRankService extends SimpleNamedConfigurationService<StoryRank,
     public void updateBase(StoryRank model, StoryRankInputDto input) {
         super.updateBase(model, input);
         setIfNotNull(input.getRequirement(), model::setRequirement);
+    }
+
+    @Override
+    protected void updateEmbeddedValues(StoryRank model, StoryRankInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void updateAssociatedValues(StoryRank model, StoryRankInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void deleteAssociatedValues(StoryRank model) {
+        // TODO Auto-generated method stub
+        
     }
 }

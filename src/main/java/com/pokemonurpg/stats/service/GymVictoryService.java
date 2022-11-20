@@ -1,10 +1,10 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
+import com.pokemonurpg.configuration.v1.gym.league.repository.LeagueRepository;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
-import com.pokemonurpg.gym.repository.GymLeagueRepository;
-import com.pokemonurpg.gym.repository.GymRepository;
+import com.pokemonurpg.configuration.v1.gym.gym.repository.GymRepository;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 import com.pokemonurpg.stats.models.GymVictory;
@@ -23,11 +23,11 @@ public class GymVictoryService {
     private GymRepository gymRepository;
 
     @Resource
-    private GymLeagueRepository gymLeagueRepository;
+    private LeagueRepository gymLeagueRepository;
 
     public void update(GymVictoryInputDto input, Member challenger, KnownGymLeader defender) {
         Gym gym = gymRepository.findByName(input.getGym());
-        GymLeague league = gymLeagueRepository.findByName(input.getLeague());
+        League league = gymLeagueRepository.findByName(input.getLeague());
 
         GymVictory existingRecord = gymVictoryRepository.findByChallengerAndDefenderAndGymAndLeague(challenger, defender, gym, league);
 

@@ -1,6 +1,6 @@
 package com.pokemonurpg.member.models;
 
-import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;

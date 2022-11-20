@@ -3,8 +3,8 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
@@ -46,7 +46,7 @@ public class GymVictory {
     @MapsId("league_dbid")
     @JoinColumn(name="league_dbid")
     @JsonIgnoreProperties({ "dbid", "gyms" })
-    private GymLeague league;
+    private League league;
 
     @Column
     private Date date;
@@ -57,7 +57,7 @@ public class GymVictory {
     public GymVictory() {
     }
 
-    public GymVictory(GymVictoryInputDto input, Member challenger, KnownGymLeader defender, Gym gym, GymLeague league) {
+    public GymVictory(GymVictoryInputDto input, Member challenger, KnownGymLeader defender, Gym gym, League league) {
         this.update(input);
         this.id = new GymVictoryKey(challenger.getDbid(), defender.getDbid(), gym.getDbid(), league.getDbid());
         setChallenger(challenger);
@@ -95,11 +95,11 @@ public class GymVictory {
         this.gym = gym;
     }
 
-    public GymLeague getLeague() {
+    public League getLeague() {
         return league;
     }
 
-    public void setLeague(GymLeague league) {
+    public void setLeague(League league) {
         this.league = league;
     }
 

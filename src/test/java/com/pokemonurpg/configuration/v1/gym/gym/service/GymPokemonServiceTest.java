@@ -1,8 +1,8 @@
-package com.pokemonurpg.gym.service;
+package com.pokemonurpg.configuration.v1.gym.gym.service;
 
-import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.gym.input.GymPokemonInputDto;
-import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.input.GymPokemonInputDto;
+import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.junit.jupiter.api.Test;

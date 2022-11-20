@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.gym.gymownershipterm.input;
 
 import java.util.Date;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.test.RandomNumberGenerator;
@@ -13,7 +13,7 @@ public class GymOwnershipTermInputTestDto extends GymOwnershipTermInputDto {
     public final static Gym GYM = new Gym();
     public final static Member OWNER = new Member();
     public final static Item ITEM = new Item();
-    public final static GymLeague LEAGUE = new GymLeague();
+    public final static League LEAGUE = new League();
 
     public GymOwnershipTermInputTestDto() {
         this.setOpenDate(new Date());

@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository;
 
 import com.pokemonurpg.configuration.v1.lib.repository.IndexedConfigurationRepository;
-import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.member.models.Member;
 
 import java.util.Date;

@@ -11,9 +11,9 @@ import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipT
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.service.GymLeagueService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
+import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.member.models.Member;
 import com.pokemonurpg.member.service.MemberService;
@@ -45,7 +45,7 @@ public class GymOwnershipTermServiceTest {
     private GymService gymService;
 
     @Mock
-    private GymLeagueService gymLeagueService;
+    private LeagueService gymLeagueService;
 
     @Mock
     private ItemService itemService;

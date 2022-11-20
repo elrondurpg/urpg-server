@@ -3,13 +3,13 @@ package com.pokemonurpg.configuration.v1.contest.rse.service;
 import com.pokemonurpg.configuration.v1.contest.rse.input.RseContestMoveTypeInputDto;
 import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.rse.repository.RseContestMoveTypeRepository;
-import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RseContestMoveTypeService extends SimpleNamedConfigurationService<RseContestMoveType, RseContestMoveTypeInputDto> {
+public class RseContestMoveTypeService extends NamedConfigurationService<RseContestMoveType, RseContestMoveTypeInputDto> {
 
     @Autowired
     public RseContestMoveTypeService(RseContestMoveTypeRepository repository) {
@@ -22,5 +22,23 @@ public class RseContestMoveTypeService extends SimpleNamedConfigurationService<R
         setIfNotNull(input.getDescription(), model::setDescription);
         setIfNotNull(input.getScore(), model::setScore);
         setIfNotNull(input.getJam(), model::setJam);
+    }
+
+    @Override
+    protected void updateEmbeddedValues(RseContestMoveType model, RseContestMoveTypeInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void updateAssociatedValues(RseContestMoveType model, RseContestMoveTypeInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void deleteAssociatedValues(RseContestMoveType model) {
+        // TODO Auto-generated method stub
+        
     }
 }

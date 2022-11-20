@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import com.pokemonurpg.configuration.v1.contest.oras.input.OrasContestMoveTypeInputDto;
 import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
-import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 
 @Service
-public class OrasContestMoveTypeService extends SimpleNamedConfigurationService<OrasContestMoveType, OrasContestMoveTypeInputDto> {
+public class OrasContestMoveTypeService extends NamedConfigurationService<OrasContestMoveType, OrasContestMoveTypeInputDto> {
 
     @Autowired
     public OrasContestMoveTypeService(OrasContestMoveTypeRepository repository) {
@@ -22,5 +22,23 @@ public class OrasContestMoveTypeService extends SimpleNamedConfigurationService<
         setIfNotNull(input.getDescription(), model::setDescription);
         setIfNotNull(input.getScore(), model::setScore);
         setIfNotNull(input.getJam(), model::setJam);
+    }
+
+    @Override
+    protected void updateEmbeddedValues(OrasContestMoveType model, OrasContestMoveTypeInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void updateAssociatedValues(OrasContestMoveType model, OrasContestMoveTypeInputDto input) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void deleteAssociatedValues(OrasContestMoveType model) {
+        // TODO Auto-generated method stub
+        
     }
 }

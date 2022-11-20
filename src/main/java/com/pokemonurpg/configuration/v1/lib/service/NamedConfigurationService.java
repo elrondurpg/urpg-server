@@ -28,4 +28,9 @@ public abstract class NamedConfigurationService <
     public ModelClass findByNameExact(String name) {
         return repository.findByName(name);
     }
+
+    @Override
+    protected void updateBase(ModelClass model, InputDtoClass input) {
+        setIfNotNull(input.getName(), model::setName);
+    }
 }

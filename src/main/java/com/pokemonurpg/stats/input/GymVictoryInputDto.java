@@ -2,8 +2,8 @@ package com.pokemonurpg.stats.input;
 
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public class GymVictoryInputDto extends ChildInputDto {
     private String gym;
 
     @NotNull
-    @ExistsInDb(type = GymLeague.class)
+    @ExistsInDb(type = League.class)
     private String league;
 
     private Date date;

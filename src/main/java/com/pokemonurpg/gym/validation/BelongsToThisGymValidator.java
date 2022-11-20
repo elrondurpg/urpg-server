@@ -2,10 +2,10 @@ package com.pokemonurpg.gym.validation;
 
 import com.pokemonurpg.core.service.*;
 import com.pokemonurpg.gym.annotation.BelongsToThisGym;
-import com.pokemonurpg.gym.models.Gym;
+import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.service.GymOwnershipTermService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
