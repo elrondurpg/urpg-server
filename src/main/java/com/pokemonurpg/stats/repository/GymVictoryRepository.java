@@ -5,7 +5,7 @@ import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
 import com.pokemonurpg.configuration.v1.member.member.model.GymVictoryKey;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

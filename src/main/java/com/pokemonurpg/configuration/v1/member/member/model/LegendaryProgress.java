@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto;
 import com.pokemonurpg.configuration.v1.site.section.model.Section;
-import com.pokemonurpg.member.models.Member;
 
 import javax.persistence.*;
 import java.util.Date;

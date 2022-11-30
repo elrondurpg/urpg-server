@@ -14,8 +14,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 import java.util.*;
 import com.pokemonurpg.stats.models.*;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Member extends NamedConfigurationModel {
+    private final static Random RANDOM = new Random();
 
     @Column(name = "discord_id")
     @JsonView(value = { MemberViews.Id.class })
@@ -70,17 +76,14 @@ public class Member extends NamedConfigurationModel {
     private Date banExpiration;
 
     @OneToMany(mappedBy="trainer")
-    @JsonIgnoreProperties("trainer")
     @JsonView(value = { MemberViews.Full.class })
     private List<OwnedPokemon> pokemon;
 
     @OneToMany(mappedBy="trainer")
-    @JsonIgnoreProperties("trainer")
     @JsonView(value = { MemberViews.Full.class })
     private List<OwnedItem> items;
 
     @OneToMany(mappedBy="trainer")
-    @JsonIgnoreProperties("trainer")
     @JsonView(value = { MemberViews.Full.class })
     private List<LegendaryProgress> legendaryProgress;
 
@@ -98,17 +101,14 @@ public class Member extends NamedConfigurationModel {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy="owner")
-    @JsonIgnoreProperties("owner")
     @JsonView(value = { MemberViews.Full.class })
     private Set<GymOwnershipTerm> gyms;
 
     @OneToMany(mappedBy="owner")
-    @JsonIgnoreProperties("owner")
     @JsonView(value = { MemberViews.Full.class })
     private Set<EliteFourOwnershipTerm> eliteFourTerms;
 
     @OneToMany(mappedBy="owner")
-    @JsonIgnoreProperties("owner")
     @JsonView(value = { MemberViews.Full.class })
     private Set<ChampionOwnershipTerm> championTerms;
 
@@ -117,17 +117,28 @@ public class Member extends NamedConfigurationModel {
     private Boolean bot;
 
     @OneToMany(mappedBy="challenger")
-    @JsonIgnoreProperties("challenger")
     @JsonView(value = { MemberViews.Full.class })
     private List<EliteFourVictory> eliteFourVictories;
 
     @OneToMany(mappedBy="challenger")
-    @JsonIgnoreProperties("challenger")
     @JsonView(value = { MemberViews.Full.class })
     private List<ChampionVictory> championVictories;
 
     @OneToMany(mappedBy="challenger")
-    @JsonIgnoreProperties("challenger")
     @JsonView(value = { MemberViews.Full.class })
     private List<GymVictory> gymVictories;
+
+    @Override
+    public void setDefaultValues() {
+        setSalt(RANDOM.nextInt(1000000000));
+        if (bot == null) setBot(false);
+    }
+
+    public boolean hasStarter() {
+        return pokemon.stream().anyMatch(ownedPokemon -> "Starter".equalsIgnoreCase(ownedPokemon.getObtained().getName()));
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 }

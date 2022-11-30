@@ -1,15 +1,11 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.member.input.PermissionInputDto;
-import com.pokemonurpg.member.models.KnownNameClaim;
-import com.pokemonurpg.member.models.Permission;
-import com.pokemonurpg.member.repository.KnownNameClaimRepository;
-import com.pokemonurpg.member.repository.PermissionRepository;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.pokemonurpg.member.models.KnownNameClaim;
+import com.pokemonurpg.member.repository.KnownNameClaimRepository;
 
 @Service
 public class KnownNameClaimService {

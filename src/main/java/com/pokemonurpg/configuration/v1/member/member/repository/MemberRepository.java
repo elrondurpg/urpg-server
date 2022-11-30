@@ -4,5 +4,5 @@ import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationReposit
 import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 public interface MemberRepository extends NamedConfigurationRepository<Member> {
-
+    Member findByDiscordId(String discordId);
 }

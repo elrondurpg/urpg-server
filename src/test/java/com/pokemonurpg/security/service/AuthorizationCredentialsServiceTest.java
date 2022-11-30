@@ -1,6 +1,6 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

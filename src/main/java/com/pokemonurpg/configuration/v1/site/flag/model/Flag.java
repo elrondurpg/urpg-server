@@ -26,7 +26,7 @@ public class Flag extends NamedConfigurationModel {
     private String value;
 
     @JsonIgnore
-    public boolean getBooleanValue() {
+    public boolean isTrue() {
         return "TRUE".equalsIgnoreCase(value);
     }
 }

@@ -1,7 +1,8 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.member.models.*;
 import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
@@ -16,7 +17,7 @@ public class AuthorizationService
         SessionService sessionService = sessionServiceProvider.get();
         Member member = sessionService.getAuthenticatedMember();
         return member != null &&
-            !member.isBanned() &&
+            !member.getBanned() &&
             sessionService.getAuthenticatedPermissions().stream()
                 .anyMatch(permissionObj -> permissionObj != null && permissionObj.getName().equals(permission));
     }

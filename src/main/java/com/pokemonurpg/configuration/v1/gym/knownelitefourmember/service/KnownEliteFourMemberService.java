@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.input.KnownEliteFourMemberInputDto;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.repository.KnownEliteFourMemberRepository;

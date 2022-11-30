@@ -20,8 +20,8 @@ import com.pokemonurpg.configuration.v1.gym.championownershipterm.repository.Cha
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
 import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
 import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;
 
 @ExtendWith(MockitoExtension.class)

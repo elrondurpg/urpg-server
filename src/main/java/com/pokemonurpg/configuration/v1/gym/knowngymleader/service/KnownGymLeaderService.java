@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.knowngymleader.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.input.KnownGymLeaderInputDto;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.repository.KnownGymLeaderRepository;

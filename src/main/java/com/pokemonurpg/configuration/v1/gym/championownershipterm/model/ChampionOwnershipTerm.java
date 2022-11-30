@@ -7,7 +7,7 @@ import com.pokemonurpg.configuration.v1.gym.lib.constants.GymConstants;
 import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
 import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import lombok.Getter;
 import lombok.Setter;

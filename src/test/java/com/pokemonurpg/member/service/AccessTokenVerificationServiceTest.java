@@ -2,7 +2,7 @@ package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.security.service.AccessTokenVerificationService;
 import com.pokemonurpg.security.service.HashService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

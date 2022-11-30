@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
 import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
 
 import javax.persistence.*;
 

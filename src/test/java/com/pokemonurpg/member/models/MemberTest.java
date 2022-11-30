@@ -7,7 +7,7 @@ import com.pokemonurpg.configuration.v1.member.member.model.EliteFourVictory;
 import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
 import com.pokemonurpg.configuration.v1.member.member.model.LegendaryProgress;
 import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
-import com.pokemonurpg.member.input.MemberInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
 import com.pokemonurpg.stats.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

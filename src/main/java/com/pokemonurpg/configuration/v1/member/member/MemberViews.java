@@ -12,7 +12,4 @@ public interface MemberViews extends MemberSubdomainViews {
     public static interface Full extends Brief {
 
     }
-    public static interface Secure extends Full {
-        
-    }
 }

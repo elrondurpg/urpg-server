@@ -24,8 +24,8 @@ public class MemberControllerTest {
     public void test_constructor() {
         assertEquals(service, controller.getService());
         assertEquals(MemberViews.Id.class, controller.getIdViewClass());
-        assertEquals(MemberViews.Id.class, controller.getBriefViewClass());
-        assertEquals(MemberViews.Id.class, controller.getFullViewClass());
+        assertEquals(MemberViews.Brief.class, controller.getBriefViewClass());
+        assertEquals(MemberViews.Full.class, controller.getFullViewClass());
     }
 
 }

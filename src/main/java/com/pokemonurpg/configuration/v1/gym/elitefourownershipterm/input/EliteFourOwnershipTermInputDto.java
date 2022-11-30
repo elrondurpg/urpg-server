@@ -5,7 +5,7 @@ import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueId;
 import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import lombok.Getter;
 import lombok.Setter;

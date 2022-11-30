@@ -15,8 +15,8 @@ import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
 import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -5,8 +5,8 @@ import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLea
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;

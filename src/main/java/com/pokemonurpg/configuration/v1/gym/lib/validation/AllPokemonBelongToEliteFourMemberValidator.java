@@ -6,7 +6,7 @@ import com.pokemonurpg.configuration.v1.gym.elitefour.input.EliteFourPokemonInpu
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 

@@ -6,7 +6,7 @@ import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMetho
 import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import org.junit.jupiter.api.Test;
 

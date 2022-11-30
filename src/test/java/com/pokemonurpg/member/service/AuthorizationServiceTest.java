@@ -2,7 +2,7 @@ package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.service.*;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
 import org.junit.jupiter.api.BeforeEach;

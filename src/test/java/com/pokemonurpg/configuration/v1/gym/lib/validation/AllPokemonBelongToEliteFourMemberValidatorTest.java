@@ -5,7 +5,7 @@ import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
 import com.pokemonurpg.configuration.v1.gym.elitefour.input.EliteFourPokemonInputDto;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.junit.jupiter.api.Test;

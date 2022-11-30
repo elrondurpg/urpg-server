@@ -5,7 +5,7 @@ import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
 import com.pokemonurpg.configuration.v1.gym.champion.input.ChampionPokemonInputDto;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.junit.jupiter.api.Test;

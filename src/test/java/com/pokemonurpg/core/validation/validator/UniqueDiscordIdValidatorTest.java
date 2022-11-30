@@ -1,8 +1,8 @@
 package com.pokemonurpg.core.validation.validator;
 import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.member.input.MemberInputDto;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

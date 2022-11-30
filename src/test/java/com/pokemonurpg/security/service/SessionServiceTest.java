@@ -3,7 +3,7 @@ package com.pokemonurpg.security.service;
 import com.pokemonurpg.member.models.Permission;
 import com.pokemonurpg.member.models.Role;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

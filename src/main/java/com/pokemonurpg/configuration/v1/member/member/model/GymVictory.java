@@ -6,7 +6,6 @@ import com.pokemonurpg.configuration.v1.gym.league.model.League;
 import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
-import com.pokemonurpg.member.models.Member;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -13,7 +13,7 @@ import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
 import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.item.service.ItemBundleService;
 import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.site.service.MenuItemService;
 import com.pokemonurpg.member.service.PermissionService;
 import com.pokemonurpg.member.service.RoleService;
@@ -81,7 +81,6 @@ public class NamedObjectServiceFactory {
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "ItemBundle": return itemBundleService;
-                case "Member": return memberService;
                 case "MenuItem": return menuItemService;
                 case "Permission": return permissionService;
                 case "Role": return roleService;

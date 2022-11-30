@@ -14,8 +14,8 @@ import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeade
 import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
 import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 
 @Service
 public class GymOwnershipTermService extends IndexedConfigurationService<GymOwnershipTerm, GymOwnershipTermInputDto> {

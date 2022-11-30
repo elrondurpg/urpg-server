@@ -11,4 +11,8 @@ public class RandomNumberGenerator {
     public static double generateDouble() {
         return (Math.random()*(MAX-MIN+1)+MIN);  
     }
+
+    public static long generateLong() {
+        return (long)(Math.random()*(MAX-MIN+1)+MIN);  
+    }
 }

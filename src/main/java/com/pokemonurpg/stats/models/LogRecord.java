@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import javax.persistence.*;
 import java.util.Date;

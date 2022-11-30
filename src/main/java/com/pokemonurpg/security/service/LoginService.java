@@ -1,11 +1,11 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.models.DiscordUserResponse;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.dto.LoginInputDto;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

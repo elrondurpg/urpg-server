@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.member.member.model;
 
 import com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import org.junit.jupiter.api.Test;
 

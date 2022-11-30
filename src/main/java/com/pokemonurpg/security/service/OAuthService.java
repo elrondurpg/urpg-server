@@ -25,7 +25,8 @@ public class OAuthService {
         Request request = oAuthRequestBuilder.buildAccessTokenRequest(code);
         try {
             String response = okHttpClientService.sendRequest(request);
-            return mapper.readValue(response, OAuthAccessTokenResponse.class);
+            OAuthAccessTokenResponse model = mapper.readValue(response, OAuthAccessTokenResponse.class);
+            return model.isValid() ? model : null;
         } catch (IOException e) {
             return null;
         }
@@ -35,7 +36,8 @@ public class OAuthService {
         Request request = oAuthRequestBuilder.buildDiscordIdRequest(accessToken);
         try {
             String response = okHttpClientService.sendRequest(request);
-            return mapper.readValue(response, DiscordUserResponse.class);
+            DiscordUserResponse model = mapper.readValue(response, DiscordUserResponse.class);
+            return model.isValid() ? model : null;
         } catch (IOException ignored) {
 
         }

@@ -24,12 +24,17 @@ extends ConfigurationService<ModelClass, InputDtoClass> {
     public ModelClass update(InputDtoClass input, int dbid) {
         ModelClass model = repository.findByDbid(dbid);
         if (model != null) {
+            preupdateAssociatedValues(model, input);
             updateBase(model, input);
             updateEmbeddedValues(model, input);
             repository.save(model);
             updateAssociatedValues(model, input);
         }
         return model;
+    }
+
+    protected void preupdateAssociatedValues(ModelClass model, InputDtoClass input) {
+
     }
 
     public ModelClass delete(int dbid) {

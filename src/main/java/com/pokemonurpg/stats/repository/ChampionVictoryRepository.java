@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.repository;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
 import com.pokemonurpg.configuration.v1.member.member.model.ChampionVictory;
 import com.pokemonurpg.configuration.v1.member.member.model.ChampionVictoryKey;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

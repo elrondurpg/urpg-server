@@ -3,6 +3,7 @@ package com.pokemonurpg.member.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.core.model.NamedObject;
 import com.pokemonurpg.member.input.RoleInputDto;
 

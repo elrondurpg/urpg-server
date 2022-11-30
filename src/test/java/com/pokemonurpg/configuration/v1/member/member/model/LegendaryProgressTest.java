@@ -3,7 +3,7 @@ package com.pokemonurpg.configuration.v1.member.member.model;
 import com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto;
 import com.pokemonurpg.configuration.v1.member.member.model.LegendaryProgress;
 import com.pokemonurpg.configuration.v1.site.section.model.Section;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import org.junit.jupiter.api.Test;
 

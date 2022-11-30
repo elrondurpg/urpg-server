@@ -6,7 +6,7 @@ import com.pokemonurpg.security.service.AesEncryptionService;
 import com.pokemonurpg.security.service.OAuthService;
 import com.pokemonurpg.security.service.RefreshService;
 import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.repository.KnownEliteFourMemberRepository;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.test.RandomStringGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;

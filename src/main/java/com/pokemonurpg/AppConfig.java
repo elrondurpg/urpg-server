@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.pokemonurpg.lib.management.v1.FeatureFlagInterceptor;
 import com.pokemonurpg.lib.security.v1.SessionCreator;
 import com.pokemonurpg.security.interceptor.AuthorizationHandler;
 
@@ -64,9 +65,14 @@ public class AppConfig implements WebMvcConfigurer {
         return new SessionCreator();
     }
 
+    @Bean FeatureFlagInterceptor featureFlagInterceptor() {
+        return new FeatureFlagInterceptor();
+    }
+
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");
         registry.addInterceptor(sessionHandlerInterceptor());
         registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error");
+        registry.addInterceptor(featureFlagInterceptor());
     }
 }

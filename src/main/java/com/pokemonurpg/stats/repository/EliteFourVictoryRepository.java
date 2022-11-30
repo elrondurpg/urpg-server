@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.repository;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
 import com.pokemonurpg.configuration.v1.member.member.model.EliteFourVictory;
 import com.pokemonurpg.configuration.v1.member.member.model.EliteFourVictoryKey;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

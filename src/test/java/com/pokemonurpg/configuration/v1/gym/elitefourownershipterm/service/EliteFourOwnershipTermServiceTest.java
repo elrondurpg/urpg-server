@@ -13,8 +13,8 @@ import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.repository.El
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
 import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
 import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;

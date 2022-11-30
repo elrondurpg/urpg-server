@@ -1,9 +1,9 @@
 package com.pokemonurpg.member.controller;
 
 import com.pokemonurpg.View;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.input.MemberInputDto;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.security.service.AuthorizationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

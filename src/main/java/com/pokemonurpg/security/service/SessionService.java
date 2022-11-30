@@ -1,6 +1,6 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.member.models.Permission;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class SessionService {
     }
 
     public boolean isMemberAuthorizedFor(String permission) {
-        return authenticatedMember != null && !authenticatedMember.isBanned() && hasAuthorizedPermission(permission);
+        return authenticatedMember != null && !authenticatedMember.getBanned() && hasAuthorizedPermission(permission);
     }
 
     public boolean hasAuthorizedPermission(String permission) {
