@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface EnabledByFlag {
     public String flag() default ""; 
+    public String message() default "The requested operation is not enabled at this time.";
 }

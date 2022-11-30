@@ -2,7 +2,10 @@ package com.pokemonurpg.member.models;
 
 import javax.persistence.*;
 
+import lombok.Builder;
+
 @Entity
+@Builder
 public class KnownNameClaim {
 
     @Id

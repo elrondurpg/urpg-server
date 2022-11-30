@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
@@ -21,9 +23,11 @@ public class FeatureFlagInterceptor implements HandlerInterceptor {
         boolean valid = isAnnotationValid(annotation);
         if (valid) {
             Flag flag = flagService.findByName(annotation.flag());
-            return flag != null && flag.isTrue();
+            if (flag == null || !flag.isTrue()) {
+                throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, annotation.message());
+            }
         }
-        else return true;
+        return true;
     }
 
     private EnabledByFlag getAnnotation(Object handler) {

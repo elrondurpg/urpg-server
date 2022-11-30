@@ -20,17 +20,18 @@ public class OwnedItemService {
     @Resource
     private ItemRepository itemRepository;
 
-    public void add(Member member, String name, int quantity) {
+    public OwnedItem add(Member member, String name, int quantity) {
         Item item = itemRepository.findByName(name);
-        OwnedItem existingRecord = ownedItemRepository.findByTrainerAndItem(member, item);
-        if (existingRecord != null) {
-            existingRecord.update(quantity);
-            ownedItemRepository.save(existingRecord);
+        OwnedItem itemRecord = ownedItemRepository.findByTrainerAndItem(member, item);
+        if (itemRecord != null) {
+            itemRecord.update(quantity);
+            ownedItemRepository.save(itemRecord);
         }
         else {
             OwnedItem newRecord = new OwnedItem(member, item, quantity);
             ownedItemRepository.save(newRecord);
         }
+        return itemRecord;
     }
 
     public void update(Member member, OwnedItemInputDto input) {

@@ -70,7 +70,7 @@ public class MemberControllerTest {
         MemberInputDto input = new MemberInputDto();
         input.setName(NAME);
         when(memberService.create(input)).thenReturn(member);
-        assertEquals(member, memberController.create(input));
+        assertEquals(member, memberController.createMember(input));
     }
 
     @Test

@@ -1,16 +1,16 @@
 package com.pokemonurpg.security.validator;
 
+import com.pokemonurpg.configuration.v1.create.pokemon.starter.CreateStarterPokemonRequest;
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.security.annotation.ValidStarter;
-import com.pokemonurpg.stats.input.StarterPokemonInputDto;
 import com.pokemonurpg.stats.validation.OwnedPokemonValidator;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ValidStarterValidator implements ConstraintValidator<ValidStarter, StarterPokemonInputDto> {
+public class ValidStarterValidator implements ConstraintValidator<ValidStarter, CreateStarterPokemonRequest> {
     @Resource
     private SpeciesService speciesService;
 
@@ -23,7 +23,7 @@ public class ValidStarterValidator implements ConstraintValidator<ValidStarter, 
     }
 
     @Override
-    public boolean isValid(StarterPokemonInputDto input, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(CreateStarterPokemonRequest input, ConstraintValidatorContext constraintValidatorContext) {
         if (input != null) {
             Species species = speciesService.findByName(input.getSpecies());
             return ownedPokemonValidator.isGenderLegal(species, input.getGender()) && ownedPokemonValidator.isValidStarter(species);
