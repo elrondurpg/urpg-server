@@ -53,14 +53,14 @@ public class AuthorizationServiceTest {
     @Test
     public void failsWhenMemberIsBanned() {
         when(sessionService.getAuthenticatedMember()).thenReturn(MEMBER);
-        when(MEMBER.isBanned()).thenReturn(true);
+        when(MEMBER.getBanned()).thenReturn(true);
         assertFalse(authorizationService.isAuthorized(PERMISSION_NAME));
     }
 
     @Test
     public void failsWhenMemberDoesntHavePermission() {
         when(sessionService.getAuthenticatedMember()).thenReturn(MEMBER);
-        when(MEMBER.isBanned()).thenReturn(false);
+        when(MEMBER.getBanned()).thenReturn(false);
         when(sessionService.getAuthenticatedPermissions()).thenReturn(Collections.emptySet());
         assertFalse(authorizationService.isAuthorized(PERMISSION_NAME));
     }
@@ -68,7 +68,7 @@ public class AuthorizationServiceTest {
     @Test
     public void failsWhenMemberHasOnlyANullPermission() {
         when(sessionService.getAuthenticatedMember()).thenReturn(MEMBER);
-        when(MEMBER.isBanned()).thenReturn(false);
+        when(MEMBER.getBanned()).thenReturn(false);
         when(sessionService.getAuthenticatedPermissions()).thenReturn(Collections.singleton(null));
         assertFalse(authorizationService.isAuthorized(PERMISSION_NAME));
     }
@@ -78,7 +78,7 @@ public class AuthorizationServiceTest {
         when(PERMISSION.getName()).thenReturn("garbage");
 
         when(sessionService.getAuthenticatedMember()).thenReturn(MEMBER);
-        when(MEMBER.isBanned()).thenReturn(false);
+        when(MEMBER.getBanned()).thenReturn(false);
         when(sessionService.getAuthenticatedPermissions()).thenReturn(PERMISSIONS);
         assertFalse(authorizationService.isAuthorized(PERMISSION_NAME));
     }
@@ -88,7 +88,7 @@ public class AuthorizationServiceTest {
         when(PERMISSION.getName()).thenReturn(PERMISSION_NAME);
 
         when(sessionService.getAuthenticatedMember()).thenReturn(MEMBER);
-        when(MEMBER.isBanned()).thenReturn(false);
+        when(MEMBER.getBanned()).thenReturn(false);
         when(sessionService.getAuthenticatedPermissions()).thenReturn(PERMISSIONS);
         assertTrue(authorizationService.isAuthorized(PERMISSION_NAME));
     }

@@ -1,19 +1,28 @@
 package com.pokemonurpg.account.v1.register.beginner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.account.v1.register.common.RegisterPlayerHandler;
-import com.pokemonurpg.configuration.v1.create.member.beginner.CreateBeginnerRequest;
-import com.pokemonurpg.configuration.v1.create.member.beginner.CreateBeginnerResponse;
+import com.pokemonurpg.account.v1.register.beginner.internal.CreateBeginnerRequest;
+import com.pokemonurpg.account.v1.register.beginner.internal.CreateBeginnerResponse;
+import com.pokemonurpg.account.v1.register.common.RegisterMemberHandler;
+import com.pokemonurpg.account.v1.register.common.internal.CreateMemberHandler;
 import com.pokemonurpg.security.models.DiscordUserResponse;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.security.service.OAuthService;
 
 @Service
-public class RegisterBeginnerHandler extends RegisterPlayerHandler<
+public class RegisterBeginnerHandler extends RegisterMemberHandler<
     RegisterBeginnerRequest, 
     RegisterBeginnerResponse,
     CreateBeginnerRequest,
     CreateBeginnerResponse> {
+
+    @Autowired
+    public RegisterBeginnerHandler(OAuthService oAuthService,
+            CreateMemberHandler<CreateBeginnerRequest, CreateBeginnerResponse> memberHandler) {
+        super(oAuthService, memberHandler);
+    }
 
     @Override
     protected CreateBeginnerRequest createMemberRequest(RegisterBeginnerRequest request) {
