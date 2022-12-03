@@ -70,9 +70,9 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error");
-        registry.addInterceptor(sessionHandlerInterceptor());
-        registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error");
-        registry.addInterceptor(featureFlagInterceptor());
+        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
+        registry.addInterceptor(sessionHandlerInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
+        registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
+        registry.addInterceptor(featureFlagInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
     }
 }
