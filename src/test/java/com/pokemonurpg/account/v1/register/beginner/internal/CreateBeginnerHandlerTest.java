@@ -60,7 +60,7 @@ public class CreateBeginnerHandlerTest {
     public void test_handle_success() {
         CreateBeginnerRequest request = new CreateBeginnerRequestFake();
         CreateBeginnerResponse response = handler.handle(request);
-        verify()
+        //verify()
     }
 
 }
