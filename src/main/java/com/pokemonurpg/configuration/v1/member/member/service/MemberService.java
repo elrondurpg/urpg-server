@@ -52,22 +52,20 @@ public class MemberService extends NamedConfigurationService<Member, MemberInput
     private KnownChampionService knownChampionService;
     private AuthorizationService authorizationService;
     private KnownNameClaimService knownNameClaimService;
-
-    @Autowired
     
-
     public Member findByDiscordId(String discordId) {
         return repository.findByDiscordId(discordId);
     }
 
-    public MemberService(MemberRepository repository, Class<Member> modelClass,RoleService roleService, HashService hashService, SystemService systemService,
+    @Autowired
+    public MemberService(MemberRepository repository, RoleService roleService, HashService hashService, SystemService systemService,
             LegendaryProgressService legendaryProgressService, OwnedItemService ownedItemService,
             AesEncryptionService aesEncryptionService, EliteFourVictoryService eliteFourVictoryService,
             ChampionVictoryService championVictoryService, GymVictoryService gymVictoryService,
             KnownGymLeaderService knownGymLeaderService, KnownEliteFourMemberService knownEliteFourMemberService,
             KnownChampionService knownChampionService, AuthorizationService authorizationService,
             KnownNameClaimService knownNameClaimService) {
-        super(repository, modelClass);
+        super(repository, Member.class);
         this.repository = repository;
         this.roleService = roleService;
         this.hashService = hashService;

@@ -9,7 +9,7 @@ public class JpaPageableFactory {
     private final static int DEFAULT_PAGE = 0;
     private final static int DEFAULT_ITEMS_PER_PAGE = 25;
 
-    public Pageable fromRequest(GetParams request) {
+    public Pageable fromRequest(ListRequest request) {
         if (shouldGetUnpagedResults(request)) {
             return Pageable.unpaged();
         }
@@ -18,11 +18,11 @@ public class JpaPageableFactory {
         }
     }
 
-    private boolean shouldGetUnpagedResults(GetParams request) {
-        return "id".equals(request.getDetailLevel()) && request.getPage() == null && request.getItemsPerPage() == null;
+    private boolean shouldGetUnpagedResults(ListRequest request) {
+        return request.getPage() == null && request.getItemsPerPage() == null;
     }
 
-    private Pageable getPagedRequest(GetParams request) {
+    private Pageable getPagedRequest(ListRequest request) {
         if (request.getSortBy() != null) {
             return PageRequest.of(getPageValueForPagedResults(request.getPage()), getItemsPerPageForPagedResults(request.getItemsPerPage()), Sort.by(request.getSortBy()));
         }

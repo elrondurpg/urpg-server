@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.SpeciesFullResponseAbilityView;
+import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesAbilityView;
 import com.pokemonurpg.entities.v3.pokemon.species.SpeciesAbilityEntity;
 import com.pokemonurpg.entities.v3.shared.NamedEntity;
 
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "ability")
-public class AbilityEntity extends NamedEntity implements SpeciesFullResponseAbilityView {
+public class AbilityEntity extends NamedEntity implements GetSpeciesAbilityView {
 
     @Column
     private String description;

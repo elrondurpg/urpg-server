@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.SpeciesFullResponseSpeciesAttackView;
+import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesSpeciesAttackView;
 import com.pokemonurpg.entities.v3.attack.AttackEntity;
 
 import lombok.Getter;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Table(name = "species_attack")
 @Getter
 @Setter
-public class SpeciesAttackEntity implements SpeciesFullResponseSpeciesAttackView {
+public class SpeciesAttackEntity implements GetSpeciesSpeciesAttackView {
 
     @EmbeddedId
     SpeciesAttackKeyEntity id;

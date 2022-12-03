@@ -8,9 +8,9 @@ import lombok.Getter;
 public class JpaPageableFactoryFake extends JpaPageableFactory {
     public final static Pageable PAGEABLE = Pageable.unpaged();
 
-    private GetParams requestArg;
+    private ListRequest requestArg;
 
-    public Pageable fromRequest(GetParams request) {
+    public Pageable fromRequest(ListRequest request) {
         requestArg = request;
         return PAGEABLE;
     }

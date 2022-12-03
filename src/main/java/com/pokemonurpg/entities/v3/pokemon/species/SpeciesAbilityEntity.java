@@ -5,14 +5,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.SpeciesFullResponseSpeciesAbilityView;
+import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesSpeciesAbilityView;
 import com.pokemonurpg.entities.v3.pokemon.ability.AbilityEntity;
 
 @Entity
 @Table(name = "species_ability")
 @Getter
 @Setter
-public class SpeciesAbilityEntity implements SpeciesFullResponseSpeciesAbilityView {
+public class SpeciesAbilityEntity implements GetSpeciesSpeciesAbilityView {
 
     @EmbeddedId
     SpeciesAbilityKeyEntity id;

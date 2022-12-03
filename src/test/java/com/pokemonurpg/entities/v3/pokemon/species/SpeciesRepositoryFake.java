@@ -7,18 +7,18 @@ import java.util.function.Function;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.entities.v3.shared.PagedEntity;
 
 import lombok.Getter;
 
 @Getter
-public class SpeciesRepositoryFake implements SpeciesRepository {
-    public final static PagedEntity<SpeciesEntity> PAGE = new PagedEntity<>(Collections.singletonList(new SpeciesEntity()));
+public class SpeciesRepositoryFake implements SpeciesJpaRepository {
+    public final static PageImpl<SpeciesEntity> PAGE = new PageImpl<>(Collections.singletonList(new SpeciesEntity()));
 
     SpeciesEntity probeArg = null;
     ExampleMatcher matcherArg = null;
@@ -26,11 +26,11 @@ public class SpeciesRepositoryFake implements SpeciesRepository {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <S extends SpeciesEntity> PagedEntity<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends SpeciesEntity> PageImpl<S> findAll(Example<S> example, Pageable pageable) {
         probeArg = example.getProbe();
         matcherArg = example.getMatcher();
         pageableArg = pageable;
-        return (PagedEntity<S>) PAGE;
+        return (PageImpl<S>) PAGE;
     }
 
     @Override
@@ -245,7 +245,7 @@ public class SpeciesRepositoryFake implements SpeciesRepository {
     }
 
     @Override
-    public PagedEntity<SpeciesEntity> findAll(Pageable pageable) {
+    public PageImpl<SpeciesEntity> findAll(Pageable pageable) {
         // TODO Auto-generated method stub
         return null;
     }

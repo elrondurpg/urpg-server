@@ -10,10 +10,12 @@ import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springdoc.webmvc.ui.SwaggerWelcomeWebMvc;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
@@ -44,7 +46,12 @@ public class AuthorizationHandler implements HandlerInterceptor {
             Object handler) {
         try {
             if (handler != null) {
+                if (handler instanceof ResourceHttpRequestHandler) return true;
                 HandlerMethod method = (HandlerMethod) handler;
+                if (method.getBean() instanceof SwaggerWelcomeWebMvc)
+                {
+                    return true;
+                }
 
                 sessionServiceProvider.get().createSession();
 
