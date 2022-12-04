@@ -1,15 +1,13 @@
 package com.pokemonurpg.lib.security.v1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springdoc.webmvc.ui.SwaggerWelcomeWebMvc;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +16,6 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthenticated;
@@ -41,7 +38,6 @@ public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, A
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         boolean authorized = false;
         try {
-            if (handlerIsSwaggerPage(handler)) return true;
             if (handlerHasOtherAuthAnnotation(handler)) return true;
             AuthorizationService service = determineAuthorizationService(handler);
             authorized = service.isAuthorized(request);
@@ -50,10 +46,6 @@ public class PreRequestAuthorizationInterceptor implements HandlerInterceptor, A
             catchAuthorizationExceptionAndUpdateResponse(e, response);
         }
         return authorized;
-    }
-
-    private boolean handlerIsSwaggerPage(Object handler) {
-        return  handler instanceof ResourceHttpRequestHandler || ((HandlerMethod) handler).getBean() instanceof SwaggerWelcomeWebMvc;
     }
 
     private boolean handlerHasOtherAuthAnnotation(Object handler) {

@@ -12,34 +12,8 @@ import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.TypeFilter;
 
-import io.swagger.v3.oas.models.ExternalDocumentation;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
-
 @SpringBootApplication
 public class URPGServerApplication {
-
-    // @Bean
-    // public Docket api() {
-    //     return new Docket(DocumentationType.SWAGGER_2)
-    //             .select()
-    //             .apis(RequestHandlerSelectors.any())
-    //             .paths(PathSelectors.any())
-    //             .build();
-    // }
-
-    @Bean
-    public OpenAPI springShopOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("URPG Server")
-                .description("")
-                .version("v3.0.0")
-                .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-                .externalDocs(new ExternalDocumentation()
-                .description("SpringShop Wiki Documentation")
-                .url("https://springshop.wiki.github.org/docs"));
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(URPGServerApplication.class, args);

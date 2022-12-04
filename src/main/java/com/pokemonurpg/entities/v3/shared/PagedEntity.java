@@ -1,6 +1,7 @@
 package com.pokemonurpg.entities.v3.shared;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageImpl;
 
@@ -18,8 +19,8 @@ public class PagedEntity<T> implements PagedResponse<T> {
     }
 
     @Override
-    public List<? extends T> getContent() {
-        return page.getContent();
+    public List<T> getContent() {
+        return page.getContent().stream().map(item -> (T) item).collect(Collectors.toList());
     }
 
     @Override

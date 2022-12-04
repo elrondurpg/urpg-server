@@ -1,27 +1,31 @@
 package com.pokemonurpg.security.interceptor;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.lib.security.v1.CheckAuthorization;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
-import com.pokemonurpg.security.annotation.*;
-import com.pokemonurpg.security.service.AuthorizationService;
-import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springdoc.webmvc.ui.SwaggerWelcomeWebMvc;
-import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.core.service.RequestPathVariableService;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
+import com.pokemonurpg.security.annotation.AllowAll;
+import com.pokemonurpg.security.annotation.AllowAuthenticated;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.annotation.AllowTheOwner;
+import com.pokemonurpg.security.annotation.AllowThisMember;
+import com.pokemonurpg.security.service.AuthorizationService;
+import com.pokemonurpg.security.service.SessionService;
+import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.stats.service.OwnedPokemonService;
 
 public class AuthorizationHandler implements HandlerInterceptor {
     private static final Logger log = LogManager.getLogger(AuthorizationHandler.class);
@@ -46,12 +50,7 @@ public class AuthorizationHandler implements HandlerInterceptor {
             Object handler) {
         try {
             if (handler != null) {
-                if (handler instanceof ResourceHttpRequestHandler) return true;
                 HandlerMethod method = (HandlerMethod) handler;
-                if (method.getBean() instanceof SwaggerWelcomeWebMvc)
-                {
-                    return true;
-                }
 
                 sessionServiceProvider.get().createSession();
 

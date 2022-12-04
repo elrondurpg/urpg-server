@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as = PagedResponse.class)
 public interface PagedResponse<T> {
-    List<? extends T> getContent();
+    List<T> getContent();
     long getTotalElements();
     int getNumber();
     int getTotalPages();

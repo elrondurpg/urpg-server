@@ -65,10 +65,10 @@
         </dependency>
 
         <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-      <version>1.6.13</version>
-   </dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>

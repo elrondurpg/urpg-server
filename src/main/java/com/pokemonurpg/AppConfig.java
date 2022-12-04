@@ -17,9 +17,27 @@ import com.pokemonurpg.lib.management.v1.FeatureFlagInterceptor;
 import com.pokemonurpg.lib.security.v1.SessionCreator;
 import com.pokemonurpg.security.interceptor.AuthorizationHandler;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+
 @Configuration
 @EnableWebMvc
+@EnableSwagger2
 public class AppConfig implements WebMvcConfigurer {
+    
+    // Swagger documentation available at /swagger-ui/index.html
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(PathSelectors.regex("/configuration.v3.*"))
+            .build();
+    }
 
     @Value( "${server.image-base}" )
     private String imageBase;
@@ -70,9 +88,18 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
-        registry.addInterceptor(sessionHandlerInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
-        registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
-        registry.addInterceptor(featureFlagInterceptor()).excludePathPatterns("/error", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**");
+        String[] excludePaths = { 
+            "/error", 
+            "/swagger-ui/**", 
+            "/v3/api-docs", 
+            "/v3/api-docs/**", 
+            "/v2/api-docs", 
+            "/v2/api-docs/**",
+            "/swagger-resources/**" 
+        };
+        registry.addInterceptor(authenticationInterceptor()).excludePathPatterns(excludePaths);
+        registry.addInterceptor(sessionHandlerInterceptor()).excludePathPatterns(excludePaths);
+        registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns(excludePaths);
+        registry.addInterceptor(featureFlagInterceptor()).excludePathPatterns(excludePaths);
     }
 }

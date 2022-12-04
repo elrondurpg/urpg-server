@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v3.pokemon.species.shared.view;
 
-import com.pokemonurpg.configuration.v3.shared.view.NamedEntityResponseView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.pokemonurpg.configuration.v3.shared.view.NamedEntityResponseView;
 
 @JsonSerialize(as = ListSpeciesView.class)
 public interface ListSpeciesView extends NamedEntityResponseView {
