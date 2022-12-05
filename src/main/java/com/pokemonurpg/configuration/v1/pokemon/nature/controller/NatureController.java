@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.pokemon.nature.NatureViews;
 import com.pokemonurpg.configuration.v1.pokemon.nature.input.NatureInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
+import com.pokemonurpg.entities.v1.pokemon.Nature;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.badge.BadgeViews;
 import com.pokemonurpg.configuration.v1.gym.badge.input.BadgeInputDto;
-import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
+import com.pokemonurpg.entities.v1.gym.Badge;
 import com.pokemonurpg.configuration.v1.gym.badge.service.BadgeService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

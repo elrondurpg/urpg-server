@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.site.flag.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.site.flag.input.FlagInputDto;
-import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
-import com.pokemonurpg.configuration.v1.site.flag.repository.FlagRepository;
+import com.pokemonurpg.entities.v1.site.Flag;
+import com.pokemonurpg.entities.v1.site.FlagRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.pokemonurpg.configuration.v1.member.permission.PermissionService;
 import com.pokemonurpg.lib.resource.v1.model.ApiResource;
 import com.pokemonurpg.lib.resource.v1.repository.ApiResourceRepository;
-import com.pokemonurpg.member.service.PermissionService;
 import com.pokemonurpg.security.service.SessionService;
 
 @Service

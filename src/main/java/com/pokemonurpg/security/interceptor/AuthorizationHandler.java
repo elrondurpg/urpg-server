@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.core.service.RequestPathVariableService;
 import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAll;

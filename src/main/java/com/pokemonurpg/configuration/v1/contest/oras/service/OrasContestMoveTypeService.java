@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.contest.oras.input.OrasContestMoveTypeInputDto;
-import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
-import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
+import com.pokemonurpg.entities.v1.contest.OrasContestMoveType;
+import com.pokemonurpg.entities.v1.contest.OrasContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 
 @Service

@@ -5,7 +5,7 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.core.service.SystemService;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.service.AesEncryptionService;

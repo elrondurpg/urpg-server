@@ -3,7 +3,7 @@ package com.pokemonurpg.core.validation.validator;
 import com.pokemonurpg.core.service.*;
 import com.pokemonurpg.core.validation.annotation.UniqueDiscordId;
 import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 
 import javax.annotation.Resource;

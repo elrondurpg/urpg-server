@@ -2,11 +2,11 @@ package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.entities.v1.pokemon.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.security.service.SessionService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;

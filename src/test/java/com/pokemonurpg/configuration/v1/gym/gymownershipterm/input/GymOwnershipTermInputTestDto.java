@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.model.League;
-import com.pokemonurpg.item.models.Item;
+import com.pokemonurpg.configuration.v1.item.models.Item;
 import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.test.RandomNumberGenerator;
 import com.pokemonurpg.test.RandomStringGenerator;

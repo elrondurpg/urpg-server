@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.site.section.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.site.section.input.SectionInputDto;
-import com.pokemonurpg.configuration.v1.site.section.model.Section;
-import com.pokemonurpg.configuration.v1.site.section.repository.SectionRepository;
+import com.pokemonurpg.entities.v1.site.Section;
+import com.pokemonurpg.entities.v1.site.SectionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

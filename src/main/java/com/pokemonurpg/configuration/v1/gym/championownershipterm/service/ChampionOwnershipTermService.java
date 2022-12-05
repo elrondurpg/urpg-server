@@ -1,13 +1,13 @@
 package com.pokemonurpg.configuration.v1.gym.championownershipterm.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
+import com.pokemonurpg.entities.v1.gym.Champion;
 import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.championownershipterm.repository.ChampionOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.gym.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.ChampionOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
 
 import java.util.Date;

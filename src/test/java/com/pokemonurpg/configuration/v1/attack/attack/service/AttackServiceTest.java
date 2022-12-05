@@ -20,8 +20,8 @@ import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepositor
 import com.pokemonurpg.configuration.v1.contest.attribute.repository.ContestAttributeRepository;
 import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.contest.rse.repository.RseContestMoveTypeRepository;
+import com.pokemonurpg.configuration.v1.item.repository.ItemRepository;
 import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
-import com.pokemonurpg.item.repository.ItemRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class AttackServiceTest {

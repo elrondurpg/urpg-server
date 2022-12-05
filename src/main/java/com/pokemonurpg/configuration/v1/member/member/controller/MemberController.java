@@ -5,7 +5,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationControl
 import com.pokemonurpg.configuration.v1.member.member.MemberViews;
 import com.pokemonurpg.configuration.v1.member.member.input.MemberGetParams;
 import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;

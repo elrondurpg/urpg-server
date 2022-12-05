@@ -1,13 +1,13 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
-import com.pokemonurpg.configuration.v1.gym.league.model.League;
-import com.pokemonurpg.configuration.v1.gym.league.repository.LeagueRepository;
+import com.pokemonurpg.entities.v1.gym.Gym;
+import com.pokemonurpg.entities.v1.gym.League;
+import com.pokemonurpg.entities.v1.gym.LeagueRepository;
 import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.GymVictory;
-import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
-import com.pokemonurpg.configuration.v1.gym.gym.repository.GymRepository;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.GymVictory;
+import com.pokemonurpg.entities.v1.gym.KnownGymLeader;
+import com.pokemonurpg.entities.v1.gym.GymRepository;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.stats.repository.GymVictoryRepository;
 import org.springframework.stereotype.Service;
 

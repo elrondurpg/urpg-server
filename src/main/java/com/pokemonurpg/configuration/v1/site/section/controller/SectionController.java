@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.site.section.SectionViews;
 import com.pokemonurpg.configuration.v1.site.section.input.SectionInputDto;
-import com.pokemonurpg.configuration.v1.site.section.model.Section;
+import com.pokemonurpg.entities.v1.site.Section;
 import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

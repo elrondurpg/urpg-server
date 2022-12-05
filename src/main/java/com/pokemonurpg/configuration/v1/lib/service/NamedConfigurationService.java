@@ -1,18 +1,18 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
-import com.pokemonurpg.configuration.v1.lib.repository.NamedConfigurationRepository;
+import com.pokemonurpg.entities.v1.shared.NamedEntity;
+import com.pokemonurpg.entities.v1.shared.NamedRepository;
 
 public abstract class NamedConfigurationService <
-        ModelClass extends NamedConfigurationModel, 
+        ModelClass extends NamedEntity, 
         InputDtoClass extends NamedConfigurationInputDto
     > 
     extends IndexedConfigurationService<ModelClass, InputDtoClass> {
 
-    protected NamedConfigurationRepository<ModelClass> repository;
+    protected NamedRepository<ModelClass> repository;
 
-    public NamedConfigurationService(NamedConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
+    public NamedConfigurationService(NamedRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         super(repository, modelClass);
         this.repository = repository;
     }

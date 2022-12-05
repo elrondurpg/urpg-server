@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.gym.gym.service;
 
 import com.pokemonurpg.configuration.v1.gym.gym.input.GymPokemonInputDto;
 import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.entities.v1.gym.Gym;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.springframework.stereotype.Service;

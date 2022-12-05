@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
+import com.pokemonurpg.configuration.v1.item.models.Item;
+import com.pokemonurpg.configuration.v1.item.repository.ItemRepository;
 import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
 import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.repository.ItemRepository;
 import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.stats.repository.OwnedItemRepository;
 import org.junit.jupiter.api.Test;

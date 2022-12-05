@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.CaptureMethodViews;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.input.CaptureMethodInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
+import com.pokemonurpg.entities.v1.pokemon.CaptureMethod;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.configuration.v3.shared.request.JpaPageableFactoryFake;
-import com.pokemonurpg.entities.v3.pokemon.species.SpeciesEntity;
+import com.pokemonurpg.entities.v1.pokemon.species.Species;
+import com.pokemonurpg.entities.v1.shared.PagedEntity;
 import com.pokemonurpg.entities.v3.pokemon.species.SpeciesRepositoryFake;
-import com.pokemonurpg.entities.v3.shared.PagedEntity;
 
 public class ListSpeciesJpaDataGatewayTest {
 
@@ -38,7 +38,7 @@ public class ListSpeciesJpaDataGatewayTest {
         assertEquals(SpeciesRepositoryFake.PAGE, response.getPage());
     }
 
-    boolean isProbeOwnable(SpeciesEntity probe) {
+    boolean isProbeOwnable(Species probe) {
         return !probe.getBattleOnly() && !probe.getMegaEvolved();
     }
 
@@ -55,7 +55,7 @@ public class ListSpeciesJpaDataGatewayTest {
         assertEquals(SpeciesRepositoryFake.PAGE, response.getPage());
     }
 
-    boolean isProbeStarter(SpeciesEntity probe) {
+    boolean isProbeStarter(Species probe) {
         return !probe.getBattleOnly() && !probe.getEvolved() && !probe.getMegaEvolved() && !probe.getFullyEvolved() && probe.getLegendaryTier() == 0;
     }
 }

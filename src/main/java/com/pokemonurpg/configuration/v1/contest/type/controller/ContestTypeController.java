@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.contest.type.controller;
 
 import com.pokemonurpg.configuration.v1.contest.type.ContestTypeViews;
 import com.pokemonurpg.configuration.v1.contest.type.input.ContestTypeInputDto;
-import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.entities.v1.contest.ContestType;
 import com.pokemonurpg.configuration.v1.contest.type.service.ContestTypeService;
 import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;

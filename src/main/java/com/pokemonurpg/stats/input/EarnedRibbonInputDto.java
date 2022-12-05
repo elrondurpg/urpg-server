@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
-import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
-import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.ContestRank;
+import com.pokemonurpg.entities.v1.contest.ContestType;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.strings.GeneralConstants;

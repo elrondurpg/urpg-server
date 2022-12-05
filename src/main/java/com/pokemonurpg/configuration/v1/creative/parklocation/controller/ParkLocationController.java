@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.creative.parklocation.ParkLocationViews;
 import com.pokemonurpg.configuration.v1.creative.parklocation.input.ParkLocationInputDto;
-import com.pokemonurpg.configuration.v1.creative.parklocation.model.ParkLocation;
+import com.pokemonurpg.entities.v1.creative.ParkLocation;
 import com.pokemonurpg.configuration.v1.creative.parklocation.service.ParkLocationService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

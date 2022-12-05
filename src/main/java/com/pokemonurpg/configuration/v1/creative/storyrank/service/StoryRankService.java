@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.creative.storyrank.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.creative.storyrank.input.StoryRankInputDto;
-import com.pokemonurpg.configuration.v1.creative.storyrank.model.StoryRank;
-import com.pokemonurpg.configuration.v1.creative.storyrank.repository.StoryRankRepository;
+import com.pokemonurpg.entities.v1.creative.StoryRank;
+import com.pokemonurpg.entities.v1.creative.StoryRankRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

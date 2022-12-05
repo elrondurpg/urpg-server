@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.badge.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
+import com.pokemonurpg.entities.v1.gym.Badge;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

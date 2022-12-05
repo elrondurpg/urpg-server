@@ -10,7 +10,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
+import com.pokemonurpg.entities.v1.site.Flag;
 import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
 
 public class FeatureFlagInterceptor implements HandlerInterceptor {

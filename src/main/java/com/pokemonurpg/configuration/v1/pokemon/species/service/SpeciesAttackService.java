@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
-import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
+import com.pokemonurpg.entities.v1.attack.Attack;
+import com.pokemonurpg.entities.v1.attack.AttackRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAttack;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesAttackRepository;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesAttack;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesAttackRepository;
 
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.pokemonurpg.account.v1.register.beginner.internal;
 
 import java.util.Collections;
 
+import com.pokemonurpg.configuration.v1.item.models.Item;
 import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
-import com.pokemonurpg.item.models.Item;
 
 public class CreateBeginnerResponseFake extends CreateBeginnerResponse {
     public static final String ACCESS_TOKEN = "ACCESS_TOKEN";

@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.attack.category.input;
 
-import com.pokemonurpg.configuration.v1.attack.category.model.AttackCategory;
+import com.pokemonurpg.entities.v1.attack.AttackCategory;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;

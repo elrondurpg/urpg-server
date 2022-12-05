@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.attack.attack.input;
 
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
-import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.entities.v1.attack.Attack;
+import com.pokemonurpg.entities.v1.contest.ContestType;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 

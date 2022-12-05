@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.league.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.gym.league.model.League;
+import com.pokemonurpg.entities.v1.gym.League;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

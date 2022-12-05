@@ -1,18 +1,18 @@
 package com.pokemonurpg.configuration.v1.lib.service;
 
 import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.IndexedConfigurationModel;
-import com.pokemonurpg.configuration.v1.lib.repository.IndexedConfigurationRepository;
+import com.pokemonurpg.entities.v1.shared.IndexedEntity;
+import com.pokemonurpg.entities.v1.shared.IndexedRepository;
 
 public abstract class IndexedConfigurationService<
-ModelClass extends IndexedConfigurationModel, 
+ModelClass extends IndexedEntity, 
 InputDtoClass extends ConfigurationInputDto
 > 
 extends ConfigurationService<ModelClass, InputDtoClass> {
 
-    protected IndexedConfigurationRepository<ModelClass> repository;
+    protected IndexedRepository<ModelClass> repository;
 
-    public IndexedConfigurationService(IndexedConfigurationRepository<ModelClass> repository, Class<ModelClass> modelClass) {
+    public IndexedConfigurationService(IndexedRepository<ModelClass> repository, Class<ModelClass> modelClass) {
         super(repository, modelClass);
         this.repository = repository;
     }

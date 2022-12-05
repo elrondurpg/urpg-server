@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.DoesNotConflictWithKnownGymLeader;
 import com.pokemonurpg.core.validation.annotation.UniqueDiscordId;

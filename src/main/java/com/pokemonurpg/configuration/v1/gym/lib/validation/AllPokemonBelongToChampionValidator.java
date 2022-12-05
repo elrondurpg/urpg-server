@@ -1,12 +1,12 @@
 package com.pokemonurpg.configuration.v1.gym.lib.validation;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
+import com.pokemonurpg.entities.v1.gym.Champion;
 import com.pokemonurpg.configuration.v1.gym.champion.input.ChampionPokemonInputDto;
-import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 

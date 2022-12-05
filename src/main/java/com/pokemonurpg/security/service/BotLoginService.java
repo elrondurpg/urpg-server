@@ -1,6 +1,6 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.security.dto.SessionDto;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;

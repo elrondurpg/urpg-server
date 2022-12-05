@@ -4,10 +4,10 @@ import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.configuration.v1.gym.badge.service.BadgeService;
 import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
-import com.pokemonurpg.configuration.v1.gym.gym.repository.GymRepository;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.gym.Gym;
+import com.pokemonurpg.entities.v1.gym.GymRepository;
+import com.pokemonurpg.entities.v1.gym.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.GymOwnershipTermRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

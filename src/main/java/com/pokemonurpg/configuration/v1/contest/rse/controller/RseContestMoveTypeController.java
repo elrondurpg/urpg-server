@@ -3,7 +3,7 @@ package com.pokemonurpg.configuration.v1.contest.rse.controller;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 import com.pokemonurpg.configuration.v1.contest.ContestMoveTypeViews;
 import com.pokemonurpg.configuration.v1.contest.rse.input.RseContestMoveTypeInputDto;
-import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
+import com.pokemonurpg.entities.v1.contest.RseContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.rse.service.RseContestMoveTypeService;
 import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;

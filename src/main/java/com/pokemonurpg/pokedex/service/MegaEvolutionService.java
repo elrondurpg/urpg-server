@@ -1,15 +1,15 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
-import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesRepository;
+import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
 
 @Service
 public class MegaEvolutionService {

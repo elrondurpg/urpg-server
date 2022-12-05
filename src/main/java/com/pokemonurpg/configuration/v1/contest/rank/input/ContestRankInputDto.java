@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.contest.rank.input;
 
-import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
+import com.pokemonurpg.entities.v1.contest.ContestRank;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;

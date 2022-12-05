@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.attack.target.AttackTargetTypeViews;
 import com.pokemonurpg.configuration.v1.attack.target.input.AttackTargetTypeInputDto;
-import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
+import com.pokemonurpg.entities.v1.attack.AttackTargetType;
 import com.pokemonurpg.configuration.v1.attack.target.service.AttackTargetTypeService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

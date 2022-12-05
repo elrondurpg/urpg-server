@@ -1,6 +1,6 @@
 package com.pokemonurpg.account.v1.register.beginner.internal;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.entities.v1.pokemon.Species;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 
 import javax.validation.constraints.NotNull;

@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.IndexedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.ChampionOwnershipTermViews;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.configuration.v1.gym.championownershipterm.model.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.championownershipterm.service.ChampionOwnershipTermService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

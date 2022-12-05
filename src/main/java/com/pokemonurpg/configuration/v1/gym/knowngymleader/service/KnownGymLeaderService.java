@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.gym.knowngymleader.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.input.KnownGymLeaderInputDto;
-import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
-import com.pokemonurpg.configuration.v1.gym.knowngymleader.repository.KnownGymLeaderRepository;
+import com.pokemonurpg.entities.v1.gym.KnownGymLeader;
+import com.pokemonurpg.entities.v1.gym.KnownGymLeaderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

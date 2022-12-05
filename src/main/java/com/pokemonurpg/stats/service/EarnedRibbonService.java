@@ -1,11 +1,11 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
-import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
-import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
-import com.pokemonurpg.configuration.v1.contest.attribute.repository.ContestAttributeRepository;
-import com.pokemonurpg.configuration.v1.contest.rank.repository.ContestRankRepository;
-import com.pokemonurpg.configuration.v1.contest.type.repository.ContestTypeRepository;
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.ContestRank;
+import com.pokemonurpg.entities.v1.contest.ContestType;
+import com.pokemonurpg.entities.v1.contest.ContestAttributeRepository;
+import com.pokemonurpg.entities.v1.contest.ContestRankRepository;
+import com.pokemonurpg.entities.v1.contest.ContestTypeRepository;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;

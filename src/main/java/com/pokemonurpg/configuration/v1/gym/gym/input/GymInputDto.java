@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.gym.gym.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.configuration.v1.gym.badge.model.Badge;
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.entities.v1.pokemon.Type;
+import com.pokemonurpg.entities.v1.gym.Badge;
+import com.pokemonurpg.entities.v1.gym.Gym;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.BelongsToThisGym;
 import com.pokemonurpg.core.validation.ObjectCreation;

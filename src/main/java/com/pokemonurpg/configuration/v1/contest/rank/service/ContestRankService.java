@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.contest.rank.service;
 
-import com.pokemonurpg.configuration.v1.contest.rank.model.ContestRank;
-import com.pokemonurpg.configuration.v1.contest.rank.repository.ContestRankRepository;
+import com.pokemonurpg.entities.v1.contest.ContestRank;
+import com.pokemonurpg.entities.v1.contest.ContestRankRepository;
 import com.pokemonurpg.configuration.v1.contest.rank.input.ContestRankInputDto;
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
 

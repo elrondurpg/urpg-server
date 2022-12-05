@@ -2,9 +2,9 @@ package com.pokemonurpg.configuration.v1.member.member.input;
 
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
-import com.pokemonurpg.configuration.v1.gym.league.model.League;
-import com.pokemonurpg.configuration.v1.gym.knowngymleader.model.KnownGymLeader;
+import com.pokemonurpg.entities.v1.gym.Gym;
+import com.pokemonurpg.entities.v1.gym.League;
+import com.pokemonurpg.entities.v1.gym.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

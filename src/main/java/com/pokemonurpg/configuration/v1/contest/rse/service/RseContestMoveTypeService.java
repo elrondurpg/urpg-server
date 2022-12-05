@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.contest.rse.service;
 
 import com.pokemonurpg.configuration.v1.contest.rse.input.RseContestMoveTypeInputDto;
-import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
-import com.pokemonurpg.configuration.v1.contest.rse.repository.RseContestMoveTypeRepository;
+import com.pokemonurpg.entities.v1.contest.RseContestMoveType;
+import com.pokemonurpg.entities.v1.contest.RseContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 
 import org.springframework.beans.factory.annotation.Autowired;

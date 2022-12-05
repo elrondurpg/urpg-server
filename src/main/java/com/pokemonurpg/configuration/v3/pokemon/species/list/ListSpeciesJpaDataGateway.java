@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.configuration.v3.shared.gateway.ListJpaDataGateway;
 import com.pokemonurpg.configuration.v3.shared.request.JpaPageableFactory;
-import com.pokemonurpg.entities.v3.pokemon.species.SpeciesEntity;
-import com.pokemonurpg.entities.v3.pokemon.species.SpeciesJpaRepository;
-import com.pokemonurpg.entities.v3.shared.PagedEntity;
+import com.pokemonurpg.entities.v1.pokemon.species.Species;
+import com.pokemonurpg.entities.v1.pokemon.species.SpeciesRepository;
+import com.pokemonurpg.entities.v1.shared.PagedEntity;
 
 public class ListSpeciesJpaDataGateway extends ListJpaDataGateway
 <
@@ -17,14 +17,14 @@ public class ListSpeciesJpaDataGateway extends ListJpaDataGateway
     ListSpeciesRequest
 >
 {
-    public ListSpeciesJpaDataGateway(JpaPageableFactory pageableFactory, SpeciesJpaRepository repository) {
+    public ListSpeciesJpaDataGateway(JpaPageableFactory pageableFactory, SpeciesRepository repository) {
         super(pageableFactory, repository);
     }
 
     @Override
     public PagedEntity<ListSpeciesView> getList(ListSpeciesRequest request) {
-        SpeciesJpaRepository repo = (SpeciesJpaRepository) repository;
-        Example<SpeciesEntity> example = new ExampleBuilder()
+        SpeciesRepository repo = (SpeciesRepository) repository;
+        Example<Species> example = new ExampleBuilder()
             .withOwnable(request.getOwnableOnly())
             .withStartersOnly(request.getStartersOnly())
             .build();
@@ -33,7 +33,7 @@ public class ListSpeciesJpaDataGateway extends ListJpaDataGateway
     }
     
     private static class ExampleBuilder {
-        SpeciesEntity example = new SpeciesEntity();
+        Species example = new Species();
         ExampleMatcher matcher = ExampleMatcher.matchingAll();
 
         private ExampleBuilder withOwnable(Boolean ownableOnly) {
@@ -55,7 +55,7 @@ public class ListSpeciesJpaDataGateway extends ListJpaDataGateway
             return this;
         }
 
-        private Example<SpeciesEntity> build() {
+        private Example<Species> build() {
             return Example.of(example, matcher);
         }
     }

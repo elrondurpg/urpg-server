@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.creative.parklocation.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.creative.parklocation.model.ParkLocation;
+import com.pokemonurpg.entities.v1.creative.ParkLocation;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

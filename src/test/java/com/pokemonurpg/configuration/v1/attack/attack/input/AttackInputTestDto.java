@@ -7,8 +7,8 @@ import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
 import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
 import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
+import com.pokemonurpg.configuration.v1.item.models.Item;
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
-import com.pokemonurpg.item.models.Item;
 import com.pokemonurpg.test.RandomNumberGenerator;
 import com.pokemonurpg.test.RandomStringGenerator;
 

@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
 import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;

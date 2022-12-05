@@ -4,8 +4,8 @@ import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
-import com.pokemonurpg.configuration.v1.member.member.repository.MemberRepository;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.member.MemberRepository;
 
 
 import java.util.List;

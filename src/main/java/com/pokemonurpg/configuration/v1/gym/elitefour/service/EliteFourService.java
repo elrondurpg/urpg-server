@@ -2,10 +2,10 @@ package com.pokemonurpg.configuration.v1.gym.elitefour.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.gym.elitefour.input.EliteFourInputDto;
-import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
-import com.pokemonurpg.configuration.v1.gym.elitefour.repository.EliteFourRepository;
-import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.repository.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.gym.EliteFour;
+import com.pokemonurpg.entities.v1.gym.EliteFourRepository;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTermRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,13 +1,13 @@
 package com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
+import com.pokemonurpg.entities.v1.gym.EliteFour;
 import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.input.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.repository.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
 
 import java.util.Date;

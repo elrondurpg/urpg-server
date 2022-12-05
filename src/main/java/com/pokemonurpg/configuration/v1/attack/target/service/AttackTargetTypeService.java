@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.attack.target.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.attack.target.input.AttackTargetTypeInputDto;
-import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
-import com.pokemonurpg.configuration.v1.attack.target.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.entities.v1.attack.AttackTargetType;
+import com.pokemonurpg.entities.v1.attack.AttackTargetTypeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,9 +3,9 @@ package com.pokemonurpg.configuration.v3.shared.gateway;
 import org.springframework.data.domain.Pageable;
 
 import com.pokemonurpg.configuration.v3.shared.request.ListRequest;
+import com.pokemonurpg.entities.v1.shared.PagedEntity;
+import com.pokemonurpg.entities.v1.shared.UrpgRepository;
 import com.pokemonurpg.configuration.v3.shared.request.JpaPageableFactory;
-import com.pokemonurpg.entities.v3.shared.PagedEntity;
-import com.pokemonurpg.entities.v3.shared.UrpgRepository;
 
 public abstract class ListJpaDataGateway
 <

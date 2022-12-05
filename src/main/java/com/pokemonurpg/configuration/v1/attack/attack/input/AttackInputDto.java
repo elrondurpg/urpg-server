@@ -8,18 +8,18 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.pokemonurpg.configuration.v1.attack.category.model.AttackCategory;
-import com.pokemonurpg.configuration.v1.attack.target.model.AttackTargetType;
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
-import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
-import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
-import com.pokemonurpg.configuration.v1.contest.rse.model.RseContestMoveType;
+import com.pokemonurpg.entities.v1.attack.AttackCategory;
+import com.pokemonurpg.entities.v1.attack.AttackTargetType;
+import com.pokemonurpg.entities.v1.attack.Attack;
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.OrasContestMoveType;
+import com.pokemonurpg.entities.v1.contest.RseContestMoveType;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.entities.v1.pokemon.Type;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
-import com.pokemonurpg.item.models.Item;
+import com.pokemonurpg.entities.v1.item.Item;
 
 import lombok.Getter;
 import lombok.Setter;

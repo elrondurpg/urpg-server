@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.SimpleNamedConfigurationService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.input.KnownEliteFourMemberInputDto;
-import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
-import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.repository.KnownEliteFourMemberRepository;
+import com.pokemonurpg.entities.v1.gym.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.gym.KnownEliteFourMemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

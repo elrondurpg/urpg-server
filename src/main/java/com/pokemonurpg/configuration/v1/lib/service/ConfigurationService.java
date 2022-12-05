@@ -6,24 +6,24 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 
 import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
-import com.pokemonurpg.configuration.v1.lib.repository.ConfigurationRepository;
+import com.pokemonurpg.entities.v1.shared.UrpgEntity;
+import com.pokemonurpg.entities.v1.shared.UrpgRepository;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 
 import lombok.Getter;
 
 @Getter
 public abstract class ConfigurationService<
-        ModelClass extends ConfigurationModel, 
+        ModelClass extends UrpgEntity, 
         InputDtoClass extends ConfigurationInputDto
     > {
 
     protected Class<ModelClass> modelClass;
-    protected ConfigurationRepository<ModelClass, ?> repository;
+    protected UrpgRepository<ModelClass, ?> repository;
 
     public ConfigurationService() {}
 
-    public ConfigurationService(ConfigurationRepository<ModelClass, ?> repository, Class<ModelClass> modelClass) {
+    public ConfigurationService(UrpgRepository<ModelClass, ?> repository, Class<ModelClass> modelClass) {
         this.repository = repository;
         this.modelClass = modelClass;
     }

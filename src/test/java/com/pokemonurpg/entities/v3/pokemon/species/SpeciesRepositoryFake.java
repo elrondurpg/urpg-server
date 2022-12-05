@@ -13,20 +13,22 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.entities.v1.pokemon.species.Species;
+import com.pokemonurpg.entities.v1.pokemon.species.SpeciesRepository;
 
 import lombok.Getter;
 
 @Getter
-public class SpeciesRepositoryFake implements SpeciesJpaRepository {
-    public final static PageImpl<SpeciesEntity> PAGE = new PageImpl<>(Collections.singletonList(new SpeciesEntity()));
+public class SpeciesRepositoryFake implements SpeciesRepository {
+    public final static PageImpl<Species> PAGE = new PageImpl<>(Collections.singletonList(new Species()));
 
-    SpeciesEntity probeArg = null;
+    Species probeArg = null;
     ExampleMatcher matcherArg = null;
     Pageable pageableArg = null;
 
     @Override
     @SuppressWarnings("unchecked")
-    public <S extends SpeciesEntity> PageImpl<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Species> PageImpl<S> findAll(Example<S> example, Pageable pageable) {
         probeArg = example.getProbe();
         matcherArg = example.getMatcher();
         pageableArg = pageable;
@@ -34,43 +36,43 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public SpeciesEntity findByName(String name) {
+    public Species findByName(String name) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public SpeciesEntity findFirstByNameStartingWith(String name) {
+    public Species findFirstByNameStartingWith(String name) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public SpeciesEntity findByDbid(Integer dbid) {
+    public Species findByDbid(Integer dbid) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<SpeciesEntity> findAll() {
+    public List<Species> findAll() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<SpeciesEntity> findAll(Sort sort) {
+    public List<Species> findAll(Sort sort) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<SpeciesEntity> findAllById(Iterable<Integer> ids) {
+    public List<Species> findAllById(Iterable<Integer> ids) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends SpeciesEntity> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Species> List<S> saveAll(Iterable<S> entities) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -82,19 +84,19 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public <S extends SpeciesEntity> S saveAndFlush(S entity) {
+    public <S extends Species> S saveAndFlush(S entity) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends SpeciesEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Species> List<S> saveAllAndFlush(Iterable<S> entities) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<SpeciesEntity> entities) {
+    public void deleteAllInBatch(Iterable<Species> entities) {
         // TODO Auto-generated method stub
         
     }
@@ -112,37 +114,37 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public SpeciesEntity getOne(Integer id) {
+    public Species getOne(Integer id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public SpeciesEntity getById(Integer id) {
+    public Species getById(Integer id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends SpeciesEntity> List<S> findAll(Example<S> example) {
+    public <S extends Species> List<S> findAll(Example<S> example) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends SpeciesEntity> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Species> List<S> findAll(Example<S> example, Sort sort) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends SpeciesEntity> S save(S entity) {
+    public <S extends Species> S save(S entity) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Optional<SpeciesEntity> findById(Integer id) {
+    public Optional<Species> findById(Integer id) {
         // TODO Auto-generated method stub
         return Optional.empty();
     }
@@ -166,7 +168,7 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public void delete(SpeciesEntity entity) {
+    public void delete(Species entity) {
         // TODO Auto-generated method stub
         
     }
@@ -178,7 +180,7 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends SpeciesEntity> entities) {
+    public void deleteAll(Iterable<? extends Species> entities) {
         // TODO Auto-generated method stub
         
     }
@@ -190,25 +192,25 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public <S extends SpeciesEntity> Optional<S> findOne(Example<S> example) {
+    public <S extends Species> Optional<S> findOne(Example<S> example) {
         // TODO Auto-generated method stub
         return Optional.empty();
     }
 
     @Override
-    public <S extends SpeciesEntity> long count(Example<S> example) {
+    public <S extends Species> long count(Example<S> example) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public <S extends SpeciesEntity> boolean exists(Example<S> example) {
+    public <S extends Species> boolean exists(Example<S> example) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public <S extends SpeciesEntity, R> R findBy(Example<S> example,
+    public <S extends Species, R> R findBy(Example<S> example,
             Function<FetchableFluentQuery<S>, R> queryFunction) {
         // TODO Auto-generated method stub
         return null;
@@ -245,7 +247,7 @@ public class SpeciesRepositoryFake implements SpeciesJpaRepository {
     }
 
     @Override
-    public PageImpl<SpeciesEntity> findAll(Pageable pageable) {
+    public PageImpl<Species> findAll(Pageable pageable) {
         // TODO Auto-generated method stub
         return null;
     }

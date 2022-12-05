@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.league.LeagueViews;
 import com.pokemonurpg.configuration.v1.gym.league.input.LeagueInputDto;
-import com.pokemonurpg.configuration.v1.gym.league.model.League;
+import com.pokemonurpg.entities.v1.gym.League;
 import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

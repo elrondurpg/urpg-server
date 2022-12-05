@@ -2,6 +2,7 @@ package com.pokemonurpg.core.validation.annotation;
 
 import com.pokemonurpg.core.validation.validator.UniqueNameValidator;
 import com.pokemonurpg.core.validation.validator.UniqueNameValidatorOld;
+import com.pokemonurpg.entities.v1.shared.UrpgEntity;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -24,5 +25,5 @@ public @interface UniqueName {
 
     Class<? extends Payload>[] payload() default { };
 
-    public Class type();
+    public Class<? extends UrpgEntity> type();
 }

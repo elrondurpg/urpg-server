@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.creative.artrank.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
+import com.pokemonurpg.entities.v1.creative.ArtRank;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

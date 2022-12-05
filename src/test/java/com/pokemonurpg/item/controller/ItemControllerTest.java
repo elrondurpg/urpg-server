@@ -1,13 +1,15 @@
 package com.pokemonurpg.item.controller;
 
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.input.ItemInputDto;
-import com.pokemonurpg.item.service.ItemService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.pokemonurpg.configuration.v1.item.controller.ItemController;
+import com.pokemonurpg.configuration.v1.item.input.ItemInputDto;
+import com.pokemonurpg.configuration.v1.item.models.Item;
+import com.pokemonurpg.configuration.v1.item.service.ItemService;
 
 import java.util.ArrayList;
 import java.util.Arrays;

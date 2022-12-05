@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.knownelitefourmember.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.gym.KnownEliteFourMember;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

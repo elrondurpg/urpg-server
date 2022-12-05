@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pokemonurpg.configuration.v1.attack.category.AttackCategoryViews;
 import com.pokemonurpg.configuration.v1.attack.category.input.AttackCategoryInputDto;
-import com.pokemonurpg.configuration.v1.attack.category.model.AttackCategory;
+import com.pokemonurpg.entities.v1.attack.AttackCategory;
 import com.pokemonurpg.configuration.v1.attack.category.service.AttackCategoryService;
 import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;

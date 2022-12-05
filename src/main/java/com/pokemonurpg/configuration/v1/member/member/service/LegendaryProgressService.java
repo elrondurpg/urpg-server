@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
 import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto;
-import com.pokemonurpg.configuration.v1.member.member.model.LegendaryProgress;
-import com.pokemonurpg.configuration.v1.site.section.model.Section;
+import com.pokemonurpg.entities.v1.member.LegendaryProgress;
+import com.pokemonurpg.entities.v1.site.Section;
 import com.pokemonurpg.stats.repository.LegendaryProgressRepository;
 import org.springframework.stereotype.Service;
 

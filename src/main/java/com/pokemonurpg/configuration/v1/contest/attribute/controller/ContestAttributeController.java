@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pokemonurpg.configuration.v1.contest.attribute.ContestAttributeViews;
 import com.pokemonurpg.configuration.v1.contest.attribute.input.ContestAttributeInputDto;
-import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
 import com.pokemonurpg.configuration.v1.contest.attribute.service.ContestAttributeService;
 import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;

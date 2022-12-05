@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.KnownChampionViews;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.input.KnownChampionInputDto;
-import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
+import com.pokemonurpg.entities.v1.gym.KnownChampion;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

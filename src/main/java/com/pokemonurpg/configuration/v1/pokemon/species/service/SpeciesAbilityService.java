@@ -2,12 +2,12 @@ package com.pokemonurpg.configuration.v1.pokemon.species.service;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
-import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
+import com.pokemonurpg.entities.v1.pokemon.AbilityRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.SpeciesAbility;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesAbilityRepository;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesAbility;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesAbilityRepository;
 
 import java.util.List;
 

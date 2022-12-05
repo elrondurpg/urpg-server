@@ -13,8 +13,8 @@ import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwner
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
 import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
+import com.pokemonurpg.configuration.v1.item.service.ItemService;
 import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
-import com.pokemonurpg.item.service.ItemService;
 import com.pokemonurpg.configuration.v1.member.member.model.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.test.RandomStringGenerator;

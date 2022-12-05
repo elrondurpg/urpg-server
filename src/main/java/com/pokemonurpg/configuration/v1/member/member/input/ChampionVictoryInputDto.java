@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.member.member.input;
 
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
+import com.pokemonurpg.entities.v1.gym.KnownChampion;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

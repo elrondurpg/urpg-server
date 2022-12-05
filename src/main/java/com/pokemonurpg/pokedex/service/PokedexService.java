@@ -1,6 +1,6 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
+import com.pokemonurpg.entities.v1.pokemon.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.pokedex.output.PokedexEntryDto;
 

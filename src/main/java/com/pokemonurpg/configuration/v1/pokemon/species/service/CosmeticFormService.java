@@ -3,9 +3,9 @@ package com.pokemonurpg.configuration.v1.pokemon.species.service;
 import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.input.CosmeticFormInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.CosmeticForm;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.CosmeticFormRepository;
+import com.pokemonurpg.entities.v1.pokemon.CosmeticForm;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.CosmeticFormRepository;
 
 import java.util.Set;
 

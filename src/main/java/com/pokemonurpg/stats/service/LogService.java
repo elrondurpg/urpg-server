@@ -2,7 +2,7 @@ package com.pokemonurpg.stats.service;
 
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.stats.models.LogRecord;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.stats.repository.LogRecordRepository;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.creative.storyrank.StoryRankViews;
 import com.pokemonurpg.configuration.v1.creative.storyrank.input.StoryRankInputDto;
-import com.pokemonurpg.configuration.v1.creative.storyrank.model.StoryRank;
+import com.pokemonurpg.entities.v1.creative.StoryRank;
 import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

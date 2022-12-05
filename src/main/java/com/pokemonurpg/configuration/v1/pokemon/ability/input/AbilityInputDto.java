@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon.ability.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

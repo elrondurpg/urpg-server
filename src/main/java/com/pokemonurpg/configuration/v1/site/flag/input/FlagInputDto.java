@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.site.flag.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.site.flag.model.Flag;
+import com.pokemonurpg.entities.v1.site.Flag;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 import com.pokemonurpg.core.validation.annotation.ValueConformsToType;

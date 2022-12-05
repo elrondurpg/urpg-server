@@ -1,13 +1,13 @@
 package com.pokemonurpg.stats.input;
 
 
-import com.pokemonurpg.configuration.v1.pokemon.capturemethod.model.CaptureMethod;
-import com.pokemonurpg.configuration.v1.pokemon.nature.model.Nature;
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.entities.v1.pokemon.CaptureMethod;
+import com.pokemonurpg.entities.v1.pokemon.Nature;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.Type;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.strings.GeneralConstants;
 
 import javax.validation.Valid;

@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.pokemon.ability.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
-import com.pokemonurpg.configuration.v1.pokemon.ability.repository.AbilityRepository;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
+import com.pokemonurpg.entities.v1.pokemon.AbilityRepository;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesAbilityService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.KnownEliteFourMemberViews;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.input.KnownEliteFourMemberInputDto;
-import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.model.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.gym.KnownEliteFourMember;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

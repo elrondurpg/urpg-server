@@ -2,8 +2,8 @@ package com.pokemonurpg.pokedex.service;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesRepository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

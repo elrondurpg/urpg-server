@@ -2,7 +2,7 @@ package com.pokemonurpg.security.service;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;

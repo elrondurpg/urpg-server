@@ -1,16 +1,16 @@
 package com.pokemonurpg.configuration.v1.attack.attack.service;
 
-import com.pokemonurpg.configuration.v1.attack.category.repository.AttackCategoryRepository;
-import com.pokemonurpg.configuration.v1.attack.target.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.entities.v1.attack.AttackCategoryRepository;
+import com.pokemonurpg.entities.v1.attack.AttackTargetTypeRepository;
 import com.pokemonurpg.configuration.v1.attack.attack.input.AttackInputDto;
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
-import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
-import com.pokemonurpg.configuration.v1.pokemon.type.repository.TypeRepository;
-import com.pokemonurpg.configuration.v1.contest.attribute.repository.ContestAttributeRepository;
-import com.pokemonurpg.configuration.v1.contest.oras.repository.OrasContestMoveTypeRepository;
-import com.pokemonurpg.configuration.v1.contest.rse.repository.RseContestMoveTypeRepository;
+import com.pokemonurpg.entities.v1.attack.Attack;
+import com.pokemonurpg.entities.v1.attack.AttackRepository;
+import com.pokemonurpg.entities.v1.pokemon.TypeRepository;
+import com.pokemonurpg.entities.v1.contest.ContestAttributeRepository;
+import com.pokemonurpg.entities.v1.contest.OrasContestMoveTypeRepository;
+import com.pokemonurpg.entities.v1.contest.RseContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
-import com.pokemonurpg.item.repository.ItemRepository;
+import com.pokemonurpg.entities.v1.item.ItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

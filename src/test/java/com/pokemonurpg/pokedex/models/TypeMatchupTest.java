@@ -3,6 +3,7 @@ package com.pokemonurpg.pokedex.models;
 import org.junit.jupiter.api.Test;
 
 import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.entities.v1.pokemon.TypeMatchup;
 
 import static org.junit.jupiter.api.Assertions.*;
 

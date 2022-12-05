@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.champion.ChampionViews;
 import com.pokemonurpg.configuration.v1.gym.champion.input.ChampionInputDto;
-import com.pokemonurpg.configuration.v1.gym.champion.model.Champion;
+import com.pokemonurpg.entities.v1.gym.Champion;
 import com.pokemonurpg.configuration.v1.gym.champion.service.ChampionService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

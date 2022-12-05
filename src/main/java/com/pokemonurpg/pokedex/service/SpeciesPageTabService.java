@@ -1,12 +1,11 @@
 package com.pokemonurpg.pokedex.service;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.pokemon.species.model.Species;
-import com.pokemonurpg.configuration.v1.pokemon.species.repository.SpeciesRepository;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
-
-import javax.annotation.Resource;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.pokemon.SpeciesRepository;
 
 @Service
 public class SpeciesPageTabService {

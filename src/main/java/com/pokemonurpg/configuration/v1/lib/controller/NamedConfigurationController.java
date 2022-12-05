@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.NamedConfigurationModel;
+import com.pokemonurpg.entities.v1.shared.NamedEntity;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 import com.pokemonurpg.lib.security.v1.AuthorizationType;
@@ -19,7 +19,7 @@ import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 public abstract class NamedConfigurationController<
-        ModelClass extends NamedConfigurationModel, 
+        ModelClass extends NamedEntity, 
         FilterableGetParamsClass extends FilterableGetParams<ModelClass>,
         InputDtoClass extends NamedConfigurationInputDto
     > 

@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.knownchampion.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.gym.knownchampion.model.KnownChampion;
+import com.pokemonurpg.entities.v1.gym.KnownChampion;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

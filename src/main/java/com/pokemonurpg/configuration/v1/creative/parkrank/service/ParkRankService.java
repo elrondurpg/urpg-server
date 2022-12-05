@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.creative.parkrank.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.creative.parkrank.input.ParkRankInputDto;
-import com.pokemonurpg.configuration.v1.creative.parkrank.model.ParkRank;
-import com.pokemonurpg.configuration.v1.creative.parkrank.repository.ParkRankRepository;
+import com.pokemonurpg.entities.v1.creative.ParkRank;
+import com.pokemonurpg.entities.v1.creative.ParkRankRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

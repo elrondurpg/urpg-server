@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.gym.elitefour.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
+import com.pokemonurpg.entities.v1.gym.EliteFour;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.BelongsToThisEliteFourSlot;
 import com.pokemonurpg.core.validation.ObjectCreation;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon.type.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.entities.v1.pokemon.Type;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 
 import lombok.Getter;

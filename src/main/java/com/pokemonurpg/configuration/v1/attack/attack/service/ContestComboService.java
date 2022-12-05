@@ -1,12 +1,12 @@
 package com.pokemonurpg.configuration.v1.attack.attack.service;
 
 import com.pokemonurpg.configuration.v1.attack.attack.input.ContestComboInputDto;
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
-import com.pokemonurpg.configuration.v1.attack.attack.model.ContestCombo;
-import com.pokemonurpg.configuration.v1.attack.attack.repository.AttackRepository;
-import com.pokemonurpg.configuration.v1.attack.attack.repository.ContestComboRepository;
-import com.pokemonurpg.configuration.v1.contest.type.repository.ContestTypeRepository;
-import com.pokemonurpg.configuration.v1.contest.type.model.ContestType;
+import com.pokemonurpg.entities.v1.attack.Attack;
+import com.pokemonurpg.entities.v1.attack.ContestCombo;
+import com.pokemonurpg.entities.v1.attack.AttackRepository;
+import com.pokemonurpg.entities.v1.attack.ContestComboRepository;
+import com.pokemonurpg.entities.v1.contest.ContestTypeRepository;
+import com.pokemonurpg.entities.v1.contest.ContestType;
 
 import org.springframework.stereotype.Service;
 

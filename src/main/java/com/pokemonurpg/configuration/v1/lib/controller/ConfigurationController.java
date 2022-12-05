@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pokemonurpg.configuration.v1.lib.ConfigurationViews;
 import com.pokemonurpg.configuration.v1.lib.config.PagedConfiguration;
 import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
+import com.pokemonurpg.entities.v1.shared.UrpgEntity;
 import com.pokemonurpg.configuration.v1.lib.service.ConfigurationService;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
@@ -24,7 +24,7 @@ import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import lombok.Getter;
 
 public abstract class ConfigurationController<
-        ModelClass extends ConfigurationModel, 
+        ModelClass extends UrpgEntity, 
         FilterableGetParamsClass extends FilterableGetParams<ModelClass>,
         InputDtoClass extends ConfigurationInputDto> {
 

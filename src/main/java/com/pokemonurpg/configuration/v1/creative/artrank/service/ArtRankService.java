@@ -2,8 +2,8 @@ package com.pokemonurpg.configuration.v1.creative.artrank.service;
 
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.creative.artrank.input.ArtRankInputDto;
-import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
-import com.pokemonurpg.configuration.v1.creative.artrank.repository.ArtRankRepository;
+import com.pokemonurpg.entities.v1.creative.ArtRank;
+import com.pokemonurpg.entities.v1.creative.ArtRankRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

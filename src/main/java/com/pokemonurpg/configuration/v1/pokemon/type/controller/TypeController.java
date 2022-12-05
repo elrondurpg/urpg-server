@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.pokemon.type.TypeViews;
 import com.pokemonurpg.configuration.v1.pokemon.type.input.TypeInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.type.model.Type;
+import com.pokemonurpg.entities.v1.pokemon.Type;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

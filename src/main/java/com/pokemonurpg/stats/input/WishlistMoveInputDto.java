@@ -2,7 +2,7 @@ package com.pokemonurpg.stats.input;
 
 import javax.validation.constraints.NotNull;
 
-import com.pokemonurpg.configuration.v1.attack.attack.model.Attack;
+import com.pokemonurpg.entities.v1.attack.Attack;
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 

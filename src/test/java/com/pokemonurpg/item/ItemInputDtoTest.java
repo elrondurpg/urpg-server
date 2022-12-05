@@ -1,7 +1,8 @@
 package com.pokemonurpg.item;
 
-import com.pokemonurpg.item.input.ItemInputDto;
 import org.junit.jupiter.api.Test;
+
+import com.pokemonurpg.configuration.v1.item.input.ItemInputDto;
 
 import static org.junit.jupiter.api.Assertions.*;
 

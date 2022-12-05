@@ -1,0 +1,61 @@
+package com.pokemonurpg.configuration.v1.item.controller;
+
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.configuration.v1.item.input.ItemInputDto;
+import com.pokemonurpg.configuration.v1.item.models.Item;
+import com.pokemonurpg.configuration.v1.item.service.ItemService;
+import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/item")
+@CrossOrigin
+@Validated
+public class ItemController {
+
+    @Resource
+    private ItemService itemService;
+
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
+    @GetMapping
+    public @ResponseBody
+    List<String> findNamesBy(@RequestParam(required = false) String type) {
+        return itemService.findNamesBy(type);
+    }
+
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
+    @GetMapping(path="/type/{types}")
+    public @ResponseBody
+    List<Item> findByTypeIn(@PathVariable("types") List<String> types) {
+        return itemService.findByTypeIn(types);
+    }
+
+    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
+    @GetMapping(path="/{name}")
+    public @ResponseBody
+    Item findByName(@PathVariable("name") String name) {
+        return itemService.findByName(name);
+    }
+
+    @Validated(ObjectCreation.class)
+    @AllowAuthorized(permission = "Write Item")
+    @PostMapping
+    public @ResponseBody
+    Item create(@Valid @RequestBody ItemInputDto input) {
+        return itemService.create(input);
+    }
+
+    @AllowAuthorized(permission = "Write Item")
+    @PutMapping(path="/{dbid}")
+    public @ResponseBody
+    Item update(@Valid @RequestBody ItemInputDto input, @PathVariable int dbid) {
+        return itemService.update(input, dbid);
+    }
+}

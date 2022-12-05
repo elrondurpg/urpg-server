@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gym.lib.validation;
 
 import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.configuration.v1.gym.elitefour.model.EliteFour;
-import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.model.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.EliteFour;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gym.elitefourownershipterm.service.EliteFourOwnershipTermService;
 import com.pokemonurpg.configuration.v1.gym.lib.annotation.BelongsToThisEliteFourSlot;
 import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;

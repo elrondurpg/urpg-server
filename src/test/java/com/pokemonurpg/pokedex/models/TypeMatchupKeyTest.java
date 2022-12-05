@@ -2,6 +2,8 @@ package com.pokemonurpg.pokedex.models;
 
 import org.junit.jupiter.api.Test;
 
+import com.pokemonurpg.entities.v1.pokemon.TypeMatchupKey;
+
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -3,7 +3,7 @@ package com.pokemonurpg.configuration.v1.contest.oras.controller;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 import com.pokemonurpg.configuration.v1.contest.ContestMoveTypeViews;
 import com.pokemonurpg.configuration.v1.contest.oras.input.OrasContestMoveTypeInputDto;
-import com.pokemonurpg.configuration.v1.contest.oras.model.OrasContestMoveType;
+import com.pokemonurpg.entities.v1.contest.OrasContestMoveType;
 import com.pokemonurpg.configuration.v1.contest.oras.service.OrasContestMoveTypeService;
 import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinition;
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.core.validation.validator;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.lib.model.ConfigurationModel;
+import com.pokemonurpg.entities.v1.shared.UrpgEntity;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationServiceFactory;
 import com.pokemonurpg.core.input.UniquelyNamedInputDto;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.ResolvableType;
 
 public class UniqueNameValidatorOld implements ConstraintValidator<UniqueName, UniquelyNamedInputDto> {
-    private Class<? extends ConfigurationModel> objectClass;
+    private Class<? extends UrpgEntity> objectClass;
 
     @Resource
     private NamedObjectServiceFactory namedObjectServiceFactory;
@@ -31,7 +31,7 @@ public class UniqueNameValidatorOld implements ConstraintValidator<UniqueName, U
     @Resource
     private RequestPathVariableService requestPathVariableService;
 
-    public Class<? extends ConfigurationModel> getType() {
+    public Class<? extends UrpgEntity> getType() {
         return objectClass;
     }
 

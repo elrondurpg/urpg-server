@@ -3,7 +3,7 @@ package com.pokemonurpg.configuration.v1.contest.attribute.input;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.pokemonurpg.configuration.v1.contest.attribute.model.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;

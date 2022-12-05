@@ -5,16 +5,16 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.entities.v1.gym.Gym;
 import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 import com.pokemonurpg.configuration.v1.gym.gymownershipterm.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.model.GymOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.gymownershipterm.repository.GymOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.gym.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.gym.GymOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
 import com.pokemonurpg.configuration.v1.gym.league.service.LeagueService;
+import com.pokemonurpg.configuration.v1.item.service.ItemService;
 import com.pokemonurpg.configuration.v1.lib.service.IndexedConfigurationService;
-import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 
 @Service

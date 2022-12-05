@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.creative.artrank.ArtRankViews;
 import com.pokemonurpg.configuration.v1.creative.artrank.input.ArtRankInputDto;
-import com.pokemonurpg.configuration.v1.creative.artrank.model.ArtRank;
+import com.pokemonurpg.entities.v1.creative.ArtRank;
 import com.pokemonurpg.configuration.v1.creative.artrank.service.ArtRankService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

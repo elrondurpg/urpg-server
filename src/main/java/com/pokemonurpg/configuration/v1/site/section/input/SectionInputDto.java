@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.site.section.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.site.section.model.Section;
+import com.pokemonurpg.entities.v1.site.Section;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

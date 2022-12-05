@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.member.member.input;
 
 import org.springframework.data.domain.Example;
 
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
+import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.lib.input.v1.FilterableGetParams;
 
 import lombok.Getter;

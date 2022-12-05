@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.creative.parkrank.input;
 
 import com.pokemonurpg.configuration.v1.lib.input.NamedConfigurationInputDto;
-import com.pokemonurpg.configuration.v1.creative.parkrank.model.ParkRank;
+import com.pokemonurpg.entities.v1.creative.ParkRank;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.UniqueName;
 

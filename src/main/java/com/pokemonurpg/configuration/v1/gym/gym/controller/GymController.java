@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.gym.gym.GymViews;
 import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
-import com.pokemonurpg.configuration.v1.gym.gym.model.Gym;
+import com.pokemonurpg.entities.v1.gym.Gym;
 import com.pokemonurpg.configuration.v1.gym.gym.service.GymService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

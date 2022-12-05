@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.account.v1.register.common.internal.CreateMemberHandler;
 import com.pokemonurpg.account.v1.register.common.internal.UpdateMemberAccessTokensHandler;
-import com.pokemonurpg.configuration.v1.member.member.model.Member;
-import com.pokemonurpg.configuration.v1.member.member.model.OwnedItem;
-import com.pokemonurpg.configuration.v1.member.member.repository.MemberRepository;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.member.OwnedItem;
+import com.pokemonurpg.entities.v1.member.MemberRepository;
 import com.pokemonurpg.configuration.v1.member.member.service.OwnedItemService;
-import com.pokemonurpg.member.repository.KnownNameClaimRepository;
-import com.pokemonurpg.member.repository.RoleRepository;
 
 @Service
 public class CreateBeginnerHandler extends CreateMemberHandler<CreateBeginnerRequest, CreateBeginnerResponse>{

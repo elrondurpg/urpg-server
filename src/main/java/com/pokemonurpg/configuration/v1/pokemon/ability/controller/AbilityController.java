@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.lib.controller.ConfigControllerDefinitio
 import com.pokemonurpg.configuration.v1.lib.controller.NamedConfigurationController;
 import com.pokemonurpg.configuration.v1.pokemon.ability.AbilityViews;
 import com.pokemonurpg.configuration.v1.pokemon.ability.input.AbilityInputDto;
-import com.pokemonurpg.configuration.v1.pokemon.ability.model.Ability;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
 import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
 import com.pokemonurpg.lib.input.v1.FilterlessGetParams;
 

@@ -1,0 +1,45 @@
+package com.pokemonurpg.configuration.v1.item.service;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.item.input.ItemBundleItemInputDto;
+import com.pokemonurpg.configuration.v1.item.models.Item;
+import com.pokemonurpg.configuration.v1.item.models.ItemBundle;
+import com.pokemonurpg.configuration.v1.item.models.ItemBundleItem;
+import com.pokemonurpg.configuration.v1.item.repository.ItemBundleItemRepository;
+import com.pokemonurpg.configuration.v1.item.repository.ItemRepository;
+
+@Service
+public class ItemBundleItemService {
+    @Resource
+    private ItemBundleItemRepository itemBundleItemRepository;
+
+    @Resource
+    private ItemRepository itemRepository;
+
+    public List<ItemBundleItem> findByBundle(ItemBundle bundle) {
+        return itemBundleItemRepository.findByBundle(bundle);
+    }
+
+    public void update(ItemBundle bundle, ItemBundleItemInputDto input) {
+        Item item = itemRepository.findByName(input.getItem());
+        ItemBundleItem existingRecord = itemBundleItemRepository.findByBundleAndItem(bundle, item);
+        if (existingRecord != null) {
+            if (input.getDelete()) {
+                itemBundleItemRepository.delete(existingRecord);
+            }
+            else {
+                existingRecord.update(input);
+                itemBundleItemRepository.save(existingRecord);
+            }
+        }
+        else {
+            ItemBundleItem newRecord = new ItemBundleItem(input, bundle, item);
+            itemBundleItemRepository.save(newRecord);
+        }
+    }
+}
