@@ -3,8 +3,8 @@ package com.pokemonurpg.entities.v1.site;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import com.pokemonurpg.configuration.v1.site.menu.MenuItemInputDto;
 import com.pokemonurpg.entities.v1.shared.NamedEntity;
-import com.pokemonurpg.site.input.MenuItemInputDto;
 
 import lombok.Getter;
 import lombok.Setter;

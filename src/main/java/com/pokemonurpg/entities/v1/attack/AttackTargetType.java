@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesAttackTargetTypeView;
+import com.pokemonurpg.configuration.v1.attack.attack.shared.view.AttackResponseTargetPart;
 import com.pokemonurpg.entities.v1.shared.NamedEntity;
 
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name = "attack_target_type")
 @Getter
 @Setter
-public class AttackTargetType extends NamedEntity implements GetSpeciesAttackTargetTypeView {
+public class AttackTargetType extends NamedEntity implements AttackResponseTargetPart {
 
     @Column
     private String description;

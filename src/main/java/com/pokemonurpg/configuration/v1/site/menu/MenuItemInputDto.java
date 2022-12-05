@@ -1,4 +1,4 @@
-package com.pokemonurpg.site.input;
+package com.pokemonurpg.configuration.v1.site.menu;
 
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
