@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.item.input.ItemBundleItemInputDto;
-import com.pokemonurpg.configuration.v1.item.models.Item;
-import com.pokemonurpg.configuration.v1.item.models.ItemBundle;
-import com.pokemonurpg.configuration.v1.item.models.ItemBundleItem;
-import com.pokemonurpg.configuration.v1.item.repository.ItemBundleItemRepository;
-import com.pokemonurpg.configuration.v1.item.repository.ItemRepository;
+import com.pokemonurpg.entities.v1.item.Item;
+import com.pokemonurpg.entities.v1.item.ItemBundle;
+import com.pokemonurpg.entities.v1.item.ItemBundleItem;
+import com.pokemonurpg.entities.v1.item.ItemBundleItemRepository;
+import com.pokemonurpg.entities.v1.item.ItemRepository;
 
 @Service
 public class ItemBundleItemService {

@@ -1,9 +1,8 @@
-package com.pokemonurpg.site.service;
-
-import com.pokemonurpg.site.models.MenuItem;
-import org.springframework.stereotype.Service;
+package com.pokemonurpg.configuration.v1.site.menu;
 
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class MenuService {

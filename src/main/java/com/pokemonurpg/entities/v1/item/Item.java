@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.pokemonurpg.configuration.v1.item.input.ItemInputDto;
 import com.pokemonurpg.entities.v1.shared.NamedEntity;
 
 @Entity
@@ -22,7 +23,7 @@ public class Item extends NamedEntity {
     @Column
     private String description;
 
-    /*public Item() {
+    public Item() {
     }
 
     public Item(ItemInputDto item) {
@@ -35,5 +36,5 @@ public class Item extends NamedEntity {
         setPrice(input.getPrice());
         setType(input.getType());
         setDescription(input.getDescription());
-    }*/
+    }
 }

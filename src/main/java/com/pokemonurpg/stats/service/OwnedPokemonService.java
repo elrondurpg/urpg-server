@@ -1,32 +1,32 @@
 package com.pokemonurpg.stats.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.inject.Provider;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
-import com.pokemonurpg.entities.v1.pokemon.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
 import com.pokemonurpg.core.service.IndexedObjectService;
 import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemonRepository;
 import com.pokemonurpg.security.service.SessionService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.input.WishlistAbilityInputDto;
 import com.pokemonurpg.stats.input.WishlistMoveInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.models.WishlistAbility;
-import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
 import com.pokemonurpg.stats.validation.OwnedPokemonValidator;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import javax.annotation.Resource;
-import javax.inject.Provider;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
@@ -159,9 +159,5 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
             wishlistMoveService.update(move, pokemon);
         }
         pokemon.setWishlistMoves(wishlistMoveService.findByPokemon(pokemon));
-    }
-
-    public void delete(int dbid) {
-        ownedPokemonRepository.deleteByDbid(dbid);
     }
 }

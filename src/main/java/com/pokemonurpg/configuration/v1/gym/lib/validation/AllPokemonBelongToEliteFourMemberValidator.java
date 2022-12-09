@@ -1,19 +1,20 @@
 package com.pokemonurpg.configuration.v1.gym.lib.validation;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.entities.v1.gym.EliteFour;
-import com.pokemonurpg.configuration.v1.gym.elitefour.input.EliteFourPokemonInputDto;
-import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
-import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
+import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidatorContext;
-import java.util.List;
-import java.util.Objects;
+
+import com.pokemonurpg.configuration.v1.gym.elitefour.input.EliteFourPokemonInputDto;
+import com.pokemonurpg.configuration.v1.gym.elitefour.service.EliteFourService;
+import com.pokemonurpg.configuration.v1.gym.lib.annotation.AllPokemonBelongToOwner;
+import com.pokemonurpg.core.service.RequestPathVariableService;
+import com.pokemonurpg.entities.v1.gym.EliteFour;
+import com.pokemonurpg.entities.v1.gym.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.stats.service.OwnedPokemonService;
 
 public class AllPokemonBelongToEliteFourMemberValidator extends AllPokemonBelongToOwnerValidator<List<EliteFourPokemonInputDto>> {
     @Resource

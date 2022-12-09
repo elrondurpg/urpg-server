@@ -1,10 +1,10 @@
-package com.pokemonurpg.member.input;
+package com.pokemonurpg.configuration.v1.member.role;
+
+import javax.validation.constraints.NotNull;
 
 import com.pokemonurpg.core.input.ChildInputDto;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.member.models.Permission;
-
-import javax.validation.constraints.NotNull;
+import com.pokemonurpg.entities.v1.member.Permission;
 
 public class RolePermissionInputDto extends ChildInputDto {
     @NotNull

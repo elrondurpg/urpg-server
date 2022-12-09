@@ -1,13 +1,16 @@
 package com.pokemonurpg.security.service;
 
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.member.models.Permission;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
-import java.util.*;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.member.Permission;
 
 @Service
 @Scope(WebApplicationContext.SCOPE_REQUEST)

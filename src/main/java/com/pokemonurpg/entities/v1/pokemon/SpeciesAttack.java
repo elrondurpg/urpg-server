@@ -9,16 +9,19 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAttackInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesSpeciesAttackView;
 import com.pokemonurpg.entities.v1.attack.Attack;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "species_attack")
 @Getter
 @Setter
-public class SpeciesAttack {
+@NoArgsConstructor
+public class SpeciesAttack implements GetSpeciesSpeciesAttackView {
 
     @EmbeddedId
     SpeciesAttackKey id;

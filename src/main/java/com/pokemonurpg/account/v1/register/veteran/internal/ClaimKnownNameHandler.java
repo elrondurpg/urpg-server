@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.member.models.KnownNameClaim;
-import com.pokemonurpg.member.repository.KnownNameClaimRepository;
+import com.pokemonurpg.entities.v1.member.KnownNameClaim;
+import com.pokemonurpg.entities.v1.member.KnownNameClaimRepository;
 
 @Service
 public class ClaimKnownNameHandler {

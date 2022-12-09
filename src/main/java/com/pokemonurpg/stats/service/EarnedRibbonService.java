@@ -1,21 +1,21 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.v1.contest.ContestAttribute;
-import com.pokemonurpg.entities.v1.contest.ContestRank;
-import com.pokemonurpg.entities.v1.contest.ContestType;
-import com.pokemonurpg.entities.v1.contest.ContestAttributeRepository;
-import com.pokemonurpg.entities.v1.contest.ContestRankRepository;
-import com.pokemonurpg.entities.v1.contest.ContestTypeRepository;
-import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
-import com.pokemonurpg.stats.models.EarnedRibbon;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.repository.EarnedRibbonRepository;
-
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.entities.v1.contest.ContestAttribute;
+import com.pokemonurpg.entities.v1.contest.ContestAttributeRepository;
+import com.pokemonurpg.entities.v1.contest.ContestRank;
+import com.pokemonurpg.entities.v1.contest.ContestRankRepository;
+import com.pokemonurpg.entities.v1.contest.ContestType;
+import com.pokemonurpg.entities.v1.contest.ContestTypeRepository;
+import com.pokemonurpg.entities.v1.stats.EarnedRibbon;
+import com.pokemonurpg.entities.v1.stats.EarnedRibbonRepository;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 
 @Service
 public class EarnedRibbonService {

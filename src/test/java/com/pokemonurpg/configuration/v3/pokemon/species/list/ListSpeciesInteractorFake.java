@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v3.pokemon.species.list;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.ListSpeciesView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.configuration.v3.shared.interactor.ListInputBoundary;
 import com.pokemonurpg.configuration.v3.shared.response.PagedResponse;
 import com.pokemonurpg.configuration.v3.shared.response.PagedResponseFake;

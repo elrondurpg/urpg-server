@@ -1,15 +1,15 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
-import com.pokemonurpg.configuration.v1.item.models.Item;
-import com.pokemonurpg.configuration.v1.item.repository.ItemRepository;
-import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
-import com.pokemonurpg.entities.v1.member.OwnedItem;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.repository.OwnedItemRepository;
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
+import com.pokemonurpg.entities.v1.item.Item;
+import com.pokemonurpg.entities.v1.item.ItemRepository;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.member.OwnedItem;
+import com.pokemonurpg.entities.v1.member.OwnedItemRepository;
 
 @Service
 public class OwnedItemService {

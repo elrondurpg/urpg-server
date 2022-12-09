@@ -1,14 +1,16 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
-import com.pokemonurpg.entities.v1.gym.KnownChampion;
-import com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto;
-import com.pokemonurpg.entities.v1.member.ChampionVictory;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.repository.ChampionVictoryRepository;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import javax.annotation.Resource;
-import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto;
+import com.pokemonurpg.entities.v1.gym.KnownChampion;
+import com.pokemonurpg.entities.v1.member.ChampionVictory;
+import com.pokemonurpg.entities.v1.member.ChampionVictoryRepository;
+import com.pokemonurpg.entities.v1.member.Member;
 
 @Service
 public class ChampionVictoryService {

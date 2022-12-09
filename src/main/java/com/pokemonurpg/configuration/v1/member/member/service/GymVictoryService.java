@@ -1,17 +1,18 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
-import com.pokemonurpg.entities.v1.gym.Gym;
-import com.pokemonurpg.entities.v1.gym.League;
-import com.pokemonurpg.entities.v1.gym.LeagueRepository;
-import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
-import com.pokemonurpg.entities.v1.member.GymVictory;
-import com.pokemonurpg.entities.v1.gym.KnownGymLeader;
-import com.pokemonurpg.entities.v1.gym.GymRepository;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.repository.GymVictoryRepository;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
+import com.pokemonurpg.entities.v1.gym.Gym;
+import com.pokemonurpg.entities.v1.gym.GymRepository;
+import com.pokemonurpg.entities.v1.gym.KnownGymLeader;
+import com.pokemonurpg.entities.v1.gym.League;
+import com.pokemonurpg.entities.v1.gym.LeagueRepository;
+import com.pokemonurpg.entities.v1.member.GymVictory;
+import com.pokemonurpg.entities.v1.member.GymVictoryRepository;
+import com.pokemonurpg.entities.v1.member.Member;
 
 @Service
 public class GymVictoryService {

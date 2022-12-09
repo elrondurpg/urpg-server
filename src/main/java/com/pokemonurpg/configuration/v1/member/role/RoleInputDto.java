@@ -1,16 +1,17 @@
 package com.pokemonurpg.configuration.v1.member.role;
 
 
-import com.pokemonurpg.core.input.UniquelyNamedInputDto;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.core.validation.annotation.UniqueName;
-import com.pokemonurpg.member.models.Role;
+import java.util.Collections;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Collections;
-import java.util.List;
+
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
+import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.entities.v1.member.Role;
 
 @UniqueName(type = Role.class)
 public class RoleInputDto implements UniquelyNamedInputDto {

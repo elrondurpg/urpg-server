@@ -30,16 +30,12 @@ public abstract class ConfigurationController<
 
     @Getter
     protected ConfigurationService<ModelClass, InputDtoClass> service;
-
-    @Getter
-    protected final Class<? extends ConfigurationViews.V1> idViewClass;
     @Getter
     protected final Class<? extends ConfigurationViews.V1> briefViewClass;
     @Getter
     protected final Class<? extends ConfigurationViews.V1> fullViewClass;
 
     public ConfigurationController(ConfigControllerDefinition definition, ConfigurationService<ModelClass, InputDtoClass> service) {
-        this.idViewClass = definition.getIdViewClass();
         this.briefViewClass = definition.getBriefViewClass();
         this.fullViewClass = definition.getFullViewClass();
         this.service = service;
@@ -49,7 +45,7 @@ public abstract class ConfigurationController<
     @GetMapping
     public @ResponseBody
     PagedConfiguration find(@Valid FilterableGetParamsClass params) throws JsonProcessingException {
-        Page<ModelClass> page = service.find(params);
+        Page<ModelClass> page = service.getList(params);
         Class<? extends ConfigurationViews.V1> view = getViewByDetailLevel(params.getDetailLevel());
         return new PagedConfiguration(page, view);
     }
@@ -70,14 +66,11 @@ public abstract class ConfigurationController<
     }
 
     protected Class<? extends ConfigurationViews.V1> getViewByDetailLevel(String detailLevel) {
-        if ("brief".equals(detailLevel)) {
-            return briefViewClass;
-        }
-        else if ("full".equals(detailLevel)) {
+        if ("full".equals(detailLevel)) {
             return fullViewClass;
         }
         else {
-            return idViewClass;
+            return briefViewClass;
         }
     }
 }

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
 import com.pokemonurpg.entities.v1.shared.UrpgEntity;
@@ -28,7 +29,7 @@ public abstract class ConfigurationService<
         this.modelClass = modelClass;
     }
 
-    public Page<ModelClass> find(FilterableGetParams<ModelClass> params) {
+    public Page<ModelClass> getList(FilterableGetParams<ModelClass> params) {
         Example<ModelClass> example = params.asExample();
         if (example != null) {
             return repository.findAll(params.asExample(), params.asPageRequest());

@@ -10,17 +10,10 @@ import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/configuration/v1/pokemon/species")
-@CrossOrigin
-@Validated
-public class SpeciesController extends NamedConfigurationController<Species, SpeciesGetParams, SpeciesInputDto> {
-
-    public SpeciesController(SpeciesService service) {
-        super(new ConfigControllerDefinition.Builder()
-            .withIdViewClass(SpeciesViews.Id.class)
-            .withBriefViewClass(SpeciesViews.Brief.class)
-            .withFullViewClass(SpeciesViews.Full.class)
-            .build(), service);
-    }
+//@RestController
+//@RequestMapping("/configuration/v1/pokemon/species")
+// @CrossOrigin
+// @Validated
+public class SpeciesController {
+    
 }

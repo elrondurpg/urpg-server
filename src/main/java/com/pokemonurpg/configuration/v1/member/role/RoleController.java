@@ -1,23 +1,31 @@
-package com.pokemonurpg.member.controller;
+package com.pokemonurpg.configuration.v1.member.role;
 
-import com.pokemonurpg.View;
-import com.pokemonurpg.lib.security.v1.AuthorizationType;
-import com.pokemonurpg.lib.security.v1.CheckAuthorization;
-import com.pokemonurpg.security.annotation.AllowAuthorized;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.member.input.RoleInputDto;
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.service.RoleService;
-import com.pokemonurpg.security.service.AuthorizationService;
-import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import static com.pokemonurpg.strings.PermissionNames.WRITE_ROLE_PERMISSION;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.List;
 
-import static com.pokemonurpg.strings.PermissionNames.*;
+import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pokemonurpg.View;
+import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.entities.v1.member.Role;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.service.AuthorizationService;
 
 @RestController
 @RequestMapping("/role")
@@ -30,13 +38,6 @@ public class RoleController {
 
     @Resource
     private AuthorizationService authorizationService;
-
-    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
-    @GetMapping
-    public @ResponseBody
-    List<String> findAllNames() {
-        return roleService.findAllNames();
-    }
 
     @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_ALL)
     @GetMapping(path="/{name}")

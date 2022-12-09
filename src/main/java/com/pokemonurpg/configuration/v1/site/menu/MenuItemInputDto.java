@@ -1,13 +1,11 @@
 package com.pokemonurpg.configuration.v1.site.menu;
 
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.site.models.MenuItem;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.pokemonurpg.core.validation.ObjectCreation;
 
 public class MenuItemInputDto {
     @NotNull(groups = { ObjectCreation.class })

@@ -1,20 +1,23 @@
 package com.pokemonurpg.configuration.v1.site.image.service;
 
-import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.core.service.FolderService;
-import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.image.models.ImageFolder;
-import com.pokemonurpg.image.repository.ImageFolderRepository;
-import com.pokemonurpg.image.input.ImageFolderInputDto;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.pokemonurpg.AppConfig;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
+import com.pokemonurpg.configuration.v1.site.image.input.ImageFolderInputDto;
+import com.pokemonurpg.core.service.FolderService;
+import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.site.ImageFolder;
+import com.pokemonurpg.entities.v1.site.ImageFolderRepository;
 
 @Service
-public class ImageFolderService implements NamedObjectService<ImageFolder> {
+public class ImageFolderService {
 
     @Resource
     private ImageFolderRepository imageFolderRepository;
@@ -25,10 +28,6 @@ public class ImageFolderService implements NamedObjectService<ImageFolder> {
     @Resource
     private FolderService folderService;
 
-    public List<String> findAllNames() {
-        return imageFolderRepository.findAllNames();
-    }
-
     public ImageFolder findByDbid(int dbid) {
         return imageFolderRepository.findByDbid(dbid);
     }
@@ -37,7 +36,6 @@ public class ImageFolderService implements NamedObjectService<ImageFolder> {
         return findByNameExact(name);
     }
 
-    @Override
     public ImageFolder findByNameExact(String name) {
         return imageFolderRepository.findByName(name);
     }

@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -13,16 +14,18 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.pokemonurpg.lib.management.v1.FeatureFlagInterceptor;
 import com.pokemonurpg.lib.security.v1.SessionCreator;
 import com.pokemonurpg.security.interceptor.AuthorizationHandler;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableWebMvc
@@ -35,7 +38,7 @@ public class AppConfig implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
             .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.regex("/configuration.v3.*"))
+            .paths(PathSelectors.regex("/configuration.v1.*"))
             .build();
     }
 
@@ -101,5 +104,11 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addInterceptor(sessionHandlerInterceptor()).excludePathPatterns(excludePaths);
         registry.addInterceptor(libSecurityV1authenticationInterceptor()).excludePathPatterns(excludePaths);
         registry.addInterceptor(featureFlagInterceptor()).excludePathPatterns(excludePaths);
+    }
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper() {
+        return JsonMapper.builder().configure(MapperFeature.AUTO_DETECT_FIELDS, false).build();
     }
 }

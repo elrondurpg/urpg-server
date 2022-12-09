@@ -1,6 +1,6 @@
 package com.pokemonurpg.account.v1.register.veteran.internal;
 
-import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.*;
+import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.CREATED_KNOWN_NAME_CLAIM_EXCEPTION_MESSAGE;
 
 import java.util.stream.Collectors;
 
@@ -11,10 +11,10 @@ import com.pokemonurpg.account.v1.register.common.internal.CreateMemberHandler;
 import com.pokemonurpg.account.v1.register.common.internal.CreateMemberRequest;
 import com.pokemonurpg.account.v1.register.common.internal.CreateMemberResponse;
 import com.pokemonurpg.account.v1.register.common.internal.UpdateMemberAccessTokensHandler;
+import com.pokemonurpg.entities.v1.member.KnownNameClaimRepository;
 import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.entities.v1.member.MemberRepository;
-import com.pokemonurpg.member.repository.KnownNameClaimRepository;
-import com.pokemonurpg.member.repository.RoleRepository;
+import com.pokemonurpg.entities.v1.member.RoleRepository;
 
 @Service
 public class CreateVeteranHandler extends CreateMemberHandler<CreateMemberRequest, CreateMemberResponse> {

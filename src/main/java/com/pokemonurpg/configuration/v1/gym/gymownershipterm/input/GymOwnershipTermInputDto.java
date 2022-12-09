@@ -1,18 +1,17 @@
 package com.pokemonurpg.configuration.v1.gym.gymownershipterm.input;
 
-import com.pokemonurpg.configuration.v1.item.models.Item;
-import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
-
 import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.pokemonurpg.configuration.v1.lib.input.ConfigurationInputDto;
 import com.pokemonurpg.core.validation.ObjectCreation;
 import com.pokemonurpg.core.validation.annotation.ExistsInDb;
 import com.pokemonurpg.core.validation.annotation.UniqueId;
 import com.pokemonurpg.entities.v1.gym.Gym;
 import com.pokemonurpg.entities.v1.gym.League;
+import com.pokemonurpg.entities.v1.item.Item;
 import com.pokemonurpg.entities.v1.member.Member;
 
 import lombok.Getter;

@@ -9,8 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v1.attack.attack.shared.view.GetAttackResponse;
-import com.pokemonurpg.configuration.v1.attack.attack.shared.view.ListAttackResponse;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesAttackView;
+import com.pokemonurpg.configuration.v2.attack.attack.shared.view.GetAttackResponse;
+import com.pokemonurpg.configuration.v2.attack.attack.shared.view.ListAttackResponse;
 import com.pokemonurpg.entities.v1.contest.ContestAttribute;
 import com.pokemonurpg.entities.v1.contest.OrasContestMoveType;
 import com.pokemonurpg.entities.v1.contest.RseContestMoveType;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "attack")
-public class Attack extends NamedEntity implements ListAttackResponse, GetAttackResponse {
+public class Attack extends NamedEntity implements ListAttackResponse, GetAttackResponse, GetSpeciesAttackView {
 
     @OneToOne
     @JoinColumn(name = "type")

@@ -8,21 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.configuration.v1.item.input.ItemBundleInputDto;
 import com.pokemonurpg.configuration.v1.item.input.ItemBundleItemInputDto;
-import com.pokemonurpg.configuration.v1.item.models.ItemBundle;
-import com.pokemonurpg.configuration.v1.item.repository.ItemBundleRepository;
-import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.item.ItemBundle;
+import com.pokemonurpg.entities.v1.item.ItemBundleRepository;
 
 @Service
-public class ItemBundleService implements NamedObjectService<ItemBundle> {
+public class ItemBundleService {
     @Resource
     private ItemBundleRepository itemBundleRepository;
 
     @Resource
     private ItemBundleItemService itemBundleItemService;
-
-    public List<String> findAllNames() {
-        return itemBundleRepository.findAllNames();
-    }
 
     public ItemBundle findByName(String name) {
         ItemBundle bundle = findByNameExact(name);

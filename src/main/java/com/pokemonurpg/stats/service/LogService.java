@@ -1,13 +1,14 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
-import com.pokemonurpg.stats.models.LogRecord;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.repository.LogRecordRepository;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import javax.annotation.Resource;
-import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.stats.LogRecord;
+import com.pokemonurpg.entities.v1.stats.LogRecordRepository;
 
 @Service
 public class LogService {

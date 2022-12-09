@@ -1,35 +1,45 @@
 package com.pokemonurpg.stats.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.pokemonurpg.View;
-import com.pokemonurpg.security.annotation.AllowAuthenticated;
-import com.pokemonurpg.security.annotation.AllowAuthorized;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.lib.security.v1.AuthorizationType;
-import com.pokemonurpg.lib.security.v1.CheckAuthorization;
-import com.pokemonurpg.security.annotation.AllowTheOwner;
-import com.pokemonurpg.security.service.AuthorizationService;
-import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
-import com.pokemonurpg.strings.ErrorStrings;
+import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
+import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Provider;
 import javax.validation.Valid;
 
-import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
-import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.pokemonurpg.View;
+import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.lib.security.v1.AuthorizationType;
+import com.pokemonurpg.lib.security.v1.CheckAuthorization;
+import com.pokemonurpg.security.annotation.AllowAuthenticated;
+import com.pokemonurpg.security.annotation.AllowAuthorized;
+import com.pokemonurpg.security.annotation.AllowTheOwner;
+import com.pokemonurpg.security.service.AuthorizationService;
+import com.pokemonurpg.security.service.SessionService;
+import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
+import com.pokemonurpg.stats.service.OwnedPokemonService;
+import com.pokemonurpg.strings.ErrorStrings;
 
 @RestController
 @RequestMapping("/ownedPokemon")
@@ -86,18 +96,5 @@ public class OwnedPokemonController {
     public @ResponseBody
     OwnedPokemon update(@Valid @RequestBody OwnedPokemonInputDto input, @PathVariable int dbid) {
         return ownedPokemonService.update(input, dbid);
-    }
-
-    @Transactional
-    @AllowAuthorized(permission = "Delete Member")
-    @DeleteMapping(path="/{dbid}")
-    public @ResponseBody
-    ResponseEntity<?> delete(@PathVariable int dbid) {
-        try {
-            ownedPokemonService.delete(dbid);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_ON_DELETE);
-        }
     }
 }

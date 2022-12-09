@@ -1,23 +1,22 @@
-package com.pokemonurpg.site.service;
-
-import com.pokemonurpg.core.service.NamedObjectService;
-import com.pokemonurpg.site.models.MenuItem;
-import com.pokemonurpg.site.repository.MenuItemRepository;
-import org.springframework.stereotype.Service;
+package com.pokemonurpg.configuration.v1.site.menu;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.site.MenuItem;
+import com.pokemonurpg.entities.v1.site.MenuItemRepository;
+
 @Service
-public class MenuItemService implements NamedObjectService<MenuItem> {
+public class MenuItemService {
     @Resource
     MenuItemRepository menuItemRepository;
 
-    @Override
     public MenuItem findByName(String name) {
         return findByNameExact(name);
     }
 
-    @Override
     public MenuItem findByNameExact(String name) {
         return menuItemRepository.findByName(name);
     }

@@ -1,29 +1,26 @@
-package com.pokemonurpg.member.service;
+package com.pokemonurpg.configuration.v1.member.role;
 
-import com.pokemonurpg.member.input.RolePermissionInputDto;
-import com.pokemonurpg.member.models.Permission;
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.input.RoleInputDto;
-import com.pokemonurpg.member.repository.RoleRepository;
-import com.pokemonurpg.core.service.NamedObjectService;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.member.permission.PermissionService;
+import com.pokemonurpg.core.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.member.Permission;
+import com.pokemonurpg.entities.v1.member.Role;
+import com.pokemonurpg.entities.v1.member.RoleRepository;
+
 @Service
-public class RoleService implements NamedObjectService<Role> {
+public class RoleService {
 
     @Resource
     private RoleRepository roleRepository;
 
     @Resource
     private PermissionService permissionService;
-
-    public List<String> findAllNames() {
-        return roleRepository.findAllNames();
-    }
 
     public Role findByDbid(int dbid) {
         return roleRepository.findByDbid(dbid);
@@ -37,7 +34,6 @@ public class RoleService implements NamedObjectService<Role> {
         else return role;
     }
 
-    @Override
     public Role findByNameExact(String name) {
         return roleRepository.findByName(name);
     }

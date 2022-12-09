@@ -1,25 +1,26 @@
 package com.pokemonurpg.core.service;
 
-import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
-import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
-import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
-import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
-import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.pokemonurpg.configuration.v1.creative.parklocation.service.ParkLocationService;
 import com.pokemonurpg.configuration.v1.creative.parkrank.service.ParkRankService;
 import com.pokemonurpg.configuration.v1.creative.storyrank.service.StoryRankService;
 import com.pokemonurpg.configuration.v1.item.service.ItemBundleService;
 import com.pokemonurpg.configuration.v1.item.service.ItemService;
-import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
-import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
-import com.pokemonurpg.image.service.ImageFolderService;
 import com.pokemonurpg.configuration.v1.member.member.service.MemberService;
-import com.pokemonurpg.site.service.MenuItemService;
-import com.pokemonurpg.member.service.PermissionService;
-import com.pokemonurpg.member.service.RoleService;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
+import com.pokemonurpg.configuration.v1.member.permission.PermissionService;
+import com.pokemonurpg.configuration.v1.member.role.RoleService;
+import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
+import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
+import com.pokemonurpg.configuration.v1.pokemon.nature.service.NatureService;
+import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.type.service.TypeService;
+import com.pokemonurpg.configuration.v1.site.flag.service.FlagService;
+import com.pokemonurpg.configuration.v1.site.image.service.ImageFolderService;
+import com.pokemonurpg.configuration.v1.site.menu.MenuItemService;
+import com.pokemonurpg.configuration.v1.site.section.service.SectionService;
 
 @Service
 public class NamedObjectServiceFactory {
@@ -78,12 +79,6 @@ public class NamedObjectServiceFactory {
     public NamedObjectService getServiceForClass(Class type) {
         if (type != null) {
             switch (type.getSimpleName()) {
-                case "ImageFolder": return imageFolderService;
-                case "Item": return itemService;
-                case "ItemBundle": return itemBundleService;
-                case "MenuItem": return menuItemService;
-                case "Permission": return permissionService;
-                case "Role": return roleService;
             }
         }
         return null;

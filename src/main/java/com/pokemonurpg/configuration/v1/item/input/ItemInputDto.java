@@ -1,15 +1,15 @@
 package com.pokemonurpg.configuration.v1.item.input;
 
 
-import com.pokemonurpg.configuration.v1.item.models.Item;
-import com.pokemonurpg.core.input.UniquelyNamedInputDto;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.core.validation.annotation.UniqueName;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.pokemonurpg.core.input.UniquelyNamedInputDto;
+import com.pokemonurpg.core.validation.ObjectCreation;
+import com.pokemonurpg.core.validation.annotation.UniqueName;
+import com.pokemonurpg.entities.v1.item.Item;
 
 @UniqueName(type = Item.class)
 public class ItemInputDto implements UniquelyNamedInputDto {

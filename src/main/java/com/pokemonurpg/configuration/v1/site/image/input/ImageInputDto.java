@@ -1,12 +1,11 @@
 package com.pokemonurpg.configuration.v1.site.image.input;
 
-import com.pokemonurpg.image.models.ImageFolder;
-
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.v1.site.ImageFolder;
 
 public class ImageInputDto {
     @NotNull

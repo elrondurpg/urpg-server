@@ -9,15 +9,17 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.pokemonurpg.configuration.v1.pokemon.species.input.SpeciesAbilityInputDto;
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesSpeciesAbilityView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesSpeciesAbilityView;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "species_ability")
 @Getter
 @Setter
+@NoArgsConstructor
 public class SpeciesAbility implements GetSpeciesSpeciesAbilityView {
 
     @EmbeddedId

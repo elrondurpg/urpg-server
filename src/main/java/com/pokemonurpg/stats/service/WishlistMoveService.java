@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.pokemonurpg.entities.v1.attack.Attack;
 import com.pokemonurpg.entities.v1.attack.AttackRepository;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.entities.v1.stats.WishlistMove;
+import com.pokemonurpg.entities.v1.stats.WishlistMoveRepository;
 import com.pokemonurpg.stats.input.WishlistMoveInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.models.WishlistMove;
-import com.pokemonurpg.stats.repository.WishlistMoveRepository;
 
 @Service
 public class WishlistMoveService {

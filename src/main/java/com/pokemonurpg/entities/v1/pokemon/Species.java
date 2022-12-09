@@ -13,6 +13,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
 
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesPreEvolutionView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesPreMegaView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.entities.v1.creative.ArtRank;
 import com.pokemonurpg.entities.v1.creative.ParkLocation;
 import com.pokemonurpg.entities.v1.creative.ParkRank;
@@ -26,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "species")
-public class Species extends NamedEntity {
+public class Species extends NamedEntity implements ListSpeciesView, GetSpeciesView, GetSpeciesPreEvolutionView, GetSpeciesPreMegaView {
     @Column
     private Integer dexno;
 

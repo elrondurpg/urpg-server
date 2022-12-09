@@ -1,14 +1,16 @@
 package com.pokemonurpg.configuration.v1.gym.gym.service;
 
-import com.pokemonurpg.configuration.v1.gym.gym.input.GymPokemonInputDto;
-import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
-import com.pokemonurpg.entities.v1.gym.Gym;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
-import org.springframework.stereotype.Service;
+import java.util.Set;
 
 import javax.annotation.Resource;
-import java.util.Set;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.gym.gym.input.GymInputDto;
+import com.pokemonurpg.configuration.v1.gym.gym.input.GymPokemonInputDto;
+import com.pokemonurpg.entities.v1.gym.Gym;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.stats.service.OwnedPokemonService;
 
 @Service
 public class GymPokemonService {

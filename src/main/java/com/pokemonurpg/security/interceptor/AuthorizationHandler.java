@@ -14,8 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.core.service.RequestPathVariableService;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
 import com.pokemonurpg.lib.security.v1.CheckAuthorization;
 import com.pokemonurpg.security.annotation.AllowAll;
 import com.pokemonurpg.security.annotation.AllowAuthenticated;
@@ -24,7 +25,6 @@ import com.pokemonurpg.security.annotation.AllowTheOwner;
 import com.pokemonurpg.security.annotation.AllowThisMember;
 import com.pokemonurpg.security.service.AuthorizationService;
 import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 
 public class AuthorizationHandler implements HandlerInterceptor {

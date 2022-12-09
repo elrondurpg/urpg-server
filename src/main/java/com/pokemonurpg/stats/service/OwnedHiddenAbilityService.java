@@ -1,16 +1,17 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.v1.pokemon.Ability;
-import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
-import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import org.springframework.stereotype.Service;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.pokemon.ability.service.AbilityService;
+import com.pokemonurpg.entities.v1.pokemon.Ability;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
+import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 
 @Service
 public class OwnedHiddenAbilityService {

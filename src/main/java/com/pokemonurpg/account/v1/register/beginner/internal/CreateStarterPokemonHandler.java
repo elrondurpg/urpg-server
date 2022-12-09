@@ -4,12 +4,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.configuration.v1.pokemon.capturemethod.service.CaptureMethodService;
-import com.pokemonurpg.entities.v1.pokemon.Species;
 import com.pokemonurpg.configuration.v1.pokemon.species.service.SpeciesService;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.repository.OwnedPokemonRepository;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.pokemon.Species;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemon;
+import com.pokemonurpg.entities.v1.stats.OwnedPokemonRepository;
 
 @Service
 public class CreateStarterPokemonHandler {

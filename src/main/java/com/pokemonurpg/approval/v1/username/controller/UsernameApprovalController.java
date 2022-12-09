@@ -24,15 +24,15 @@ public class UsernameApprovalController {
     @Resource
     private MemberService memberService;
 
-    @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
-    @PostMapping(path="/{discordId}")
-    public @ResponseBody
-    ResponseEntity<?> approveKnownNameClaim(@PathVariable String discordId) {
-        try {
-            memberService.registerForKnownName(discordId);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_ON_CLAIM);
-        }
-    }
+    // @CheckAuthorization(authorizationType = AuthorizationType.ALLOW_AUTHORIZED)
+    // @PostMapping(path="/{discordId}")
+    // public @ResponseBody
+    // ResponseEntity<?> approveKnownNameClaim(@PathVariable String discordId) {
+    //     try {
+    //         memberService.registerForKnownName(discordId);
+    //         return new ResponseEntity<>(HttpStatus.OK);
+    //     } catch (Exception e) {
+    //         throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_ON_CLAIM);
+    //     }
+    // }
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.ListSpeciesView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.configuration.v3.shared.request.JpaPageableFactoryFake;
 import com.pokemonurpg.entities.v1.pokemon.species.Species;
 import com.pokemonurpg.entities.v1.shared.PagedEntity;
@@ -32,7 +32,7 @@ public class ListSpeciesJpaDataGatewayTest {
 
         PagedEntity<ListSpeciesView> response = gateway.getList(request);
         assertEquals(request, pageableFactory.getRequestArg());
-        assertEquals(JpaPageableFactoryFake.PAGEABLE, repository.getPageableArg());
+        assertEquals(JpaPageableFactoryFake.PAGEABLE, repository.getFindAllPageableArg());
         assertTrue(isProbeOwnable(repository.getProbeArg()));
         assertTrue(repository.getMatcherArg().isAllMatching());
         assertEquals(SpeciesRepositoryFake.PAGE, response.getPage());
@@ -49,7 +49,7 @@ public class ListSpeciesJpaDataGatewayTest {
 
         PagedEntity<ListSpeciesView> response = gateway.getList(request);
         assertEquals(request, pageableFactory.getRequestArg());
-        assertEquals(JpaPageableFactoryFake.PAGEABLE, repository.getPageableArg());
+        assertEquals(JpaPageableFactoryFake.PAGEABLE, repository.getFindAllPageableArg());
         assertTrue(isProbeStarter(repository.getProbeArg()));
         assertTrue(repository.getMatcherArg().isAllMatching());
         assertEquals(SpeciesRepositoryFake.PAGE, response.getPage());

@@ -1,11 +1,13 @@
 package com.pokemonurpg.account.v1.register.common.internal;
 
-import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.*;
+import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.NON_UNIQUE_ID_ERROR;
+import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.NON_UNIQUE_USERNAME_ERROR;
+import static com.pokemonurpg.account.v1.register.common.internal.CreateMemberConstants.USERNAME_BEING_CLAIMED_ERROR;
 
+import com.pokemonurpg.entities.v1.member.KnownNameClaimRepository;
 import com.pokemonurpg.entities.v1.member.Member;
 import com.pokemonurpg.entities.v1.member.MemberRepository;
-import com.pokemonurpg.member.repository.KnownNameClaimRepository;
-import com.pokemonurpg.member.repository.RoleRepository;
+import com.pokemonurpg.entities.v1.member.RoleRepository;
 
 public abstract class CreateMemberHandler<Request extends CreateMemberRequest, Response extends CreateMemberResponse> {
 

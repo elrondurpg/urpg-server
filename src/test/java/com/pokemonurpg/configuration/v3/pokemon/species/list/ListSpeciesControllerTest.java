@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.ListSpeciesView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.ListSpeciesView;
 import com.pokemonurpg.configuration.v3.shared.response.PagedResponse;
 
 public class ListSpeciesControllerTest {

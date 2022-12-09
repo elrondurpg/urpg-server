@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v3.pokemon.species.shared.view.GetSpeciesParkRankView;
+import com.pokemonurpg.configuration.v1.pokemon.species.shared.view.GetSpeciesParkRankView;
 import com.pokemonurpg.entities.v1.shared.NamedEntity;
 
 import lombok.Getter;

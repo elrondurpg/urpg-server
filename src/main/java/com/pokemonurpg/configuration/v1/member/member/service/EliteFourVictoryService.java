@@ -1,14 +1,16 @@
 package com.pokemonurpg.configuration.v1.member.member.service;
 
-import com.pokemonurpg.entities.v1.gym.KnownEliteFourMember;
-import com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto;
-import com.pokemonurpg.entities.v1.member.EliteFourVictory;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.stats.repository.EliteFourVictoryRepository;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import javax.annotation.Resource;
-import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto;
+import com.pokemonurpg.entities.v1.gym.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.member.EliteFourVictory;
+import com.pokemonurpg.entities.v1.member.EliteFourVictoryRepository;
+import com.pokemonurpg.entities.v1.member.Member;
 
 @Service
 public class EliteFourVictoryService {

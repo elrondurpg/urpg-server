@@ -2,12 +2,6 @@ package com.pokemonurpg.configuration.v1.member.member.service;
 
 import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 
-import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
-import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
-import com.pokemonurpg.entities.v1.member.Member;
-import com.pokemonurpg.entities.v1.member.MemberRepository;
-
-
 import java.util.List;
 import java.util.Set;
 
@@ -19,17 +13,20 @@ import org.springframework.stereotype.Service;
 import com.pokemonurpg.configuration.v1.gym.knownchampion.service.KnownChampionService;
 import com.pokemonurpg.configuration.v1.gym.knownelitefourmember.service.KnownEliteFourMemberService;
 import com.pokemonurpg.configuration.v1.gym.knowngymleader.service.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.lib.service.NamedConfigurationService;
 import com.pokemonurpg.configuration.v1.member.member.input.ChampionVictoryInputDto;
 import com.pokemonurpg.configuration.v1.member.member.input.EliteFourVictoryInputDto;
 import com.pokemonurpg.configuration.v1.member.member.input.GymVictoryInputDto;
 import com.pokemonurpg.configuration.v1.member.member.input.LegendaryProgressInputDto;
+import com.pokemonurpg.configuration.v1.member.member.input.MemberInputDto;
 import com.pokemonurpg.configuration.v1.member.member.input.MemberRoleInputDto;
 import com.pokemonurpg.configuration.v1.member.member.input.OwnedItemInputDto;
+import com.pokemonurpg.configuration.v1.member.role.RoleService;
 import com.pokemonurpg.core.service.SystemService;
-import com.pokemonurpg.member.models.KnownNameClaim;
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.service.KnownNameClaimService;
-import com.pokemonurpg.member.service.RoleService;
+import com.pokemonurpg.entities.v1.member.KnownNameClaim;
+import com.pokemonurpg.entities.v1.member.Member;
+import com.pokemonurpg.entities.v1.member.MemberRepository;
+import com.pokemonurpg.entities.v1.member.Role;
 import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
 import com.pokemonurpg.security.service.AesEncryptionService;
 import com.pokemonurpg.security.service.AuthorizationService;
@@ -51,7 +48,7 @@ public class MemberService extends NamedConfigurationService<Member, MemberInput
     private KnownEliteFourMemberService knownEliteFourMemberService;
     private KnownChampionService knownChampionService;
     private AuthorizationService authorizationService;
-    private KnownNameClaimService knownNameClaimService;
+    // private KnownNameClaimService knownNameClaimService;
     
     public Member findByDiscordId(String discordId) {
         return repository.findByDiscordId(discordId);
@@ -63,8 +60,7 @@ public class MemberService extends NamedConfigurationService<Member, MemberInput
             AesEncryptionService aesEncryptionService, EliteFourVictoryService eliteFourVictoryService,
             ChampionVictoryService championVictoryService, GymVictoryService gymVictoryService,
             KnownGymLeaderService knownGymLeaderService, KnownEliteFourMemberService knownEliteFourMemberService,
-            KnownChampionService knownChampionService, AuthorizationService authorizationService,
-            KnownNameClaimService knownNameClaimService) {
+            KnownChampionService knownChampionService, AuthorizationService authorizationService) {
         super(repository, Member.class);
         this.repository = repository;
         this.roleService = roleService;
@@ -80,7 +76,7 @@ public class MemberService extends NamedConfigurationService<Member, MemberInput
         this.knownEliteFourMemberService = knownEliteFourMemberService;
         this.knownChampionService = knownChampionService;
         this.authorizationService = authorizationService;
-        this.knownNameClaimService = knownNameClaimService;
+        // this.knownNameClaimService = knownNameClaimService;
     }
 
     @Override
@@ -89,19 +85,19 @@ public class MemberService extends NamedConfigurationService<Member, MemberInput
         model.setBot(input.getBot());
     }
 
-    public void registerForKnownName(String discordId) {
-        KnownNameClaim claim = knownNameClaimService.findByDiscordId(discordId);
-        if (claim != null) {
-            Member member = new Member();
-            member.setName(claim.getName());
-            member.setDiscordId(discordId);
-            member.setBot(false);
-            member.setDefaultValues();
-            member.addRole(roleService.findByName("Member"));
+    // public void registerForKnownName(String discordId) {
+    //     KnownNameClaim claim = knownNameClaimService.findByDiscordId(discordId);
+    //     if (claim != null) {
+    //         Member member = new Member();
+    //         member.setName(claim.getName());
+    //         member.setDiscordId(discordId);
+    //         member.setBot(false);
+    //         member.setDefaultValues();
+    //         member.addRole(roleService.findByName("Member"));
 
-            repository.save(member);
-        }
-    }
+    //         repository.save(member);
+    //     }
+    // }
 
     public void update(Member member, OAuthAccessTokenResponse accessTokenResponse) {
         int salt = member.getSalt();

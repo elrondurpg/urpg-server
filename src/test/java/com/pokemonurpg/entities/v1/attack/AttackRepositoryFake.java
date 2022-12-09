@@ -16,25 +16,39 @@ import lombok.Getter;
 @Getter
 public class AttackRepositoryFake implements AttackRepository {
     public final static PageImpl<Attack> ATTACKS = new PageImpl<>(Collections.singletonList(new Attack()));
+    public final static String SHORT_NAME = "SHORT_NAME";
+    public final static String LONG_NAME = "LONG_NAME";
+    public final static Attack ATTACK = new Attack();
 
-    private Pageable pageableArg;
+    private Pageable findAllPageableArg;
+    private String findByNameArg;
+    private String findFirstByNameStartingWithArg;
 
     @Override
     public PageImpl<Attack> findAll(Pageable pageable) {
-        pageableArg = pageable;
+        findAllPageableArg = pageable;
         return ATTACKS;
     }
 
     @Override
     public Attack findByName(String name) {
-        // TODO Auto-generated method stub
+        findByNameArg = name;
+        if (SHORT_NAME.equalsIgnoreCase(name)) {
+            return null;
+        }
+        else if (LONG_NAME.equalsIgnoreCase(name)) {
+            return ATTACK;
+        }
         return null;
     }
 
     @Override
     public Attack findFirstByNameStartingWith(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        findFirstByNameStartingWithArg = name;
+        if (SHORT_NAME.equalsIgnoreCase(name)) {
+            return ATTACK;
+        }
+        else return null;
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.member.member.input;
 
-import com.pokemonurpg.configuration.v1.item.models.Item;
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.pokemonurpg.core.input.ChildInputDto;
+import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.v1.item.Item;
 
 public class OwnedItemInputDto extends ChildInputDto {
     @NotNull
