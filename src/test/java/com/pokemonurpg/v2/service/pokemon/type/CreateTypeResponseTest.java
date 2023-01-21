@@ -9,10 +9,15 @@ class CreateTypeResponseTest {
 
     @Test
     public void constructor() {
-        TypeToTest entity = new TypeToTest();
+        TypeToTest entity = TypeToTest
+            .builder()
+            .dbid(TypeToTest.DBID)
+            .name(TypeToTest.NAME)
+            .build();
+
         CreateTypeResponse response = new CreateTypeResponse(entity);
-        assertEquals(entity.getDbid(), response.getDbid());
-        assertEquals(entity.getName(), response.getName());
+        assertEquals(TypeToTest.DBID, response.getDbid());
+        assertEquals(TypeToTest.NAME, response.getName());
     }
 
 }
