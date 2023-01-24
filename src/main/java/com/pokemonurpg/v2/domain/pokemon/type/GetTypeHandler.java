@@ -1,7 +1,8 @@
 package com.pokemonurpg.v2.domain.pokemon.type;
 
-import com.pokemonurpg.v2.domain.lib.request.PageRequest;
-import com.pokemonurpg.v2.domain.lib.response.PageResponse;
+import com.pokemonurpg.v2.lib.request.PagedListRequest;
+import com.pokemonurpg.v2.lib.response.PageResponse;
+import com.pokemonurpg.v2.domain.member.session.AuthorizationInputBoundary;
 import com.pokemonurpg.v2.entities.pokemon.Type;
 import lombok.AllArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 class GetTypeHandler implements GetTypeInputBoundary {
     private Types entities;
+    private AuthorizationInputBoundary sessions;
 
     @Override
     public boolean existsByName(String name) {
@@ -52,20 +54,20 @@ class GetTypeHandler implements GetTypeInputBoundary {
 
     @Override
     public GetTypeListResponse getList(GetTypeListRequest request) {
-        PageRequest<Type> pageRequest = buildPageRequest(request);
-        PageResponse<Type> pageResponse = entities.getPageByExample(pageRequest);
+        PagedListRequest<Type> pagedListRequest = buildPageRequest(request);
+        PageResponse<? extends Type> pageResponse = entities.getPageByExample(pagedListRequest);
         return buildListResponse(pageResponse);
     }
 
-    private PageRequest<Type> buildPageRequest(GetTypeListRequest request) {
-        return PageRequest.<Type>builder()
+    private PagedListRequest<Type> buildPageRequest(GetTypeListRequest request) {
+        return PagedListRequest.<Type>builder()
                 .itemsPerPage(request.getItemsPerPage())
                 .page(request.getPage())
                 .example(TypeModel.builder().build())
                 .build();
     }
 
-    private GetTypeListResponse buildListResponse(PageResponse<Type> pageResponse) {
+    private GetTypeListResponse buildListResponse(PageResponse<? extends Type> pageResponse) {
         List<GetTypeListResponseItem> items = new ArrayList<>();
         pageResponse.getItems().forEach(item -> items.add(buildListResponseItem(item)));
 

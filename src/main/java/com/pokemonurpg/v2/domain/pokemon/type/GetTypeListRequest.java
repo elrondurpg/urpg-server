@@ -1,8 +1,6 @@
 package com.pokemonurpg.v2.domain.pokemon.type;
 
-import com.pokemonurpg.v2.domain.lib.request.GetListRequest;
-import lombok.experimental.SuperBuilder;
+import com.pokemonurpg.v2.lib.request.GetListRequest;
 
-@SuperBuilder
 public class GetTypeListRequest extends GetListRequest {
 }

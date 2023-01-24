@@ -1,23 +1,27 @@
 package com.pokemonurpg.v2.domain.pokemon.type;
 
-import com.pokemonurpg.v2.domain.lib.exception.ConstraintViolationException;
-import com.pokemonurpg.v2.domain.lib.exception.NotFoundException;
+import com.pokemonurpg.v2.lib.exception.ConstraintViolationException;
+import com.pokemonurpg.v2.lib.exception.NotFoundException;
+import com.pokemonurpg.v2.lib.exception.UnauthorizedException;
+import com.pokemonurpg.v2.domain.member.session.AuthorizationInputBoundaryFake;
 import com.pokemonurpg.v2.entities.pokemon.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.pokemonurpg.v2.domain.lib.constants.ErrorConstants.NOT_FOUND_FORMATTABLE_MESSAGE;
+import static com.pokemonurpg.v2.lib.constants.ErrorConstants.NOT_FOUND_FORMATTABLE_MESSAGE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UpdateTypeHandlerTest {
 
     private UpdateTypeHandler handler;
-    private TypesFake types;
+    private TypesFake entities;
+    private AuthorizationInputBoundaryFake sessions;
 
     @BeforeEach
     public void setup() {
-        types = new TypesFake();
-        handler = new UpdateTypeHandler(types);
+        entities = new TypesFake();
+        sessions = new AuthorizationInputBoundaryFake();
+        handler = new UpdateTypeHandler(entities, sessions);
     }
 
     @Test
@@ -25,11 +29,12 @@ class UpdateTypeHandlerTest {
         UpdateTypeRequest request = new UpdateTypeRequest();
         request.setName(TypeValidatorFake.VALID_NAME);
 
-        UpdateTypeResponse response = handler.handle(TypesFake.EXISTING_DBID, request);
-        assertEquals(TypesFake.EXISTING_DBID, types.getSavedInput().getDbid());
-        assertEquals(request.getName(), types.getSavedInput().getName());
-        assertEquals(TypesFake.SAVED_OUTPUT.getDbid(), response.getDbid());
-        assertEquals(TypesFake.SAVED_OUTPUT.getName(), response.getName());
+        UpdateTypeResponse response = handler.update(TypesFake.EXISTING_DBID, request);
+        assertTrue(sessions.isChecked());
+        assertEquals(TypesFake.EXISTING_DBID, entities.getSavedInput().getDbid());
+        assertEquals(request.getName(), entities.getSavedInput().getName());
+        assertEquals(TypesFake.NEW_DBID, response.getDbid());
+        assertEquals(TypesFake.NEW_NAME, response.getName());
     }
 
     @Test
@@ -37,7 +42,8 @@ class UpdateTypeHandlerTest {
         UpdateTypeRequest request = new UpdateTypeRequest();
         request.setName(TypeValidatorFake.VALID_NAME);
 
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> handler.handle(TypesFake.NOT_FOUND_DBID, request));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> handler.update(TypesFake.NOT_FOUND_DBID, request));
+        assertTrue(sessions.isChecked());
         assertEquals(String.format(NOT_FOUND_FORMATTABLE_MESSAGE, Type.class, "dbid", TypesFake.NOT_FOUND_DBID), exception.getMessage());
     }
 
@@ -46,7 +52,14 @@ class UpdateTypeHandlerTest {
         UpdateTypeRequest request = new UpdateTypeRequest();
         request.setName(TypeValidatorFake.INVALID_NAME);
 
-        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> handler.handle(TypesFake.EXISTING_DBID, request));
-        assertEquals(types.getValidator().getErrors(), exception.getErrors());
+        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> handler.update(TypesFake.EXISTING_DBID, request));
+        assertTrue(sessions.isChecked());
+        assertEquals(TypeValidatorFake.ERROR, exception.getErrors().get(0));
+    }
+
+    @Test
+    public void handle_unauthorized() {
+        sessions.setAuthorized(false);
+        assertThrows(UnauthorizedException.class, () -> handler.update(TypesFake.EXISTING_DBID, new UpdateTypeRequest()));
     }
 }

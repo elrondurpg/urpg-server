@@ -1,21 +1,24 @@
 package com.pokemonurpg.v2.domain.pokemon.type;
 
-import com.pokemonurpg.v2.domain.lib.exception.ConstraintViolationException;
+import com.pokemonurpg.v2.lib.exception.ConstraintViolationException;
+import com.pokemonurpg.v2.lib.exception.UnauthorizedException;
+import com.pokemonurpg.v2.domain.member.session.AuthorizationInputBoundaryFake;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CreateTypeHandlerTest {
 
     private CreateTypeHandler handler;
-    private TypesFake types;
+    private TypesFake entities;
+    private AuthorizationInputBoundaryFake sessions;
 
     @BeforeEach
     public void setup() {
-        types = new TypesFake();
-        handler = new CreateTypeHandler(types);
+        entities = new TypesFake();
+        sessions = new AuthorizationInputBoundaryFake();
+        handler = new CreateTypeHandler(entities, sessions);
     }
 
     @Test
@@ -23,10 +26,11 @@ class CreateTypeHandlerTest {
         CreateTypeRequest request = new CreateTypeRequest();
         request.setName(TypeValidatorFake.VALID_NAME);
 
-        CreateTypeResponse response = handler.handle(request);
-        assertEquals(request.getName(), types.getSavedInput().getName());
-        assertEquals(TypesFake.SAVED_OUTPUT.getDbid(), response.getDbid());
-        assertEquals(TypesFake.SAVED_OUTPUT.getName(), response.getName());
+        CreateTypeResponse response = handler.create(request);
+        assertTrue(sessions.isChecked());
+        assertEquals(request.getName(), entities.getSavedInput().getName());
+        assertEquals(TypesFake.NEW_DBID, response.getDbid());
+        assertEquals(TypesFake.NEW_NAME, response.getName());
     }
 
     @Test
@@ -34,8 +38,15 @@ class CreateTypeHandlerTest {
         CreateTypeRequest request = new CreateTypeRequest();
         request.setName(TypeValidatorFake.INVALID_NAME);
 
-        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> handler.handle(request));
-        assertEquals(types.getValidator().getErrors(), exception.getErrors());
+        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> handler.create(request));
+        assertTrue(sessions.isChecked());
+        assertEquals(TypeValidatorFake.ERROR, exception.getErrors().get(0));
+    }
+
+    @Test
+    public void handle_unauthorized() {
+        sessions.setAuthorized(false);
+        assertThrows(UnauthorizedException.class, () -> handler.create(new CreateTypeRequest()));
     }
 
 }
