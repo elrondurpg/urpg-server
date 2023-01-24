@@ -1,10 +1,10 @@
-package com.pokemonurpg.v2.service.pokemon.type;
+package com.pokemonurpg.v2.domain.pokemon.type;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class CreateTypeRequest {
     private String name;
 }
