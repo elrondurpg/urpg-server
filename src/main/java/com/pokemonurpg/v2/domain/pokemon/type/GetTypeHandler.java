@@ -63,6 +63,7 @@ class GetTypeHandler implements GetTypeInputBoundary {
         return PagedListRequest.<Type>builder()
                 .itemsPerPage(request.getItemsPerPage())
                 .page(request.getPage())
+                .sortBy(request.getSortBy())
                 .example(TypeModel.builder().build())
                 .build();
     }

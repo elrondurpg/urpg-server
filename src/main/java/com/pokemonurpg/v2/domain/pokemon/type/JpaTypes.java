@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.List;
+
 @AllArgsConstructor
 class JpaTypes implements Types {
     private JpaTypeRepository repository;
@@ -72,7 +74,8 @@ class JpaTypes implements Types {
             pageable = PageRequest.of(pagedListRequest.getPage(), pagedListRequest.getItemsPerPage());
         }
         else {
-            pageable = PageRequest.of(pagedListRequest.getPage(), pagedListRequest.getItemsPerPage(), Sort.by(pagedListRequest.getSortBy()));
+            Sort.Order order = new Sort.Order(Sort.Direction.ASC, pagedListRequest.getSortBy()).ignoreCase();
+            pageable = PageRequest.of(pagedListRequest.getPage(), pagedListRequest.getItemsPerPage(), Sort.by(order));
         }
         Page<JpaTypeModel> page = repository.findAll(pageable);
         return createPageResponse(page);
@@ -89,7 +92,13 @@ class JpaTypes implements Types {
     }
 
     @Override
-    public Type deleteByDbid(int dbid) {
-        return repository.deleteByDbid(dbid);
+    public Type deleteByDbid(Integer dbid) {
+        List<JpaTypeModel> entities = repository.deleteByDbid(dbid);
+        if (!entities.isEmpty()) {
+            return entities.get(0);
+        }
+        else {
+            return null;
+        }
     }
 }

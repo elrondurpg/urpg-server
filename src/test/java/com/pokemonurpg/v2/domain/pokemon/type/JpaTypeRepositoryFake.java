@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 @Getter
 public class JpaTypeRepositoryFake implements JpaTypeRepository {
-    public final static int EXISTING_DBID = 123;
+    public final static Integer EXISTING_DBID = 123;
     public final static String EXISTING_NAME = "EXISTING_NAME";
     public final static int NOT_FOUND_DBID = 234;
     public final static String NOT_FOUND_NAME = "NOT_FOUND_NAME";
@@ -71,20 +71,23 @@ public class JpaTypeRepositoryFake implements JpaTypeRepository {
     }
 
     @Override
-    public JpaTypeModel deleteByDbid(int dbid) {
-        if (EXISTING_DBID == dbid) {
-            return createExistingType();
+    public List<JpaTypeModel> deleteByDbid(Integer dbid) {
+        if (EXISTING_DBID.equals(dbid)) {
+            return Collections.singletonList(createExistingType());
         }
         else {
-            return null;
+            return Collections.emptyList();
         }
     }
 
     @Override
     public Page<JpaTypeModel> findAll(Pageable pageable) {
+        Sort.Order order = pageable.getSort().getOrderFor(SORT_BY);
         if (PAGE_NUMBER == pageable.getPageNumber()
                 && PAGE_SIZE == pageable.getPageSize()
-                && pageable.getSort().getOrderFor(SORT_BY) != null) {
+                && order != null
+                && order.isAscending()
+                && order.isIgnoreCase()) {
             Pageable pageInfo = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
             return new PageImpl<>(Collections.singletonList(createExistingType()), pageInfo, TOTAL_SORTED_ITEMS);
         }

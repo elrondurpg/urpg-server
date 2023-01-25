@@ -22,6 +22,7 @@ public class TypesFake implements Types {
     public final static int TOTAL_ITEMS = 50;
     public final static int ITEMS_PER_PAGE = 10;
     public final static int PAGE = 2;
+    public final static String SORT_BY = "SORT_BY";
 
     public final static int NOT_FOUND_DBID = 234;
     public final static String NOT_FOUND_NAME = "NOT_FOUND_NAME";
@@ -110,7 +111,7 @@ public class TypesFake implements Types {
         return VALIDATOR;
     }
 
-    public Type deleteByDbid(int dbid) {
+    public Type deleteByDbid(Integer dbid) {
         if (EXISTING_DBID == dbid) {
             return TypeModel.builder()
                     .dbid(EXISTING_DBID)

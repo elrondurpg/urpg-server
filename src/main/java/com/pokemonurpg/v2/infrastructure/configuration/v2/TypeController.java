@@ -1,12 +1,15 @@
-package com.pokemonurpg.v2.domain.pokemon.type;
+package com.pokemonurpg.v2.infrastructure.configuration.v2;
 
+import com.pokemonurpg.v2.domain.pokemon.type.*;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/configuration/v2/type")
 @CrossOrigin
 @AllArgsConstructor
+@Transactional
 public class TypeController {
     private GetTypeInputBoundary getService;
     private CreateTypeInputBoundary createService;
@@ -22,7 +25,7 @@ public class TypeController {
     @GetMapping("/{name}")
     public @ResponseBody
     GetTypeResponse getByName(@PathVariable(name = "name") String name) {
-        return getService.getByName(name);
+        return getService.getByNameStartingWith(name);
     }
 
     @PostMapping

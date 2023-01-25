@@ -7,6 +7,8 @@ import com.pokemonurpg.v2.entities.pokemon.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GetTypeHandlerTest {
@@ -96,19 +98,21 @@ class GetTypeHandlerTest {
         GetTypeListRequest request = new GetTypeListRequest();
         request.setItemsPerPage(TypesFake.ITEMS_PER_PAGE);
         request.setPage(TypesFake.PAGE);
+        request.setSortBy(TypesFake.SORT_BY);
 
         GetTypeListResponse response = handler.getList(request);
 
         PagedListRequest<Type> requestedPage = entities.getRequestedPage();
-        validateRequestConversionToPageRequest(request, requestedPage);
+        validateRequestConversionToPageRequest(requestedPage);
         validateRequestConversionToExample(requestedPage.getExample());
         validateResponseAttributes(response);
         validateResponseItems(response);
     }
 
-    private void validateRequestConversionToPageRequest(GetTypeListRequest request, PagedListRequest<Type> requestedPage) {
+    private void validateRequestConversionToPageRequest(PagedListRequest<Type> requestedPage) {
         assertEquals(TypesFake.ITEMS_PER_PAGE, requestedPage.getItemsPerPage());
         assertEquals(TypesFake.PAGE, requestedPage.getPage());
+        assertEquals(TypesFake.SORT_BY.toLowerCase(), requestedPage.getSortBy());
     }
 
     private void validateRequestConversionToExample(Type example) {

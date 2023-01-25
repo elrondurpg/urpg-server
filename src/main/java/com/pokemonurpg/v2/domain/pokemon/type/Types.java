@@ -15,5 +15,5 @@ interface Types {
     boolean existsByDbid(int dbid);
     boolean existsByName(String name);
     PageResponse<? extends Type> getPageByExample(PagedListRequest<Type> pagedListRequest) throws PageNotFoundException;
-    Type deleteByDbid(int dbid);
+    Type deleteByDbid(Integer dbid);
 }
