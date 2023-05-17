@@ -1,9 +1,9 @@
 package com.pokemonurpg.stats.validation;
 
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.SpeciesAbility;
-import com.pokemonurpg.species.models.SpeciesAttack;
-import com.pokemonurpg.species.service.SpeciesService;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.SpeciesAbility;
+import com.pokemonurpg.entities.SpeciesAttack;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
 import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;

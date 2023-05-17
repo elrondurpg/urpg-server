@@ -1,12 +1,9 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.strings.GeneralConstants;
-
-import org.hibernate.validator.group.GroupSequenceProvider;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.Section;
+import com.pokemonurpg.lib.strings.GeneralConstants;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

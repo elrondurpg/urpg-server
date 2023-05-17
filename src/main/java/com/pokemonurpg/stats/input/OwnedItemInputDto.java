@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.item.models.Item;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.Item;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

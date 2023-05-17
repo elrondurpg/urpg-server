@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.repository;
 
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.OwnedItem;
 import com.pokemonurpg.stats.models.OwnedItemKey;
 import org.springframework.data.jpa.repository.JpaRepository;

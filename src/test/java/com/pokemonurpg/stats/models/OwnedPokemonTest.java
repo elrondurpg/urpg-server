@@ -1,12 +1,12 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.ability.models.Ability;
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.general.models.Nature;
-import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.entities.Nature;
+import com.pokemonurpg.entities.Obtained;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.Type;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import org.junit.Test;
 

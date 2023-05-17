@@ -2,8 +2,8 @@ package com.pokemonurpg.pokedex.service;
 
 import com.pokemonurpg.pokedex.output.AlteredFormDto;
 import com.pokemonurpg.pokedex.util.FormAttackSorter;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

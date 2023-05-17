@@ -1,9 +1,10 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
+import com.pokemonurpg.entities.Badge;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.entities.Type;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
@@ -14,8 +15,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 public class GymTest {
-    private final static Badge              BADGE       = mock(Badge.class);
-    private final static GymOwnershipTerm   OWNER_REC   = mock(GymOwnershipTerm.class);
+    private final static Badge BADGE       = mock(Badge.class);
+    private final static GymOwnershipTerm OWNER_REC   = mock(GymOwnershipTerm.class);
     private final static Integer            DBID        = 32432;
     private final static List<GymVictory>   VICTORIES   = new ArrayList<>();
     private final static String             NAME        = "NAME";

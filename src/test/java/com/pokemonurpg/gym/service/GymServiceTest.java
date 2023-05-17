@@ -1,12 +1,16 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.gym.models.Badge;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.service.TypeService;
+import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
+import com.pokemonurpg.entities.Badge;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.infrastructure.data.GymRepository;
+import com.pokemonurpg.configuration.v1.badges.BadgeService;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gyms.GymPokemonService;
+import com.pokemonurpg.configuration.v1.gyms.GymService;
+import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;

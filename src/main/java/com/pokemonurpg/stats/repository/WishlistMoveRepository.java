@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pokemonurpg.attack.models.Attack;
+import com.pokemonurpg.entities.Attack;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.models.WishlistMove;
 import com.pokemonurpg.stats.models.WishlistMoveKey;

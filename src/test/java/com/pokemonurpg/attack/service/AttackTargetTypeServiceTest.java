@@ -1,8 +1,9 @@
 package com.pokemonurpg.attack.service;
 
-import com.pokemonurpg.attack.models.AttackTargetType;
-import com.pokemonurpg.attack.input.AttackTargetTypeInputDto;
-import com.pokemonurpg.attack.repository.AttackTargetTypeRepository;
+import com.pokemonurpg.entities.AttackTargetType;
+import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeInputDto;
+import com.pokemonurpg.infrastructure.data.AttackTargetTypeRepository;
+import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

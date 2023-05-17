@@ -1,8 +1,9 @@
 package com.pokemonurpg.creative.controller;
 
-import com.pokemonurpg.creative.models.StoryRank;
-import com.pokemonurpg.creative.input.StoryRankInputDto;
-import com.pokemonurpg.creative.service.StoryRankService;
+import com.pokemonurpg.configuration.v1.storyranks.StoryRankController;
+import com.pokemonurpg.entities.StoryRank;
+import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
+import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

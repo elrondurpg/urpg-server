@@ -1,7 +1,8 @@
 package com.pokemonurpg.ability.models;
 
-import com.pokemonurpg.ability.input.AbilityInputDto;
-import com.pokemonurpg.species.models.SpeciesAbility;
+import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
+import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.entities.SpeciesAbility;
 import org.junit.Test;
 
 import java.util.HashSet;

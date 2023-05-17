@@ -1,8 +1,9 @@
 package com.pokemonurpg.member.controller;
 
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.input.RoleInputDto;
-import com.pokemonurpg.member.service.RoleService;
+import com.pokemonurpg.configuration.v1.roles.RoleController;
+import com.pokemonurpg.entities.Role;
+import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
+import com.pokemonurpg.configuration.v1.roles.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

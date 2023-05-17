@@ -1,21 +1,19 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.EliteFourInputDto;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.stats.models.EliteFourVictory;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.EliteFourOwnershipTerm;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class EliteFourTest {
-    private final static EliteFourOwnershipTerm     OWNER_REC   = mock(EliteFourOwnershipTerm.class);
+    private final static EliteFourOwnershipTerm OWNER_REC   = mock(EliteFourOwnershipTerm.class);
     private final static Integer                    DBID        = 32432;
     private final static String                     NAME        = "NAME";
     private final static Set<OwnedPokemon>          POKEMON     = new HashSet<>();

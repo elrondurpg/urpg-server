@@ -1,15 +1,10 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.GymVictoryInputDto;
-import org.junit.Before;
-import org.junit.Test;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.Member;
 
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class GymVictoryTest {
     private final static Member CHALLENGER = new Member();

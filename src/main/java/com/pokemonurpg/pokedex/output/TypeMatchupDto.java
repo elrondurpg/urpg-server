@@ -1,6 +1,6 @@
 package com.pokemonurpg.pokedex.output;
 
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.entities.Type;
 
 public class TypeMatchupDto {
     private Type type;

@@ -1,7 +1,9 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.ability.models.Ability;
-import com.pokemonurpg.species.input.SpeciesAbilityInputDto;
+import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesAbilityInputDto;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.SpeciesAbility;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

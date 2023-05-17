@@ -1,8 +1,9 @@
 package com.pokemonurpg.species.controller;
 
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.input.SpeciesInputDto;
-import com.pokemonurpg.species.service.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesController;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

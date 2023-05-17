@@ -1,11 +1,11 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
-import com.pokemonurpg.contest.models.ContestType;
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.strings.GeneralConstants;
+import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.entities.ContestRank;
+import com.pokemonurpg.entities.ContestType;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.lib.strings.GeneralConstants;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

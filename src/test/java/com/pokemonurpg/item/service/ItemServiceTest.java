@@ -1,8 +1,9 @@
 package com.pokemonurpg.item.service;
 
-import com.pokemonurpg.item.input.ItemInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.repository.ItemRepository;
+import com.pokemonurpg.configuration.v1.items.ItemInputDto;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.infrastructure.data.ItemRepository;
+import com.pokemonurpg.configuration.v1.items.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

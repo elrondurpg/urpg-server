@@ -1,8 +1,9 @@
 package com.pokemonurpg.creative.controller;
 
-import com.pokemonurpg.creative.models.ArtRank;
-import com.pokemonurpg.creative.input.ArtRankInputDto;
-import com.pokemonurpg.creative.service.ArtRankService;
+import com.pokemonurpg.configuration.v1.artranks.ArtRankController;
+import com.pokemonurpg.entities.ArtRank;
+import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
+import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

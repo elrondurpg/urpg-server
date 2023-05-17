@@ -1,11 +1,10 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
+import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.entities.ContestRank;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 public class EarnedRibbonTest {

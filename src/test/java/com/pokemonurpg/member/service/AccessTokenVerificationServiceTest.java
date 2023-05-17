@@ -1,8 +1,8 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.security.service.AccessTokenVerificationService;
-import com.pokemonurpg.security.service.HashService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.login.service.AccessTokenVerificationService;
+import com.pokemonurpg.login.service.HashService;
+import com.pokemonurpg.entities.Member;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

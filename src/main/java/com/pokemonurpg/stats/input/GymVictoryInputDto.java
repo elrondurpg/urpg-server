@@ -1,10 +1,10 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownGymLeader;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.KnownGymLeader;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

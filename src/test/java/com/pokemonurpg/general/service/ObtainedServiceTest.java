@@ -1,8 +1,9 @@
 package com.pokemonurpg.general.service;
 
-import com.pokemonurpg.general.input.ObtainedInputDto;
-import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.general.repository.ObtainedRepository;
+import com.pokemonurpg.configuration.v1.capturemethods.ObtainedInputDto;
+import com.pokemonurpg.entities.Obtained;
+import com.pokemonurpg.infrastructure.data.ObtainedRepository;
+import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

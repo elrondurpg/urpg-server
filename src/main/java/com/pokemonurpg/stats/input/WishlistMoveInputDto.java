@@ -2,9 +2,9 @@ package com.pokemonurpg.stats.input;
 
 import javax.validation.constraints.NotNull;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
 
 public class WishlistMoveInputDto extends ChildInputDto {
     @NotNull

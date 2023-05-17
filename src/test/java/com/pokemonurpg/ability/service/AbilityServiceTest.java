@@ -1,8 +1,9 @@
 package com.pokemonurpg.ability.service;
 
-import com.pokemonurpg.ability.models.Ability;
-import com.pokemonurpg.ability.input.AbilityInputDto;
-import com.pokemonurpg.ability.repository.AbilityRepository;
+import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
+import com.pokemonurpg.infrastructure.data.AbilityRepository;
+import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

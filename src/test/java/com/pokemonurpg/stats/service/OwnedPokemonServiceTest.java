@@ -1,16 +1,16 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.general.models.Nature;
-import com.pokemonurpg.general.models.Obtained;
-import com.pokemonurpg.general.service.NatureService;
-import com.pokemonurpg.general.service.ObtainedService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
-import com.pokemonurpg.security.service.SessionService;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.service.SpeciesService;
-import com.pokemonurpg.species.service.TypeService;
+import com.pokemonurpg.entities.Nature;
+import com.pokemonurpg.entities.Obtained;
+import com.pokemonurpg.configuration.v1.natures.NatureService;
+import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.configuration.v1.members.MemberService;
+import com.pokemonurpg.login.service.SessionService;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
@@ -23,7 +23,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.inject.Provider;
 import java.util.Collections;

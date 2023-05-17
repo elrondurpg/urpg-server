@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.repository;
 
-import com.pokemonurpg.gym.models.KnownChampion;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.KnownChampion;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.ChampionVictory;
 import com.pokemonurpg.stats.models.ChampionVictoryKey;
 import org.springframework.data.jpa.repository.JpaRepository;

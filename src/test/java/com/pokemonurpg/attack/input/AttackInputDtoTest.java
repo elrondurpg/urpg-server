@@ -1,7 +1,7 @@
 package com.pokemonurpg.attack.input;
 
-import com.pokemonurpg.attack.input.AttackInputDto;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
+import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
 import org.junit.Test;
 
 import java.util.ArrayList;

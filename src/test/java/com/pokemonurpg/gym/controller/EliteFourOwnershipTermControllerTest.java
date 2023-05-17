@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
+import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermController;
+import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermInputDto;
+import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,12 +1,15 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
-import com.pokemonurpg.gym.repository.ChampionOwnershipTermRepository;
-import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermInputDto;
+import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.entities.ChampionOwnershipTerm;
+import com.pokemonurpg.infrastructure.data.ChampionOwnershipTermRepository;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionService;
+import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
+import com.pokemonurpg.configuration.v1.items.ItemService;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

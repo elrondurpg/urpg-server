@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.input.GymInputDto;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.configuration.v1.gyms.GymController;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
+import com.pokemonurpg.configuration.v1.gyms.GymService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.OwnedItemInputDto;
 import org.junit.Test;
 

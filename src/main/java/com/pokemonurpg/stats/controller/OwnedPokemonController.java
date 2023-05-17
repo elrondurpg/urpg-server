@@ -2,17 +2,17 @@ package com.pokemonurpg.stats.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.security.annotation.AllowAuthenticated;
-import com.pokemonurpg.security.annotation.AllowAuthorized;
-import com.pokemonurpg.core.validation.ObjectCreation;
-import com.pokemonurpg.security.annotation.AllowAll;
-import com.pokemonurpg.security.annotation.AllowTheOwner;
-import com.pokemonurpg.security.service.AuthorizationService;
-import com.pokemonurpg.security.service.SessionService;
+import com.pokemonurpg.login.annotation.AllowAuthenticated;
+import com.pokemonurpg.login.annotation.AllowAuthorized;
+import com.pokemonurpg.lib.validation.ObjectCreation;
+import com.pokemonurpg.login.annotation.AllowAll;
+import com.pokemonurpg.login.annotation.AllowTheOwner;
+import com.pokemonurpg.login.service.AuthorizationService;
+import com.pokemonurpg.login.service.SessionService;
 import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
-import com.pokemonurpg.strings.ErrorStrings;
+import com.pokemonurpg.lib.strings.ErrorStrings;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ import javax.annotation.Resource;
 import javax.inject.Provider;
 import javax.validation.Valid;
 
-import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
-import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
+import static com.pokemonurpg.lib.strings.ErrorStrings.ERROR_ON_DELETE;
+import static com.pokemonurpg.lib.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 
 import java.util.List;
 

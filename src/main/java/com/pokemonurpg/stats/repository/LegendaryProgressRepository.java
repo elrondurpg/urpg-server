@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.repository;
 
-import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Section;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.LegendaryProgress;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.pokemonurpg.contest.models;
 
-import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
+import com.pokemonurpg.configuration.v1.contestmovetypes.ContestMoveTypeInputDto;
+import com.pokemonurpg.entities.RSEContestMoveType;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

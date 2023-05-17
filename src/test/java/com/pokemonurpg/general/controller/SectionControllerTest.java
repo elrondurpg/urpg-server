@@ -1,8 +1,9 @@
 package com.pokemonurpg.general.controller;
 
-import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.general.input.SectionInputDto;
-import com.pokemonurpg.general.service.SectionService;
+import com.pokemonurpg.configuration.v1.sections.SectionController;
+import com.pokemonurpg.entities.Section;
+import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
+import com.pokemonurpg.configuration.v1.sections.SectionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

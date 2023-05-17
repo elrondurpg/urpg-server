@@ -3,8 +3,8 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.gym.models.KnownChampion;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.KnownChampion;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
 
 import javax.persistence.*;

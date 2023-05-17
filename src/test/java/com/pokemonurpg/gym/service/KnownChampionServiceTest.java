@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.models.KnownChampion;
-import com.pokemonurpg.gym.input.KnownChampionInputDto;
-import com.pokemonurpg.gym.repository.KnownChampionRepository;
+import com.pokemonurpg.entities.KnownChampion;
+import com.pokemonurpg.configuration.v1.champions.KnownChampionInputDto;
+import com.pokemonurpg.infrastructure.data.KnownChampionRepository;
+import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

@@ -1,6 +1,8 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.GymLeagueInputDto;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.GymOwnershipTerm;
 import org.junit.Test;
 
 import java.util.ArrayList;

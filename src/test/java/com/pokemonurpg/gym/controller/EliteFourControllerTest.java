@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.input.EliteFourInputDto;
-import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.service.EliteFourService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourController;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

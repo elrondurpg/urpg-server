@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.input.ChampionInputDto;
-import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.service.ChampionService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionController;
+import com.pokemonurpg.configuration.v1.championslots.ChampionInputDto;
+import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.configuration.v1.championslots.ChampionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

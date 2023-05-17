@@ -1,6 +1,7 @@
 package com.pokemonurpg.general.models;
 
-import com.pokemonurpg.general.input.SectionInputDto;
+import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
+import com.pokemonurpg.entities.Section;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

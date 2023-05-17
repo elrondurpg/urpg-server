@@ -1,8 +1,11 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermInputDto;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.Member;
 import org.junit.Test;
 
 import java.util.Date;
@@ -12,8 +15,8 @@ import static org.mockito.Mockito.mock;
 
 public class GymOwnershipTermTest {
     private final static Date       DATE    = new Date();
-    private final static Gym        GYM     = mock(Gym.class);
-    private final static GymLeague  LEAGUE  = mock(GymLeague.class);
+    private final static Gym GYM     = mock(Gym.class);
+    private final static GymLeague LEAGUE  = mock(GymLeague.class);
     private final static Integer    DBID    = 342;
     private final static Integer    DRAWS   = 3;
     private final static Integer    LOSSES  = 2;

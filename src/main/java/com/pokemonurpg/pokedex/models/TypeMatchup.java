@@ -1,7 +1,6 @@
 package com.pokemonurpg.pokedex.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.entities.Type;
 
 import javax.persistence.*;
 

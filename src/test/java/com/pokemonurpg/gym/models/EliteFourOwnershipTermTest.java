@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermInputDto;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.Member;
 import org.junit.Test;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import static org.mockito.Mockito.mock;
 
 public class EliteFourOwnershipTermTest {
     private final static Date       DATE        = new Date();
-    private final static EliteFour  ELITE_FOUR  = mock(EliteFour.class);
+    private final static EliteFour ELITE_FOUR  = mock(EliteFour.class);
     private final static Integer    DBID        = 342;
     private final static Integer    DRAWS       = 3;
     private final static Integer    LOSSES      = 2;

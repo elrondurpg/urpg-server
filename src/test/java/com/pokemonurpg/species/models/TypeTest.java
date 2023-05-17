@@ -1,6 +1,7 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.species.input.TypeInputDto;
+import com.pokemonurpg.configuration.v1.types.TypeInputDto;
+import com.pokemonurpg.entities.Type;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

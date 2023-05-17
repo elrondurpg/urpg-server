@@ -1,8 +1,8 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.models.KnownGymLeader;
-import com.pokemonurpg.gym.input.KnownGymLeaderInputDto;
-import com.pokemonurpg.gym.repository.KnownGymLeaderRepository;
+import com.pokemonurpg.entities.KnownGymLeader;
+import com.pokemonurpg.infrastructure.data.KnownGymLeaderRepository;
+import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

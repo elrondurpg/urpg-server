@@ -1,14 +1,18 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.input.GymOwnershipTermInputDto;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.repository.GymOwnershipTermRepository;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.service.ItemService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.service.MemberService;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermInputDto;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.infrastructure.data.GymOwnershipTermRepository;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gyms.GymService;
+import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.configuration.v1.items.ItemService;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

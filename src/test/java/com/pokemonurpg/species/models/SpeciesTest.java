@@ -1,10 +1,7 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.creative.models.ArtRank;
-import com.pokemonurpg.creative.models.ParkLocation;
-import com.pokemonurpg.creative.models.ParkRank;
-import com.pokemonurpg.creative.models.StoryRank;
-import com.pokemonurpg.species.input.SpeciesInputDto;
+import com.pokemonurpg.entities.*;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesInputDto;
 import org.junit.Test;
 
 import java.util.ArrayList;

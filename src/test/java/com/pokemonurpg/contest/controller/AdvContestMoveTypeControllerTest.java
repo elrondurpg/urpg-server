@@ -1,8 +1,9 @@
 package com.pokemonurpg.contest.controller;
 
-import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
-import com.pokemonurpg.contest.models.AdvContestMoveType;
-import com.pokemonurpg.contest.service.AdvContestMoveTypeService;
+import com.pokemonurpg.configuration.v1.contestmovetypes.AdvContestMoveTypeController;
+import com.pokemonurpg.configuration.v1.contestmovetypes.ContestMoveTypeInputDto;
+import com.pokemonurpg.entities.AdvContestMoveType;
+import com.pokemonurpg.configuration.v1.contestmovetypes.AdvContestMoveTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,18 +1,19 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.gym.service.KnownChampionService;
-import com.pokemonurpg.gym.service.KnownEliteFourMemberService;
-import com.pokemonurpg.gym.service.KnownGymLeaderService;
-import com.pokemonurpg.security.models.OAuthAccessTokenResponse;
-import com.pokemonurpg.security.service.AesEncryptionService;
-import com.pokemonurpg.security.service.AuthorizationService;
-import com.pokemonurpg.security.service.HashService;
-import com.pokemonurpg.core.service.SystemService;
-import com.pokemonurpg.member.input.MemberInputDto;
-import com.pokemonurpg.member.input.MemberRoleInputDto;
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.member.repository.MemberRepository;
+import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.members.MemberService;
+import com.pokemonurpg.configuration.v1.roles.RoleService;
+import com.pokemonurpg.login.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.login.service.AesEncryptionService;
+import com.pokemonurpg.login.service.AuthorizationService;
+import com.pokemonurpg.login.service.HashService;
+import com.pokemonurpg.lib.service.SystemService;
+import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.entities.Role;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.infrastructure.data.MemberRepository;
 import com.pokemonurpg.stats.input.*;
 import com.pokemonurpg.stats.service.*;
 import org.junit.Test;
@@ -26,10 +27,8 @@ import org.springframework.data.domain.Example;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -39,11 +38,11 @@ public class MemberServiceTest {
 
     private final static byte[]                     IV = { 12, 32 };
 
-    private final static ChampionVictoryInputDto    CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
+    private final static ChampionVictoryInputDto CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
 
-    private final static EliteFourVictoryInputDto   ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
+    private final static EliteFourVictoryInputDto ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
 
-    private final static GymVictoryInputDto         GYM_VICTORY = mock(GymVictoryInputDto.class);
+    private final static GymVictoryInputDto GYM_VICTORY = mock(GymVictoryInputDto.class);
 
     private final static Integer                    DBID = 32432;
     private final static Integer                    SALT = 34222;
@@ -53,11 +52,11 @@ public class MemberServiceTest {
     private final static Long                       EXPIRES_IN = 69L;
     private final static Long                       CURRENT_TIME_MILLIS = 432000L;
 
-    private final static LegendaryProgressInputDto  LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
+    private final static LegendaryProgressInputDto LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
 
     private final static Member                     CURRENT_MEMBER = new Member();
 
-    private final static OwnedItemInputDto          OWNED_ITEM = mock(OwnedItemInputDto.class);
+    private final static OwnedItemInputDto OWNED_ITEM = mock(OwnedItemInputDto.class);
 
     private final static Role                       CURRENT_ROLE = mock(Role.class);
     private final static Role                       NEW_ROLE = mock(Role.class);

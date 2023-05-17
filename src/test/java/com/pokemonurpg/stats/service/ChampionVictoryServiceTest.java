@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
 import com.pokemonurpg.stats.models.ChampionVictory;
 import com.pokemonurpg.stats.repository.ChampionVictoryRepository;
@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;

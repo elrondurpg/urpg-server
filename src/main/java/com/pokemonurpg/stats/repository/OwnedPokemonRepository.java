@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.repository;
 
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 
 import java.util.List;

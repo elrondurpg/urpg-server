@@ -1,17 +1,11 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.general.models.Section;
-import com.pokemonurpg.general.service.SectionService;
-import com.pokemonurpg.member.models.Member;
-import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
+import com.pokemonurpg.entities.Section;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.LegendaryProgress;
-import com.pokemonurpg.stats.repository.LegendaryProgressRepository;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

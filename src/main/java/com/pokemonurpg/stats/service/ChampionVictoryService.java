@@ -1,7 +1,7 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.gym.models.KnownChampion;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.KnownChampion;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
 import com.pokemonurpg.stats.models.ChampionVictory;
 import com.pokemonurpg.stats.repository.ChampionVictoryRepository;

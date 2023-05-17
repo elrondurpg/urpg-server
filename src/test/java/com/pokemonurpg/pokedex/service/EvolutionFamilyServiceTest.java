@@ -1,14 +1,12 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.service.SpeciesService;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import javax.annotation.Resource;
 
 import java.util.Collections;
 import java.util.List;

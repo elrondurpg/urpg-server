@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
-import com.pokemonurpg.gym.service.ChampionOwnershipTermService;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermController;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermInputDto;
+import com.pokemonurpg.entities.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.species.input;
 
+import com.pokemonurpg.configuration.v1.types.TypeInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

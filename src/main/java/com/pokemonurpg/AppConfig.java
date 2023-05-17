@@ -1,6 +1,6 @@
 package com.pokemonurpg;
 
-import com.pokemonurpg.security.interceptor.AuthorizationHandler;
+import com.pokemonurpg.login.interceptor.AuthorizationHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

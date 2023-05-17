@@ -1,8 +1,9 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.species.input.TypeInputDto;
-import com.pokemonurpg.species.models.Type;
-import com.pokemonurpg.species.repository.TypeRepository;
+import com.pokemonurpg.configuration.v1.types.TypeInputDto;
+import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.infrastructure.data.TypeRepository;
+import com.pokemonurpg.configuration.v1.types.TypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

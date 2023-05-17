@@ -1,6 +1,6 @@
 package com.pokemonurpg.contest.input;
 
-import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
+import com.pokemonurpg.configuration.v1.contestmovetypes.ContestMoveTypeInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

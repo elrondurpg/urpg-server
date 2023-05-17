@@ -1,8 +1,9 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.member.input.PermissionInputDto;
-import com.pokemonurpg.member.models.Permission;
-import com.pokemonurpg.member.repository.PermissionRepository;
+import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
+import com.pokemonurpg.entities.Permission;
+import com.pokemonurpg.infrastructure.data.PermissionRepository;
+import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

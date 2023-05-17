@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.controller;
 
-import com.pokemonurpg.gym.models.Badge;
-import com.pokemonurpg.gym.input.BadgeInputDto;
-import com.pokemonurpg.gym.service.BadgeService;
+import com.pokemonurpg.configuration.v1.badges.BadgeController;
+import com.pokemonurpg.entities.Badge;
+import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
+import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

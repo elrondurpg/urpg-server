@@ -1,10 +1,10 @@
 package com.pokemonurpg.attack.models;
 
-import com.pokemonurpg.attack.input.AttackInputDto;
-import com.pokemonurpg.contest.models.*;
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.species.models.SpeciesAttack;
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
+import com.pokemonurpg.entities.*;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.SpeciesAttack;
+import com.pokemonurpg.entities.Type;
 import org.junit.Test;
 
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.ability.input;
 
-import com.pokemonurpg.ability.input.AbilityInputDto;
+import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

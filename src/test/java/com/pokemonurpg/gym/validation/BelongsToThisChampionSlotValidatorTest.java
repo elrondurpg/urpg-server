@@ -1,10 +1,11 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.gym.models.Champion;
-import com.pokemonurpg.gym.models.ChampionOwnershipTerm;
-import com.pokemonurpg.gym.service.ChampionOwnershipTermService;
-import com.pokemonurpg.gym.service.ChampionService;
+import com.pokemonurpg.lib.validators.BelongsToThisChampionSlotValidator;
+import com.pokemonurpg.lib.service.RequestPathVariableService;
+import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.entities.ChampionOwnershipTerm;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

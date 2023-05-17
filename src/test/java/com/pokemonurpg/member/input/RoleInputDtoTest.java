@@ -1,5 +1,6 @@
 package com.pokemonurpg.member.input;
 
+import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

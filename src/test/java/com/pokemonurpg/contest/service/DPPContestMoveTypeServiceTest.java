@@ -1,8 +1,9 @@
 package com.pokemonurpg.contest.service;
 
-import com.pokemonurpg.contest.input.ContestMoveTypeInputDto;
-import com.pokemonurpg.contest.models.DPPContestMoveType;
-import com.pokemonurpg.contest.repository.DPPContestMoveTypeRepository;
+import com.pokemonurpg.configuration.v1.contestmovetypes.ContestMoveTypeInputDto;
+import com.pokemonurpg.entities.DPPContestMoveType;
+import com.pokemonurpg.infrastructure.data.DPPContestMoveTypeRepository;
+import com.pokemonurpg.configuration.v1.contestmovetypes.DPPContestMoveTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

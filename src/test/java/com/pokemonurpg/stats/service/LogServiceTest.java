@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.LogRecord;
 import com.pokemonurpg.stats.repository.LogRecordRepository;
 import org.junit.Test;

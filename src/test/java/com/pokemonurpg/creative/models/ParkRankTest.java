@@ -1,6 +1,7 @@
 package com.pokemonurpg.creative.models;
 
-import com.pokemonurpg.creative.input.ParkRankInputDto;
+import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
+import com.pokemonurpg.entities.ParkRank;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,8 +1,9 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.species.input.CosmeticFormInputDto;
-import com.pokemonurpg.species.models.CosmeticForm;
-import com.pokemonurpg.species.repository.CosmeticFormRepository;
+import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
+import com.pokemonurpg.entities.CosmeticForm;
+import com.pokemonurpg.infrastructure.data.CosmeticFormRepository;
+import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,7 +11,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

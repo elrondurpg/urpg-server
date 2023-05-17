@@ -1,11 +1,12 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.gym.input.EliteFourPokemonInputDto;
-import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.service.EliteFourService;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.lib.validators.AllPokemonBelongToEliteFourMemberValidator;
+import com.pokemonurpg.lib.service.RequestPathVariableService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonInputDto;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.junit.Test;

@@ -1,10 +1,12 @@
 package com.pokemonurpg.image.service;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.core.service.FileService;
-import com.pokemonurpg.core.service.ImageIoService;
-import com.pokemonurpg.image.input.ImageInputDto;
-import com.pokemonurpg.image.models.ImageFolder;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
+import com.pokemonurpg.configuration.v1.images.ImageService;
+import com.pokemonurpg.lib.service.FileService;
+import com.pokemonurpg.lib.service.ImageIoService;
+import com.pokemonurpg.configuration.v1.images.ImageInputDto;
+import com.pokemonurpg.entities.ImageFolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

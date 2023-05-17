@@ -1,6 +1,7 @@
 package com.pokemonurpg.creative.models;
 
-import com.pokemonurpg.creative.input.ParkLocationInputDto;
+import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
+import com.pokemonurpg.entities.ParkLocation;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

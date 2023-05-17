@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.input;
 
-import com.pokemonurpg.core.input.ChildInputDto;
-import com.pokemonurpg.core.validation.annotation.ExistsInDb;
-import com.pokemonurpg.gym.models.KnownChampion;
+import com.pokemonurpg.lib.input.ChildInputDto;
+import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.KnownChampion;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

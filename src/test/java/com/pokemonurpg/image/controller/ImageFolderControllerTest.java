@@ -1,8 +1,9 @@
 package com.pokemonurpg.image.controller;
 
-import com.pokemonurpg.image.input.ImageFolderInputDto;
-import com.pokemonurpg.image.models.ImageFolder;
-import com.pokemonurpg.image.service.ImageFolderService;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderController;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
+import com.pokemonurpg.entities.ImageFolder;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

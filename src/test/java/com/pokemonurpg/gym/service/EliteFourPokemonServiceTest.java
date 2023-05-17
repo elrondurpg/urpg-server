@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.input.EliteFourInputDto;
-import com.pokemonurpg.gym.input.EliteFourPokemonInputDto;
-import com.pokemonurpg.gym.models.EliteFour;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonInputDto;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonService;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.service.OwnedPokemonService;
 import org.junit.Test;

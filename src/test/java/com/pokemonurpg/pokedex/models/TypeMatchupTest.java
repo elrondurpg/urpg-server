@@ -1,6 +1,6 @@
 package com.pokemonurpg.pokedex.models;
 
-import com.pokemonurpg.species.models.Type;
+import com.pokemonurpg.entities.Type;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

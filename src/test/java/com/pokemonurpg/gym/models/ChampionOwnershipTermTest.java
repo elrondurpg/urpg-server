@@ -1,7 +1,9 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermInputDto;
+import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.entities.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.Member;
 import org.junit.Test;
 
 import java.util.Date;
@@ -11,7 +13,7 @@ import static org.mockito.Mockito.mock;
 
 public class ChampionOwnershipTermTest {
     private final static Date       DATE        = new Date();
-    private final static Champion   CHAMPION    = mock(Champion.class);
+    private final static Champion CHAMPION    = mock(Champion.class);
     private final static Integer    DBID        = 342;
     private final static Integer    DRAWS       = 3;
     private final static Integer    LOSSES      = 2;

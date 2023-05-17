@@ -1,6 +1,7 @@
 package com.pokemonurpg.image.models;
 
-import com.pokemonurpg.image.input.ImageFolderInputDto;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
+import com.pokemonurpg.entities.ImageFolder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,8 +1,9 @@
 package com.pokemonurpg.attack.controller;
 
-import com.pokemonurpg.attack.models.AttackCategory;
-import com.pokemonurpg.attack.input.AttackCategoryInputDto;
-import com.pokemonurpg.attack.service.AttackCategoryService;
+import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryController;
+import com.pokemonurpg.entities.AttackCategory;
+import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
+import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

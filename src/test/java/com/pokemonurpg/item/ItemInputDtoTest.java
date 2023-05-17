@@ -1,6 +1,6 @@
 package com.pokemonurpg.item;
 
-import com.pokemonurpg.item.input.ItemInputDto;
+import com.pokemonurpg.configuration.v1.items.ItemInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -3,10 +3,10 @@ package com.pokemonurpg.stats.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownGymLeader;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.KnownGymLeader;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 
 import javax.persistence.*;

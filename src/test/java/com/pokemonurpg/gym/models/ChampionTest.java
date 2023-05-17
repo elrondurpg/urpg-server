@@ -1,6 +1,8 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.gym.input.ChampionInputDto;
+import com.pokemonurpg.configuration.v1.championslots.ChampionInputDto;
+import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.entities.ChampionOwnershipTerm;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import org.junit.Test;
 
@@ -11,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class ChampionTest {
-    private final static ChampionOwnershipTerm      OWNER_REC   = mock(ChampionOwnershipTerm.class);
+    private final static ChampionOwnershipTerm OWNER_REC   = mock(ChampionOwnershipTerm.class);
     private final static Integer                    DBID        = 32432;
     private final static String                     NAME        = "NAME";
     private final static Set<OwnedPokemon>          POKEMON     = new HashSet<>();

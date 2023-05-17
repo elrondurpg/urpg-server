@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.item.models.Item;
-import com.pokemonurpg.item.repository.ItemRepository;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.infrastructure.data.ItemRepository;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.OwnedItemInputDto;
 import com.pokemonurpg.stats.models.OwnedItem;
 import com.pokemonurpg.stats.repository.OwnedItemRepository;

@@ -1,8 +1,9 @@
 package com.pokemonurpg.creative.controller;
 
-import com.pokemonurpg.creative.models.ParkLocation;
-import com.pokemonurpg.creative.input.ParkLocationInputDto;
-import com.pokemonurpg.creative.service.ParkLocationService;
+import com.pokemonurpg.configuration.v1.parklocations.ParkLocationController;
+import com.pokemonurpg.entities.ParkLocation;
+import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
+import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

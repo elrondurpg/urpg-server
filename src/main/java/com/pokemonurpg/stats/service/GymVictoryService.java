@@ -1,11 +1,11 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.models.KnownGymLeader;
-import com.pokemonurpg.gym.repository.GymLeagueRepository;
-import com.pokemonurpg.gym.repository.GymRepository;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.KnownGymLeader;
+import com.pokemonurpg.infrastructure.data.GymLeagueRepository;
+import com.pokemonurpg.infrastructure.data.GymRepository;
+import com.pokemonurpg.entities.Member;
 import com.pokemonurpg.stats.input.GymVictoryInputDto;
 import com.pokemonurpg.stats.models.GymVictory;
 import com.pokemonurpg.stats.repository.GymVictoryRepository;

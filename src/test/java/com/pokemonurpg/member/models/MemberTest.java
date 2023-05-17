@@ -1,8 +1,9 @@
 package com.pokemonurpg.member.models;
 
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.member.input.MemberInputDto;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.Role;
 import com.pokemonurpg.stats.models.*;
 import org.junit.Before;
 import org.junit.Test;

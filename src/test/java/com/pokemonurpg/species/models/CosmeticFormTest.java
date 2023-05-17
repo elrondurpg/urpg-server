@@ -1,6 +1,7 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.species.input.CosmeticFormInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
+import com.pokemonurpg.entities.CosmeticForm;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

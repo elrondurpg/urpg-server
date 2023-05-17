@@ -1,8 +1,9 @@
 package com.pokemonurpg.contest.service;
 
-import com.pokemonurpg.contest.input.ContestAttributeInputDto;
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.repository.ContestAttributeRepository;
+import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
+import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.infrastructure.data.ContestAttributeRepository;
+import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

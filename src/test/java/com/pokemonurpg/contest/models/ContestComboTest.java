@@ -1,11 +1,8 @@
 package com.pokemonurpg.contest.models;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.contest.input.ContestComboInputDto;
-import com.pokemonurpg.species.input.SpeciesAttackInputDto;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.SpeciesAttack;
-import org.junit.Before;
+import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
+import com.pokemonurpg.entities.ContestCombo;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

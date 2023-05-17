@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.ability.models.Ability;
-import com.pokemonurpg.ability.repository.AbilityRepository;
+import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.infrastructure.data.AbilityRepository;
 import com.pokemonurpg.stats.input.WishlistAbilityInputDto;
 import com.pokemonurpg.stats.models.OwnedPokemon;
 import com.pokemonurpg.stats.models.WishlistAbility;

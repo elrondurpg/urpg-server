@@ -1,10 +1,11 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.gym.models.EliteFour;
-import com.pokemonurpg.gym.models.EliteFourOwnershipTerm;
-import com.pokemonurpg.gym.service.EliteFourOwnershipTermService;
-import com.pokemonurpg.gym.service.EliteFourService;
+import com.pokemonurpg.lib.validators.BelongsToThisEliteFourSlotValidator;
+import com.pokemonurpg.lib.service.RequestPathVariableService;
+import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

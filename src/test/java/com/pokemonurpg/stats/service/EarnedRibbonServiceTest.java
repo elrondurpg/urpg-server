@@ -1,9 +1,9 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
-import com.pokemonurpg.contest.service.ContestAttributeService;
-import com.pokemonurpg.contest.service.ContestRankService;
+import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.entities.ContestRank;
+import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
+import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 import com.pokemonurpg.stats.models.EarnedRibbon;
 import com.pokemonurpg.stats.models.OwnedPokemon;
@@ -15,7 +15,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

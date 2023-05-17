@@ -1,11 +1,12 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.attack.models.Attack;
-import com.pokemonurpg.attack.repository.AttackRepository;
-import com.pokemonurpg.species.input.SpeciesAttackInputDto;
-import com.pokemonurpg.species.models.Species;
-import com.pokemonurpg.species.models.SpeciesAttack;
-import com.pokemonurpg.species.repository.SpeciesAttackRepository;
+import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.infrastructure.data.AttackRepository;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesAttackInputDto;
+import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.SpeciesAttack;
+import com.pokemonurpg.infrastructure.data.SpeciesAttackRepository;
+import com.pokemonurpg.configuration.v1.pokemon.SpeciesAttackService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

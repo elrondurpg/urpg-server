@@ -1,8 +1,9 @@
 package com.pokemonurpg.general.service;
 
-import com.pokemonurpg.general.input.NatureInputDto;
-import com.pokemonurpg.general.models.Nature;
-import com.pokemonurpg.general.repository.NatureRepository;
+import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
+import com.pokemonurpg.entities.Nature;
+import com.pokemonurpg.infrastructure.data.NatureRepository;
+import com.pokemonurpg.configuration.v1.natures.NatureService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.creative.input;
 
+import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,8 +1,9 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.input.GymLeagueInputDto;
-import com.pokemonurpg.gym.models.GymLeague;
-import com.pokemonurpg.gym.repository.GymLeagueRepository;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
+import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.infrastructure.data.GymLeagueRepository;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

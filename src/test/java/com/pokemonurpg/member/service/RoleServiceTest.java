@@ -1,10 +1,12 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.member.input.RoleInputDto;
-import com.pokemonurpg.member.input.RolePermissionInputDto;
-import com.pokemonurpg.member.models.Permission;
-import com.pokemonurpg.member.models.Role;
-import com.pokemonurpg.member.repository.RoleRepository;
+import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
+import com.pokemonurpg.configuration.v1.roles.RolePermissionInputDto;
+import com.pokemonurpg.entities.Permission;
+import com.pokemonurpg.entities.Role;
+import com.pokemonurpg.infrastructure.data.RoleRepository;
+import com.pokemonurpg.configuration.v1.permissions.PermissionService;
+import com.pokemonurpg.configuration.v1.roles.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

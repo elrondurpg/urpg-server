@@ -2,9 +2,9 @@ package com.pokemonurpg.stats.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.contest.models.ContestAttribute;
-import com.pokemonurpg.contest.models.ContestRank;
-import com.pokemonurpg.contest.models.ContestType;
+import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.entities.ContestRank;
+import com.pokemonurpg.entities.ContestType;
 import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
 
 import javax.persistence.*;

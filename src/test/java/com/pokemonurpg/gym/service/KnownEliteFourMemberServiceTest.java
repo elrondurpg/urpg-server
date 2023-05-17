@@ -1,8 +1,8 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.gym.models.KnownEliteFourMember;
-import com.pokemonurpg.gym.input.KnownEliteFourMemberInputDto;
-import com.pokemonurpg.gym.repository.KnownEliteFourMemberRepository;
+import com.pokemonurpg.entities.KnownEliteFourMember;
+import com.pokemonurpg.infrastructure.data.KnownEliteFourMemberRepository;
+import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

@@ -1,7 +1,8 @@
 package com.pokemonurpg.member.service;
 
-import com.pokemonurpg.security.service.*;
-import com.pokemonurpg.member.models.Member;
+import com.pokemonurpg.configuration.v1.members.MemberService;
+import com.pokemonurpg.login.service.*;
+import com.pokemonurpg.entities.Member;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

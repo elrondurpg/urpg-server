@@ -1,6 +1,6 @@
 package com.pokemonurpg.contest.input;
 
-import com.pokemonurpg.contest.input.ContestRankInputDto;
+import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,10 +1,11 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.core.service.RequestPathVariableService;
-import com.pokemonurpg.gym.models.Gym;
-import com.pokemonurpg.gym.models.GymOwnershipTerm;
-import com.pokemonurpg.gym.service.GymOwnershipTermService;
-import com.pokemonurpg.gym.service.GymService;
+import com.pokemonurpg.lib.validators.BelongsToThisGymValidator;
+import com.pokemonurpg.lib.service.RequestPathVariableService;
+import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gyms.GymService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
