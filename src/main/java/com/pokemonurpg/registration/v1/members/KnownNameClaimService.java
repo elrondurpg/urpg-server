@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 @Service
 public class KnownNameClaimService {
-
+    // TODO REMOVE THIS COMMENT
     @Resource
     private KnownNameClaimRepository knownNameClaimRepository;
 
