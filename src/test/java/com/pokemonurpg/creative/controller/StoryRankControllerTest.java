@@ -1,7 +1,7 @@
 package com.pokemonurpg.creative.controller;
 
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankController;
-import com.pokemonurpg.entities.StoryRank;
+import com.pokemonurpg.entities.v1.StoryRank;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import org.junit.Test;

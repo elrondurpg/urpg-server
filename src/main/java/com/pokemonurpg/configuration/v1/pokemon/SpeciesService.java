@@ -1,13 +1,13 @@
 package com.pokemonurpg.configuration.v1.pokemon;
 
-import com.pokemonurpg.infrastructure.data.SpeciesRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.SpeciesRepository;
 import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

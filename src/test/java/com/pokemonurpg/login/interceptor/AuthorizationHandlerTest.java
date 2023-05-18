@@ -1,13 +1,14 @@
 package com.pokemonurpg.login.interceptor;
 
-import com.pokemonurpg.lib.service.RequestPathVariableService;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.login.annotation.*;
-import com.pokemonurpg.login.service.AuthorizationService;
-import com.pokemonurpg.login.service.SessionService;
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.lib.v1.annotations.*;
+import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.login.v1.AuthorizationHandler;
+import com.pokemonurpg.login.v1.AuthorizationService;
+import com.pokemonurpg.login.v1.SessionService;
+import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import com.pokemonurpg.test.HttpServletRequestImpl;
 import com.pokemonurpg.test.HttpServletResponseImpl;
 import org.junit.Before;

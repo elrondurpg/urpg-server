@@ -1,9 +1,11 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.pokedex.output.MegaEvolutionDto;
-import com.pokemonurpg.pokedex.output.TypeMatchupDto;
-import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.pokedex.v1.MegaEvolutionDto;
+import com.pokemonurpg.pokedex.v1.MegaEvolutionService;
+import com.pokemonurpg.pokedex.v1.TypeMatchupDto;
+import com.pokemonurpg.entities.v1.Species;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.pokedex.v1.TypeMatchupService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

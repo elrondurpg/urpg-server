@@ -1,13 +1,13 @@
 package com.pokemonurpg.configuration.v1.members;
 
 
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.DoesNotConflictWithKnownGymLeader;
-import com.pokemonurpg.lib.validation.annotation.UniqueDiscordId;
-import com.pokemonurpg.lib.validation.annotation.UniqueName;
-import com.pokemonurpg.stats.input.*;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.DoesNotConflictWithKnownGymLeader;
+import com.pokemonurpg.lib.v1.annotations.UniqueDiscordId;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
+import com.pokemonurpg.stats.v1.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;

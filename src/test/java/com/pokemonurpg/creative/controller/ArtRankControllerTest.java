@@ -1,7 +1,7 @@
 package com.pokemonurpg.creative.controller;
 
 import com.pokemonurpg.configuration.v1.artranks.ArtRankController;
-import com.pokemonurpg.entities.ArtRank;
+import com.pokemonurpg.entities.v1.ArtRank;
 import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
 import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import org.junit.Test;

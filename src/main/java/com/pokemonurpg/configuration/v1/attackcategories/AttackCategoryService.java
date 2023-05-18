@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.attackcategories;
 
-import com.pokemonurpg.entities.AttackCategory;
-import com.pokemonurpg.infrastructure.data.AttackCategoryRepository;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.AttackCategory;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackCategoryRepository;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

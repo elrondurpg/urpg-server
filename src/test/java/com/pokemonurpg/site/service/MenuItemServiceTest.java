@@ -1,7 +1,7 @@
 package com.pokemonurpg.site.service;
 
-import com.pokemonurpg.entities.MenuItem;
-import com.pokemonurpg.infrastructure.data.MenuItemRepository;
+import com.pokemonurpg.entities.v1.MenuItem;
+import com.pokemonurpg.infrastructure.v1.data.jpa.MenuItemRepository;
 import com.pokemonurpg.configuration.v1.sitemenuitem.MenuItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

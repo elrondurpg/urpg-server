@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.lib.validators.BelongsToThisChampionSlotValidator;
-import com.pokemonurpg.lib.service.RequestPathVariableService;
-import com.pokemonurpg.entities.Champion;
-import com.pokemonurpg.entities.ChampionOwnershipTerm;
+import com.pokemonurpg.lib.v1.validators.BelongsToThisChampionSlotValidator;
+import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.entities.v1.Champion;
+import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
 import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermService;
 import com.pokemonurpg.configuration.v1.championslots.ChampionService;
 import org.junit.Test;

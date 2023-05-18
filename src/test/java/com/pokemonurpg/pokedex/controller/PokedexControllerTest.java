@@ -1,7 +1,8 @@
 package com.pokemonurpg.pokedex.controller;
 
-import com.pokemonurpg.pokedex.output.PokedexEntryDto;
-import com.pokemonurpg.pokedex.service.PokedexService;
+import com.pokemonurpg.pokedex.v1.PokedexController;
+import com.pokemonurpg.pokedex.v1.PokedexEntryDto;
+import com.pokemonurpg.pokedex.v1.PokedexService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

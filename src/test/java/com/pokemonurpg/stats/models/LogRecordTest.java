@@ -1,6 +1,7 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.LogRecord;
+import com.pokemonurpg.entities.v1.Member;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

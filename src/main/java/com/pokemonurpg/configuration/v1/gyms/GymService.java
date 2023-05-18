@@ -2,12 +2,12 @@ package com.pokemonurpg.configuration.v1.gyms;
 
 import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
-import com.pokemonurpg.infrastructure.data.GymOwnershipTermRepository;
-import com.pokemonurpg.infrastructure.data.GymRepository;
-import com.pokemonurpg.lib.service.IndexedObjectService;
-import com.pokemonurpg.lib.service.NamedObjectService;
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymOwnershipTermRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
+import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

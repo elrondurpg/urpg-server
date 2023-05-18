@@ -1,5 +1,6 @@
 package com.pokemonurpg.lib.service;
 
+import com.pokemonurpg.lib.v1.service.FileService;
 import org.junit.Test;
 
 import java.io.File;

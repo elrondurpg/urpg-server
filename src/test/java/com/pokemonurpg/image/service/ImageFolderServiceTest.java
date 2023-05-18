@@ -2,10 +2,10 @@ package com.pokemonurpg.image.service;
 
 import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
-import com.pokemonurpg.lib.service.FolderService;
+import com.pokemonurpg.lib.v1.service.FolderService;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
-import com.pokemonurpg.entities.ImageFolder;
-import com.pokemonurpg.infrastructure.data.ImageFolderRepository;
+import com.pokemonurpg.entities.v1.ImageFolder;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ImageFolderRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

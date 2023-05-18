@@ -1,11 +1,12 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.pokedex.models.TypeMatchup;
-import com.pokemonurpg.pokedex.output.TypeMatchupDto;
-import com.pokemonurpg.pokedex.repository.TypeMatchupRepository;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.entities.v1.TypeMatchup;
+import com.pokemonurpg.pokedex.v1.TypeMatchupDto;
+import com.pokemonurpg.infrastructure.v1.data.jpa.TypeMatchupRepository;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.Type;
 import com.pokemonurpg.configuration.v1.types.TypeService;
+import com.pokemonurpg.pokedex.v1.TypeMatchupService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

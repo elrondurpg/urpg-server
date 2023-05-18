@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.capturemethods;
 
-import com.pokemonurpg.infrastructure.data.ObtainedRepository;
-import com.pokemonurpg.entities.Obtained;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ObtainedRepository;
+import com.pokemonurpg.entities.v1.Obtained;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.lib.service;
 
-import com.pokemonurpg.login.service.RequestHeaderService;
+import com.pokemonurpg.login.v1.RequestHeaderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

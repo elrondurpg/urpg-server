@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.storyranks;
 
 
-import com.pokemonurpg.entities.StoryRank;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.UniqueName;
+import com.pokemonurpg.entities.v1.StoryRank;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

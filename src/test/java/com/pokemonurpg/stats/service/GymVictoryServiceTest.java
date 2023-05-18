@@ -1,13 +1,14 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymLeague;
-import com.pokemonurpg.infrastructure.data.GymLeagueRepository;
-import com.pokemonurpg.infrastructure.data.GymRepository;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.GymVictoryInputDto;
-import com.pokemonurpg.stats.models.GymVictory;
-import com.pokemonurpg.stats.repository.GymVictoryRepository;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymLeague;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeagueRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.stats.v1.GymVictoryInputDto;
+import com.pokemonurpg.entities.v1.GymVictory;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymVictoryRepository;
+import com.pokemonurpg.stats.v1.GymVictoryService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

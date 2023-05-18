@@ -1,0 +1,16 @@
+package com.pokemonurpg.infrastructure.v1.data.jpa;
+
+import com.pokemonurpg.entities.v1.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface ItemRepository extends JpaRepository<Item, Integer> {
+    @Query("select t.name from Item t")
+    List<String> findAllNames();
+    Item findByDbid(int dbid);
+    Item findByName(String name);
+    List<Item> findByTypeIn(List<String> types);
+    Item findFirstByNameStartingWith(String name);
+}

@@ -1,8 +1,8 @@
 package com.pokemonurpg.contest.service;
 
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
-import com.pokemonurpg.entities.ContestRank;
-import com.pokemonurpg.infrastructure.data.ContestRankRepository;
+import com.pokemonurpg.entities.v1.ContestRank;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestRankRepository;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

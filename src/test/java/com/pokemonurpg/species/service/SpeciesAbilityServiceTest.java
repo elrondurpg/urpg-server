@@ -1,11 +1,11 @@
 package com.pokemonurpg.species.service;
 
-import com.pokemonurpg.entities.Ability;
-import com.pokemonurpg.infrastructure.data.AbilityRepository;
+import com.pokemonurpg.entities.v1.Ability;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AbilityRepository;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesAbilityInputDto;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.SpeciesAbility;
-import com.pokemonurpg.infrastructure.data.SpeciesAbilityRepository;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.SpeciesAbility;
+import com.pokemonurpg.infrastructure.v1.data.jpa.SpeciesAbilityRepository;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesAbilityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

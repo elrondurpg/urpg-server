@@ -2,11 +2,11 @@ package com.pokemonurpg.configuration.v1.elitefourmemberslots;
 
 import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
-import com.pokemonurpg.infrastructure.data.EliteFourOwnershipTermRepository;
-import com.pokemonurpg.infrastructure.data.EliteFourRepository;
-import com.pokemonurpg.lib.service.NamedObjectService;
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourRepository;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

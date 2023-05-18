@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.imagefolders;
 
 import com.pokemonurpg.AppConfig;
-import com.pokemonurpg.entities.ImageFolder;
-import com.pokemonurpg.infrastructure.data.ImageFolderRepository;
-import com.pokemonurpg.lib.service.FolderService;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.ImageFolder;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ImageFolderRepository;
+import com.pokemonurpg.lib.v1.service.FolderService;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

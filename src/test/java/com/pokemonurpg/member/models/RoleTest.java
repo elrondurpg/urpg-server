@@ -1,9 +1,9 @@
 package com.pokemonurpg.member.models;
 
 import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.entities.Role;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.entities.v1.Permission;
+import com.pokemonurpg.entities.v1.Role;
 import org.junit.Test;
 
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
-import com.pokemonurpg.entities.AttackCategory;
+import com.pokemonurpg.entities.v1.AttackCategory;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.featureflags;
 
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.ValueConformsToType;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.ValueConformsToType;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.creative.models;
 
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
-import com.pokemonurpg.entities.StoryRank;
+import com.pokemonurpg.entities.v1.StoryRank;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,9 +1,10 @@
 package com.pokemonurpg.pokedex.util;
 
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.pokedex.output.AlteredFormDto;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.SpeciesAttack;
+import com.pokemonurpg.entities.v1.Attack;
+import com.pokemonurpg.pokedex.v1.AlteredFormDto;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.SpeciesAttack;
+import com.pokemonurpg.pokedex.v1.FormAttackSorter;
 import org.junit.Test;
 
 import java.util.Arrays;

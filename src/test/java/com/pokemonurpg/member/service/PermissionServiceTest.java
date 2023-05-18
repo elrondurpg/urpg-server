@@ -1,8 +1,8 @@
 package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.infrastructure.data.PermissionRepository;
+import com.pokemonurpg.entities.v1.Permission;
+import com.pokemonurpg.infrastructure.v1.data.jpa.PermissionRepository;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -51,8 +51,6 @@ public class AttackInputDtoTest {
         input.setMagicCoat(MAGIC_COAT);
         input.setRseContestAttribute(RSE_ATTR);
         input.setRseContestMoveType(RSE_TYPE);
-        input.setDppContestAttribute(DPP_ATTR);
-        input.setDppContestMoveType(DPP_TYPE);
         input.setOrasContestAttribute(ORAS_ATTR);
         input.setOrasContestMoveType(ORAS_TYPE);
         input.setTm(TM_NAME);
@@ -73,8 +71,6 @@ public class AttackInputDtoTest {
         assertEquals(MAGIC_COAT, input.getMagicCoat());
         assertEquals(RSE_ATTR, input.getRseContestAttribute());
         assertEquals(RSE_TYPE, input.getRseContestMoveType());
-        assertEquals(DPP_ATTR, input.getDppContestAttribute());
-        assertEquals(DPP_TYPE, input.getDppContestMoveType());
         assertEquals(ORAS_ATTR, input.getOrasContestAttribute());
         assertEquals(ORAS_TYPE, input.getOrasContestMoveType());
         assertEquals(TM_NAME, input.getTm());

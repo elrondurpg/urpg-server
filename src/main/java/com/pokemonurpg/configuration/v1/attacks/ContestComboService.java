@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.attacks;
 
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.infrastructure.data.AttackRepository;
-import com.pokemonurpg.infrastructure.data.ContestComboRepository;
-import com.pokemonurpg.infrastructure.data.ContestTypeRepository;
-import com.pokemonurpg.entities.ContestCombo;
-import com.pokemonurpg.entities.ContestType;
+import com.pokemonurpg.entities.v1.Attack;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestComboRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestTypeRepository;
+import com.pokemonurpg.entities.v1.ContestCombo;
+import com.pokemonurpg.entities.v1.ContestType;
 
 import org.springframework.stereotype.Service;
 

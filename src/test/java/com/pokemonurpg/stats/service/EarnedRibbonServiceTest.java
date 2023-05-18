@@ -1,13 +1,14 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.ContestAttribute;
-import com.pokemonurpg.entities.ContestRank;
+import com.pokemonurpg.entities.v1.ContestAttribute;
+import com.pokemonurpg.entities.v1.ContestRank;
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
-import com.pokemonurpg.stats.input.EarnedRibbonInputDto;
-import com.pokemonurpg.stats.models.EarnedRibbon;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.repository.EarnedRibbonRepository;
+import com.pokemonurpg.stats.v1.EarnedRibbonInputDto;
+import com.pokemonurpg.entities.v1.EarnedRibbon;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EarnedRibbonRepository;
+import com.pokemonurpg.stats.v1.EarnedRibbonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.login.service;
 
+import com.pokemonurpg.login.v1.MessageDigestService;
 import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;

@@ -1,12 +1,12 @@
 package com.pokemonurpg.configuration.v1.gyms;
 
 
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.lib.annotations.AllPokemonBelongToOwner;
-import com.pokemonurpg.lib.annotations.BelongsToThisGym;
-import com.pokemonurpg.entities.Badge;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.lib.v1.annotations.AllPokemonBelongToOwner;
+import com.pokemonurpg.lib.v1.annotations.BelongsToThisGym;
+import com.pokemonurpg.entities.v1.Badge;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

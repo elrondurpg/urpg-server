@@ -1,7 +1,7 @@
 package com.pokemonurpg.member.controller;
 
 import com.pokemonurpg.configuration.v1.permissions.PermissionController;
-import com.pokemonurpg.entities.Permission;
+import com.pokemonurpg.entities.v1.Permission;
 import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import org.junit.Test;

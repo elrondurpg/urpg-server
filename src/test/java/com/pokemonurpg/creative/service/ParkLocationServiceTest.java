@@ -1,8 +1,8 @@
 package com.pokemonurpg.creative.service;
 
 import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
-import com.pokemonurpg.entities.ParkLocation;
-import com.pokemonurpg.infrastructure.data.ParkLocationRepository;
+import com.pokemonurpg.entities.v1.ParkLocation;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ParkLocationRepository;
 import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

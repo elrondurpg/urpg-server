@@ -1,9 +1,10 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.ChampionVictoryInputDto;
-import com.pokemonurpg.stats.models.ChampionVictory;
-import com.pokemonurpg.stats.repository.ChampionVictoryRepository;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.stats.v1.ChampionVictoryInputDto;
+import com.pokemonurpg.entities.v1.ChampionVictory;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ChampionVictoryRepository;
+import com.pokemonurpg.stats.v1.ChampionVictoryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

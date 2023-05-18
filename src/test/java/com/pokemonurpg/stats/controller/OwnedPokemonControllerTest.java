@@ -1,8 +1,9 @@
 package com.pokemonurpg.stats.controller;
 
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
+import com.pokemonurpg.stats.v1.OwnedPokemonController;
+import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

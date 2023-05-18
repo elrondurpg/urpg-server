@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Member;
 
 import java.util.Date;
 

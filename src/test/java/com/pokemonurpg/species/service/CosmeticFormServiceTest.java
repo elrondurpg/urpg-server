@@ -1,8 +1,8 @@
 package com.pokemonurpg.species.service;
 
 import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
-import com.pokemonurpg.entities.CosmeticForm;
-import com.pokemonurpg.infrastructure.data.CosmeticFormRepository;
+import com.pokemonurpg.entities.v1.CosmeticForm;
+import com.pokemonurpg.infrastructure.v1.data.jpa.CosmeticFormRepository;
 import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.species.controller;
 
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesController;
-import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.v1.Species;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesInputDto;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import org.junit.Test;

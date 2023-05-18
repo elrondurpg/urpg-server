@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.featureflags;
 
-import com.pokemonurpg.infrastructure.data.FlagRepository;
-import com.pokemonurpg.lib.service.NamedObjectService;
-import com.pokemonurpg.entities.Flag;
+import com.pokemonurpg.infrastructure.v1.data.jpa.FlagRepository;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.Flag;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -8,13 +8,11 @@ import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
-import com.pokemonurpg.entities.*;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
-import com.pokemonurpg.configuration.v1.contestmovetypes.DPPContestMoveTypeService;
 import com.pokemonurpg.configuration.v1.contestmovetypes.ORASContestMoveTypeService;
 import com.pokemonurpg.configuration.v1.contestmovetypes.RSEContestMoveTypeService;
 import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
@@ -24,22 +22,17 @@ import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
 import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
 import com.pokemonurpg.configuration.v1.sections.SectionService;
-import com.pokemonurpg.entities.ImageFolder;
+import com.pokemonurpg.entities.v1.*;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
-import com.pokemonurpg.entities.Item;
 import com.pokemonurpg.configuration.v1.items.ItemService;
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.entities.MenuItem;
 import com.pokemonurpg.configuration.v1.sitemenuitem.MenuItemService;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.Type;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.entities.Role;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.service.NamedObjectServiceFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -77,9 +70,6 @@ public class NamedObjectServiceFactoryTest {
 
     @Mock
     private ContestAttributeService contestAttributeService;
-
-    @Mock
-    private DPPContestMoveTypeService dppContestMoveTypeService;
 
     @Mock
     private EliteFourService eliteFourService;
@@ -193,12 +183,6 @@ public class NamedObjectServiceFactoryTest {
     public void returnsContestAttributeService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(ContestAttribute.class);
         assertEquals(contestAttributeService, service);
-    }
-
-    @Test
-    public void returnsDppContestMoveTypeService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(DPPContestMoveType.class);
-        assertEquals(dppContestMoveTypeService, service);
     }
 
     @Test

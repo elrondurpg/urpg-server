@@ -1,13 +1,13 @@
 package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.login.dto.SessionDto;
-import com.pokemonurpg.login.models.OAuthAccessTokenResponse;
-import com.pokemonurpg.login.service.AesEncryptionService;
-import com.pokemonurpg.login.service.OAuthService;
-import com.pokemonurpg.login.service.RefreshService;
-import com.pokemonurpg.login.service.SessionService;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.login.v1.SessionDto;
+import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
+import com.pokemonurpg.login.v1.AesEncryptionService;
+import com.pokemonurpg.login.v1.OAuthService;
+import com.pokemonurpg.login.v1.RefreshService;
+import com.pokemonurpg.login.v1.SessionService;
+import com.pokemonurpg.entities.v1.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Before;
 import org.junit.Test;

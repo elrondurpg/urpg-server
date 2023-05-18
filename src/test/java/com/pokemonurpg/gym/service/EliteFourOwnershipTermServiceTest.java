@@ -1,14 +1,14 @@
 package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
-import com.pokemonurpg.infrastructure.data.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermService;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
 import com.pokemonurpg.configuration.v1.items.ItemService;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,7 @@
 package com.pokemonurpg.pokedex.output;
 
-import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.pokedex.v1.TypeMatchupDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

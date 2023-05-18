@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.models;
 
+import com.pokemonurpg.entities.v1.OwnedItemKey;
 import org.junit.Test;
 
 import java.util.Objects;

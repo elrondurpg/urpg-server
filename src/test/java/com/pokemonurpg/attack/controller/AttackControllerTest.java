@@ -1,7 +1,7 @@
 package com.pokemonurpg.attack.controller;
 
 import com.pokemonurpg.configuration.v1.attacks.AttackController;
-import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.entities.v1.Attack;
 import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import org.junit.Test;

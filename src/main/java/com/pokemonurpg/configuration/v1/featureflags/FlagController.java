@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.featureflags;
 
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.Flag;
-import com.pokemonurpg.login.annotation.AllowAuthorized;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.Flag;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,10 +1,11 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.entities.v1.Ability;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
-import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.stats.v1.OwnedHiddenAbilityInputDto;
+import com.pokemonurpg.stats.v1.OwnedHiddenAbilityService;
+import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

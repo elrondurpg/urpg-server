@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.contestranks;
 
-import com.pokemonurpg.infrastructure.data.ContestRankRepository;
-import com.pokemonurpg.entities.ContestRank;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestRankRepository;
+import com.pokemonurpg.entities.v1.ContestRank;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

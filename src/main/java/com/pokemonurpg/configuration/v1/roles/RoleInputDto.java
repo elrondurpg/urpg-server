@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.roles;
 
 
-import com.pokemonurpg.entities.Role;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.UniqueName;
+import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

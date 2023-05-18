@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.parkranks;
 
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.ParkRank;
-import com.pokemonurpg.login.annotation.AllowAuthorized;
-import com.pokemonurpg.login.annotation.AllowAll;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.ParkRank;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
+import com.pokemonurpg.lib.v1.annotations.AllowAll;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

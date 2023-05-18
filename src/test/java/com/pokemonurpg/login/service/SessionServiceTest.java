@@ -1,8 +1,11 @@
 package com.pokemonurpg.login.service;
 
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.entities.Role;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Permission;
+import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.login.v1.AuthenticationService;
+import com.pokemonurpg.login.v1.AuthorizationCredentialsService;
+import com.pokemonurpg.login.v1.SessionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

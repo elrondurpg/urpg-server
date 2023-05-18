@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.entities.KnownEliteFourMember;
-import com.pokemonurpg.infrastructure.data.KnownEliteFourMemberRepository;
+import com.pokemonurpg.entities.v1.KnownEliteFourMember;
+import com.pokemonurpg.infrastructure.v1.data.jpa.KnownEliteFourMemberRepository;
 import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

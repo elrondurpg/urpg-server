@@ -2,7 +2,7 @@ package com.pokemonurpg.gym.controller;
 
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourController;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
-import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFour;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

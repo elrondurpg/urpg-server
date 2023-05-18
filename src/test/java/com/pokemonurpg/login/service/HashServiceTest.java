@@ -1,5 +1,7 @@
 package com.pokemonurpg.login.service;
 
+import com.pokemonurpg.login.v1.HashService;
+import com.pokemonurpg.login.v1.MessageDigestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

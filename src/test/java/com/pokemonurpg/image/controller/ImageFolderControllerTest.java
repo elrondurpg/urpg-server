@@ -2,7 +2,7 @@ package com.pokemonurpg.image.controller;
 
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderController;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
-import com.pokemonurpg.entities.ImageFolder;
+import com.pokemonurpg.entities.v1.ImageFolder;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -2,10 +2,10 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.configuration.v1.championslots.ChampionInputDto;
 import com.pokemonurpg.configuration.v1.championslots.ChampionPokemonInputDto;
-import com.pokemonurpg.entities.Champion;
+import com.pokemonurpg.entities.v1.Champion;
 import com.pokemonurpg.configuration.v1.championslots.ChampionPokemonService;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

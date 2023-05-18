@@ -1,9 +1,10 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.EliteFourVictoryInputDto;
-import com.pokemonurpg.stats.models.EliteFourVictory;
-import com.pokemonurpg.stats.repository.EliteFourVictoryRepository;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.stats.v1.EliteFourVictoryInputDto;
+import com.pokemonurpg.entities.v1.EliteFourVictory;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourVictoryRepository;
+import com.pokemonurpg.stats.v1.EliteFourVictoryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

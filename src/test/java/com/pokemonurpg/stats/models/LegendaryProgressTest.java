@@ -1,8 +1,9 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Section;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.LegendaryProgressInputDto;
+import com.pokemonurpg.entities.v1.LegendaryProgress;
+import com.pokemonurpg.entities.v1.Section;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.stats.v1.LegendaryProgressInputDto;
 import org.junit.Test;
 
 import java.util.Date;

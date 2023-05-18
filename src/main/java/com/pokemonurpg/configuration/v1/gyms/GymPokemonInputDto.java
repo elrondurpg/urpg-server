@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gyms;
 
-import com.pokemonurpg.lib.input.ChildInputDto;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.lib.v1.request.ChildInputDto;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 
 import javax.validation.constraints.NotNull;
 

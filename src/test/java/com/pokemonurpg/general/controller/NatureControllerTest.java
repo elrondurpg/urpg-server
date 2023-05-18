@@ -1,7 +1,7 @@
 package com.pokemonurpg.general.controller;
 
 import com.pokemonurpg.configuration.v1.natures.NatureController;
-import com.pokemonurpg.entities.Nature;
+import com.pokemonurpg.entities.v1.Nature;
 import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
 import org.junit.Test;

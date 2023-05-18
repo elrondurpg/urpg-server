@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.items;
 
-import com.pokemonurpg.infrastructure.data.ItemRepository;
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 
 import org.springframework.stereotype.Service;
 

@@ -1,16 +1,15 @@
 package com.pokemonurpg.configuration.v1.attacks;
 
-import com.pokemonurpg.infrastructure.data.ItemRepository;
-import com.pokemonurpg.infrastructure.data.TypeRepository;
-import com.pokemonurpg.infrastructure.data.AttackCategoryRepository;
-import com.pokemonurpg.infrastructure.data.AttackRepository;
-import com.pokemonurpg.infrastructure.data.AttackTargetTypeRepository;
-import com.pokemonurpg.infrastructure.data.ContestAttributeRepository;
-import com.pokemonurpg.infrastructure.data.DPPContestMoveTypeRepository;
-import com.pokemonurpg.infrastructure.data.ORASContestMoveTypeRepository;
-import com.pokemonurpg.infrastructure.data.RSEContestMoveTypeRepository;
-import com.pokemonurpg.lib.service.NamedObjectService;
-import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.TypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackCategoryRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackTargetTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ORASContestMoveTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.RSEContestMoveTypeRepository;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.Attack;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -39,9 +38,6 @@ public class AttackService implements NamedObjectService<Attack> {
 
     @Resource
     private ORASContestMoveTypeRepository orasContestMoveTypeRepository;
-
-    @Resource
-    private DPPContestMoveTypeRepository dppContestMoveTypeRepository;
 
     @Resource
     private ItemRepository itemRepository;
@@ -92,8 +88,6 @@ public class AttackService implements NamedObjectService<Attack> {
         attack.setTarget(attackTargetTypeRepository.findByName(input.getTarget()));
         attack.setRseContestMoveType(rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()));
         attack.setRseContestAttribute(contestAttributeRepository.findByName(input.getRseContestAttribute()));
-        attack.setDppContestMoveType(dppContestMoveTypeRepository.findByName(input.getDppContestMoveType()));
-        attack.setDppContestAttribute(contestAttributeRepository.findByName(input.getDppContestAttribute()));
         attack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
         attack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
         attack.setTm(itemRepository.findByName(input.getTm()));

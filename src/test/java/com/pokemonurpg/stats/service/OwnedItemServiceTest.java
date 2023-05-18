@@ -1,11 +1,12 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.infrastructure.data.ItemRepository;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
-import com.pokemonurpg.stats.models.OwnedItem;
-import com.pokemonurpg.stats.repository.OwnedItemRepository;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.stats.v1.OwnedItemInputDto;
+import com.pokemonurpg.entities.v1.OwnedItem;
+import com.pokemonurpg.infrastructure.v1.data.jpa.OwnedItemRepository;
+import com.pokemonurpg.stats.v1.OwnedItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

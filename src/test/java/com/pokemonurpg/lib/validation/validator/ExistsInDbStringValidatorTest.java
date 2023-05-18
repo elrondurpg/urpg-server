@@ -1,9 +1,10 @@
 package com.pokemonurpg.lib.validation.validator;
 
-import com.pokemonurpg.lib.service.NamedObjectServiceFactory;
-import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.lib.v1.service.NamedObjectServiceFactory;
+import com.pokemonurpg.entities.v1.Ability;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.lib.v1.validators.ExistsInDbStringValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

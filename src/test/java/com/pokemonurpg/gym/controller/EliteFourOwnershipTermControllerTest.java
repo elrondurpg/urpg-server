@@ -2,7 +2,7 @@ package com.pokemonurpg.gym.controller;
 
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermController;
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

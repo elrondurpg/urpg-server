@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.championrecords;
 
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.ChampionOwnershipTerm;
-import com.pokemonurpg.login.annotation.AllowAll;
-import com.pokemonurpg.login.annotation.AllowAuthorized;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
+import com.pokemonurpg.lib.v1.annotations.AllowAll;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.pokemonurpg.lib.strings.ErrorStrings.ERROR_ON_DELETE;
+import static com.pokemonurpg.lib.v1.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
 @RequestMapping("/championOwnershipTerm")

@@ -1,5 +1,6 @@
 package com.pokemonurpg.pokedex.models;
 
+import com.pokemonurpg.entities.v1.TypeMatchupKey;
 import org.junit.Test;
 
 import java.util.Objects;

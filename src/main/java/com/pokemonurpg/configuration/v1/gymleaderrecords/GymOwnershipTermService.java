@@ -2,13 +2,13 @@ package com.pokemonurpg.configuration.v1.gymleaderrecords;
 
 import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
 import com.pokemonurpg.configuration.v1.items.ItemService;
-import com.pokemonurpg.infrastructure.data.GymOwnershipTermRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
-import com.pokemonurpg.lib.service.IndexedObjectService;
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymOwnershipTerm;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.springframework.stereotype.Service;
 

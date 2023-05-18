@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.controller;
 
 import com.pokemonurpg.configuration.v1.gyms.GymController;
-import com.pokemonurpg.entities.Gym;
+import com.pokemonurpg.entities.v1.Gym;
 import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import org.junit.Test;

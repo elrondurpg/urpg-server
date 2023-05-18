@@ -1,7 +1,7 @@
 package com.pokemonurpg.registration.v1.members;
 
-import com.pokemonurpg.infrastructure.data.KnownNameClaimRepository;
-import com.pokemonurpg.entities.KnownNameClaim;
+import com.pokemonurpg.infrastructure.v1.data.jpa.KnownNameClaimRepository;
+import com.pokemonurpg.entities.v1.KnownNameClaim;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

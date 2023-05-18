@@ -1,8 +1,8 @@
 package com.pokemonurpg.ability.service;
 
-import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.entities.v1.Ability;
 import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
-import com.pokemonurpg.infrastructure.data.AbilityRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AbilityRepository;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,9 +1,9 @@
 package com.pokemonurpg.configuration.v1.elitefourmemberslots;
 
 
-import com.pokemonurpg.lib.annotations.AllPokemonBelongToOwner;
-import com.pokemonurpg.lib.annotations.BelongsToThisEliteFourSlot;
-import com.pokemonurpg.lib.validation.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.AllPokemonBelongToOwner;
+import com.pokemonurpg.lib.v1.annotations.BelongsToThisEliteFourSlot;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.contest.controller;
 
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankController;
-import com.pokemonurpg.entities.ContestRank;
+import com.pokemonurpg.entities.v1.ContestRank;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
 import org.junit.Test;

@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.roles;
 
-import com.pokemonurpg.infrastructure.data.RoleRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.RoleRepository;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.entities.Role;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.Permission;
+import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

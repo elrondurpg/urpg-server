@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.pokemonurpg.infrastructure.data.ItemBundleRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemBundleRepository;
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.lib.service.NamedObjectService;
-import com.pokemonurpg.entities.ItemBundle;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.ItemBundle;
 
 @Service
 public class ItemBundleService implements NamedObjectService<ItemBundle> {

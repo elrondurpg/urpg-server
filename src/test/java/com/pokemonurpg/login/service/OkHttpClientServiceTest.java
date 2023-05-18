@@ -1,5 +1,6 @@
 package com.pokemonurpg.login.service;
 
+import com.pokemonurpg.login.v1.OkHttpClientService;
 import okhttp3.*;
 import org.junit.Before;
 import org.junit.Test;

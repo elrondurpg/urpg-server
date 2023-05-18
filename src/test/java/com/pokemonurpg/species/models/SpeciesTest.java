@@ -1,7 +1,7 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.entities.*;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesInputDto;
+import com.pokemonurpg.entities.v1.*;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -2,10 +2,10 @@ package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonInputDto;
-import com.pokemonurpg.entities.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFour;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonService;
-import com.pokemonurpg.stats.models.OwnedPokemon;
-import com.pokemonurpg.stats.service.OwnedPokemonService;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

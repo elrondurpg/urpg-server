@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
-import com.pokemonurpg.entities.Badge;
+import com.pokemonurpg.entities.v1.Badge;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

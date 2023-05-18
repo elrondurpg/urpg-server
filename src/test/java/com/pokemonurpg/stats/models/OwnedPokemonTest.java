@@ -1,13 +1,7 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Ability;
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.entities.Nature;
-import com.pokemonurpg.entities.Obtained;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
+import com.pokemonurpg.entities.v1.*;
+import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.entities.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.KnownEliteFourMember;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

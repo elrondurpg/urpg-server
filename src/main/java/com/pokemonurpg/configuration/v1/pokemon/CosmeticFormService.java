@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon;
 
-import com.pokemonurpg.infrastructure.data.CosmeticFormRepository;
-import com.pokemonurpg.entities.CosmeticForm;
+import com.pokemonurpg.infrastructure.v1.data.jpa.CosmeticFormRepository;
+import com.pokemonurpg.entities.v1.CosmeticForm;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

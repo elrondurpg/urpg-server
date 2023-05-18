@@ -1,7 +1,7 @@
 package com.pokemonurpg.general.models;
 
 import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
-import com.pokemonurpg.entities.Nature;
+import com.pokemonurpg.entities.v1.Nature;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

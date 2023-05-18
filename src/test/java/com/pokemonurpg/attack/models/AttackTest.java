@@ -1,10 +1,7 @@
 package com.pokemonurpg.attack.models;
 
 import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
-import com.pokemonurpg.entities.*;
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.entities.SpeciesAttack;
-import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.entities.v1.*;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -33,10 +30,6 @@ public class AttackTest {
     private final static ContestAttribute RSE_CONTEST_ATTRIBUTE = new ContestAttribute();
     private final static ORASContestMoveType ORAS_CONTEST_MOVE_TYPE = new ORASContestMoveType();
     private final static ContestAttribute ORAS_CONTEST_ATTRIBUTE = new ContestAttribute();
-    private final static DPPContestMoveType DPP_CONTEST_MOVE_TYPE = new DPPContestMoveType();
-    private final static ContestAttribute DPP_CONTEST_ATTRIBUTE = new ContestAttribute();
-    private final static AdvContestMoveType ADV_CONTEST_MOVE_TYPE = new AdvContestMoveType();
-    private final static ContestAttribute ADV_CONTEST_ATTRIBUTE = new ContestAttribute();
     private final static Integer TM_HM_DBID = 32432;
     private final static Set<SpeciesAttack> POKEMON = new HashSet<>();
     private final static Item TM = mock(Item.class);
@@ -94,23 +87,11 @@ public class AttackTest {
         attack.setRseContestMoveType(RSE_CONTEST_MOVE_TYPE);
         assertEquals(RSE_CONTEST_MOVE_TYPE, attack.getRseContestMoveType());
 
-        attack.setDppContestAttribute(DPP_CONTEST_ATTRIBUTE);
-        assertEquals(DPP_CONTEST_ATTRIBUTE, attack.getDppContestAttribute());
-
-        attack.setDppContestMoveType(DPP_CONTEST_MOVE_TYPE);
-        assertEquals(DPP_CONTEST_MOVE_TYPE, attack.getDppContestMoveType());
-
         attack.setOrasContestAttribute(ORAS_CONTEST_ATTRIBUTE);
         assertEquals(ORAS_CONTEST_ATTRIBUTE, attack.getOrasContestAttribute());
 
         attack.setOrasContestMoveType(ORAS_CONTEST_MOVE_TYPE);
         assertEquals(ORAS_CONTEST_MOVE_TYPE, attack.getOrasContestMoveType());
-
-        attack.setAdvContestAttribute(ADV_CONTEST_ATTRIBUTE);
-        assertEquals(ADV_CONTEST_ATTRIBUTE, attack.getAdvContestAttribute());
-
-        attack.setAdvContestMoveType(ADV_CONTEST_MOVE_TYPE);
-        assertEquals(ADV_CONTEST_MOVE_TYPE, attack.getAdvContestMoveType());
 
         attack.setPokemon(POKEMON);
         assertEquals(POKEMON, attack.getPokemon());

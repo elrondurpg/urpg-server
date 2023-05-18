@@ -1,5 +1,7 @@
 package com.pokemonurpg.lib.service;
 
+import com.pokemonurpg.lib.v1.service.FileService;
+import com.pokemonurpg.lib.v1.service.FolderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

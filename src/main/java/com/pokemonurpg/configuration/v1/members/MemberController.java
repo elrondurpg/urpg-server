@@ -2,12 +2,12 @@ package com.pokemonurpg.configuration.v1.members;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.login.annotation.AllowAll;
-import com.pokemonurpg.login.annotation.AllowAuthorized;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.login.annotation.AllowThisMember;
-import com.pokemonurpg.login.service.AuthorizationService;
+import com.pokemonurpg.lib.v1.annotations.AllowAll;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.lib.v1.annotations.AllowThisMember;
+import com.pokemonurpg.login.v1.AuthorizationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -20,10 +20,10 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.pokemonurpg.lib.strings.ErrorStrings.ERROR_ON_CLAIM;
-import static com.pokemonurpg.lib.strings.ErrorStrings.ERROR_ON_DELETE;
-import static com.pokemonurpg.lib.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
-import static com.pokemonurpg.lib.strings.PermissionNames.WRITE_ROLE_PERMISSION;
+import static com.pokemonurpg.lib.v1.strings.ErrorStrings.ERROR_ON_CLAIM;
+import static com.pokemonurpg.lib.v1.strings.ErrorStrings.ERROR_ON_DELETE;
+import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
+import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_ROLE_PERMISSION;
 
 @RestController
 @RequestMapping("/member")

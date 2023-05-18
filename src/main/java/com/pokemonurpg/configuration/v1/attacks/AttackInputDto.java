@@ -1,18 +1,17 @@
 package com.pokemonurpg.configuration.v1.attacks;
 
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.entities.AttackCategory;
-import com.pokemonurpg.entities.AttackTargetType;
-import com.pokemonurpg.entities.ContestAttribute;
-import com.pokemonurpg.entities.DPPContestMoveType;
-import com.pokemonurpg.entities.ORASContestMoveType;
-import com.pokemonurpg.entities.RSEContestMoveType;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
-import com.pokemonurpg.lib.validation.annotation.UniqueName;
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.entities.Type;
+import com.pokemonurpg.entities.v1.Attack;
+import com.pokemonurpg.entities.v1.AttackCategory;
+import com.pokemonurpg.entities.v1.AttackTargetType;
+import com.pokemonurpg.entities.v1.ContestAttribute;
+import com.pokemonurpg.entities.v1.ORASContestMoveType;
+import com.pokemonurpg.entities.v1.RSEContestMoveType;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.entities.v1.Type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -78,12 +77,6 @@ public class AttackInputDto implements UniquelyNamedInputDto {
 
     @ExistsInDb(type = RSEContestMoveType.class)
     private String rseContestMoveType;
-
-    @ExistsInDb(type = ContestAttribute.class)
-    private String dppContestAttribute;
-
-    @ExistsInDb(type = DPPContestMoveType.class)
-    private String dppContestMoveType;
 
     @ExistsInDb(type = ContestAttribute.class)
     private String orasContestAttribute;
@@ -214,22 +207,6 @@ public class AttackInputDto implements UniquelyNamedInputDto {
 
     public void setRseContestMoveType(String rseContestMoveType) {
         this.rseContestMoveType = rseContestMoveType;
-    }
-
-    public String getDppContestAttribute() {
-        return dppContestAttribute;
-    }
-
-    public void setDppContestAttribute(String dppContestAttribute) {
-        this.dppContestAttribute = dppContestAttribute;
-    }
-
-    public String getDppContestMoveType() {
-        return dppContestMoveType;
-    }
-
-    public void setDppContestMoveType(String dppContestMoveType) {
-        this.dppContestMoveType = dppContestMoveType;
     }
 
     public String getOrasContestAttribute() {

@@ -2,7 +2,7 @@ package com.pokemonurpg.contest.controller;
 
 import com.pokemonurpg.configuration.v1.contestmovetypes.ORASContestMoveTypeController;
 import com.pokemonurpg.configuration.v1.contestmovetypes.ContestMoveTypeInputDto;
-import com.pokemonurpg.entities.ORASContestMoveType;
+import com.pokemonurpg.entities.v1.ORASContestMoveType;
 import com.pokemonurpg.configuration.v1.contestmovetypes.ORASContestMoveTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

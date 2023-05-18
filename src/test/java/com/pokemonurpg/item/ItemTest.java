@@ -1,7 +1,7 @@
 package com.pokemonurpg.item;
 
 import com.pokemonurpg.configuration.v1.items.ItemInputDto;
-import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.v1.Item;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

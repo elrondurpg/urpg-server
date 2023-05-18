@@ -1,5 +1,6 @@
 package com.pokemonurpg.login.models;
 
+import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

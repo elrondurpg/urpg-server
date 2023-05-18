@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Section;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.models.LegendaryProgress;
+import com.pokemonurpg.entities.v1.Section;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.entities.v1.LegendaryProgress;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 

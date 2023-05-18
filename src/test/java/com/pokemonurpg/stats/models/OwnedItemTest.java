@@ -1,8 +1,9 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.input.OwnedItemInputDto;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.entities.v1.OwnedItem;
+import com.pokemonurpg.stats.v1.OwnedItemInputDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

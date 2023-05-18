@@ -1,7 +1,7 @@
 package com.pokemonurpg.general.models;
 
 import com.pokemonurpg.configuration.v1.capturemethods.ObtainedInputDto;
-import com.pokemonurpg.entities.Obtained;
+import com.pokemonurpg.entities.v1.Obtained;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

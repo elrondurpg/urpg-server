@@ -1,8 +1,8 @@
 package com.pokemonurpg.gym.service;
 
 import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
-import com.pokemonurpg.entities.Badge;
-import com.pokemonurpg.infrastructure.data.BadgeRepository;
+import com.pokemonurpg.entities.v1.Badge;
+import com.pokemonurpg.infrastructure.v1.data.jpa.BadgeRepository;
 import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

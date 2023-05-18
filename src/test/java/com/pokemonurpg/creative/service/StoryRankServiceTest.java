@@ -1,8 +1,8 @@
 package com.pokemonurpg.creative.service;
 
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
-import com.pokemonurpg.entities.StoryRank;
-import com.pokemonurpg.infrastructure.data.StoryRankRepository;
+import com.pokemonurpg.entities.v1.StoryRank;
+import com.pokemonurpg.infrastructure.v1.data.jpa.StoryRankRepository;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

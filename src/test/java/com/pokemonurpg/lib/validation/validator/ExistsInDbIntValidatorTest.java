@@ -1,9 +1,10 @@
 package com.pokemonurpg.lib.validation.validator;
 
-import com.pokemonurpg.lib.service.IndexedObjectServiceFactory;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
-import com.pokemonurpg.stats.models.EarnedRibbon;
-import com.pokemonurpg.stats.service.EarnedRibbonService;
+import com.pokemonurpg.lib.v1.service.IndexedObjectServiceFactory;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.entities.v1.EarnedRibbon;
+import com.pokemonurpg.lib.v1.validators.ExistsInDbIntValidator;
+import com.pokemonurpg.stats.v1.EarnedRibbonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

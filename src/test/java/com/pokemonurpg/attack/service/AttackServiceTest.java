@@ -1,27 +1,25 @@
 package com.pokemonurpg.attack.service;
 
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.entities.AttackCategory;
+import com.pokemonurpg.entities.v1.Attack;
+import com.pokemonurpg.entities.v1.AttackCategory;
 import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
-import com.pokemonurpg.entities.AttackTargetType;
-import com.pokemonurpg.infrastructure.data.AttackCategoryRepository;
-import com.pokemonurpg.infrastructure.data.AttackRepository;
-import com.pokemonurpg.infrastructure.data.AttackTargetTypeRepository;
+import com.pokemonurpg.entities.v1.AttackTargetType;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackCategoryRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.AttackTargetTypeRepository;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
-import com.pokemonurpg.entities.ContestAttribute;
-import com.pokemonurpg.entities.DPPContestMoveType;
-import com.pokemonurpg.entities.ORASContestMoveType;
-import com.pokemonurpg.entities.RSEContestMoveType;
-import com.pokemonurpg.infrastructure.data.ContestAttributeRepository;
-import com.pokemonurpg.infrastructure.data.DPPContestMoveTypeRepository;
-import com.pokemonurpg.infrastructure.data.ORASContestMoveTypeRepository;
-import com.pokemonurpg.infrastructure.data.RSEContestMoveTypeRepository;
+import com.pokemonurpg.entities.v1.ContestAttribute;
+import com.pokemonurpg.entities.v1.ORASContestMoveType;
+import com.pokemonurpg.entities.v1.RSEContestMoveType;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ORASContestMoveTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.RSEContestMoveTypeRepository;
 import com.pokemonurpg.configuration.v1.attacks.ContestComboService;
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.infrastructure.data.ItemRepository;
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.infrastructure.data.TypeRepository;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.infrastructure.v1.data.jpa.TypeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -51,13 +49,9 @@ public class AttackServiceTest {
     private final static ContestAttribute RSE_CONTEST_ATTRIBUTE = new ContestAttribute();
     private final static ORASContestMoveType ORAS_CONTEST_MOVE_TYPE = new ORASContestMoveType();
     private final static ContestAttribute ORAS_CONTEST_ATTRIBUTE = new ContestAttribute();
-    private final static DPPContestMoveType DPP_CONTEST_MOVE_TYPE = new DPPContestMoveType();
-    private final static ContestAttribute DPP_CONTEST_ATTRIBUTE = new ContestAttribute();
     private static final String TARGET_NAME = "TARGET";
     private static final String RSE_CONTEST_MOVE_TYPE_NAME = "RSE_CONTEST_MOVE_TYPE";
     private static final String RSE_CONTEST_ATTRIBUTE_NAME = "RSE_CONTEST_ATTRIBUTE";
-    private static final String DPP_CONTEST_MOVE_TYPE_NAME = "DPP_CONTEST_MOVE_TYPE";
-    private static final String DPP_CONTEST_ATTRIBUTE_NAME = "DPP_CONTEST_ATTRIBUTE";
     private static final String ORAS_CONTEST_MOVE_TYPE_NAME = "ORAS_CONTEST_MOVE_TYPE";
     private static final String ORAS_CONTEST_ATTRIBUTE_NAME = "ORAS_CONTEST_ATTRIBUTE";
     private static final String TM_NAME = "TM_NAME";
@@ -87,9 +81,6 @@ public class AttackServiceTest {
 
     @Mock
     private ORASContestMoveTypeRepository orasContestMoveTypeRepository;
-
-    @Mock
-    private DPPContestMoveTypeRepository dppContestMoveTypeRepository;
 
     @Mock
     private ItemRepository itemRepository;
@@ -138,8 +129,6 @@ public class AttackServiceTest {
         assertEquals(TARGET, attack.getTarget());
         assertEquals(RSE_CONTEST_ATTRIBUTE, attack.getRseContestAttribute());
         assertEquals(RSE_CONTEST_MOVE_TYPE, attack.getRseContestMoveType());
-        assertEquals(DPP_CONTEST_ATTRIBUTE, attack.getDppContestAttribute());
-        assertEquals(DPP_CONTEST_MOVE_TYPE, attack.getDppContestMoveType());
         assertEquals(ORAS_CONTEST_ATTRIBUTE, attack.getOrasContestAttribute());
         assertEquals(ORAS_CONTEST_MOVE_TYPE, attack.getOrasContestMoveType());
         verify(contestComboService, times(1)).update(attack, CONTEST_COMBO_INPUT_DTO);
@@ -157,8 +146,6 @@ public class AttackServiceTest {
         assertEquals(TARGET, attack.getTarget());
         assertEquals(RSE_CONTEST_ATTRIBUTE, attack.getRseContestAttribute());
         assertEquals(RSE_CONTEST_MOVE_TYPE, attack.getRseContestMoveType());
-        assertEquals(DPP_CONTEST_ATTRIBUTE, attack.getDppContestAttribute());
-        assertEquals(DPP_CONTEST_MOVE_TYPE, attack.getDppContestMoveType());
         assertEquals(ORAS_CONTEST_ATTRIBUTE, attack.getOrasContestAttribute());
         assertEquals(ORAS_CONTEST_MOVE_TYPE, attack.getOrasContestMoveType());
         verify(contestComboService, times(1)).update(attack, CONTEST_COMBO_INPUT_DTO);
@@ -181,8 +168,6 @@ public class AttackServiceTest {
         when(input.getTarget()).thenReturn(TARGET_NAME);
         when(input.getRseContestMoveType()).thenReturn(RSE_CONTEST_MOVE_TYPE_NAME);
         when(input.getRseContestAttribute()).thenReturn(RSE_CONTEST_ATTRIBUTE_NAME);
-        when(input.getDppContestMoveType()).thenReturn(DPP_CONTEST_MOVE_TYPE_NAME);
-        when(input.getDppContestAttribute()).thenReturn(DPP_CONTEST_ATTRIBUTE_NAME);
         when(input.getOrasContestMoveType()).thenReturn(ORAS_CONTEST_MOVE_TYPE_NAME);
         when(input.getOrasContestAttribute()).thenReturn(ORAS_CONTEST_ATTRIBUTE_NAME);
         when(input.getTm()).thenReturn(TM_NAME);
@@ -193,8 +178,6 @@ public class AttackServiceTest {
         when(attackTargetTypeRepository.findByName(TARGET_NAME)).thenReturn(TARGET);
         when(rseContestMoveTypeRepository.findByName(RSE_CONTEST_MOVE_TYPE_NAME)).thenReturn(RSE_CONTEST_MOVE_TYPE);
         when(contestAttributeRepository.findByName(RSE_CONTEST_ATTRIBUTE_NAME)).thenReturn(RSE_CONTEST_ATTRIBUTE);
-        when(dppContestMoveTypeRepository.findByName(DPP_CONTEST_MOVE_TYPE_NAME)).thenReturn(DPP_CONTEST_MOVE_TYPE);
-        when(contestAttributeRepository.findByName(DPP_CONTEST_ATTRIBUTE_NAME)).thenReturn(DPP_CONTEST_ATTRIBUTE);
         when(orasContestMoveTypeRepository.findByName(ORAS_CONTEST_MOVE_TYPE_NAME)).thenReturn(ORAS_CONTEST_MOVE_TYPE);
         when(contestAttributeRepository.findByName(ORAS_CONTEST_ATTRIBUTE_NAME)).thenReturn(ORAS_CONTEST_ATTRIBUTE);
         when(itemRepository.findByName(TM_NAME)).thenReturn(TM);

@@ -1,8 +1,9 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Member;
-import com.pokemonurpg.stats.models.LogRecord;
-import com.pokemonurpg.stats.repository.LogRecordRepository;
+import com.pokemonurpg.entities.v1.Member;
+import com.pokemonurpg.entities.v1.LogRecord;
+import com.pokemonurpg.infrastructure.v1.data.jpa.LogRecordRepository;
+import com.pokemonurpg.stats.v1.LogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

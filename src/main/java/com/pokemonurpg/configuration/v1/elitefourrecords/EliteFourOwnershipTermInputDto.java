@@ -1,10 +1,10 @@
 package com.pokemonurpg.configuration.v1.elitefourrecords;
 
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
-import com.pokemonurpg.lib.validation.annotation.UniqueId;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.lib.v1.annotations.UniqueId;
+import com.pokemonurpg.entities.v1.Member;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

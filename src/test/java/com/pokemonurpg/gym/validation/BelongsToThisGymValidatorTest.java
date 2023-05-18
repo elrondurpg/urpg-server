@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.validation;
 
-import com.pokemonurpg.lib.validators.BelongsToThisGymValidator;
-import com.pokemonurpg.lib.service.RequestPathVariableService;
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.lib.v1.validators.BelongsToThisGymValidator;
+import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import org.junit.Test;

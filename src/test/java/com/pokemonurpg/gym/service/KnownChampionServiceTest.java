@@ -1,8 +1,8 @@
 package com.pokemonurpg.gym.service;
 
-import com.pokemonurpg.entities.KnownChampion;
+import com.pokemonurpg.entities.v1.KnownChampion;
 import com.pokemonurpg.configuration.v1.champions.KnownChampionInputDto;
-import com.pokemonurpg.infrastructure.data.KnownChampionRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.KnownChampionRepository;
 import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

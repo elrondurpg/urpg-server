@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.gymleagues;
 
-import com.pokemonurpg.infrastructure.data.GymLeagueRepository;
-import com.pokemonurpg.entities.GymLeague;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeagueRepository;
+import com.pokemonurpg.entities.v1.GymLeague;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

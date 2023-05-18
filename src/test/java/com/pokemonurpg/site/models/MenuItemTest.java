@@ -1,7 +1,7 @@
 package com.pokemonurpg.site.models;
 
 import com.pokemonurpg.configuration.v1.sitemenuitem.MenuItemInputDto;
-import com.pokemonurpg.entities.MenuItem;
+import com.pokemonurpg.entities.v1.MenuItem;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

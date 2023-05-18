@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.images;
 
-import com.pokemonurpg.entities.ImageFolder;
+import com.pokemonurpg.entities.v1.ImageFolder;
 
-import com.pokemonurpg.lib.validation.annotation.ExistsInDb;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

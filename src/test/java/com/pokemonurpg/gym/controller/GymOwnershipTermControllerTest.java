@@ -2,7 +2,7 @@ package com.pokemonurpg.gym.controller;
 
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermController;
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermInputDto;
-import com.pokemonurpg.entities.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

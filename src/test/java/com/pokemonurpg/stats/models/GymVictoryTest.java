@@ -1,8 +1,8 @@
 package com.pokemonurpg.stats.models;
 
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymLeague;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymLeague;
+import com.pokemonurpg.entities.v1.Member;
 
 import java.util.Date;
 

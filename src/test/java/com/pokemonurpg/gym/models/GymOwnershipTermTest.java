@@ -1,11 +1,11 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermInputDto;
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymLeague;
-import com.pokemonurpg.entities.GymOwnershipTerm;
-import com.pokemonurpg.entities.Item;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymLeague;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.entities.v1.Member;
 import org.junit.Test;
 
 import java.util.Date;

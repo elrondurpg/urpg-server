@@ -1,7 +1,7 @@
 package com.pokemonurpg.contest.models;
 
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
-import com.pokemonurpg.entities.ContestAttribute;
+import com.pokemonurpg.entities.v1.ContestAttribute;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

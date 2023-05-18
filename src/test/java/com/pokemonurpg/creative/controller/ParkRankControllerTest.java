@@ -1,7 +1,7 @@
 package com.pokemonurpg.creative.controller;
 
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankController;
-import com.pokemonurpg.entities.ParkRank;
+import com.pokemonurpg.entities.v1.ParkRank;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import org.junit.Test;

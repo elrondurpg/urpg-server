@@ -1,8 +1,7 @@
 package com.pokemonurpg.login.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pokemonurpg.login.models.DiscordUserResponse;
-import com.pokemonurpg.login.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.login.v1.*;
 import okhttp3.Request;
 import org.junit.Before;
 import org.junit.Test;

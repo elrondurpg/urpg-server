@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.parklocations;
 
-import com.pokemonurpg.infrastructure.data.ParkLocationRepository;
-import com.pokemonurpg.entities.ParkLocation;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ParkLocationRepository;
+import com.pokemonurpg.entities.v1.ParkLocation;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

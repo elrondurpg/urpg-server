@@ -2,9 +2,9 @@ package com.pokemonurpg.member.service;
 
 import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
 import com.pokemonurpg.configuration.v1.roles.RolePermissionInputDto;
-import com.pokemonurpg.entities.Permission;
-import com.pokemonurpg.entities.Role;
-import com.pokemonurpg.infrastructure.data.RoleRepository;
+import com.pokemonurpg.entities.v1.Permission;
+import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.infrastructure.v1.data.jpa.RoleRepository;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package com.pokemonurpg.lib.aspect;
 
+import com.pokemonurpg.lib.v1.aspect.DataIntegrityViolationExceptionAspect;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.server.ResponseStatusException;

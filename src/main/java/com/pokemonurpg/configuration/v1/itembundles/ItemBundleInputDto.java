@@ -9,10 +9,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.pokemonurpg.entities.ItemBundle;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.UniqueName;
+import com.pokemonurpg.entities.v1.ItemBundle;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
 
 @UniqueName(type = ItemBundle.class)
 public class ItemBundleInputDto implements UniquelyNamedInputDto {

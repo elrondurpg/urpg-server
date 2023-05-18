@@ -1,13 +1,14 @@
 package com.pokemonurpg.stats.validation;
 
-import com.pokemonurpg.entities.Ability;
-import com.pokemonurpg.entities.Attack;
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.SpeciesAbility;
-import com.pokemonurpg.entities.SpeciesAttack;
-import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
-import com.pokemonurpg.stats.input.OwnedHiddenAbilityInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
+import com.pokemonurpg.entities.v1.Ability;
+import com.pokemonurpg.entities.v1.Attack;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.SpeciesAbility;
+import com.pokemonurpg.entities.v1.SpeciesAttack;
+import com.pokemonurpg.stats.v1.OwnedExtraMoveInputDto;
+import com.pokemonurpg.stats.v1.OwnedHiddenAbilityInputDto;
+import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
+import com.pokemonurpg.stats.v1.OwnedPokemonValidator;
 import org.junit.Test;
 import org.springframework.web.server.ResponseStatusException;
 

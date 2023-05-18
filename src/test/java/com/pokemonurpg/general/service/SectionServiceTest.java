@@ -1,8 +1,8 @@
 package com.pokemonurpg.general.service;
 
 import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
-import com.pokemonurpg.entities.Section;
-import com.pokemonurpg.infrastructure.data.SectionRepository;
+import com.pokemonurpg.entities.v1.Section;
+import com.pokemonurpg.infrastructure.v1.data.jpa.SectionRepository;
 import com.pokemonurpg.configuration.v1.sections.SectionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

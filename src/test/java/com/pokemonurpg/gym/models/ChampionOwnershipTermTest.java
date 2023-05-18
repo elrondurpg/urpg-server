@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermInputDto;
-import com.pokemonurpg.entities.Champion;
-import com.pokemonurpg.entities.ChampionOwnershipTerm;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Champion;
+import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.v1.Member;
 import org.junit.Test;
 
 import java.util.Date;

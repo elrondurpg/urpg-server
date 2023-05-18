@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.sitemenuitem;
 
-import com.pokemonurpg.lib.validation.ObjectCreation;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

@@ -1,8 +1,8 @@
 package com.pokemonurpg.contest.service;
 
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
-import com.pokemonurpg.entities.ContestAttribute;
-import com.pokemonurpg.infrastructure.data.ContestAttributeRepository;
+import com.pokemonurpg.entities.v1.ContestAttribute;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

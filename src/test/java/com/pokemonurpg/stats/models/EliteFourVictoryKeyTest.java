@@ -1,5 +1,6 @@
 package com.pokemonurpg.stats.models;
 
+import com.pokemonurpg.entities.v1.EliteFourVictoryKey;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

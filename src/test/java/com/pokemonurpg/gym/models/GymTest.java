@@ -1,12 +1,12 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
-import com.pokemonurpg.entities.Badge;
-import com.pokemonurpg.entities.Gym;
-import com.pokemonurpg.entities.GymOwnershipTerm;
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.stats.models.GymVictory;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.entities.v1.Badge;
+import com.pokemonurpg.entities.v1.Gym;
+import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.entities.v1.GymVictory;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 
 import java.util.*;

@@ -1,11 +1,11 @@
 package com.pokemonurpg.configuration.v1.roles;
 
 import com.pokemonurpg.View;
-import com.pokemonurpg.login.annotation.AllowAll;
-import com.pokemonurpg.login.annotation.AllowAuthorized;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.Role;
-import com.pokemonurpg.login.service.AuthorizationService;
+import com.pokemonurpg.lib.v1.annotations.AllowAll;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.login.v1.AuthorizationService;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.pokemonurpg.lib.strings.PermissionNames.*;
+import static com.pokemonurpg.lib.v1.strings.PermissionNames.*;
 
 @RestController
 @RequestMapping("/role")

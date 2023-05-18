@@ -1,5 +1,6 @@
 package com.pokemonurpg.lib.service;
 
+import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.context.request.RequestContextHolder;

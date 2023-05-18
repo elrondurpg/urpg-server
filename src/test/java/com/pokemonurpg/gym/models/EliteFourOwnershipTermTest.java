@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.elitefourrecords.EliteFourOwnershipTermInputDto;
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.Member;
 import org.junit.Test;
 
 import java.util.Date;

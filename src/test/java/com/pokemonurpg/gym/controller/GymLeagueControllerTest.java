@@ -1,7 +1,7 @@
 package com.pokemonurpg.gym.controller;
 
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueController;
-import com.pokemonurpg.entities.GymLeague;
+import com.pokemonurpg.entities.v1.GymLeague;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import org.junit.Test;

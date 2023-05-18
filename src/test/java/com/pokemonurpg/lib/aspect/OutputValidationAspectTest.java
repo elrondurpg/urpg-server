@@ -1,5 +1,6 @@
 package com.pokemonurpg.lib.aspect;
 
+import com.pokemonurpg.lib.v1.aspect.OutputValidationAspect;
 import org.junit.Test;
 import org.springframework.web.server.ResponseStatusException;
 

@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.permissions;
 
-import com.pokemonurpg.login.annotation.AllowAuthorized;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.entities.Permission;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.Permission;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +10,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.pokemonurpg.lib.strings.PermissionNames.READ_PERMISSION_PERMISSION;
-import static com.pokemonurpg.lib.strings.PermissionNames.WRITE_PERMISSION_PERMISSION;
+import static com.pokemonurpg.lib.v1.strings.PermissionNames.READ_PERMISSION_PERMISSION;
+import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_PERMISSION_PERMISSION;
 
 @RestController
 @RequestMapping("/permission")

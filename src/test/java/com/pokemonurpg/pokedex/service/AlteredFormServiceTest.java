@@ -1,8 +1,9 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.pokedex.output.AlteredFormDto;
-import com.pokemonurpg.pokedex.util.FormAttackSorter;
-import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.pokedex.v1.AlteredFormDto;
+import com.pokemonurpg.pokedex.v1.AlteredFormService;
+import com.pokemonurpg.pokedex.v1.FormAttackSorter;
+import com.pokemonurpg.entities.v1.Species;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

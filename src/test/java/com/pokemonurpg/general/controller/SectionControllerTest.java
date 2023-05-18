@@ -1,7 +1,7 @@
 package com.pokemonurpg.general.controller;
 
 import com.pokemonurpg.configuration.v1.sections.SectionController;
-import com.pokemonurpg.entities.Section;
+import com.pokemonurpg.entities.v1.Section;
 import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
 import com.pokemonurpg.configuration.v1.sections.SectionService;
 import org.junit.Test;

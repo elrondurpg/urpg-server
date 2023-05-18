@@ -1,9 +1,8 @@
 package com.pokemonurpg.login.service;
 
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.login.dto.SessionDto;
-import com.pokemonurpg.login.models.OAuthAccessTokenResponse;
+import com.pokemonurpg.login.v1.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Before;
 import org.junit.Test;

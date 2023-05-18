@@ -1,7 +1,8 @@
 package com.pokemonurpg.pokedex.service;
 
-import com.pokemonurpg.entities.Species;
+import com.pokemonurpg.entities.v1.Species;
 import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.pokedex.v1.EvolutionFamilyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

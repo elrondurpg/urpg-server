@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourInputDto;
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 
 import java.util.HashSet;

@@ -1,10 +1,11 @@
 package com.pokemonurpg.stats.service;
 
-import com.pokemonurpg.entities.Attack;
+import com.pokemonurpg.entities.v1.Attack;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
-import com.pokemonurpg.stats.input.OwnedExtraMoveInputDto;
-import com.pokemonurpg.stats.input.OwnedPokemonInputDto;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.stats.v1.OwnedExtraMoveInputDto;
+import com.pokemonurpg.stats.v1.OwnedExtraMoveService;
+import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

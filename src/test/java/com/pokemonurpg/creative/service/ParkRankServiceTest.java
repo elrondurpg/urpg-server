@@ -1,8 +1,8 @@
 package com.pokemonurpg.creative.service;
 
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
-import com.pokemonurpg.entities.ParkRank;
-import com.pokemonurpg.infrastructure.data.ParkRankRepository;
+import com.pokemonurpg.entities.v1.ParkRank;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ParkRankRepository;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

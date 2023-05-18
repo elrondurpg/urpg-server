@@ -1,5 +1,6 @@
 package com.pokemonurpg.login.dto;
 
+import com.pokemonurpg.login.v1.SessionDto;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

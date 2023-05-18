@@ -3,11 +3,11 @@ package com.pokemonurpg.configuration.v1.elitefourrecords;
 import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
 import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
 import com.pokemonurpg.configuration.v1.items.ItemService;
-import com.pokemonurpg.infrastructure.data.EliteFourOwnershipTermRepository;
-import com.pokemonurpg.lib.service.IndexedObjectService;
-import com.pokemonurpg.entities.EliteFour;
-import com.pokemonurpg.entities.EliteFourOwnershipTerm;
-import com.pokemonurpg.entities.Member;
+import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourOwnershipTermRepository;
+import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
+import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.springframework.stereotype.Service;
 

@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.pokemonurpg.entities.ItemBundle;
-import com.pokemonurpg.entities.ItemBundleItem;
-import com.pokemonurpg.infrastructure.data.ItemBundleItemRepository;
-import com.pokemonurpg.infrastructure.data.ItemRepository;
+import com.pokemonurpg.entities.v1.ItemBundle;
+import com.pokemonurpg.entities.v1.ItemBundleItem;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemBundleItemRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.v1.Item;
 
 @Service
 public class ItemBundleItemService {

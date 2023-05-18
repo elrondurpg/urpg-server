@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.images;
 
-import com.pokemonurpg.login.annotation.AllowAuthorized;
+import com.pokemonurpg.lib.v1.annotations.AllowAuthorized;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

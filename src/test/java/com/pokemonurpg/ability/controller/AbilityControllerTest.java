@@ -1,7 +1,7 @@
 package com.pokemonurpg.ability.controller;
 
 import com.pokemonurpg.configuration.v1.abilities.AbilityController;
-import com.pokemonurpg.entities.Ability;
+import com.pokemonurpg.entities.v1.Ability;
 import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import org.junit.Test;

@@ -1,9 +1,9 @@
 package com.pokemonurpg.gym.models;
 
 import com.pokemonurpg.configuration.v1.championslots.ChampionInputDto;
-import com.pokemonurpg.entities.Champion;
-import com.pokemonurpg.entities.ChampionOwnershipTerm;
-import com.pokemonurpg.stats.models.OwnedPokemon;
+import com.pokemonurpg.entities.v1.Champion;
+import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 
 import java.util.HashSet;

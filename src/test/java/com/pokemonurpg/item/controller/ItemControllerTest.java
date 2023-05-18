@@ -1,7 +1,7 @@
 package com.pokemonurpg.item.controller;
 
 import com.pokemonurpg.configuration.v1.items.ItemController;
-import com.pokemonurpg.entities.Item;
+import com.pokemonurpg.entities.v1.Item;
 import com.pokemonurpg.configuration.v1.items.ItemInputDto;
 import com.pokemonurpg.configuration.v1.items.ItemService;
 import org.junit.Test;

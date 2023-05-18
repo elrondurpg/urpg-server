@@ -1,8 +1,8 @@
 package com.pokemonurpg.general.service;
 
 import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
-import com.pokemonurpg.entities.Nature;
-import com.pokemonurpg.infrastructure.data.NatureRepository;
+import com.pokemonurpg.entities.v1.Nature;
+import com.pokemonurpg.infrastructure.v1.data.jpa.NatureRepository;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

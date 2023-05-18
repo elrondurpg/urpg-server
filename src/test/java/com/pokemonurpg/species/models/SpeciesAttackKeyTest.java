@@ -1,6 +1,6 @@
 package com.pokemonurpg.species.models;
 
-import com.pokemonurpg.entities.SpeciesAttackKey;
+import com.pokemonurpg.entities.v1.SpeciesAttackKey;
 import org.junit.Test;
 
 import java.util.Objects;

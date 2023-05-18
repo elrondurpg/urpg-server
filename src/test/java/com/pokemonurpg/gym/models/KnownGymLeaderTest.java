@@ -1,6 +1,6 @@
 package com.pokemonurpg.gym.models;
 
-import com.pokemonurpg.entities.KnownGymLeader;
+import com.pokemonurpg.entities.v1.KnownGymLeader;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.creative.models;
 
 import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
-import com.pokemonurpg.entities.ArtRank;
+import com.pokemonurpg.entities.v1.ArtRank;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

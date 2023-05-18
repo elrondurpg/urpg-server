@@ -1,6 +1,6 @@
 package com.pokemonurpg.contest.models;
 
-import com.pokemonurpg.entities.ContestComboKey;
+import com.pokemonurpg.entities.v1.ContestComboKey;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

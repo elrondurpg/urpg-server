@@ -1,15 +1,16 @@
 package com.pokemonurpg.configuration.v1.pokemon;
 
 
-import com.pokemonurpg.entities.Species;
-import com.pokemonurpg.entities.Type;
-import com.pokemonurpg.lib.input.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.validation.ObjectCreation;
-import com.pokemonurpg.lib.validation.annotation.*;
-import com.pokemonurpg.entities.ArtRank;
-import com.pokemonurpg.entities.ParkLocation;
-import com.pokemonurpg.entities.ParkRank;
-import com.pokemonurpg.entities.StoryRank;
+import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
+import com.pokemonurpg.lib.v1.annotations.UniqueName;
+import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
+import com.pokemonurpg.entities.v1.ArtRank;
+import com.pokemonurpg.entities.v1.ParkLocation;
+import com.pokemonurpg.entities.v1.ParkRank;
+import com.pokemonurpg.entities.v1.StoryRank;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;

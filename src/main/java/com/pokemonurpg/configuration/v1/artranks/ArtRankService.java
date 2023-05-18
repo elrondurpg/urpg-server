@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.artranks;
 
-import com.pokemonurpg.infrastructure.data.ArtRankRepository;
-import com.pokemonurpg.entities.ArtRank;
-import com.pokemonurpg.lib.service.NamedObjectService;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ArtRankRepository;
+import com.pokemonurpg.entities.v1.ArtRank;
+import com.pokemonurpg.lib.v1.service.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

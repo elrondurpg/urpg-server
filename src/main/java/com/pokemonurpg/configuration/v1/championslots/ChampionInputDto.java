@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.championslots;
 
-import com.pokemonurpg.lib.annotations.AllPokemonBelongToOwner;
-import com.pokemonurpg.lib.annotations.BelongsToThisChampionSlot;
-import com.pokemonurpg.lib.validation.ObjectCreation;
+import com.pokemonurpg.lib.v1.annotations.AllPokemonBelongToOwner;
+import com.pokemonurpg.lib.v1.annotations.BelongsToThisChampionSlot;
+import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
