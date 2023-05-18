@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
-import com.pokemonurpg.entities.v1.Badge;
+import com.pokemonurpg.configuration.v1.badges.BadgeRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class BadgeTest {
 
     @Test
     public void testConstructor() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
 
         Badge badge = new Badge(input);

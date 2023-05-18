@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.configuration.v1.members.MemberRequest;
 
 import javax.persistence.*;
 import java.util.*;
@@ -93,15 +93,15 @@ public class Member implements NamedObject {
 
     @OneToMany(mappedBy="owner")
     @JsonIgnoreProperties("owner")
-    private Set<GymOwnershipTerm> gyms;
+    private Set<GymLeaderRecord> gyms;
 
     @OneToMany(mappedBy="owner")
     @JsonIgnoreProperties("owner")
-    private Set<EliteFourOwnershipTerm> eliteFourTerms;
+    private Set<EliteFourMemberRecord> eliteFourTerms;
 
     @OneToMany(mappedBy="owner")
     @JsonIgnoreProperties("owner")
-    private Set<ChampionOwnershipTerm> championTerms;
+    private Set<ChampionRecord> championTerms;
 
     @Column
     private Boolean bot;
@@ -122,7 +122,7 @@ public class Member implements NamedObject {
 
     }
 
-    public Member(MemberInputDto input) {
+    public Member(MemberRequest input) {
         this.update(input);
         initSalt();
         setDiscordId(input.getDiscordId());
@@ -130,7 +130,7 @@ public class Member implements NamedObject {
         if (bot == null) bot = false;
     }
 
-    public void update(MemberInputDto input) {
+    public void update(MemberRequest input) {
         setName(input.getName());
         setMoney(input.getMoney());
         setWins(input.getWins());
@@ -309,27 +309,27 @@ public class Member implements NamedObject {
         this.banExpiration = banExpiration;
     }
 
-    public Set<GymOwnershipTerm> getGyms() {
+    public Set<GymLeaderRecord> getGyms() {
         return gyms;
     }
 
-    public void setGyms(Set<GymOwnershipTerm> gyms) {
+    public void setGyms(Set<GymLeaderRecord> gyms) {
         this.gyms = gyms;
     }
 
-    public Set<EliteFourOwnershipTerm> getEliteFourTerms() {
+    public Set<EliteFourMemberRecord> getEliteFourTerms() {
         return eliteFourTerms;
     }
 
-    public void setEliteFourTerms(Set<EliteFourOwnershipTerm> eliteFourTerms) {
+    public void setEliteFourTerms(Set<EliteFourMemberRecord> eliteFourTerms) {
         this.eliteFourTerms = eliteFourTerms;
     }
 
-    public Set<ChampionOwnershipTerm> getChampionTerms() {
+    public Set<ChampionRecord> getChampionTerms() {
         return championTerms;
     }
 
-    public void setChampionTerms(Set<ChampionOwnershipTerm> championTerms) {
+    public void setChampionTerms(Set<ChampionRecord> championTerms) {
         this.championTerms = championTerms;
     }
 

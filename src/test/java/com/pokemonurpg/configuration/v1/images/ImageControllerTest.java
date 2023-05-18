@@ -1,8 +1,5 @@
 package com.pokemonurpg.configuration.v1.images;
 
-import com.pokemonurpg.configuration.v1.images.ImageController;
-import com.pokemonurpg.configuration.v1.images.ImageInputDto;
-import com.pokemonurpg.configuration.v1.images.ImageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,7 +12,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageControllerTest {
-    private final static ImageInputDto INPUT = mock(ImageInputDto.class);
+    private final static ImageRequest INPUT = mock(ImageRequest.class);
 
     @InjectMocks
     private ImageController imageController;

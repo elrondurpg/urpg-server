@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.types.TypeInputDto;
-import com.pokemonurpg.entities.v1.Type;
+import com.pokemonurpg.configuration.v1.types.TypeRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class TypeTest {
 
     @Test
     public void testConstructor() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
 
         Type type = new Type(input);

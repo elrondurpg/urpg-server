@@ -2,7 +2,6 @@ package com.pokemonurpg.login.v1;
 
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.login.v1.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class BotLoginServiceTest {
 
     private Member member;
 
-    private SessionDto expectedResponse;
+    private Session expectedResponse;
 
     @Before
     public void init() {
@@ -47,7 +46,7 @@ public class BotLoginServiceTest {
         member.setDiscordId(DISCORD_ID);
         member.setBot(true);
 
-        expectedResponse = new SessionDto();
+        expectedResponse = new Session();
         expectedResponse.setUsername(USERNAME);
         expectedResponse.setId(DISCORD_ID);
         expectedResponse.setAccessToken(ACCESS_TOKEN);
@@ -62,7 +61,7 @@ public class BotLoginServiceTest {
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
         when(ACCESS_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
 
-        SessionDto response = botLoginService.login();
+        Session response = botLoginService.login();
 
         verify(memberService, times(1)).update(member, ACCESS_TOKEN_RESPONSE);
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));
@@ -115,7 +114,7 @@ public class BotLoginServiceTest {
         when(ACCESS_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
 
-        SessionDto response = botLoginService.login();
+        Session response = botLoginService.login();
     }
 
 }

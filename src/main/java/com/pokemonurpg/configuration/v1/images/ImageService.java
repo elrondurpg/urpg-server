@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 @Service
 public class ImageService {
@@ -30,7 +29,7 @@ public class ImageService {
     @Resource
     private AppConfig appConfig;
 
-    public ImageInputDto create(ImageInputDto input) {
+    public ImageRequest create(ImageRequest input) {
         RenderedImage image = null;
         String extension = null;
         File file = null;

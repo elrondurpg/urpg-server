@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.natures;
 
-import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
 import com.pokemonurpg.entities.v1.Nature;
 import com.pokemonurpg.infrastructure.v1.data.jpa.NatureRepository;
-import com.pokemonurpg.configuration.v1.natures.NatureService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class NatureServiceTest {
 
     @Test
     public void create() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
 
         Nature nature = natureService.create(input);
@@ -69,7 +66,7 @@ public class NatureServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
 
         when(natureRepository.findByDbid(DBID)).thenReturn(nature);
@@ -82,7 +79,7 @@ public class NatureServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
 
         when(natureRepository.findByDbid(DBID)).thenReturn(null);

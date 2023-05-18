@@ -26,7 +26,7 @@ import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_MEMBER_PERMIS
 import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_ROLE_PERMISSION;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/urpg-configuration/v1/members")
 @CrossOrigin
 @Validated
 public class MemberController {
@@ -62,7 +62,7 @@ public class MemberController {
     @PostMapping
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
-    Member create(@Valid @RequestBody MemberInputDto input) {
+    Member create(@Valid @RequestBody MemberRequest input) {
         return memberService.create(input);
     }
 
@@ -82,7 +82,7 @@ public class MemberController {
     @AllowAuthorized(permission = WRITE_MEMBER_PERMISSION)
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    MappingJacksonValue update(@Valid @RequestBody MemberInputDto input, @PathVariable int dbid) {
+    MappingJacksonValue update(@Valid @RequestBody MemberRequest input, @PathVariable int dbid) {
         MappingJacksonValue value = new MappingJacksonValue( memberService.update(input, dbid) );
         if( authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION) ) {
             value.setSerializationView( View.MemberView.Secure.class );

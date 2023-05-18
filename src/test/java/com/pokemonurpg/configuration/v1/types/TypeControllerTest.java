@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.types;
 
-import com.pokemonurpg.configuration.v1.types.TypeController;
 import com.pokemonurpg.entities.v1.Type;
-import com.pokemonurpg.configuration.v1.types.TypeInputDto;
-import com.pokemonurpg.configuration.v1.types.TypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class TypeControllerTest {
 
     @Test
     public void create() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
         when(typeService.create(input)).thenReturn(type);
         assertEquals(type, typeController.create(input));
@@ -52,7 +49,7 @@ public class TypeControllerTest {
 
     @Test
     public void update() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
         when(typeService.update(input, DBID)).thenReturn(type);
         assertEquals(type, typeController.update(input, DBID));

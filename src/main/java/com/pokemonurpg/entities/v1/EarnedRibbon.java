@@ -2,7 +2,7 @@ package com.pokemonurpg.entities.v1;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.EarnedRibbonInputDto;
+import com.pokemonurpg.stats.v1.EarnedRibbonRequest;
 
 import javax.persistence.*;
 
@@ -32,7 +32,7 @@ public class EarnedRibbon {
     @OneToOne
     @MapsId("generation_dbid")
     @JoinColumn(name = "contest_type_dbid")
-    private ContestType generation;
+    private ContestGeneration generation;
 
     @Column
     private Integer spent;
@@ -43,7 +43,7 @@ public class EarnedRibbon {
     public EarnedRibbon() {
     }
 
-    public EarnedRibbon (EarnedRibbonInputDto input, OwnedPokemon pokemon, ContestType generation, ContestRank rank, ContestAttribute attribute) {
+    public EarnedRibbon (EarnedRibbonRequest input, OwnedPokemon pokemon, ContestGeneration generation, ContestRank rank, ContestAttribute attribute) {
         this.update(input);
         this.id = new EarnedRibbonKey(input.getLogUrl(), pokemon.getDbid(), generation.getDbid(), rank.getDbid(), attribute.getDbid());
         setPokemon(pokemon);
@@ -54,7 +54,7 @@ public class EarnedRibbon {
         if (quantity == null) quantity = 0;
     }
 
-    public void update(EarnedRibbonInputDto input) {
+    public void update(EarnedRibbonRequest input) {
         setSpent(input.getSpent());
         setQuantity(input.getQuantity());
     }
@@ -97,11 +97,11 @@ public class EarnedRibbon {
         }
     }
 
-    public ContestType getGeneration() {
+    public ContestGeneration getGeneration() {
         return generation;
     }
 
-    public void setGeneration(ContestType generation) {
+    public void setGeneration(ContestGeneration generation) {
         this.generation = generation;
     }
 

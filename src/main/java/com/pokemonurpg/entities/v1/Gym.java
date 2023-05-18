@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
+import com.pokemonurpg.configuration.v1.gyms.GymRequest;
 
 import javax.persistence.*;
 import java.util.*;
@@ -46,16 +46,16 @@ public class Gym implements NamedObject {
     @OneToOne
     @JoinColumn(name = "term_dbid")
     @JsonIgnoreProperties({"gym" })
-    private GymOwnershipTerm currentOwnerRecord;
+    private GymLeaderRecord currentOwnerRecord;
 
     public Gym() {
     }
 
-    public Gym (GymInputDto input) {
+    public Gym (GymRequest input) {
         this.update(input);
     }
 
-    public void update(GymInputDto input) {
+    public void update(GymRequest input) {
         setName(input.getName());
     }
 
@@ -97,11 +97,11 @@ public class Gym implements NamedObject {
         }
     }
 
-    public GymOwnershipTerm getCurrentOwnerRecord() {
+    public GymLeaderRecord getCurrentOwnerRecord() {
         return currentOwnerRecord;
     }
 
-    public void setCurrentOwnerRecord(GymOwnershipTerm currentOwnerRecord) {
+    public void setCurrentOwnerRecord(GymLeaderRecord currentOwnerRecord) {
         this.currentOwnerRecord = currentOwnerRecord;
     }
 

@@ -1,8 +1,8 @@
 package com.pokemonurpg.lib.v1.annotations;
 
-import com.pokemonurpg.lib.v1.validators.UniqueChampionOwnershipTermIdValidator;
-import com.pokemonurpg.lib.v1.validators.UniqueEliteFourOwnershipTermIdValidator;
-import com.pokemonurpg.lib.v1.validators.UniqueGymOwnershipTermIdValidator;
+import com.pokemonurpg.lib.v1.validators.UniqueChampionRecordIdValidator;
+import com.pokemonurpg.lib.v1.validators.UniqueEliteFourRecordIdValidator;
+import com.pokemonurpg.lib.v1.validators.UniqueGymLeaderRecordIdValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = { UniqueGymOwnershipTermIdValidator.class, UniqueEliteFourOwnershipTermIdValidator.class, UniqueChampionOwnershipTermIdValidator.class })
+@Constraint(validatedBy = { UniqueGymLeaderRecordIdValidator.class, UniqueEliteFourRecordIdValidator.class, UniqueChampionRecordIdValidator.class })
 @Documented
 public @interface UniqueId {
 

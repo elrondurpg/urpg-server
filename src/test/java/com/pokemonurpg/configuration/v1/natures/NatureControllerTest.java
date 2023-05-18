@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.natures;
 
-import com.pokemonurpg.configuration.v1.natures.NatureController;
 import com.pokemonurpg.entities.v1.Nature;
-import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
-import com.pokemonurpg.configuration.v1.natures.NatureService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class NatureControllerTest {
 
     @Test
     public void create() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
         when(natureService.create(input)).thenReturn(nature);
         assertEquals(nature, natureController.create(input));
@@ -52,7 +49,7 @@ public class NatureControllerTest {
 
     @Test
     public void update() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
         when(natureService.update(input, DBID)).thenReturn(nature);
         assertEquals(nature, natureController.update(input, DBID));

@@ -25,7 +25,7 @@ public class WishlistMoveService {
         return wishlistMoveRepository.findByPokemon(pokemon);
     }
 
-    public void update(WishlistMoveInputDto input, OwnedPokemon pokemon) {
+    public void update(WishlistMoveRequest input, OwnedPokemon pokemon) {
         Attack move = moveRepository.findByName(input.getMove());
         WishlistMove existingRecord = wishlistMoveRepository.findByPokemonAndMove(pokemon, move);
 

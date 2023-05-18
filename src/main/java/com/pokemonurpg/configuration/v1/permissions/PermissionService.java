@@ -35,13 +35,13 @@ public class PermissionService implements NamedObjectService<Permission> {
         return permissionRepository.findByName(name);
     }
 
-    public Permission create(PermissionInputDto input) {
+    public Permission create(PermissionRequest input) {
         Permission permission = new Permission(input);
         permissionRepository.save(permission);
         return permission;
     }
 
-    public Permission update(PermissionInputDto input, int dbid) {
+    public Permission update(PermissionRequest input, int dbid) {
         Permission permission = permissionRepository.findByDbid(dbid);
         if (permission != null) {
             permission.update(input);

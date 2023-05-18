@@ -2,10 +2,10 @@ package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.AllPokemonBelongToOwner;
-import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourPokemonInputDto;
-import com.pokemonurpg.entities.v1.EliteFour;
-import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;
-import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourMemberPokemonRequest;
+import com.pokemonurpg.entities.v1.EliteFourMemberSlot;
+import com.pokemonurpg.entities.v1.EliteFourMemberRecord;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourMemberSlotService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.stats.v1.OwnedPokemonService;
@@ -15,9 +15,9 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 import java.util.Objects;
 
-public class AllPokemonBelongToEliteFourMemberValidator extends AllPokemonBelongToOwnerValidator<List<EliteFourPokemonInputDto>> {
+public class AllPokemonBelongToEliteFourMemberValidator extends AllPokemonBelongToOwnerValidator<List<EliteFourMemberPokemonRequest>> {
     @Resource
-    private EliteFourService eliteFourService;
+    private EliteFourMemberSlotService eliteFourMemberSlotService;
 
     @Resource
     private OwnedPokemonService ownedPokemonService;
@@ -30,17 +30,17 @@ public class AllPokemonBelongToEliteFourMemberValidator extends AllPokemonBelong
     }
 
     @Override
-    public boolean isValid(List<EliteFourPokemonInputDto> input, ConstraintValidatorContext context) {
+    public boolean isValid(List<EliteFourMemberPokemonRequest> input, ConstraintValidatorContext context) {
         if (input != null && !input.isEmpty()) {
             Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-            EliteFour requestEliteFour = eliteFourService.findByDbid(requestDbid);
+            EliteFourMemberSlot requestEliteFourMemberSlot = eliteFourMemberSlotService.findByDbid(requestDbid);
 
-            if (requestEliteFour != null) {
-                EliteFourOwnershipTerm currentOwnerRecord = requestEliteFour.getCurrentOwnerRecord();
+            if (requestEliteFourMemberSlot != null) {
+                EliteFourMemberRecord currentOwnerRecord = requestEliteFourMemberSlot.getCurrentOwnerRecord();
                 if (currentOwnerRecord != null) {
                     Member eliteFourOwner = currentOwnerRecord.getOwner();
                     if (eliteFourOwner != null) {
-                        for (EliteFourPokemonInputDto pokemonInput : input) {
+                        for (EliteFourMemberPokemonRequest pokemonInput : input) {
                             if (pokemonInput != null) {
                                 OwnedPokemon pokemon = ownedPokemonService.findByDbid(pokemonInput.getDbid());
                                 if (pokemon != null) {

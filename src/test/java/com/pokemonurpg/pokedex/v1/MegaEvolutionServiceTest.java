@@ -1,11 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.pokedex.v1.MegaEvolutionDto;
-import com.pokemonurpg.pokedex.v1.MegaEvolutionService;
-import com.pokemonurpg.pokedex.v1.TypeMatchupDto;
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
-import com.pokemonurpg.pokedex.v1.TypeMatchupService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +22,7 @@ public class MegaEvolutionServiceTest {
     private MegaEvolutionService megaEvolutionService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Mock
     private TypeMatchupService typeMatchupService;
@@ -34,29 +30,29 @@ public class MegaEvolutionServiceTest {
     @Test
     public void findBySpeciesReturnsList() {
         // Given a Species
-        Species preMega = new Species();
+        Pokemon preMega = new Pokemon();
 
         // Given a Species that is the mega-evolution of that species
-        Species mega = new Species();
+        Pokemon mega = new Pokemon();
         mega.setPreMega(mega);
-        when(speciesService.findByPreMega(preMega)).thenReturn(Collections.singletonList(mega));
+        when(pokemonService.findByPreMega(preMega)).thenReturn(Collections.singletonList(mega));
 
         // Given a set of type matchups
-        List<TypeMatchupDto> typeMatchups = new ArrayList<>();
+        List<TypeMatchupResponse> typeMatchups = new ArrayList<>();
         when(typeMatchupService.findBySpecies(mega)).thenReturn(typeMatchups);
 
-        List<MegaEvolutionDto> megaEvolutions = megaEvolutionService.findBySpecies(preMega);
+        List<MegaEvolutionResponse> megaEvolutions = megaEvolutionService.findBySpecies(preMega);
         assertEquals(mega, megaEvolutions.get(0).getSpecies());
         assertEquals(typeMatchups, megaEvolutions.get(0).getTypeMatchups());
     }
 
     @Test
     public void findBySpeciesReturnsEmptyList() {
-        Species species = new Species();
+        Pokemon pokemon = new Pokemon();
 
-        when(speciesService.findByPreMega(species)).thenReturn(Collections.emptyList());
+        when(pokemonService.findByPreMega(pokemon)).thenReturn(Collections.emptyList());
 
-        List<MegaEvolutionDto> megaEvolutions = megaEvolutionService.findBySpecies(species);
+        List<MegaEvolutionResponse> megaEvolutions = megaEvolutionService.findBySpecies(pokemon);
         assertNotNull(megaEvolutions);
     }
 

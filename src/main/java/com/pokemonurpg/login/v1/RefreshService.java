@@ -26,7 +26,7 @@ public class RefreshService {
     @Resource
     private Provider<SessionService> sessionServiceProvider;
 
-    public SessionDto refresh() {
+    public Session refresh() {
         SessionService sessionService = sessionServiceProvider.get();
         Member member = sessionService.getAuthenticatedMember();
         if (member != null) {
@@ -39,7 +39,7 @@ public class RefreshService {
                 OAuthAccessTokenResponse refreshTokenResponse = oAuthService.refreshAccessToken(refreshToken);
                 if (refreshTokenResponse != null && refreshTokenResponse.isValid()) {
                     memberService.update(member, refreshTokenResponse);
-                    return new SessionDto(member.getName(), member.getDiscordId(), refreshTokenResponse.getAccessToken());
+                    return new Session(member.getName(), member.getDiscordId(), refreshTokenResponse.getAccessToken());
                 }
             }
         }

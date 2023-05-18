@@ -1,12 +1,6 @@
 package com.pokemonurpg.login.v1;
 
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.login.v1.SessionDto;
-import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
-import com.pokemonurpg.login.v1.AesEncryptionService;
-import com.pokemonurpg.login.v1.OAuthService;
-import com.pokemonurpg.login.v1.RefreshService;
-import com.pokemonurpg.login.v1.SessionService;
 import com.pokemonurpg.entities.v1.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Before;
@@ -54,7 +48,7 @@ public class RefreshServiceTest {
 
     private SessionService sessionService = mock(SessionService.class);
     private Member member;
-    private SessionDto expectedResponse = new SessionDto();
+    private Session expectedResponse = new Session();
 
     @Before
     public void init() {
@@ -83,7 +77,7 @@ public class RefreshServiceTest {
         when(REFRESH_TOKEN_RESPONSE.isValid()).thenReturn(true);
         when(REFRESH_TOKEN_RESPONSE.getAccessToken()).thenReturn(ACCESS_TOKEN);
 
-        SessionDto response = refreshService.refresh();
+        Session response = refreshService.refresh();
         verify(memberService, times(1)).update(member, REFRESH_TOKEN_RESPONSE);
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));
     }

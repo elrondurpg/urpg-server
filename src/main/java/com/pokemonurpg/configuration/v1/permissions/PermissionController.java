@@ -14,7 +14,7 @@ import static com.pokemonurpg.lib.v1.strings.PermissionNames.READ_PERMISSION_PER
 import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_PERMISSION_PERMISSION;
 
 @RestController
-@RequestMapping("/permission")
+@RequestMapping("/urpg-configuration/v1/permissions")
 @CrossOrigin
 @Validated
 public class PermissionController {
@@ -40,14 +40,14 @@ public class PermissionController {
     @AllowAuthorized(permission = WRITE_PERMISSION_PERMISSION)
     @PostMapping
     public @ResponseBody
-    Permission create(@Valid @RequestBody PermissionInputDto input) {
+    Permission create(@Valid @RequestBody PermissionRequest input) {
         return permissionService.create(input);
     }
 
     @AllowAuthorized(permission = WRITE_PERMISSION_PERMISSION)
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Permission update(@Valid @RequestBody PermissionInputDto input, @PathVariable int dbid) {
+    Permission update(@Valid @RequestBody PermissionRequest input, @PathVariable int dbid) {
         return permissionService.update(input, dbid);
     }
 }

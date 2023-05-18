@@ -1,8 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
-import com.pokemonurpg.pokedex.v1.EvolutionFamilyService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,39 +21,39 @@ public class EvolutionFamilyServiceTest {
     private EvolutionFamilyService evolutionFamilyService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Test
     public void getBasicSpeciesReturnsBasic() {
         // Given a species with a preEvolution (1) with a preEvolution (2)
-        Species secondStage = new Species();
-        Species firstStage = new Species();
-        Species basic = new Species();
+        Pokemon secondStage = new Pokemon();
+        Pokemon firstStage = new Pokemon();
+        Pokemon basic = new Pokemon();
 
         secondStage.setPreEvolution(firstStage);
         firstStage.setPreEvolution(basic);
 
-        Species result = evolutionFamilyService.getBasicSpecies(secondStage);
+        Pokemon result = evolutionFamilyService.getBasicSpecies(secondStage);
         assertEquals(basic, result);
     }
 
     @Test
     public void findEvolutionFamilyBySpecies() {
         // Given a basic Species
-        Species basic = new Species();
+        Pokemon basic = new Pokemon();
 
         // Given a Species that evolves from the basic
-        Species firstStage = new Species();
+        Pokemon firstStage = new Pokemon();
         firstStage.setPreEvolution(basic);
-        when(speciesService.findByPreEvolution(basic)).thenReturn(Collections.singletonList(firstStage));
+        when(pokemonService.findByPreEvolution(basic)).thenReturn(Collections.singletonList(firstStage));
 
         // Given a Species that evolves from the firstStage
-        Species secondStage = new Species();
+        Pokemon secondStage = new Pokemon();
         secondStage.setPreEvolution(firstStage);
-        when(speciesService.findByPreEvolution(firstStage)).thenReturn(Collections.singletonList(secondStage));
+        when(pokemonService.findByPreEvolution(firstStage)).thenReturn(Collections.singletonList(secondStage));
 
         // When I call findBySpecies()
-        List<List<Species>> evolutionFamily = evolutionFamilyService.findBySpecies(basic);
+        List<List<Pokemon>> evolutionFamily = evolutionFamilyService.findBySpecies(basic);
 
         // Then I will receive a List of three Lists, which each have one element
         assertEquals(basic, evolutionFamily.get(0).get(0));

@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/attackcategory")
+@RequestMapping("/urpg-configuration/v1/attack-categories")
 @CrossOrigin
 @Validated
 public class AttackCategoryController {
@@ -38,14 +38,14 @@ public class AttackCategoryController {
     @AllowAuthorized(permission = "Write Attack")
     @PostMapping
     public @ResponseBody
-    AttackCategory create(@Valid @RequestBody AttackCategoryInputDto input) {
+    AttackCategory create(@Valid @RequestBody AttackCategoryRequest input) {
         return attackCategoryService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Attack")
     @PutMapping(path = "/{dbid}")
     public @ResponseBody
-    AttackCategory update(@Valid @RequestBody AttackCategoryInputDto input, @PathVariable int dbid) {
+    AttackCategory update(@Valid @RequestBody AttackCategoryRequest input, @PathVariable int dbid) {
         return attackCategoryService.update(input, dbid);
     }
 }

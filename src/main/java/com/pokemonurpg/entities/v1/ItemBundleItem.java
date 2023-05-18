@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.pokemonurpg.configuration.v1.itembundles.ItemBundleItemInputDto;
+import com.pokemonurpg.configuration.v1.itembundles.ItemBundleItemRequest;
 
 @Entity
 @Table(name = "item_bundle_item")
@@ -31,7 +31,7 @@ public class ItemBundleItem {
 
     public ItemBundleItem() {}
 
-    public ItemBundleItem(ItemBundleItemInputDto input, ItemBundle bundle, Item item) {
+    public ItemBundleItem(ItemBundleItemRequest input, ItemBundle bundle, Item item) {
         this.update(input);
         this.id = new ItemBundleItemKey(bundle.getDbid(), item.getDbid());
         this.bundle = bundle;
@@ -39,7 +39,7 @@ public class ItemBundleItem {
         if (this.quantity == null) this.quantity = 1;
     }
 
-    public void update(ItemBundleItemInputDto input) {
+    public void update(ItemBundleItemRequest input) {
         setQuantity(input.getQuantity());
     }
 

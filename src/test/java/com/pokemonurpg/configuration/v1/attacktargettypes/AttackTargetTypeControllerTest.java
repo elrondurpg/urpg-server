@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.attacktargettypes;
 
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeController;
 import com.pokemonurpg.entities.v1.AttackTargetType;
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeInputDto;
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,14 +41,14 @@ public class AttackTargetTypeControllerTest {
 
     @Test
     public void create() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         when(attackTargetTypeService.create(input)).thenReturn(attackTargetType);
         assertEquals(attackTargetType, attackTargetTypeController.create(input));
     }
 
     @Test
     public void update() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         when(attackTargetTypeService.update(input, DBID)).thenReturn(attackTargetType);
         assertEquals(attackTargetType, attackTargetTypeController.update(input, DBID));
     }

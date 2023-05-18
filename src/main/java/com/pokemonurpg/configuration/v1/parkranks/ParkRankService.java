@@ -35,13 +35,13 @@ public class ParkRankService implements NamedObjectService<ParkRank> {
         return parkRankRepository.findByName(name);
     }
 
-    public ParkRank create(ParkRankInputDto input) {
+    public ParkRank create(ParkRankRequest input) {
         ParkRank parkRank = new ParkRank(input);
         parkRankRepository.save(parkRank);
         return parkRank;
     }
 
-    public ParkRank update(ParkRankInputDto input, int dbid) {
+    public ParkRank update(ParkRankRequest input, int dbid) {
         ParkRank parkRank = parkRankRepository.findByDbid(dbid);
         if (parkRank != null) {
             parkRank.update(input);

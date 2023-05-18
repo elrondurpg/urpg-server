@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
+import com.pokemonurpg.configuration.v1.attacks.AttackRequest;
 import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
@@ -62,7 +62,7 @@ public class Attack implements NamedObject {
 
     @OneToOne
     @JoinColumn(name = "rse_contest_move_type")
-    private RSEContestMoveType rseContestMoveType;
+    private RSEContestEffect rseContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "rse_contest_attribute")
@@ -70,7 +70,7 @@ public class Attack implements NamedObject {
 
     @OneToOne
     @JoinColumn(name = "oras_contest_move_type")
-    private ORASContestMoveType orasContestMoveType;
+    private ORASContestEffect orasContestMoveType;
 
     @OneToOne
     @JoinColumn(name = "oras_contest_attribute")
@@ -82,7 +82,7 @@ public class Attack implements NamedObject {
 
     @OneToMany(mappedBy = "attack")
     @JsonIgnoreProperties({ "attack" })
-    private Set<SpeciesAttack> pokemon;
+    private Set<PokemonAttack> pokemon;
 
     @OneToMany(mappedBy = "firstAttack")
     @JsonIgnoreProperties({ "firstAttack" })
@@ -90,11 +90,11 @@ public class Attack implements NamedObject {
 
     public Attack() { }
 
-    public Attack (AttackInputDto input) {
+    public Attack (AttackRequest input) {
         this.update(input);
     }
 
-    public void update(AttackInputDto input) {
+    public void update(AttackRequest input) {
         setName(input.getName());
         setDescription(input.getDescription());
         setPower(input.getPower());
@@ -250,11 +250,11 @@ public class Attack implements NamedObject {
         }
     }
 
-    public RSEContestMoveType getRseContestMoveType() {
+    public RSEContestEffect getRseContestMoveType() {
         return rseContestMoveType;
     }
 
-    public void setRseContestMoveType(RSEContestMoveType rseContestMoveType) {
+    public void setRseContestMoveType(RSEContestEffect rseContestMoveType) {
         if (rseContestMoveType != null ) {
             this.rseContestMoveType = rseContestMoveType;
         }
@@ -270,11 +270,11 @@ public class Attack implements NamedObject {
         }
     }
 
-    public ORASContestMoveType getOrasContestMoveType() {
+    public ORASContestEffect getOrasContestMoveType() {
         return orasContestMoveType;
     }
 
-    public void setOrasContestMoveType(ORASContestMoveType orasContestMoveType) {
+    public void setOrasContestMoveType(ORASContestEffect orasContestMoveType) {
         if (orasContestMoveType != null) {
             this.orasContestMoveType = orasContestMoveType;
         }
@@ -298,11 +298,11 @@ public class Attack implements NamedObject {
         this.tm = tm;
     }
 
-    public Set<SpeciesAttack> getPokemon() {
+    public Set<PokemonAttack> getPokemon() {
         return pokemon;
     }
 
-    public void setPokemon(Set<SpeciesAttack> pokemon) {
+    public void setPokemon(Set<PokemonAttack> pokemon) {
         this.pokemon = pokemon;
     }
 

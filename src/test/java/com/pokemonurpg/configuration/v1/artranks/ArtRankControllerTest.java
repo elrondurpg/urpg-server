@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.artranks;
 
-import com.pokemonurpg.configuration.v1.artranks.ArtRankController;
 import com.pokemonurpg.entities.v1.ArtRank;
-import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
-import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class ArtRankControllerTest {
 
     @Test
     public void create() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
         when(artRankService.create(input)).thenReturn(artRank);
         assertEquals(artRank, artRankController.create(input));
@@ -52,7 +49,7 @@ public class ArtRankControllerTest {
 
     @Test
     public void update() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
         when(artRankService.update(input, DBID)).thenReturn(artRank);
         assertEquals(artRank, artRankController.update(input, DBID));

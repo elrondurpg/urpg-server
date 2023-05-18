@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.types.TypeInputDto;
+import com.pokemonurpg.configuration.v1.types.TypeRequest;
 
 import javax.persistence.*;
 
@@ -20,11 +20,11 @@ public class Type implements NamedObject {
 
     public Type() {}
 
-    public Type(TypeInputDto input) {
+    public Type(TypeRequest input) {
         this.update(input);
     }
 
-    public void update(TypeInputDto input) {
+    public void update(TypeRequest input) {
         setName(input.getName());
     }
 

@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.abilities;
 
-import com.pokemonurpg.configuration.v1.abilities.AbilityController;
 import com.pokemonurpg.entities.v1.Ability;
-import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
-import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -39,7 +36,7 @@ public class AbilityControllerTest {
 
     @Test
     public void createReturnsResultFromAbilityService() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         Ability ability = new Ability();
 
         when (abilityService.create(input)).thenReturn(ability);
@@ -48,7 +45,7 @@ public class AbilityControllerTest {
 
     @Test
     public void updateReturnsResultFromAbilityService() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         Ability ability = new Ability();
 
         when (abilityService.update(input, DBID)).thenReturn(ability);

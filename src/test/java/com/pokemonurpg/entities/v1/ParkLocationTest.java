@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
-import com.pokemonurpg.entities.v1.ParkLocation;
+import com.pokemonurpg.configuration.v1.parklocations.ParkLocationRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class ParkLocationTest {
 
     @Test
     public void testConstructor() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
 
         ParkLocation parkLocation = new ParkLocation(input);

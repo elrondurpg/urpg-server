@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
+import com.pokemonurpg.configuration.v1.abilities.AbilityRequest;
 import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
@@ -26,15 +26,15 @@ public class Ability implements NamedObject {
 
     @OneToMany(mappedBy = "ability")
     @JsonIgnoreProperties({ "ability" })
-    private Set<SpeciesAbility> pokemon;
+    private Set<PokemonAbility> pokemon;
 
     public Ability() {}
 
-    public Ability(AbilityInputDto input) {
+    public Ability(AbilityRequest input) {
         this.update(input);
     }
 
-    public void update(AbilityInputDto input) {
+    public void update(AbilityRequest input) {
         setName(input.getName());
         setDescription(input.getDescription());
     }
@@ -67,11 +67,11 @@ public class Ability implements NamedObject {
         }
     }
 
-    public Set<SpeciesAbility> getPokemon() {
+    public Set<PokemonAbility> getPokemon() {
         return pokemon;
     }
 
-    public void setPokemon(Set<SpeciesAbility> pokemon) {
+    public void setPokemon(Set<PokemonAbility> pokemon) {
         this.pokemon = pokemon;
     }
 }

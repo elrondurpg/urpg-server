@@ -1,9 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
-import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.entities.v1.Permission;
-import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.configuration.v1.roles.RoleRequest;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -33,7 +30,7 @@ public class RoleTest {
 
     @Test
     public void testConstructor() {
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
 
         Role role = new Role(input);

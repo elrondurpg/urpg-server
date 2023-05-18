@@ -2,10 +2,10 @@ package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.ContestAttribute;
 import com.pokemonurpg.entities.v1.ContestRank;
-import com.pokemonurpg.entities.v1.ContestType;
+import com.pokemonurpg.entities.v1.ContestGeneration;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestRankRepository;
-import com.pokemonurpg.infrastructure.v1.data.jpa.ContestTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestGenerationRepository;
 import com.pokemonurpg.entities.v1.EarnedRibbon;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.infrastructure.v1.data.jpa.EarnedRibbonRepository;
@@ -29,16 +29,16 @@ public class EarnedRibbonService {
     private ContestAttributeRepository contestAttributeRepository;
 
     @Resource
-    private ContestTypeRepository contestTypeRepository;
+    private ContestGenerationRepository contestGenerationRepository;
 
     List<EarnedRibbon> findByOwnedPokemon(OwnedPokemon pokemon) {
         return earnedRibbonRepository.findByPokemon(pokemon);
     }
 
-    public void update(EarnedRibbonInputDto input, OwnedPokemon pokemon) {
+    public void update(EarnedRibbonRequest input, OwnedPokemon pokemon) {
         ContestRank rank = contestRankRepository.findByName(input.getRank());
         ContestAttribute attribute = contestAttributeRepository.findByName(input.getAttribute());
-        ContestType generation = contestTypeRepository.findByName(input.getGeneration());
+        ContestGeneration generation = contestGenerationRepository.findByName(input.getGeneration());
         EarnedRibbon existingRecord = earnedRibbonRepository.findByPokemonAndIdLogUrlAndGenerationAndRankAndAttribute(pokemon, input.getLogUrl(), generation, rank, attribute);
         if (existingRecord != null) {
             if (input.getDelete()) {

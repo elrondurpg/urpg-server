@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueRequest;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,14 +22,14 @@ public class GymLeague implements NamedObject {
 
     @OneToMany(mappedBy="league")
     @JsonIgnoreProperties("league")
-    private List<GymOwnershipTerm> gyms;
+    private List<GymLeaderRecord> gyms;
 
     public GymLeague() {}
-    public GymLeague(GymLeagueInputDto input) {
+    public GymLeague(GymLeagueRequest input) {
         this.update(input);
     }
 
-    public void update(GymLeagueInputDto input) {
+    public void update(GymLeagueRequest input) {
         setName(input.getName());
     }
 
@@ -51,11 +51,11 @@ public class GymLeague implements NamedObject {
         }
     }
 
-    public List<GymOwnershipTerm> getGyms() {
+    public List<GymLeaderRecord> getGyms() {
         return gyms;
     }
 
-    public void setGyms(List<GymOwnershipTerm> gyms) {
+    public void setGyms(List<GymLeaderRecord> gyms) {
         this.gyms = gyms;
     }
 }

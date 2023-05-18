@@ -6,18 +6,17 @@ import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.badges.BadgeService;
-import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
-import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
-import com.pokemonurpg.configuration.v1.championslots.ChampionService;
+import com.pokemonurpg.configuration.v1.capturemethods.CaptureMethodService;
+import com.pokemonurpg.configuration.v1.champions.ChampionService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionSlotService;
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
-import com.pokemonurpg.configuration.v1.contestgenerations.ContestTypeService;
-import com.pokemonurpg.configuration.v1.contestmovetypes.ORASContestMoveTypeService;
-import com.pokemonurpg.configuration.v1.contestmovetypes.RSEContestMoveTypeService;
+import com.pokemonurpg.configuration.v1.contestgenerations.ContestGenerationService;
+import com.pokemonurpg.configuration.v1.contesteffects.ContestEffectService;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
-import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
-import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
-import com.pokemonurpg.configuration.v1.featureflags.FlagService;
-import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.EliteFourMemberService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourMemberSlotService;
+import com.pokemonurpg.configuration.v1.featureflags.FeatureFlagService;
+import com.pokemonurpg.configuration.v1.gymleaders.GymLeaderService;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
@@ -28,7 +27,7 @@ import com.pokemonurpg.configuration.v1.natures.NatureService;
 import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
 import com.pokemonurpg.configuration.v1.sections.SectionService;
 import com.pokemonurpg.configuration.v1.sitemenuitems.MenuItemService;
@@ -60,7 +59,7 @@ public class NamedObjectServiceFactory {
     private BadgeService badgeService;
 
     @Resource
-    private ChampionService championService;
+    private ChampionSlotService championSlotService;
 
     @Resource
     private ContestAttributeService contestAttributeService;
@@ -69,13 +68,13 @@ public class NamedObjectServiceFactory {
     private ContestRankService contestRankService;
 
     @Resource
-    private ContestTypeService contestTypeService;
+    private ContestGenerationService contestGenerationService;
 
     @Resource
-    private EliteFourService eliteFourService;
+    private EliteFourMemberSlotService eliteFourMemberSlotService;
 
     @Resource
-    private FlagService flagService;
+    private FeatureFlagService featureFlagService;
 
     @Resource
     private GymService gymService;
@@ -90,13 +89,13 @@ public class NamedObjectServiceFactory {
     private ItemBundleService itemBundleService;
 
     @Resource
-    private KnownChampionService knownChampionService;
+    private ChampionService championService;
 
     @Resource
-    private KnownEliteFourMemberService knownEliteFourMemberService;
+    private EliteFourMemberService eliteFourMemberService;
 
     @Resource
-    private KnownGymLeaderService knownGymLeaderService;
+    private GymLeaderService gymLeaderService;
 
     @Resource
     private MemberService memberService;
@@ -108,10 +107,10 @@ public class NamedObjectServiceFactory {
     private NatureService natureService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService captureMethodService;
 
     @Resource
-    private ORASContestMoveTypeService orasContestMoveTypeService;
+    private ContestEffectService contestEffectService;
 
     @Resource
     private ParkLocationService parkLocationService;
@@ -126,13 +125,10 @@ public class NamedObjectServiceFactory {
     private RoleService roleService;
 
     @Resource
-    private RSEContestMoveTypeService rseContestMoveTypeService;
-
-    @Resource
     private SectionService sectionService;
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
     private StoryRankService storyRankService;
@@ -152,32 +148,31 @@ public class NamedObjectServiceFactory {
                 case "Attack": return attackService;
                 case "AttackTargetType": return attackTargetTypeService;
                 case "Badge": return badgeService;
-                case "Champion": return championService;
+                case "ChampionSlot": return championSlotService;
                 case "ContestAttribute": return contestAttributeService;
                 case "ContestRank": return contestRankService;
-                case "ContestType": return contestTypeService;
-                case "EliteFour": return eliteFourService;
-                case "Flag": return flagService;
+                case "ContestGeneration": return contestGenerationService;
+                case "EliteFourMemberSlot": return eliteFourMemberSlotService;
+                case "FeatureFlag": return featureFlagService;
                 case "Gym": return gymService;
                 case "GymLeague": return gymLeagueService;
                 case "ImageFolder": return imageFolderService;
                 case "Item": return itemService;
                 case "ItemBundle": return itemBundleService;
-                case "KnownChampion": return knownChampionService;
-                case "KnownEliteFourMember": return knownEliteFourMemberService;
-                case "KnownGymLeader": return knownGymLeaderService;
+                case "Champion": return championSlotService;
+                case "EliteFourMember": return eliteFourMemberService;
+                case "GymLeader": return gymLeaderService;
                 case "Member": return memberService;
                 case "MenuItem": return menuItemService;
                 case "Nature": return natureService;
-                case "Obtained": return obtainedService;
-                case "ORASContestMoveType": return orasContestMoveTypeService;
+                case "CaptureMethod": return captureMethodService;
+                case "ContestEffect": return contestEffectService;
                 case "ParkLocation": return parkLocationService;
                 case "ParkRank": return parkRankService;
                 case "Permission": return permissionService;
                 case "Role": return roleService;
-                case "RSEContestMoveType": return rseContestMoveTypeService;
                 case "Section": return sectionService;
-                case "Species": return speciesService;
+                case "Pokemon": return pokemonService;
                 case "StoryRank": return storyRankService;
                 case "Type": return typeService;
             }

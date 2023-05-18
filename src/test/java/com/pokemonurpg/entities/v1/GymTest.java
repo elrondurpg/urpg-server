@@ -1,12 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.gyms.GymInputDto;
-import com.pokemonurpg.entities.v1.Badge;
-import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
-import com.pokemonurpg.entities.v1.Type;
-import com.pokemonurpg.entities.v1.GymVictory;
-import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.configuration.v1.gyms.GymRequest;
 import org.junit.Test;
 
 import java.util.*;
@@ -16,7 +10,7 @@ import static org.mockito.Mockito.mock;
 
 public class GymTest {
     private final static Badge BADGE       = mock(Badge.class);
-    private final static GymOwnershipTerm OWNER_REC   = mock(GymOwnershipTerm.class);
+    private final static GymLeaderRecord OWNER_REC   = mock(GymLeaderRecord.class);
     private final static Integer            DBID        = 32432;
     private final static List<GymVictory>   VICTORIES   = new ArrayList<>();
     private final static String             NAME        = "NAME";
@@ -45,7 +39,7 @@ public class GymTest {
 
     @Test
     public void testConstructor() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
 
         Gym gym = new Gym(input);
@@ -54,7 +48,7 @@ public class GymTest {
 
     @Test
     public void testConstructorWithDefaultValues() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
 
         Gym gym = new Gym(input);

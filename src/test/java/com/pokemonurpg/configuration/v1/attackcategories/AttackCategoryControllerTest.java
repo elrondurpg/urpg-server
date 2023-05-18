@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.attackcategories;
 
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryController;
 import com.pokemonurpg.entities.v1.AttackCategory;
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class AttackCategoryControllerTest {
 
     @Test
     public void create() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
         when(attackCategoryService.create(input)).thenReturn(category);
         assertEquals(category, attackCategoryController.create(input));
@@ -52,7 +49,7 @@ public class AttackCategoryControllerTest {
 
     @Test
     public void update() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
         when(attackCategoryService.update(input, DBID)).thenReturn(category);
         assertEquals(category, attackCategoryController.update(input, DBID));

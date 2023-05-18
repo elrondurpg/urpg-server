@@ -2,7 +2,7 @@ package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.Gym;
 import com.pokemonurpg.entities.v1.GymLeague;
-import com.pokemonurpg.entities.v1.KnownGymLeader;
+import com.pokemonurpg.entities.v1.GymLeader;
 import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeagueRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
 import com.pokemonurpg.entities.v1.Member;
@@ -24,7 +24,7 @@ public class GymVictoryService {
     @Resource
     private GymLeagueRepository gymLeagueRepository;
 
-    public void update(GymVictoryInputDto input, Member challenger, KnownGymLeader defender) {
+    public void update(GymVictoryRequest input, Member challenger, GymLeader defender) {
         Gym gym = gymRepository.findByName(input.getGym());
         GymLeague league = gymLeagueRepository.findByName(input.getLeague());
 

@@ -35,13 +35,13 @@ public class ArtRankService implements NamedObjectService<ArtRank> {
         return artRankRepository.findByName(name);
     }
 
-    public ArtRank create(ArtRankInputDto input) {
+    public ArtRank create(ArtRankRequest input) {
         ArtRank artRank = new ArtRank(input);
         artRankRepository.save(artRank);
         return artRank;
     }
 
-    public ArtRank update(ArtRankInputDto input, int dbid) {
+    public ArtRank update(ArtRankRequest input, int dbid) {
         ArtRank artRank = artRankRepository.findByDbid(dbid);
         if (artRank != null) {
             artRank.update(input);

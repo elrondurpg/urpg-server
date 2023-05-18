@@ -1,16 +1,12 @@
 package com.pokemonurpg.configuration.v1.roles;
 
-import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
-import com.pokemonurpg.configuration.v1.roles.RolePermissionInputDto;
 import com.pokemonurpg.entities.v1.Permission;
 import com.pokemonurpg.entities.v1.Role;
 import com.pokemonurpg.infrastructure.v1.data.jpa.RoleRepository;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
-import com.pokemonurpg.configuration.v1.roles.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -73,11 +69,11 @@ public class RoleServiceTest {
         when(permissionService.findByName(NEW_PERMISSION_NAME)).thenReturn(NEW_PERMISSION);
 
         // Given a RolePermissionInputDto with name = "NEW_PERMISSION_NAME"
-        RolePermissionInputDto permInput1 = new RolePermissionInputDto();
+        RolePermissionRequest permInput1 = new RolePermissionRequest();
         permInput1.setName(NEW_PERMISSION_NAME);
 
         // Given a RoleInputDto whose "permissions" list includes permInput1
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
         input.setPermissions(Collections.singletonList(permInput1));
 
@@ -104,16 +100,16 @@ public class RoleServiceTest {
         CURRENT_ROLE.setPermissions(currentPermissions);
 
         // Given a RolePermissionInputDto with name = "NEW_PERMISSION_NAME"
-        RolePermissionInputDto permInput1 = new RolePermissionInputDto();
+        RolePermissionRequest permInput1 = new RolePermissionRequest();
         permInput1.setName(NEW_PERMISSION_NAME);
 
         // Given a RolePermissionInputDto with name = "CURRENT_PERMISSION_NAME" and delete = true
-        RolePermissionInputDto permInput2 = new RolePermissionInputDto();
+        RolePermissionRequest permInput2 = new RolePermissionRequest();
         permInput2.setName(CURRENT_PERMISSION_NAME);
         permInput2.setDelete(true);
 
         // Given a RoleInputDto whose "permissions" list includes permInput1 and permInput2
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
         input.setPermissions(Arrays.asList(permInput1, permInput2));
 
@@ -131,7 +127,7 @@ public class RoleServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
 
         when(roleRepository.findByDbid(DBID)).thenReturn(null);

@@ -41,14 +41,14 @@ public class RoleService implements NamedObjectService<Role> {
         return roleRepository.findByName(name);
     }
 
-    public Role create(RoleInputDto input) {
+    public Role create(RoleRequest input) {
         Role role = new Role(input);
         updateEmbeddedValues(input, role);
         roleRepository.save(role);
         return role;
     }
 
-    public Role update(RoleInputDto input, int dbid) {
+    public Role update(RoleRequest input, int dbid) {
         Role role = roleRepository.findByDbid(dbid);
         if (role != null) {
             role.update(input);
@@ -58,10 +58,10 @@ public class RoleService implements NamedObjectService<Role> {
         return role;
     }
 
-    public void updateEmbeddedValues(RoleInputDto input, Role role) {
+    public void updateEmbeddedValues(RoleRequest input, Role role) {
         Set<Permission> currentPermissions = role.getPermissions();
 
-        for (RolePermissionInputDto permission : input.getPermissions()) {
+        for (RolePermissionRequest permission : input.getPermissions()) {
             String name = permission.getName();
             Permission permissionObject = permissionService.findByName(name);
             if (permission.getDelete())

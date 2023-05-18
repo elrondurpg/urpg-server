@@ -6,4 +6,5 @@ public class ErrorStrings {
     public static final String ERROR_ON_CLAIM            = "ERROR_ON_CLAIM - Claim operation could not be completed. Please contact your system administrator if this issue persists.";
     public static final String ERROR_POKEMON_FOR_OTHER   = "The current user is not authorized to create or update Pokemon belonging to other members.";
     public static final String ERROR_ON_DELETE           = "ERROR_ON_DELETE - Deletion operation could not be completed. Please contact your system administrator if this issue persists.";
+    public static final String ERROR_ON_MISSING_REGISTRATION_TYPE = "Must provide a value for query parameter 'type'! (Valid values: 'new', 'existing')";
 }

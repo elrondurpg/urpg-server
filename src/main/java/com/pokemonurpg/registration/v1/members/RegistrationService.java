@@ -1,12 +1,12 @@
 package com.pokemonurpg.registration.v1.members;
 
-import com.pokemonurpg.entities.v1.Flag;
-import com.pokemonurpg.configuration.v1.featureflags.FlagService;
+import com.pokemonurpg.entities.v1.FeatureFlag;
+import com.pokemonurpg.configuration.v1.featureflags.FeatureFlagService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.login.v1.DiscordUserResponse;
 import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
 import com.pokemonurpg.login.v1.OAuthService;
-import com.pokemonurpg.login.v1.SessionDto;
+import com.pokemonurpg.login.v1.Session;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class RegistrationService {
 
     @Resource
-    private FlagService flagService;
+    private FeatureFlagService featureFlagService;
 
     @Resource
     private MemberService memberService;
@@ -29,8 +29,8 @@ public class RegistrationService {
     @Resource
     private KnownNameClaimService knownNameClaimService;
 
-    public void claimKnownName(RegistrationInputDto input) {
-        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+    public void claimKnownName(RegistrationRequest input) {
+        FeatureFlag canRegisterMembers = featureFlagService.findByName("Can_Register_Members");
         if (canRegisterMembers.getBooleanValue()) {
             OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
             if (accessTokenResponse != null && accessTokenResponse.isValid()) {
@@ -49,8 +49,8 @@ public class RegistrationService {
         }
     }
 
-    public SessionDto registerNew(RegistrationInputDto input) {
-        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+    public Session registerNew(RegistrationRequest input) {
+        FeatureFlag canRegisterMembers = featureFlagService.findByName("Can_Register_Members");
         if (canRegisterMembers != null && canRegisterMembers.getBooleanValue()) {
         OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
         if (accessTokenResponse != null && accessTokenResponse.isValid()) {
@@ -60,7 +60,7 @@ public class RegistrationService {
                 if (member == null) {
                     member = memberService.registerNew(input, discordUserResponse.getId(), accessTokenResponse);
                     if (member != null) {
-                        return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                        return new Session(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                     }
                 }
             }
@@ -72,8 +72,8 @@ public class RegistrationService {
         }
     }
 
-    public SessionDto registerVet(RegistrationInputDto input) {
-        Flag canRegisterMembers = flagService.findByName("Can_Register_Members");
+    public Session registerVet(RegistrationRequest input) {
+        FeatureFlag canRegisterMembers = featureFlagService.findByName("Can_Register_Members");
         if (canRegisterMembers.getBooleanValue()) {
             OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
             if (accessTokenResponse != null && accessTokenResponse.isValid()) {
@@ -83,7 +83,7 @@ public class RegistrationService {
                     if (member == null) {
                         member = memberService.registerVet(input, discordUserResponse.getId(), accessTokenResponse);
                         if (member != null) {
-                            return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                            return new Session(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,17 +11,17 @@ import java.util.stream.Collectors;
 @Service
 public class AlteredFormService {
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
     private FormAttackSorter formAttackSorter;
 
-    public List<AlteredFormDto> findBySpecies(Species input) {
-        List<AlteredFormDto> alteredForms =
-            speciesService.findByDexno(input.getDexno())
+    public List<AlteredFormResponse> findBySpecies(Pokemon input) {
+        List<AlteredFormResponse> alteredForms =
+            pokemonService.findByDexno(input.getDexno())
             .stream()
             .filter(species -> species.getPreMega() == null)
-            .map(AlteredFormDto::new)
+            .map(AlteredFormResponse::new)
             .collect(Collectors.toList());
         if (alteredForms.size() > 1) {
             formAttackSorter.run(alteredForms);

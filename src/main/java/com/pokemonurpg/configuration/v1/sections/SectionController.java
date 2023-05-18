@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/section")
+@RequestMapping("/urpg-configuration/v1/sections")
 @CrossOrigin
 @Validated
 public class SectionController {
@@ -45,14 +45,14 @@ public class SectionController {
     @AllowAuthorized(permission = "Write General")
     @PostMapping
     public @ResponseBody
-    Section create(@Valid @RequestBody SectionInputDto input) {
+    Section create(@Valid @RequestBody SectionRequest input) {
         return sectionService.create(input);
     }
 
     @AllowAuthorized(permission = "Write General")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Section update(@Valid @RequestBody SectionInputDto input, @PathVariable int dbid) {
+    Section update(@Valid @RequestBody SectionRequest input, @PathVariable int dbid) {
         return sectionService.update(input, dbid);
     }
 }

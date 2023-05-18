@@ -1,18 +1,17 @@
 package com.pokemonurpg.entities.v1;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.championslots.ChampionInputDto;
+import com.pokemonurpg.configuration.v1.champions.ChampionRequest;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
+@Table(name = "known_champion")
 public class Champion implements NamedObject {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -21,37 +20,28 @@ public class Champion implements NamedObject {
     @Column
     private String name;
 
-    @ManyToMany(
-            targetEntity= OwnedPokemon.class,
-            cascade={CascadeType.PERSIST, CascadeType.MERGE}
-    )
-    @JoinTable(
-            name="ELITE_FOUR_POKEMON",
-            joinColumns=@JoinColumn(name="SLOT_DBID"),
-            inverseJoinColumns=@JoinColumn(name="POKEMON_DBID")
-    )
-    private Set<OwnedPokemon> pokemon = new HashSet<>();
-
-    @OneToOne
-    @JoinColumn(name = "term_dbid")
-    @JsonIgnoreProperties({ "slot" })
-    private ChampionOwnershipTerm currentOwnerRecord;
-
     public Champion() {
+
     }
 
-    public Champion(ChampionInputDto input) {
+    public Champion(String name) {
+        setName(name);
+    }
+
+    public Champion(ChampionRequest input) {
         this.update(input);
     }
 
-    public void update(ChampionInputDto input) {
+    public void update(ChampionRequest input) {
         setName(input.getName());
     }
 
+    @Override
     public Integer getDbid() {
         return dbid;
     }
 
+    @Override
     public void setDbid(Integer dbid) {
         this.dbid = dbid;
     }
@@ -64,21 +54,5 @@ public class Champion implements NamedObject {
         if (name != null) {
             this.name = name;
         }
-    }
-
-    public ChampionOwnershipTerm getCurrentOwnerRecord() {
-        return currentOwnerRecord;
-    }
-
-    public void setCurrentOwnerRecord(ChampionOwnershipTerm currentOwnerRecord) {
-        this.currentOwnerRecord = currentOwnerRecord;
-    }
-
-    public Set<OwnedPokemon> getPokemon() {
-        return pokemon;
-    }
-
-    public void setPokemon(Set<OwnedPokemon> pokemon) {
-        this.pokemon = pokemon;
     }
 }

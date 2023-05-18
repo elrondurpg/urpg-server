@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
-import com.pokemonurpg.entities.v1.ImageFolder;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -28,7 +27,7 @@ public class ImageFolderTest {
 
     @Test
     public void testConstructor() {
-        ImageFolderInputDto input = new ImageFolderInputDto();
+        ImageFolderRequest input = new ImageFolderRequest();
         input.setDescription(DESCRIPTION);
         input.setExtension(EXTENSION);
         input.setName(NAME);

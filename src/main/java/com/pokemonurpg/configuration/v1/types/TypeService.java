@@ -37,13 +37,13 @@ public class TypeService implements NamedObjectService<Type> {
         return typeRepository.findByName(name);
     }
 
-    public Type create(TypeInputDto input) {
+    public Type create(TypeRequest input) {
         Type type = new Type(input);
         typeRepository.save(type);
         return type;
     }
 
-    public Type update(TypeInputDto input, int dbid) {
+    public Type update(TypeRequest input, int dbid) {
         Type type = typeRepository.findByDbid(dbid);
         if (type != null) {
             type.update(input);

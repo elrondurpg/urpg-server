@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.contestattributes;
 
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeController;
 import com.pokemonurpg.entities.v1.ContestAttribute;
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class ContestAttributeControllerTest {
 
     @Test
     public void create() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
         when(contestAttributeService.create(input)).thenReturn(contestAttribute);
         assertEquals(contestAttribute, contestAttributeController.create(input));
@@ -52,7 +49,7 @@ public class ContestAttributeControllerTest {
 
     @Test
     public void update() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
         when(contestAttributeService.update(input, DBID)).thenReturn(contestAttribute);
         assertEquals(contestAttribute, contestAttributeController.update(input, DBID));

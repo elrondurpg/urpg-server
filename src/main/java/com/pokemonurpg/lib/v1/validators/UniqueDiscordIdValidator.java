@@ -1,6 +1,6 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.configuration.v1.members.MemberRequest;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.lib.v1.annotations.UniqueDiscordId;
@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueDiscordIdValidator implements ConstraintValidator<UniqueDiscordId, MemberInputDto> {
+public class UniqueDiscordIdValidator implements ConstraintValidator<UniqueDiscordId, MemberRequest> {
     @Resource
     private MemberService memberService;
 
@@ -18,7 +18,7 @@ public class UniqueDiscordIdValidator implements ConstraintValidator<UniqueDisco
     private RequestPathVariableService requestPathVariableService;
 
     @Override
-    public boolean isValid(MemberInputDto input, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(MemberRequest input, ConstraintValidatorContext constraintValidatorContext) {
         if (input != null) {
             String discordId = input.getDiscordId();
             if (discordId != null) {

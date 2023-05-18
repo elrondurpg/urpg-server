@@ -2,18 +2,18 @@ package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.ValueConformsToType;
-import com.pokemonurpg.configuration.v1.featureflags.FlagInputDto;
-import com.pokemonurpg.entities.v1.Flag;
-import com.pokemonurpg.configuration.v1.featureflags.FlagService;
+import com.pokemonurpg.configuration.v1.featureflags.FeatureFlagRequest;
+import com.pokemonurpg.entities.v1.FeatureFlag;
+import com.pokemonurpg.configuration.v1.featureflags.FeatureFlagService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ValueConformsToTypeValidator implements ConstraintValidator<ValueConformsToType, FlagInputDto> {
+public class ValueConformsToTypeValidator implements ConstraintValidator<ValueConformsToType, FeatureFlagRequest> {
 
     @Resource
-    private FlagService flagService;
+    private FeatureFlagService featureFlagService;
 
     @Resource
     private RequestPathVariableService requestPathVariableService;
@@ -24,7 +24,7 @@ public class ValueConformsToTypeValidator implements ConstraintValidator<ValueCo
     }
 
     @Override
-    public boolean isValid(FlagInputDto input, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(FeatureFlagRequest input, ConstraintValidatorContext constraintValidatorContext) {
         if (input != null) {
             String type = input.getType();
             String value = input.getValue();
@@ -32,10 +32,10 @@ public class ValueConformsToTypeValidator implements ConstraintValidator<ValueCo
 
                 if (type == null || value == null) {
                     Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-                    Flag flag = flagService.findByDbid(requestDbid);
+                    FeatureFlag featureFlag = featureFlagService.findByDbid(requestDbid);
 
-                    if (type == null) type = flag.getType();
-                    if (value == null) value = flag.getValue();
+                    if (type == null) type = featureFlag.getType();
+                    if (value == null) value = featureFlag.getValue();
                 }
 
                 return conforms(type, value);

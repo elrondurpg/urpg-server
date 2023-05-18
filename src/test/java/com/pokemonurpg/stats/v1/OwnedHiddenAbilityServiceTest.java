@@ -2,9 +2,6 @@ package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.Ability;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
-import com.pokemonurpg.stats.v1.OwnedHiddenAbilityInputDto;
-import com.pokemonurpg.stats.v1.OwnedHiddenAbilityService;
-import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,17 +33,17 @@ public class OwnedHiddenAbilityServiceTest {
     @Test
     public void updateAll() {
         // Given an OwnedHiddenAbilityInputDto with ability AbilityName and Delete = false;
-        OwnedHiddenAbilityInputDto input1 = new OwnedHiddenAbilityInputDto();
+        OwnedHiddenAbilityRequest input1 = new OwnedHiddenAbilityRequest();
         input1.setAbility(ABILITY_NAME1);
         input1.setDelete(false);
 
         // Given an OwnedHiddenAbilityInputDto with ability AbilityName2 and Delete = true;
-        OwnedHiddenAbilityInputDto input2 = new OwnedHiddenAbilityInputDto();
+        OwnedHiddenAbilityRequest input2 = new OwnedHiddenAbilityRequest();
         input2.setAbility(ABILITY_NAME2);
         input2.setDelete(true);
 
         // Given an OwnedPokemonInputDto that contains those hidden ability inputs
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
         input.setOwnedHiddenAbilities(Arrays.asList(input1, input2));
 
         // Given an OwnedPokemon with 'abilitys' containing ability2

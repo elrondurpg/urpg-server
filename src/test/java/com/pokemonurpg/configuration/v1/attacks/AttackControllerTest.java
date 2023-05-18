@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.attacks;
 
-import com.pokemonurpg.configuration.v1.attacks.AttackController;
 import com.pokemonurpg.entities.v1.Attack;
-import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
-import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -39,7 +36,7 @@ public class AttackControllerTest {
 
     @Test
     public void createReturnsResultFromAttackService() {
-        AttackInputDto input = new AttackInputDto();
+        AttackRequest input = new AttackRequest();
         Attack attack = new Attack();
 
         when (attackService.create(input)).thenReturn(attack);
@@ -48,7 +45,7 @@ public class AttackControllerTest {
 
     @Test
     public void updateReturnsResultFromAttackService() {
-        AttackInputDto input = new AttackInputDto();
+        AttackRequest input = new AttackRequest();
         Attack attack = new Attack();
 
         when (attackService.update(input, DBID)).thenReturn(attack);

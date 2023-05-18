@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contestRank")
+@RequestMapping("/urpg-configuration/v1/contest-ranks")
 @CrossOrigin
 @Validated
 public class ContestRankController {
@@ -38,14 +38,14 @@ public class ContestRankController {
     @AllowAuthorized(permission = "Write Contest Type")
     @PostMapping
     public @ResponseBody
-    ContestRank create(@Valid @RequestBody ContestRankInputDto input) {
+    ContestRank create(@Valid @RequestBody ContestRankRequest input) {
         return contestRankService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Contest Type")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ContestRank update(@Valid @RequestBody ContestRankInputDto input, @PathVariable int dbid) {
+    ContestRank update(@Valid @RequestBody ContestRankRequest input, @PathVariable int dbid) {
         return contestRankService.update(input, dbid);
     }
 }

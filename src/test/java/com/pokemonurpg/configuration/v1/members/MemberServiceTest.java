@@ -1,8 +1,8 @@
 package com.pokemonurpg.configuration.v1.members;
 
-import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
-import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
-import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.champions.ChampionService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.EliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gymleaders.GymLeaderService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
 import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
 import com.pokemonurpg.login.v1.AesEncryptionService;
@@ -35,11 +35,11 @@ public class MemberServiceTest {
 
     private final static byte[]                     IV = { 12, 32 };
 
-    private final static ChampionVictoryInputDto CHAMPION_VICTORY = mock(ChampionVictoryInputDto.class);
+    private final static ChampionVictoryRequest CHAMPION_VICTORY = mock(ChampionVictoryRequest.class);
 
-    private final static EliteFourVictoryInputDto ELITE_FOUR_VICTORY = mock(EliteFourVictoryInputDto.class);
+    private final static EliteFourVictoryRequest ELITE_FOUR_VICTORY = mock(EliteFourVictoryRequest.class);
 
-    private final static GymVictoryInputDto GYM_VICTORY = mock(GymVictoryInputDto.class);
+    private final static GymVictoryRequest GYM_VICTORY = mock(GymVictoryRequest.class);
 
     private final static Integer                    DBID = 32432;
     private final static Integer                    SALT = 34222;
@@ -49,11 +49,11 @@ public class MemberServiceTest {
     private final static Long                       EXPIRES_IN = 69L;
     private final static Long                       CURRENT_TIME_MILLIS = 432000L;
 
-    private final static LegendaryProgressInputDto LEGENDARY_PROGRESS = mock(LegendaryProgressInputDto.class);
+    private final static LegendaryProgressRequest LEGENDARY_PROGRESS = mock(LegendaryProgressRequest.class);
 
     private final static Member                     CURRENT_MEMBER = new Member();
 
-    private final static OwnedItemInputDto OWNED_ITEM = mock(OwnedItemInputDto.class);
+    private final static OwnedItemRequest OWNED_ITEM = mock(OwnedItemRequest.class);
 
     private final static Role                       CURRENT_ROLE = mock(Role.class);
     private final static Role                       NEW_ROLE = mock(Role.class);
@@ -107,13 +107,13 @@ public class MemberServiceTest {
     private GymVictoryService gymVictoryService;
 
     @Mock
-    private KnownChampionService knownChampionService;
+    private ChampionService championService;
 
     @Mock
-    private KnownEliteFourMemberService knownEliteFourMemberService;
+    private EliteFourMemberService eliteFourMemberService;
 
     @Mock
-    private KnownGymLeaderService knownGymLeaderService;
+    private GymLeaderService gymLeaderService;
 
     @Mock
     private AuthorizationService authorizationService;
@@ -249,7 +249,7 @@ public class MemberServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        MemberInputDto input = new MemberInputDto();
+        MemberRequest input = new MemberRequest();
         input.setName(NAME);
 
         when(memberRepository.findByDbid(DBID)).thenReturn(null);

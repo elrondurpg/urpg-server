@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.contestranks;
 
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
 import com.pokemonurpg.entities.v1.ContestRank;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestRankRepository;
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -66,7 +63,7 @@ public class ContestRankServiceTest {
 
     @Test
     public void create() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
 
         ContestRank contestRank = contestRankService.create(input);
@@ -76,7 +73,7 @@ public class ContestRankServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
 
         when(contestRankRepository.findByDbid(DBID)).thenReturn(contestRank);
@@ -89,7 +86,7 @@ public class ContestRankServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
 
         when(contestRankRepository.findByDbid(DBID)).thenReturn(null);

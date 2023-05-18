@@ -2,9 +2,9 @@ package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.DoesNotConflictWithKnownGymLeader;
-import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
-import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
-import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.champions.ChampionService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.EliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gymleaders.GymLeaderService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 
@@ -14,13 +14,13 @@ import javax.validation.ConstraintValidatorContext;
 
 public class DoesNotConflictWithKnownGymLeaderValidator implements ConstraintValidator<DoesNotConflictWithKnownGymLeader, String> {
     @Resource
-    private KnownGymLeaderService knownGymLeaderService;
+    private GymLeaderService gymLeaderService;
 
     @Resource
-    private KnownEliteFourMemberService knownEliteFourMemberService;
+    private EliteFourMemberService eliteFourMemberService;
 
     @Resource
-    private KnownChampionService knownChampionService;
+    private ChampionService championService;
 
     @Resource
     private MemberService memberService;
@@ -39,9 +39,9 @@ public class DoesNotConflictWithKnownGymLeaderValidator implements ConstraintVal
             Integer dbid = requestPathVariableService.findIntByName("dbid");
             Member member = memberService.findByDbid(dbid);
             return (member != null && input.equalsIgnoreCase(member.getName())) ||
-                    (knownGymLeaderService.findByNameExact(input) == null &&
-                    knownEliteFourMemberService.findByNameExact(input) == null &&
-                    knownChampionService.findByNameExact(input) == null);
+                    (gymLeaderService.findByNameExact(input) == null &&
+                    eliteFourMemberService.findByNameExact(input) == null &&
+                    championService.findByNameExact(input) == null);
         }
         else return true;
     }

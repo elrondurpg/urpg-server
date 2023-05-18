@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
+import com.pokemonurpg.configuration.v1.roles.RoleRequest;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -46,11 +46,11 @@ public class Role implements NamedObject {
     public Role() {
     }
 
-    public Role(RoleInputDto input) {
+    public Role(RoleRequest input) {
         this.update(input);
     }
 
-    public void update(RoleInputDto input) {
+    public void update(RoleRequest input) {
         setName(input.getName());
     }
 

@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.contestranks;
 
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankController;
 import com.pokemonurpg.entities.v1.ContestRank;
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class ContestRankControllerTest {
 
     @Test
     public void create() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
         when(contestRankService.create(input)).thenReturn(contestRank);
         assertEquals(contestRank, contestRankController.create(input));
@@ -52,7 +49,7 @@ public class ContestRankControllerTest {
 
     @Test
     public void update() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
         when(contestRankService.update(input, DBID)).thenReturn(contestRank);
         assertEquals(contestRank, contestRankController.update(input, DBID));

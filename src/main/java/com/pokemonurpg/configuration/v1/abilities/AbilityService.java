@@ -35,13 +35,13 @@ public class AbilityService implements NamedObjectService<Ability> {
         return abilityRepository.findByName(name);
     }
 
-    public Ability create(AbilityInputDto input) {
+    public Ability create(AbilityRequest input) {
         Ability ability = new Ability(input);
         abilityRepository.save(ability);
         return ability;
     }
 
-    public Ability update(AbilityInputDto input, int dbid) {
+    public Ability update(AbilityRequest input, int dbid) {
         Ability ability = abilityRepository.findByDbid(dbid);
         if (ability != null) {
             ability.update(input);

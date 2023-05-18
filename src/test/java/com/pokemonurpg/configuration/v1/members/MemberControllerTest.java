@@ -1,10 +1,7 @@
 package com.pokemonurpg.configuration.v1.members;
 
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.members.MemberController;
 import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
-import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.login.v1.AuthorizationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,7 +67,7 @@ public class MemberControllerTest {
 
     @Test
     public void create() {
-        MemberInputDto input = new MemberInputDto();
+        MemberRequest input = new MemberRequest();
         input.setName(NAME);
         when(memberService.create(input)).thenReturn(member);
         assertEquals(member, memberController.create(input));
@@ -78,7 +75,7 @@ public class MemberControllerTest {
 
     @Test
     public void update_ReturnsRoles_WhenAuthorized() {
-        MemberInputDto input = new MemberInputDto();
+        MemberRequest input = new MemberRequest();
         when(memberService.update(input, DBID)).thenReturn(member);
         when(authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION)).thenReturn(true);
 
@@ -89,7 +86,7 @@ public class MemberControllerTest {
 
     @Test
     public void update_DoesNotReturnRoles_WhenNotAuthorized() {
-        MemberInputDto input = new MemberInputDto();
+        MemberRequest input = new MemberRequest();
         when(memberService.update(input, DBID)).thenReturn(member);
         when(authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION)).thenReturn(false);
 

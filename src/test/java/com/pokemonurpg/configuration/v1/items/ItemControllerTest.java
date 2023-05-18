@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.items;
 
-import com.pokemonurpg.configuration.v1.items.ItemController;
 import com.pokemonurpg.entities.v1.Item;
-import com.pokemonurpg.configuration.v1.items.ItemInputDto;
-import com.pokemonurpg.configuration.v1.items.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -53,7 +50,7 @@ public class ItemControllerTest {
 
     @Test
     public void create() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
         when(itemService.create(input)).thenReturn(item);
         assertEquals(item, itemController.create(input));
@@ -61,7 +58,7 @@ public class ItemControllerTest {
 
     @Test
     public void update() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
         when(itemService.update(input, DBID)).thenReturn(item);
         assertEquals(item, itemController.update(input, DBID));

@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.entities.v1.KnownChampion;
+import com.pokemonurpg.entities.v1.Champion;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.ChampionVictory;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ChampionVictoryRepository;
@@ -19,7 +19,7 @@ public class ChampionVictoryService {
         return championVictoryRepository.findAll();
     }
 
-    public void update(ChampionVictoryInputDto input, Member challenger, KnownChampion defender) {
+    public void update(ChampionVictoryRequest input, Member challenger, Champion defender) {
         ChampionVictory existingRecord = championVictoryRepository.findByChallengerAndDefender(challenger, defender);
 
         if (existingRecord != null) {

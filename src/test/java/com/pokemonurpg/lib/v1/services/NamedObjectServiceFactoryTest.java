@@ -1,11 +1,11 @@
 package com.pokemonurpg.lib.v1.services;
 
 import com.pokemonurpg.configuration.v1.badges.BadgeService;
-import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
-import com.pokemonurpg.configuration.v1.championslots.ChampionService;
-import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
-import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourService;
-import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.champions.ChampionService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionSlotService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.EliteFourMemberService;
+import com.pokemonurpg.configuration.v1.elitefourmemberslots.EliteFourMemberSlotService;
+import com.pokemonurpg.configuration.v1.gymleaders.GymLeaderService;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import com.pokemonurpg.configuration.v1.abilities.AbilityService;
@@ -13,21 +13,20 @@ import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
 import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
-import com.pokemonurpg.configuration.v1.contestmovetypes.ORASContestMoveTypeService;
-import com.pokemonurpg.configuration.v1.contestmovetypes.RSEContestMoveTypeService;
+import com.pokemonurpg.configuration.v1.contesteffects.ContestEffectService;
 import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
-import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
+import com.pokemonurpg.configuration.v1.capturemethods.CaptureMethodService;
 import com.pokemonurpg.configuration.v1.sections.SectionService;
 import com.pokemonurpg.entities.v1.*;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
 import com.pokemonurpg.configuration.v1.items.ItemService;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.configuration.v1.sitemenuitems.MenuItemService;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
@@ -64,13 +63,13 @@ public class NamedObjectServiceFactoryTest {
     private BadgeService badgeService;
 
     @Mock
-    private ChampionService championService;
+    private ChampionSlotService championSlotService;
 
     @Mock
     private ContestAttributeService contestAttributeService;
 
     @Mock
-    private EliteFourService eliteFourService;
+    private EliteFourMemberSlotService eliteFourMemberSlotService;
 
     @Mock
     private GymService gymService;
@@ -82,13 +81,13 @@ public class NamedObjectServiceFactoryTest {
     private ItemService itemService;
 
     @Mock
-    private KnownChampionService knownChampionService;
+    private ChampionService championService;
 
     @Mock
-    private KnownEliteFourMemberService knownEliteFourMemberService;
+    private EliteFourMemberService eliteFourMemberService;
 
     @Mock
-    private KnownGymLeaderService knownGymLeaderService;
+    private GymLeaderService gymLeaderService;
 
     @Mock
     private MemberService memberService;
@@ -100,10 +99,10 @@ public class NamedObjectServiceFactoryTest {
     private NatureService natureService;
 
     @Mock
-    private ObtainedService obtainedService;
+    private CaptureMethodService captureMethodService;
 
     @Mock
-    private ORASContestMoveTypeService orasContestMoveTypeService;
+    private ContestEffectService contestEffectService;
 
     @Mock
     private ParkLocationService parkLocationService;
@@ -118,13 +117,10 @@ public class NamedObjectServiceFactoryTest {
     private RoleService roleService;
 
     @Mock
-    private RSEContestMoveTypeService rseContestMoveTypeService;
-
-    @Mock
     private SectionService sectionService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Mock
     private StoryRankService storyRankService;
@@ -173,8 +169,8 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsChampionService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Champion.class);
-        assertEquals(championService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(ChampionSlot.class);
+        assertEquals(championSlotService, service);
     }
 
     @Test
@@ -185,8 +181,8 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsEliteFourService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(EliteFour.class);
-        assertEquals(eliteFourService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(EliteFourMemberSlot.class);
+        assertEquals(eliteFourMemberSlotService, service);
     }
 
     @Test
@@ -215,20 +211,20 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsKnownChampionService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownChampion.class);
-        assertEquals(knownChampionService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Champion.class);
+        assertEquals(championSlotService, service);
     }
 
     @Test
     public void returnsKnownEliteFourMemberService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownEliteFourMember.class);
-        assertEquals(knownEliteFourMemberService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(EliteFourMember.class);
+        assertEquals(eliteFourMemberService, service);
     }
 
     @Test
     public void returnsKnownGymLeaderService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(KnownGymLeader.class);
-        assertEquals(knownGymLeaderService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(GymLeader.class);
+        assertEquals(gymLeaderService, service);
     }
 
     @Test
@@ -251,14 +247,14 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsObtainedService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Obtained.class);
-        assertEquals(obtainedService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(CaptureMethod.class);
+        assertEquals(captureMethodService, service);
     }
 
     @Test
     public void returnsOrasContestMoveTypeService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(ORASContestMoveType.class);
-        assertEquals(orasContestMoveTypeService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(ContestEffect.class);
+        assertEquals(contestEffectService, service);
     }
 
     @Test
@@ -286,12 +282,6 @@ public class NamedObjectServiceFactoryTest {
     }
 
     @Test
-    public void returnsRseContestMoveTypeService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(RSEContestMoveType.class);
-        assertEquals(rseContestMoveTypeService, service);
-    }
-
-    @Test
     public void returnsSectionService() {
         NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Section.class);
         assertEquals(sectionService, service);
@@ -299,8 +289,8 @@ public class NamedObjectServiceFactoryTest {
 
     @Test
     public void returnsSpeciesService() {
-        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Species.class);
-        assertEquals(speciesService, service);
+        NamedObjectService service = namedObjectServiceFactory.getServiceForClass(Pokemon.class);
+        assertEquals(pokemonService, service);
     }
 
     @Test

@@ -18,7 +18,7 @@ import java.util.List;
 import static com.pokemonurpg.lib.v1.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/badge")
+@RequestMapping("/urpg-configuration/v1/badges")
 @CrossOrigin
 @Validated
 public class BadgeController {
@@ -44,14 +44,14 @@ public class BadgeController {
     @AllowAuthorized(permission = "Write Gym")
     @PostMapping
     public @ResponseBody
-    Badge create(@Valid @RequestBody BadgeInputDto input) {
+    Badge create(@Valid @RequestBody BadgeRequest input) {
         return badgeService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Gym")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Badge update(@Valid @RequestBody BadgeInputDto input, @PathVariable int dbid) {
+    Badge update(@Valid @RequestBody BadgeRequest input, @PathVariable int dbid) {
         return badgeService.update(input, dbid);
     }
 

@@ -35,13 +35,13 @@ public class ContestAttributeService implements NamedObjectService<ContestAttrib
         return contestAttributeRepository.findByName(name);
     }
 
-    public ContestAttribute create(ContestAttributeInputDto input) {
+    public ContestAttribute create(ContestAttributeRequest input) {
         ContestAttribute contestAttribute = new ContestAttribute(input);
         contestAttributeRepository.save(contestAttribute);
         return contestAttribute;
     }
 
-    public ContestAttribute update(ContestAttributeInputDto input, int dbid) {
+    public ContestAttribute update(ContestAttributeRequest input, int dbid) {
         ContestAttribute contestAttribute = contestAttributeRepository.findByDbid(dbid);
         if (contestAttribute != null) {
             contestAttribute.update(input);

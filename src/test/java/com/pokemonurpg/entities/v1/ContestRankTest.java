@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
-import com.pokemonurpg.entities.v1.ContestRank;
+import com.pokemonurpg.configuration.v1.contestranks.ContestRankRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class ContestRankTest {
 
     @Test
     public void testConstructor() {
-        ContestRankInputDto input = new ContestRankInputDto();
+        ContestRankRequest input = new ContestRankRequest();
         input.setName(NAME);
 
         ContestRank contestRank = new ContestRank(input);

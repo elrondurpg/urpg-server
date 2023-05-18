@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.ChampionVictoryInputDto;
+import com.pokemonurpg.stats.v1.ChampionVictoryRequest;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class ChampionVictory {
     @MapsId("defender_dbid")
     @JoinColumn(name="defender_dbid")
     @JsonIgnoreProperties({"dbid"})
-    private KnownChampion defender;
+    private Champion defender;
 
     @Column
     private Date date;
@@ -41,14 +41,14 @@ public class ChampionVictory {
     public ChampionVictory() {
     }
 
-    public ChampionVictory(ChampionVictoryInputDto input, Member challenger, KnownChampion defender) {
+    public ChampionVictory(ChampionVictoryRequest input, Member challenger, Champion defender) {
         this.update(input);
         this.id = new ChampionVictoryKey(challenger.getDbid(), defender.getDbid());
         setChallenger(challenger);
         setDefender(defender);
     }
 
-    public void update(ChampionVictoryInputDto input) {
+    public void update(ChampionVictoryRequest input) {
         setDate(input.getDate());
         setLogUrl(input.getLogUrl());
     }
@@ -61,11 +61,11 @@ public class ChampionVictory {
         this.challenger = challenger;
     }
 
-    public KnownChampion getDefender() {
+    public Champion getDefender() {
         return defender;
     }
 
-    public void setDefender(KnownChampion defender) {
+    public void setDefender(Champion defender) {
         this.defender = defender;
     }
 

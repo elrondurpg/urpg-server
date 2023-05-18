@@ -35,13 +35,13 @@ public class BadgeService implements NamedObjectService<Badge> {
         return badgeRepository.findByName(name);
     }
 
-    public Badge create(BadgeInputDto input) {
+    public Badge create(BadgeRequest input) {
         Badge badge = new Badge(input);
         badgeRepository.save(badge);
         return badge;
     }
 
-    public Badge update(BadgeInputDto input, int dbid) {
+    public Badge update(BadgeRequest input, int dbid) {
         Badge badge = badgeRepository.findByDbid(dbid);
         if (badge != null) {
             badge.update(input);

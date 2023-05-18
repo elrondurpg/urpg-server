@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
+import com.pokemonurpg.configuration.v1.sections.SectionRequest;
 
 import javax.persistence.*;
 
@@ -26,11 +26,11 @@ public class Section implements NamedObject {
 
     public Section() {}
 
-    public Section(SectionInputDto input) {
+    public Section(SectionRequest input) {
         this.update(input);
     }
 
-    public void update(SectionInputDto input) {
+    public void update(SectionRequest input) {
         setName(input.getName());
         setTier1LegendaryRequirement(input.getTier1LegendaryRequirement());
         setTier2LegendaryRequirement(input.getTier2LegendaryRequirement());

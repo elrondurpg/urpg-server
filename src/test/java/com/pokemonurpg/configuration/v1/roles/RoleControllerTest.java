@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.roles;
 
-import com.pokemonurpg.configuration.v1.roles.RoleController;
 import com.pokemonurpg.entities.v1.Role;
-import com.pokemonurpg.configuration.v1.roles.RoleInputDto;
-import com.pokemonurpg.configuration.v1.roles.RoleService;
 import com.pokemonurpg.login.v1.AuthorizationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +49,7 @@ public class RoleControllerTest {
 
     @Test
     public void create() {
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
         when(roleService.create(input)).thenReturn(role);
         assertEquals(role, roleController.create(input));
@@ -60,7 +57,7 @@ public class RoleControllerTest {
 
     @Test
     public void update() {
-        RoleInputDto input = new RoleInputDto();
+        RoleRequest input = new RoleRequest();
         input.setName(NAME);
         when(roleService.update(input, DBID)).thenReturn(role);
         assertEquals(role, roleController.update(input, DBID));

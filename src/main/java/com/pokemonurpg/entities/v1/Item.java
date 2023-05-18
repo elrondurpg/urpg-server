@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.items.ItemInputDto;
+import com.pokemonurpg.configuration.v1.items.ItemRequest;
 
 import javax.persistence.*;
 
@@ -30,12 +30,12 @@ public class Item implements NamedObject {
     public Item() {
     }
 
-    public Item(ItemInputDto item) {
+    public Item(ItemRequest item) {
         this.update(item);
 		if (price == null) price = 0;
     }
 
-    public void update(ItemInputDto input) {
+    public void update(ItemRequest input) {
         setName(input.getName());
         setPrice(input.getPrice());
         setType(input.getType());

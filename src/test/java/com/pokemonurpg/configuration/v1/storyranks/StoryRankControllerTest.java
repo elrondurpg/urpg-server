@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.storyranks;
 
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankController;
 import com.pokemonurpg.entities.v1.StoryRank;
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class StoryRankControllerTest {
 
     @Test
     public void create() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
         when(storyRankService.create(input)).thenReturn(storyRank);
         assertEquals(storyRank, storyRankController.create(input));
@@ -52,7 +49,7 @@ public class StoryRankControllerTest {
 
     @Test
     public void update() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
         when(storyRankService.update(input, DBID)).thenReturn(storyRank);
         assertEquals(storyRank, storyRankController.update(input, DBID));

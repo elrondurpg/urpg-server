@@ -1,13 +1,10 @@
 package com.pokemonurpg.lib.v1.services;
 
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
-import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymLeaderRecordService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
-import com.pokemonurpg.entities.v1.EarnedRibbon;
-import com.pokemonurpg.entities.v1.LegendaryProgress;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
-import com.pokemonurpg.stats.v1.EarnedRibbonService;
 import com.pokemonurpg.stats.v1.LegendaryProgressService;
 import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.junit.Test;
@@ -28,7 +25,7 @@ public class IndexedObjectServiceFactoryTest {
     private GymService gymService;
 
     @Mock
-    private GymOwnershipTermService gymOwnershipTermService;
+    private GymLeaderRecordService gymLeaderRecordService;
 
     @Mock
     private LegendaryProgressService legendaryProgressService;
@@ -39,7 +36,7 @@ public class IndexedObjectServiceFactoryTest {
     @Test
     public void testAll() {
         assertEquals(gymService, indexedObjectServiceFactory.getServiceForClass(Gym.class));
-        assertEquals(gymOwnershipTermService, indexedObjectServiceFactory.getServiceForClass(GymOwnershipTerm.class));
+        assertEquals(gymLeaderRecordService, indexedObjectServiceFactory.getServiceForClass(GymLeaderRecord.class));
         assertEquals(ownedPokemonService, indexedObjectServiceFactory.getServiceForClass(OwnedPokemon.class));
         assertNull(indexedObjectServiceFactory.getServiceForClass(Object.class));
     }

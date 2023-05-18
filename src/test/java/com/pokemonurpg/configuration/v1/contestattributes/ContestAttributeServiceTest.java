@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.contestattributes;
 
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
 import com.pokemonurpg.entities.v1.ContestAttribute;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -66,7 +63,7 @@ public class ContestAttributeServiceTest {
 
     @Test
     public void create() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
 
         ContestAttribute contestAttribute = contestAttributeService.create(input);
@@ -76,7 +73,7 @@ public class ContestAttributeServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
 
         when(contestAttributeRepository.findByDbid(DBID)).thenReturn(contestAttribute);
@@ -89,7 +86,7 @@ public class ContestAttributeServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
 
         when(contestAttributeRepository.findByDbid(DBID)).thenReturn(null);

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 public class GymServiceTest {
     private final static Badge              BADGE       = mock(Badge.class);
-    private final static GymOwnershipTerm   TERM        = mock(GymOwnershipTerm.class);
+    private final static GymLeaderRecord TERM        = mock(GymLeaderRecord.class);
     private final static Integer            TERM_DBID   = 32742;
     private final static Integer            DBID        = 32432;
     private final static List<String>       GYMS        = new ArrayList<>();
@@ -95,7 +95,7 @@ public class GymServiceTest {
 
     @Test
     public void findByCurrentOwnershipTerm() {
-        GymOwnershipTerm record = new GymOwnershipTerm();
+        GymLeaderRecord record = new GymLeaderRecord();
         Gym gym = new Gym();
         gym.setCurrentOwnerRecord(record);
         gymRepository.save(gym);
@@ -107,7 +107,7 @@ public class GymServiceTest {
 
     @Test
     public void create() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
 
         Gym gym = gymService.create(input);
@@ -122,7 +122,7 @@ public class GymServiceTest {
         gym.setDbid(DBID);
         gymRepository.save(gym);
 
-        GymOwnershipTerm record = new GymOwnershipTerm();
+        GymLeaderRecord record = new GymLeaderRecord();
         record.setDbid(TERM_DBID);
         gymRecordRepository.save(record);
 
@@ -134,7 +134,7 @@ public class GymServiceTest {
         type.setName(TYPE_NAME);
         typeRepository.save(type);
 
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
         input.setBadge(BADGE_NAME);
         input.setType(TYPE_NAME);
@@ -150,7 +150,7 @@ public class GymServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
 
         Gym response = gymService.update(DBID, input);
 
@@ -170,7 +170,7 @@ public class GymServiceTest {
 
     @Test
     public void updateEmbeddedValues_SetsOwnerRecordToNull_whenInputOwnerRecordIsNullAndRemoveOwnerIsTrue() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setRemoveOwner(true);
 
         Gym gym = new Gym();

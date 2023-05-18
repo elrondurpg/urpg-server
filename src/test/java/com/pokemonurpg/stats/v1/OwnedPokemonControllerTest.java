@@ -1,9 +1,6 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.stats.v1.OwnedPokemonController;
-import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
-import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -39,14 +36,14 @@ public class OwnedPokemonControllerTest {
 
     @Test
     public void create() {
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
         when(ownedPokemonService.create(input)).thenReturn(POKEMON);
         assertEquals(POKEMON, ownedPokemonController.create(input));
     }
 
     @Test
     public void update() {
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
         when(ownedPokemonService.update(input, DBID)).thenReturn(POKEMON);
         assertEquals(POKEMON, ownedPokemonController.update(input, DBID));
     }

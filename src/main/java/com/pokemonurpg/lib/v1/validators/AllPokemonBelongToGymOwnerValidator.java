@@ -2,9 +2,9 @@ package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.AllPokemonBelongToOwner;
-import com.pokemonurpg.configuration.v1.gyms.GymPokemonInputDto;
+import com.pokemonurpg.configuration.v1.gyms.GymPokemonRequest;
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
@@ -15,7 +15,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 import java.util.Objects;
 
-public class AllPokemonBelongToGymOwnerValidator extends AllPokemonBelongToOwnerValidator<List<GymPokemonInputDto>> {
+public class AllPokemonBelongToGymOwnerValidator extends AllPokemonBelongToOwnerValidator<List<GymPokemonRequest>> {
     @Resource
     private GymService gymService;
 
@@ -30,17 +30,17 @@ public class AllPokemonBelongToGymOwnerValidator extends AllPokemonBelongToOwner
     }
 
     @Override
-    public boolean isValid(List<GymPokemonInputDto> input, ConstraintValidatorContext context) {
+    public boolean isValid(List<GymPokemonRequest> input, ConstraintValidatorContext context) {
         if (input != null && !input.isEmpty()) {
             Integer requestDbid = requestPathVariableService.findIntByName("dbid");
             Gym requestGym = gymService.findByDbid(requestDbid);
 
             if (requestGym != null) {
-                GymOwnershipTerm currentOwnerRecord = requestGym.getCurrentOwnerRecord();
+                GymLeaderRecord currentOwnerRecord = requestGym.getCurrentOwnerRecord();
                 if (currentOwnerRecord != null) {
                     Member gymOwner = currentOwnerRecord.getOwner();
                     if (gymOwner != null) {
-                        for (GymPokemonInputDto pokemonInput : input) {
+                        for (GymPokemonRequest pokemonInput : input) {
                             if (pokemonInput != null) {
                                 OwnedPokemon pokemon = ownedPokemonService.findByDbid(pokemonInput.getDbid());
                                 if (pokemon != null) {

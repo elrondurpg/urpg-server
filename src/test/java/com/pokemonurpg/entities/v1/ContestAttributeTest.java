@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
-import com.pokemonurpg.entities.v1.ContestAttribute;
+import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class ContestAttributeTest {
 
     @Test
     public void testConstructor() {
-        ContestAttributeInputDto input = new ContestAttributeInputDto();
+        ContestAttributeRequest input = new ContestAttributeRequest();
         input.setName(NAME);
 
         ContestAttribute contestAttribute = new ContestAttribute(input);

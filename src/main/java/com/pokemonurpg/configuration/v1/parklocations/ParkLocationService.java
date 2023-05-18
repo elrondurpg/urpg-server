@@ -35,13 +35,13 @@ public class ParkLocationService implements NamedObjectService<ParkLocation> {
         return parkLocationRepository.findByName(name);
     }
 
-    public ParkLocation create(ParkLocationInputDto input) {
+    public ParkLocation create(ParkLocationRequest input) {
         ParkLocation parkLocation = new ParkLocation(input);
         parkLocationRepository.save(parkLocation);
         return parkLocation;
     }
 
-    public ParkLocation update(ParkLocationInputDto input, int dbid) {
+    public ParkLocation update(ParkLocationRequest input, int dbid) {
         ParkLocation parkLocation = parkLocationRepository.findByDbid(dbid);
         if (parkLocation != null) {
             parkLocation.update(input);

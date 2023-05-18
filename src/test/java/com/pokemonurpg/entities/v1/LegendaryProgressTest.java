@@ -1,9 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.entities.v1.LegendaryProgress;
-import com.pokemonurpg.entities.v1.Section;
-import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.stats.v1.LegendaryProgressInputDto;
+import com.pokemonurpg.stats.v1.LegendaryProgressRequest;
 import org.junit.Test;
 
 import java.util.Date;
@@ -25,7 +22,7 @@ public class LegendaryProgressTest {
 
     @Test
     public void testConstructor() {
-        LegendaryProgressInputDto input = new LegendaryProgressInputDto();
+        LegendaryProgressRequest input = new LegendaryProgressRequest();
         input.setValue(VALUE);
         input.setDate(DATE);
         input.setLogUrl(LOG_URL);

@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,28 +13,28 @@ import java.util.List;
 public class EvolutionFamilyService {
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
-    public List<List<Species>> findBySpecies(Species species) {
-        List<List<Species>> evolutionFamily = new ArrayList<>();
+    public List<List<Pokemon>> findBySpecies(Pokemon pokemon) {
+        List<List<Pokemon>> evolutionFamily = new ArrayList<>();
 
-        Species basic = getBasicSpecies(species);
+        Pokemon basic = getBasicSpecies(pokemon);
         evolutionFamily.add(Collections.singletonList(basic));
 
-        List<Species> stageOne = speciesService.findByPreEvolution(basic);
+        List<Pokemon> stageOne = pokemonService.findByPreEvolution(basic);
         evolutionFamily.add(stageOne);
 
-        List<Species> stageTwo = new ArrayList<>();
-        stageOne.forEach(firstStageSpecies -> stageTwo.addAll(speciesService.findByPreEvolution(firstStageSpecies)));
+        List<Pokemon> stageTwo = new ArrayList<>();
+        stageOne.forEach(firstStageSpecies -> stageTwo.addAll(pokemonService.findByPreEvolution(firstStageSpecies)));
         evolutionFamily.add(stageTwo);
 
         return evolutionFamily;
     }
 
-    public Species getBasicSpecies(Species species) {
-        Species prevo = species.getPreEvolution();
+    public Pokemon getBasicSpecies(Pokemon pokemon) {
+        Pokemon prevo = pokemon.getPreEvolution();
         if (prevo == null) {
-            return species;
+            return pokemon;
         }
         else {
             return getBasicSpecies(prevo);

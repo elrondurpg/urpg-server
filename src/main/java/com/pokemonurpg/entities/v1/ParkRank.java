@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
+import com.pokemonurpg.configuration.v1.parkranks.ParkRankRequest;
 
 import javax.persistence.*;
 
@@ -25,11 +25,11 @@ public class ParkRank implements NamedObject {
     public ParkRank() {
     }
 
-    public ParkRank(ParkRankInputDto input) {
+    public ParkRank(ParkRankRequest input) {
         this.update(input);
     }
 
-    public void update(ParkRankInputDto input) {
+    public void update(ParkRankRequest input) {
         setName(input.getName());
         setRequirement(input.getRequirement());
     }

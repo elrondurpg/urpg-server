@@ -1,9 +1,9 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermService;
+import com.pokemonurpg.configuration.v1.gymleaderrecords.GymLeaderRecordService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import com.pokemonurpg.lib.v1.annotations.BelongsToThisGym;
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 
@@ -17,7 +17,7 @@ public class BelongsToThisGymValidator implements ConstraintValidator<BelongsToT
     private GymService gymService;
 
     @Resource
-    private GymOwnershipTermService gymOwnershipTermService;
+    private GymLeaderRecordService gymLeaderRecordService;
 
     @Resource
     private RequestPathVariableService requestPathVariableService;
@@ -28,7 +28,7 @@ public class BelongsToThisGymValidator implements ConstraintValidator<BelongsToT
             Integer requestDbid = requestPathVariableService.findIntByName("dbid");
             Gym requestGym = gymService.findByDbid(requestDbid);
             if (requestGym != null) {
-                GymOwnershipTerm requestTerm = gymOwnershipTermService.findByDbid(input);
+                GymLeaderRecord requestTerm = gymLeaderRecordService.findByDbid(input);
                 if (requestTerm != null) {
                     Gym termGym = requestTerm.getGym();
                     if (termGym != null) {

@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.attacktargettypes;
 
 import com.pokemonurpg.entities.v1.AttackTargetType;
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeInputDto;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AttackTargetTypeRepository;
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -67,7 +64,7 @@ public class AttackTargetTypeServiceTest {
 
     @Test
     public void create() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 
@@ -79,7 +76,7 @@ public class AttackTargetTypeServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 
@@ -94,7 +91,7 @@ public class AttackTargetTypeServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 

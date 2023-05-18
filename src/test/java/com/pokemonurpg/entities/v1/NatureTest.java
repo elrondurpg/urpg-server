@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
-import com.pokemonurpg.entities.v1.Nature;
+import com.pokemonurpg.configuration.v1.natures.NatureRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class NatureTest {
 
     @Test
     public void testConstructor() {
-        NatureInputDto input = new NatureInputDto();
+        NatureRequest input = new NatureRequest();
         input.setName(NAME);
 
         Nature nature = new Nature(input);

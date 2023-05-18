@@ -1,9 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.entities.v1.Item;
-import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.entities.v1.OwnedItem;
-import com.pokemonurpg.stats.v1.OwnedItemInputDto;
+import com.pokemonurpg.stats.v1.OwnedItemRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -20,7 +17,7 @@ public class OwnedItemTest {
 
     @Test
     public void testConstructor() {
-        OwnedItemInputDto input = new OwnedItemInputDto();
+        OwnedItemRequest input = new OwnedItemRequest();
         input.setQuantity(QUANTITY);
 
         Member trainer = new Member();

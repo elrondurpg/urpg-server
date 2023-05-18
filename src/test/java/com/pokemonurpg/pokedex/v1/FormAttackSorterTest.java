@@ -1,10 +1,8 @@
 package com.pokemonurpg.pokedex.v1;
 
 import com.pokemonurpg.entities.v1.Attack;
-import com.pokemonurpg.pokedex.v1.AlteredFormDto;
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.entities.v1.SpeciesAttack;
-import com.pokemonurpg.pokedex.v1.FormAttackSorter;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.entities.v1.PokemonAttack;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -26,24 +24,24 @@ public class FormAttackSorterTest {
     @Test
     public void alteredFormsDontMapAttackWhenAllMethodsAreEqual() {
         // Given a set of Species
-        Species species1 = mock(Species.class);
-        Species species2 = mock(Species.class);
-        Species species3 = mock(Species.class);
+        Pokemon pokemon1 = mock(Pokemon.class);
+        Pokemon pokemon2 = mock(Pokemon.class);
+        Pokemon pokemon3 = mock(Pokemon.class);
 
         // Given each Species has a SpeciesAttack that maps attack X with method Y
-        SpeciesAttack speciesAttack = mock(SpeciesAttack.class);
+        PokemonAttack pokemonAttack = mock(PokemonAttack.class);
         when(ATTACK.getName()).thenReturn(ATTACK_NAME);
-        when(speciesAttack.getAttack()).thenReturn(ATTACK);
-        when(speciesAttack.getMethod()).thenReturn(METHOD1);
-        when(species1.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species2.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species3.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(pokemonAttack.getAttack()).thenReturn(ATTACK);
+        when(pokemonAttack.getMethod()).thenReturn(METHOD1);
+        when(pokemon1.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack));
+        when(pokemon2.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack));
+        when(pokemon3.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack));
 
         // Given a set of alteredForms for each Species
-        AlteredFormDto form1 = new AlteredFormDto(species1);
-        AlteredFormDto form2 = new AlteredFormDto(species2);
-        AlteredFormDto form3 = new AlteredFormDto(species3);
-        List<AlteredFormDto> alteredForms = Arrays.asList(form1, form2, form3);
+        AlteredFormResponse form1 = new AlteredFormResponse(pokemon1);
+        AlteredFormResponse form2 = new AlteredFormResponse(pokemon2);
+        AlteredFormResponse form3 = new AlteredFormResponse(pokemon3);
+        List<AlteredFormResponse> alteredForms = Arrays.asList(form1, form2, form3);
 
         // When I call formAttackSorter.run(alteredForms)
         formAttackSorter.run(alteredForms);
@@ -58,28 +56,28 @@ public class FormAttackSorterTest {
     @Test
     public void alteredFormsMapAttackWhenMethodsAreDifferent() {
         // Given a set of Species
-        Species species1 = mock(Species.class);
-        Species species2 = mock(Species.class);
-        Species species3 = mock(Species.class);
+        Pokemon pokemon1 = mock(Pokemon.class);
+        Pokemon pokemon2 = mock(Pokemon.class);
+        Pokemon pokemon3 = mock(Pokemon.class);
 
-        SpeciesAttack speciesAttack = mock(SpeciesAttack.class);
+        PokemonAttack pokemonAttack = mock(PokemonAttack.class);
         when(ATTACK.getName()).thenReturn(ATTACK_NAME);
-        when(speciesAttack.getAttack()).thenReturn(ATTACK);
-        when(speciesAttack.getMethod()).thenReturn(METHOD1);
+        when(pokemonAttack.getAttack()).thenReturn(ATTACK);
+        when(pokemonAttack.getMethod()).thenReturn(METHOD1);
 
-        SpeciesAttack speciesAttack2 = mock(SpeciesAttack.class);
-        when(speciesAttack2.getAttack()).thenReturn(ATTACK);
-        when(speciesAttack2.getMethod()).thenReturn(METHOD2);
+        PokemonAttack pokemonAttack2 = mock(PokemonAttack.class);
+        when(pokemonAttack2.getAttack()).thenReturn(ATTACK);
+        when(pokemonAttack2.getMethod()).thenReturn(METHOD2);
 
-        when(species1.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
-        when(species2.getAttacks()).thenReturn(Collections.singletonList(speciesAttack2));
-        when(species3.getAttacks()).thenReturn(Collections.singletonList(speciesAttack));
+        when(pokemon1.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack));
+        when(pokemon2.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack2));
+        when(pokemon3.getAttacks()).thenReturn(Collections.singletonList(pokemonAttack));
 
         // Given a set of alteredForms for each Species
-        AlteredFormDto form1 = new AlteredFormDto(species1);
-        AlteredFormDto form2 = new AlteredFormDto(species2);
-        AlteredFormDto form3 = new AlteredFormDto(species3);
-        List<AlteredFormDto> alteredForms = Arrays.asList(form1, form2, form3);
+        AlteredFormResponse form1 = new AlteredFormResponse(pokemon1);
+        AlteredFormResponse form2 = new AlteredFormResponse(pokemon2);
+        AlteredFormResponse form3 = new AlteredFormResponse(pokemon3);
+        List<AlteredFormResponse> alteredForms = Arrays.asList(form1, form2, form3);
 
         // When I call formAttackSorter.run(alteredForms)
         formAttackSorter.run(alteredForms);

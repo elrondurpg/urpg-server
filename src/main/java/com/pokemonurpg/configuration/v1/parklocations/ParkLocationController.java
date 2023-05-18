@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parkLocation")
+@RequestMapping("/urpg-configuration/v1/park-locations")
 @CrossOrigin
 @Validated
 public class ParkLocationController {
@@ -38,14 +38,14 @@ public class ParkLocationController {
     @AllowAuthorized(permission = "Write Park")
     @PostMapping
     public @ResponseBody
-    ParkLocation create(@Valid @RequestBody ParkLocationInputDto input) {
+    ParkLocation create(@Valid @RequestBody ParkLocationRequest input) {
         return parkLocationService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Park")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ParkLocation update(@Valid @RequestBody ParkLocationInputDto input, @PathVariable int dbid) {
+    ParkLocation update(@Valid @RequestBody ParkLocationRequest input, @PathVariable int dbid) {
         return parkLocationService.update(input, dbid);
     }
 }

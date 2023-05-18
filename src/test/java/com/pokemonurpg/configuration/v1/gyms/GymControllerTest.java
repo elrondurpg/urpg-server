@@ -48,7 +48,7 @@ public class GymControllerTest {
 
     @Test
     public void create() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
         when(gymService.create(input)).thenReturn(gym);
         assertEquals(gym, gymController.create(input));
@@ -56,7 +56,7 @@ public class GymControllerTest {
 
     @Test
     public void update() {
-        GymInputDto input = new GymInputDto();
+        GymRequest input = new GymRequest();
         input.setName(NAME);
         when(gymService.update(DBID, input)).thenReturn(gym);
         assertEquals(gym, gymController.update(input, DBID));

@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.permissions;
 
-import com.pokemonurpg.configuration.v1.permissions.PermissionController;
 import com.pokemonurpg.entities.v1.Permission;
-import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
-import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class PermissionControllerTest {
 
     @Test
     public void create() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
         when(permissionService.create(input)).thenReturn(permission);
         assertEquals(permission, permissionController.create(input));
@@ -52,7 +49,7 @@ public class PermissionControllerTest {
 
     @Test
     public void update() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
         when(permissionService.update(input, DBID)).thenReturn(permission);
         assertEquals(permission, permissionController.update(input, DBID));

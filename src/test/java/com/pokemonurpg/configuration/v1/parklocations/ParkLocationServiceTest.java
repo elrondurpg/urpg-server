@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.parklocations;
 
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
 import com.pokemonurpg.entities.v1.ParkLocation;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ParkLocationRepository;
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class ParkLocationServiceTest {
 
     @Test
     public void create() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
 
         ParkLocation parkLocation = parkLocationService.create(input);
@@ -69,7 +66,7 @@ public class ParkLocationServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
 
         when(parkLocationRepository.findByDbid(DBID)).thenReturn(parkLocation);
@@ -82,7 +79,7 @@ public class ParkLocationServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
 
         when(parkLocationRepository.findByDbid(DBID)).thenReturn(null);

@@ -16,14 +16,14 @@ public class OwnedExtraMoveService {
     @Resource
     private AttackService attackService;
 
-    public void updateAll(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+    public void updateAll(OwnedPokemonRequest input, OwnedPokemon pokemon) {
         Set<Attack> attacks = pokemon.getOwnedExtraMoves();
         if (attacks == null) {
             attacks = new HashSet<Attack>();
             pokemon.setOwnedExtraMoves(attacks);
         }
 
-        for (OwnedExtraMoveInputDto attack : input.getOwnedExtraMoves()) {
+        for (OwnedExtraMoveRequest attack : input.getOwnedExtraMoves()) {
             String name = attack.getAttack();
             Attack attackObject = attackService.findByName(name);
             if (attack.getDelete()) {

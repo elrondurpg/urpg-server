@@ -1,19 +1,18 @@
 package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.Nature;
-import com.pokemonurpg.entities.v1.Obtained;
+import com.pokemonurpg.entities.v1.CaptureMethod;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
-import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
+import com.pokemonurpg.configuration.v1.capturemethods.CaptureMethodService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.login.v1.SessionService;
-import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.Pokemon;
 import com.pokemonurpg.entities.v1.Type;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.infrastructure.v1.data.jpa.OwnedPokemonRepository;
-import com.pokemonurpg.stats.v1.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -33,13 +32,13 @@ public class OwnedPokemonServiceTest {
     private final static Integer        DBID            = 432;
     private final static OwnedPokemon   POKEMON         = mock(OwnedPokemon.class);
     private final static SessionService SESSION_SERVICE = mock(SessionService.class);
-    private final static Species        SPECIES         = mock(Species.class);
+    private final static Pokemon SPECIES = mock(Pokemon.class);
     private final static String         SPECIES_NAME    = "SPECIES_NAME";
     private final static Member         MEMBER          = mock(Member.class);
     private final static String         MEMBER_NAME     = "MEMBER_NAME";
     private final static Nature         NATURE          = mock(Nature.class);
     private final static String         NATURE_NAME     = "NATURE_NAME";
-    private final static Obtained       OBTAINED        = mock(Obtained.class);
+    private final static CaptureMethod CAPTURE_METHOD = mock(CaptureMethod.class);
     private final static String         OBTAINED_NAME   = "OBTAINED_NAME";
     private final static Type           HP_TYPE         = mock(Type.class);
     private final static String         HP_TYPE_NAME    = "HP_TYPE_NAME";
@@ -57,13 +56,13 @@ public class OwnedPokemonServiceTest {
     private MemberService memberService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Mock
     private NatureService natureService;
 
     @Mock
-    private ObtainedService obtainedService;
+    private CaptureMethodService captureMethodService;
 
     @Mock
     private TypeService typeService;
@@ -101,7 +100,7 @@ public class OwnedPokemonServiceTest {
 
     @Test
     public void create() {
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
         input.setSpecies(SPECIES_NAME);
         input.setNature(NATURE_NAME);
         input.setObtained(OBTAINED_NAME);
@@ -110,21 +109,21 @@ public class OwnedPokemonServiceTest {
         when(sessionServiceProvider.get()).thenReturn(SESSION_SERVICE);
         when(SESSION_SERVICE.getAuthenticatedMember()).thenReturn(MEMBER);
 
-        EarnedRibbonInputDto ribbon = mock(EarnedRibbonInputDto.class);
+        EarnedRibbonRequest ribbon = mock(EarnedRibbonRequest.class);
         input.setEarnedRibbons(Collections.singletonList(ribbon));
 
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
+        when(pokemonService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
         when(ownedPokemonValidator.isValid(SPECIES, input)).thenReturn(true);
 
         when(natureService.findByName(NATURE_NAME)).thenReturn(NATURE);
-        when(obtainedService.findByName(OBTAINED_NAME)).thenReturn(OBTAINED);
+        when(captureMethodService.findByName(OBTAINED_NAME)).thenReturn(CAPTURE_METHOD);
         when(typeService.findByName(HP_TYPE_NAME)).thenReturn(HP_TYPE);
 
         OwnedPokemon pokemon = ownedPokemonService.create(input);
         assertEquals(MEMBER, pokemon.getTrainer());
         assertEquals(SPECIES, pokemon.getSpecies());
         assertEquals(NATURE, pokemon.getNature());
-        assertEquals(OBTAINED, pokemon.getObtained());
+        assertEquals(CAPTURE_METHOD, pokemon.getObtained());
         assertEquals(HP_TYPE, pokemon.getHiddenPowerType());
 
         verify(ownedExtraMoveService).updateAll(input, pokemon);
@@ -134,7 +133,7 @@ public class OwnedPokemonServiceTest {
 
     @Test
     public void update() {
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
 
         when(ownedPokemonRepository.findByDbid(DBID)).thenReturn(POKEMON);
         when(POKEMON.getSpecies()).thenReturn(SPECIES);

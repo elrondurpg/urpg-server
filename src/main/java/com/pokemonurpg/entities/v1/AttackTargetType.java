@@ -1,6 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeInputDto;
+import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeRequest;
 import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
@@ -22,11 +22,11 @@ public class AttackTargetType implements NamedObject {
     public AttackTargetType() {
     }
 
-    public AttackTargetType(AttackTargetTypeInputDto input) {
+    public AttackTargetType(AttackTargetTypeRequest input) {
         this.update(input);
     }
 
-    public void update(AttackTargetTypeInputDto input) {
+    public void update(AttackTargetTypeRequest input) {
         setName(input.getName());
         setDescription(input.getDescription());
     }

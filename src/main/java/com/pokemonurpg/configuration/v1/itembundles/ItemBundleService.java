@@ -34,7 +34,7 @@ public class ItemBundleService implements NamedObjectService<ItemBundle> {
         return itemBundleRepository.findByName(name);
     }
 
-    public ItemBundle create(ItemBundleInputDto input) {
+    public ItemBundle create(ItemBundleRequest input) {
         ItemBundle bundle = new ItemBundle(input);
         itemBundleRepository.save(bundle);
 
@@ -43,7 +43,7 @@ public class ItemBundleService implements NamedObjectService<ItemBundle> {
         return bundle;
     }
 
-    public ItemBundle update(ItemBundleInputDto input, int dbid) {
+    public ItemBundle update(ItemBundleRequest input, int dbid) {
         ItemBundle bundle = itemBundleRepository.findByDbid(dbid);
         if (bundle != null) {
             bundle.update(input);
@@ -53,13 +53,13 @@ public class ItemBundleService implements NamedObjectService<ItemBundle> {
         return bundle;
     }
 
-    void updateAssociatedValues(ItemBundle bundle, ItemBundleInputDto input) {
+    void updateAssociatedValues(ItemBundle bundle, ItemBundleRequest input) {
         updateItemBundleItems(bundle, input);
     }
 
-    void updateItemBundleItems(ItemBundle bundle, ItemBundleInputDto input) {
-        List<ItemBundleItemInputDto> items = input.getItems();
-        for (ItemBundleItemInputDto item : items) {
+    void updateItemBundleItems(ItemBundle bundle, ItemBundleRequest input) {
+        List<ItemBundleItemRequest> items = input.getItems();
+        for (ItemBundleItemRequest item : items) {
             itemBundleItemService.update(bundle, item);
         }
         bundle.setItems(itemBundleItemService.findByBundle(bundle));

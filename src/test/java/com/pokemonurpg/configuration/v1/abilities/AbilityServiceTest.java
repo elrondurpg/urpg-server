@@ -1,9 +1,7 @@
 package com.pokemonurpg.configuration.v1.abilities;
 
 import com.pokemonurpg.entities.v1.Ability;
-import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AbilityRepository;
-import com.pokemonurpg.configuration.v1.abilities.AbilityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -89,7 +87,7 @@ public class AbilityServiceTest {
 
     @Test
     public void create() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 
@@ -100,7 +98,7 @@ public class AbilityServiceTest {
 
     @Test
     public void update() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         input.setDescription(DESCRIPTION_2);
 
         Ability ability = new Ability();
@@ -115,7 +113,7 @@ public class AbilityServiceTest {
 
     @Test
     public void updateReturnsNullWhenNotFound() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         input.setDescription(DESCRIPTION_2);
 
         Ability ability = new Ability();

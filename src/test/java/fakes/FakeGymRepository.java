@@ -1,7 +1,7 @@
 package fakes;
 
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 public class FakeGymRepository extends FakeNamedRepository<Gym> implements GymRepository {
 
-    Map<GymOwnershipTerm, Gym> entitiesByCurrentOwnerRecord = new HashMap<>();
+    Map<GymLeaderRecord, Gym> entitiesByCurrentOwnerRecord = new HashMap<>();
 
     @Override
     public <S extends Gym> S save(S entity) {
@@ -29,7 +29,7 @@ public class FakeGymRepository extends FakeNamedRepository<Gym> implements GymRe
     }
 
     @Override
-    public Gym findByCurrentOwnerRecord(GymOwnershipTerm currentOwnerRecord) {
+    public Gym findByCurrentOwnerRecord(GymLeaderRecord currentOwnerRecord) {
         return entitiesByCurrentOwnerRecord.get(currentOwnerRecord);
     }
 

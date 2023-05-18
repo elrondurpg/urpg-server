@@ -41,7 +41,7 @@ public class ImageFolderService implements NamedObjectService<ImageFolder> {
         return imageFolderRepository.findByName(name);
     }
 
-    public ImageFolder create(ImageFolderInputDto input) {
+    public ImageFolder create(ImageFolderRequest input) {
         ImageFolder imageFolder = new ImageFolder(input);
 
         String imageBase = appConfig.getImageBase() + "/";
@@ -54,7 +54,7 @@ public class ImageFolderService implements NamedObjectService<ImageFolder> {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Image folder " + input.getName() + " already exists!");
     }
 
-    public ImageFolder update(ImageFolderInputDto input, int dbid) {
+    public ImageFolder update(ImageFolderRequest input, int dbid) {
         ImageFolder imageFolder = imageFolderRepository.findByDbid(dbid);
 
         if (imageFolder != null) {

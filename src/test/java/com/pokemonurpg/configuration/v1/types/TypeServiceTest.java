@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.types;
 
-import com.pokemonurpg.configuration.v1.types.TypeInputDto;
 import com.pokemonurpg.entities.v1.Type;
 import com.pokemonurpg.infrastructure.v1.data.jpa.TypeRepository;
-import com.pokemonurpg.configuration.v1.types.TypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -66,7 +63,7 @@ public class TypeServiceTest {
 
     @Test
     public void create() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
 
         Type type = typeService.create(input);
@@ -76,7 +73,7 @@ public class TypeServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
 
         when(typeRepository.findByDbid(DBID)).thenReturn(type);
@@ -89,7 +86,7 @@ public class TypeServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        TypeInputDto input = new TypeInputDto();
+        TypeRequest input = new TypeRequest();
         input.setName(NAME);
 
         when(typeRepository.findByDbid(DBID)).thenReturn(null);

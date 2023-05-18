@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
+import com.pokemonurpg.configuration.v1.artranks.ArtRankRequest;
 
 import javax.persistence.*;
 
@@ -25,11 +25,11 @@ public class ArtRank implements NamedObject {
     public ArtRank() {
     }
 
-    public ArtRank(ArtRankInputDto input) {
+    public ArtRank(ArtRankRequest input) {
         this.update(input);
     }
 
-    public void update(ArtRankInputDto input) {
+    public void update(ArtRankRequest input) {
         setName(input.getName());
         setRequirement(input.getRequirement());
     }

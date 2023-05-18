@@ -2,7 +2,7 @@ package com.pokemonurpg.entities.v1;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeInputDto;
+import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeRequest;
 import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
@@ -22,11 +22,11 @@ public class ContestAttribute implements NamedObject {
 
     public ContestAttribute() {}
 
-    public ContestAttribute(ContestAttributeInputDto input) {
+    public ContestAttribute(ContestAttributeRequest input) {
         this.update(input);
     }
 
-    public void update(ContestAttributeInputDto input) {
+    public void update(ContestAttributeRequest input) {
         setName(input.getName());
     }
 

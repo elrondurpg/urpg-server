@@ -24,7 +24,7 @@ public class LegendaryProgressService {
         return legendaryProgressRepository.findByTrainer(trainer);
     }
 
-    public void update(LegendaryProgressInputDto input, Member member) {
+    public void update(LegendaryProgressRequest input, Member member) {
         Section section = sectionService.findByName(input.getSection());
         LegendaryProgress existingRecord = legendaryProgressRepository.findByTrainerAndIdLogUrlAndSection(member, input.getLogUrl(), section);
         if (existingRecord != null) {

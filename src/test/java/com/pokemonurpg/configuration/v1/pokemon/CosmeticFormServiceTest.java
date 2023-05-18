@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.pokemon;
 
-import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
 import com.pokemonurpg.entities.v1.CosmeticForm;
 import com.pokemonurpg.infrastructure.v1.data.jpa.CosmeticFormRepository;
-import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -28,7 +25,7 @@ public class CosmeticFormServiceTest {
     public void deleteWhenFormExistsAndDeleteIsTrue() {
         CosmeticForm cosmeticForm = new CosmeticForm();
 
-        CosmeticFormInputDto input = new CosmeticFormInputDto();
+        CosmeticFormRequest input = new CosmeticFormRequest();
         input.setName(NAME);
         input.setDelete(true);
 
@@ -43,7 +40,7 @@ public class CosmeticFormServiceTest {
     public void updateWhenFormExistsAndDeleteIsFalse() {
         CosmeticForm cosmeticForm = mock(CosmeticForm.class);
 
-        CosmeticFormInputDto input = new CosmeticFormInputDto();
+        CosmeticFormRequest input = new CosmeticFormRequest();
         input.setName(NAME);
         input.setDelete(false);
 
@@ -57,7 +54,7 @@ public class CosmeticFormServiceTest {
 
     @Test
     public void createWhenFormDoesNotExist() {
-        CosmeticFormInputDto input = new CosmeticFormInputDto();
+        CosmeticFormRequest input = new CosmeticFormRequest();
         input.setName(NAME);
 
         cosmeticFormService.update(input, SPECIES_DBID);

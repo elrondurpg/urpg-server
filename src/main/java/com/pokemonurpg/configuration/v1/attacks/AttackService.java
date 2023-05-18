@@ -6,7 +6,7 @@ import com.pokemonurpg.infrastructure.v1.data.jpa.AttackCategoryRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AttackRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AttackTargetTypeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
-import com.pokemonurpg.infrastructure.v1.data.jpa.ORASContestMoveTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ORASContestEffectRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.RSEContestMoveTypeRepository;
 import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.Attack;
@@ -37,7 +37,7 @@ public class AttackService implements NamedObjectService<Attack> {
     private RSEContestMoveTypeRepository rseContestMoveTypeRepository;
 
     @Resource
-    private ORASContestMoveTypeRepository orasContestMoveTypeRepository;
+    private ORASContestEffectRepository orasContestEffectRepository;
 
     @Resource
     private ItemRepository itemRepository;
@@ -63,7 +63,7 @@ public class AttackService implements NamedObjectService<Attack> {
         return attackRepository.findByName(name);
     }
 
-    public Attack create(AttackInputDto input) {
+    public Attack create(AttackRequest input) {
         Attack attack = new Attack(input);
         updateEmbeddedValues(attack, input);
         attackRepository.save(attack);
@@ -71,7 +71,7 @@ public class AttackService implements NamedObjectService<Attack> {
         return attack;
     }
 
-    public Attack update(AttackInputDto input, int dbid) {
+    public Attack update(AttackRequest input, int dbid) {
         Attack attack = attackRepository.findByDbid(dbid);
         if (attack != null) {
             attack.update(input);
@@ -82,18 +82,18 @@ public class AttackService implements NamedObjectService<Attack> {
         return attack;
     }
 
-    private void updateEmbeddedValues(Attack attack, AttackInputDto input) {
+    private void updateEmbeddedValues(Attack attack, AttackRequest input) {
         attack.setType(typeRepository.findByName(input.getType()));
         attack.setCategory(attackCategoryRepository.findByName(input.getCategory()));
         attack.setTarget(attackTargetTypeRepository.findByName(input.getTarget()));
         attack.setRseContestMoveType(rseContestMoveTypeRepository.findByName(input.getRseContestMoveType()));
         attack.setRseContestAttribute(contestAttributeRepository.findByName(input.getRseContestAttribute()));
-        attack.setOrasContestMoveType(orasContestMoveTypeRepository.findByName(input.getOrasContestMoveType()));
+        attack.setOrasContestMoveType(orasContestEffectRepository.findByName(input.getOrasContestMoveType()));
         attack.setOrasContestAttribute(contestAttributeRepository.findByName(input.getOrasContestAttribute()));
         attack.setTm(itemRepository.findByName(input.getTm()));
     }
 
-    private void updateAssociatedValues(Attack attack, AttackInputDto input) {
+    private void updateAssociatedValues(Attack attack, AttackRequest input) {
         input.getContestCombos().forEach(combo -> contestComboService.update(attack, combo));
     }
 }

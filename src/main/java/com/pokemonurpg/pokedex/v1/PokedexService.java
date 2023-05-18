@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 public class PokedexService {
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
     private SpeciesPageTabService speciesPageTabService;
@@ -27,30 +27,30 @@ public class PokedexService {
     @Resource
     private TypeMatchupService typeMatchupService;
 
-    public PokedexEntryDto findByName(String name) {
-        Species species = speciesService.findByName(name);
-        if (species != null) {
-            species = switchToPreMegaIfNeeded(species);
+    public PokemonResponse findByName(String name) {
+        Pokemon pokemon = pokemonService.findByName(name);
+        if (pokemon != null) {
+            pokemon = switchToPreMegaIfNeeded(pokemon);
 
-            PokedexEntryDto pokedexEntry = new PokedexEntryDto(species);
-            pokedexEntry.setPrevDex(speciesPageTabService.findPrevDexBySpecies(species));
-            pokedexEntry.setNextDex(speciesPageTabService.findNextDexBySpecies(species));
-            pokedexEntry.setAlteredForms(alteredFormService.findBySpecies(species));
+            PokemonResponse pokedexEntry = new PokemonResponse(pokemon);
+            pokedexEntry.setPrevDex(speciesPageTabService.findPrevDexBySpecies(pokemon));
+            pokedexEntry.setNextDex(speciesPageTabService.findNextDexBySpecies(pokemon));
+            pokedexEntry.setAlteredForms(alteredFormService.findBySpecies(pokemon));
             pokedexEntry.buildAttacksThatDifferByForm();
-            pokedexEntry.setEvolutionFamily(evolutionFamilyService.findBySpecies(species));
-            pokedexEntry.setMegaEvolutions(megaEvolutionService.findBySpecies(species));
-            pokedexEntry.setTypeMatchups(typeMatchupService.findBySpecies(species));
+            pokedexEntry.setEvolutionFamily(evolutionFamilyService.findBySpecies(pokemon));
+            pokedexEntry.setMegaEvolutions(megaEvolutionService.findBySpecies(pokemon));
+            pokedexEntry.setTypeMatchups(typeMatchupService.findBySpecies(pokemon));
             return pokedexEntry;
         }
         return null;
     }
 
-    public Species switchToPreMegaIfNeeded(Species species) {
-        Species preMega = species.getPreMega();
+    public Pokemon switchToPreMegaIfNeeded(Pokemon pokemon) {
+        Pokemon preMega = pokemon.getPreMega();
         if (preMega != null) {
             // TODO set a "jump to" parameter so that the pokedex page jumps to this mega
             return preMega;
         }
-        else return species;
+        else return pokemon;
     }
 }

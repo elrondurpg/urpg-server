@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FormAttackSorter {
-    public void run(List<AlteredFormDto> alteredForms) {
+    public void run(List<AlteredFormResponse> alteredForms) {
         Set<String> allAttacks = new HashSet<>();
 
         alteredForms.forEach(alteredForm -> {

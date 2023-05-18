@@ -1,9 +1,9 @@
 package fakes;
 
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymOwnershipTermRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeaderRecordRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,30 +13,30 @@ import org.springframework.data.repository.query.FluentQuery;
 import java.util.*;
 import java.util.function.Function;
 
-public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipTerm> implements GymOwnershipTermRepository {
+public class FakeGymRecordRepository extends FakeIndexedRepository<GymLeaderRecord> implements GymLeaderRecordRepository {
 
     @Override
-    public GymOwnershipTerm findByGymAndOwnerAndOpenDate(Gym gym, Member owner, Date openDate) {
+    public GymLeaderRecord findByGymAndOwnerAndOpenDate(Gym gym, Member owner, Date openDate) {
         return null;
     }
 
     @Override
-    public List<GymOwnershipTerm> findAll() {
+    public List<GymLeaderRecord> findAll() {
         return null;
     }
 
     @Override
-    public List<GymOwnershipTerm> findAll(Sort sort) {
+    public List<GymLeaderRecord> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<GymOwnershipTerm> findAll(Pageable pageable) {
+    public Page<GymLeaderRecord> findAll(Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<GymOwnershipTerm> findAllById(Iterable<Integer> integers) {
+    public List<GymLeaderRecord> findAllById(Iterable<Integer> integers) {
         return null;
     }
 
@@ -51,7 +51,7 @@ public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipT
     }
 
     @Override
-    public void delete(GymOwnershipTerm entity) {
+    public void delete(GymLeaderRecord entity) {
 
     }
 
@@ -61,7 +61,7 @@ public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipT
     }
 
     @Override
-    public void deleteAll(Iterable<? extends GymOwnershipTerm> entities) {
+    public void deleteAll(Iterable<? extends GymLeaderRecord> entities) {
 
     }
 
@@ -71,12 +71,12 @@ public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipT
     }
 
     @Override
-    public <S extends GymOwnershipTerm> List<S> saveAll(Iterable<S> entities) {
+    public <S extends GymLeaderRecord> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<GymOwnershipTerm> findById(Integer integer) {
+    public Optional<GymLeaderRecord> findById(Integer integer) {
         return Optional.empty();
     }
 
@@ -91,17 +91,17 @@ public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipT
     }
 
     @Override
-    public <S extends GymOwnershipTerm> S saveAndFlush(S entity) {
+    public <S extends GymLeaderRecord> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends GymLeaderRecord> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<GymOwnershipTerm> entities) {
+    public void deleteAllInBatch(Iterable<GymLeaderRecord> entities) {
 
     }
 
@@ -116,47 +116,47 @@ public class FakeGymRecordRepository extends FakeIndexedRepository<GymOwnershipT
     }
 
     @Override
-    public GymOwnershipTerm getOne(Integer integer) {
+    public GymLeaderRecord getOne(Integer integer) {
         return null;
     }
 
     @Override
-    public GymOwnershipTerm getById(Integer integer) {
+    public GymLeaderRecord getById(Integer integer) {
         return null;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> Optional<S> findOne(Example<S> example) {
+    public <S extends GymLeaderRecord> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends GymOwnershipTerm> List<S> findAll(Example<S> example) {
+    public <S extends GymLeaderRecord> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends GymLeaderRecord> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends GymLeaderRecord> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> long count(Example<S> example) {
+    public <S extends GymLeaderRecord> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends GymOwnershipTerm> boolean exists(Example<S> example) {
+    public <S extends GymLeaderRecord> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends GymOwnershipTerm, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends GymLeaderRecord, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 }

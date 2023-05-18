@@ -1,7 +1,7 @@
 package com.pokemonurpg.entities.v1;
 
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
+import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderRequest;
 
 import javax.persistence.*;
 
@@ -25,11 +25,11 @@ public class ImageFolder implements NamedObject {
 
     }
 
-    public ImageFolder(ImageFolderInputDto input) {
+    public ImageFolder(ImageFolderRequest input) {
         this.update(input);
     }
 
-    public void update(ImageFolderInputDto input) {
+    public void update(ImageFolderRequest input) {
         setName(input.getName());
         setDescription(input.getDescription());
         setExtension(input.getExtension());

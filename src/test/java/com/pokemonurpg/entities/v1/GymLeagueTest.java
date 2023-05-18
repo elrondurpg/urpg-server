@@ -1,8 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
-import com.pokemonurpg.entities.v1.GymLeague;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueRequest;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ import static org.junit.Assert.*;
 public class GymLeagueTest {
     private final static Integer DBID = 3242;
     private final static String NAME = "NAME";
-    private final static List<GymOwnershipTerm> GYMS = new ArrayList<>();
+    private final static List<GymLeaderRecord> GYMS = new ArrayList<>();
 
     @Test
     public void testPojo() {
@@ -29,7 +27,7 @@ public class GymLeagueTest {
 
     @Test
     public void testConstructor() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
 
         GymLeague gymLeague = new GymLeague(input);

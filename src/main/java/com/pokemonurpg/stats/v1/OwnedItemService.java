@@ -31,7 +31,7 @@ public class OwnedItemService {
         }
     }
 
-    public void update(Member member, OwnedItemInputDto input) {
+    public void update(Member member, OwnedItemRequest input) {
         Item item = itemRepository.findByName(input.getItem());
         OwnedItem existingRecord = ownedItemRepository.findByTrainerAndItem(member, item);
         if (existingRecord != null) {

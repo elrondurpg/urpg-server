@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.sections;
 
-import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
 import com.pokemonurpg.entities.v1.Section;
 import com.pokemonurpg.infrastructure.v1.data.jpa.SectionRepository;
-import com.pokemonurpg.configuration.v1.sections.SectionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -66,7 +63,7 @@ public class SectionServiceTest {
 
     @Test
     public void create() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
 
         Section section = sectionService.create(input);
@@ -76,7 +73,7 @@ public class SectionServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
 
         when(sectionRepository.findByDbid(DBID)).thenReturn(section);
@@ -89,7 +86,7 @@ public class SectionServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
 
         when(sectionRepository.findByDbid(DBID)).thenReturn(null);

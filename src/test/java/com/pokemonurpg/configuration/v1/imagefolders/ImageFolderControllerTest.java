@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.imagefolders;
 
-import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderController;
-import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderInputDto;
 import com.pokemonurpg.entities.v1.ImageFolder;
-import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +19,7 @@ public class ImageFolderControllerTest {
     private final static List<String> ALL_NAMES = new ArrayList<>();
     private final static String NAME = "name";
     private final static ImageFolder IMAGE_FOLDER = mock(ImageFolder.class);
-    private final static ImageFolderInputDto INPUT = mock(ImageFolderInputDto.class);
+    private final static ImageFolderRequest INPUT = mock(ImageFolderRequest.class);
     private final static Integer DBID = 32432;
 
     @InjectMocks

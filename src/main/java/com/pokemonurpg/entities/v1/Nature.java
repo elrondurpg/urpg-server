@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.natures.NatureInputDto;
+import com.pokemonurpg.configuration.v1.natures.NatureRequest;
 
 import javax.persistence.*;
 
@@ -22,11 +22,11 @@ public class Nature implements NamedObject {
     public Nature() {
     }
 
-    public Nature(NatureInputDto input) {
+    public Nature(NatureRequest input) {
         this.update(input);
     }
 
-    public void update(NatureInputDto input) {
+    public void update(NatureRequest input) {
         setName(input.getName());
     }
 

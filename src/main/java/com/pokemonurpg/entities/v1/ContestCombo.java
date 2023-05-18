@@ -1,7 +1,7 @@
 package com.pokemonurpg.entities.v1;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attacks.ContestComboRequest;
 
 import javax.persistence.*;
 
@@ -35,7 +35,7 @@ public class ContestCombo {
     @OneToOne
     @MapsId("generation_dbid")
     @JoinColumn(name = "generation_dbid")
-    private ContestType generation;
+    private ContestGeneration generation;
 
     @Column
     private Boolean overpowered;
@@ -44,7 +44,7 @@ public class ContestCombo {
 
     }
 
-    public ContestCombo(ContestComboInputDto input, Attack firstAttack, Attack secondAttack, ContestType generation) {
+    public ContestCombo(ContestComboRequest input, Attack firstAttack, Attack secondAttack, ContestGeneration generation) {
         this.update(input);
         this.id = new ContestComboKey(firstAttack.getDbid(), secondAttack.getDbid(), generation.getDbid());
         setFirstAttack(firstAttack);
@@ -53,7 +53,7 @@ public class ContestCombo {
         if (overpowered == null) overpowered = false;
     }
 
-    public void update(ContestComboInputDto input) {
+    public void update(ContestComboRequest input) {
         setOverpowered(input.getOverpowered());
     }
 
@@ -83,11 +83,11 @@ public class ContestCombo {
         }
     }
 
-    public ContestType getGeneration() {
+    public ContestGeneration getGeneration() {
         return generation;
     }
 
-    public void setGeneration(ContestType generation) {
+    public void setGeneration(ContestGeneration generation) {
         this.generation = generation;
     }
 

@@ -2,10 +2,10 @@ package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.BelongsToThisChampionSlot;
-import com.pokemonurpg.entities.v1.Champion;
-import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
-import com.pokemonurpg.configuration.v1.championrecords.ChampionOwnershipTermService;
-import com.pokemonurpg.configuration.v1.championslots.ChampionService;
+import com.pokemonurpg.entities.v1.ChampionSlot;
+import com.pokemonurpg.entities.v1.ChampionRecord;
+import com.pokemonurpg.configuration.v1.championrecords.ChampionRecordService;
+import com.pokemonurpg.configuration.v1.championslots.ChampionSlotService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
@@ -14,10 +14,10 @@ import java.util.Objects;
 
 public class BelongsToThisChampionSlotValidator implements ConstraintValidator<BelongsToThisChampionSlot, Integer> {
     @Resource
-    private ChampionService championService;
+    private ChampionSlotService championSlotService;
 
     @Resource
-    private ChampionOwnershipTermService championOwnershipTermService;
+    private ChampionRecordService championRecordService;
 
     @Resource
     private RequestPathVariableService requestPathVariableService;
@@ -26,13 +26,13 @@ public class BelongsToThisChampionSlotValidator implements ConstraintValidator<B
     public boolean isValid(Integer input, ConstraintValidatorContext constraintValidatorContext) {
         if (input != null) {
             Integer requestDbid = requestPathVariableService.findIntByName("dbid");
-            Champion requestChampion = championService.findByDbid(requestDbid);
-            if (requestChampion != null) {
-                ChampionOwnershipTerm requestTerm = championOwnershipTermService.findByDbid(input);
+            ChampionSlot requestChampionSlot = championSlotService.findByDbid(requestDbid);
+            if (requestChampionSlot != null) {
+                ChampionRecord requestTerm = championRecordService.findByDbid(input);
                 if (requestTerm != null) {
-                    Champion termChampion = requestTerm.getSlot();
-                    if (termChampion != null) {
-                        return Objects.equals(termChampion.getDbid(), requestChampion.getDbid());
+                    ChampionSlot termChampionSlot = requestTerm.getSlot();
+                    if (termChampionSlot != null) {
+                        return Objects.equals(termChampionSlot.getDbid(), requestChampionSlot.getDbid());
                     }
                 }
             }

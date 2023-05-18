@@ -20,7 +20,7 @@ import java.util.List;
 import static com.pokemonurpg.lib.v1.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/gym")
+@RequestMapping("/urpg-configuration/v1/gyms")
 @CrossOrigin
 @Validated
 public class GymController {
@@ -48,7 +48,7 @@ public class GymController {
     @PostMapping
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
-    Gym create(@Valid @RequestBody GymInputDto input) {
+    Gym create(@Valid @RequestBody GymRequest input) {
         return gymService.create(input);
     }
 
@@ -56,7 +56,7 @@ public class GymController {
     @PutMapping(path="/{dbid}")
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
-    Gym update(@Valid @RequestBody GymInputDto input, @PathVariable int dbid) {
+    Gym update(@Valid @RequestBody GymRequest input, @PathVariable int dbid) {
         return gymService.update(dbid, input);
     }
 

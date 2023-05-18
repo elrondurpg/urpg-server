@@ -1,6 +1,6 @@
 package com.pokemonurpg.configuration.v1.elitefourmemberslots;
 
-import com.pokemonurpg.entities.v1.EliteFour;
+import com.pokemonurpg.entities.v1.EliteFourMemberSlot;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.stats.v1.OwnedPokemonService;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ public class EliteFourPokemonService {
     @Resource
     private OwnedPokemonService ownedPokemonService;
 
-    public void updateAll(EliteFourInputDto input, EliteFour eliteFour) {
-        Set<OwnedPokemon> pokemons = eliteFour.getPokemon();
+    public void updateAll(EliteFourMemberSlotRequest input, EliteFourMemberSlot eliteFourMemberSlot) {
+        Set<OwnedPokemon> pokemons = eliteFourMemberSlot.getPokemon();
 
-        for (EliteFourPokemonInputDto pokemon : input.getPokemon()) {
+        for (EliteFourMemberPokemonRequest pokemon : input.getPokemon()) {
             Integer dbid = pokemon.getDbid();
             OwnedPokemon ownedPokemon = ownedPokemonService.findByDbid(dbid);
             if (pokemon.getDelete()) {

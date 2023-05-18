@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
+import com.pokemonurpg.configuration.v1.badges.BadgeRequest;
 
 import javax.persistence.*;
 
@@ -20,11 +20,11 @@ public class Badge implements NamedObject {
 
     public Badge() {}
 
-    public Badge(BadgeInputDto input) {
+    public Badge(BadgeRequest input) {
         this.update(input);
     }
 
-    public void update(BadgeInputDto input) {
+    public void update(BadgeRequest input) {
         setName(input.getName());
     }
 

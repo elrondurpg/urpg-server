@@ -35,13 +35,13 @@ public class NatureService implements NamedObjectService<Nature> {
         return natureRepository.findByName(name);
     }
 
-    public Nature create(NatureInputDto input) {
+    public Nature create(NatureRequest input) {
         Nature nature = new Nature(input);
         natureRepository.save(nature);
         return nature;
     }
 
-    public Nature update(NatureInputDto input, int dbid) {
+    public Nature update(NatureRequest input, int dbid) {
         Nature nature = natureRepository.findByDbid(dbid);
         if (nature != null) {
             nature.update(input);

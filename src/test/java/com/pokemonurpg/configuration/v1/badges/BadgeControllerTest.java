@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.badges;
 
-import com.pokemonurpg.configuration.v1.badges.BadgeController;
 import com.pokemonurpg.entities.v1.Badge;
-import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
-import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,7 +48,7 @@ public class BadgeControllerTest {
 
     @Test
     public void create() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
         when(badgeService.create(input)).thenReturn(badge);
         assertEquals(badge, badgeController.create(input));
@@ -59,7 +56,7 @@ public class BadgeControllerTest {
 
     @Test
     public void update() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
         when(badgeService.update(input, DBID)).thenReturn(badge);
         assertEquals(badge, badgeController.update(input, DBID));

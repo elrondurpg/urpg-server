@@ -1,9 +1,7 @@
 package com.pokemonurpg.configuration.v1.badges;
 
-import com.pokemonurpg.configuration.v1.badges.BadgeInputDto;
 import com.pokemonurpg.entities.v1.Badge;
 import com.pokemonurpg.infrastructure.v1.data.jpa.BadgeRepository;
-import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -60,7 +58,7 @@ public class BadgeServiceTest {
 
     @Test
     public void create() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
 
         Badge badge = badgeService.create(input);
@@ -70,7 +68,7 @@ public class BadgeServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
 
         when(badgeRepository.findByDbid(DBID)).thenReturn(badge);
@@ -83,7 +81,7 @@ public class BadgeServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        BadgeInputDto input = new BadgeInputDto();
+        BadgeRequest input = new BadgeRequest();
         input.setName(NAME);
 
         when(badgeRepository.findByDbid(DBID)).thenReturn(null);

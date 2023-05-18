@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeInputDto;
-import com.pokemonurpg.entities.v1.AttackTargetType;
+import com.pokemonurpg.configuration.v1.attacktargettypes.AttackTargetTypeRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -27,7 +26,7 @@ public class AttackTargetTypeTest {
 
     @Test
     public void testConstructor() {
-        AttackTargetTypeInputDto input = new AttackTargetTypeInputDto();
+        AttackTargetTypeRequest input = new AttackTargetTypeRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 

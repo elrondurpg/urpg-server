@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/attacktargettype")
+@RequestMapping("/urpg-configuration/v1/attack-target-types")
 @CrossOrigin
 @Validated
 public class AttackTargetTypeController {
@@ -37,14 +37,14 @@ public class AttackTargetTypeController {
     @AllowAuthorized(permission = "Write Attack")
     @PostMapping
     public @ResponseBody
-    AttackTargetType create(@Valid @RequestBody AttackTargetTypeInputDto input) {
+    AttackTargetType create(@Valid @RequestBody AttackTargetTypeRequest input) {
         return attackTargetTypeService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Attack")
     @PutMapping(path = "/{dbid}")
     public @ResponseBody
-    AttackTargetType update(@Valid @RequestBody AttackTargetTypeInputDto input, @PathVariable int dbid) {
+    AttackTargetType update(@Valid @RequestBody AttackTargetTypeRequest input, @PathVariable int dbid) {
         return attackTargetTypeService.update(input, dbid);
     }
 }

@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attacks.AttackInputDto;
-import com.pokemonurpg.entities.v1.*;
+import com.pokemonurpg.configuration.v1.attacks.AttackRequest;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -26,12 +25,12 @@ public class AttackTest {
     private final static Boolean SUBSTITUTE = true;
     private final static Boolean SHEER_FORCE = true;
     private final static Boolean MAGIC_COAT = true;
-    private final static RSEContestMoveType RSE_CONTEST_MOVE_TYPE = new RSEContestMoveType();
+    private final static RSEContestEffect RSE_CONTEST_MOVE_TYPE = new RSEContestEffect();
     private final static ContestAttribute RSE_CONTEST_ATTRIBUTE = new ContestAttribute();
-    private final static ORASContestMoveType ORAS_CONTEST_MOVE_TYPE = new ORASContestMoveType();
+    private final static ORASContestEffect ORAS_CONTEST_MOVE_TYPE = new ORASContestEffect();
     private final static ContestAttribute ORAS_CONTEST_ATTRIBUTE = new ContestAttribute();
     private final static Integer TM_HM_DBID = 32432;
-    private final static Set<SpeciesAttack> POKEMON = new HashSet<>();
+    private final static Set<PokemonAttack> POKEMON = new HashSet<>();
     private final static Item TM = mock(Item.class);
     private final static Set<ContestCombo> CONTEST_COMBOS = new HashSet<>();
 
@@ -105,7 +104,7 @@ public class AttackTest {
 
     @Test
     public void update() {
-        AttackInputDto input = mock(AttackInputDto.class);
+        AttackRequest input = mock(AttackRequest.class);
         when(input.getName()).thenReturn(NAME);
         when(input.getDescription()).thenReturn(DESCRIPTION);
         when(input.getPower()).thenReturn(POWER);

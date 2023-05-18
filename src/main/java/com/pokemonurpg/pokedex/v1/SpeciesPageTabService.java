@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,27 +10,27 @@ import javax.annotation.Resource;
 public class SpeciesPageTabService {
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
-    public Species findPrevDexBySpecies(Species species) {
-        int dexno = species.getDexno();
+    public Pokemon findPrevDexBySpecies(Pokemon pokemon) {
+        int dexno = pokemon.getDexno();
         int prevDex = getPrevDex(dexno);
-        return speciesService.findFirstByDexno(prevDex);
+        return pokemonService.findFirstByDexno(prevDex);
     }
 
-    public Species findNextDexBySpecies(Species species) {
-        int dexno = species.getDexno();
+    public Pokemon findNextDexBySpecies(Pokemon pokemon) {
+        int dexno = pokemon.getDexno();
         int nextDex = getNextDex(dexno);
-        return speciesService.findFirstByDexno(nextDex);
+        return pokemonService.findFirstByDexno(nextDex);
     }
 
     public int getNextDex(int dexno) {
-        int maxDex = speciesService.findMaxDexno();
+        int maxDex = pokemonService.findMaxDexno();
         return dexno % maxDex + 1;
     }
 
     public int getPrevDex(int dexno) {
-        int maxDex = speciesService.findMaxDexno();
+        int maxDex = pokemonService.findMaxDexno();
         return (dexno + maxDex - 2) % maxDex + 1;
     }
 

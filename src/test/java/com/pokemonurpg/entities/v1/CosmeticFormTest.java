@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
-import com.pokemonurpg.entities.v1.CosmeticForm;
+import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,7 +22,7 @@ public class CosmeticFormTest {
 
     @Test
     public void testConstructor() {
-        CosmeticFormInputDto input = new CosmeticFormInputDto();
+        CosmeticFormRequest input = new CosmeticFormRequest();
         input.setName(NAME);
         input.setFormName(FORM_NAME);
 

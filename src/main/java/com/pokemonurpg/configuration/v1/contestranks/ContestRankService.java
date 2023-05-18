@@ -35,13 +35,13 @@ public class ContestRankService implements NamedObjectService<ContestRank> {
         return contestRankRepository.findByName(name);
     }
 
-    public ContestRank create(ContestRankInputDto input) {
+    public ContestRank create(ContestRankRequest input) {
         ContestRank contestRank = new ContestRank(input);
         contestRankRepository.save(contestRank);
         return contestRank;
     }
 
-    public ContestRank update(ContestRankInputDto input, int dbid) {
+    public ContestRank update(ContestRankRequest input, int dbid) {
         ContestRank contestRank = contestRankRepository.findByDbid(dbid);
         if (contestRank != null) {
             contestRank.update(input);

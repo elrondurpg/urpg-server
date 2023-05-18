@@ -2,12 +2,12 @@ package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.lib.v1.services.IndexedObjectService;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
-import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
+import com.pokemonurpg.configuration.v1.capturemethods.CaptureMethodService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.login.v1.SessionService;
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.infrastructure.v1.data.jpa.OwnedPokemonRepository;
@@ -35,13 +35,13 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
     private MemberService memberService;
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
     private NatureService natureService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService captureMethodService;
 
     @Resource
     private TypeService typeService;
@@ -76,7 +76,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         return ownedPokemonRepository.findByDbid(dbid);
     }
 
-    public OwnedPokemon create(OwnedPokemonInputDto input) {
+    public OwnedPokemon create(OwnedPokemonRequest input) {
         if (input.getTrainer() == null) {
             return create(input, sessionServiceProvider.get().getAuthenticatedMember());
         }
@@ -86,8 +86,8 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         }
     }
 
-    private OwnedPokemon create(OwnedPokemonInputDto input, Member member) {
-        Species species = speciesService.findByName(input.getSpecies());
+    private OwnedPokemon create(OwnedPokemonRequest input, Member member) {
+        Pokemon species = pokemonService.findByName(input.getSpecies());
         if (ownedPokemonValidator.isValid(species, input)) {
             OwnedPokemon pokemon = new OwnedPokemon(input, member, species);
             updateEmbeddedValues(input, pokemon);
@@ -99,7 +99,7 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OwnedPokemon create() request was invalid.");
     }
 
-    public OwnedPokemon update(OwnedPokemonInputDto input, int dbid) {
+    public OwnedPokemon update(OwnedPokemonRequest input, int dbid) {
         Member member = null;
         if (input.getTrainer() != null) {
             member = memberService.findByNameExact(input.getTrainer());
@@ -116,13 +116,13 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         return pokemon;
     }
 
-    private void updateEmbeddedValues(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+    private void updateEmbeddedValues(OwnedPokemonRequest input, OwnedPokemon pokemon) {
         pokemon.setNature(natureService.findByName(input.getNature()));
-        pokemon.setObtained(obtainedService.findByName(input.getObtained()));
+        pokemon.setObtained(captureMethodService.findByName(input.getObtained()));
         pokemon.setHiddenPowerType(typeService.findByName(input.getHiddenPowerType()));
     }
 
-    private void updateAssociatedValues(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+    private void updateAssociatedValues(OwnedPokemonRequest input, OwnedPokemon pokemon) {
         ownedExtraMoveService.updateAll(input, pokemon);
         ownedHiddenAbilityService.updateAll(input, pokemon);
         updateEarnedRibbons(input, pokemon);
@@ -130,25 +130,25 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
         updateWishlistMoves(input, pokemon);
     }
 
-    private void updateEarnedRibbons(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
-        List<EarnedRibbonInputDto> ribbons = input.getEarnedRibbons();
-        for (EarnedRibbonInputDto ribbon : ribbons) {
+    private void updateEarnedRibbons(OwnedPokemonRequest input, OwnedPokemon pokemon) {
+        List<EarnedRibbonRequest> ribbons = input.getEarnedRibbons();
+        for (EarnedRibbonRequest ribbon : ribbons) {
             earnedRibbonService.update(ribbon, pokemon);
         }
         pokemon.setEarnedRibbons(earnedRibbonService.findByOwnedPokemon(pokemon));
     }
 
-    private void updateWishlistAbilities(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
-        Set<WishlistAbilityInputDto> abilities = input.getWishlistAbilities();
-        for(WishlistAbilityInputDto ability : abilities) {
+    private void updateWishlistAbilities(OwnedPokemonRequest input, OwnedPokemon pokemon) {
+        Set<WishlistAbilityRequest> abilities = input.getWishlistAbilities();
+        for(WishlistAbilityRequest ability : abilities) {
             wishlistAbilityService.update(ability, pokemon);
         }
         pokemon.setWishlistAbilities(wishlistAbilityService.findByPokemon(pokemon));
     }
 
-    private void updateWishlistMoves(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
-        Set<WishlistMoveInputDto> moves = input.getWishlistMoves();
-        for(WishlistMoveInputDto move : moves) {
+    private void updateWishlistMoves(OwnedPokemonRequest input, OwnedPokemon pokemon) {
+        Set<WishlistMoveRequest> moves = input.getWishlistMoves();
+        for(WishlistMoveRequest move : moves) {
             wishlistMoveService.update(move, pokemon);
         }
         pokemon.setWishlistMoves(wishlistMoveService.findByPokemon(pokemon));

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
+import com.pokemonurpg.configuration.v1.permissions.PermissionRequest;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -31,11 +31,11 @@ public class Permission implements NamedObject {
     public Permission() {
     }
 
-    public Permission(PermissionInputDto input) {
+    public Permission(PermissionRequest input) {
         this.update(input);
     }
 
-    public void update(PermissionInputDto input) {
+    public void update(PermissionRequest input) {
         setName(input.getName());
         setDescription(input.getDescription());
     }

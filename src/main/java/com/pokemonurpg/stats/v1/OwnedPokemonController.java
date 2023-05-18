@@ -29,7 +29,7 @@ import static com.pokemonurpg.lib.v1.strings.PermissionNames.WRITE_MEMBER_PERMIS
 import java.util.List;
 
 @RestController
-@RequestMapping("/ownedPokemon")
+@RequestMapping("/urpg-stats/v1/pokemon")
 @CrossOrigin
 @Validated
 public class OwnedPokemonController {
@@ -64,7 +64,7 @@ public class OwnedPokemonController {
     @PostMapping
     @JsonView(value = { View.MemberView.Pokemon.class })
     public @ResponseBody
-    OwnedPokemon create(@Valid @RequestBody OwnedPokemonInputDto input) {
+    OwnedPokemon create(@Valid @RequestBody OwnedPokemonRequest input) {
         String memberName = input.getTrainer();
         if (memberName != null) {
             if (!memberName.equals(sessionServiceProvider.get().getAuthenticatedMember().getName())) {
@@ -81,7 +81,7 @@ public class OwnedPokemonController {
     @PutMapping(path="/{dbid}")
     @JsonView(value = { View.MemberView.Pokemon.class })
     public @ResponseBody
-    OwnedPokemon update(@Valid @RequestBody OwnedPokemonInputDto input, @PathVariable int dbid) {
+    OwnedPokemon update(@Valid @RequestBody OwnedPokemonRequest input, @PathVariable int dbid) {
         return ownedPokemonService.update(input, dbid);
     }
 

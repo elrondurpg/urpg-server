@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/imageFolder")
+@RequestMapping("/urpg-configuration/v1/image-folders")
 @CrossOrigin
 @Validated
 public class ImageFolderController {
@@ -38,14 +38,14 @@ public class ImageFolderController {
     @AllowAuthorized(permission = "Write Image")
     @PostMapping
     public @ResponseBody
-    ImageFolder create(@Valid @RequestBody ImageFolderInputDto input) {
+    ImageFolder create(@Valid @RequestBody ImageFolderRequest input) {
         return imageFolderService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Image")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ImageFolder update(@Valid @RequestBody ImageFolderInputDto input, @PathVariable int dbid) {
+    ImageFolder update(@Valid @RequestBody ImageFolderRequest input, @PathVariable int dbid) {
         return imageFolderService.update(input, dbid);
     }
 }

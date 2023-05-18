@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ability")
+@RequestMapping("/urpg-configuration/v1/abilities")
 @CrossOrigin
 @Validated
 public class AbilityController {
@@ -37,14 +37,14 @@ public class AbilityController {
     @AllowAuthorized(permission = "Write Ability")
     @PostMapping
     public @ResponseBody
-    Ability create(@Valid @RequestBody AbilityInputDto input) {
+    Ability create(@Valid @RequestBody AbilityRequest input) {
         return abilityService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Ability")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Ability update(@Valid @RequestBody AbilityInputDto input, @PathVariable int dbid) {
+    Ability update(@Valid @RequestBody AbilityRequest input, @PathVariable int dbid) {
         return abilityService.update(input, dbid);
     }
 }

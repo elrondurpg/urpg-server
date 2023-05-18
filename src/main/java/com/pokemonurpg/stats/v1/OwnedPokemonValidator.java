@@ -1,9 +1,9 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.entities.v1.SpeciesAbility;
-import com.pokemonurpg.entities.v1.SpeciesAttack;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.entities.v1.PokemonAbility;
+import com.pokemonurpg.entities.v1.PokemonAttack;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,50 +17,50 @@ import java.util.stream.Collectors;
 public class OwnedPokemonValidator {
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
-    public boolean isValidStarter(Species species) {
-        return isOwnable(species)
-                && species.getPreEvolution() == null
-                && !speciesService.findByPreEvolution(species).isEmpty()
-                && species.getLegendaryTier() == 0;
+    public boolean isValidStarter(Pokemon pokemon) {
+        return isOwnable(pokemon)
+                && pokemon.getPreEvolution() == null
+                && !pokemonService.findByPreEvolution(pokemon).isEmpty()
+                && pokemon.getLegendaryTier() == 0;
     }
 
-    public boolean isValid(Species species, OwnedPokemonInputDto input) {
-        return isOwnable(species)
-            && isGenderLegal(species, input.getGender())
-            && areAllMovesLegal(species, input.getOwnedExtraMoves())
-            && areAllAbilitiesLegal(species, input.getOwnedHiddenAbilities());
+    public boolean isValid(Pokemon pokemon, OwnedPokemonRequest input) {
+        return isOwnable(pokemon)
+            && isGenderLegal(pokemon, input.getGender())
+            && areAllMovesLegal(pokemon, input.getOwnedExtraMoves())
+            && areAllAbilitiesLegal(pokemon, input.getOwnedHiddenAbilities());
     }
 
-    public boolean isOwnable(Species species) {
-        if (species.getPreMega() == null && Boolean.FALSE.equals(species.isBattleOnly()))
+    public boolean isOwnable(Pokemon pokemon) {
+        if (pokemon.getPreMega() == null && Boolean.FALSE.equals(pokemon.isBattleOnly()))
             return true;
         else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't own that Pokemon form!");
     }
 
-    public boolean isGenderLegal(Species species, String gender) {
+    public boolean isGenderLegal(Pokemon pokemon, String gender) {
         if (gender == null) {
             return true;
         }
-        else if ("F".equalsIgnoreCase(gender) && species.getFemaleAllowed()) {
+        else if ("F".equalsIgnoreCase(gender) && pokemon.getFemaleAllowed()) {
             return true;
         }
-        else if ("M".equalsIgnoreCase(gender) && species.getMaleAllowed()) {
+        else if ("M".equalsIgnoreCase(gender) && pokemon.getMaleAllowed()) {
             return true;
         }
-        else if ("G".equalsIgnoreCase(gender) && !species.getFemaleAllowed() && !species.getMaleAllowed()) {
+        else if ("G".equalsIgnoreCase(gender) && !pokemon.getFemaleAllowed() && !pokemon.getMaleAllowed()) {
             return true;
         }
         else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, gender + " is not a legal gender for " + species.getName());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, gender + " is not a legal gender for " + pokemon.getName());
         }
     }
 
-    public boolean areAllMovesLegal(Species species, List<OwnedExtraMoveInputDto> moves) {
-        if ("Smeargle".equals(species.getName())) return true;
+    public boolean areAllMovesLegal(Pokemon pokemon, List<OwnedExtraMoveRequest> moves) {
+        if ("Smeargle".equals(pokemon.getName())) return true;
 
-        List<SpeciesAttack> validMoves = species.getAttacks();
+        List<PokemonAttack> validMoves = pokemon.getAttacks();
         List<String> validMoveNames =
             validMoves.stream()
                 .filter(speciesAttack -> !"LEVEL-UP".equals(speciesAttack.getMethod()))
@@ -70,26 +70,26 @@ public class OwnedPokemonValidator {
         List<String> invalidMoves =
             moves.stream()
                 .filter(move -> !validMoveNames.contains(move.getAttack()))
-                .map(OwnedExtraMoveInputDto::getAttack)
+                .map(OwnedExtraMoveRequest::getAttack)
                 .collect(Collectors.toList());
 
         if (invalidMoves.isEmpty()) {
             return true;
         }
         else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, species.getName() + " cannot learn the following moves: " + invalidMoves.toString());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, pokemon.getName() + " cannot learn the following moves: " + invalidMoves.toString());
         }
     }
 
-    public boolean areAllAbilitiesLegal(Species species, List<OwnedHiddenAbilityInputDto> abilities) {
+    public boolean areAllAbilitiesLegal(Pokemon pokemon, List<OwnedHiddenAbilityRequest> abilities) {
         List<String> invalidAbilities = new ArrayList<>();
-        List<SpeciesAbility> validAbilities = species.getAbilities();
+        List<PokemonAbility> validAbilities = pokemon.getAbilities();
         List<String> validAbilityNames = validAbilities.stream()
-                .filter(SpeciesAbility::getHidden)
+                .filter(PokemonAbility::getHidden)
                 .map(speciesAbility -> speciesAbility.getAbility().getName())
                 .collect(Collectors.toList());
 
-        for (OwnedHiddenAbilityInputDto ability : abilities) {
+        for (OwnedHiddenAbilityRequest ability : abilities) {
             if (!validAbilityNames.contains(ability.getAbility())) invalidAbilities.add(ability.getAbility());
         }
 
@@ -97,7 +97,7 @@ public class OwnedPokemonValidator {
             return true;
         }
         else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, species.getName() + " cannot have the following abilities: " + invalidAbilities.toString());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, pokemon.getName() + " cannot have the following abilities: " + invalidAbilities.toString());
         }
     }
 

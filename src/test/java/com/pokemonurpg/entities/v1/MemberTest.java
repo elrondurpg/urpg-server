@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
-import com.pokemonurpg.entities.v1.*;
+import com.pokemonurpg.configuration.v1.members.MemberRequest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class MemberTest {
     private final static Set<Role> ROLES = new HashSet<>();
     private final static Boolean BANNED = true;
     private final static Date BAN_EXPIRATION = new Date();
-    private final static Set<GymOwnershipTerm> GYMS = new HashSet<>();
+    private final static Set<GymLeaderRecord> GYMS = new HashSet<>();
     private final static Boolean BOT = null;
     private final static List<EliteFourVictory> ELITE_FOUR_VICTORIES = new ArrayList<>();
     private final static List<ChampionVictory> CHAMPION_VICTORIES = new ArrayList<>();
@@ -98,7 +97,7 @@ public class MemberTest {
 
     @Test
     public void testConstructor() {
-        MemberInputDto input = new MemberInputDto();
+        MemberRequest input = new MemberRequest();
         input.setDiscordId(DISCORD_ID);
         input.setName(USERNAME);
         input.setMoney(MONEY);

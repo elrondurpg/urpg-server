@@ -1,10 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.entities.v1.ContestAttribute;
-import com.pokemonurpg.entities.v1.ContestRank;
-import com.pokemonurpg.entities.v1.EarnedRibbon;
-import com.pokemonurpg.entities.v1.OwnedPokemon;
-import com.pokemonurpg.stats.v1.EarnedRibbonInputDto;
+import com.pokemonurpg.stats.v1.EarnedRibbonRequest;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -24,7 +20,7 @@ public class EarnedRibbonTest {
 
     @Test
     public void testConstructor() {
-        EarnedRibbonInputDto input = new EarnedRibbonInputDto();
+        EarnedRibbonRequest input = new EarnedRibbonRequest();
         /*input.setUrl(URL);
         input.setSpent(SPENT);
 

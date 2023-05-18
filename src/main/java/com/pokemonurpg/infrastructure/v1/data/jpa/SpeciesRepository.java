@@ -1,7 +1,7 @@
 package com.pokemonurpg.infrastructure.v1.data.jpa;
 
 import com.pokemonurpg.entities.v1.ParkRank;
-import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.Pokemon;
 import com.pokemonurpg.entities.v1.StoryRank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SpeciesRepository extends JpaRepository<Species, Integer> {
+public interface SpeciesRepository extends JpaRepository<Pokemon, Integer> {
     @Query("select max(dexno) from Species s")
     Integer findMaxDexno();
     @Query("select s.name from Species s")
@@ -25,13 +25,13 @@ public interface SpeciesRepository extends JpaRepository<Species, Integer> {
             "and s.preMega is null " +
             "and s in (select s2.preEvolution from Species s2)")
     List<String> findAllStarterNames();
-    Species findByName(String name);
-    Species findByDbid(Integer dbid);
-    List<Species> findByDexno(Integer dexno);
-    Species findFirstByNameStartingWith(String name);
-    Species findFirstByDexno(int dexno);
-    List<Species> findByStoryRank(StoryRank rank);
-    List<Species> findByParkRank(ParkRank rank);
-    List<Species> findByPreEvolution(Species species);
-    List<Species> findByPreMega(Species species);
+    Pokemon findByName(String name);
+    Pokemon findByDbid(Integer dbid);
+    List<Pokemon> findByDexno(Integer dexno);
+    Pokemon findFirstByNameStartingWith(String name);
+    Pokemon findFirstByDexno(int dexno);
+    List<Pokemon> findByStoryRank(StoryRank rank);
+    List<Pokemon> findByParkRank(ParkRank rank);
+    List<Pokemon> findByPreEvolution(Pokemon pokemon);
+    List<Pokemon> findByPreMega(Pokemon pokemon);
 }

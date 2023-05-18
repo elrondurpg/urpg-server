@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/urpg-configuration/v1/items")
 @CrossOrigin
 @Validated
 public class ItemController {
@@ -45,14 +45,14 @@ public class ItemController {
     @AllowAuthorized(permission = "Write Item")
     @PostMapping
     public @ResponseBody
-    Item create(@Valid @RequestBody ItemInputDto input) {
+    Item create(@Valid @RequestBody ItemRequest input) {
         return itemService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Item")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Item update(@Valid @RequestBody ItemInputDto input, @PathVariable int dbid) {
+    Item update(@Valid @RequestBody ItemRequest input, @PathVariable int dbid) {
         return itemService.update(input, dbid);
     }
 }

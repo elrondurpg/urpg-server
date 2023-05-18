@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.parkranks;
 
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankController;
 import com.pokemonurpg.entities.v1.ParkRank;
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class ParkRankControllerTest {
 
     @Test
     public void create() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
         when(parkRankService.create(input)).thenReturn(parkRank);
         assertEquals(parkRank, parkRankController.create(input));
@@ -52,7 +49,7 @@ public class ParkRankControllerTest {
 
     @Test
     public void update() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
         when(parkRankService.update(input, DBID)).thenReturn(parkRank);
         assertEquals(parkRank, parkRankController.update(input, DBID));

@@ -1,10 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.pokedex.v1.AlteredFormDto;
-import com.pokemonurpg.pokedex.v1.AlteredFormService;
-import com.pokemonurpg.pokedex.v1.FormAttackSorter;
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,44 +23,44 @@ public class AlteredFormServiceTest {
     private AlteredFormService alteredFormService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Mock
     private FormAttackSorter formAttackSorter;
 
     @Test
     public void returnsEmptyListWhenSpeciesHasNoAlternateForms() {
-        Species species1 = new Species();
-        species1.setDexno(DEXNO);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Collections.singletonList(species1));
+        Pokemon pokemon1 = new Pokemon();
+        pokemon1.setDexno(DEXNO);
+        when(pokemonService.findByDexno(DEXNO)).thenReturn(Collections.singletonList(pokemon1));
 
-        List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
+        List<AlteredFormResponse> alteredForms = alteredFormService.findBySpecies(pokemon1);
         assertEquals(0, alteredForms.size());
     }
 
     @Test
     public void returnsListOfAlteredForms() {
-        Species species1 = new Species();
-        species1.setDexno(DEXNO);
-        Species species2 = new Species();
-        species2.setDexno(DEXNO);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
+        Pokemon pokemon1 = new Pokemon();
+        pokemon1.setDexno(DEXNO);
+        Pokemon pokemon2 = new Pokemon();
+        pokemon2.setDexno(DEXNO);
+        when(pokemonService.findByDexno(DEXNO)).thenReturn(Arrays.asList(pokemon1, pokemon2));
 
-        List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
+        List<AlteredFormResponse> alteredForms = alteredFormService.findBySpecies(pokemon1);
         verify(formAttackSorter, times(1)).run(alteredForms);
         assertEquals(2, alteredForms.size());
     }
 
     @Test
     public void returnsEmptyListWhenOneOfTwoFormsIsAMega() {
-        Species species1 = new Species();
-        species1.setDexno(DEXNO);
-        Species species2 = new Species();
-        species2.setDexno(DEXNO);
-        species2.setPreMega(species1);
-        when(speciesService.findByDexno(DEXNO)).thenReturn(Arrays.asList(species1, species2));
+        Pokemon pokemon1 = new Pokemon();
+        pokemon1.setDexno(DEXNO);
+        Pokemon pokemon2 = new Pokemon();
+        pokemon2.setDexno(DEXNO);
+        pokemon2.setPreMega(pokemon1);
+        when(pokemonService.findByDexno(DEXNO)).thenReturn(Arrays.asList(pokemon1, pokemon2));
 
-        List<AlteredFormDto> alteredForms = alteredFormService.findBySpecies(species1);
+        List<AlteredFormResponse> alteredForms = alteredFormService.findBySpecies(pokemon1);
         assertEquals(0, alteredForms.size());
     }
 }

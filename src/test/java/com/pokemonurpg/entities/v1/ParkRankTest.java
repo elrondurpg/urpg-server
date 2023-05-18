@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
-import com.pokemonurpg.entities.v1.ParkRank;
+import com.pokemonurpg.configuration.v1.parkranks.ParkRankRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -25,7 +24,7 @@ public class ParkRankTest {
 
     @Test
     public void testConstructor() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
         input.setRequirement(REQUIREMENT);
 

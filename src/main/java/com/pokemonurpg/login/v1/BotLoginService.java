@@ -19,7 +19,7 @@ public class BotLoginService {
     @Resource
     private MemberService memberService;
 
-    public SessionDto login() {
+    public Session login() {
         String[] credentials = authorizationCredentialsService.getCredentials();
         if (credentials != null && credentials.length == 2) {
             OAuthAccessTokenResponse accessTokenResponse = oAuthService.getAccessTokenForClientCredentials(credentials[0], credentials[1]);
@@ -27,7 +27,7 @@ public class BotLoginService {
                 Member member = memberService.findByDiscordId(credentials[0]);
                 if (member != null && Boolean.TRUE.equals(member.getBot())) {
                     memberService.update(member, accessTokenResponse);
-                    return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                    return new Session(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                 }
             }
         }

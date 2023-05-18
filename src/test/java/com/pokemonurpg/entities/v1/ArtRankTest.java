@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
-import com.pokemonurpg.entities.v1.ArtRank;
+import com.pokemonurpg.configuration.v1.artranks.ArtRankRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -25,7 +24,7 @@ public class ArtRankTest {
 
     @Test
     public void testConstructor() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
         input.setRequirement(REQUIREMENT);
 

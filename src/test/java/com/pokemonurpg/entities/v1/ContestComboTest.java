@@ -1,6 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
+import com.pokemonurpg.configuration.v1.attacks.ContestComboRequest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,12 +25,12 @@ public class ContestComboTest {
 
     @Test
     public void testConstructor() {
-        ContestComboInputDto input = new ContestComboInputDto();
+        ContestComboRequest input = new ContestComboRequest();
         input.setSecondAttack(SECOND_ATTACK_NAME);
         input.setOverpowered(OVERPOWERED);
        // input.setContestType(CONTEST_TYPE);
 
-        ContestType generation = new ContestType();
+        ContestGeneration generation = new ContestGeneration();
 
         ContestCombo contestCombo = new ContestCombo(input, FIRST_ATTACK, SECOND_ATTACK, generation);
         Assert.assertEquals(FIRST_ATTACK, contestCombo.getFirstAttack());

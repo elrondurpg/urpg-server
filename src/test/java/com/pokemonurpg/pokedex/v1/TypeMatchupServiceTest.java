@@ -1,12 +1,10 @@
 package com.pokemonurpg.pokedex.v1;
 
 import com.pokemonurpg.entities.v1.TypeMatchup;
-import com.pokemonurpg.pokedex.v1.TypeMatchupDto;
 import com.pokemonurpg.infrastructure.v1.data.jpa.TypeMatchupRepository;
-import com.pokemonurpg.entities.v1.Species;
+import com.pokemonurpg.entities.v1.Pokemon;
 import com.pokemonurpg.entities.v1.Type;
 import com.pokemonurpg.configuration.v1.types.TypeService;
-import com.pokemonurpg.pokedex.v1.TypeMatchupService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,12 +75,12 @@ public class TypeMatchupServiceTest {
     @Test
     public void testTwoTypes() {
         // Given a Species with Type1 "type1" and Type2 "type2"
-        Species species = new Species();
-        species.setType1(type1);
-        species.setType2(type2);
+        Pokemon pokemon = new Pokemon();
+        pokemon.setType1(type1);
+        pokemon.setType2(type2);
 
         // when I call typeMatchupService.findBySpecies(species);
-        List<TypeMatchupDto> matchups = typeMatchupService.findBySpecies(species);
+        List<TypeMatchupResponse> matchups = typeMatchupService.findBySpecies(pokemon);
 
         // Then I will receive a list of two TypeMatchupDtos, where each typeMatchupDto has the correct multiplier
         assertEquals(2, matchups.size());
@@ -92,11 +90,11 @@ public class TypeMatchupServiceTest {
 
     @Test
     public void testOneType() {
-        Species species = new Species();
-        species.setType1(type1);
+        Pokemon pokemon = new Pokemon();
+        pokemon.setType1(type1);
 
         // when I call typeMatchupService.findBySpecies(species);
-        List<TypeMatchupDto> matchups = typeMatchupService.findBySpecies(species);
+        List<TypeMatchupResponse> matchups = typeMatchupService.findBySpecies(pokemon);
 
         // Then I will receive a list of two TypeMatchupDtos, where each typeMatchupDto has the correct multiplier
         assertEquals(2, matchups.size());

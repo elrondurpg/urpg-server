@@ -17,7 +17,7 @@ import java.util.List;
 import static com.pokemonurpg.lib.v1.strings.PermissionNames.*;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/urpg-configuration/v1/roles")
 @CrossOrigin
 @Validated
 public class RoleController {
@@ -52,14 +52,14 @@ public class RoleController {
     @AllowAuthorized(permission = WRITE_ROLE_PERMISSION)
     @PostMapping
     public @ResponseBody
-    Role create(@Valid @RequestBody RoleInputDto input) {
+    Role create(@Valid @RequestBody RoleRequest input) {
         return roleService.create(input);
     }
 
     @AllowAuthorized(permission = WRITE_ROLE_PERMISSION)
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Role update(@Valid @RequestBody RoleInputDto input, @PathVariable int dbid) {
+    Role update(@Valid @RequestBody RoleRequest input, @PathVariable int dbid) {
         return roleService.update(input, dbid);
     }
 }

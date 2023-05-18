@@ -1,7 +1,7 @@
 package com.pokemonurpg.infrastructure.v1.data.jpa;
 
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,6 +13,6 @@ public interface GymRepository extends JpaRepository<Gym, Integer> {
     Gym findByDbid(Integer dbid);
     Gym findByName(String name);
     Gym findFirstByNameStartingWith(String name);
-    Gym findByCurrentOwnerRecord(GymOwnershipTerm currentOwnerRecord);
+    Gym findByCurrentOwnerRecord(GymLeaderRecord currentOwnerRecord);
     void deleteByDbid(int dbid);
 }

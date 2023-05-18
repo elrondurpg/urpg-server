@@ -1,8 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
-import com.pokemonurpg.entities.v1.Permission;
-import com.pokemonurpg.entities.v1.Role;
+import com.pokemonurpg.configuration.v1.permissions.PermissionRequest;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -33,7 +31,7 @@ public class PermissionTest {
 
     @Test
     public void testConstructor() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 

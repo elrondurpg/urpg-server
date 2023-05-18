@@ -35,13 +35,13 @@ public class AttackCategoryService implements NamedObjectService<AttackCategory>
         return attackCategoryRepository.findByName(name);
     }
 
-    public AttackCategory create(AttackCategoryInputDto input) {
+    public AttackCategory create(AttackCategoryRequest input) {
         AttackCategory attackCategory = new AttackCategory(input);
         attackCategoryRepository.save(attackCategory);
         return attackCategory;
     }
 
-    public AttackCategory update(AttackCategoryInputDto input, int dbid) {
+    public AttackCategory update(AttackCategoryRequest input, int dbid) {
         AttackCategory attackCategory = attackCategoryRepository.findByDbid(dbid);
         if (attackCategory != null) {
             attackCategory.update(input);

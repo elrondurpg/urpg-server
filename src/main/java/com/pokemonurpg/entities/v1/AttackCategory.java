@@ -1,6 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
+import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryRequest;
 import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
@@ -19,11 +19,11 @@ public class AttackCategory implements NamedObject {
     public AttackCategory() {
     }
 
-    public AttackCategory(AttackCategoryInputDto input) {
+    public AttackCategory(AttackCategoryRequest input) {
         this.update(input);
     }
 
-    public void update(AttackCategoryInputDto input) {
+    public void update(AttackCategoryRequest input) {
         setName(input.getName());
     }
 

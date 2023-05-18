@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.gymleagues;
 
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
 import com.pokemonurpg.entities.v1.GymLeague;
 import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeagueRepository;
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class GymLeagueServiceTest {
 
     @Test
     public void create() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
 
         GymLeague gymLeague = gymLeagueService.create(input);
@@ -69,7 +66,7 @@ public class GymLeagueServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
 
         when(gymLeagueRepository.findByDbid(DBID)).thenReturn(gymLeague);
@@ -82,7 +79,7 @@ public class GymLeagueServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
 
         when(gymLeagueRepository.findByDbid(DBID)).thenReturn(null);

@@ -35,13 +35,13 @@ public class StoryRankService implements NamedObjectService<StoryRank> {
         return storyRankRepository.findByName(name);
     }
 
-    public StoryRank create(StoryRankInputDto input) {
+    public StoryRank create(StoryRankRequest input) {
         StoryRank storyRank = new StoryRank(input);
         storyRankRepository.save(storyRank);
         return storyRank;
     }
 
-    public StoryRank update(StoryRankInputDto input, int dbid) {
+    public StoryRank update(StoryRankRequest input, int dbid) {
         StoryRank storyRank = storyRankRepository.findByDbid(dbid);
         if (storyRank != null) {
             storyRank.update(input);

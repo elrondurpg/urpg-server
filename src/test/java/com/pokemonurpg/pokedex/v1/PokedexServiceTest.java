@@ -1,8 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
-import com.pokemonurpg.pokedex.v1.*;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,24 +17,24 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PokedexServiceTest {
-    private final static Species SPECIES = new Species();
+    private final static Pokemon POKEMON = new Pokemon();
     private final static String SPECIES_NAME = "SPECIES";
-    private final static Species PREV_DEX = new Species();
-    private final static Species NEXT_DEX = new Species();
-    private final static List<AlteredFormDto> ALTERED_FORMS = new ArrayList<>();
-    private final static AlteredFormDto ALTERED_FORM = mock(AlteredFormDto.class);
+    private final static Pokemon PREV_DEX = new Pokemon();
+    private final static Pokemon NEXT_DEX = new Pokemon();
+    private final static List<AlteredFormResponse> ALTERED_FORMS = new ArrayList<>();
+    private final static AlteredFormResponse ALTERED_FORM = mock(AlteredFormResponse.class);
     private final static Map<String, String> ATTACKS_THAT_DIFFER_BY_FORM = new HashMap<>();
     private final static String ATTACK_THAT_DIFFERS_BY_FORM = "ATTACK";
     private final static String METHOD = "METHOD";
-    private final static List<List<Species>> EVOLUTION_FAMILY = new ArrayList<>();
-    private final static List<MegaEvolutionDto> MEGA_EVOLUTIONS = new ArrayList<>();
-    private final static List<TypeMatchupDto> TYPE_MATCHUPS = new ArrayList<>();
+    private final static List<List<Pokemon>> EVOLUTION_FAMILY = new ArrayList<>();
+    private final static List<MegaEvolutionResponse> MEGA_EVOLUTIONS = new ArrayList<>();
+    private final static List<TypeMatchupResponse> TYPE_MATCHUPS = new ArrayList<>();
 
     @InjectMocks
     private PokedexService pokedexService;
 
     @Mock
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Mock
     private SpeciesPageTabService speciesPageTabService;
@@ -54,23 +53,23 @@ public class PokedexServiceTest {
 
     @Test
     public void switchToPreMega() {
-        Species preMega = new Species();
-        Species mega = new Species();
+        Pokemon preMega = new Pokemon();
+        Pokemon mega = new Pokemon();
         mega.setPreMega(preMega);
         assertEquals(preMega, pokedexService.switchToPreMegaIfNeeded(mega));
     }
 
     @Test
     public void dontSwitchToPreMega() {
-        Species preMega = new Species();
-        Species mega = new Species();
+        Pokemon preMega = new Pokemon();
+        Pokemon mega = new Pokemon();
         mega.setPreMega(preMega);
         assertEquals(preMega, pokedexService.switchToPreMegaIfNeeded(preMega));
     }
 
     @Test
     public void testSpeciesNotFound() {
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(null);
+        when(pokemonService.findByName(SPECIES_NAME)).thenReturn(null);
         assertNull(pokedexService.findByName(SPECIES_NAME));
     }
 
@@ -83,16 +82,16 @@ public class PokedexServiceTest {
 
     @Test
     public void testFindByName() {
-        when(speciesService.findByName(SPECIES_NAME)).thenReturn(SPECIES);
-        when(speciesPageTabService.findPrevDexBySpecies(SPECIES)).thenReturn(PREV_DEX);
-        when(speciesPageTabService.findNextDexBySpecies(SPECIES)).thenReturn(NEXT_DEX);
-        when(alteredFormService.findBySpecies(SPECIES)).thenReturn(ALTERED_FORMS);
-        when(evolutionFamilyService.findBySpecies(SPECIES)).thenReturn(EVOLUTION_FAMILY);
-        when(megaEvolutionService.findBySpecies(SPECIES)).thenReturn(MEGA_EVOLUTIONS);
-        when(typeMatchupService.findBySpecies(SPECIES)).thenReturn(TYPE_MATCHUPS);
+        when(pokemonService.findByName(SPECIES_NAME)).thenReturn(POKEMON);
+        when(speciesPageTabService.findPrevDexBySpecies(POKEMON)).thenReturn(PREV_DEX);
+        when(speciesPageTabService.findNextDexBySpecies(POKEMON)).thenReturn(NEXT_DEX);
+        when(alteredFormService.findBySpecies(POKEMON)).thenReturn(ALTERED_FORMS);
+        when(evolutionFamilyService.findBySpecies(POKEMON)).thenReturn(EVOLUTION_FAMILY);
+        when(megaEvolutionService.findBySpecies(POKEMON)).thenReturn(MEGA_EVOLUTIONS);
+        when(typeMatchupService.findBySpecies(POKEMON)).thenReturn(TYPE_MATCHUPS);
 
-        PokedexEntryDto entry = pokedexService.findByName(SPECIES_NAME);
-        assertEquals(SPECIES, entry.getSpecies());
+        PokemonResponse entry = pokedexService.findByName(SPECIES_NAME);
+        assertEquals(POKEMON, entry.getSpecies());
         assertEquals(PREV_DEX, entry.getPrevDex());
         assertEquals(NEXT_DEX, entry.getNextDex());
         assertEquals(ALTERED_FORMS, entry.getAlteredForms());

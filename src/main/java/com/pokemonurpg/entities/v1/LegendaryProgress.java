@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.LegendaryProgressInputDto;
+import com.pokemonurpg.stats.v1.LegendaryProgressRequest;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,14 +40,14 @@ public class LegendaryProgress {
     public LegendaryProgress() {
     }
 
-    public LegendaryProgress(LegendaryProgressInputDto input, Member member, Section section) {
+    public LegendaryProgress(LegendaryProgressRequest input, Member member, Section section) {
         this.update(input);
         this.id = new LegendaryProgressKey(input.getLogUrl(), member.getDbid(), section.getDbid());
         setTrainer(member);
         setSection(section);
     }
 
-    public void update(LegendaryProgressInputDto input) {
+    public void update(LegendaryProgressRequest input) {
         setValue(input.getValue());
         setDate(input.getDate());
     }

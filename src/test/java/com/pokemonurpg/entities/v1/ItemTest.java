@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.items.ItemInputDto;
-import com.pokemonurpg.entities.v1.Item;
+import com.pokemonurpg.configuration.v1.items.ItemRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class ItemTest {
 
     @Test
     public void createItemFromDto() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
         input.setPrice(PRICE);
         input.setType(TYPE);

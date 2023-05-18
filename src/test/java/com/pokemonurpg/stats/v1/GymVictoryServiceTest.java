@@ -1,24 +1,5 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymLeague;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymLeagueRepository;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
-import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.stats.v1.GymVictoryInputDto;
-import com.pokemonurpg.entities.v1.GymVictory;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymVictoryRepository;
-import com.pokemonurpg.stats.v1.GymVictoryService;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.mockito.Mockito.*;
-
 public class GymVictoryServiceTest {
     // TODO Refactor this service as a private method in the stats/v1/member UpdateMemberRequest class
     /*

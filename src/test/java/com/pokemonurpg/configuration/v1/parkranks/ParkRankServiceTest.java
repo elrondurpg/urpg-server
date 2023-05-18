@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.parkranks;
 
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankInputDto;
 import com.pokemonurpg.entities.v1.ParkRank;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ParkRankRepository;
-import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class ParkRankServiceTest {
 
     @Test
     public void create() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
 
         ParkRank parkRank = parkRankService.create(input);
@@ -69,7 +66,7 @@ public class ParkRankServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
 
         when(parkRankRepository.findByDbid(DBID)).thenReturn(parkRank);
@@ -82,7 +79,7 @@ public class ParkRankServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ParkRankInputDto input = new ParkRankInputDto();
+        ParkRankRequest input = new ParkRankRequest();
         input.setName(NAME);
 
         when(parkRankRepository.findByDbid(DBID)).thenReturn(null);

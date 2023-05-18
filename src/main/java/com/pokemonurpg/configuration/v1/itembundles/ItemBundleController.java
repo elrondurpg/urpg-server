@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itemBundle")
+@RequestMapping("/urpg-configuration/v1/item-bundles")
 @CrossOrigin
 @Validated
 public class ItemBundleController {
@@ -38,14 +38,14 @@ public class ItemBundleController {
     @AllowAuthorized(permission = "Write Item")
     @PostMapping
     public @ResponseBody
-    ItemBundle create(@Valid @RequestBody ItemBundleInputDto input) {
+    ItemBundle create(@Valid @RequestBody ItemBundleRequest input) {
         return itemBundleService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Item")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ItemBundle update(@Valid @RequestBody ItemBundleInputDto input, @PathVariable int dbid) {
+    ItemBundle update(@Valid @RequestBody ItemBundleRequest input, @PathVariable int dbid) {
         return itemBundleService.update(input, dbid);
     }
 }

@@ -1,17 +1,17 @@
 package com.pokemonurpg.configuration.v1.members;
 
-import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
-import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;
-import com.pokemonurpg.configuration.v1.gymleaders.KnownGymLeaderService;
+import com.pokemonurpg.configuration.v1.champions.ChampionService;
+import com.pokemonurpg.configuration.v1.elitefourmembers.EliteFourMemberService;
+import com.pokemonurpg.configuration.v1.gymleaders.GymLeaderService;
 import com.pokemonurpg.entities.v1.Role;
 import com.pokemonurpg.infrastructure.v1.data.jpa.MemberRepository;
-import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
+import com.pokemonurpg.configuration.v1.capturemethods.CaptureMethodService;
 import com.pokemonurpg.entities.v1.KnownNameClaim;
 import com.pokemonurpg.registration.v1.members.KnownNameClaimService;
 import com.pokemonurpg.configuration.v1.roles.RoleService;
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
-import com.pokemonurpg.registration.v1.members.RegistrationInputDto;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
+import com.pokemonurpg.registration.v1.members.RegistrationRequest;
 import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
 import com.pokemonurpg.login.v1.AesEncryptionService;
 import com.pokemonurpg.login.v1.AuthorizationService;
@@ -71,13 +71,13 @@ public class MemberService implements NamedObjectService<Member> {
     private GymVictoryService gymVictoryService;
 
     @Resource
-    private KnownGymLeaderService knownGymLeaderService;
+    private GymLeaderService gymLeaderService;
 
     @Resource
-    private KnownEliteFourMemberService knownEliteFourMemberService;
+    private EliteFourMemberService eliteFourMemberService;
 
     @Resource
-    private KnownChampionService knownChampionService;
+    private ChampionService championService;
 
     @Resource
     private AuthorizationService authorizationService;
@@ -86,10 +86,10 @@ public class MemberService implements NamedObjectService<Member> {
     private KnownNameClaimService knownNameClaimService;
 
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
-    private ObtainedService obtainedService;
+    private CaptureMethodService captureMethodService;
 
     @Resource
     private OwnedPokemonRepository ownedPokemonRepository;
@@ -126,7 +126,7 @@ public class MemberService implements NamedObjectService<Member> {
         return memberRepository.findByDiscordId(discordId);
     }
 
-    public Member create(MemberInputDto input) {
+    public Member create(MemberRequest input) {
         Member member = new Member(input);
         updateEmbeddedValues(input, member);
         memberRepository.save(member);
@@ -134,7 +134,7 @@ public class MemberService implements NamedObjectService<Member> {
         return member;
     }
 
-    public Member registerNew(RegistrationInputDto input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
+    public Member registerNew(RegistrationRequest input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
         Member member = new Member();
         member.setName(input.getName());
         member.setDiscordId(discordId);
@@ -157,16 +157,16 @@ public class MemberService implements NamedObjectService<Member> {
         ownedItemService.add(member, "Starter Ribbon Coupon", 1);
         ownedItemService.add(member, "Rare Candy", 5);
 
-        Species species = speciesService.findByName(input.getStarter().getSpecies());
+        Pokemon species = pokemonService.findByName(input.getStarter().getSpecies());
         OwnedPokemon pokemon = new OwnedPokemon(member, species, input.getStarter().getGender());
-        pokemon.setObtained(obtainedService.findByName("Starter"));
+        pokemon.setObtained(captureMethodService.findByName("Starter"));
         ownedPokemonRepository.save(pokemon);
 
         update(member, accessTokenResponse);
         return member;
     }
 
-    public Member registerVet(RegistrationInputDto input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
+    public Member registerVet(RegistrationRequest input, String discordId, OAuthAccessTokenResponse accessTokenResponse) {
         Member member = new Member();
         member.setName(input.getName());
         member.setDiscordId(discordId);
@@ -219,7 +219,7 @@ public class MemberService implements NamedObjectService<Member> {
         memberRepository.save(member);
     }
 
-    public Member update(MemberInputDto input, int dbid) {
+    public Member update(MemberRequest input, int dbid) {
         Member member = memberRepository.findByDbid(dbid);
         if (member != null) {
             preupdateAssociatedValues(input, member);
@@ -231,21 +231,21 @@ public class MemberService implements NamedObjectService<Member> {
         return member;
     }
 
-    private void preupdateAssociatedValues(MemberInputDto input, Member member) {
-        knownGymLeaderService.rename(input, member);
-        knownEliteFourMemberService.rename(input, member);
-        knownChampionService.rename(input, member);
+    private void preupdateAssociatedValues(MemberRequest input, Member member) {
+        gymLeaderService.rename(input, member);
+        eliteFourMemberService.rename(input, member);
+        championService.rename(input, member);
     }
 
-    private void updateEmbeddedValues(MemberInputDto input, Member member) {
+    private void updateEmbeddedValues(MemberRequest input, Member member) {
         updateRoles(input, member);
     }
 
-    private void updateRoles(MemberInputDto input, Member member) {
+    private void updateRoles(MemberRequest input, Member member) {
         if (authorizationService.isAuthorized(WRITE_MEMBER_PERMISSION)) {
             Set<Role> currentRoles = member.getRoles();
 
-            for (MemberRoleInputDto role : input.getRoles()) {
+            for (MemberRoleRequest role : input.getRoles()) {
                 String name = role.getName();
                 Role roleObject = roleService.findByName(name);
                 if (role.getDelete())
@@ -256,7 +256,7 @@ public class MemberService implements NamedObjectService<Member> {
         }
     }
 
-    private void updateAssociatedValues(MemberInputDto input, Member member) {
+    private void updateAssociatedValues(MemberRequest input, Member member) {
         updateLegendaryProgress(input, member);
         updateOwnedItems(input, member);
         updateEliteFourVictories(input, member);
@@ -264,39 +264,39 @@ public class MemberService implements NamedObjectService<Member> {
         updateGymVictories(input, member);
     }
 
-    private void updateLegendaryProgress(MemberInputDto input, Member member) {
-        List<LegendaryProgressInputDto> legendaryProgresses = input.getLegendaryProgress();
-        for (LegendaryProgressInputDto legendaryProgress : legendaryProgresses) {
+    private void updateLegendaryProgress(MemberRequest input, Member member) {
+        List<LegendaryProgressRequest> legendaryProgresses = input.getLegendaryProgress();
+        for (LegendaryProgressRequest legendaryProgress : legendaryProgresses) {
             legendaryProgressService.update(legendaryProgress, member);
         }
         member.setLegendaryProgress(legendaryProgressService.findByTrainer(member));
     }
 
-    private void updateOwnedItems(MemberInputDto input, Member member) {
-        List<OwnedItemInputDto> items = input.getItems();
-        for (OwnedItemInputDto item : items) {
+    private void updateOwnedItems(MemberRequest input, Member member) {
+        List<OwnedItemRequest> items = input.getItems();
+        for (OwnedItemRequest item : items) {
             ownedItemService.update(member, item);
         }
     }
 
-    private void updateEliteFourVictories(MemberInputDto input, Member member) {
-        List<EliteFourVictoryInputDto> victories = input.getEliteFourVictories();
-        for(EliteFourVictoryInputDto victory : victories) {
-            eliteFourVictoryService.update(victory, member, knownEliteFourMemberService.findByName(victory.getDefender()));
+    private void updateEliteFourVictories(MemberRequest input, Member member) {
+        List<EliteFourVictoryRequest> victories = input.getEliteFourVictories();
+        for(EliteFourVictoryRequest victory : victories) {
+            eliteFourVictoryService.update(victory, member, eliteFourMemberService.findByName(victory.getDefender()));
         }
     }
 
-    private void updateChampionVictories(MemberInputDto input, Member member) {
-        List<ChampionVictoryInputDto> victories = input.getChampionVictories();
-        for(ChampionVictoryInputDto victory : victories) {
-            championVictoryService.update(victory, member, knownChampionService.findByName(victory.getDefender()));
+    private void updateChampionVictories(MemberRequest input, Member member) {
+        List<ChampionVictoryRequest> victories = input.getChampionVictories();
+        for(ChampionVictoryRequest victory : victories) {
+            championVictoryService.update(victory, member, championService.findByName(victory.getDefender()));
         }
     }
 
-    private void updateGymVictories(MemberInputDto input, Member member) {
-        List<GymVictoryInputDto> victories = input.getGymVictories();
-        for(GymVictoryInputDto victory : victories) {
-            gymVictoryService.update(victory, member, knownGymLeaderService.findByName(victory.getDefender()));
+    private void updateGymVictories(MemberRequest input, Member member) {
+        List<GymVictoryRequest> victories = input.getGymVictories();
+        for(GymVictoryRequest victory : victories) {
+            gymVictoryService.update(victory, member, gymLeaderService.findByName(victory.getDefender()));
         }
     }
 

@@ -2,9 +2,6 @@ package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.Attack;
 import com.pokemonurpg.configuration.v1.attacks.AttackService;
-import com.pokemonurpg.stats.v1.OwnedExtraMoveInputDto;
-import com.pokemonurpg.stats.v1.OwnedExtraMoveService;
-import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,17 +33,17 @@ public class OwnedExtraMoveServiceTest {
     @Test
     public void updateAll() {
         // Given an OwnedExtraMoveInputDto with attack AttackName and Delete = false;
-        OwnedExtraMoveInputDto input1 = new OwnedExtraMoveInputDto();
+        OwnedExtraMoveRequest input1 = new OwnedExtraMoveRequest();
         input1.setAttack(ATTACK_NAME1);
         input1.setDelete(false);
 
         // Given an OwnedExtraMoveInputDto with attack AttackName2 and Delete = true;
-        OwnedExtraMoveInputDto input2 = new OwnedExtraMoveInputDto();
+        OwnedExtraMoveRequest input2 = new OwnedExtraMoveRequest();
         input2.setAttack(ATTACK_NAME2);
         input2.setDelete(true);
 
         // Given an OwnedPokemonInputDto that contains those extra move inputs
-        OwnedPokemonInputDto input = new OwnedPokemonInputDto();
+        OwnedPokemonRequest input = new OwnedPokemonRequest();
         input.setOwnedExtraMoves(Arrays.asList(input1, input2));
 
         // Given an OwnedPokemon with 'attacks' containing attack2

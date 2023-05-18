@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/nature")
+@RequestMapping("/urpg-configuration/v1/natures")
 @CrossOrigin
 @Validated
 public class NatureController {
@@ -38,14 +38,14 @@ public class NatureController {
     @AllowAuthorized(permission = "Write General")
     @PostMapping
     public @ResponseBody
-    Nature create(@Valid @RequestBody NatureInputDto input) {
+    Nature create(@Valid @RequestBody NatureRequest input) {
         return natureService.create(input);
     }
 
     @AllowAuthorized(permission = "Write General")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Nature update(@Valid @RequestBody NatureInputDto input, @PathVariable int dbid) {
+    Nature update(@Valid @RequestBody NatureRequest input, @PathVariable int dbid) {
         return natureService.update(input, dbid);
     }
 }

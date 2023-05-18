@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.itembundles.ItemBundleInputDto;
+import com.pokemonurpg.configuration.v1.itembundles.ItemBundleRequest;
 
 @Entity
 public class ItemBundle implements NamedObject {
@@ -33,11 +33,11 @@ public class ItemBundle implements NamedObject {
 
     public ItemBundle() {}
 
-    public ItemBundle(ItemBundleInputDto input) {
+    public ItemBundle(ItemBundleRequest input) {
         this.update(input);
     }
 
-    public void update(ItemBundleInputDto input) {
+    public void update(ItemBundleRequest input) {
         setName(input.getName());
         setPrice(input.getPrice());
     }

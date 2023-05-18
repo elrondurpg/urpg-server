@@ -1,7 +1,7 @@
 package com.pokemonurpg.pokedex.v1;
 
-import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.configuration.v1.pokemon.SpeciesService;
+import com.pokemonurpg.entities.v1.Pokemon;
+import com.pokemonurpg.configuration.v1.pokemon.PokemonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 @Service
 public class MegaEvolutionService {
     @Resource
-    private SpeciesService speciesService;
+    private PokemonService pokemonService;
 
     @Resource
     private TypeMatchupService typeMatchupService;
 
-    public List<MegaEvolutionDto> findBySpecies(Species species) {
-        List<Species> megaSpecies = speciesService.findByPreMega(species);
+    public List<MegaEvolutionResponse> findBySpecies(Pokemon pokemon) {
+        List<Pokemon> megaSpecies = pokemonService.findByPreMega(pokemon);
 
         return megaSpecies.stream().map(mega -> {
-            MegaEvolutionDto dto = new MegaEvolutionDto(mega);
+            MegaEvolutionResponse dto = new MegaEvolutionResponse(mega);
             dto.setTypeMatchups(typeMatchupService.findBySpecies(mega));
             return dto;
         }).collect(Collectors.toList());

@@ -39,14 +39,14 @@ public class ImageFolderServiceTest {
     @Mock
     private AppConfig appConfig;
 
-    private ImageFolderInputDto input;
+    private ImageFolderRequest input;
 
     @Captor
     ArgumentCaptor<ImageFolder> imageFolderArgumentCaptor;
 
     @Before
     public void init() {
-        input = new ImageFolderInputDto();
+        input = new ImageFolderRequest();
         input.setName(NAME);
     }
 

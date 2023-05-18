@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.sections;
 
-import com.pokemonurpg.configuration.v1.sections.SectionController;
 import com.pokemonurpg.entities.v1.Section;
-import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
-import com.pokemonurpg.configuration.v1.sections.SectionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -51,7 +48,7 @@ public class SectionControllerTest {
 
     @Test
     public void create() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
         when(sectionService.create(input)).thenReturn(section);
         assertEquals(section, sectionController.create(input));
@@ -59,7 +56,7 @@ public class SectionControllerTest {
 
     @Test
     public void update() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
         when(sectionService.update(input, DBID)).thenReturn(section);
         assertEquals(section, sectionController.update(input, DBID));

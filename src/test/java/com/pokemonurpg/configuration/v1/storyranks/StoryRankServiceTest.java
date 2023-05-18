@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.storyranks;
 
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
 import com.pokemonurpg.entities.v1.StoryRank;
 import com.pokemonurpg.infrastructure.v1.data.jpa.StoryRankRepository;
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class StoryRankServiceTest {
 
     @Test
     public void create() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
 
         StoryRank storyRank = storyRankService.create(input);
@@ -69,7 +66,7 @@ public class StoryRankServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
 
         when(storyRankRepository.findByDbid(DBID)).thenReturn(storyRank);
@@ -82,7 +79,7 @@ public class StoryRankServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
 
         when(storyRankRepository.findByDbid(DBID)).thenReturn(null);

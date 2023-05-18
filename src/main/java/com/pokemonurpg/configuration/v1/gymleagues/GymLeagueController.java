@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gymLeague")
+@RequestMapping("/urpg-configuration/v1/gym-leagues")
 @CrossOrigin
 @Validated
 public class GymLeagueController {
@@ -38,14 +38,14 @@ public class GymLeagueController {
     @AllowAuthorized(permission = "Write Gym")
     @PostMapping
     public @ResponseBody
-    GymLeague create(@Valid @RequestBody GymLeagueInputDto input) {
+    GymLeague create(@Valid @RequestBody GymLeagueRequest input) {
         return gymLeagueService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Gym")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    GymLeague update(@Valid @RequestBody GymLeagueInputDto input, @PathVariable int dbid) {
+    GymLeague update(@Valid @RequestBody GymLeagueRequest input, @PathVariable int dbid) {
         return gymLeagueService.update(input, dbid);
     }
 }

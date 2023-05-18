@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.permissions;
 
-import com.pokemonurpg.configuration.v1.permissions.PermissionInputDto;
 import com.pokemonurpg.entities.v1.Permission;
 import com.pokemonurpg.infrastructure.v1.data.jpa.PermissionRepository;
-import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class PermissionServiceTest {
 
     @Test
     public void create() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
 
         Permission permission = permissionService.create(input);
@@ -69,7 +66,7 @@ public class PermissionServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
 
         when(permissionRepository.findByDbid(DBID)).thenReturn(permission);
@@ -82,7 +79,7 @@ public class PermissionServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        PermissionInputDto input = new PermissionInputDto();
+        PermissionRequest input = new PermissionRequest();
         input.setName(NAME);
 
         when(permissionRepository.findByDbid(DBID)).thenReturn(null);

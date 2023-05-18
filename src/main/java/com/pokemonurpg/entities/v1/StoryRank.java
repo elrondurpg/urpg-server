@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.NamedObject;
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
+import com.pokemonurpg.configuration.v1.storyranks.StoryRankRequest;
 
 import javax.persistence.*;
 
@@ -25,11 +25,11 @@ public class StoryRank implements NamedObject {
     public StoryRank() {
     }
 
-    public StoryRank(StoryRankInputDto input) {
+    public StoryRank(StoryRankRequest input) {
         this.update(input);
     }
 
-    public void update(StoryRankInputDto input) {
+    public void update(StoryRankRequest input) {
         setName(input.getName());
         setRequirement(input.getRequirement());
     }

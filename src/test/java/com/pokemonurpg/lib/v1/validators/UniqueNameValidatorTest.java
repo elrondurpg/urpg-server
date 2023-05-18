@@ -1,10 +1,10 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedRequest;
 import com.pokemonurpg.lib.v1.services.NamedObjectServiceFactory;
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.UniqueName;
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.configuration.v1.members.MemberRequest;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.junit.Before;
@@ -49,13 +49,13 @@ public class UniqueNameValidatorTest {
 
     @Test
     public void isValidWhenInputNameNull() {
-        UniquelyNamedInputDto input = new MemberInputDto();
+        UniquelyNamedRequest input = new MemberRequest();
         assertTrue(uniqueNameValidator.isValid(input, null));
     }
 
     @Test
     public void isValidWhenNoObjectExistsWithProvidedName() {
-        UniquelyNamedInputDto input = new MemberInputDto();
+        UniquelyNamedRequest input = new MemberRequest();
         input.setName(NAME);
 
         when(namedObjectServiceFactory.getServiceForClass(Member.class)).thenReturn(memberService);
@@ -66,7 +66,7 @@ public class UniqueNameValidatorTest {
 
     @Test
     public void isInvalidWhenObjectWithProvidedNameExistsButRequestDbidIsNull() {
-        UniquelyNamedInputDto input = new MemberInputDto();
+        UniquelyNamedRequest input = new MemberRequest();
         input.setName(NAME);
 
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(null);
@@ -80,7 +80,7 @@ public class UniqueNameValidatorTest {
 
     @Test
     public void isInvalidWhenObjectWithProvidedNameExistsButObjectDbidIsNotEqualToRequestDbid() {
-        UniquelyNamedInputDto input = new MemberInputDto();
+        UniquelyNamedRequest input = new MemberRequest();
         input.setName(NAME);
 
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(REQUEST_DBID);
@@ -94,7 +94,7 @@ public class UniqueNameValidatorTest {
 
     @Test
     public void isValidWhenObjectWithProvidedNameExistsAndObjectDbidEqualsRequestDbid() {
-        UniquelyNamedInputDto input = new MemberInputDto();
+        UniquelyNamedRequest input = new MemberRequest();
         input.setName(NAME);
 
         when(requestPathVariableService.findIntByName("dbid")).thenReturn(REQUEST_DBID);

@@ -24,7 +24,7 @@ public class ItemBundleItemService {
         return itemBundleItemRepository.findByBundle(bundle);
     }
 
-    public void update(ItemBundle bundle, ItemBundleItemInputDto input) {
+    public void update(ItemBundle bundle, ItemBundleItemRequest input) {
         Item item = itemRepository.findByName(input.getItem());
         ItemBundleItem existingRecord = itemBundleItemRepository.findByBundleAndItem(bundle, item);
         if (existingRecord != null) {

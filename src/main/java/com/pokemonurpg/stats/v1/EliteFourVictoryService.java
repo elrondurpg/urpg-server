@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.entities.v1.KnownEliteFourMember;
+import com.pokemonurpg.entities.v1.EliteFourMember;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.EliteFourVictory;
 import com.pokemonurpg.infrastructure.v1.data.jpa.EliteFourVictoryRepository;
@@ -19,7 +19,7 @@ public class EliteFourVictoryService {
         return eliteFourVictoryRepository.findAll();
     }
 
-    public void update(EliteFourVictoryInputDto input, Member challenger, KnownEliteFourMember defender) {
+    public void update(EliteFourVictoryRequest input, Member challenger, EliteFourMember defender) {
         EliteFourVictory existingRecord = eliteFourVictoryRepository.findByChallengerAndDefender(challenger, defender);
 
         if (existingRecord != null) {

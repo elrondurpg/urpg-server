@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.storyranks.StoryRankInputDto;
-import com.pokemonurpg.entities.v1.StoryRank;
+import com.pokemonurpg.configuration.v1.storyranks.StoryRankRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -25,7 +24,7 @@ public class StoryRankTest {
 
     @Test
     public void testConstructor() {
-        StoryRankInputDto input = new StoryRankInputDto();
+        StoryRankRequest input = new StoryRankRequest();
         input.setName(NAME);
         input.setRequirement(REQUIREMENT);
 

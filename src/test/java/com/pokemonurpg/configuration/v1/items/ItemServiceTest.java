@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.items;
 
-import com.pokemonurpg.configuration.v1.items.ItemInputDto;
 import com.pokemonurpg.entities.v1.Item;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
-import com.pokemonurpg.configuration.v1.items.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -74,7 +71,7 @@ public class ItemServiceTest {
 
     @Test
     public void create() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
 
         Item item = itemService.create(input);
@@ -84,7 +81,7 @@ public class ItemServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
 
         when(itemRepository.findByDbid(DBID)).thenReturn(item);
@@ -97,7 +94,7 @@ public class ItemServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ItemInputDto input = new ItemInputDto();
+        ItemRequest input = new ItemRequest();
         input.setName(NAME);
 
         when(itemRepository.findByDbid(DBID)).thenReturn(null);

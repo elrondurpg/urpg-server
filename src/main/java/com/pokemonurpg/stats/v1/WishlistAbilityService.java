@@ -25,7 +25,7 @@ public class WishlistAbilityService {
         return wishlistAbilityRepository.findByPokemon(pokemon);
     }
 
-    public void update(WishlistAbilityInputDto input, OwnedPokemon pokemon) {
+    public void update(WishlistAbilityRequest input, OwnedPokemon pokemon) {
         Ability ability = abilityRepository.findByName(input.getAbility());
         WishlistAbility existingRecord = wishlistAbilityRepository.findByPokemonAndAbility(pokemon, ability);
 

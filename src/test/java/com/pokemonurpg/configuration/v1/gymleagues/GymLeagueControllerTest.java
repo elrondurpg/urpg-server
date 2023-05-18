@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.gymleagues;
 
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueController;
 import com.pokemonurpg.entities.v1.GymLeague;
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueInputDto;
-import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class GymLeagueControllerTest {
 
     @Test
     public void create() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
         when(gymLeagueService.create(input)).thenReturn(gymLeague);
         assertEquals(gymLeague, gymLeagueController.create(input));
@@ -52,7 +49,7 @@ public class GymLeagueControllerTest {
 
     @Test
     public void update() {
-        GymLeagueInputDto input = new GymLeagueInputDto();
+        GymLeagueRequest input = new GymLeagueRequest();
         input.setName(NAME);
         when(gymLeagueService.update(input, DBID)).thenReturn(gymLeague);
         assertEquals(gymLeague, gymLeagueController.update(input, DBID));

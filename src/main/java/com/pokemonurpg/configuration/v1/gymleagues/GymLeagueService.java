@@ -35,13 +35,13 @@ public class GymLeagueService implements NamedObjectService<GymLeague> {
         return gymLeagueRepository.findByName(name);
     }
 
-    public GymLeague create(GymLeagueInputDto input) {
+    public GymLeague create(GymLeagueRequest input) {
         GymLeague gymLeague = new GymLeague(input);
         gymLeagueRepository.save(gymLeague);
         return gymLeague;
     }
 
-    public GymLeague update(GymLeagueInputDto input, int dbid) {
+    public GymLeague update(GymLeagueRequest input, int dbid) {
         GymLeague gymLeague = gymLeagueRepository.findByDbid(dbid);
         if (gymLeague != null) {
             gymLeague.update(input);

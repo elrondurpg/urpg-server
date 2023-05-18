@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/type")
+@RequestMapping("/urpg-configuration/v1/types")
 @CrossOrigin
 @Validated
 public class TypeController {
@@ -37,14 +37,14 @@ public class TypeController {
     @AllowAuthorized(permission = "Write Species")
     @PostMapping
     public @ResponseBody
-    Type create(@Valid @RequestBody TypeInputDto input) {
+    Type create(@Valid @RequestBody TypeRequest input) {
         return typeService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Species")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    Type update(@Valid @RequestBody TypeInputDto input, @PathVariable int dbid) {
+    Type update(@Valid @RequestBody TypeRequest input, @PathVariable int dbid) {
         return typeService.update(input, dbid);
     }
 }

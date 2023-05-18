@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.artranks;
 
-import com.pokemonurpg.configuration.v1.artranks.ArtRankInputDto;
 import com.pokemonurpg.entities.v1.ArtRank;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ArtRankRepository;
-import com.pokemonurpg.configuration.v1.artranks.ArtRankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -59,7 +56,7 @@ public class ArtRankServiceTest {
 
     @Test
     public void create() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
 
         ArtRank artRank = artRankService.create(input);
@@ -69,7 +66,7 @@ public class ArtRankServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
 
         when(artRankRepository.findByDbid(DBID)).thenReturn(artRank);
@@ -82,7 +79,7 @@ public class ArtRankServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        ArtRankInputDto input = new ArtRankInputDto();
+        ArtRankRequest input = new ArtRankRequest();
         input.setName(NAME);
 
         when(artRankRepository.findByDbid(DBID)).thenReturn(null);

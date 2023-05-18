@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
-import com.pokemonurpg.entities.v1.AttackCategory;
+import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,7 +22,7 @@ public class AttackCategoryTest {
 
     @Test
     public void testConstructor() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
 
         AttackCategory category = new AttackCategory(input);

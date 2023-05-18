@@ -1,15 +1,13 @@
 package com.pokemonurpg.stats.v1;
 
 import com.pokemonurpg.entities.v1.*;
-import com.pokemonurpg.configuration.v1.contestattributes.ContestAttributeService;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestRankRepository;
-import com.pokemonurpg.infrastructure.v1.data.jpa.ContestTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestGenerationRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.EarnedRibbonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -39,28 +37,28 @@ public class EarnedRibbonServiceTest {
     private ContestAttributeRepository contestAttributeRepository;
 
     @Mock
-    private ContestTypeRepository contestTypeRepository;
+    private ContestGenerationRepository contestGenerationRepository;
 
     @Test
     public void createsNewRibbon() {
-        ContestType generation = new ContestType();
+        ContestGeneration generation = new ContestGeneration();
         generation.setName(GENERATION_NAME);
 
-        EarnedRibbonInputDto input = new EarnedRibbonInputDto();
+        EarnedRibbonRequest input = new EarnedRibbonRequest();
         input.setRank(RANK_NAME);
         input.setAttribute(ATTR_NAME);
         input.setGeneration(GENERATION_NAME);
 
         when(contestRankRepository.findByName(RANK_NAME)).thenReturn(RANK);
         when(contestAttributeRepository.findByName(ATTR_NAME)).thenReturn(ATTRIBUTE);
-        when(contestTypeRepository.findByName(GENERATION_NAME)).thenReturn(generation);
+        when(contestGenerationRepository.findByName(GENERATION_NAME)).thenReturn(generation);
 
         earnedRibbonService.update(input, POKEMON);
     }
 
     @Test
     public void updateExistingRibbon() {
-        EarnedRibbonInputDto input = new EarnedRibbonInputDto();
+        EarnedRibbonRequest input = new EarnedRibbonRequest();
         /*input.setDbid(DBID);
 
         when(earnedRibbonRepository.findByDbid(DBID)).thenReturn(EXISTING_RECORD);
@@ -73,7 +71,7 @@ public class EarnedRibbonServiceTest {
 
     @Test
     public void deleteExistingRibbon() {
-        EarnedRibbonInputDto input = new EarnedRibbonInputDto();
+        EarnedRibbonRequest input = new EarnedRibbonRequest();
         input.setDelete(true);
 
         // when(earnedRibbonRepository.findByDbid(DBID)).thenReturn(EXISTING_RECORD);

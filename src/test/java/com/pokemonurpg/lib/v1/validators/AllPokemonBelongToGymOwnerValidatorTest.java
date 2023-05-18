@@ -1,9 +1,9 @@
 package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
-import com.pokemonurpg.configuration.v1.gyms.GymPokemonInputDto;
+import com.pokemonurpg.configuration.v1.gyms.GymPokemonRequest;
 import com.pokemonurpg.entities.v1.Gym;
-import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import com.pokemonurpg.entities.v1.GymLeaderRecord;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class AllPokemonBelongToGymOwnerValidatorTest {
     private final static Gym                GYM             = mock(Gym.class);
-    private final static GymOwnershipTerm   TERM            = mock(GymOwnershipTerm.class);
+    private final static GymLeaderRecord TERM            = mock(GymLeaderRecord.class);
     private final static Integer            GYM_DBID        = 1;
     private final static Integer            MEMBER_DBID     = 2;
     private final static Integer            O_MEMBER_DBID   = 3;
@@ -139,16 +139,16 @@ public class AllPokemonBelongToGymOwnerValidatorTest {
         assertFalse(validator.isValid(createInputList(), null));
     }
 
-    private List<GymPokemonInputDto> createInputList() {
-        List<GymPokemonInputDto> list = new ArrayList<>();
-        GymPokemonInputDto dto = new GymPokemonInputDto();
+    private List<GymPokemonRequest> createInputList() {
+        List<GymPokemonRequest> list = new ArrayList<>();
+        GymPokemonRequest dto = new GymPokemonRequest();
         dto.setDbid(POKEMON_DBID);
         list.add(dto);
         return list;
     }
 
-    private List<GymPokemonInputDto> createInputListWithNullInput() {
-        List<GymPokemonInputDto> list = new ArrayList<>();
+    private List<GymPokemonRequest> createInputListWithNullInput() {
+        List<GymPokemonRequest> list = new ArrayList<>();
         list.add(null);
         return list;
     }

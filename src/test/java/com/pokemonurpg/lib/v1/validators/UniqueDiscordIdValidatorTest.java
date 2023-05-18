@@ -1,6 +1,6 @@
 package com.pokemonurpg.lib.v1.validators;
 import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
-import com.pokemonurpg.configuration.v1.members.MemberInputDto;
+import com.pokemonurpg.configuration.v1.members.MemberRequest;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import org.junit.Before;
@@ -32,11 +32,11 @@ public class UniqueDiscordIdValidatorTest {
     @Mock
     private RequestPathVariableService requestPathVariableService;
 
-    private MemberInputDto input;
+    private MemberRequest input;
 
     @Before
     public void init() {
-        input = new MemberInputDto();
+        input = new MemberRequest();
         input.setDiscordId(DISCORD_ID);
 
         EXISTING_OBJECT.setDbid(EXISTING_OBJECT_DBID);
@@ -49,7 +49,7 @@ public class UniqueDiscordIdValidatorTest {
 
     @Test
     public void isValid_ReturnsTrue_WhenDiscordIdNotProvided() {
-        assertTrue(validator.isValid(new MemberInputDto(), null));
+        assertTrue(validator.isValid(new MemberRequest(), null));
     }
 
     @Test

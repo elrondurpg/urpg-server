@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.EliteFourVictoryInputDto;
+import com.pokemonurpg.stats.v1.EliteFourVictoryRequest;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class EliteFourVictory {
     @MapsId("defender_dbid")
     @JoinColumn(name="defender_dbid")
     @JsonIgnoreProperties({"dbid"})
-    private KnownEliteFourMember defender;
+    private EliteFourMember defender;
 
     @Column
     private Date date;
@@ -40,14 +40,14 @@ public class EliteFourVictory {
 
     public EliteFourVictory() {}
 
-    public EliteFourVictory(EliteFourVictoryInputDto input, Member challenger, KnownEliteFourMember defender) {
+    public EliteFourVictory(EliteFourVictoryRequest input, Member challenger, EliteFourMember defender) {
         this.update(input);
         this.id = new EliteFourVictoryKey(challenger.getDbid(), defender.getDbid());
         setChallenger(challenger);
         setDefender(defender);
     }
 
-    public void update(EliteFourVictoryInputDto input) {
+    public void update(EliteFourVictoryRequest input) {
         setDate(input.getDate());
         setLogUrl(input.getLogUrl());
     }
@@ -60,11 +60,11 @@ public class EliteFourVictory {
         this.challenger = challenger;
     }
 
-    public KnownEliteFourMember getDefender() {
+    public EliteFourMember getDefender() {
         return defender;
     }
 
-    public void setDefender(KnownEliteFourMember defender) {
+    public void setDefender(EliteFourMember defender) {
         this.defender = defender;
     }
 

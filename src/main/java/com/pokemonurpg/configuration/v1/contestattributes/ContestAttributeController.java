@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contestAttribute")
+@RequestMapping("/urpg-configuration/v1/contest-attributes")
 @CrossOrigin
 @Validated
 public class ContestAttributeController {
@@ -38,14 +38,14 @@ public class ContestAttributeController {
     @AllowAuthorized(permission = "Write Contest Type")
     @PostMapping
     public @ResponseBody
-    ContestAttribute create(@Valid @RequestBody ContestAttributeInputDto input) {
+    ContestAttribute create(@Valid @RequestBody ContestAttributeRequest input) {
         return contestAttributeService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Contest Type")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ContestAttribute update(@Valid @RequestBody ContestAttributeInputDto input, @PathVariable int dbid) {
+    ContestAttribute update(@Valid @RequestBody ContestAttributeRequest input, @PathVariable int dbid) {
         return contestAttributeService.update(input, dbid);
     }
 }

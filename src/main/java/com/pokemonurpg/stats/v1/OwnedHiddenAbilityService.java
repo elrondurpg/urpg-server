@@ -16,14 +16,14 @@ public class OwnedHiddenAbilityService {
     @Resource
     private AbilityService abilityService;
 
-    public void updateAll(OwnedPokemonInputDto input, OwnedPokemon pokemon) {
+    public void updateAll(OwnedPokemonRequest input, OwnedPokemon pokemon) {
         Set<Ability> abilities = pokemon.getOwnedHiddenAbilities();
         if (abilities == null) {
             abilities = new HashSet<Ability>();
             pokemon.setOwnedHiddenAbilities(abilities);
         }
 
-        for (OwnedHiddenAbilityInputDto ability : input.getOwnedHiddenAbilities()) {
+        for (OwnedHiddenAbilityRequest ability : input.getOwnedHiddenAbilities()) {
             String name = ability.getAbility();
             Ability abilityObject = abilityService.findByName(name);
             if (ability.getDelete()) {

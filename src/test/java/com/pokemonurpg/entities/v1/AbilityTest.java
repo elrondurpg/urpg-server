@@ -1,8 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.abilities.AbilityInputDto;
-import com.pokemonurpg.entities.v1.Ability;
-import com.pokemonurpg.entities.v1.SpeciesAbility;
+import com.pokemonurpg.configuration.v1.abilities.AbilityRequest;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -21,14 +19,14 @@ public class AbilityTest {
         ability.setDbid(DBID);
         assertEquals(DBID, ability.getDbid());
 
-        Set<SpeciesAbility> pokemon = new HashSet<>();
+        Set<PokemonAbility> pokemon = new HashSet<>();
         ability.setPokemon(pokemon);
         assertEquals(pokemon, ability.getPokemon());
     }
 
     @Test
     public void updateFromAbilityInputDto() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 
@@ -40,7 +38,7 @@ public class AbilityTest {
 
     @Test
     public void constructFromAbilityInputDto() {
-        AbilityInputDto input = new AbilityInputDto();
+        AbilityRequest input = new AbilityRequest();
         input.setName(NAME);
         input.setDescription(DESCRIPTION);
 

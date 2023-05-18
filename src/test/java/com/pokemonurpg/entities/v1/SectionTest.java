@@ -1,7 +1,6 @@
 package com.pokemonurpg.entities.v1;
 
-import com.pokemonurpg.configuration.v1.sections.SectionInputDto;
-import com.pokemonurpg.entities.v1.Section;
+import com.pokemonurpg.configuration.v1.sections.SectionRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -21,7 +20,7 @@ public class SectionTest {
 
     @Test
     public void testConstructor() {
-        SectionInputDto input = new SectionInputDto();
+        SectionRequest input = new SectionRequest();
         input.setName(NAME);
         input.setTier1LegendaryRequirement(TIER1_LEGENDARY_REQUIREMENT);
         input.setTier2LegendaryRequirement(TIER2_LEGENDARY_REQUIREMENT);

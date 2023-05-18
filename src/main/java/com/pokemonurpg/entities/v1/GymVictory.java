@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.GymVictoryInputDto;
+import com.pokemonurpg.stats.v1.GymVictoryRequest;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class GymVictory {
     @MapsId("defender_dbid")
     @JoinColumn(name="defender_dbid")
     @JsonIgnoreProperties({"dbid"})
-    private KnownGymLeader defender;
+    private GymLeader defender;
 
     @ManyToOne
     @MapsId("gym_dbid")
@@ -53,7 +53,7 @@ public class GymVictory {
     public GymVictory() {
     }
 
-    public GymVictory(GymVictoryInputDto input, Member challenger, KnownGymLeader defender, Gym gym, GymLeague league) {
+    public GymVictory(GymVictoryRequest input, Member challenger, GymLeader defender, Gym gym, GymLeague league) {
         this.update(input);
         this.id = new GymVictoryKey(challenger.getDbid(), defender.getDbid(), gym.getDbid(), league.getDbid());
         setChallenger(challenger);
@@ -62,7 +62,7 @@ public class GymVictory {
         setLeague(league);
     }
 
-    public void update(GymVictoryInputDto input) {
+    public void update(GymVictoryRequest input) {
         setDate(input.getDate());
         setLogUrl(input.getLogUrl());
     }
@@ -75,11 +75,11 @@ public class GymVictory {
         this.challenger = challenger;
     }
 
-    public KnownGymLeader getDefender() {
+    public GymLeader getDefender() {
         return defender;
     }
 
-    public void setDefender(KnownGymLeader defender) {
+    public void setDefender(GymLeader defender) {
         this.defender = defender;
     }
 

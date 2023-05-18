@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.lib.v1.models.IndexedObject;
-import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
+import com.pokemonurpg.stats.v1.OwnedPokemonRequest;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,7 +32,7 @@ public class OwnedPokemon implements IndexedObject {
     @OneToOne
     @JoinColumn(name = "species_dbid")
     @JsonView(value = { View.MemberView.Summary.class })
-    private Species species;
+    private Pokemon species;
 
     @Column
     @JsonView(value = { View.MemberView.Summary.class })
@@ -51,7 +51,7 @@ public class OwnedPokemon implements IndexedObject {
     @JoinColumn(name = "obtained")
     @JsonView(value = { View.MemberView.Summary.class })
     @JsonIgnoreProperties("dbid")
-    private Obtained obtained;
+    private CaptureMethod captureMethod;
 
     @Column(name = "obtained_link")
     @JsonView(value = { View.MemberView.Pokemon.class })
@@ -129,7 +129,7 @@ public class OwnedPokemon implements IndexedObject {
     public OwnedPokemon() {
     }
 
-    public OwnedPokemon(Member member, Species species, String gender) {
+    public OwnedPokemon(Member member, Pokemon species, String gender) {
         setTrainer(member);
         setSpecies(species);
         setGender(gender);
@@ -139,7 +139,7 @@ public class OwnedPokemon implements IndexedObject {
         setRental(false);
     }
 
-    public OwnedPokemon(OwnedPokemonInputDto input, Member member, Species species) {
+    public OwnedPokemon(OwnedPokemonRequest input, Member member, Pokemon species) {
         update(input, member);
         setSpecies(species);
         if (job == null) setJob(false);
@@ -148,7 +148,7 @@ public class OwnedPokemon implements IndexedObject {
         if (rental == null) setRental(false);
     }
 
-    public void update(OwnedPokemonInputDto input, Member member) {
+    public void update(OwnedPokemonRequest input, Member member) {
         setTrainer(member);
         setGender(input.getGender());
         setExp(input.getExp());
@@ -179,12 +179,12 @@ public class OwnedPokemon implements IndexedObject {
         }
     }
 
-    public Species getSpecies() {
+    public Pokemon getSpecies() {
         return species;
     }
 
-    public void setSpecies(Species species) {
-        this.species = species;
+    public void setSpecies(Pokemon pokemon) {
+        this.species = pokemon;
     }
 
     public String getGender() {
@@ -217,13 +217,13 @@ public class OwnedPokemon implements IndexedObject {
         }
     }
 
-    public Obtained getObtained() {
-        return obtained;
+    public CaptureMethod getObtained() {
+        return captureMethod;
     }
 
-    public void setObtained(Obtained obtained) {
-        if (obtained != null) {
-            this.obtained = obtained;
+    public void setObtained(CaptureMethod captureMethod) {
+        if (captureMethod != null) {
+            this.captureMethod = captureMethod;
         }
     }
 

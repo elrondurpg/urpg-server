@@ -1,12 +1,6 @@
 package com.pokemonurpg.login.v1;
 
 import com.pokemonurpg.configuration.v1.members.MemberService;
-import com.pokemonurpg.login.v1.SessionDto;
-import com.pokemonurpg.login.v1.DiscordUserResponse;
-import com.pokemonurpg.login.v1.OAuthAccessTokenResponse;
-import com.pokemonurpg.login.v1.LoginService;
-import com.pokemonurpg.login.v1.OAuthService;
-import com.pokemonurpg.login.v1.LoginInputDto;
 import com.pokemonurpg.entities.v1.Member;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Before;
@@ -38,9 +32,9 @@ public class LoginServiceTest {
     @Mock
     private OAuthService oAuthService;
 
-    private LoginInputDto input = new LoginInputDto();
+    private LoginRequest input = new LoginRequest();
     private Member member = new Member();
-    private SessionDto expectedResponse = new SessionDto();
+    private Session expectedResponse = new Session();
 
     @Before
     public void init() {
@@ -64,7 +58,7 @@ public class LoginServiceTest {
         when(DISCORD_USER_RESPONSE.getId()).thenReturn(DISCORD_ID);
         when(memberService.findByDiscordId(DISCORD_ID)).thenReturn(member);
 
-        SessionDto response = loginService.login(input);
+        Session response = loginService.login(input);
 
         verify(memberService, times(1)).update(member, ACCESS_TOKEN_RESPONSE);
         assertTrue(EqualsBuilder.reflectionEquals(expectedResponse, response));

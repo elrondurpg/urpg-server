@@ -49,13 +49,13 @@ public class ItemService implements NamedObjectService<Item> {
         else return items;
     }
 
-    public Item create(ItemInputDto input) {
+    public Item create(ItemRequest input) {
         Item item = new Item(input);
         itemRepository.save(item);
         return item;
     }
 
-    public Item update(ItemInputDto input, int dbid) {
+    public Item update(ItemRequest input, int dbid) {
         Item item = itemRepository.findByDbid(dbid);
         if (item != null) {
             item.update(input);

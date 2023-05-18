@@ -18,7 +18,7 @@ public class CosmeticFormService
         return cosmeticFormRepository.findBySpeciesDbid(speciesDbid);
     }
 
-    public void update(CosmeticFormInputDto input, Integer speciesDbid) {
+    public void update(CosmeticFormRequest input, Integer speciesDbid) {
         CosmeticForm form = cosmeticFormRepository.findByName(input.getName());
         if (form != null) {
             if (input.getDelete()) {

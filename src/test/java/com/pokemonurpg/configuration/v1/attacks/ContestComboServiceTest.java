@@ -1,17 +1,14 @@
 package com.pokemonurpg.configuration.v1.attacks;
 
 import com.pokemonurpg.entities.v1.Attack;
-import com.pokemonurpg.entities.v1.ContestType;
+import com.pokemonurpg.entities.v1.ContestGeneration;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AttackRepository;
-import com.pokemonurpg.configuration.v1.attacks.ContestComboInputDto;
 import com.pokemonurpg.entities.v1.ContestCombo;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestComboRepository;
-import com.pokemonurpg.configuration.v1.attacks.ContestComboService;
-import com.pokemonurpg.infrastructure.v1.data.jpa.ContestTypeRepository;
+import com.pokemonurpg.infrastructure.v1.data.jpa.ContestGenerationRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -35,7 +32,7 @@ public class ContestComboServiceTest {
     private AttackRepository attackRepository;
 
     @Mock
-    private ContestTypeRepository contestTypeRepository;
+    private ContestGenerationRepository contestGenerationRepository;
 
     @Test
     public void deleteWhenFormExistsAndDeleteIsTrue() {
@@ -74,14 +71,14 @@ public class ContestComboServiceTest {
 
     @Test
     public void createWhenFormDoesNotExist() {
-        ContestComboInputDto input = new ContestComboInputDto();
+        ContestComboRequest input = new ContestComboRequest();
         input.setSecondAttack(SECOND_ATTACK_NAME);
         input.setGeneration(CONTEST_TYPE);
 
-        ContestType generation = new ContestType();
+        ContestGeneration generation = new ContestGeneration();
         generation.setDbid(GENERATION_DBID);
 
-        when(contestTypeRepository.findByName(CONTEST_TYPE)).thenReturn(generation);
+        when(contestGenerationRepository.findByName(CONTEST_TYPE)).thenReturn(generation);
         when(attackRepository.findByName(SECOND_ATTACK_NAME)).thenReturn(SECOND_ATTACK);
         contestComboService.update(FIRST_ATTACK, input);
     }

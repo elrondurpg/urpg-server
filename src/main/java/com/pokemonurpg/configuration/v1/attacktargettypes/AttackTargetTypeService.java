@@ -35,13 +35,13 @@ public class AttackTargetTypeService implements NamedObjectService<AttackTargetT
         return attackTargetTypeRepository.findByName(name);
     }
 
-    public AttackTargetType create(AttackTargetTypeInputDto input) {
+    public AttackTargetType create(AttackTargetTypeRequest input) {
         AttackTargetType attackTargetType = new AttackTargetType(input);
         attackTargetTypeRepository.save(attackTargetType);
         return attackTargetType;
     }
 
-    public AttackTargetType update(AttackTargetTypeInputDto input, int dbid) {
+    public AttackTargetType update(AttackTargetTypeRequest input, int dbid) {
         AttackTargetType attackTargetType = attackTargetTypeRepository.findByDbid(dbid);
         if (attackTargetType != null) {
             attackTargetType.update(input);

@@ -2,7 +2,7 @@ package com.pokemonurpg.entities.v1;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormInputDto;
+import com.pokemonurpg.configuration.v1.pokemon.CosmeticFormRequest;
 
 import javax.persistence.*;
 
@@ -21,13 +21,13 @@ public class CosmeticForm {
 
     public CosmeticForm() {}
 
-    public CosmeticForm(CosmeticFormInputDto input, Integer speciesDbid) {
+    public CosmeticForm(CosmeticFormRequest input, Integer speciesDbid) {
         this.update(input);
         setName(input.getName());
         setSpeciesDbid(speciesDbid);
     }
 
-    public void update(CosmeticFormInputDto input) {
+    public void update(CosmeticFormRequest input) {
         setFormName(input.getFormName());
     }
 

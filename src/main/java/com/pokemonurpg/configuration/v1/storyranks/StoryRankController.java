@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/storyRank")
+@RequestMapping("/urpg-configuration/v1/story-ranks")
 @CrossOrigin
 @Validated
 public class StoryRankController {
@@ -38,14 +38,14 @@ public class StoryRankController {
     @AllowAuthorized(permission = "Write Story")
     @PostMapping
     public @ResponseBody
-    StoryRank create(@Valid @RequestBody StoryRankInputDto input) {
+    StoryRank create(@Valid @RequestBody StoryRankRequest input) {
         return storyRankService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Story")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    StoryRank update(@Valid @RequestBody StoryRankInputDto input, @PathVariable int dbid) {
+    StoryRank update(@Valid @RequestBody StoryRankRequest input, @PathVariable int dbid) {
         return storyRankService.update(input, dbid);
     }
 }

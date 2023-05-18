@@ -3,10 +3,8 @@ package com.pokemonurpg.stats.v1;
 import com.pokemonurpg.entities.v1.Item;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ItemRepository;
 import com.pokemonurpg.entities.v1.Member;
-import com.pokemonurpg.stats.v1.OwnedItemInputDto;
 import com.pokemonurpg.entities.v1.OwnedItem;
 import com.pokemonurpg.infrastructure.v1.data.jpa.OwnedItemRepository;
-import com.pokemonurpg.stats.v1.OwnedItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -39,7 +37,7 @@ public class OwnedItemServiceTest {
 
     @Test
     public void createsNewRecord() {
-        OwnedItemInputDto input = new OwnedItemInputDto();
+        OwnedItemRequest input = new OwnedItemRequest();
         input.setItem(ITEM_NAME);
 
         when(itemRepository.findByName(ITEM_NAME)).thenReturn(ITEM);
@@ -54,7 +52,7 @@ public class OwnedItemServiceTest {
 
     @Test
     public void updatesExistingRecord() {
-        OwnedItemInputDto input = new OwnedItemInputDto();
+        OwnedItemRequest input = new OwnedItemRequest();
         input.setItem(ITEM_NAME);
 
         when(itemRepository.findByName(ITEM_NAME)).thenReturn(ITEM);
@@ -67,7 +65,7 @@ public class OwnedItemServiceTest {
 
     @Test
     public void deletesExistingRecord() {
-        OwnedItemInputDto input = new OwnedItemInputDto();
+        OwnedItemRequest input = new OwnedItemRequest();
         input.setItem(ITEM_NAME);
         input.setDelete(true);
 

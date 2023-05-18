@@ -1,9 +1,6 @@
 package com.pokemonurpg.configuration.v1.parklocations;
 
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationController;
 import com.pokemonurpg.entities.v1.ParkLocation;
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationInputDto;
-import com.pokemonurpg.configuration.v1.parklocations.ParkLocationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +41,7 @@ public class ParkLocationControllerTest {
 
     @Test
     public void create() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
         when(parkLocationService.create(input)).thenReturn(parkLocation);
         assertEquals(parkLocation, parkLocationController.create(input));
@@ -52,7 +49,7 @@ public class ParkLocationControllerTest {
 
     @Test
     public void update() {
-        ParkLocationInputDto input = new ParkLocationInputDto();
+        ParkLocationRequest input = new ParkLocationRequest();
         input.setName(NAME);
         when(parkLocationService.update(input, DBID)).thenReturn(parkLocation);
         assertEquals(parkLocation, parkLocationController.update(input, DBID));

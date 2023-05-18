@@ -37,13 +37,13 @@ public class SectionService implements NamedObjectService<Section> {
         return sectionRepository.findByName(name);
     }
 
-    public Section create(SectionInputDto input) {
+    public Section create(SectionRequest input) {
         Section section = new Section(input);
         sectionRepository.save(section);
         return section;
     }
 
-    public Section update(SectionInputDto input, int dbid) {
+    public Section update(SectionRequest input, int dbid) {
         Section section = sectionRepository.findByDbid(dbid);
         if (section != null) {
             section.update(input);

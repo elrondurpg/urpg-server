@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.stats.v1.OwnedItemInputDto;
+import com.pokemonurpg.stats.v1.OwnedItemRequest;
 
 import javax.persistence.*;
 
@@ -36,7 +36,7 @@ public class OwnedItem {
     public OwnedItem() {
     }
 
-    public OwnedItem(OwnedItemInputDto input, Member member, Item item) {
+    public OwnedItem(OwnedItemRequest input, Member member, Item item) {
         this.update(input);
         this.id = new OwnedItemKey(member.getDbid(), item.getDbid());
         setTrainer(member);
@@ -50,7 +50,7 @@ public class OwnedItem {
         setQuantity(quantity);
     }
 
-    public void update(OwnedItemInputDto input) {
+    public void update(OwnedItemRequest input) {
         setQuantity(input.getQuantity());
     }
 

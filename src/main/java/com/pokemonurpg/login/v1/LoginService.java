@@ -17,7 +17,7 @@ public class LoginService {
     @Resource
     private OAuthService oAuthService;
 
-    public SessionDto login(LoginInputDto input) {
+    public Session login(LoginRequest input) {
         OAuthAccessTokenResponse accessTokenResponse = oAuthService.exchangeCodeForAccessToken(input.getCode());
         if (accessTokenResponse != null && accessTokenResponse.isValid()) {
             DiscordUserResponse discordUserResponse = oAuthService.getDiscordId(accessTokenResponse.getAccessToken());
@@ -25,7 +25,7 @@ public class LoginService {
                 Member member = memberService.findByDiscordId(discordUserResponse.getId());
                 if (member != null) {
                     memberService.update(member, accessTokenResponse);
-                    return new SessionDto(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
+                    return new Session(member.getName(), member.getDiscordId(), accessTokenResponse.getAccessToken());
                 }
             }
         }

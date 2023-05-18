@@ -8,7 +8,6 @@ import com.pokemonurpg.entities.v1.ImageFolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.server.ResponseStatusException;
@@ -50,7 +49,7 @@ public class ImageServiceTest {
     @Test
     public void createSucceeds() throws IOException {
         // Given and ImageInputDto with reasonable FolderName, Name, and Url
-        ImageInputDto input = new ImageInputDto();
+        ImageRequest input = new ImageRequest();
         input.setFolder(FOLDER_NAME);
         input.setName(NAME);
         input.setUrl(URL);
@@ -71,7 +70,7 @@ public class ImageServiceTest {
         when(fileService.findByName(IMAGE_BASE + "/" + FOLDER_NAME + "/" + NAME + "." + EXTENSION)).thenReturn(FILE);
 
         // When I call ImageService.create()
-        ImageInputDto output = imageService.create(input);
+        ImageRequest output = imageService.create(input);
 
         // Then the ImageIoService will save the image
         verify(imageIoService, times(1)).write(IMAGE, EXTENSION, FILE);
@@ -83,20 +82,20 @@ public class ImageServiceTest {
     @Test
     public void createFailsToFindImage() throws IOException {
         // Given and ImageInputDto with reasonable Url
-        ImageInputDto input = new ImageInputDto();
+        ImageRequest input = new ImageRequest();
         input.setUrl(URL);
 
         // Given we don't find an image at the given URL
         when(imageIoService.findByUrl(URL)).thenThrow(new IOException());
 
         // When I call ImageService.create()
-        ImageInputDto output = imageService.create(input);
+        ImageRequest output = imageService.create(input);
     }
 
     @Test(expected = ResponseStatusException.class)
     public void createFailsOnWrite() throws IOException {
         // Given and ImageInputDto with reasonable FolderName, Name, and Url
-        ImageInputDto input = new ImageInputDto();
+        ImageRequest input = new ImageRequest();
         input.setFolder(FOLDER_NAME);
         input.setName(NAME);
         input.setUrl(URL);
@@ -120,7 +119,7 @@ public class ImageServiceTest {
         doThrow(new IOException()).when(imageIoService).write(IMAGE, EXTENSION, FILE);
 
         // When I call ImageService.create()
-        ImageInputDto output = imageService.create(input);
+        ImageRequest output = imageService.create(input);
 
         // Then it will throw a Response Status Exception
     }

@@ -1,9 +1,5 @@
 package com.pokemonurpg.login.v1;
 
-import com.pokemonurpg.login.v1.AuthenticationService;
-import com.pokemonurpg.login.v1.AuthorizationService;
-import com.pokemonurpg.login.v1.SessionDto;
-import com.pokemonurpg.login.v1.SessionService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.Permission;
 import org.junit.Before;
@@ -24,7 +20,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class AuthorizationServiceTest {
     private final static Permission         PERMISSION  = mock(Permission.class);
-    private final static SessionDto         SESSION     = mock(SessionDto.class);
+    private final static Session SESSION     = mock(Session.class);
     private final static Set<Permission>    PERMISSIONS = Collections.singleton(PERMISSION);
     private final static String PERMISSION_NAME = "PERMISSION";
     private final static Member MEMBER = mock(Member.class);

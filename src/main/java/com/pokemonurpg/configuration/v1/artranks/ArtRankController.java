@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/artRank")
+@RequestMapping("/urpg-configuration/v1/art-ranks")
 @CrossOrigin
 @Validated
 public class ArtRankController {
@@ -38,14 +38,14 @@ public class ArtRankController {
     @AllowAuthorized(permission = "Write Art")
     @PostMapping
     public @ResponseBody
-    ArtRank create(@Valid @RequestBody ArtRankInputDto input) {
+    ArtRank create(@Valid @RequestBody ArtRankRequest input) {
         return artRankService.create(input);
     }
 
     @AllowAuthorized(permission = "Write Art")
     @PutMapping(path="/{dbid}")
     public @ResponseBody
-    ArtRank update(@Valid @RequestBody ArtRankInputDto input, @PathVariable int dbid) {
+    ArtRank update(@Valid @RequestBody ArtRankRequest input, @PathVariable int dbid) {
         return artRankService.update(input, dbid);
     }
 }

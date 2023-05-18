@@ -1,13 +1,10 @@
 package com.pokemonurpg.configuration.v1.attackcategories;
 
 import com.pokemonurpg.entities.v1.AttackCategory;
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryInputDto;
 import com.pokemonurpg.infrastructure.v1.data.jpa.AttackCategoryRepository;
-import com.pokemonurpg.configuration.v1.attackcategories.AttackCategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -66,7 +63,7 @@ public class AttackCategoryServiceTest {
 
     @Test
     public void create() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
 
         AttackCategory category = attackCategoryService.create(input);
@@ -76,7 +73,7 @@ public class AttackCategoryServiceTest {
 
     @Test
     public void updateExistingRecord() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
 
         when(attackCategoryRepository.findByDbid(DBID)).thenReturn(category);
@@ -89,7 +86,7 @@ public class AttackCategoryServiceTest {
 
     @Test
     public void updateNonExistingRecord() {
-        AttackCategoryInputDto input = new AttackCategoryInputDto();
+        AttackCategoryRequest input = new AttackCategoryRequest();
         input.setName(NAME);
 
         when(attackCategoryRepository.findByDbid(DBID)).thenReturn(null);
