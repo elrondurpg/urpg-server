@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
-import com.pokemonurpg.lib.v1.model.NamedObject;
+import com.pokemonurpg.lib.v1.models.NamedObject;
 import com.pokemonurpg.configuration.v1.members.MemberInputDto;
 
 import javax.persistence.*;

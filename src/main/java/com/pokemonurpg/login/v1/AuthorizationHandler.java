@@ -1,7 +1,7 @@
 package com.pokemonurpg.login.v1;
 
 import com.pokemonurpg.lib.v1.annotations.*;
-import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.entities.v1.OwnedPokemon;
 import com.pokemonurpg.stats.v1.OwnedPokemonService;

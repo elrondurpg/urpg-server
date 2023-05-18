@@ -6,7 +6,7 @@ import com.pokemonurpg.entities.v1.AttackTargetType;
 import com.pokemonurpg.entities.v1.ContestAttribute;
 import com.pokemonurpg.entities.v1.ORASContestMoveType;
 import com.pokemonurpg.entities.v1.RSEContestMoveType;
-import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
 import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 import com.pokemonurpg.lib.v1.annotations.UniqueName;

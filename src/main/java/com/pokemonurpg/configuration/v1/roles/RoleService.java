@@ -4,7 +4,7 @@ import com.pokemonurpg.infrastructure.v1.data.jpa.RoleRepository;
 import com.pokemonurpg.configuration.v1.permissions.PermissionService;
 import com.pokemonurpg.entities.v1.Permission;
 import com.pokemonurpg.entities.v1.Role;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,7 +1,7 @@
 package com.pokemonurpg.entities.v1;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pokemonurpg.lib.v1.model.NamedObject;
+import com.pokemonurpg.lib.v1.models.NamedObject;
 import com.pokemonurpg.configuration.v1.featureflags.FlagInputDto;
 
 import javax.persistence.*;

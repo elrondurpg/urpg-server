@@ -8,7 +8,7 @@ import com.pokemonurpg.infrastructure.v1.data.jpa.AttackTargetTypeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ContestAttributeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ORASContestMoveTypeRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.RSEContestMoveTypeRepository;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.Attack;
 import org.springframework.stereotype.Service;
 

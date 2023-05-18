@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ItemBundleRepository;
 import org.springframework.stereotype.Service;
 
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.ItemBundle;
 
 @Service

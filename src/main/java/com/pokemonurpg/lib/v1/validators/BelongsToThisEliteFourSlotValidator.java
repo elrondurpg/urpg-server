@@ -1,6 +1,6 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.BelongsToThisEliteFourSlot;
 import com.pokemonurpg.entities.v1.EliteFour;
 import com.pokemonurpg.entities.v1.EliteFourOwnershipTerm;

@@ -1,6 +1,6 @@
 package com.pokemonurpg.stats.v1;
 
-import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.lib.v1.services.IndexedObjectService;
 import com.pokemonurpg.configuration.v1.natures.NatureService;
 import com.pokemonurpg.configuration.v1.capturemethods.ObtainedService;
 import com.pokemonurpg.entities.v1.Member;
@@ -94,7 +94,6 @@ public class OwnedPokemonService implements IndexedObjectService<OwnedPokemon> {
             ownedPokemonRepository.save(pokemon);
             updateAssociatedValues(input, pokemon);
             ownedPokemonRepository.save(pokemon);
-            pokemon = ownedPokemonRepository.findByDbid(pokemon.getDbid());
             return pokemon;
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OwnedPokemon create() request was invalid.");

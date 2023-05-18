@@ -1,35 +1,27 @@
 package com.pokemonurpg.configuration.v1.gyms;
 
-import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymOwnershipTermRepository;
-import com.pokemonurpg.infrastructure.v1.data.jpa.GymRepository;
-import com.pokemonurpg.lib.v1.service.IndexedObjectService;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.entities.v1.OwnedPokemon;
+import com.pokemonurpg.infrastructure.v1.data.jpa.*;
+import com.pokemonurpg.lib.v1.services.IndexedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.Gym;
 import com.pokemonurpg.entities.v1.GymOwnershipTerm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class GymService implements IndexedObjectService<Gym>, NamedObjectService<Gym> {
 
-    @Resource
-    private GymRepository gymRepository;
-
-    @Resource
-    private BadgeService badgeService;
-
-    @Resource
-    private TypeService typeService;
-
-    @Resource
-    private GymOwnershipTermRepository gymOwnershipTermRepository;
-
-    @Resource
-    private GymPokemonService gymPokemonService;
+    private final GymRepository gymRepository;
+    private final BadgeRepository badgeRepository;
+    private final TypeRepository typeRepository;
+    private final GymOwnershipTermRepository gymOwnershipTermRepository;
+    private final OwnedPokemonRepository ownedPokemonRepository;
 
     public List<String> findAllNames() {
         return gymRepository.findAllNames();
@@ -44,7 +36,7 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
         if (gym == null && name != null) {
             return gymRepository.findFirstByNameStartingWith(name);
         }
-        else return gym;
+        return gym;
     }
 
     @Override
@@ -64,7 +56,7 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
         return gym;
     }
 
-    public Gym update(GymInputDto input, int dbid) {
+    public Gym update(int dbid, GymInputDto input) {
         Gym gym = gymRepository.findByDbid(dbid);
         if (gym != null) {
             gym.update(input);
@@ -80,14 +72,30 @@ public class GymService implements IndexedObjectService<Gym>, NamedObjectService
     }
 
     void updateEmbeddedValues(GymInputDto input, Gym gym) {
-        gym.setType(typeService.findByName(input.getType()));
-        gym.setBadge(badgeService.findByName(input.getBadge()));
-        gymPokemonService.updateAll(input, gym);
-        if (input.getCurrentOwnerRecordDbid() != null)
+        gym.setType(typeRepository.findByName(input.getType()));
+        gym.setBadge(badgeRepository.findByName(input.getBadge()));
+
+        updatePokemon(input, gym);
+
+        if (input.getCurrentOwnerRecordDbid() != null) {
             gym.setCurrentOwnerRecord(gymOwnershipTermRepository.findByDbid(input.getCurrentOwnerRecordDbid()));
-        else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
+        } else if (Boolean.TRUE.equals(input.getRemoveOwner())) {
             gym.setCurrentOwnerRecord(null);
             gym.getPokemon().clear();
+        }
+    }
+
+    private void updatePokemon(GymInputDto input, Gym gym) {
+        Set<OwnedPokemon> pokemons = gym.getPokemon();
+
+        for (GymPokemonInputDto pokemon : input.getPokemon()) {
+            Integer dbid = pokemon.getDbid();
+            OwnedPokemon ownedPokemon = ownedPokemonRepository.findByDbid(dbid);
+            if (pokemon.getDelete()) {
+                pokemons.remove(ownedPokemon);
+            } else {
+                pokemons.add(ownedPokemon);
+            }
         }
     }
 

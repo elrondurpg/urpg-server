@@ -20,18 +20,6 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Value( "${server.image-base}" )
     private String imageBase;
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-        dataSource.setUsername("urpg_secure");
-        dataSource.setPassword(System.getenv("URPG_DB_PASSWORD"));
-        dataSource.setUrl("jdbc:mysql://localhost:3306/URPG_DB");
-
-        return dataSource;
-    }
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {

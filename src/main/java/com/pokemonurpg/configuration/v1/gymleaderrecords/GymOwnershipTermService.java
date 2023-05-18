@@ -5,7 +5,7 @@ import com.pokemonurpg.configuration.v1.items.ItemService;
 import com.pokemonurpg.infrastructure.v1.data.jpa.GymOwnershipTermRepository;
 import com.pokemonurpg.configuration.v1.gymleagues.GymLeagueService;
 import com.pokemonurpg.configuration.v1.gyms.GymService;
-import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.lib.v1.services.IndexedObjectService;
 import com.pokemonurpg.entities.v1.Gym;
 import com.pokemonurpg.entities.v1.GymOwnershipTerm;
 import com.pokemonurpg.entities.v1.Member;

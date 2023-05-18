@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.configuration.v1.gymleaderrecords.GymOwnershipTermInputDto;
+import com.pokemonurpg.lib.v1.models.IndexedObject;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @JsonView(value = { View.MemberView.Summary.class })
-public class GymOwnershipTerm {
+public class GymOwnershipTerm implements IndexedObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

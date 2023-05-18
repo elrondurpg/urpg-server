@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.championslots.ChampionService;
 import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
 import com.pokemonurpg.configuration.v1.items.ItemService;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ChampionOwnershipTermRepository;
-import com.pokemonurpg.lib.v1.service.IndexedObjectService;
+import com.pokemonurpg.lib.v1.services.IndexedObjectService;
 import com.pokemonurpg.entities.v1.Champion;
 import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
 import com.pokemonurpg.entities.v1.Member;

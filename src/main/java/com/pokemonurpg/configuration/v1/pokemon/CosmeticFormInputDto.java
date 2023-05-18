@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.pokemon;
 
-import com.pokemonurpg.lib.v1.request.ChildInputDto;
-import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.requests.ChildInputDto;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

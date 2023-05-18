@@ -1,7 +1,7 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
-import com.pokemonurpg.lib.v1.service.NamedObjectServiceFactory;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectServiceFactory;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 
 import javax.annotation.Resource;

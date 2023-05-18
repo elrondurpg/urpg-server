@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.badges;
 
 import com.pokemonurpg.infrastructure.v1.data.jpa.BadgeRepository;
 import com.pokemonurpg.entities.v1.Badge;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

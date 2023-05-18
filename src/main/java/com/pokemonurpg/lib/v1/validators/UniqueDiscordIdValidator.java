@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.members.MemberInputDto;
 import com.pokemonurpg.configuration.v1.members.MemberService;
 import com.pokemonurpg.entities.v1.Member;
 import com.pokemonurpg.lib.v1.annotations.UniqueDiscordId;
-import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;

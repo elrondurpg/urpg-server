@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.attacks;
 
 import com.pokemonurpg.entities.v1.Attack;
 import com.pokemonurpg.entities.v1.ContestType;
-import com.pokemonurpg.lib.v1.request.ChildInputDto;
+import com.pokemonurpg.lib.v1.requests.ChildInputDto;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 
 import javax.validation.constraints.NotNull;

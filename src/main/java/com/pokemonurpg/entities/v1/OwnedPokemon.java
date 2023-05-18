@@ -3,6 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
+import com.pokemonurpg.lib.v1.models.IndexedObject;
 import com.pokemonurpg.stats.v1.OwnedPokemonInputDto;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "owned_pokemon")
-public class OwnedPokemon {
+public class OwnedPokemon implements IndexedObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

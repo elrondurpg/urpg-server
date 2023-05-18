@@ -4,7 +4,7 @@ import com.pokemonurpg.configuration.v1.badges.BadgeService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ChampionOwnershipTermRepository;
 import com.pokemonurpg.infrastructure.v1.data.jpa.ChampionRepository;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.Champion;
 import com.pokemonurpg.entities.v1.ChampionOwnershipTerm;
 import org.springframework.stereotype.Service;

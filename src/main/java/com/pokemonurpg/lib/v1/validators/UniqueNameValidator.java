@@ -1,11 +1,11 @@
 package com.pokemonurpg.lib.v1.validators;
 
 import com.pokemonurpg.lib.v1.annotations.UniqueName;
-import com.pokemonurpg.lib.v1.model.NamedObject;
-import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
-import com.pokemonurpg.lib.v1.service.NamedObjectServiceFactory;
-import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.lib.v1.models.NamedObject;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectServiceFactory;
+import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;

@@ -3,7 +3,7 @@ package com.pokemonurpg.stats.v1;
 import com.pokemonurpg.entities.v1.ContestAttribute;
 import com.pokemonurpg.entities.v1.ContestRank;
 import com.pokemonurpg.entities.v1.ContestType;
-import com.pokemonurpg.lib.v1.request.ChildInputDto;
+import com.pokemonurpg.lib.v1.requests.ChildInputDto;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 import com.pokemonurpg.lib.v1.strings.GeneralConstants;
 
@@ -69,7 +69,7 @@ public class EarnedRibbonInputDto extends ChildInputDto {
         return generation;
     }
 
-    public void getGeneration(String generation) {
+    public void setGeneration(String generation) {
         this.generation = generation;
     }
 

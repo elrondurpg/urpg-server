@@ -5,7 +5,7 @@ import com.pokemonurpg.entities.v1.Species;
 import com.pokemonurpg.entities.v1.Type;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 import com.pokemonurpg.lib.v1.annotations.UniqueName;
-import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
 import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 import com.pokemonurpg.entities.v1.ArtRank;
 import com.pokemonurpg.entities.v1.ParkLocation;

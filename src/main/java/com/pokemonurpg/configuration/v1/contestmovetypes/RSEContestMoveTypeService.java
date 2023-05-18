@@ -1,7 +1,7 @@
 package com.pokemonurpg.configuration.v1.contestmovetypes;
 
 import com.pokemonurpg.infrastructure.v1.data.jpa.RSEContestMoveTypeRepository;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import com.pokemonurpg.entities.v1.RSEContestMoveType;
 import org.springframework.stereotype.Service;
 

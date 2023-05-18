@@ -3,8 +3,8 @@ package com.pokemonurpg.configuration.v1.images;
 import com.pokemonurpg.AppConfig;
 import com.pokemonurpg.configuration.v1.imagefolders.ImageFolderService;
 import com.pokemonurpg.entities.v1.ImageFolder;
-import com.pokemonurpg.lib.v1.service.FileService;
-import com.pokemonurpg.lib.v1.service.ImageIoService;
+import com.pokemonurpg.lib.v1.services.FileService;
+import com.pokemonurpg.lib.v1.services.ImageIoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,7 +35,7 @@ public class ImageService {
         String extension = null;
         File file = null;
         try {
-            image = imageIoService.findByUrl(new URL(input.getUrl()));
+            image = imageIoService.findByUrl(input.getUrl());
             ImageFolder folder = imageFolderService.findByName(input.getFolder());
 
             String imageBase = appConfig.getImageBase() + "/";

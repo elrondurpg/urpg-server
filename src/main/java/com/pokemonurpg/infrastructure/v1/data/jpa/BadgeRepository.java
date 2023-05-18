@@ -9,7 +9,7 @@ import java.util.List;
 public interface BadgeRepository extends JpaRepository<Badge, Integer> {
     @Query("select t.name from Badge t")
     List<String> findAllNames();
-    Badge findByDbid(int dbid);
+    Badge findByDbid(Integer dbid);
     Badge findByName(String name);
     Badge findFirstByNameStartingWith(String name);
     void deleteByDbid(int dbid);

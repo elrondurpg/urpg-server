@@ -2,7 +2,7 @@ package com.pokemonurpg.configuration.v1.parkranks;
 
 
 import com.pokemonurpg.entities.v1.ParkRank;
-import com.pokemonurpg.lib.v1.request.UniquelyNamedInputDto;
+import com.pokemonurpg.lib.v1.requests.UniquelyNamedInputDto;
 import com.pokemonurpg.lib.v1.validationgroups.ObjectCreation;
 import com.pokemonurpg.lib.v1.annotations.UniqueName;
 

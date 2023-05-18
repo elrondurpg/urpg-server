@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pokemonurpg.lib.v1.model.NamedObject;
+import com.pokemonurpg.lib.v1.models.NamedObject;
 import com.pokemonurpg.configuration.v1.itembundles.ItemBundleInputDto;
 
 @Entity

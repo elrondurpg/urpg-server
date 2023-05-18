@@ -1,6 +1,6 @@
 package com.pokemonurpg.login.v1;
 
-import com.pokemonurpg.lib.v1.service.SystemService;
+import com.pokemonurpg.lib.v1.services.SystemService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

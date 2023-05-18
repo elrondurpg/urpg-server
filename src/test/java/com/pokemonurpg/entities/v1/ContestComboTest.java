@@ -30,11 +30,13 @@ public class ContestComboTest {
         input.setOverpowered(OVERPOWERED);
        // input.setContestType(CONTEST_TYPE);
 
-        ContestCombo contestCombo = new ContestCombo(input, FIRST_ATTACK, SECOND_ATTACK, null);
+        ContestType generation = new ContestType();
+
+        ContestCombo contestCombo = new ContestCombo(input, FIRST_ATTACK, SECOND_ATTACK, generation);
         Assert.assertEquals(FIRST_ATTACK, contestCombo.getFirstAttack());
         Assert.assertEquals(SECOND_ATTACK, contestCombo.getSecondAttack());
         Assert.assertEquals(OVERPOWERED, contestCombo.getOverpowered());
-        //assertEquals(CONTEST_TYPE, contestCombo.getContestType());
+        Assert.assertEquals(generation, contestCombo.getGeneration());
         Assert.assertNotNull(contestCombo.id);
     }
 

@@ -7,7 +7,7 @@ import com.pokemonurpg.configuration.v1.parkranks.ParkRankService;
 import com.pokemonurpg.configuration.v1.types.TypeService;
 import com.pokemonurpg.configuration.v1.storyranks.StoryRankService;
 import com.pokemonurpg.entities.v1.Species;
-import com.pokemonurpg.lib.v1.service.NamedObjectService;
+import com.pokemonurpg.lib.v1.services.NamedObjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

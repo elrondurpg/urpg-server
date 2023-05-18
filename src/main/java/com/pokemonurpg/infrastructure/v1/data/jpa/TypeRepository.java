@@ -10,7 +10,7 @@ public interface TypeRepository extends JpaRepository<Type, Integer> {
     List<Type> findAll();
     @Query("select t.name from Type t")
     List<String> findAllNames();
-    Type findByDbid(int dbid);
+    Type findByDbid(Integer dbid);
     Type findByName(String name);
     Type findFirstByNameStartingWith(String name);
 }

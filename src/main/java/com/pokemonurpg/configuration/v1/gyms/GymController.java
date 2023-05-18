@@ -57,7 +57,7 @@ public class GymController {
     @JsonView(value = { View.MemberView.Summary.class })
     public @ResponseBody
     Gym update(@Valid @RequestBody GymInputDto input, @PathVariable int dbid) {
-        return gymService.update(input, dbid);
+        return gymService.update(dbid, input);
     }
 
     @Transactional

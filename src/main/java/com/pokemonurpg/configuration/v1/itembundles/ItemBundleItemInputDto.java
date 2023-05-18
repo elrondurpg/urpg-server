@@ -4,7 +4,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.pokemonurpg.lib.v1.request.ChildInputDto;
+import com.pokemonurpg.lib.v1.requests.ChildInputDto;
 import com.pokemonurpg.lib.v1.annotations.ExistsInDb;
 import com.pokemonurpg.entities.v1.Item;
 

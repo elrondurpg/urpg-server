@@ -1,6 +1,6 @@
 package com.pokemonurpg.lib.v1.validators;
 
-import com.pokemonurpg.lib.v1.service.RequestPathVariableService;
+import com.pokemonurpg.lib.v1.services.RequestPathVariableService;
 import com.pokemonurpg.lib.v1.annotations.DoesNotConflictWithKnownGymLeader;
 import com.pokemonurpg.configuration.v1.champions.KnownChampionService;
 import com.pokemonurpg.configuration.v1.elitefourmembers.KnownEliteFourMemberService;

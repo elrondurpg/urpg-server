@@ -3,7 +3,7 @@ package com.pokemonurpg.entities.v1;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pokemonurpg.View;
 import com.pokemonurpg.configuration.v1.contestranks.ContestRankInputDto;
-import com.pokemonurpg.lib.v1.model.NamedObject;
+import com.pokemonurpg.lib.v1.models.NamedObject;
 
 import javax.persistence.*;
 
