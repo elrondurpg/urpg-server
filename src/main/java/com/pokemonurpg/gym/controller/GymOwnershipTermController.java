@@ -21,7 +21,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/gymOwnershipTerm")
+@RequestMapping("/urpg-server/gymOwnershipTerm")
 @CrossOrigin
 @Validated
 public class GymOwnershipTermController {

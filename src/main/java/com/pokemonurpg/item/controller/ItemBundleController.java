@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itemBundle")
+@RequestMapping("/urpg-server/itemBundle")
 @CrossOrigin
 @Validated
 public class ItemBundleController {

@@ -22,7 +22,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/gym")
+@RequestMapping("/urpg-server/gym")
 @CrossOrigin
 @Validated
 public class GymController {

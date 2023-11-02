@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/eliteFourVictories")
+@RequestMapping("/urpg-server/eliteFourVictories")
 @CrossOrigin
 public class EliteFourVictoriesController {
 

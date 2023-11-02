@@ -20,7 +20,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/badge")
+@RequestMapping("/urpg-server/badge")
 @CrossOrigin
 @Validated
 public class BadgeController {

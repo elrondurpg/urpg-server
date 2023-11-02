@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/type")
+@RequestMapping("/urpg-server/type")
 @CrossOrigin
 @Validated
 public class TypeController {

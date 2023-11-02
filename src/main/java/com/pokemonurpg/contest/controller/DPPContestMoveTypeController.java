@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dppContestMoveType")
+@RequestMapping("/urpg-server/dppContestMoveType")
 @CrossOrigin
 @Validated
 public class DPPContestMoveTypeController {

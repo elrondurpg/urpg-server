@@ -16,7 +16,7 @@ import static com.pokemonurpg.strings.PermissionNames.READ_PERMISSION_PERMISSION
 import static com.pokemonurpg.strings.PermissionNames.WRITE_PERMISSION_PERMISSION;
 
 @RestController
-@RequestMapping("/permission")
+@RequestMapping("/urpg-server/permission")
 @CrossOrigin
 @Validated
 public class PermissionController {

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ability")
+@RequestMapping("/urpg-server/ability")
 @CrossOrigin
 @Validated
 public class AbilityController {

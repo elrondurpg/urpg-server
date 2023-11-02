@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orasContestMoveType")
+@RequestMapping("/urpg-server/orasContestMoveType")
 @CrossOrigin
 @Validated
 public class ORASContestMoveTypeController {

@@ -22,7 +22,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_DELETE;
 
 @RestController
-@RequestMapping("/eliteFourOwnershipTerm")
+@RequestMapping("/urpg-server/eliteFourOwnershipTerm")
 @CrossOrigin
 @Validated
 public class EliteFourOwnershipTermController {

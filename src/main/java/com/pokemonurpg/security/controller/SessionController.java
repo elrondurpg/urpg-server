@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import static com.pokemonurpg.strings.ErrorStrings.ERROR_ON_CLAIM;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/urpg-server/session")
 @CrossOrigin
 @Validated
 public class SessionController {

@@ -28,7 +28,7 @@ import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 import static com.pokemonurpg.strings.PermissionNames.WRITE_ROLE_PERMISSION;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/urpg-server/member")
 @CrossOrigin
 @Validated
 public class MemberController {

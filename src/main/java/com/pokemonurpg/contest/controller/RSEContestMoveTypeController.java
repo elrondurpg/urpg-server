@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rseContestMoveType")
+@RequestMapping("/urpg-server/rseContestMoveType")
 @CrossOrigin
 @Validated
 public class RSEContestMoveTypeController {

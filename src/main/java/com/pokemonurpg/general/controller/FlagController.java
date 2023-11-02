@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/flag")
+@RequestMapping("/urpg-server/flag")
 @CrossOrigin
 @Validated
 public class FlagController {

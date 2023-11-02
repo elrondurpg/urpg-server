@@ -19,7 +19,7 @@ import java.util.List;
 import static com.pokemonurpg.strings.PermissionNames.*;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/urpg-server/role")
 @CrossOrigin
 @Validated
 public class RoleController {

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gymLeague")
+@RequestMapping("/urpg-server/gymLeague")
 @CrossOrigin
 @Validated
 public class GymLeagueController {

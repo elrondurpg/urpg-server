@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/imageFolder")
+@RequestMapping("/urpg-server/imageFolder")
 @CrossOrigin
 @Validated
 public class ImageFolderController {

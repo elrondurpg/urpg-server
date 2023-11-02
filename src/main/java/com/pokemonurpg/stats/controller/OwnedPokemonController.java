@@ -31,7 +31,7 @@ import static com.pokemonurpg.strings.PermissionNames.WRITE_MEMBER_PERMISSION;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ownedPokemon")
+@RequestMapping("/urpg-server/ownedPokemon")
 @CrossOrigin
 @Validated
 public class OwnedPokemonController {

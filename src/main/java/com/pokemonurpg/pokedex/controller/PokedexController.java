@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/pokemon")
+@RequestMapping("/urpg-server/pokemon")
 @CrossOrigin
 public class PokedexController {
 

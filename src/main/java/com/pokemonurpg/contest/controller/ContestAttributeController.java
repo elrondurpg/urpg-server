@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contestAttribute")
+@RequestMapping("/urpg-server/contestAttribute")
 @CrossOrigin
 @Validated
 public class ContestAttributeController {

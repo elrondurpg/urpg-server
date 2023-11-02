@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/urpg-server/image")
 @CrossOrigin
 @Validated
 public class ImageController {
